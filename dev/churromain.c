@@ -38,9 +38,6 @@
 #include "beeper.h"
 #include "printer.h"
 #ifdef ACTIVATE_SCRIPTING
-#ifdef ENABLE_EXTERN_CODE
-#include "extern.h"
-#endif
 #include "msc.h"
 #endif
 #include "engine.h"

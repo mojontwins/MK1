@@ -65,9 +65,6 @@ typedef struct {
 	unsigned char killed;
 	unsigned char disparando;
 	unsigned char facing_v, facing_h;
-#ifdef MAX_AMMO
-	unsigned char ammo;
-#endif	
 } INERCIA;
 
 INERCIA player;
@@ -134,11 +131,3 @@ unsigned char flags[MAX_FLAGS];
 
 unsigned char n_pant;
 unsigned char maincounter;
-
-#ifdef BREAKABLE_WALLS
-unsigned char *brk_buff = 23296;
-#endif
-
-#ifdef ENABLE_FIRE_ZONE
-unsigned char fzx1, fzy1, fzx2, fzy2, f_zone_ac;
-#endif

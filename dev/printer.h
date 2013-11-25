@@ -43,12 +43,12 @@ void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t) {
 #ifdef USE_AUTO_SHADOWS
 	xx = (x - VIEWPORT_X) >> 1;
 	yy = (y - VIEWPORT_Y) >> 1;	
-	if (!(attr (xx, yy) & 8) && (t < 16 || t == 19)) {
+	if (attr (xx, yy) < 8 && (t < 16 || t == 19)) {
 		t = 64 + (t << 2);
 		pointer = (unsigned char *) &tileset [2048 + t];
-		sp_PrintAtInv (y, x, attr (xx - 1, yy - 1) & 8 ? (pointer[0] & 7)-1 : pointer [0], t);
-		sp_PrintAtInv (y, x + 1, attr (xx, yy - 1) & 8 ? (pointer[1] & 7)-1 : pointer [1], t + 1);
-		sp_PrintAtInv (y + 1, x, attr (xx - 1, yy) & 8 ? (pointer[2] & 7)-1 : pointer [2], t + 2);
+		sp_PrintAtInv (y, x, attr (xx - 1, yy - 1) == 8 ? (pointer[0] & 7)-1 : pointer [0], t);
+		sp_PrintAtInv (y, x + 1, attr (xx, yy - 1) == 8 ? (pointer[1] & 7)-1 : pointer [1], t + 1);
+		sp_PrintAtInv (y + 1, x, attr (xx - 1, yy) == 8 ? (pointer[2] & 7)-1 : pointer [2], t + 2);
 		sp_PrintAtInv (y + 1, x + 1, pointer [3], t + 3);
 	} else {
 #endif
@@ -56,7 +56,7 @@ void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t) {
 #ifdef USE_AUTO_TILE_SHADOWS
 	xx = (x - VIEWPORT_X) >> 1;
 	yy = (y - VIEWPORT_Y) >> 1;	
-	if (!(attr (xx, yy) & 8) && (t < 16 || t == 19)) {
+	if (attr (xx, yy) <= 4 && (t < 16 || t == 19)) {
 		t = 64 + (t << 2);
 		if (t == 140) {
 			pointer = (unsigned char *) &tileset [2188];
@@ -68,17 +68,17 @@ void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t) {
 			pointer_alt = (unsigned char *) &tileset [2048 + t + 128];
 		}
 		
-		if (attr (xx - 1, yy - 1) & 8) {
+		if (attr (xx - 1, yy - 1) > 4) {
 			sp_PrintAtInv (y, x, pointer_alt [0], t_alt);
 		} else {
 			sp_PrintAtInv (y, x, pointer [0], t);
 		}
-		if (attr (xx, yy - 1) & 8) {
+		if (attr (xx, yy - 1) > 4) {
 			sp_PrintAtInv (y, x + 1, pointer_alt [1], t_alt + 1);
 		} else {
 			sp_PrintAtInv (y, x + 1, pointer [1], t + 1);
 		}
-		if (attr (xx - 1, yy) & 8) {
+		if (attr (xx - 1, yy) > 4) {
 			sp_PrintAtInv (y + 1, x, pointer_alt [2], t_alt + 2);
 		} else {
 			sp_PrintAtInv (y + 1, x, pointer [2], t + 2);
