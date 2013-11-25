@@ -134,8 +134,7 @@ void main (void) {
 		// Aquí la pantalla de título
 		sp_UpdateNow();
 		unpack ((unsigned int) (s_title));
-		// todo: cambiar esto por la música del orfeus:
-		espera_activa (32767);
+		select_joyfunc ();
 		cortina ();
 		
 		// Empezamos.
@@ -204,7 +203,7 @@ void main (void) {
 				hotspot_x = hotspot_y = 240;
 				// ¿Sumamos un objeto, una llave, o vida?
 				if (hotspots [n_pant].act == 0) {
-					player.life += 10;
+					player.life += PLAYER_REFILL;
 					if (player.life > PLAYER_LIFE)
 						player.life = PLAYER_LIFE;
 					draw_life ();
@@ -225,6 +224,18 @@ void main (void) {
 			// Comprobaciones
 			
 			i = (joyfunc) (&keys);
+#ifdef PLAYER_AUTO_CHANGE_SCREEN
+			if (player.x == 0 && player.vx < 0) {
+				n_pant --;
+				draw_scr (n_pant);
+				player.x = 14336;
+			}
+			if (player.x == 14336 && player.vx > 0) {
+				n_pant ++;
+				draw_scr (n_pant);
+				player.x = 0;
+			}
+#else
 			if (player.x == 0 && ((i & sp_LEFT) == 0)) {
 				n_pant --;
 				draw_scr (n_pant);	
@@ -235,6 +246,7 @@ void main (void) {
 				draw_scr (n_pant);
 				player.x = 0;
 			}
+#endif
 			if (player.y == 0 && player.vy < 0 && n_pant >= MAP_W) {
 				n_pant -= MAP_W;
 				draw_scr (n_pant);
