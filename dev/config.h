@@ -1,154 +1,207 @@
 // Config.h
-// Generado por GameConfig de la churrera
-// Copyleft 2010 The Mojon Twins
+// Churrera v.4
+// Copyleft 2010, 2011 The Mojon Twins
 
 // ============================================================================
-// I. Configuración general del juego
+// I. General configuration
 // ============================================================================
 
-// En esta sección configuramos las dimensiones del mapa, pantalla y posición iniciales,
-// pantalla y posición finales (si aplica), número de objetos que hay que recoger, etcétera.
+// In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W                   5       //
-#define MAP_H                   5       // Dimensiones del mapa, en pantallas.
-#define SCR_INICIO              20      // Pantalla de inicio
-#define PLAYER_INI_X            2       //
-#define PLAYER_INI_Y            2       // Coordenadas de inicio del jugador, a nivel de tiles
-#define SCR_FIN                 99      // Pantalla del final. 99 si da igual.
-#define PLAYER_FIN_X            14      //
-#define PLAYER_FIN_Y            8       // Posición del jugador para terminar, a nivel de tiles
-#define PLAYER_NUM_OBJETOS      25      // Número de objetos para terminar el juego
-#define PLAYER_LIFE             50      // Vida máxima (con la que empieza, además)
-#define PLAYER_REFILL           10      // Recarga de vida.
+#define MAP_W					7		//
+#define MAP_H					5		// Map dimmensions in screens
+#define TOTAL_SCREENS			35		// 
+#define SCR_INICIO				28		// Initial screen
+#define PLAYER_INI_X			8		//
+#define PLAYER_INI_Y			3		// Initial tile coordinates
+#define SCR_FIN 				99		// Last screen. 99 = deactivated.
+#define PLAYER_FIN_X			99		//
+#define PLAYER_FIN_Y			99		// Player tile coordinates to finish game
+#define PLAYER_NUM_OBJETOS		13		// Objects to get to finish game
+#define PLAYER_LIFE 			5		// Max and starting life gauge.
+#define PLAYER_REFILL			1		// Life recharge
+
+#define LINEAR_ENEMY_HIT		1		// Amount of life to substract when normal enemy hits
+#define FLYING_ENEMY_HIT		1		// Amount of life to substract when flying enemy hits
 
 // ============================================================================
-// II. Tipo de motor
+// II. Engine type
 // ============================================================================
 
-// En esta sección definimos el tipo de motor que será compilado con el juego. En esta 
-// versión 2.0 tenemos dos tipos básicos y excluyentes: top-view (MOGGY_STYLE) y de plataformas.
-// Para emplear uno u otro deberemos descomentarlo eliminando las marcas /* y */ de principio
-// y fin de bloque.
+// This section is used to define the game engine behaviour. Many directives are related,
+// and others are mutually exclusive. I think this will be pretty obvious when you look at them. 
 
-// En la versión 3 se añade el motor de disparos, en principio compatible con el de plataformas,
-// Pero próximamente compatible con el moggy style también. En pruebas: el motor de scripting.
+// Right now the shooting engine is only compatible with the side-view engine.
 
-// Motor top-view (MOGGY-STYLE)
-/*
-#define PLAYER_MOGGY_STYLE              // Vista cenital, movimiento 8-way
-#define PLAYER_AUTO_CHANGE_SCREEN       // Si se define, se cambiará de pantalla sin pulsar una dirección.
-*/
+// General directives:
+// -------------------
 
-// Motor de plataformas
+//#define PLAYER_AUTO_CHANGE_SCREEN		// Player changes screen automaticly (no need to press direction)
+//#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
+#define DIRECT_TO_PLAY					// If defined, title screen is also the game frame.
+#define DEACTIVATE_KEYS					// If defined, keys are not present.
+//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
+//#define ONLY_ONE_OBJECT				// If defined, only one object can be carried at a time.
+#define DEACTIVATE_EVIL_TILE			// If defined, no killing tiles (behaviour 1) are detected.
+//#define PLAYER_BOUNCES				// If defined, collisions make player bounce
+#define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
+#define DEACTIVATE_REFILLS
 
-#define PLAYER_HAS_JUMP                 // Si se define, el personaje principal SALTA
-//#define PLAYER_HAS_JETPAC             // Si se define, el personaje principal tiene JET PAC
-//#define PLAYER_KILLS_ENEMIES          // Si se define, el personaje mata enemigos saltando sobre ellos
+// Shooting behaviour (only side view!)
+// ------------------------------------
 
-// Los siguientes defines pueden aplicarse a cualquiera de los dos tipos de motores y definen
-// comportamiento extra:
+//#define PLAYER_CAN_FIRE 				// If defined, shooting engine is enabled.
+#define PLAYER_BULLET_SPEED 	8		// Pixels/frame. 
+#define MAX_BULLETS 			3		// Max number of bullets on screen. Be careful!.
+#define PLAYER_BULLET_Y_OFFSET	4		// vertical offset from the player's top.
+#define ENEMIES_LIFE_GAUGE		5		// Amount of shots needed to kill enemies.
 
-//#define PLAYER_PUSH_BOXES             // Si se define, el jugador podrá empujar los tiles #14
-#define DIRECT_TO_PLAY                  // Si se define, la pantalla de marco y la de título son la misma
-#define DEACTIVATE_KEYS                 // Si se define, desactiva las llaves automáticas
-//#define DEACTIVATE_OBJECTS            // Si se define, desactiva los objetos automáticos.
-#define DEACTIVATE_EVIL_TILE            // Si se define, desactiva los tiles que te matan (1)
-#define PLAYER_BOUNCES                  // Si se define, la colisión hace que el jugador rebote.
-//#define PLAYER_FLICKERS               // Si se define, la colisión activa inmunidad
+#define FIRING_DRAINS_LIFE				// If defined, firing drains life (oi!)
+#define FIRING_DRAIN_AMOUNT		2		// what to substract when firing.
 
-// Motor de disparos
-#define PLAYER_CAN_FIRE                 // Si se define, el jugador salta con ARRIBA y dispara con FIRE
-#define PLAYER_BULLET_SPEED     8       // Pixels/frame. 
-#define MAX_BULLETS             3       // Número de balas. No te vaya colá.
-#define PLAYER_BULLET_Y_OFFSET  4       // Píxels con respecto a la posición Y del jugador
-#define ENEMIES_LIFE_GAUGE      5       // Tiros que hay que darles pa matarlos
-
-#define RANDOM_RESPAWN                  // Si se define, se activan los enemigos voladores.
-#define FANTY_MAX_V             256     // Velocidad máxima de fantys.
-#define FANTY_A                 12      // Aceleración de fantys
-#define FANTIES_LIFE_GAUGE      10      // Tiros que hay que darles pa matarlos
+//#define RANDOM_RESPAWN				// If defined, automatic flying enemies spawn on killed enemies
+#define USE_TYPE_6						// If defined, type 6 enemies are enabled.
+#define SIGHT_DISTANCE			80		
+#define FANTY_MAX_V 			256 	// Flying enemies max speed.
+#define FANTY_A 				12		// Flying enemies acceleration.
+#define FANTIES_LIFE_GAUGE		10		// Amount of shots needed to kill flying enemies.
 
 // Scripting
-//#define ACTIVATE_SCRIPTING            // Para activar el msc
+// ---------
+
+#define ACTIVATE_SCRIPTING			  	// Activates msc scripting and flag related stuff.
+//#define SCRIPTING_DOWN				// Use DOWN as the action key.
+#define SCRIPTING_KEY_M					// Use M as the action key instead.
+#define OBJECTS_ON_VAR			2		// If defined, only show objects if var # is set.
+#define OBJECT_COUNT			3		// Defines which FLAG will be used to store the object count.
+#define REENTER_ON_ALL_OBJECTS			// If set, re-enter screen when all objects are got, instead of ending
+
+// Top view:
+// ---------
+
+#define PLAYER_MOGGY_STYLE				// Enable top view.
+#define PLAYER_NO_INERTIA				// Disable inertia
+#define PLAYER_CONST_V			256		// Constant speed
+
+// Side view:
+// ----------
+
+//#define PLAYER_HAS_JUMP 				// If defined, player is able to jump.
+//#define PLAYER_HAS_JETPAC 			// If defined, player can thrust a vertical jetpac
+//#define JETPAC_DRAINS_LIFE			// If defined, flying drains life.
+//#define JETPAC_DRAIN_RATIO	3		// Drain 1 each X frames.
+//#define JETPAC_DRAIN_OFFSET	8		// Drain after X frames.
+//#define PLAYER_KILLS_ENEMIES		  	// If defined, stepping on enemies kills them
+//#define PLAYER_MIN_KILLABLE 	3		// Only kill enemies with id >= PLAYER_MIN_KILLABLE
+
 
 // ============================================================================
-// III. Configuración de la pantalla
+// III. Screen configuration
 // ============================================================================
 
-// En esta sección colocamos los elementos en la pantalla: la ventana de juego y los tres
-// marcadores (vida, objetos y llaves) definiendo su posición a nivel de carácteres.
-// También definimos si queremos sombreado automático (los tiles obstáculo dejan sombra sobre
-// los de segundo plano), y de qué tipo:
+// This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define VIEWPORT_X              1       //
-#define VIEWPORT_Y              0       // Posición de la ventana de juego (en carácteres)
-#define LIFE_X                  7       //
-#define LIFE_Y                  21      // Posición del marcador de vida (en carácteres)
-#define OBJECTS_X               16      //
-#define OBJECTS_Y               21      // Posición del marcador de objetos (en carácteres)
-#define KEYS_X                  10      //
-#define KEYS_Y                  21      // Posición del marcador de llaves (en carácteres)
-#define KILLED_X                27      //
-#define KILLED_Y                21      // Posición del marcador de enemigos matados (en carácteres)
+#define VIEWPORT_X				1		//
+#define VIEWPORT_Y				0		// Viewport character coordinates
 
-// Efectos gráficos: Descomentar la que aplique, o ninguna.
+#define LIFE_X					28		//
+#define LIFE_Y					23		// Life gauge counter character coordinates
+//#define DRAW_HI_DIGIT	
+//#define LIFE_H_X 				1
+//#define LIFE_H_Y				8
 
-//#define USE_AUTO_SHADOWS              // Sombras automáticas por atributos
-//#define USE_AUTO_TILE_SHADOWS         // Sombras automáticas por tiles-
-#define UNPACKED_MAP                    // Mapa sin comprimir (256 tiles). Las sombras NO TIENEN EFECTO
-#define NO_MASKS                        // Si se define, sprites con OR.
-#define PLAYER_ALTERNATE_ANIMATION      // Si se define, los frames van 1, 2, 3, 1, 2, 3, ...
+#define OBJECTS_X				14		//
+#define OBJECTS_Y				23		// Objects counter character coordinates
+#define OBJECTS_ICON_X			2		// 
+#define OBJECTS_ICON_Y			21		// Objects icon character coordinates (use with ONLY_ONE_OBJECT)
 
-// ============================================================================
-// IV. Configuración del movimiento del jugador
-// ============================================================================
+#define KEYS_X					28		//
+#define KEYS_Y					21		// Keys counter character coordinates
 
-// En esta sección definimos las constantes que gobiernan los parámetros del motor de movimiento.
-// En un juego tipo plataformas, definimos por separado el comportamiento en vertical y el compor-
-// tamiento en horizontal. Para un juego tipo top-view, los valores definidos en el comportamiento
-// horizontal se aplican también al vertical.
+//#define SHOW_KILLED
+//#define SHOW_TOTAL
+#define KILLED_X				20		//
+#define KILLED_Y				21		// Kills counter character coordinates
 
-// IV.1. Movimiento vertical, sólo aplicable al motor de plataformas:
+// Use this to show tile = ITEM_FIRST_TILE + flags [ITEM_IN_FLAG] - 1 at coordinates
+// ITEM_SHOW_X, ITEM_SHOW_Y.
 
-#define PLAYER_MAX_VY_CAYENDO   512     // Velocidad máxima cuando cae (512/64 = 8 píxels/frame)
-#define PLAYER_G                32      // Aceleración de la gravedad (32/64 = 0.5 píxeles/frame^2)
+//#define PLAYER_SHOW_ITEM				// If defined, current item is shown (scripting needed)
+#define ITEM_IN_FLAG			4		// Which flag is used to store current item.
+#define ITEM_FIRST_TILE			17		// First tile in tileset representing an object
+#define ITEM_SHOW_X				2		//
+#define ITEM_SHOW_Y				21		// Position
 
-#define PLAYER_VY_INICIAL_SALTO 64      // Velocidad inicial al saltar (64/64 = 1 píxel/frame)
-#define PLAYER_MAX_VY_SALTANDO  256     // Velocidad máxima al saltar (320/64 = 5 píxels/frame)
-#define PLAYER_INCR_SALTO       32      // Aceleración al pulsar "salto" (48/64 = 0.75 píxeles/frame^2)
+// Line of text
 
-#define PLAYER_INCR_JETPAC      32      // Incremento al usar el jetpac
-#define PLAYER_MAX_VY_JETPAC    256     // Máxima velocidad vertical con jetpac
+#define LINE_OF_TEXT			21
+#define LINE_OF_TEXT_X			2
+#define LINE_OF_TEXT_SUBSTR		4
 
-// IV.2. Movimiento horizontal (en motor de plataformas) o general (en motor top-view):
+// Graphic FX, uncomment which applies...
 
-#define PLAYER_MAX_VX           256     // Velocidad máxima horizontal (192/64 = 3 píxels/frame)
-#define PLAYER_AX               24      // Aceleración horizontal (24/64 = 0,375 píxels/frame^2)
-#define PLAYER_RX               24      // Fricción horizontal (32/64 = 0,5 píxels/frame^2)
+//#define USE_AUTO_SHADOWS				// Automatic shadows made of darker attributes
+//#define USE_AUTO_TILE_SHADOWS			// Automatic shadows using specially defined tiles 32-47.
+//#define UNPACKED_MAP					// Full, uncompressed maps. Shadows settings are ignored.
+#define NO_ALT_BG						// No alternative tile 19 for bg = 0
+#define NO_MAX_ENEMS					// Less than 3 enems in some screens
+//#define NO_MASKS						// Sprites are rendered using OR instead of masks.
+//#define PLAYER_ALTERNATE_ANIMATION	// If defined, animation is 1,2,3,1,2,3... 
 
 // ============================================================================
-// V. Comportamiento de los tiles
+// IV. Player movement configuration
 // ============================================================================
 
-// Indica el comportamiento de cada uno de los 16 tiles. Recuerda que el tile nº 15 (el último)
-// es el cerrojo y debe ser un obstáculo, porque si no, vaya mierda de cerrojo.
+// This section is used to define which constants are used in the gravity/acceleration engine.
+// If a side-view engine is configured, we have to define vertical and horizontal constants
+// separately. If a top-view engine is configured instead, the horizontal values are also
+// applied to the vertical component, vertical values are ignored.
 
-// 0 = traspasable.
-// 1 = traspasable y mata.
-// 2 = traspasable y oculta.
-// 4 = plataforma
-// 8 = obstáculo
+// IV.1. Vertical movement. Only for side-view.
+
+#define PLAYER_MAX_VY_CAYENDO	384 	// Max falling speed (512/64 = 8 pixels/frame)
+#define PLAYER_G				24		// Gravity acceleration (32/64 = 0.5 píxeles/frame^2)
+
+#define PLAYER_VY_INICIAL_SALTO 64		// Initial junp velocity (64/64 = 1 píxel/frame)
+#define PLAYER_MAX_VY_SALTANDO	256 	// Max jump velocity (320/64 = 5 píxels/frame)
+#define PLAYER_INCR_SALTO		32		// acceleration while JUMP is pressed (48/64 = 0.75 píxeles/frame^2)
+
+#define PLAYER_INCR_JETPAC		48		// Vertical jetpac gauge
+#define PLAYER_MAX_VY_JETPAC	384 	// Max vertical jetpac speed
+
+// IV.2. Horizontal (side view) or general (top view) movement.
+
+#define PLAYER_MAX_VX			256 	// Max velocity (192/64 = 3 píxels/frame)
+#define PLAYER_AX				24		// Acceleration (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_RX				24		// Friction (32/64 = 0,5 píxels/frame^2)
+
+// ============================================================================
+// V. Tile behaviour
+// ============================================================================
+
+// Defines the behaviour for each tile. Remember that if keys are activated, tile #15 is a bolt
+// and, therefore, it should be made a full obstacle!
+
+// 0 = Walkable (no action)
+// 1 = Walkable and kills.
+// 2 = Walkable and hides.
+// 4 = Platform (only stops player if falling on it)
+// 8 = Full obstacle (blocks player from all directions)
 
 #ifndef UNPACKED_MAP
-// Comportamiento de los tiles para mapas "packed"
+// Fill this array for normal, packed maps. The second row
+// is defined if you want to use tiles 20-31 in your scripts.
+// Remove it if you are not using extra tiles at all. And remember
+// that tiles 16 to 19 MUST be 0.
 unsigned char comportamiento_tiles [] = {
-    0, 0, 0, 0, 8, 8, 8, 8, 0, 8, 0, 0, 1, 8, 8, 8
+	0, 8, 8, 8, 8, 0, 8, 8, 8, 8, 8, 8, 8, 8, 0, 8,
+	0, 0, 0, 0, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0
 };
 #else
-// Comportamiento de los tiles en mapas "unpacked"
+// Fill this array if you are using unpacked maps.
 unsigned char comportamiento_tiles [] = {
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
-    0, 0, 4, 8, 8, 4, 8, 8, 4, 4, 8, 0, 0, 2, 0, 0,
-    0, 0, 4, 4, 0, 8, 2, 2, 2, 2, 8, 0, 2, 2, 2, 0  
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
+	0, 0, 4, 8, 8, 4, 8, 8, 4, 4, 8, 0, 0, 2, 0, 0,
+	0, 0, 4, 4, 0, 8, 2, 2, 2, 2, 8, 0, 2, 2, 2, 8	
 };
 #endif

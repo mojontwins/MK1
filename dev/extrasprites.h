@@ -10,7 +10,9 @@ extern unsigned char sprite_18_a [];
 #ifdef PLAYER_CAN_FIRE
 extern unsigned char sprite_19_a [];
 extern unsigned char sprite_19_b [];
+#endif
 
+#ifdef NO_MASKS
 #asm
     ._sprite_17_a
         defb 0
@@ -95,42 +97,6 @@ extern unsigned char sprite_19_b [];
         defb 0, 0
         defb 0, 0
         defb 0, 0
-        	
-	._sprite_19_a
-		defb 0, 0
-		defb 0, 0
-		defb 24, 0
-		defb 60, 0
-		defb 60, 0
-		defb 24, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-	
-	._sprite_19_b
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
 #endasm
 #else
 #asm
@@ -235,5 +201,45 @@ extern unsigned char sprite_19_b [];
 		defb 0, 255, 0, 255, 0, 255, 0, 255
 		defb 0, 255, 0, 255, 0, 255, 0, 255
 		defb 0, 255, 0, 255, 0, 255, 0, 255
+#endasm
+#endif
+
+#ifdef PLAYER_CAN_FIRE
+#asm
+	._sprite_19_a
+		defb 0, 0
+		defb 0, 0
+		defb 24, 0
+		defb 60, 0
+		defb 60, 0
+		defb 24, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+	
+	._sprite_19_b
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
+		defb 0, 0
 #endasm
 #endif
