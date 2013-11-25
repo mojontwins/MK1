@@ -8,20 +8,20 @@
 
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W                   8       //
-#define MAP_H                   3       // Map dimmensions in screens
-#define SCR_INICIO              16      // Initial screen
-#define PLAYER_INI_X            1       //
-#define PLAYER_INI_Y            7       // Initial tile coordinates
-#define SCR_FIN                 99      // Last screen. 99 = deactivated.
-#define PLAYER_FIN_X            99      //
-#define PLAYER_FIN_Y            99      // Player tile coordinates to finish game
-#define PLAYER_NUM_OBJETOS      99      // Objects to get to finish game
-#define PLAYER_LIFE             15      // Max and starting life gauge.
-#define PLAYER_REFILL           1       // Life recharge
-//#define COMPRESSED_LEVELS             // use levels.h instead of mapa.h and enems.h (!)
-//#define MAX_LEVELS            2       // # of compressed levels
-//#define REFILL_ME                     // If defined, refill player on each level
+#define MAP_W					6		//
+#define MAP_H					5		// Map dimmensions in screens
+#define SCR_INICIO				1		// Initial screen
+#define PLAYER_INI_X			5		//
+#define PLAYER_INI_Y			1		// Initial tile coordinates
+#define SCR_FIN 				99		// Last screen. 99 = deactivated.
+#define PLAYER_FIN_X			99		//
+#define PLAYER_FIN_Y			99		// Player tile coordinates to finish game
+#define PLAYER_NUM_OBJETOS		25		// Objects to get to finish game
+#define PLAYER_LIFE 			9		// Max and starting life gauge.
+#define PLAYER_REFILL			1		// Life recharge
+//#define COMPRESSED_LEVELS				// use levels.h instead of mapa.h and enems.h (!)
+//#define MAX_LEVELS			2		// # of compressed levels
+//#define REFILL_ME						// If defined, refill player on each level
 
 // ============================================================================
 // II. Engine type
@@ -42,25 +42,25 @@
 // General directives:
 // -------------------
 
-#define PLAYER_AUTO_CHANGE_SCREEN       // Player changes screen automaticly (no need to press direction)
-//#define PLAYER_PUSH_BOXES             // If defined, tile #14 is pushable
+#define PLAYER_AUTO_CHANGE_SCREEN		// Player changes screen automaticly (no need to press direction)
+//#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable
 //#define FIRE_TO_PUSH
-#define DIRECT_TO_PLAY                  // If defined, title screen is also the game frame.
-//#define DEACTIVATE_KEYS               // If defined, keys are not present.
-//#define DEACTIVATE_OBJECTS            // If defined, objects are not present.
-#define ONLY_ONE_OBJECT                 // If defined, only one object can be carried at a time.
-#define OBJECT_COUNT            1       // Defines which FLAG will be used to store the object count.
-//#define DEACTIVATE_EVIL_TILE          // If defined, no killing tiles (behaviour 1) are detected.
-//#define FULL_BOUNCE   
-//#define PLAYER_BOUNCES                // If defined, collisions make player bounce
-//#define SLOW_DRAIN                    // Works with bounces. Drain is 4 times slower
-#define PLAYER_FLICKERS                 // If defined, collisions make player flicker instead.
-//#define MAP_BOTTOM_KILLS              // If defined, exiting the map bottomwise kills.
-//#define WALLS_STOP_ENEMIES            // If defined... erm...
-//#define EVERYTHING_IS_A_WALL			// If defined, any tile <> type 0 is a wall, otherwise just 8.
-//#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
-//#define DEATH_COUNT_EXPRESSION		20+(rand()&15)
-//#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
+#define DIRECT_TO_PLAY					// If defined, title screen is also the game frame.
+//#define DEACTIVATE_KEYS				// If defined, keys are not present.
+//#define DEACTIVATE_OBJECTS			// If defined, objects are not present.
+//#define ONLY_ONE_OBJECT				// If defined, only one object can be carried at a time.
+//#define OBJECT_COUNT			1		// Defines which FLAG will be used to store the object count.
+//#define DEACTIVATE_EVIL_TILE			// If defined, no killing tiles (behaviour 1) are detected.
+#define FULL_BOUNCE						// If defined, evil tile bounces equal MAX_VX, otherwise v/2
+//#define PLAYER_BOUNCES				// If defined, collisions make player bounce
+//#define SLOW_DRAIN						// Works with bounces. Drain is 4 times slower
+#define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
+//#define MAP_BOTTOM_KILLS				// If defined, exiting the map bottomwise kills.
+#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
+#define EVERYTHING_IS_A_WALL			// If defined, any tile <> type 0 is a wall, otherwise just 8.
+#define ENABLE_PURSUERS					// If defined, type 7 enemies are active
+#define DEATH_COUNT_EXPRESSION	20+(rand()&15)
+#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
 
 // Shooting behaviour
 // ------------------
@@ -89,7 +89,7 @@
 // ---------
 
 //#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
-#define SCRIPTING_DOWN					// Use DOWN as the action key.
+//#define SCRIPTING_DOWN				// Use DOWN as the action key.
 //#define SCRIPTING_KEY_M				// Use M as the action key instead.
 //#define ENABLE_EXTERN_CODE			// Enables custom code to be run from the script using EXTERN n
 //#define ENABLE_FIRE_ZONE				// Allows to define a zone which auto-triggers "FIRE"
@@ -97,16 +97,16 @@
 // Top view:
 // ---------
 
-//#define PLAYER_MOGGY_STYLE			// Enable top view.
-//#define TOP_OVER_SIDE					// UP/DOWN has priority over LEFT/RIGHT
+#define PLAYER_MOGGY_STYLE            // Enable top view.
+#define TOP_OVER_SIDE                 // UP/DOWN has priority over LEFT/RIGHT
 
 // Side view:
 // ----------
 
-#define PLAYER_HAS_JUMP                 // If defined, player is able to jump.
+//#define PLAYER_HAS_JUMP               // If defined, player is able to jump.
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
-#define PLAYER_KILLS_ENEMIES            // If defined, stepping on enemies kills them
-#define PLAYER_MIN_KILLABLE     3       // Only kill enemies with id >= PLAYER_MIN_KILLABLE
+//#define PLAYER_KILLS_ENEMIES          // If defined, stepping on enemies kills them
+//#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 //#define PLAYER_BOOTEE                 // Always jumping engine. Don't forget to disable "HAS_JUMP" and "HAS_JETPAC"!!!
 //#define PLAYER_STEP_SOUND             // Sound while walking. No effect in the BOOTEE engine.
 //#define PLAYER_BOUNCE_WITH_WALLS      // Bounce when hitting a wall. Only really useful in MOGGY_STYLE mode
@@ -118,26 +118,26 @@
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
 
-#define VIEWPORT_X              1       //
-#define VIEWPORT_Y              0       // Viewport character coordinates
-#define LIFE_X                  22      //
-#define LIFE_Y                  21      // Life gauge counter character coordinates
-#define OBJECTS_X               17      //
-#define OBJECTS_Y               21      // Objects counter character coordinates
-#define OBJECTS_ICON_X          15      // 
-#define OBJECTS_ICON_Y          21      // Objects icon character coordinates (use with ONLY_ONE_OBJECT)
-#define KEYS_X                  27      //
-#define KEYS_Y                  21      // Keys counter character coordinates
-#define KILLED_X                12      //
-#define KILLED_Y                21      // Kills counter character coordinates
-#define AMMO_X					99		// 
-#define AMMO_Y					99		// Ammo counter character coordinates
-#define PLAYER_SHOW_KILLS
+#define VIEWPORT_X				1		//
+#define VIEWPORT_Y				1		// Viewport character coordinates
+#define LIFE_X					3		//
+#define LIFE_Y					23		// Life gauge counter character coordinates
+#define OBJECTS_X				27		//
+#define OBJECTS_Y				23		// Objects counter character coordinates
+#define OBJECTS_ICON_X			99		// 
+#define OBJECTS_ICON_Y			99		// Objects icon character coordinates (use with ONLY_ONE_OBJECT)
+#define KEYS_X					22		//
+#define KEYS_Y					23		// Keys counter character coordinates
+#define KILLED_X				99		//
+#define KILLED_Y				99		// Kills counter character coordinates
+#define AMMO_X					8		// 
+#define AMMO_Y					23		// Ammo counter character coordinates
+//#define PLAYER_SHOW_KILLS
 
 // Text
-//#define LINE_OF_TEXT			0		// If defined, scripts can show text @ Y = #
-//#define LINE_OF_TEXT_X		1		// X coordinate.
-//#define LINE_OF_TEXT_ATTR		71		// Attribute
+#define LINE_OF_TEXT			0		// If defined, scripts can show text @ Y = #
+#define LINE_OF_TEXT_X			1		// X coordinate.
+#define LINE_OF_TEXT_ATTR		71		// Attribute
 
 // Graphic FX, uncomment which applies...
 
@@ -192,8 +192,8 @@
 // Save for 10 (special), but that's obvious, innit?
 #ifndef COMPRESSED_LEVELS
 unsigned char comportamiento_tiles [] = {
-	0, 8, 8, 8, 8, 8, 0, 8, 4, 0, 8, 1, 0, 0, 0,10,
+	0, 0, 8, 8, 8, 8, 8, 8,17, 8, 8, 8, 8, 8, 10, 10,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0
 };
 #endif

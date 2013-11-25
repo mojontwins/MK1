@@ -10,17 +10,25 @@ extern unsigned char s_ending [];
 	._s_title
 		BINARY "title.bin"
 	._s_marco
+#endasm
+#ifndef DIRECT_TO_PLAY
+#asm
 		BINARY "marco.bin"
+#endasm
+#endif
+#asm
 	._s_ending
 		BINARY "ending.bin"
 #endasm
 
-void unpack (unsigned int address) {
-	asm_int [0] = address;
-	
+void blackout (void) {
 	#asm
-		ld hl, (_asm_int)
-		ld de, 16384
-		call depack
+		ld hl, 22528
+		ld (hl), 0
+		push hl
+		pop de
+		inc de
+		ld bc, 767
+		ldir
 	#endasm
 }

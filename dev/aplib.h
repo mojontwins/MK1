@@ -1,3 +1,5 @@
+extern unsigned int ram_address [];
+extern unsigned int ram_destination [];
 #asm
 
 ; aPPack decompressor
@@ -119,3 +121,23 @@
 		ret
 
 #endasm
+
+#asm
+	._ram_address
+		defw 0
+	._ram_destination
+		defw 0
+#endasm
+
+void unpack (unsigned int address, unsigned int destination) {
+	if (address != 0) {
+		ram_address [0] = address;
+		ram_destination [0] = destination;
+
+		#asm	
+			ld hl, (_ram_address)
+			ld de, (_ram_destination)
+			call depack
+		#endasm
+	}
+}
