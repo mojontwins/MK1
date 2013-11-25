@@ -11,6 +11,9 @@ void saca_a_todo_el_mundo_de_aqui (void) {
 
 int itj;
 unsigned char objs_old, keys_old, life_old, killed_old;
+#ifdef MAX_AMMO
+unsigned char ammo_old;
+#endif
 #ifdef COMPRESSED_LEVELS
 unsigned char *level_str = "LEVEL 0X";
 #endif
@@ -179,6 +182,9 @@ void do_game (void) {
 #endif
 
 		objs_old = keys_old = life_old = killed_old = 0xff;
+#ifdef MAX_AMMO		
+		ammo_old = 0xff;
+#endif
 		success = 0;
 		
 		while (playing) {
@@ -210,6 +216,14 @@ void do_game (void) {
 			}
 #endif
 #endif
+
+#ifdef MAX_AMMO		
+			if (player.ammo != ammo_old) {
+				print_number2 (AMMO_X, AMMO_Y, player.ammo);
+				ammo_old = player.ammo;
+			}
+#endif
+
 			maincounter ++;
 			half_life = !half_life;
 			
@@ -244,6 +258,17 @@ void do_game (void) {
 			// Precalc this, comes handy:
 			x = player.x >> 6;
 			y = player.y >> 6;
+			
+#ifdef ACTIVATE_SCRIPTING
+#ifdef ENABLE_FIRE_ZONE
+			if (f_zone_ac == 1) {
+				if (x >= fzx1 && x <= fzx2 && y >= fzy1 && y <= fzy2) {
+					script = f_scripts [n_pant];
+					run_script ();
+				}	
+			}
+#endif
+#endif			
 			
 			if ( !(player.estado & EST_PARP) || !(half_life) )
 				sp_MoveSprAbs (sp_player, spritesClip, player.next_frame - player.current_frame, VIEWPORT_Y + (y >> 3), VIEWPORT_X + (x >> 3), x & 7, y & 7);
@@ -287,6 +312,7 @@ void do_game (void) {
 			if (x >= hotspot_x - 15 && x <= hotspot_x + 15 && y >= hotspot_y - 15 && y <= hotspot_y + 15) {
 				// Deactivate hotspot
 				draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), orig_tile);
+				gpit = 0;
 				// Was it an object, key or life boost?
 				if (hotspots [n_pant].act == 0) {
 					player.life += PLAYER_REFILL;
@@ -294,31 +320,43 @@ void do_game (void) {
 						player.life = PLAYER_LIFE;
 					hotspots [n_pant].act = 2;
 					peta_el_beeper (8);
-#ifndef DEACTIVATE_OBJECTS
-				} else if (hotspots [n_pant].tipo == 1) {
+				} else {					
+					switch (hotspots [n_pant].tipo) {
+#ifndef DEACTIVATE_OBJECTS						
+						case 1:
 #ifdef ONLY_ONE_OBJECT
-					if (player.objs == 0) {
-						player.objs ++;
-						hotspots [n_pant].act = 0;
-						peta_el_beeper (9);	
-					} else {
-						peta_el_beeper (4);	
-						draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), 17);
-					}
+							if (player.objs == 0) {
+								player.objs ++;
+								peta_el_beeper (9);	
+							} else {
+								peta_el_beeper (4);	
+								draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), 17);
+								gpit = 1;
+							}
 #else
-					player.objs ++;
-					hotspots [n_pant].act = 0;
-					peta_el_beeper (9);
+							player.objs ++;
+							peta_el_beeper (9);
 #endif
+							break;
 #endif
 #ifndef DEACTIVATE_KEYS
-				} else if (hotspots [n_pant].tipo == 2) {
-					player.keys ++;
-					hotspots [n_pant].act = 0;
-					peta_el_beeper (7);
+						case 2:
+							player.keys ++;
+							peta_el_beeper (7);
+							break;
 #endif
-				} 
-				// PLOP!!
+#ifdef MAX_AMMO
+						case 4:
+							if (MAX_AMMO - player.ammo > AMMO_REFILL)
+								player.ammo += AMMO_REFILL;
+							else 
+								player.ammo = MAX_AMMO;
+							peta_el_beeper (9);
+							break;
+#endif
+					}
+					hotspots [n_pant].act = gpit;
+				}
 				hotspot_x = hotspot_y = 240;
 			}
 			
