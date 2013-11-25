@@ -9,17 +9,17 @@
 // En esta sección configuramos las dimensiones del mapa, pantalla y posición iniciales,
 // pantalla y posición finales (si aplica), número de objetos que hay que recoger, etcétera.
 
-#define MAP_W 					5		//
-#define MAP_H					5		// Dimensiones del mapa, en pantallas.
-#define SCR_INICIO				15		// Pantalla de inicio
-#define PLAYER_INI_X			1		//
-#define PLAYER_INI_Y			2		// Coordenadas de inicio del jugador, a nivel de tiles
-#define SCR_FIN					99		// Pantalla del final. 99 si da igual.
-#define PLAYER_FIN_X			99		//
-#define PLAYER_FIN_Y			99		// Posición del jugador para terminar, a nivel de tiles
-#define PLAYER_NUM_OBJETOS		31		// Número de objetos para terminar el juego
-#define PLAYER_LIFE				99		// Vida máxima (con la que empieza, además)
-#define PLAYER_REFILL			25		// Recarga de vida.
+#define MAP_W                   5       //
+#define MAP_H                   5       // Dimensiones del mapa, en pantallas.
+#define SCR_INICIO              20      // Pantalla de inicio
+#define PLAYER_INI_X            2       //
+#define PLAYER_INI_Y            2       // Coordenadas de inicio del jugador, a nivel de tiles
+#define SCR_FIN                 99      // Pantalla del final. 99 si da igual.
+#define PLAYER_FIN_X            14      //
+#define PLAYER_FIN_Y            8       // Posición del jugador para terminar, a nivel de tiles
+#define PLAYER_NUM_OBJETOS      25      // Número de objetos para terminar el juego
+#define PLAYER_LIFE             50      // Vida máxima (con la que empieza, además)
+#define PLAYER_REFILL           10      // Recarga de vida.
 
 // ============================================================================
 // II. Tipo de motor
@@ -30,24 +30,46 @@
 // Para emplear uno u otro deberemos descomentarlo eliminando las marcas /* y */ de principio
 // y fin de bloque.
 
-/*
-// Motor top-view (MOGGY-STYLE)
+// En la versión 3 se añade el motor de disparos, en principio compatible con el de plataformas,
+// Pero próximamente compatible con el moggy style también. En pruebas: el motor de scripting.
 
-#define PLAYER_MOGGY_STYLE				// Vista cenital, movimiento 8-way
-#define PLAYER_AUTO_CHANGE_SCREEN		// Si se define, se cambiará de pantalla sin pulsar una dirección.
+// Motor top-view (MOGGY-STYLE)
+/*
+#define PLAYER_MOGGY_STYLE              // Vista cenital, movimiento 8-way
+#define PLAYER_AUTO_CHANGE_SCREEN       // Si se define, se cambiará de pantalla sin pulsar una dirección.
 */
 
-/*
 // Motor de plataformas
 
-#define	PLAYER_HAS_JUMP					// Si se define, el personaje principal SALTA
-#define PLAYER_HAS_JETPAC				// Si se define, el personaje principal tiene JET PAC
-*/
+#define PLAYER_HAS_JUMP                 // Si se define, el personaje principal SALTA
+//#define PLAYER_HAS_JETPAC             // Si se define, el personaje principal tiene JET PAC
+//#define PLAYER_KILLS_ENEMIES          // Si se define, el personaje mata enemigos saltando sobre ellos
 
 // Los siguientes defines pueden aplicarse a cualquiera de los dos tipos de motores y definen
 // comportamiento extra:
 
-// #define PLAYER_PUSH_BOXES			// Si se define, el jugador podrá empujar los tiles #14
+//#define PLAYER_PUSH_BOXES             // Si se define, el jugador podrá empujar los tiles #14
+#define DIRECT_TO_PLAY                  // Si se define, la pantalla de marco y la de título son la misma
+#define DEACTIVATE_KEYS                 // Si se define, desactiva las llaves automáticas
+//#define DEACTIVATE_OBJECTS            // Si se define, desactiva los objetos automáticos.
+#define DEACTIVATE_EVIL_TILE            // Si se define, desactiva los tiles que te matan (1)
+#define PLAYER_BOUNCES                  // Si se define, la colisión hace que el jugador rebote.
+//#define PLAYER_FLICKERS               // Si se define, la colisión activa inmunidad
+
+// Motor de disparos
+#define PLAYER_CAN_FIRE                 // Si se define, el jugador salta con ARRIBA y dispara con FIRE
+#define PLAYER_BULLET_SPEED     8       // Pixels/frame. 
+#define MAX_BULLETS             3       // Número de balas. No te vaya colá.
+#define PLAYER_BULLET_Y_OFFSET  4       // Píxels con respecto a la posición Y del jugador
+#define ENEMIES_LIFE_GAUGE      5       // Tiros que hay que darles pa matarlos
+
+#define RANDOM_RESPAWN                  // Si se define, se activan los enemigos voladores.
+#define FANTY_MAX_V             256     // Velocidad máxima de fantys.
+#define FANTY_A                 12      // Aceleración de fantys
+#define FANTIES_LIFE_GAUGE      10      // Tiros que hay que darles pa matarlos
+
+// Scripting
+//#define ACTIVATE_SCRIPTING            // Para activar el msc
 
 // ============================================================================
 // III. Configuración de la pantalla
@@ -58,19 +80,24 @@
 // También definimos si queremos sombreado automático (los tiles obstáculo dejan sombra sobre
 // los de segundo plano), y de qué tipo:
 
-#define VIEWPORT_X				1		//
-#define VIEWPORT_Y				0		// Posición de la ventana de juego (en carácteres)
-#define LIFE_X					14		//
-#define LIFE_Y					21		// Posición del marcador de vida (en carácteres)
-#define OBJECTS_X				19		//
-#define OBJECTS_Y				21		// Posición del marcador de objetos (en carácteres)
-#define KEYS_X					24		//
-#define KEYS_Y					21		// Posición del marcador de llaves (en carácteres)
+#define VIEWPORT_X              1       //
+#define VIEWPORT_Y              0       // Posición de la ventana de juego (en carácteres)
+#define LIFE_X                  7       //
+#define LIFE_Y                  21      // Posición del marcador de vida (en carácteres)
+#define OBJECTS_X               16      //
+#define OBJECTS_Y               21      // Posición del marcador de objetos (en carácteres)
+#define KEYS_X                  10      //
+#define KEYS_Y                  21      // Posición del marcador de llaves (en carácteres)
+#define KILLED_X                27      //
+#define KILLED_Y                21      // Posición del marcador de enemigos matados (en carácteres)
 
-// Sombras: descomentar la que aplique, o ninguna.
+// Efectos gráficos: Descomentar la que aplique, o ninguna.
 
-//#define USE_AUTO_SHADOWS				// Sombras automáticas por atributos
-//#define USE_AUTO_TILE_SHADOWS			// Sombras automáticas por tiles-
+//#define USE_AUTO_SHADOWS              // Sombras automáticas por atributos
+//#define USE_AUTO_TILE_SHADOWS         // Sombras automáticas por tiles-
+#define UNPACKED_MAP                    // Mapa sin comprimir (256 tiles). Las sombras NO TIENEN EFECTO
+#define NO_MASKS                        // Si se define, sprites con OR.
+#define PLAYER_ALTERNATE_ANIMATION      // Si se define, los frames van 1, 2, 3, 1, 2, 3, ...
 
 // ============================================================================
 // IV. Configuración del movimiento del jugador
@@ -83,21 +110,21 @@
 
 // IV.1. Movimiento vertical, sólo aplicable al motor de plataformas:
 
-#define PLAYER_MAX_VY_CAYENDO	512		// Velocidad máxima cuando cae (512/64 = 8 píxels/frame)
-#define PLAYER_G				32		// Aceleración de la gravedad (32/64 = 0.5 píxeles/frame^2)
+#define PLAYER_MAX_VY_CAYENDO   512     // Velocidad máxima cuando cae (512/64 = 8 píxels/frame)
+#define PLAYER_G                32      // Aceleración de la gravedad (32/64 = 0.5 píxeles/frame^2)
 
-#define PLAYER_VY_INICIAL_SALTO	64		// Velocidad inicial al saltar (64/64 = 1 píxel/frame)
-#define PLAYER_MAX_VY_SALTANDO	320		// Velocidad máxima al saltar (320/64 = 5 píxels/frame)
-#define PLAYER_INCR_SALTO 		48		// Aceleración al pulsar "salto" (48/64 = 0.75 píxeles/frame^2)
+#define PLAYER_VY_INICIAL_SALTO 64      // Velocidad inicial al saltar (64/64 = 1 píxel/frame)
+#define PLAYER_MAX_VY_SALTANDO  256     // Velocidad máxima al saltar (320/64 = 5 píxels/frame)
+#define PLAYER_INCR_SALTO       32      // Aceleración al pulsar "salto" (48/64 = 0.75 píxeles/frame^2)
 
-#define PLAYER_INCR_JETPAC		32		// Incremento al usar el jetpac
-#define PLAYER_MAX_VY_JETPAC	256		// Máxima velocidad vertical con jetpac
+#define PLAYER_INCR_JETPAC      32      // Incremento al usar el jetpac
+#define PLAYER_MAX_VY_JETPAC    256     // Máxima velocidad vertical con jetpac
 
 // IV.2. Movimiento horizontal (en motor de plataformas) o general (en motor top-view):
 
-#define PLAYER_MAX_VX			256		// Velocidad máxima horizontal (192/64 = 3 píxels/frame)
-#define PLAYER_AX				16		// Aceleración horizontal (24/64 = 0,375 píxels/frame^2)
-#define PLAYER_RX				0		// Fricción horizontal (32/64 = 0,5 píxels/frame^2)
+#define PLAYER_MAX_VX           256     // Velocidad máxima horizontal (192/64 = 3 píxels/frame)
+#define PLAYER_AX               24      // Aceleración horizontal (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_RX               24      // Fricción horizontal (32/64 = 0,5 píxels/frame^2)
 
 // ============================================================================
 // V. Comportamiento de los tiles
@@ -108,8 +135,20 @@
 
 // 0 = traspasable.
 // 1 = traspasable y mata.
-// 2 = obstáculo
+// 2 = traspasable y oculta.
+// 4 = plataforma
+// 8 = obstáculo
 
+#ifndef UNPACKED_MAP
+// Comportamiento de los tiles para mapas "packed"
 unsigned char comportamiento_tiles [] = {
-	0, 1, 2, 2, 2, 2, 1, 0, 0, 2, 2, 0, 0, 1, 2, 2
+    0, 0, 0, 0, 8, 8, 8, 8, 0, 8, 0, 0, 1, 8, 8, 8
 };
+#else
+// Comportamiento de los tiles en mapas "unpacked"
+unsigned char comportamiento_tiles [] = {
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 2, 2, 0,
+    0, 0, 4, 8, 8, 4, 8, 8, 4, 4, 8, 0, 0, 2, 0, 0,
+    0, 0, 4, 4, 0, 8, 2, 2, 2, 2, 8, 0, 2, 2, 2, 0  
+};
+#endif

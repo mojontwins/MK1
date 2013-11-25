@@ -5,10 +5,28 @@
 // Renombrar a tujuego.c o lo que sea para que quede más bello
 // y to la pesca.
 
+// Super mega hiper disclaimer: como verás, el código es una 
+// paranoia de la hostia. El tema está en que se reaprovecha
+// mucho para poder hacer distintos tipos de juego con dife-
+// rentes características, pero no todo el código es usable
+// en todos los tipos de juego. Para ahorrar, se usan direc-
+// tivas que incluyen sólo el código necesario, dejando fuera
+// todo lo que no se usa... Por eso es tan zapatiéstico.
+
+// Y sí, es el mismo motor que Uwol o Phantomasa 2, pero
+// mejorado, tuneado, modularizado y hipervitaminado.
+
 #include <spritepack.h>
 
+/*
 #pragma output STACKPTR=61440
 #define AD_FREE			60000
+*/
+// Tighten it even more... Gaining about 1.1 extra Kb 
+#pragma output STACKPTR=61952
+#define AD_FREE			60020
+
+#include "config.h"
 
 struct sp_UDK keys;
 void *joyfunc;				// Puntero a la función de manejo seleccionada.
@@ -25,6 +43,9 @@ void *u_free = sp_FreeBlock;
 unsigned char kempston_is_attached;
 struct sp_SS *sp_player;
 struct sp_SS *sp_moviles [3];
+#ifdef PLAYER_CAN_FIRE
+struct sp_SS *sp_bullets [MAX_BULLETS];
+#endif
 struct sp_Rect spritesClipValues;
 struct sp_Rect *spritesClip;
 
@@ -54,10 +75,12 @@ unsigned char half_life;
 
 #include "aplib.h"
 #include "pantallas.h"
-#include "config.h"
 #include "mapa.h"
 #include "tileset.h"
 #include "sprites.h"
+#if defined(PLAYER_KILLS_ENEMIES) || defined(PLAYER_CAN_FIRE)
+#include "extrasprites.h"
+#endif
 #include "enems.h"
 #include "beeper.h"
 #include "engine.h"
@@ -71,7 +94,11 @@ void main (void) {
 	unsigned char playing;
 	unsigned char n_pant;
 	unsigned char maincounter;
+#ifdef RANDOM_RESPAWN
+	int x, y;
+#else
 	unsigned char x, y;
+#endif
 	unsigned char success;
 	
 	// Primero detecto el kempston
@@ -88,7 +115,7 @@ void main (void) {
 	
 	sp_Initialize (7, 0);
 	sp_Border (BLACK);
-	sp_AddMemory(0, 50, 14, AD_FREE);
+	sp_AddMemory(0, 56, 14, AD_FREE);
 	
 	// Defino las teclas y el control por defecto
 	
@@ -118,6 +145,19 @@ void main (void) {
 	
 	// Creamos los sprites
 	
+#ifdef NO_MASKS
+	sp_player = sp_CreateSpr (sp_OR_SPRITE, 3, sprite_2_a, 1, TRANSPARENT);
+	sp_AddColSpr (sp_player, sprite_2_b, TRANSPARENT);
+	sp_AddColSpr (sp_player, sprite_2_c, TRANSPARENT);
+	player.current_frame = player.next_frame = sprite_2_a;
+	
+	for (i = 0; i < 3; i ++) {
+		sp_moviles [i] = sp_CreateSpr(sp_OR_SPRITE, 3, sprite_9_a, 1, TRANSPARENT);
+		sp_AddColSpr (sp_moviles [i], sprite_9_b, TRANSPARENT);
+		sp_AddColSpr (sp_moviles [i], sprite_9_c, TRANSPARENT);	
+		en_an [i].current_frame = sprite_9_a;
+	}
+#else
 	sp_player = sp_CreateSpr (sp_MASK_SPRITE, 3, sprite_2_a, 1, TRANSPARENT);
 	sp_AddColSpr (sp_player, sprite_2_b, TRANSPARENT);
 	sp_AddColSpr (sp_player, sprite_2_c, TRANSPARENT);
@@ -129,31 +169,64 @@ void main (void) {
 		sp_AddColSpr (sp_moviles [i], sprite_9_c, TRANSPARENT);	
 		en_an [i].current_frame = sprite_9_a;
 	}
-	
+#endif
+
+#ifdef PLAYER_CAN_FIRE
+	for (i = 0; i < MAX_BULLETS; i ++) {
+		sp_bullets [i] = sp_CreateSpr (sp_OR_SPRITE, 2, sprite_19_a, 1, TRANSPARENT);
+		sp_AddColSpr (sp_bullets [i], sprite_19_b, TRANSPARENT);
+	}
+#endif
+
 	while (1) {
 		// Aquí la pantalla de título
 		sp_UpdateNow();
 		unpack ((unsigned int) (s_title));
 		select_joyfunc ();
+		
+#ifndef DIRECT_TO_PLAY
+		// Si no está definido DIRECT_TO_PLAY, entonces borramos la pantalla de
+		// título y colocamos el marco
 		cortina ();
-		
-		// Empezamos.
-		
 		sp_UpdateNow();
 		unpack ((unsigned int) (s_marco));
-		
+#endif
+
+		// Empezamos.
+
 		playing = 1;
 		init_player ();
 		init_hotspots ();
+#ifndef DEACTIVATE_KEYS
 		init_cerrojos ();
-		
+#endif
+#if defined(PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
+		init_malotes ();
+#endif
+#ifdef PLAYER_CAN_FIRE
+		init_bullets ();
+#endif	
+			
 		n_pant = SCR_INICIO;
 		maincounter = 0;
 		
 		draw_scr (n_pant);
 		draw_life ();
+#ifndef	DEACTIVATE_OBJECTS
 		draw_objs ();
+#endif
+#ifndef DEACTIVATE_KEYS
 		draw_keys ();
+#endif
+
+#if defined(PLAYER_KILLS_ENEMIES) || defined(PLAYER_CAN_FIRE)
+		draw_killed ();
+#endif
+#ifdef PLAYER_KILLS_ENEMIES		
+		sp_PrintAtInv (KILLED_Y, 2 + KILLED_X, 71, 15);// Poner total
+		sp_PrintAtInv (KILLED_Y, 3 + KILLED_X, 71, 16 + BADDIES_COUNT / 10);
+		sp_PrintAtInv (KILLED_Y, 4 + KILLED_X, 71, 16 + BADDIES_COUNT % 10);
+#endif
 		
 		half_life = 0;
 		
@@ -171,28 +244,77 @@ void main (void) {
 			
 			// Mover enemigos
 			
-			mueve_bicharracos ();
-			
+			mueve_bicharracos (n_pant);
+
+#ifdef PLAYER_CAN_FIRE
+			// Mover balas
+				
+			mueve_bullets ();
+#endif
+
+			// Render			
+
+			for (i = 0; i < 3; i ++) {
+				if (malotes [enoffs + i].t != 0) {		// Esto sólo es necesario si hay habitaciones con menos de 3.
+#ifdef RANDOM_RESPAWN
+					if (en_an [i].fanty_activo) {
+						x = en_an [i].x >> 6;
+						y = en_an [i].y >> 6;
+					} else {
+#endif
+						x = malotes [enoffs + i].x;
+						y = malotes [enoffs + i].y;
+#ifdef RANDOM_RESPAWN
+					}
+#endif
+					sp_MoveSprAbs (sp_moviles [i], spritesClip, en_an [i].next_frame - en_an [i].current_frame, VIEWPORT_Y + (y >> 3), VIEWPORT_X + (x >> 3),x & 7, y & 7);
+					en_an [i].current_frame = en_an [i].next_frame;
+				}
+			}
+
 			// Precalc para cálculos (eh?)
 			
 			x = player.x >> 6;
 			y = player.y >> 6;
 			
-			// Render
+			if ( !(player.estado & EST_PARP) || !(half_life) )
+				sp_MoveSprAbs (sp_player, spritesClip, player.next_frame - player.current_frame, VIEWPORT_Y + (y >> 3), VIEWPORT_X + (x >> 3), x & 7, y & 7);
+			else
+				sp_MoveSprAbs (sp_player, spritesClip, player.next_frame - player.current_frame, -2, -2, 0, 0);
 			
-			sp_MoveSprAbs (sp_player, spritesClip, player.next_frame - player.current_frame, VIEWPORT_Y + (y >> 3), VIEWPORT_X + (x >> 3), x & 7, y & 7);
 			player.current_frame = player.next_frame;
 			
-			for (i = 0; i < 3; i ++) {
-				if (malotes [enoffs + i].t != 0) {		// Esto sólo es necesario si hay habitaciones con menos de 3.
-					sp_MoveSprAbs (sp_moviles [i], spritesClip, en_an [i].next_frame - en_an [i].current_frame, VIEWPORT_Y + (malotes [enoffs + i].y >> 3), VIEWPORT_X + (malotes [enoffs + i].x >> 3), malotes [enoffs + i].x & 7, malotes [enoffs + i].y & 7);
-					en_an [i].current_frame = en_an [i].next_frame;
+			
+#ifdef PLAYER_CAN_FIRE
+			for (i = 0; i < MAX_BULLETS; i ++) {
+				if (bullets [i].estado == 1) {
+					sp_MoveSprAbs (sp_bullets [i], spritesClip, 0, VIEWPORT_Y + (bullets [i].y >> 3), VIEWPORT_X + (bullets [i].x >> 3), bullets [i].x & 7, bullets [i].y & 7);
+				} else {
+					sp_MoveSprAbs (sp_bullets [i], spritesClip, 0, -2, -2, 0, 0);
 				}
 			}
+#endif			
 			
 			// Update to screen
 			
 			sp_UpdateNow();
+			
+#ifdef PLAYER_CAN_FIRE
+			for (i = 0; i < 3; i ++)
+				if (en_an [i].morido == 1) {
+					peta_el_beeper (1);
+					en_an [i].morido = 0;
+				} 	
+#endif
+
+#ifdef PLAYER_FLICKERS
+			// parpadeo
+			if (player.estado == EST_PARP) {
+				player.ct_estado --;
+				if (player.ct_estado == 0)
+					player.estado = EST_NORMAL;	
+			}
+#endif			
 			
 			// Coger objeto
 			
@@ -208,14 +330,18 @@ void main (void) {
 						player.life = PLAYER_LIFE;
 					draw_life ();
 					hotspots [n_pant].act = 2;
+#ifndef DEACTIVATE_OBJECTS
 				} else if (hotspots [n_pant].tipo == 1) {
 					player.objs ++;
 					draw_objs ();	
 					hotspots [n_pant].act = 0;
+#endif
+#ifndef DEACTIVATE_KEYS
 				} else if (hotspots [n_pant].tipo == 2) {
 					player.keys ++;
 					draw_keys ();
 					hotspots [n_pant].act = 0;
+#endif
 				} 
 				// PLOP!!
 				peta_el_beeper (0);			
@@ -253,9 +379,18 @@ void main (void) {
 				player.y = 9216;	
 			}
 			if (player.y == 9216 && player.vy > 0) {				// 9216 = 144 * 64
-				n_pant += MAP_W;
-				draw_scr (n_pant);
-				player.y = 0;
+				if (n_pant < MAP_W * MAP_H - MAP_W) {
+					n_pant += MAP_W;
+					draw_scr (n_pant);
+					player.y = 0;
+				} else {
+					player.vy = -PLAYER_MAX_VY_CAYENDO;	
+					if (player.life > 0) {
+						peta_el_beeper (4);
+						player.life --;	
+						draw_life ();
+					}
+				}
 			}
 			
 			// llegarse al final
