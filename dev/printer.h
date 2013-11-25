@@ -103,8 +103,8 @@ void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t) {
 #endif
 
 void print_number2 (unsigned char x, unsigned char y, unsigned char number) {
-	sp_PrintAtInv (y, x, 5, 16 + (number / 10));
-	sp_PrintAtInv (y, x + 1, 5, 16 + (number % 10));
+	sp_PrintAtInv (y, x, 7, 16 + (number / 10));
+	sp_PrintAtInv (y, x + 1, 7, 16 + (number % 10));
 }
 
 #ifndef DEACTIVATE_OBJECTS

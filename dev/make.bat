@@ -2,14 +2,15 @@
 rem Cambia "%1" por el nombre de tu güego.
 echo ### COMPILANDO SCRIPT ###
 cd ..\script
+rem no olvides cambiar el 24 por el nº de pantallas
 msc %1.spt msc.h 24
 copy *.h ..\dev
 cd ..\dev
 echo -------------------------------------------------------------------------------
 echo ### REGENERANDO MAPA ###
 cd ..\map
-rem cambia ALTO y ANCHO por los valores de tu mapa:
-..\utils\mapcnv mapa.map ALTO ANCHO 15 10 15 packed
+rem cambia ANCHO y ALTO por los valores de tu mapa:
+..\utils\mapcnv mapa.map ANCHO ALTO 15 10 15 packed
 copy mapa.h ..\dev
 cd ..\dev
 echo -------------------------------------------------------------------------------

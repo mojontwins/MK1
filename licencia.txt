@@ -1,0 +1,43 @@
+Esta parte es muy aburrida pero tristemente necesaria.
+
+La Churrera está bajo licencia Creative Commons 3.0 "by-nc-ca", o sea,
+"Reconocimiento-NoComercial-CompartirIgual 3.0 Unported (CC BY-NC-SA 3.0)"
+
+Esto significa que eres libre de:
+
+	- Copiar, distribuir y comunicar públicamente la obra.
+	- Transformar la obra.
+	- Crear productos derivados de la obra.
+	
+Bajo las siguientes condiciones:
+
+	Reconocimiento — Debes reconocer los créditos de la obra de la manera 
+	especificada por los Mojon Twins (pero no de una manera que sugiera que 
+	tiene su apoyo o apoyan el uso que hace de su obra). En este caso, sólo 
+	te pedimos que incluyas el texto "Powered by La Churrera" o incluyas el 
+	logo que incluimos en el archivo logo.png en un lugar visible, como puede 
+	ser la pantalla de carga o la portada del güego.
+
+	No comercial — No puede utilizar esta obra para fines comerciales.
+
+	Compartir bajo la misma licencia — Si altera o transforma esta obra, o 
+	genera una obra derivada, sólo puede distribuir la obra generada bajo una 
+	licencia idéntica a ésta. 
+	
+Entendiendo que:
+
+	Renuncia — Alguna de estas condiciones puede no aplicarse si se obtiene 
+	el permiso de los Mojon Twins.
+	
+	Aviso — Al reutilizar o distribuir la obra, tiene que dejar bien claro los 
+	términos de la licencia de esta obra. 
+	
+En resumen
+
+	- Los güegos que hagan deben lanzarse bajo una licencia CC equivalente. Si
+	quieres lanzar los güegos bajo otro tipo de licencia, debes hablar con 
+	nosotros y pedir permiso.
+	
+	- Debes incluir "Powered by la Churrera" o el logo en un sitio visible. No
+	te cuesta ningún trabajo y nos beneficiamos todos.
+	

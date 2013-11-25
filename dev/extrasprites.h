@@ -125,39 +125,39 @@ extern unsigned char sprite_19_b [];
 #ifdef PLAYER_CAN_FIRE
 #asm	              	
 	._sprite_19_a
-		defb 0, 0
-		defb 0, 0
-		defb 24, 0
+		defb 0, 255
+		defb 0, 195
+		defb 24, 129
 		defb 60, 0
 		defb 60, 0
-		defb 24, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
+		defb 24, 129
+		defb 0, 195
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
 	
 	._sprite_19_b
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
-		defb 0, 0
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
+		defb 0, 255
 #endasm
 #endif

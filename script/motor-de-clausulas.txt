@@ -34,9 +34,13 @@ Especiales:
 Sección							Se codifica como
 ENTERING ANY					ENTERING #MAX_PANTS
 ENTERING GAME					ENTERING #(MAX_PANTS+1)
+ON_TIMER_OFF					ENTERING #(MAX_PANTS+2)
 PRESS_FIRE AT ANY               FIRE #MAX_PANTS
 PLAYER_GETS_COIN				FIRE #(MAX_PANTS+1)
 PLAYER_KILLS_ENEMY				FIRE #(MAX_PANTS+2)
+
+Variables (FLAGS) La mayoría de los parámetros numéricos pueden ser sustituidos por el valor
+de un flag con #n significando "el valor del flag n"
 
 I.1. Tipos de cláusulas (IFs)
 =============================
@@ -117,6 +121,17 @@ I.1. Tipos de cláusulas (IFs)
 	Descripcion: Evaluará a CIERTO si el jugador NO está en la pantalla n
 	Opcode: 51 n
 		
+* IF JUST_PUSHED
+	Descripción: viene de acabar de empujar (!)
+	Opcode: 60
+	
+* IF TIMER >= x
+	Descripción: el timer >= x
+	Opcode: 70 x
+	
+* IF TIMER <= x
+	Opcode: 71 x
+	
 * IF TRUE
 	Descripción: Siempre CIERTO
 	Opcode: F0
@@ -217,6 +232,22 @@ I.2. Tipos de acciones
 * REDRAW
 	Descripción: Sólo redibuja la pantalla.
 	Opcode: 6E
+	
+* WARP_TO n, x, y
+	Descripción: Salta a la pantalla n en x, y
+	Opcode: 6D n x y
+	
+* SET_TIMER a, b
+	Descripción: Timer = a, rate = b
+	Opcode: 70 a b
+	
+* TIMER_START
+	Descripción: enciende el temporizador
+	Opcode: 71
+
+* TIMER_STOP
+	Descripción: apaga el temporizador
+	Opcode: 72
 	
 * SOUND n
 	Descripción: peta_el_beeper (n);

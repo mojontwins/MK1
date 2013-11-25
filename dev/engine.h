@@ -46,6 +46,7 @@ unsigned char *enem_frames [] = {
 };
 
 // Funciones:
+unsigned char bs;
 
 #ifdef COMPRESSED_LEVELS
 void prepare_level (unsigned char level) {
@@ -95,8 +96,22 @@ void init_player (void) {
 	player.ammo = MAX_AMMO;
 #endif
 #endif	
-	
 	pant_final = SCR_FIN;
+#ifdef TIMER_ENABLE
+	ctimer.count = 0;
+	ctimer.zero = 0;
+#ifdef TIMER_LAPSE
+	ctimer.frames = TIMER_LAPSE;
+#endif
+#ifdef TIMER_INITIAL
+	ctimer.t = TIMER_INITIAL;
+#endif
+#ifdef TIMER_START
+	ctimer.on = 1;
+#else
+	ctimer.on = 0;
+#endif
+#endif
 }
 
 unsigned char collide (unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2) {
@@ -180,8 +195,8 @@ unsigned int abs (int n) {
 	else 
 		return (unsigned int) n;
 }
-	
 
+#ifdef PLAYER_STEP_SOUND
 void step (void) {
 	#asm
 		ld a, 16
@@ -199,6 +214,7 @@ void step (void) {
 		out (254), a
 	#endasm	
 }
+#endif
 
 void cortina (void) {
 	#asm
@@ -210,7 +226,7 @@ void cortina (void) {
 	.clearb1
 		push bc
 		
-		ld	b, 255				; Procesamos los 256 atributos de cada tercio
+		ld	b, 0				; Procesamos los 256 atributos de cada tercio
 	.clearb2
 	
 		ld	a, (de)				; Nos traemos un atributo
@@ -236,7 +252,7 @@ void cortina (void) {
 	
 	.bucle
 		ld	b,	a			; Salvamos el contador de "bucle" en 'b'
-		ld	a,	255
+		ld	a,	0
 	
 	.bucle1
 		sla (hl)
@@ -244,7 +260,7 @@ void cortina (void) {
 		dec a
 		jr	nz, bucle1
 			
-		ld	a,	255
+		ld	a,	0
 	.bucle2
 		srl (hl)
 		inc hl
@@ -262,65 +278,63 @@ void cortina (void) {
 }
 
 // Game
-
-char espera_activa (int espera) {
-	char res = 1;
-	int i;
-	int j;
-	
-	for (i = 0; i < espera && res; i ++) {
-		for (j = 0; j < 250; j ++) { res = 1; }
-		if (sp_GetKey ()) res = 0;
-	}
-	
-	return res;
-}
-
 void game_ending (void) {
-	unsigned char x;
-	
 	sp_UpdateNow();
 	blackout ();
 	unpack ((unsigned int) (s_ending), 16384);
 	
-	for (x = 0; x < 4; x ++) {
+	bs = 4; do {
 		peta_el_beeper (7);
 		peta_el_beeper (2);
-	}
+	} while (--bs);
 	peta_el_beeper (9);
 	
 	espera_activa (500);
 }
 
+unsigned char *spacer = "            ";
 void game_over (void) {
-	unsigned char x, y;
-
-	print_str (10, 11, 79, "            ");
+	print_str (10, 11, 79, spacer);
 	print_str (10, 12, 79, " GAME OVER! ");
-	print_str (10, 13, 79, "            ");
+	print_str (10, 13, 79, spacer);
 	sp_UpdateNow ();
 		
-	for (x = 0; x < 4; x ++) {
+	bs = 4; do {
 		peta_el_beeper (7);
 		peta_el_beeper (2);
-	}
+	} while (--bs);
 	peta_el_beeper (9);
-	
 	espera_activa (500);
 }
 
+#if defined(TIMER_ENABLE) && defined(SHOW_TIMER_OVER)
+void time_over (void) {
+	print_str (10, 11, 79, spacer);
+	print_str (10, 12, 79, " TIME'S UP! ");
+	print_str (10, 13, 79, spacer);
+	sp_UpdateNow ();
+		
+	bs = 4; do {
+		peta_el_beeper (1);
+		peta_el_beeper (2);
+	} while (--bs);
+	peta_el_beeper (0);
+	espera_activa (50);
+}
+#endif
+
 signed int addsign (signed int n, signed int value) {
-	return (n == 0 ? 0 : (n < 0 ? -value : value));
+	if (n >= 0) return value; else return -value;
 }
 
 unsigned char ctileoff (char n) {
-	return (n > 0 ? 1 : 0);
+	return n > 0;
 }
 
 // Engine globals (for speed) & size!
 unsigned char gpx, gpy, gpd, gpc, gpt;
 unsigned char gpxx, gpyy, gpcx, gpcy;
-unsigned char possee, hit_v, hit_h, hit, wall;
+unsigned char possee, hit_v, hit_h, hit, wall_h, wall_v;
 unsigned char gpen_x, gpen_y, gpen_cx, gpen_cy, gpen_xx, gpen_yy, gpaux;
 unsigned char tocado, active;
 unsigned char gpit, gpjt;
@@ -329,6 +343,13 @@ unsigned char *map_pointer;
 #ifdef PLAYER_CAN_FIRE
 unsigned char blx, bly;
 #endif
+
+void espera_activa (int espera) {
+	do {
+		gpjt = 250; do { gpit = 1; } while (--gpjt);
+		if (sp_GetKey ()) break;
+	} while (--espera);
+}
 
 #ifndef COMPRESSED_LEVELS
 #ifndef DEACTIVATE_KEYS
@@ -343,14 +364,17 @@ void init_cerrojos (void) {
 #ifdef PLAYER_CAN_FIRE
 void init_bullets (void) {
 	// Inicializa las balas
-	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) 
-		bullets [gpit].estado = 0;
+	gpit = 0;
+	while (gpit < MAX_BULLETS) {
+		bullets [gpit ++].estado = 0;
+	}
 }
 #endif
 
 #if defined(PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
 void init_malotes (void) {
-	for (gpit = 0; gpit < MAP_W * MAP_H * 3; gpit ++) {
+	gpit = 0;
+	while (gpit < MAP_W * MAP_H * 3) {
 		malotes [gpit].t = malotes [gpit].t & 15;	
 #ifdef PLAYER_CAN_FIRE
 		malotes [gpit].life = ENEMIES_LIFE_GAUGE;
@@ -359,15 +383,17 @@ void init_malotes (void) {
 			malotes [gpit].t |= 16;
 #endif
 #endif
+		gpit ++;
 	}
 }
 #endif
 
 #ifndef COMPRESSED_LEVELS
 void init_hotspots (void) {
-	unsigned char gpit;
-	for (gpit = 0; gpit < MAP_W * MAP_H; gpit ++)
-		hotspots [gpit].act = 1;
+	gpit = 0;
+	while (gpit < MAP_W * MAP_H) {
+		hotspots [gpit ++].act = 1;
+	}
 }
 #endif
 
@@ -408,16 +434,28 @@ void fire_bullet (void) {
 					bullets [gpit].mx = 0;
 					break;
 			}
-#else			
-			if (player.facing == 0) {
-				bullets [gpit].x = (player.x >> 6) - 4;
-				bullets [gpit].mx = -PLAYER_BULLET_SPEED;
+#else
+			gpjt = (joyfunc) (&keys);
+			if (!(gpjt & sp_UP)) {
+				bullets [gpit].y = (player.y >> 6);
+				bullets [gpit].my = -PLAYER_BULLET_SPEED;	
 			} else {
-				bullets [gpit].x = (player.x >> 6) + 12;
-				bullets [gpit].mx = PLAYER_BULLET_SPEED;
+				bullets [gpit].y = (player.y >> 6) + PLAYER_BULLET_Y_OFFSET;
+				bullets [gpit].my = 0;	
 			}
-			bullets [gpit].y = (player.y >> 6) + PLAYER_BULLET_Y_OFFSET;
-			bullets [gpit].my = 0;
+			
+			if (!(gpjt & sp_LEFT) || !(gpjt & sp_RIGHT) || (gpjt & sp_UP)) {
+				if (player.facing == 0) {
+					bullets [gpit].x = (player.x >> 6) - 4;
+					bullets [gpit].mx = -PLAYER_BULLET_SPEED;
+				} else {
+					bullets [gpit].x = (player.x >> 6) + 12;
+					bullets [gpit].mx = PLAYER_BULLET_SPEED;
+				}
+			} else {
+				bullets [gpit].x = (player.x >> 6) + 4;
+				bullets [gpit].mx = 0;
+			}			
 #endif
 			peta_el_beeper (6);
 			break;	
@@ -443,14 +481,32 @@ char player_hidden (void) {
 unsigned char pushed_any;
 #endif
 
+#ifdef ACTIVATE_SCRIPTING
+void run_fire_script (void) {
+	script = f_scripts [MAP_W * MAP_H];
+	run_script ();
+	script = f_scripts [n_pant];
+	run_script ();
+}
+#endif
+
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
 void process_tile (unsigned char x0, unsigned char y0, signed char x1, signed char y1) {
 #ifdef PLAYER_PUSH_BOXES
 #ifdef FIRE_TO_PUSH
 	gpit = (joyfunc) (&keys);
+#ifdef USE_TWO_BUTTONS
+	if ((gpit & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) {
+#else
 	if ((gpit & sp_FIRE) == 0) {
+#endif
 #endif		
 		if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 >= 0 && x1 < 15 && y1 >= 0 && y1 < 10) {
+#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
+			flags [MOVED_TILE_FLAG] = map_buff [15 * y1 + x1];
+			flags [MOVED_X_FLAG] = x1;
+			flags [MOVED_Y_FLAG] = y1;
+#endif			
 			// Mover
 			map_attr [15 * y1 + x1] = 10;
 			map_buff [15 * y1 + x1] = 14;
@@ -464,6 +520,12 @@ void process_tile (unsigned char x0, unsigned char y0, signed char x1, signed ch
 #ifdef FIRE_TO_PUSH			
 			// Para no disparar...
 			pushed_any = 1;
+#endif
+#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING) && defined(PUSHING_ACTION)
+			// Call scripting
+			just_pushed = 1;
+			run_fire_script ();
+			just_pushed = 0;
 #endif
 		} 
 #ifdef FIRE_TO_PUSH
@@ -493,6 +555,7 @@ void process_tile (unsigned char x0, unsigned char y0, signed char x1, signed ch
 #endif
 
 unsigned char move (void) {
+	wall_v = wall_h = 0;
 	gpit = (joyfunc) (&keys); // Leemos del teclado
 	
 	/* Por partes. Primero el movimiento vertical. La ecuación de movimien-
@@ -589,7 +652,7 @@ unsigned char move (void) {
 				player.vy = 0;
 #endif
 				player.y = ((gpyy + 1) << 10) - 512;
-				wall = WTOP;
+				wall_v = WTOP;
 			} else if ( ((gpx & 15) < 12 && attr (gpxx, gpyy) & 1) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy) & 1)) {
 				hit_v = 1; 
 			}
@@ -606,7 +669,7 @@ unsigned char move (void) {
 				player.vy = 0;
 #endif
 				player.y = gpyy << 10;
-				wall = WBOTTOM;
+				wall_v = WBOTTOM;
 				possee = 1;
 			} else if ( ((gpx & 15) < 12 && attr (gpxx, gpyy + 1) & 1) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 1)) {
 				hit_v = 1;
@@ -624,7 +687,7 @@ unsigned char move (void) {
 				player.vy = 0;
 #endif
 				player.y = ((gpyy + 1) << 10) - 256;
-				wall = WTOP;
+				wall_v = WTOP;
 			} else if ( ((gpx & 15) < 12 && attr (gpxx, gpyy) & 1) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy) & 1)) {
 				hit_v = 1; 
 			}
@@ -641,7 +704,7 @@ unsigned char move (void) {
 				player.vy = 0;
 #endif
 				player.y = (gpyy << 10) + 256;
-				wall = WBOTTOM;
+				wall_v = WBOTTOM;
 				possee = 1;
 			} else if ( ((gpx & 15) < 12 && attr (gpxx, gpyy + 1) & 1) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 1)) {
 				hit_v = 1; 
@@ -657,7 +720,7 @@ unsigned char move (void) {
 			player.vy = 0;
 #endif
 			player.y = (gpyy + 1) << 10;
-			wall = WTOP;	
+			wall_v = WTOP;	
 		} else if (attr (gpxx, gpyy) & 1 || ((gpx & 15) && attr (gpxx + 1, gpyy) & 1)) {
 			hit_v = 1; 
 		}
@@ -675,7 +738,7 @@ unsigned char move (void) {
 #endif
 				player.y = gpyy << 10;
 				possee = 1;
-				wall = WBOTTOM;
+				wall_v = WBOTTOM;
 			} else if (attr (gpxx, gpyy + 1) & 1 || ((gpx & 15) && attr (gpxx + 1, gpyy + 1) & 1)) {
 				hit_v = 1; 
 			}
@@ -691,7 +754,8 @@ unsigned char move (void) {
 	*/
 
 #ifdef PLAYER_HAS_JUMP
-#ifdef PLAYER_CAN_FIRE
+
+#if defined (PLAYER_CAN_FIRE) && !defined (USE_TWO_BUTTONS)
 	
 #ifdef PLAYER_CUMULATIVE_JUMP
 	if (((gpit & sp_UP) == 0) && (possee || player.gotten)) {
@@ -717,6 +781,34 @@ unsigned char move (void) {
 	
 	if ((gpit & sp_UP))
 		player.saltando = 0;
+		
+#elif defined (PLAYER_CAN_FIRE) && defined (USE_TWO_BUTTONS)
+
+#ifdef PLAYER_CUMULATIVE_JUMP
+	if (sp_KeyPressed (key_jump) && (possee || player.gotten)) {
+		player.vy = -player.vy - PLAYER_VY_INICIAL_SALTO;
+		if (player.vy < -PLAYER_MAX_VY_SALTANDO) player.vy = -PLAYER_MAX_VY_SALTANDO;
+#else		
+	if (sp_KeyPressed (key_jump) && player.saltando == 0 && (possee || player.gotten)) {
+#endif
+		player.saltando = 1;
+		player.cont_salto = 0;
+		peta_el_beeper (3);
+	}
+
+#ifndef PLAYER_CUMULATIVE_JUMP	
+	if (sp_KeyPressed (key_jump) && player.saltando ) {
+		player.vy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (player.cont_salto>>1));
+		if (player.vy < -PLAYER_MAX_VY_SALTANDO) player.vy = -PLAYER_MAX_VY_SALTANDO;
+		player.cont_salto ++;
+		if (player.cont_salto == 8)
+			player.saltando = 0;
+	}
+#endif
+	
+	if (!sp_KeyPressed (key_jump))
+		player.saltando = 0;
+
 #else
 #ifdef PLAYER_CUMULATIVE_JUMP
 	if (((gpit & sp_FIRE) == 0) && (possee || player.gotten)) {
@@ -843,7 +935,7 @@ unsigned char move (void) {
 			player.vx = 0;
 #endif
 			player.x = ((gpxx + 1) << 10) - 256;
-			wall = WLEFT;
+			wall_h = WLEFT;
 		} else if ( ((gpy & 15) < 8 && attr (gpxx, gpyy) & 1) || ((gpy & 15) && attr (gpxx, gpyy + 1) & 1)) {
 			hit_h = 1; 
 		}
@@ -855,7 +947,7 @@ unsigned char move (void) {
 			player.vx = 0;
 #endif
 			player.x = (gpxx << 10) + 256;
-			wall = WRIGHT;
+			wall_h = WRIGHT;
 		} else if ( ((gpy & 15) < 8 && attr (gpxx + 1, gpyy) & 1) || ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 1)) {
 			hit_h = 1; 
 		}
@@ -870,7 +962,7 @@ unsigned char move (void) {
 			player.vx = 0;
 #endif
 			player.x = ((gpxx + 1) << 10) - 256;
-			wall = WLEFT;
+			wall_h = WLEFT;
 		} else if ( ((gpy & 15) < 8 && attr (gpxx, gpyy) & 1) || ((gpy & 15) && attr (gpxx, gpyy + 1) & 1)) {
 			hit_h = 1; 
 		}
@@ -882,7 +974,7 @@ unsigned char move (void) {
 			player.vx = 0;
 #endif
 			player.x = (gpxx << 10) + 256;
-			wall = WRIGHT;
+			wall_h = WRIGHT;
 		} else if ( ((gpy & 15) < 8 && attr (gpxx + 1, gpyy) & 1) || ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 1)) {
 			hit_h = 1; 
 		}
@@ -896,7 +988,7 @@ unsigned char move (void) {
 			player.vx = 0;
 #endif
 			player.x = (gpxx + 1) << 10;
-			wall = WLEFT;
+			wall_h = WLEFT;
 		} else if (attr (gpxx, gpyy) & 1 || ((gpy & 15) && attr (gpxx, gpyy + 1) & 1)) {
 			hit_h = 1; 
 		}
@@ -908,7 +1000,7 @@ unsigned char move (void) {
 			player.vx = 0;
 #endif
 			player.x = gpxx << 10;
-			wall = WRIGHT;
+			wall_h = WRIGHT;
 		} else if (attr (gpxx + 1, gpyy) & 1 || ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 1)) {
 			hit_h = 1; 
 		}
@@ -947,7 +1039,7 @@ pushed_any = 0;
 	// En modo plataformas, no se puede empujar verticalmente
 #ifdef PLAYER_MOGGY_STYLE
 	
-	if (wall == WTOP) {
+	if (wall_v == WTOP) {
 #if defined(BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED)
 		if (attr (gpxx, gpyy) == 10) {				
 			process_tile (gpxx, gpyy, gpxx, gpyy - 1);
@@ -966,7 +1058,7 @@ pushed_any = 0;
 #endif
 			}
 		}
-	} else if (wall == WBOTTOM) {
+	} else if (wall_v == WBOTTOM) {
 		if (attr (gpxx, gpyy + 1) == 10) {
 			process_tile (gpxx, gpyy + 1, gpxx, gpyy + 2);
 		}
@@ -979,7 +1071,7 @@ pushed_any = 0;
 #endif
 	// Horizontalmente
 	
-	if (wall == WRIGHT) {
+	if (wall_h == WRIGHT) {
 		if (attr (gpxx + 1, gpyy) == 10) {
 			process_tile (gpxx + 1, gpyy, gpxx + 2, gpyy);
 		}
@@ -988,7 +1080,7 @@ pushed_any = 0;
 				process_tile (gpxx + 1, gpyy + 1, gpxx + 2, gpyy + 1);
 			}
 		}
-	} else if (wall == WLEFT) {
+	} else if (wall_h == WLEFT) {
 #if defined(BOUNDING_BOX_8_BOTTOM) || defined(BOUNDING_BOX_8_CENTERED)
 		if (attr (gpxx, gpyy) == 10) {
 			process_tile (gpxx, gpyy, gpxx - 1, gpyy);
@@ -1012,10 +1104,18 @@ pushed_any = 0;
 
 #ifdef PLAYER_CAN_FIRE
 	// Disparos
+#ifdef USE_TWO_BUTTONS
+#ifdef FIRE_TO_PUSH	
+	if (((gpit & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) && player.disparando == 0 && !pushed_any) {
+#else
+	if (((gpit & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) && player.disparando == 0) {
+#endif
+#else
 #ifdef FIRE_TO_PUSH	
 	if ((gpit & sp_FIRE) == 0 && player.disparando == 0 && !pushed_any) {
 #else
 	if ((gpit & sp_FIRE) == 0 && player.disparando == 0) {
+#endif
 #endif
 		player.disparando = 1;
 		fire_bullet ();
@@ -1122,7 +1222,7 @@ void __FASTCALL__ draw_scr_background (void) {
 #else
 	map_pointer = mapa + (n_pant * 75);
 #endif
-
+	srand (n_pant);
 	gpx = gpy = 0;	
 
 	// Draw 150 tiles
@@ -1226,6 +1326,16 @@ void __FASTCALL__ draw_scr (void) {
 				en_an [gpit].base_frame = 4;
 				break;
 #endif
+#ifdef ENABLE_CUSTOM_TYPE_6
+			case 6:
+				// Añade aquí tu código custom. Esto es un ejemplo:
+				en_an [gpit].base_frame = TYPE_6_FIXED_SPRITE << 1;
+				en_an [gpit].x = malotes [enoffs + gpit].x << 6;
+				en_an [gpit].y = malotes [enoffs + gpit].y << 6;
+				en_an [gpit].vx = en_an [gpit].vy = 0;
+				en_an [gpit].state = TYPE_6_IDLE;				
+				break;				
+#endif
 #ifdef ENABLE_PURSUERS
 			case 7:
 				en_an [gpit].alive = 0;
@@ -1308,7 +1418,7 @@ void mueve_bullets (void) {
 					bullets [gpit].estado = 0;
 				}
 			} 
-#ifdef PLAYER_MOGGY_STYLE
+#if defined(PLAYER_MOGGY_STYLE) || defined(CAN_FIRE_UP)
 			if (bullets [gpit].my) {
 				bullets [gpit].y += bullets [gpit].my;
 				if (bullets [gpit].y < 8 || bullets [gpit].y > 160) {
@@ -1359,6 +1469,24 @@ unsigned char __FASTCALL__ mons_col_sc_y (void) {
 unsigned char lasttimehit;
 #endif
 
+#ifdef ENABLE_CUSTOM_TYPE_6
+// Funciones auxiliares custom
+unsigned char distance (unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2) {
+	unsigned char dx = abs (x2 - x1);
+	unsigned char dy = abs (y2 - y1);
+	unsigned char mn = dx < dy ? dx : dy;
+	return (dx + dy - (mn >> 1) - (mn >> 2) + (mn >> 4));
+}
+#endif
+
+#if defined(ENABLE_CUSTOM_TYPE_6) || defined(ENABLE_RANDOM_RESPAWN)
+int limit (int val, int min, int max) {
+	if (val < min) return min;
+	if (val > max) return max;
+	return val;
+}
+#endif
+
 void mueve_bicharracos (void) {
 	gpx = player.x >> 6;
 	gpy = player.y >> 6;
@@ -1404,31 +1532,66 @@ void mueve_bicharracos (void) {
 				gpen_cx = en_an [gpit].x >> 6;
 				gpen_cy = en_an [gpit].y >> 6;
 				if (player_hidden ()) {
-					if (player.x < en_an [gpit].x && en_an [gpit].vx < FANTY_MAX_V)
-						en_an [gpit].vx += FANTY_A >> 1;
-					else if (player.x > en_an [gpit].x && en_an [gpit].vx > -FANTY_MAX_V)
-						en_an [gpit].vx -= FANTY_A >> 1;
-					if (player.y < en_an [gpit].y && en_an [gpit].vy < FANTY_MAX_V)
-						en_an [gpit].vy += FANTY_A >> 1;
-					else if (player.y > en_an [gpit].y && en_an [gpit].vy > -FANTY_MAX_V)
-						en_an [gpit].vy -= FANTY_A >> 1;
+					en_an [gpit].vx = limit (
+						en_an [gpit].vx + addsign (en_an [gpit].x - player.x, FANTY_A >> 1),
+						-FANTY_MAX_V, FANTY_MAX_V);
+					en_an [gpit].vy = limit (
+						en_an [gpit].vy + addsign (en_an [gpit].y - player.y, FANTY_A >> 1),
+						-FANTY_MAX_V, FANTY_MAX_V);
 				} else if ((rand () & 7) > 1) {
-					if (player.x > en_an [gpit].x && en_an [gpit].vx < FANTY_MAX_V)
-						en_an [gpit].vx += FANTY_A;
-					else if (player.x < en_an [gpit].x && en_an [gpit].vx > -FANTY_MAX_V)
-						en_an [gpit].vx -= FANTY_A;
-					if (player.y > en_an [gpit].y && en_an [gpit].vy < FANTY_MAX_V)
-						en_an [gpit].vy += FANTY_A;
-					else if (player.y < en_an [gpit].y && en_an [gpit].vy > -FANTY_MAX_V)
-						en_an [gpit].vy -= FANTY_A;
+					en_an [gpit].vx = limit (
+						en_an [gpit].vx + addsign (player.x - en_an [gpit].x, FANTY_A),
+						-FANTY_MAX_V, FANTY_MAX_V);
+					en_an [gpit].vy = limit (
+						en_an [gpit].vy + addsign (player.y - en_an [gpit].y, FANTY_A),
+						-FANTY_MAX_V, FANTY_MAX_V);
 				}
 								
-				en_an [gpit].x += en_an [gpit].vx;
-				en_an [gpit].y += en_an [gpit].vy;
-				if (en_an [gpit].x > 15360) en_an [gpit].x = 15360;
-				if (en_an [gpit].x < -1024) en_an [gpit].x = -1024;
-				if (en_an [gpit].y > 10240) en_an [gpit].y = 10240;
-				if (en_an [gpit].y < -1024) en_an [gpit].y = -1024;
+				en_an [gpit].x = limit (en_an [gpit].x + en_an [gpit].vx, 0, 14336);
+				en_an [gpit].y = limit (en_an [gpit].y + en_an [gpit].vy, 0, 9216);
+							
+				break;
+#endif
+#ifdef ENABLE_CUSTOM_TYPE_6
+			case 6:	
+				active = 1;
+				gpen_cx = en_an [gpit].x >> 6;
+				gpen_cy = en_an [gpit].y >> 6;
+				switch (en_an [gpit].state) {
+					case TYPE_6_IDLE:
+						if (distance (gpx, gpy, gpen_cx, gpen_cy) <= SIGHT_DISTANCE)
+							en_an [gpit].state = TYPE_6_PURSUING;
+						break;
+					case TYPE_6_PURSUING:
+						if (distance (gpx, gpy, gpen_cx, gpen_cy) > SIGHT_DISTANCE) {
+							en_an [gpit].state = TYPE_6_RETREATING;
+						} else {
+							en_an [gpit].vx = limit (
+								en_an [gpit].vx + addsign (player.x - en_an [gpit].x, FANTY_A),
+								-FANTY_MAX_V, FANTY_MAX_V);
+							en_an [gpit].vy = limit (
+								en_an [gpit].vy + addsign (player.y - en_an [gpit].y, FANTY_A),
+								-FANTY_MAX_V, FANTY_MAX_V);
+								
+							en_an [gpit].x = limit (en_an [gpit].x + en_an [gpit].vx, 0, 14336);
+							en_an [gpit].y = limit (en_an [gpit].y + en_an [gpit].vy, 0, 9216);
+						}
+						break;
+					case TYPE_6_RETREATING:
+						en_an [gpit].x += addsign (malotes [enoffsmasi].x - gpen_cx, 64);
+						en_an [gpit].y += addsign (malotes [enoffsmasi].y - gpen_cy, 64);
+						
+						if (distance (gpx, gpy, gpen_cx, gpen_cy) <= SIGHT_DISTANCE)
+							en_an [gpit].state = TYPE_6_PURSUING;
+						break;						
+				}
+				gpen_cx = en_an [gpit].x >> 6;
+				gpen_cy = en_an [gpit].y >> 6;
+				if (en_an [gpit].state == TYPE_6_RETREATING && 
+					gpen_cx == malotes [enoffsmasi].x && 
+					gpen_cy == malotes [enoffsmasi].y
+					) 
+					en_an [gpit].state = TYPE_6_IDLE;
 				break;
 #endif
 #ifdef ENABLE_PURSUERS
@@ -1506,7 +1669,7 @@ void mueve_bicharracos (void) {
 				gpxx = gpx >> 4;
 				if (gpx >= gpen_cx - 15 && gpx <= gpen_cx + 15) {
 					if (malotes [enoffsmasi].my < 0) {
-						if (gpy >= gpen_cy - 16 && gpy <= gpen_cy - 11 && player.vy >= -(PLAYER_INCR_SALTO)) {
+						if (gpy >= gpen_cy - 16 && gpy <= gpen_cy - 9 && player.vy >= -(PLAYER_INCR_SALTO)) {
 							player.gotten = 1;
 							player.y = (gpen_cy - 16) << 6;
 #ifdef PLAYER_CUMULATIVE_JUMP
@@ -1679,7 +1842,12 @@ void mueve_bicharracos (void) {
 						if (blx >= gpen_cx && blx <= gpen_cx + 15 && bly >= gpen_cy && bly <= gpen_cy + 15) {
 #ifdef RANDOM_RESPAWN		
 							if (en_an [gpit].fanty_activo) {
-								en_an [gpit].vx += (bullets [gpjt].mx > 0 ? 128 : -128);
+								en_an [gpit].vx += addsign (bullets [gpjt].mx, 128);
+							}
+#endif
+#ifdef ENABLE_CUSTOM_TYPE_6
+							if (malotes [enoffsmasi].t == 6) {
+								en_an [gpit].vx += addsign (bullets [gpjt].mx, 128);
 							}
 #endif
 							malotes [enoffsmasi].x = gpen_x;

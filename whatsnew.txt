@@ -1,0 +1,246 @@
+La Churrera v.3.99.2
+====================
+
+Venga, las churreras van saliendo como churros. Estamos que lo rompemos, y
+se nos ocurren cosas nuevas todos los días. Las iremos metiendo a medida que
+se nos ocurran güegos que las lleven.
+
+Estas son las cosas nuevas que hay en esta versión de la churrera:
+
+Temporizadores
+==============
+
+Se añade a la churrera un temporizador que podemos usar de forma automática
+o desde el script. El temporizador toma un valor inicial, va contando hacia
+abajo, puede recargarse, se puede configurar cada cuántos frames se decrementa
+o decidir qué hacer cuando se agota.
+
+#define TIMER_ENABLE
+
+Con TIMER_ENABLE se incluye el código necesario para manejar el temporizador.
+Este código necesitará algunas otras directivas que especifican la forma de
+funcionar:
+
+#define TIMER_INITIAL		99	
+#define TIMER_REFILL		25
+#define TIMER_LAPSE 		32
+
+TIMER_INITIAL especifica el valor inicial del temporizador. Las recargas de
+tiempo, que se ponen con el colocador como hotspots de tipo 5, recargarán el
+valor especificado en TIMER_REFILL. El valor máximo del timer, tanto para el
+inicial como al recargar, es de 99. Para controlar el intervalo de tiempo que
+transcurre entre cada decremento del temporizador, especificamos en TIMER_LAPSE
+el número de frames que debe transcurrir.
+
+#define TIMER_START
+
+Si se define TIMER_START, el temporizador estará activo desde el principio.
+
+Tenemos, además, algunas directivas que definen qué pasará cuando el temporiza-
+dor llegue a cero. Hay que descomentar las que apliquen:
+
+#define TIMER_SCRIPT_0	
+
+Definiendo esta, cuando llegue a cero el temporizador se ejecutará una sección
+especial del script, ON_TIMER_OFF. Es ideal para llevar todo el control del
+temporizador por scripting, como ocurre en Cadàveriön.
+
+//#define TIMER_GAMEOVER_0
+
+Definiendo esta, el juego terminará cuando el temporizador llegue a cero.
+
+//#define TIMER_KILL_0
+//#define TIMER_WARP_TO 0
+//#define TIMER_WARP_TO_X 	1
+//#define TIMER_WARP_TO_Y 	1
+
+Si se define TIMER_KILL_0, se restará una vida cuando el temporizador llegue a
+cero. Si, además, se define TIMER_WARP_TO, además se cambiará a la pantalla
+espeficiada, apareciendo el jugador en las coordenadas TIMER_WARP_TO_X y 
+TIMER_WARP_TO_Y.
+
+//#define TIMER_AUTO_RESET
+
+Si se define esta opción, el temporizador volverá al máximo tras llegar a
+cero de forma automática. Si vas a realizar el control por scripting, mejor
+deja esta comentada.
+
+#define SHOW_TIMER_OVER	
+
+Si se define esta, en el caso de que hayamos definido o bien TIMER_SCRIPT_0 o
+bien TIMER_KILL_0, se mostrará un cartel de "TIME'S UP!" cuando el temporizador
+llegue a cero.
+
+Scripting:
+----------
+
+Como hemos dicho, el temporizador puede administrarse desde el script. Es
+interesante que, si decidimos hacer esto, activemos TIMER_SCRIPT_0 para que
+cuando el temporizador llegue a cero se ejecute la sección ON_TIMER_OFF de
+nuestro script y que el control sea total. 
+
+Además, se definen estas comprobaciones y comandos:
+
+Comprobaciones:
+---------------
+
+IF TIMER >= x
+IF TIMER <= x
+
+Que se cumplirán si el valor del temporizador es mayor o igual o menor o igual
+que el valor especificado, respectivamente.
+
+Comandos:
+---------
+
+SET_TIMER a, b
+
+Sirve para establecer los valores TIMER_INITIAL y TIMER_LAPSE desde el script.
+
+TIMER_START
+
+Sirve para iniciar el temporizador.
+
+TIMER_STOP
+
+Sirve para parar el temporizador.
+
+---
+
+Control de bloques empujables
+=============================
+
+Hemos mejorado el motor para que se pueda hacer más cosas con el tile 14 de
+tipo 10 (tile empujable) que simplemente empujarlo o que detenga la trayectoria
+de los enemigos. Ahora podemos decirle al motor que lance la sección PRESS_FIRE
+de la pantalla actual justo después de empujar un bloque empujable. Además, el
+número del tile que se "pisa" y las coordenadas finales se almacenan en tres
+flags que podemos configurar, para poderlas usar desde el script para hacer 
+comprobaciones.
+
+Este es el sistema que se emplea en el script de Cadàveriön para controlar que
+coloquemos las estatuas sobre los pedestales, por poner un ejemplo.
+
+Recordemos lo que teníamos hasta ahora:
+
+#define PLAYER_PUSH_BOXES 				
+#define FIRE_TO_PUSH					
+
+La primera es necesaria para activar los tiles empujables. La segunda obliga al
+jugador a pulsar FIRE para empujar y, por tanto, no es obligatoria. Veamos 
+ahora las nuevas directivas:
+
+#define ENABLE_PUSHED_SCRIPTING
+#define MOVED_TILE_FLAG 		1
+#define MOVED_X_FLAG 			2
+#define MOVED_Y_FLAG 			3
+
+Activando ENABLE_PUSHED_SCRIPTING, el tile que se pisa y sus coordenadas se 
+almacenarán en los flags especificados por las directivas MOVED_TILE_FLAG,
+MOVED_X_FLAG y MOVED_Y_FLAG. En el código que se muestra, el tile pisado se
+almacenará en el flag 1, y sus coordenadas en los flags 2 y 3.
+
+#define PUSHING_ACTION
+
+Si definimos esta, además, se ejecutarán los scripts PRESS_FIRE AT ANY y
+PRESS_FIRE de la pantalla actual.
+
+Recomendamos estudiar el script de Cadàveriön, el cual, además de ser un buen
+ejemplo del uso del temporizador y del control del bloque empujable, resulta
+ser un script bastante complejo que emplea un montón de técnicas avanzadas.
+
+---
+
+Comprobar si nos salimos del mapa
+=================================
+
+Es aconsejable poner límites en tu mapa para que el jugador no se pueda
+salir, pero si tu mapa es estrecho puede que quieras aprovechar toda la 
+pantalla. En ese caso, puedes activar:
+
+#define PLAYER_CHECK_MAP_BOUNDARIES
+
+Que añadirá comprobaciones y no dejará que el jugador se salga del mapa.
+¡Ojo! Si puedes evitar usarlo, mejor: ahorrarás espacio.
+
+---
+
+Tipo de enemigo "custom" de regalo
+==================================
+
+Hasta ahora habíamos dejado sin código los enemigos de tipo 6, pero 
+hemos pensado que no nos cuesta poner uno, de ejemplo. Se comporta como
+los murciélagos de Cheril the Goddess. Para usarlos, ponlos en el colo-
+cador de enemigos como tipo 6 y usa estas directivas:
+
+#define ENABLE_CUSTOM_TYPE_6			
+#define TYPE_6_FIXED_SPRITE 	2		
+#define SIGHT_DISTANCE			96
+
+La primera los activa, la segunda define qué sprite va a usar (menos 1,
+si quieres el sprite del enemigo 3, pon un 2. Sorry por la guarrada,
+pero ahorro bytes). La tercera dice cuántos píxels ve de lejos el bicho.
+Si te ve, te persigue. Si no, vuelve a su sitio (donde lo hayas puesto
+con el colocador).
+
+Esta implementación, además, utiliza dos directivas de los enemigos de
+tipo 5 para funcionar:
+
+#define FANTY_MAX_V             256	
+#define FANTY_A                 12	
+
+Define ahí la aceleración y la velocidad máxima de tus tipo 6. Si vas a 
+usar también tipo 5 y quieres otros valores, sé un hombre y modifica el
+motor.
+
+---
+
+Configuración de teclado / joystick para dos botones
+====================================================
+
+Hay güegos de vista lateral que se juegan mejor con dos botones. Si activas
+esta directiva:
+
+#define USE_TWO_BUTTONS
+
+El teclado será el siguiente, en vez del habitual:
+
+A izquierda
+D derecha
+W arriba
+S abajo
+N salto
+M disparo
+
+Si se elige joystick, FIRE y M disparan, y N salta.
+
+---
+
+Disparos hacia arriba y en diagonal para vista lateral
+======================================================
+
+Ahora podrás permitir que el jugador dispare hacia arriba o en diagonal.
+Para ello define esto:
+
+#define CAN_FIRE_UP	
+
+Esta configuración funciona mejor con USE_TWO_BUTTONS, ya que así separamos
+"arriba" del botón de salto.
+
+Si no pulsas "arriba", el personaje disparará hacia donde esté mirando. Si
+pulsas "arriba" mientras disparas, el personaje disparará hacia arriba. Si,
+además, estás pulsando una dirección, el personaje disparará en la diagonal
+indicada.
+
+---
+
+Balas enmascaradas
+==================
+
+Por velocidad, las balas no llevan máscaras. Esto funciona bien si el fondo
+sobre el que se mueven es oscuro (pocos pixels INK activos). Sin embargo, 
+hay situaciones en las que esto no ocurre y se ve mal. En ese caso, podemos
+activar máscaras para las balas:
+
+#define MASKED_BULLETS
+

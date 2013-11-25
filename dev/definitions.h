@@ -84,12 +84,13 @@ typedef struct {
 	unsigned char *current_frame, *next_frame;
 #ifdef PLAYER_CAN_FIRE
 	unsigned char morido;
-#ifdef RANDOM_RESPAWN
+#if defined (RANDOM_RESPAWN) || defined (ENABLE_CUSTOM_TYPE_6)
 	int x;
 	int y;
 	int vx;
 	int vy;
 	unsigned char fanty_activo;
+	unsigned char state;
 #endif
 #endif
 #ifdef ENABLE_PURSUERS
@@ -100,6 +101,10 @@ typedef struct {
 } ANIMADO;
 
 ANIMADO en_an [3];
+
+#define TYPE_6_IDLE 		0
+#define TYPE_6_PURSUING		1
+#define TYPE_6_RETREATING	2
 
 #ifdef PLAYER_CAN_FIRE
 typedef struct {
@@ -132,13 +137,42 @@ unsigned char pant_final;
 unsigned char flags[MAX_FLAGS];
 #endif
 
+// Globalized
 unsigned char n_pant;
 unsigned char maincounter;
 
+// Breakable walls/etc
 #ifdef BREAKABLE_WALLS
 unsigned char *brk_buff = 23296;
 #endif
 
+// Fire zone
 #ifdef ENABLE_FIRE_ZONE
 unsigned char fzx1, fzy1, fzx2, fzy2, f_zone_ac;
+#endif
+
+// Timer
+#ifdef TIMER_ENABLE
+typedef struct {
+	unsigned char on;
+	unsigned char t;
+	unsigned char frames;
+	unsigned char count;
+	unsigned char zero;
+} CTIMER;
+CTIMER ctimer;
+#endif
+
+#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
+unsigned char just_pushed;
+#endif
+
+#ifdef ACTIVATE_SCRIPTING
+void __FASTCALL__ draw_scr_background (void);
+void __FASTCALL__ draw_scr (void);
+#endif
+void espera_activa (int espera);
+
+#ifdef USE_TWO_BUTTONS
+int key_jump, key_fire;
 #endif
