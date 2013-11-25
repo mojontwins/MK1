@@ -1225,8 +1225,12 @@ void __FASTCALL__ draw_scr_background (void) {
 	srand (n_pant);
 	gpx = gpy = 0;	
 
-	// Draw 150 tiles
+#ifdef ENABLE_TILANIMS
+	// reset tilanims
+	max_tilanims = 0;
+#endif	
 	
+	// Draw 150 tiles	
 	for (gpit = 0; gpit < 150; gpit ++) {	
 #ifdef UNPACKED_MAP
 		// Mapa tipo UNPACKED
@@ -1248,7 +1252,15 @@ void __FASTCALL__ draw_scr_background (void) {
 #ifdef BREAKABLE_WALLS
 		brk_buff [gpit] = 0;
 #endif		
-		draw_coloured_tile (VIEWPORT_X + gpx, VIEWPORT_Y + gpy, gpd);	
+		draw_coloured_tile (VIEWPORT_X + gpx, VIEWPORT_Y + gpy, gpd);
+		
+#ifdef ENABLE_TILANIMS
+		// Detect tilanims
+		if (gpd >= ENABLE_TILANIMS) {
+			add_tilanim (gpit % 15, gpit / 15, gpd);	
+		}
+#endif
+			
 		gpx += 2;
 		if (gpx == 30) {
 			gpx = 0;

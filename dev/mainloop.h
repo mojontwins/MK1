@@ -324,6 +324,10 @@ void do_game (void) {
 			mueve_bullets ();
 #endif
 
+#ifdef ENABLE_TILANIMS
+			do_tilanims ();
+#endif
+
 			// Render		
 			for (gpit = 0; gpit < 3; gpit ++) {
 #if defined (RANDOM_RESPAWN) || defined (ENABLE_CUSTOM_TYPE_6)

@@ -182,7 +182,9 @@
 //#define UNPACKED_MAP					// Full, uncompressed maps. Shadows settings are ignored.
 //#define NO_MASKS						// Sprites are rendered using OR instead of masks.
 //#define PLAYER_ALTERNATE_ANIMATION	// If defined, animation is 1,2,3,1,2,3... 
-//#define MASKED_BULLETS					// If needed
+//#define MASKED_BULLETS				// If needed
+#define ENABLE_TILANIMS			32		// If defined, animated tiles are enabled.
+										// the value especifies firt animated tile pair.
 
 // ============================================================================
 // IV. Player movement configuration
