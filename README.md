@@ -6,18 +6,18 @@ La Churrera es un framework compuesto por un motor modular programado en C y un 
 Recursos
 ========
 
-    La última versión estable y pública es la 3.99.3 -> http://www.mojontwins.com/churrera/mt-churrera-3.99.3.zip
-    Existe un paquete preparado para Linux que son-link mantiene -> https://github.com/son-link/churrera-installer
-    Para aprender a manejar el motor y las herramientas incluidas en el framework, puedes seguir el tutorial que estamos publicando en El Mundo del Spectrum, http://www.elmundodelspectrum.com/taller.php
+* La última versión estable y pública es la 3.99.3 -> http://www.mojontwins.com/churrera/mt-churrera-3.99.3.zip
+* Existe un paquete preparado para Linux que son-link mantiene -> https://github.com/son-link/churrera-installer
+* Para aprender a manejar el motor y las herramientas incluidas en el framework, puedes seguir el tutorial que estamos publicando en El Mundo del Spectrum, http://www.elmundodelspectrum.com/taller.php
 
 Créditos
 ========
 
 La Churrera emplea el siguiente código de terceros:
 
-    splib2, biblioteca gráfica de Alvin Albrecht.
-    Efectos de sonido y Phaser1 engine music player por Shiru.
-    Decompresor appack por dwedit, adaptado por Utopian y optimizado por Metalbrain.
+* splib2, biblioteca gráfica de Alvin Albrecht.
+* Efectos de sonido y Phaser1 engine music player por Shiru.
+* Decompresor appack por dwedit, adaptado por Utopian y optimizado por Metalbrain.
 
 La Churrera es copyleft The Mojon Twins y se distribuye bajo una licencia CC BY-NC-SA 3.0.
 
