@@ -1,267 +1,236 @@
 // Churrera Engine
 // ===============
-// Copyleft 2010, 2011 by The Mojon Twins
+// Copyleft 2010, 2011, 2012, 2013 by The Mojon Twins
 
 // beeper.h
-// Cointains Beeper sound effects by Shiru.
-// Adapted removing di's and ei's and encapsulated by ME.
+// Cointains Beeper sound effects
+
+// Most effects have been taken off BeepFX's demo project.
+// So I guess they should be credited to Shiru again ;)
 
 #asm
-	.playsfx
-		;di
-		ld l,a
-		ld h,0
-		add hl,hl
-		ld de,proclist
-		add hl,de
-		ld a,(hl)
-		inc hl
-		ld h,(hl)
-		ld l,a
-		ld de,0
-		jp (hl)
+
+.sound_play
 	
-	.sound1	;enemy destroyed
-		ex de,hl
-		ld bc,500
-	.sound1l0
-		ld a,(hl)
-		and 16
-		out ($FE),a
-		ld e,a
-		inc a
-		sla a
-		sla a
-	.sound1l1
-		dec a
-		jr nz,sound1l1
-		out ($FE),a
-		ld a,e
-		inc a
-		add a,a
-		add a,a
-		add a,a
-	.sound1l2
-		dec a
-		jr nz,sound1l2
-		ld a,b
-		inc hl
-		dec bc
-		ld a,b
-		or c
-		jr nz,sound1l0
-		;ei
-		ret
+	ld hl, soundEffectsData	;address of sound effects data
+
+	;di
+	push iy
+
+	ld b,0
+	ld c,a
+	add hl,bc
+	add hl,bc
+	ld a,(hl)
+	inc hl
+	ld h,(hl)
+	ld l,a
+	push hl
+	pop ix			;put it into ix
+
+.readData
+	ld a,(ix+0)		;read block type
+	or a
+	jr nz,readData_sound
+	pop iy
+	;ei
+	ret
 	
-	.sound2	;enemy hit
-		ex de,hl
-		ld bc,40*256+100
-	.sound2l0
-		ld a,(hl)
-		and 16
-		out ($FE),a
-		inc hl
-		ld a,c
-	.sound2l1
-		dec a
-		jr nz,sound2l1
-		out ($FE),a
-		ld a,c
-	.sound2l2
-		dec a
-		jr nz,sound2l2
-		djnz sound2l0
-		;ei
-		ret
+.readData_sound
+	ld c,(ix+1)		;read duration 1
+	ld b,(ix+2)
+	ld e,(ix+3)		;read duration 2
+	ld d,(ix+4)
+	push de
+	pop iy
+
+	dec a
+	jr nz,sfxRoutineNoise
+
+
+
+;this routine generate tone with many parameters
+
+.sfxRoutineTone
+	ld e,(ix+5)		;freq
+	ld d,(ix+6)
+	ld a,(ix+9)		;duty
+	ld (sfxRoutineTone_duty + 1),a
+	ld hl,0
+
+.sfxRoutineTone_l0
+	push bc
+	push iy
+	pop bc
+.sfxRoutineTone_l1
+	add hl,de
+	ld a,h
+.sfxRoutineTone_duty
+	cp 0
+	sbc a,a
+	and 16
+.sfxRoutineTone_border
+	or 0
+	out ($fe),a
+
+	dec bc
+	ld a,b
+	or c
+	jr nz,sfxRoutineTone_l1
+
+	ld a,(sfxRoutineTone_duty + 1)
+	add a,(ix+10)	;duty change
+	ld (sfxRoutineTone_duty + 1),a
+
+	ld c,(ix+7)		;slide
+	ld b,(ix+8)
+	ex de,hl
+	add hl,bc
+	ex de,hl
+
+	pop bc
+	dec bc
+	ld a,b
+	or c
+	jr nz,sfxRoutineTone_l0
+
+	ld c,11
+.nextData
+	add ix,bc		;skip to the next block
+	jr readData
+
+;this routine generate noise with two parameters
+
+.sfxRoutineNoise
+	ld e,(ix+5)		;pitch
+
+	ld d,1
+	ld h,d
+	ld l,d
+.sfxRoutineNoise_l0
+	push bc
+	push iy
+	pop bc
+.sfxRoutineNoise_l1
+	ld a,(hl)
+	and 16
+.sfxRoutineNoise_border
+	or 0
+	out ($fe),a
+	dec d
+	jr nz,sfxRoutineNoise_l2
+	ld d,e
+	inc hl
+	ld a,h
+	and $1f
+	ld h,a
+.sfxRoutineNoise_l2
+	dec bc
+	ld a,b
+	or c
+	jr nz,sfxRoutineNoise_l1
+
+	ld a,e
+	add a,(ix+6)	;slide
+	ld e,a
+
+	pop bc
+	dec bc
+	ld a,b
+	or c
+	jr nz,sfxRoutineNoise_l0
+
+	ld c,7
+	jr nextData
 	
-	.sound3	;something
-		ex de,hl
-		ld b,100
-		ld de,$1020
-	.sound3l0
-		ld a,(hl)
-		and d
-		out ($FE),a
-		inc hl
-		ld a,e
-	.sound3l0a
-		dec a
-		jr nz,sound3l0a
-		djnz sound3l0
-		ld b,250
-	.sound3l1
-		ld a,(hl)
-		and d
-		out ($FE),a
-		inc hl
-		ld a,2
-	.sound3l2
-		dec a
-		jr nz,sound3l2
-		xor a
-		out ($FE),a
-		ld a,e
-	.sound3l3
-		dec a
-		jr nz,sound3l3
-		djnz sound3l1
-		;ei
-		ret
+.soundEffectsData
+	defw soundEffectsData_sfx0
+	defw soundEffectsData_sfx1
+	defw soundEffectsData_sfx2
+	defw soundEffectsData_sfx3
+	defw soundEffectsData_sfx4
+	defw soundEffectsData_sfx5
+	defw soundEffectsData_sfx6
+	defw soundEffectsData_sfx7
+	defw soundEffectsData_sfx8
+	defw soundEffectsData_sfx9
+	defw soundEffectsData_sfx10
+	defw soundEffectsData_sfx11
 	
-	.sound4	;jump
-		ld bc,20*256+250
-	.sound4l0
-		ld a,16
-		out ($FE),a
-		ld a,4
-	.sound4l1
-		dec a
-		jr nz,sound4l1
-		out ($FE),a
-		ld a,c
-	.sound4l2
-		dec a
-		jr nz,sound4l2
-		dec c
-		dec c
-		djnz sound4l0
-		;ei
-		ret
-	
-	.sound5	;player hit
-		ex de,hl
-		ld bc,100*256+16
-	.sound5l0
-		ld a,(hl)
-		and c
-		out ($FE),a
-		inc hl
-		ld a,110
-		sub b
-		ld e,a
-		and c
-		out ($FE),a
-	.sound5l1
-		dec e
-		jr nz,sound5l1
-		djnz sound5l0
-		;ei
-		ret
-	
-	.sound6	;enemy destroyed 2
-		ex de,hl
-		ld bc,20*256+16
-	.sound6l0
-		ld a,(hl)
-		inc hl
-		and c
-		out ($FE),a
-		xor a
-	.sound6l0a
-		dec a
-		jr nz,sound6l0a
-		djnz sound6l0
-	.sound6l1
-		ld a,(hl)
-		inc hl
-		and c
-		out ($FE),a
-	.sound6l2
-		dec a
-		jr nz,sound6l2
-		djnz sound6l1
-		;ei
-		ret
-		
-	.sound7	;shot
-		ex de,hl
-		ld bc,100*256
-	.sound7l0
-		ld a,(hl)
-		inc hl
-		or c
-		and 16
-		out ($FE),a
-		ld a,(hl)
-		srl a
-		srl a
-	.sound7l1
-		dec a
-		jr nz,sound7l1
-		ld a,c
-		add a,4
-		ld c,a
-		djnz sound7l0
-		;ei
-		ret
-	
-	.sound8	;take item
-		ld a,200
-		jr soundItem
-	.sound9
-		ld a,175
-		jr soundItem
-	.sound10
-		ld a,100
-	.soundItem
-		ld (frq),a
-		ld b,4
-		ld d,128
-	.sound8l2
-		push bc
-	;.frq=$+1
-	;	ld bc,2*256+200
-		defb #01	;ld bc
-	.frq
-		defb 200	;+200
-		defb 2	;2*256
-	.sound8l0
-		push bc
-		ld b,50
-	.sound8l1
-		xor 16
-		and 16
-		out ($FE),a
-		ld e,a
-		ld a,d
-	.sound8l2b
-		dec a
-		jr nz,sound8l2b
-		out ($FE),a
-		ld a,129
-		sub d
-	.sound8l3
-		dec a
-		jr nz,sound8l3
-		ld a,e
-		ld e,c
-	.sound8l4
-		dec e
-		jr nz,sound8l4
-		djnz sound8l1
-		pop bc
-		ld a,c
-		sub 16
-		ld c,a
-		djnz sound8l0
-		pop bc
-		srl d
-		srl d
-		djnz sound8l2
-		;ei
-		ret
-	
-	.proclist
-		defw sound1
-		defw sound2
-		defw sound3
-		defw sound4
-		defw sound5
-		defw sound6
-		defw sound7
-		defw sound8
-		defw sound9
-		defw sound10
+.soundEffectsData_sfx0
+	defb 0x01
+	defw 0x000a,0x03e8,0x00c8,0x0016,0x1680
+	defb 0x00
+.soundEffectsData_sfx1
+	defb 0x01
+	defw 0x0064,0x0014,0x01f4,0x0002,0x0010
+	defb 0x00
+.soundEffectsData_sfx2
+	defb 0x02
+	defw 0x0001,0x03e8,0x000a
+	defb 0x01
+	defw 0x0014,0x0064,0x0190,0xfff0,0x0080
+	defb 0x02
+	defw 0x0001,0x07d0,0x0001
+	defb 0x00
+.soundEffectsData_sfx3
+	defb 0x01
+	defw 0x0014,0x00c8,0x0d48,0x000a,0x0040
+	defb 0x00
+.soundEffectsData_sfx4
+	defb 0x01
+	defw 0x0050,0x0014,0x03e8,0xffff,0x0080
+	defb 0x00
+.soundEffectsData_sfx5
+	defb 0x01
+	defw 0x0004,0x03e8,0x03e8,0x0190,0x0080
+	defb 0x00
+.soundEffectsData_sfx6
+	defb 0x01
+	defw 0x0002,0x0fa0,0x0190,0x00c8,0x0040
+	defb 0x01
+	defw 0x0002,0x0fa0,0x00c8,0x00c8,0x0020
+	defb 0x00
+.soundEffectsData_sfx7
+	defb 0x01
+	defw 0x000a,0x03e8,0x00c8,0x0002,0x0010
+	defb 0x01
+	defw 0x0001,0x0fa0,0x0000,0x0000,0x0000
+	defb 0x01
+	defw 0x000a,0x03e8,0x00c8,0xfffe,0x0010
+	defb 0x01
+	defw 0x0001,0x07d0,0x0000,0x0000,0x0000
+	defb 0x01
+	defw 0x000a,0x03e8,0x00b4,0xfffe,0x0010
+	defb 0x01
+	defw 0x0001,0x0fa0,0x0000,0x0000,0x0000
+	defb 0x00
+.soundEffectsData_sfx8
+	defb 0x02
+	defw 0x0001,0x03e8,0x0014
+	defb 0x01
+	defw 0x0001,0x03e8,0x0000,0x0000,0x0000
+	defb 0x02
+	defw 0x0001,0x03e8,0x0001
+	defb 0x00
+.soundEffectsData_sfx9
+	defb 0x02
+	defw 0x0014,0x0032,0x0101
+	defb 0x00
+.soundEffectsData_sfx10
+	defb 0x02
+	defw 0x0064,0x01f4,0x0264
+	defb 0x00
+.soundEffectsData_sfx11
+	defb 0x01
+	defw 0x0014,0x01f4,0x00c8,0x0005,0x0110
+	defb 0x01
+	defw 0x0001,0x03e8,0x0000,0x0000,0x0000
+	defb 0x01
+	defw 0x001e,0x01f4,0x00c8,0x0008,0x0110
+	defb 0x01
+	defw 0x0001,0x07d0,0x0000,0x0000,0x0000
+	defb 0x00
 #endasm
 
 /*
@@ -269,16 +238,17 @@
 
 	n	Sonido
 	----------
-	0	Enemy destroyed
-	1	Enemy hit
-	2	Something
-	3	Jump
-	4	Player hit
-	5	Enemy destroyed 2
-	6	Shot
-	7	Item #1		(item)
-	8	Item #2		(key)
-	9	Item #3		(life)
+	1	Salto
+	2	enemy hit
+	3	killzone hit
+	4	countdown
+	5	coin
+	6	object
+	7	talk 1
+	8	key in lock
+	9	shoot
+	10	explosion
+	11	talk 2	
 	
 */
 
@@ -286,8 +256,11 @@ void peta_el_beeper (unsigned char n) {
 	// Cargar en A el valor de n
 	asm_int [0] = n;
 	#asm
+		push ix
+		push iy
 		ld a, (_asm_int)
-		;ld a, 0
-		call playsfx
+		call sound_play
+		pop ix
+		pop iy
 	#endasm
 }

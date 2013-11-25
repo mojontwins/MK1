@@ -68,10 +68,14 @@ typedef struct {
 	unsigned char estado;
 	unsigned char ct_estado;
 	unsigned char gotten;
-	unsigned char life, objs, keys;
+	char objs, keys;
+	int life;
 	unsigned char fuel;
 	unsigned char killed;
 	unsigned char disparando;
+	unsigned char killingzone_framecount;
+	unsigned char killingzone_beepcount;
+	unsigned char is_dead;
 } INERCIA;
 
 INERCIA player;
@@ -128,8 +132,52 @@ unsigned char hotspot_x;
 unsigned char hotspot_y;
 unsigned char orig_tile;	// Original background tile
 
+#ifndef WIN_ON_SCRIPTING
 unsigned char pant_final = SCR_FIN;
+#endif
 unsigned char n_pant;
 
 unsigned char f_zone_ac;
 unsigned char fzx1, fzx2, fzy1, fzy2;
+
+// Scenery status
+
+typedef struct {
+	unsigned char show_coins;	
+	unsigned char fixed_screens;
+	unsigned char show_level_info;
+	unsigned char evil_kills_slowly;
+	unsigned char allow_type_6;
+	unsigned char make_type_6;
+} SCENERY_INFO;
+
+SCENERY_INFO scenery_info; 
+unsigned char max_screens = MAP_W * MAP_H;
+
+// Flags are now in the main engine
+
+unsigned char flags [MAX_FLAGS];
+
+void draw_scr_background ();
+void draw_scr ();
+void init_player_values (); 
+
+#if defined(FALLING_BOXES) && defined(PLAYER_PUSH_BOXES)
+#define MAX_FALLING_BOXES 8
+// Joé, más de 8 es tontería.
+typedef struct {
+	unsigned char act, x, y;
+} FALLINGBOX;
+
+FALLINGBOX fallingboxbuffer [MAX_FALLING_BOXES];
+unsigned char fall_frame_counter;
+void fall_box (unsigned char x, unsigned char y);
+void init_falling_box_buffer ();
+#endif
+
+#ifdef PLAYER_PUSH_BOXES
+unsigned char can_move_box (unsigned char x0, unsigned char y0, unsigned char x1, unsigned char y1);
+#endif
+
+void do_extern_action (unsigned char n);
+void saca_a_todo_el_mundo_de_aqui ();

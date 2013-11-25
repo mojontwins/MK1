@@ -29,7 +29,7 @@
 #include "mapa.h"
 #include "tileset.h"
 #include "sprites.h"
-#if defined(PLAYER_KILLS_ENEMIES) || defined(PLAYER_CAN_FIRE) || defined(NO_MAX_ENEMS)
+#if defined(PLAYER_KILLS_ENEMIES) || defined(PLAYER_CAN_FIRE) || defined(NO_MAX_ENEMS) || defined(BOXES_KILL_ENEMIES)
 #include "extrasprites.h"
 #endif
 #include "enems.h"
@@ -39,6 +39,8 @@
 #include "msc.h"
 #endif
 #include "engine.h"
+#include "boxes.h"
+#include "msc_extern.h"
 #include "mainloop.h"
 
 // Main function.

@@ -11,9 +11,12 @@ void do_game () {
 	unsigned char i;
 	unsigned char playing;
 	unsigned char maincounter;
-	unsigned char objs_old, keys_old, life_old, killed_old, item_old;
+	unsigned char objs_old, keys_old, life_old, killed_old, item_old, ezg_old;
 	unsigned char reentered;
 	int key_m;
+#ifdef USE_SUICIDE_KEY
+	int key_s;
+#endif
 #ifdef RANDOM_RESPAWN
 	int x, y;
 #else
@@ -43,12 +46,15 @@ void do_game () {
 	keys.fire  = sp_LookupKey(' ');
 
 	key_m = sp_LookupKey ('m');
+#ifdef USE_SUICIDE_KEY
+	key_s = sp_LookupKey ('s');
+#endif
 		
 	joyfunc = sp_JoyKeyboard;
 
 	// Load tileset
 	allpurposepuntero = tileset;
-	for (j = 0; j < 192; j++) {
+	for (j = 0; j < 256; j++) {
 		sp_TileArray (j, allpurposepuntero);
 		allpurposepuntero += 8;
 	}
@@ -94,7 +100,6 @@ void do_game () {
 	}
 #endif
 
-
 	while (1) {
 		// Here the title screen
 		sp_UpdateNow();
@@ -110,6 +115,11 @@ void do_game () {
 
 		// Let's do it.
 		playing = 1;
+		scenery_info.evil_kills_slowly = 0;
+		scenery_info.make_type_6 = 0;
+#ifdef USE_TYPE_6
+		scenery_info.allow_type_6 = 1;
+#endif
 		init_player ();
 #if defined(DEACTIVATE_KEYS) && defined(DEACTIVATE_OBJECTS)
 #else
@@ -118,7 +128,7 @@ void do_game () {
 #ifndef DEACTIVATE_KEYS
 		init_cerrojos ();
 #endif
-#if defined(PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
+#if defined(PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE) || defined(BOXES_KILL_ENEMIES)
 		init_malotes ();
 #endif
 #ifdef PLAYER_CAN_FIRE
@@ -136,7 +146,7 @@ void do_game () {
 #endif
 		
 		// Execute "ENTERING GAME" script
-		script = e_scripts [MAP_W * MAP_H];
+		script = e_scripts [max_screens];
 		run_script ();
 #endif
 		
@@ -150,6 +160,12 @@ void do_game () {
 #endif
 #ifndef DEACTIVATE_KEYS
 		draw_keys ();
+#endif
+#ifdef USE_COINS
+		draw_coins ();
+#endif
+#ifndef DEACTIVATE_EVIL_ZONE
+		draw_evil_zone_gauge ();
 #endif
 
 #if defined(PLAYER_KILLS_ENEMIES) || defined(PLAYER_CAN_FIRE)
@@ -166,50 +182,22 @@ void do_game () {
 #endif
 		reentered = 0;
 		half_life = 0;
+		
+#if defined(FALLING_BOXES) && defined(PLAYER_PUSH_BOXES)
+		fall_frame_counter = 0;
+#endif
 
 		while (playing) {
-#ifndef DEACTIVATE_OBJECTS			
-			if (player.objs != objs_old) {
-				draw_objs ();
-				objs_old = player.objs;
-			}
-#endif
-			
-			if (player.life != life_old) {
-				draw_life ();
-				life_old = player.life;
-			}
-
-#ifndef DEACTIVATE_KEYS
-			if (player.keys != keys_old) {
-				draw_keys ();
-				keys_old = player.keys;
-			}
-#endif
-
-#ifdef PLAYER_KILLS_ENEMIES		
-			if (player.killed != killed_old) {
-				draw_killed ();
-				killed_old = player.killed;	
-			}
-#endif
-
-#ifdef PLAYER_SHOW_ITEM
-			if (flags [ITEM_IN_FLAG] != item_old) {
-				draw_item ();
-				item_old = flags [ITEM_IN_FLAG];
-			}
-#endif			
 
 			maincounter ++;
 			half_life = !half_life;
 			
 			// Move player
-			if ( !(player.estado & EST_MUR) )
+			//if ( !(player.estado & EST_MUR) )
 				move ();
-			else {
+			//else {
 				// WTF?
-			}
+			//}
 			
 			// Move enemies
 			mueve_bicharracos ();
@@ -219,13 +207,18 @@ void do_game () {
 			mueve_bullets ();
 #endif
 
+#if defined(FALLING_BOXES) && defined(PLAYER_PUSH_BOXES)
+			// Move boxes
+			animate_boxes ();
+#endif
+
 			// Render		
 			for (i = 0; i < 3; i ++) {
 #if defined(RANDOM_RESPAWN) || defined(USE_TYPE_6)
 #ifdef RANDOM_RESPAWN
 					if (en_an [i].fanty_activo) {
 #else
-					if (malotes [enoffs + i].t == 6) {
+					if (malotes [enoffs + i].t == 6 || malotes [enoffs + i].t == 0) {
 #endif
 						x = en_an [i].x >> 6;
 						y = en_an [i].y >> 6;
@@ -282,13 +275,14 @@ void do_game () {
 				} 	
 #endif
 
-#ifdef PLAYER_FLICKERS
+#if defined(PLAYER_FLICKERS) || defined (RESPAWN_FLICKER)
 			// Flickering
 			if (player.estado & EST_PARP) {
 				player.ct_estado --;
 				if (player.ct_estado == 0) {
 					player.estado = EST_NORMAL;
-					delete_text ();
+					// Decoment this if suitable. For example "The Hobbit"
+					// delete_text ();
 				}	
 			}
 #endif			
@@ -305,7 +299,7 @@ void do_game () {
 					if (player.life > PLAYER_LIFE)
 						player.life = PLAYER_LIFE;
 					hotspots [n_pant].act = 2;
-					peta_el_beeper (8);
+					peta_el_beeper (6);
 #ifndef DEACTIVATE_OBJECTS
 				} else if (hotspots [n_pant].tipo == 1) {
 #ifdef ONLY_ONE_OBJECT
@@ -313,16 +307,16 @@ void do_game () {
 						i = 1;
 						player.objs ++;
 						hotspots [n_pant].act = 0;
-						peta_el_beeper (9);	
+						peta_el_beeper (6);	
 					} else {
 						i = 0;
-						peta_el_beeper (4);	
+						peta_el_beeper (1);	
 						draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), 17);
 					}
 #else
 					player.objs ++;
 					hotspots [n_pant].act = 0;
-					peta_el_beeper (9);
+					peta_el_beeper (6);
 #ifdef OBJECT_COUNT
 					flags [OBJECT_COUNT] ++;
 #endif
@@ -332,7 +326,7 @@ void do_game () {
 				} else if (hotspots [n_pant].tipo == 2) {
 					player.keys ++;
 					hotspots [n_pant].act = 0;
-					peta_el_beeper (7);
+					peta_el_beeper (6);
 #endif
 				} 
 				// PLOP!!
@@ -340,9 +334,10 @@ void do_game () {
 			}
 #endif
 		
-			// Flick screen checks and scripting related stuff
 			i = (joyfunc) (&keys);
-			
+
+			// Flick screen checks and scripting related stuff
+		
 #ifdef ACTIVATE_SCRIPTING		
 #ifdef SCRIPTING_KEY_M			
 			if (sp_KeyPressed (key_m) || ((i & sp_FIRE) == 0)) {
@@ -350,13 +345,14 @@ void do_game () {
 #ifdef SCRIPTING_DOWN
 			if ((i & sp_DOWN) == 0) {
 #endif
-				script = f_scripts [MAP_W * MAP_H];
+				script = f_scripts [max_screens];
 				run_script ();
 				// Any scripts to run in this screen?
 				script = f_scripts [n_pant];
 				run_script ();
 				if (!script_something_done) 
-					peta_el_beeper (4);
+					peta_el_beeper (9);
+/*
 #ifdef SCRIPTING_KEY_M			
 				while (sp_KeyPressed (key_m) || ((i & sp_FIRE) == 0)) {
 					i = (joyfunc) (&keys);
@@ -367,9 +363,11 @@ void do_game () {
 					i = (joyfunc) (&keys);
 				} while ((i & sp_DOWN) == 0);
 #endif
+*/
 			}
 #endif
 
+#ifndef FIXED_SCREENS
 #ifdef PLAYER_AUTO_CHANGE_SCREEN
 			if (player.x == 0 && player.vx < 0) {
 				n_pant --;
@@ -404,15 +402,59 @@ void do_game () {
 					draw_scr ();
 					player.y = 0;
 				} else {
-					player.vy = -PLAYER_MAX_VY_CAYENDO;	
-					if (player.life > 0) {
-						peta_el_beeper (4);
-						player.life --;	
-					}
+					player.vy = -player.vy;
+					peta_el_beeper (2);
+					player.life --;	
 				}
 			}
+#endif
+
+			// Update  HUD
+
+#ifndef DEACTIVATE_OBJECTS			
+			if (player.objs != objs_old) {
+				draw_objs ();
+				objs_old = player.objs;
+			}
+#endif
 			
+			if (player.life != life_old) {
+				draw_life ();
+				life_old = player.life;
+			}
+
+#ifndef DEACTIVATE_KEYS
+			if (player.keys != keys_old) {
+				draw_keys ();
+				keys_old = player.keys;
+			}
+#endif
+
+#ifdef PLAYER_KILLS_ENEMIES		
+			if (player.killed != killed_old) {
+				draw_killed ();
+				killed_old = player.killed;	
+			}
+#endif
+
+#ifdef PLAYER_SHOW_ITEM
+			if (flags [ITEM_IN_FLAG] != item_old) {
+				draw_item ();
+				item_old = flags [ITEM_IN_FLAG];
+			}
+#endif			
+
+#ifndef DEACTIVATE_EVIL_ZONE
+			if (player.killingzone_beepcount != ezg_old) {
+				draw_evil_zone_gauge ();
+				ezg_old = player.killingzone_beepcount;
+			}
+#endif
+			
+#ifndef WIN_ON_SCRIPTING
+
 			// Win game condition
+			
 #ifdef ACTIVATE_SCRIPTING
 #ifndef REENTER_ON_ALL_OBJECTS
 			if (player.objs == PLAYER_NUM_OBJETOS || script_result == 1 || n_pant == SCR_FIN) {
@@ -435,30 +477,68 @@ void do_game () {
 					success = 1;
 				}
 				if (success) {
+					saca_a_todo_el_mundo_de_aqui ();
 					cortina ();
 					game_ending ();
 					playing = 0;
 					cortina ();
 				}
 			}
-			
+#else
+			if (script_result) {
+				cortina ();
+				game_ending ();
+				playing = 0;
+				cortina ();
+			}
+#endif
+
+			// Dead player
+			if (player.is_dead) {
+				player.is_dead = 0;
+				if (player.life > 0) {
+#ifdef RESPAWN_REENTER
+					explode_player (x, y);
+#ifdef RESPAWN_SHOW_LEVEL				
+					draw_scr ();
+					init_player_values ();
+#ifdef FIXED_SCREENS
+					player.killed = 0;
+					malotes [enoffs].t = malotes [enoffs].t & 15;
+					malotes [enoffs + 1].t = malotes [enoffs + 1].t & 15;
+					malotes [enoffs + 2].t = malotes [enoffs + 2].t & 15;
+#endif
+#else	
+					draw_scr_background ();
+					init_player_values ();
+#endif
+#endif
+#ifdef RESPAWN_FLICKER
+					player.estado = EST_PARP;
+					player.ct_estado = 50;
+#endif
+				}
+			}
+
 			// Game over condition
 #ifdef ACTIVATE_SCRIPTING
-			if (player.life == 0 || script_result == 2) {
+			if (player.life <= 0 || script_result == 2) {
 #else
-			if (player.life == 0) {
+			if (player.life <= 0) {
 #endif
-				// ¡Saca a todo el mundo de aquí!
-				sp_MoveSprAbs (sp_player, spritesClip, 0, VIEWPORT_Y + 30, VIEWPORT_X + 20, 0, 0);				
-				for (i = 0; i < 3; i ++) {
-					if (malotes [enoffs + i].t != 0)
-						sp_MoveSprAbs (sp_moviles [i], spritesClip, 0, VIEWPORT_Y + 30, VIEWPORT_X + 20, 0, 0);
-				}
+				saca_a_todo_el_mundo_de_aqui ();
 				
 				game_over ();
 				playing = 0;
 				cortina ();
 			}
+			
+#ifdef USE_SUICIDE_KEY
+			if (sp_KeyPressed (key_s)) {
+				player.is_dead = 1;
+				player.life --;
+			}
+#endif
 		}	
 	}
 }

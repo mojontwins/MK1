@@ -5,6 +5,13 @@
 // printer.h
 // Miscellaneous printing functions (tiles, status, etc).
 
+void draw_rectangle (unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2, unsigned char c) {
+	unsigned char i, j;
+	for (i = y1; i <= y2; i ++)
+		for (j = x1; j <= x2; j ++)
+			sp_PrintAtInv (i, j, c, 0);	
+}
+
 void attr (char x, char y) {
 	// x + 15 * y = x + (16 - 1) * y = x + 16 * y - y = x + (y << 4) - y.
 #ifdef PLAYER_AUTO_CHANGE_SCREEN
@@ -92,7 +99,7 @@ void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t) {
 	} else {
 #endif
 		t = 64 + (t << 2);
-		pointer = (unsigned char *) &tileset [1536 + t];
+		pointer = (unsigned char *) &tileset [2048 + t];
 		sp_PrintAtInv (y, x, pointer [0], t);
 		sp_PrintAtInv (y, x + 1, pointer [1], t + 1);
 		sp_PrintAtInv (y + 1, x, pointer [2], t + 2);
@@ -107,6 +114,24 @@ void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t) {
 }
 #endif
 
+void draw_2_digits (unsigned char x, unsigned char y, unsigned char value) {
+	sp_PrintAtInv (y, x, 71, 16 + (value % 100) / 10);
+	sp_PrintAtInv (y, 1 + x, 71, 16 + value % 10);
+}
+
+#ifdef USE_COINS
+void draw_coins () {
+	draw_2_digits (COINS_X, COINS_Y, flags [COIN_FLAG]);
+}
+#endif
+
+#ifndef DEACTIVATE_EVIL_ZONE
+void draw_evil_zone_gauge () {
+	unsigned char val = EVIL_ZONE_BEEPS_COUNT - player.killingzone_beepcount;
+	draw_2_digits (EVIL_GAUGE_X, EVIL_GAUGE_Y, val);
+}
+#endif
+
 #ifdef PLAYER_SHOW_ITEM
 void draw_item () {
 	draw_coloured_tile (ITEM_SHOW_X, ITEM_SHOW_Y, ITEM_FIRST_TILE + flags [ITEM_IN_FLAG] - 1);
@@ -114,13 +139,15 @@ void draw_item () {
 #endif
 
 void draw_life () {
+	unsigned char i;
+	if (player.life > 0) i = (unsigned char) player.life; else i = 0;
 #ifdef DRAW_HI_DIGIT
-	sp_PrintAtInv (LIFE_H_Y, LIFE_H_X, 71, 16 + player.life / 100);
+	sp_PrintAtInv (LIFE_H_Y, LIFE_H_X, 71, 16 + i / 100);
 #endif
-	sp_PrintAtInv (LIFE_Y, LIFE_X, 71, 16 + (player.life % 100) / 10);
-	sp_PrintAtInv (LIFE_Y, 1 + LIFE_X, 71, 16 + player.life % 10);
+	draw_2_digits (LIFE_X, LIFE_Y, i);
 }
 
+// This is a patch for this game
 #ifndef DEACTIVATE_OBJECTS
 void draw_objs () {
 #ifdef ONLY_ONE_OBJECT
@@ -132,25 +159,30 @@ void draw_objs () {
 	} else {
 		draw_coloured_tile (OBJECTS_ICON_X, OBJECTS_ICON_Y, 17);
 	}
-	sp_PrintAtInv (OBJECTS_Y, OBJECTS_X, 71, 16 + flags [OBJECT_COUNT] / 10);
-	sp_PrintAtInv (OBJECTS_Y, 1 + OBJECTS_X, 71, 16 + flags [OBJECT_COUNT] % 10);
+	draw_2_digits (OBJECTS_X, OBJECTS_Y, flags [OBJECT_COUNT]);
 #else
-	sp_PrintAtInv (OBJECTS_Y, OBJECTS_X, 71, 16 + player.objs / 10);
-	sp_PrintAtInv (OBJECTS_Y, 1 + OBJECTS_X, 71, 16 + player.objs % 10);
+	draw_2_digits (OBJECTS_X, OBJECTS_Y, player.objs);
 #endif
 }
 #endif
 
 #ifndef DEACTIVATE_KEYS
 void draw_keys () {
-	sp_PrintAtInv (KEYS_Y, KEYS_X, 71, 16 + player.keys / 10);
-	sp_PrintAtInv (KEYS_Y, 1 + KEYS_X, 71, 16 + player.keys % 10);
+	draw_2_digits (KEYS_X, KEYS_Y, player.keys);
 }
 #endif
 
 #if defined (PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
 void draw_killed () {
-	sp_PrintAtInv (KILLED_Y, KILLED_X, 71, 16 + player.killed / 10);
-	sp_PrintAtInv (KILLED_Y, 1 + KILLED_X, 71, 16 + player.killed % 10);
+	draw_2_digits (KILLED_X, KILLED_Y, player.killed);
 }
 #endif
+
+void draw_text (unsigned char x, unsigned char y, unsigned char c, char *s) {
+	unsigned char m;
+	while (*s) {
+		m = (*s) - 32;
+		sp_PrintAtInv (y, x ++, c, m);
+		s ++;
+	}
+}
