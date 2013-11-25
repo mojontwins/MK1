@@ -1,5 +1,217 @@
-La Churrera v.3.99.2
-====================
+======
+3.99.3
+======
+
+Tiles animados
+--------------
+
+Si se define:
+
+#define ENABLE_TILANIMS			32		// If defined, animated tiles are enabled.
+										// the value especifies firt animated tile pair.
+
+En config.h, los tiles >= que el índice especificado se consideran animados.
+En el tileset, vienen por parejas. Si se define, por ejemplo, "46", entonces
+la única pareja de tiles 46 y 47 estará animada. El motor los detectará y cada
+frame hará que uno de los tiles 46 cambie de estado.
+
+Puede haber un máximo de 64 tiles animados en la misma pantalla. Si pones más,
+petará.
+
+Modo 128K
+---------
+
+Tienes que hacer mucho trabajo manual con esto. Lo siento, pero es así. En primer
+lugar habrá que crear un make.bat que construya todo lo que necesitas. Para ello
+puedes basarte en el archivo spare/make128.bat y adecuarlo a tu proyecto.
+
+El modo 128K es igual que el 48K pero usar WYZ Player y además soporta varios niveles.
+No podrás tener niveles más largos, pero sí podrás tener varios niveles. 
+
+Para usarlo, necesitas activar tres cosas en config.h:
+
+#define MODE_128K						// Experimental!
+#define COMPRESSED_LEVELS				// use levels.h instead of mapa.h and enems.h (!)
+#define MAX_LEVELS			4			// # of compressed levels
+
+En MAX_LEVELS tienes que especificar el número de niveles que vas a usar.
+
+En churromain.c hay que cambiar la posición de la pila y colocarla por debajo
+del binario principal:
+
+#pragma output STACKPTR=24299
+
+Luego hay que modificar levels128.h, que es donde se define la estructura de niveles
+y que se incluye en modo 128K. Ahí verás un array levels, con información sobre los
+niveles. En principio se incluye muy poca información:
+
+// Level struct
+LEVEL levels [MAX_LEVELS] = {
+	{3,2},
+	{4,3},
+	{5,4},
+	{6,5}	
+};
+
+El primer valor es el número de recurso (ver más adelante) que contiene el nivel. 
+El segundo valor es el número de la canción en WYZ PLAYER que debe sonar mientras
+se juega al nivel.
+
+Para preparar un nivel tienes que usar la nueva utilidad buildlevel.exe que hay
+en /utils. Esta utilidad toma los siguientes parámetros:
+
+$ buildlevel mapa.map map_w map_h lock font.png work.png spriteset.png 
+extrasprites.bin enems.ene scr_ini x_ini y_ini max_objs enems_life behs.txt level.bin
+
+   * mapa.map Es el mapa de mappy
+   * map_w, map_h Son las dimensiones del mapa en pantallas.
+   * lock 15 para autodetectar cerrojos, 99 si no hay cerrojos
+   * font.png es un archivo de 256x16 con 64 caracteres ascii 32-95
+   * work.png es un archivo de 256x48 con el tileset
+   * spriteset.png es un archivo de 256x32 con el spriteset
+   * extrasprites.bin lo encuentras en /levels
+   * enems.ene el archivo con los enemigos/hotspots de colocador.exe
+   * scr_ini, scr_x, scr_y, max_objs, enems_life valores del nivel
+   * behs.txt un archivo con los tipos de tiles, separados por comas
+   * level.bin es el nombre de archivo de salida.
+   
+Cuando tengamos todos los niveles construidos, hay que comprimirlos con apack:
+
+$ /utils/apacke.exe level1.bin level1c.bin
+...
+
+Cuando tengamos todos los niveles comprimidos, habrá que crear las imagenes
+binarias que se cargarán en las páginas de RAM extra. Para eso usamos la utilidad
+librarian que hay en la carpeta /bin. De hecho, es buena idea trabajar en la
+carpeta /bin para esto.
+
+La utilidad librarian utiliza una lista list.txt con los binarios comprimidos
+que debe ir metiendo en las imagenes binarias que irán en las páginas extra de 
+RAM. Lo primero que tendremos que meter serán los archivos title.bin, marco.bin
+y ending.bin, en ese orden. Si no tienes marco.bin debes usar un archivo de
+longitud 0, pero debes especificarlo. Luego añadiremos nuestros niveles. Por
+ejemplo:
+
+title.bin
+marco.bin
+ending.bin
+level1c.bin
+level2c.bin
+level3c.bin
+level4c.bin
+
+Ahí hemos añadido cuatro niveles comprimidos.
+
+Al ejecutar librarian, irá rellenando imagenes de 16K destinadas para ir en la
+RAM extra. Primero creará ram3.bin, luego ram4.bin y finalmente ram6.bin, según
+vaya necesitando más espacio.
+
+También generará el archivo librarian.h, que tendremos que copiar en /dev. Aquí
+podremos ver el número de recurso asociado a cada binario:
+
+RESOURCE resources [] = {
+   {3, 49152},   // 0: title.bin
+   {3, 50680},   // 1: marco.bin
+   {3, 50680},   // 2: ending.bin
+   {3, 52449},   // 3: level1c.bin
+   {3, 55469},   // 4: level2c.bin
+   {3, 58148},   // 5: level3c.bin
+   {3, 60842}   // 6: level4c.bin
+};
+
+Estos números de recurso son los que tendremos que especificar en el array
+levels que mencionamos más arriba. En concreto, los recursos 3, 4, 5 y 6 son
+los que contienen los cuatro niveles.
+
+Con todo esto hecho y preparado, habrá que montar la cinta. Para ello hay 
+que crear un loader.bas adecuado (puedes ver un ejemplo en /spare/loader.bas)
+y construir un .tap con cada bloque de RAM (de nuevo, el ejemplo en 
+/spare/make.bat construye la cinta con binarios en RAM3 y RAM4).
+
+También necesitarás RAM1.BIN para construir RAM1.TAP, conteniendo el player
+de WYZ con las canciones. Para ello tendrás que modificar /mus/WYZproPlay47aZX.ASM
+en /mus para que incluya tus canciones. Tienes un ejemplo en /spare.
+
+Como ves, es un poco tedioso. Te recomiendo que construyas mini-proyectos en
+48K según vas haciendo los niveles, y que al final montes una versión 128K con
+todo.
+
+Además, puedes usar el espacio extra para meter más pantallas comprimidas, o
+incluso código para usar passwords para saltar directamente a los niveles.
+Puedes ver ejemplos de todo esto en Goku Mal 128.
+
+Hotspots tipo 3
+===============
+
+Hemos hecho esta modificación, propuesta en el foro, fija a golpe de directiva.
+Si defines
+
+#define USE_HOTSPOTS_TYPE_3				// Alternate logic for recharges.
+
+Las recargas aparecerán única y exclusivamente donde tú las coloques, usando
+el hotspot de tipo 3.
+
+Pausa / Abortar
+===============
+
+Si se define
+
+#define PAUSE_ABORT						// Add h=PAUSE, y=ABORT
+
+Se añade código para habilitar la tecla "h" para pausar el juego y la tecla
+"y" para interrumpir la partida. Si quieres cambiar la asignación tendrás que
+tocar el código en mainloop.h
+
+Mensaje al coger objetos
+========================
+
+Se se define
+
+#define GET_X_MORE						// Shows "get X more" 
+
+Aparecerá un mensaje con los objetos que te quedan cada vez que coges uno.
+
+-------------------------------------------------------------------------------
+
+=========
+3.99.2mod
+=========
+
+Esta fue una versión especial con una cosa que nos pidió Radastan, los...
+
+Tiles animados
+==============
+
+Todo se basa en tilanim.h. Este archivo se incluye si se define en config.h la 
+directiva ENABLE_TILANIMS. Además, el valor de esta directiva es el que define 
+el número de tile menor que se considera animado.
+
+En tilanim.h hay, además de la definición de datos, dos funciones:
+
+void add_tilanim (unsigned char x, unsigned char y, unsigned char t) 
+se llama desde la función que pinta la pantalla actual si detecta que el tile 
+que va a pintar es >= ENABLE_TILANIMS. Añade un tile animado a la lista de 
+tiles.
+
+void do_tilanims (void) se llama desde el bucle principal. Básicamente 
+selecciona un tile animado al azar entre todos los almacenados, le cambia el 
+frame (de 0 a 1, de 1 a 0) y lo dibuja.
+
+Para usarlo sólo tienes que definir en config.h la directiva ENABLE_TILANIMS 
+con el tile animado menor. Por ejemplo, si tus cuatro últimas parejas de 
+tiles (8 en total) son los animados, pon el valor 40. Luego, en el mapa, se 
+tiene que poner el tile menor de la pareja, o sea, el tile 40 para 40-41, el 
+42 para 42-43... Si no lo haces así pasarán cosas divertidas. El código es 
+(tiene que ser) minimal, no se comprueba nada, así que cuidao.
+
+Por cierto, esto no se ha probado. Si lo pones en tu güego y se peta, danos
+un toque.
+
+-------------------------------------------------------------------------------
+
+======
+3.99.2
+======
 
 Venga, las churreras van saliendo como churros. Estamos que lo rompemos, y
 se nos ocurren cosas nuevas todos los días. Las iremos metiendo a medida que

@@ -1,5 +1,8 @@
 extern unsigned int ram_address [];
 extern unsigned int ram_destination [];
+#ifdef MODE_128K
+extern unsigned char ram_page [];
+#endif
 #asm
 
 ; aPPack decompressor
@@ -129,6 +132,32 @@ extern unsigned int ram_destination [];
 		defw 0
 #endasm
 
+#ifdef MODE_128K
+#asm
+	._ram_page
+		defb 0
+#endasm
+void unpack_RAMn (unsigned char n, unsigned int address, unsigned int destination) {
+	ram_address [0] = address;
+	ram_page [0] = n;
+	ram_destination [0] = destination;
+
+	#asm	
+		di
+		ld a, (_ram_page)
+		ld b, a
+		call SetRAMBank
+		
+		ld hl, (_ram_address)
+		ld de, (_ram_destination)
+		call depack
+		
+		ld b, 0
+		call SetRAMBank
+		ei
+	#endasm
+}
+#else
 void unpack (unsigned int address, unsigned int destination) {
 	if (address != 0) {
 		ram_address [0] = address;
@@ -141,3 +170,4 @@ void unpack (unsigned int address, unsigned int destination) {
 		#endasm
 	}
 }
+#endif

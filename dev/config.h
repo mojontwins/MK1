@@ -6,22 +6,24 @@
 // I. General configuration
 // ============================================================================
 
+//#define MODE_128K						// Experimental!
+
 // In this section we define map dimmensions, initial and authomatic ending conditions, etc.
 
 #define MAP_W					5		//
-#define MAP_H					4		// Map dimmensions in screens
-#define SCR_INICIO				0		// Initial screen
-#define PLAYER_INI_X			2		//
-#define PLAYER_INI_Y			2		// Initial tile coordinates
+#define MAP_H					5		// Map dimmensions in screens
+#define SCR_INICIO				99		// Initial screen
+#define PLAYER_INI_X			99		//
+#define PLAYER_INI_Y			99		// Initial tile coordinates
 #define SCR_FIN 				99		// Last screen. 99 = deactivated.
 #define PLAYER_FIN_X			99		//
 #define PLAYER_FIN_Y			99		// Player tile coordinates to finish game
 #define PLAYER_NUM_OBJETOS		99		// Objects to get to finish game
-#define PLAYER_LIFE 			10		// Max and starting life gauge.
+#define PLAYER_LIFE 			9		// Max and starting life gauge.
 #define PLAYER_REFILL			1		// Life recharge
-//#define COMPRESSED_LEVELS				// use levels.h instead of mapa.h and enems.h (!)
-//#define MAX_LEVELS			2		// # of compressed levels
-//#define REFILL_ME						// If defined, refill player on each level
+#define COMPRESSED_LEVELS				// use levels.h instead of mapa.h and enems.h (!)
+#define MAX_LEVELS			4			// # of compressed levels
+#define REFILL_ME						// If defined, refill player on each level
 
 // ============================================================================
 // II. Engine type
@@ -43,51 +45,52 @@
 // -------------------
 
 #define PLAYER_AUTO_CHANGE_SCREEN		// Player changes screen automaticly (no need to press direction)
-//#define PLAYER_CHECK_MAP_BOUNDARIES		// If defined, you can't exit the map.
+#define PLAYER_CHECK_MAP_BOUNDARIES		// If defined, you can't exit the map.
 #define DIRECT_TO_PLAY					// If defined, title screen is also the game frame.
 #define DEACTIVATE_KEYS					// If defined, keys are not present.
 #define DEACTIVATE_OBJECTS				// If defined, objects are not present.
 //#define ONLY_ONE_OBJECT				// If defined, only one object can be carried at a time.
 //#define OBJECT_COUNT			1		// Defines which FLAG will be used to store the object count.
 //#define DEACTIVATE_EVIL_TILE			// If defined, no killing tiles (behaviour 1) are detected.
-//#define FULL_BOUNCE					// If defined, evil tile bounces equal MAX_VX, otherwise v/2
+#define FULL_BOUNCE						// If defined, evil tile bounces equal MAX_VX, otherwise v/2
 //#define PLAYER_BOUNCES				// If defined, collisions make player bounce
 //#define SLOW_DRAIN					// Works with bounces. Drain is 4 times slower
 #define PLAYER_FLICKERS 			 	// If defined, collisions make player flicker instead.
 //#define MAP_BOTTOM_KILLS				// If defined, exiting the map bottomwise kills.
-#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
-#define EVERYTHING_IS_A_WALL			// If defined, any tile <> type 0 is a wall, otherwise just 8.
+//#define WALLS_STOP_ENEMIES			// If defined, enemies react to the scenary
+//#define EVERYTHING_IS_A_WALL			// If defined, any tile <> type 0 is a wall, otherwise just 8.
 //#define ENABLE_PURSUERS				// If defined, type 7 enemies are active
 //#define DEATH_COUNT_EXPRESSION	20+(rand()&15)
 //#define TYPE_7_FIXED_SPRITE 	4		// If defined, type 7 enemies are always #
-//#define ENABLE_CUSTOM_TYPE_6			// If defined, add code to type 6 enemies.
-//#define TYPE_6_FIXED_SPRITE 	2		// Sprite used - 1.
-//#define SIGHT_DISTANCE			96	// Used in our type 6 enemies.
-//#define USE_TWO_BUTTONS				// Alternate keyboard scheme for two-buttons games
+#define ENABLE_CUSTOM_TYPE_6			// If defined, add code to type 6 enemies.
+#define TYPE_6_FIXED_SPRITE 	2		// Sprite used - 1.
+#define SIGHT_DISTANCE			104		// Used in our type 6 enemies.
+#define USE_TWO_BUTTONS					// Alternate keyboard scheme for two-buttons games
+#define USE_HOTSPOTS_TYPE_3				// Alternate logic for recharges.
 
 // Pushable tile
 // -------------
 
-#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable. Must be type 10.
-#define FIRE_TO_PUSH					// If defined, you have to press FIRE+direction to push.
-#define ENABLE_PUSHED_SCRIPTING			// If defined, nice goodies (below) are activated:
-#define MOVED_TILE_FLAG 		1		// Current tile "overwritten" with block is stored here.
-#define MOVED_X_FLAG 			2		// X after pushing is stored here.
-#define MOVED_Y_FLAG 			3		// Y after pushing is stored here.
-#define PUSHING_ACTION					// If defined, pushing a tile runs PRESS_FIRE script
+//#define PLAYER_PUSH_BOXES 			// If defined, tile #14 is pushable. Must be type 10.
+//#define FIRE_TO_PUSH					// If defined, you have to press FIRE+direction to push.
+//#define ENABLE_PUSHED_SCRIPTING		// If defined, nice goodies (below) are activated:
+//#define MOVED_TILE_FLAG 		1		// Current tile "overwritten" with block is stored here.
+//#define MOVED_X_FLAG 			2		// X after pushing is stored here.
+//#define MOVED_Y_FLAG 			3		// Y after pushing is stored here.
+//#define PUSHING_ACTION				// If defined, pushing a tile runs PRESS_FIRE script
 
 // Shooting behaviour
 // ------------------
 
-//#define PLAYER_CAN_FIRE 				// If defined, shooting engine is enabled.
-//#define PLAYER_BULLET_SPEED 	8		// Pixels/frame. 
-//#define MAX_BULLETS 			3		// Max number of bullets on screen. Be careful!.
-//#define PLAYER_BULLET_Y_OFFSET	6	// vertical offset from the player's top.
-//#define PLAYER_BULLET_X_OFFSET	0	// vertical offset from the player's left/right.
-//#define ENEMIES_LIFE_GAUGE	2		// Amount of shots needed to kill enemies.
-//#define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
+#define PLAYER_CAN_FIRE 				// If defined, shooting engine is enabled.
+#define PLAYER_BULLET_SPEED 	8		// Pixels/frame. 
+#define MAX_BULLETS 			3		// Max number of bullets on screen. Be careful!.
+#define PLAYER_BULLET_Y_OFFSET	6		// vertical offset from the player's top.
+#define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
+#define ENEMIES_LIFE_GAUGE	5			// Amount of shots needed to kill enemies.
+#define RESPAWN_ON_ENTER				// Enemies respawn when entering screen
 //#define FIRE_MIN_KILLABLE 	3		// If defined, only enemies >= N can be killed.
-//#define CAN_FIRE_UP						// If defined, player can fire upwards and diagonal.
+#define CAN_FIRE_UP						// If defined, player can fire upwards and diagonal.
 //#define MAX_AMMO				99		// If defined, ammo is not infinite!
 //#define AMMO_REFILL			50		// ammo refill, using tile 20 (hotspot #4)
 //#define INITIAL_AMMO 			0		// If defined, ammo = X when entering game.
@@ -95,53 +98,53 @@
 //#define BREAKABLE_WALLS				// Breakable walls
 //#define BREAKABLE_WALLS_LIFE	1		// Amount of hits to break wall
 
-//#define ENABLE_RANDOM_RESPAWN           // If defined, automatic flying enemies spawn on killed enemies
-//#define FANTY_MAX_V             256     // Flying enemies max speed.
-//#define FANTY_A                 12      // Flying enemies acceleration.
-//#define FANTIES_LIFE_GAUGE      10      // Amount of shots needed to kill flying enemies.
+//#define ENABLE_RANDOM_RESPAWN			// If defined, automatic flying enemies spawn on killed enemies
+#define FANTY_MAX_V             256		// Flying enemies max speed (also for custom type 6 if you want)
+#define FANTY_A                 16		// Flying enemies acceleration.
+//#define FANTIES_LIFE_GAUGE      10	// Amount of shots needed to kill flying enemies.
 
 // Scripting
 // ---------
 
-#define ACTIVATE_SCRIPTING			// Activates msc scripting and flag related stuff.
+//#define ACTIVATE_SCRIPTING		// Activates msc scripting and flag related stuff.
 //#define SCRIPTING_DOWN			// Use DOWN as the action key.
 //#define SCRIPTING_KEY_M			// Use M as the action key instead.
-#define SCRIPTING_KEY_FIRE			// User FIRE as the action key instead.
+//#define SCRIPTING_KEY_FIRE		// User FIRE as the action key instead.
 //#define ENABLE_EXTERN_CODE		// Enables custom code to be run from the script using EXTERN n
-#define ENABLE_FIRE_ZONE			// Allows to define a zone which auto-triggers "FIRE"
+//#define ENABLE_FIRE_ZONE			// Allows to define a zone which auto-triggers "FIRE"
 
 // Timer
 // -----
 
-#define TIMER_ENABLE					// Enable timer
-#define TIMER_INITIAL		99			// For unscripted games, initial value.
-#define TIMER_REFILL		30			// Timer refill, using tile 21 (hotspot #5)
-#define TIMER_LAPSE 		32			// # of frames between decrements
-#define TIMER_START						// If defined, start timer from the beginning
-#define TIMER_SCRIPT_0					// If defined, timer = 0 runs "ON_TIMER_OFF" in the script
+//#define TIMER_ENABLE					// Enable timer
+//#define TIMER_INITIAL		99			// For unscripted games, initial value.
+//#define TIMER_REFILL		30			// Timer refill, using tile 21 (hotspot #5)
+//#define TIMER_LAPSE 		32			// # of frames between decrements
+//#define TIMER_START					// If defined, start timer from the beginning
+//#define TIMER_SCRIPT_0				// If defined, timer = 0 runs "ON_TIMER_OFF" in the script
 //#define TIMER_GAMEOVER_0				// If defined, timer = 0 causes "game over"
 //#define TIMER_KILL_0					// If defined, timer = 0 causes "one life less".
 //#define TIMER_WARP_TO 0				// If defined, warp to screen X after "one life less".
 //#define TIMER_WARP_TO_X 	1			//
 //#define TIMER_WARP_TO_Y 	1			// "warp to" coordinates.
 //#define TIMER_AUTO_RESET				// If defined, timer resets after "one life less"
-#define SHOW_TIMER_OVER					// If defined, "TIME OVER" shows when time is up.
+//#define SHOW_TIMER_OVER				// If defined, "TIME OVER" shows when time is up.
 
 // Top view:
 // ---------
 
-#define PLAYER_MOGGY_STYLE				// Enable top view.
+//#define PLAYER_MOGGY_STYLE				// Enable top view.
 //#define TOP_OVER_SIDE					// UP/DOWN has priority over LEFT/RIGHT
 
 // Side view:
 // ----------
 
-//#define PLAYER_HAS_JUMP               // If defined, player is able to jump.
+#define PLAYER_HAS_JUMP               	// If defined, player is able to jump.
 //#define PLAYER_HAS_JETPAC             // If defined, player can thrust a vertical jetpac
 //#define PLAYER_KILLS_ENEMIES          // If defined, stepping on enemies kills them
 //#define PLAYER_MIN_KILLABLE     3     // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 //#define PLAYER_BOOTEE                 // Always jumping engine. Don't forget to disable "HAS_JUMP" and "HAS_JETPAC"!!!
-//#define PLAYER_STEP_SOUND             // Sound while walking. No effect in the BOOTEE engine.
+//#define PLAYER_STEP_SOUND				// Sound while walking. No effect in the BOOTEE engine.
 //#define PLAYER_BOUNCE_WITH_WALLS      // Bounce when hitting a wall. Only really useful in MOGGY_STYLE mode
 //#define PLAYER_CUMULATIVE_JUMP        // Keep pressing JUMP to JUMP higher in several bounces
 
@@ -153,7 +156,7 @@
 
 #define VIEWPORT_X				1		//
 #define VIEWPORT_Y				2		// Viewport character coordinates
-#define LIFE_X					6		//
+#define LIFE_X					3		//
 #define LIFE_Y					0		// Life gauge counter character coordinates
 #define OBJECTS_X				99		//
 #define OBJECTS_Y				99		// Objects counter character coordinates
@@ -166,13 +169,13 @@
 //#define PLAYER_SHOW_KILLS				// If defined, show kill counter.
 #define AMMO_X					99		// 
 #define AMMO_Y					99		// Ammo counter character coordinates
-#define TIMER_X					11		//
-#define TIMER_Y					0		// Timer counter coordinates
-#define PLAYER_SHOW_TIMER				// If defined, show timer counter
+#define TIMER_X					99		//
+#define TIMER_Y					99		// Timer counter coordinates
+//#define PLAYER_SHOW_TIMER				// If defined, show timer counter
 
 // Text
-#define LINE_OF_TEXT			23		// If defined, scripts can show text @ Y = #
-#define LINE_OF_TEXT_X			0		// X coordinate.
+#define LINE_OF_TEXT			1		// If defined, scripts can show text @ Y = #
+#define LINE_OF_TEXT_X			1		// X coordinate.
 #define LINE_OF_TEXT_ATTR		71		// Attribute
 
 // Graphic FX, uncomment which applies...
@@ -182,9 +185,11 @@
 //#define UNPACKED_MAP					// Full, uncompressed maps. Shadows settings are ignored.
 //#define NO_MASKS						// Sprites are rendered using OR instead of masks.
 //#define PLAYER_ALTERNATE_ANIMATION	// If defined, animation is 1,2,3,1,2,3... 
-//#define MASKED_BULLETS				// If needed
-#define ENABLE_TILANIMS			32		// If defined, animated tiles are enabled.
+#define MASKED_BULLETS					// If needed
+//#define ENABLE_TILANIMS			32	// If defined, animated tiles are enabled.
 										// the value especifies firt animated tile pair.
+#define PAUSE_ABORT						// Add h=PAUSE, y=ABORT
+//#define GET_X_MORE					// Shows "get X more" when getting an object
 
 // ============================================================================
 // IV. Player movement configuration
@@ -201,17 +206,17 @@
 #define PLAYER_G                48      // Gravity acceleration (32/64 = 0.5 píxeles/frame^2)
 
 #define PLAYER_VY_INICIAL_SALTO 96      // Initial junp velocity (64/64 = 1 píxel/frame)
-#define PLAYER_MAX_VY_SALTANDO  312     // Max jump velocity (320/64 = 5 píxels/frame)
-#define PLAYER_INCR_SALTO       48      // acceleration while JUMP is pressed (48/64 = 0.75 píxeles/frame^2)
+#define PLAYER_MAX_VY_SALTANDO  360     // Max jump velocity (320/64 = 5 píxels/frame)
+#define PLAYER_INCR_SALTO       64      // acceleration while JUMP is pressed (48/64 = 0.75 píxeles/frame^2)
 
 #define PLAYER_INCR_JETPAC      32      // Vertical jetpac gauge
 #define PLAYER_MAX_VY_JETPAC    256     // Max vertical jetpac speed
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_MAX_VX           256     // Max velocity (192/64 = 3 píxels/frame)
-#define PLAYER_AX               64      // Acceleration (24/64 = 0,375 píxels/frame^2)
-#define PLAYER_RX               96      // Friction (32/64 = 0,5 píxels/frame^2)
+#define PLAYER_MAX_VX           192     // Max velocity (192/64 = 3 píxels/frame)
+#define PLAYER_AX               48      // Acceleration (24/64 = 0,375 píxels/frame^2)
+#define PLAYER_RX               32      // Friction (32/64 = 0,5 píxels/frame^2)
 
 // ============================================================================
 // V. Tile behaviour
@@ -231,7 +236,7 @@
 // Save for 10 (special), but that's obvious, innit?
 #ifndef COMPRESSED_LEVELS
 unsigned char comportamiento_tiles [] = {
-	0, 8, 8, 8, 0, 8, 8, 8, 8, 0, 1, 8, 0, 0,10, 8,
+	0, 0, 0, 0, 0, 0, 8, 4, 8, 4, 4, 1, 8, 8, 0, 1,
 	0, 0, 0, 0, 0, 0, 8, 8, 8, 0, 0, 0, 0, 0, 0, 0,
 	8, 8, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };

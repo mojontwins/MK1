@@ -132,7 +132,7 @@ void print_str (unsigned char x, unsigned char y, unsigned char c, unsigned char
 }
 
 #ifdef COMPRESSED_LEVELS
-void blackout_area () {
+void blackout_area (void) {
 	// blackens gameplay area for LEVEL XX display
 	asm_int [0] = 22528 + 32 * VIEWPORT_Y + VIEWPORT_X;
 	#asm

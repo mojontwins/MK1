@@ -2,8 +2,8 @@
 rem Cambia "%1" por el nombre de tu güego.
 echo ### COMPILANDO SCRIPT ###
 cd ..\script
-rem no olvides cambiar el 24 por el nº de pantallas
-msc %1.spt msc.h 24
+rem no olvides cambiar NPANT por el nº de pantallas
+msc %1.spt msc.h NPANT
 copy *.h ..\dev
 cd ..\dev
 echo -------------------------------------------------------------------------------

@@ -2,6 +2,7 @@
 // Carga las pantallas fijas
 // Copyleft 2010 The Mojon Twins
 
+#ifndef MODE_128K
 extern unsigned char s_title [];
 extern unsigned char s_marco [];
 extern unsigned char s_ending [];
@@ -20,6 +21,7 @@ extern unsigned char s_ending [];
 	._s_ending
 		BINARY "ending.bin"
 #endasm
+#endif
 
 void blackout (void) {
 	#asm

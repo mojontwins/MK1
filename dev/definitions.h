@@ -139,6 +139,7 @@ unsigned char flags[MAX_FLAGS];
 
 // Globalized
 unsigned char n_pant;
+unsigned char level = 0;
 unsigned char maincounter;
 
 // Breakable walls/etc
@@ -175,4 +176,10 @@ void espera_activa (int espera);
 
 #ifdef USE_TWO_BUTTONS
 int key_jump, key_fire;
+#endif
+
+#ifdef MODE_128K
+void blackout_area (void);
+void get_resource (unsigned char res, unsigned int dest);
+void espera_activa (int espera);
 #endif

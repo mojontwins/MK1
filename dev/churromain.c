@@ -2,10 +2,12 @@
 // Esqueleto de juegos de la churrera
 // Copyleft 2010-2013 The Mojon Twins
 
-// version FORK 3.99b
+// version FORK 3.99.3
 
 #include <spritepack.h>
 
+// Para 128K descomenta la 24299 y comenta la otra
+//#pragma output STACKPTR=24299
 #pragma output STACKPTR=61952
 #define AD_FREE			60655
 
@@ -22,8 +24,15 @@
 #ifdef ACTIVATE_SCRIPTING
 #include "msc-config.h"
 #endif
+#ifdef MODE_128K
+#include "128k.h"
+#endif
 #include "aplib.h"
 #include "pantallas.h"
+#ifdef MODE_128K
+#include "librarian.h"
+#include "levels128.h"
+#else
 #ifdef COMPRESSED_LEVELS
 #include "levels.h"
 #else
@@ -35,7 +44,12 @@
 #ifndef COMPRESSED_LEVELS
 #include "enems.h"
 #endif
+#endif
+#ifdef MODE_128K
+#include "wyzplayer.h"
+#else
 #include "beeper.h"
+#endif
 #include "printer.h"
 #ifdef ACTIVATE_SCRIPTING
 #ifdef ENABLE_EXTERN_CODE
@@ -55,5 +69,7 @@ void main (void) {
 	do_game ();
 }
 
+#ifndef MODE_128K
 // From beepola. Phaser engine by Shiru.
 #include "music.h"
+#endif

@@ -3,10 +3,12 @@
 
 void saca_a_todo_el_mundo_de_aqui (void) {
 	sp_MoveSprAbs (sp_player, spritesClip, 0, VIEWPORT_Y + 30, VIEWPORT_X + 20, 0, 0);				
-	for (gpit = 0; gpit < 3; gpit ++) {
-		if (malotes [enoffs + gpit].t != 0)
-			sp_MoveSprAbs (sp_moviles [gpit], spritesClip, 0, VIEWPORT_Y + 30, VIEWPORT_X + 20, 0, 0);
-	}
+	for (gpit = 0; gpit < 3; gpit ++)
+		sp_MoveSprAbs (sp_moviles [gpit], spritesClip, 0, VIEWPORT_Y + 30, VIEWPORT_X + 20, 0, 0);
+#ifdef PLAYER_CAN_FIRE
+	for (gpit = 0; gpit < MAX_BULLETS; gpit ++)
+		sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, -2, -2, 0, 0);
+#endif
 }
 
 int itj;
@@ -20,14 +22,20 @@ unsigned char timer_old;
 #ifdef COMPRESSED_LEVELS
 unsigned char *level_str = "LEVEL 0X";
 #endif
+#ifdef GET_X_MORE
+unsigned char *getxmore = " GET X MORE ";
+#endif
 void do_game (void) {
 	unsigned char *allpurposepuntero;
 	unsigned char playing;
 #ifdef COMPRESSED_LEVELS
-	unsigned char mlplaying, level;
+	unsigned char mlplaying;
 #endif	
 #ifdef SCRIPTING_KEY_M
 	int key_m;
+#endif
+#ifdef PAUSE_ABORT
+	int key_h, key_y;
 #endif
 #ifdef RANDOM_RESPAWN
 	int x, y;
@@ -39,10 +47,24 @@ void do_game (void) {
 	unsigned char x_pant, y_pant;
 #endif
 
+	// Install ISR
+	
 	#asm
 		di
 	#endasm
 	
+#ifdef MODE_128
+	sp_InitIM2(0xf1f1);
+	sp_CreateGenericISR(0xf1f1);
+	sp_RegisterHook(255, ISR);
+	
+	#asm
+		ei
+	#endasm
+
+	wyz_init ();
+#endif
+
 	cortina ();
 	
 	// splib2 initialization
@@ -56,7 +78,7 @@ void do_game (void) {
 	keys.down  = sp_LookupKey('s');
 	keys.left  = sp_LookupKey('a');
 	keys.right = sp_LookupKey('d');
-	keys.fire  = sp_LookupKey('m');	
+	keys.fire  = sp_LookupKey('m'); 
 	key_jump   = sp_LookupKey('n');
 	key_fire   = keys.fire;
 #else
@@ -68,6 +90,10 @@ void do_game (void) {
 #endif
 #ifdef SCRIPTING_KEY_M
 	key_m = sp_LookupKey ('m');
+#endif
+#ifdef PAUSE_ABORT
+	key_h = sp_LookupKey ('h');
+	key_y = sp_LookupKey ('y');
 #endif
 	joyfunc = sp_JoyKeyboard;
 
@@ -127,7 +153,15 @@ void do_game (void) {
 		// Here the title screen
 		sp_UpdateNow();
 		blackout ();
+#ifdef MODE_128K
+		// Resource 0 = title.bin
+		get_resource (0, 16384);
+#else		
 		unpack ((unsigned int) (s_title), 16384);
+#endif
+#ifdef MODE_128K
+		//wyz_play_music (0);
+#endif
 		select_joyfunc ();
 
 #ifdef COMPRESSED_LEVELS
@@ -137,12 +171,18 @@ void do_game (void) {
 		player.life = PLAYER_LIFE;
 #endif
 		while (mlplaying) {
-			prepare_level (level);
+			prepare_level (level);			
 			blackout_area ();
+
 			level_str [7] = 49 + level;
 			print_str (12, 12, 71, level_str);
 			sp_UpdateNow ();
-			peta_el_beeper (7);
+#ifdef MODE_128K
+			wyz_play_sound (3);
+#else			
+			peta_el_beeper (1);
+#endif
+
 			espera_activa (100);
 #endif
 				
@@ -150,7 +190,12 @@ void do_game (void) {
 		// Clear screen and show game frame
 		cortina ();
 		sp_UpdateNow();
+#ifdef MODE_128K
+		// Resource 1 = marco.bin
+		get_resource (1, 16384);
+#else		
 		unpack ((unsigned int) (s_marco), 16384);
+#endif
 #endif
 
 		// Let's do it.
@@ -166,7 +211,9 @@ void do_game (void) {
 #endif
 #endif
 #if defined(PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
+#ifndef MODE_128K
 		init_malotes ();
+#endif
 #endif
 #ifdef PLAYER_CAN_FIRE
 		init_bullets ();
@@ -211,9 +258,19 @@ void do_game (void) {
 		success = 0;
 
 #ifdef PLAYER_CHECK_MAP_BOUNDARIES		
+#ifdef MODE_128K
+		x_pant = n_pant % level_data->map_w;
+		y_pant = n_pant / level_data->map_w;
+#else
 		x_pant = n_pant % MAP_W; y_pant = n_pant / MAP_W;
 #endif
+#endif
 
+
+#ifdef MODE_128K
+		// Play music
+		wyz_play_music (levels [level].music_id);
+#endif
 		while (playing) {
 			
 #ifdef TIMER_ENABLE
@@ -251,7 +308,11 @@ void do_game (void) {
 				ctimer.t = TIMER_INITIAL;
 #endif
 				player.life --;
+#ifdef MODE_128K
+				wyz_play_sound (7);
+#else
 				peta_el_beeper (4);
+#endif
 #ifdef PLAYER_FLICKERS
 				player.estado = EST_PARP;
 				player.ct_estado = 50;
@@ -383,7 +444,11 @@ void do_game (void) {
 #ifdef PLAYER_CAN_FIRE
 			for (gpit = 0; gpit < 3; gpit ++)
 				if (en_an [gpit].morido == 1) {
+#ifdef MODE_128K
+					wyz_play_sound (7);
+#else
 					peta_el_beeper (1);
+#endif
 					en_an [gpit].morido = 0;
 				}	
 #endif
@@ -398,17 +463,23 @@ void do_game (void) {
 #endif			
 			
 			// Hotspot interaction.
-			if (x >= hotspot_x - 15 && x <= hotspot_x + 15 && y >= hotspot_y - 15 && y <= hotspot_y + 15) {
+			//if (x >= hotspot_x - 15 && x <= hotspot_x + 15 && y >= hotspot_y - 15 && y <= hotspot_y + 15) {
+			if (collide (x, y, hotspot_x, hotspot_y)) {
 				// Deactivate hotspot
 				draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), orig_tile);
 				gpit = 0;
+#ifndef USE_HOTSPOTS_TYPE_3
 				// Was it an object, key or life boost?
 				if (hotspots [n_pant].act == 0) {
 					player.life += PLAYER_REFILL;
 					if (player.life > PLAYER_LIFE)
 						player.life = PLAYER_LIFE;
 					hotspots [n_pant].act = 2;
+#ifdef MODE_128K
+					wyz_play_sound (5);
+#else
 					peta_el_beeper (8);
+#endif
 				} else {					
 					switch (hotspots [n_pant].tipo) {
 #ifndef DEACTIVATE_OBJECTS						
@@ -416,22 +487,38 @@ void do_game (void) {
 #ifdef ONLY_ONE_OBJECT
 							if (player.objs == 0) {
 								player.objs ++;
-								peta_el_beeper (9); 
+#ifdef MODE_128K
+								wyz_play_sound (3);
+#else
+								peta_el_beeper (9);
+#endif 
 							} else {
+#ifdef MODE_128K
+								wyz_play_sound (5);
+#else
 								peta_el_beeper (4); 
+#endif
 								draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), 17);
 								gpit = 1;
 							}
 #else
 							player.objs ++;
+#ifdef MODE_128K
+							wyz_play_sound (3);
+#else
 							peta_el_beeper (9);
+#endif
 #endif
 							break;
 #endif
 #ifndef DEACTIVATE_KEYS
 						case 2:
 							player.keys ++;
+#ifdef MODE_128K
+							wyz_play_sound (3);
+#else
 							peta_el_beeper (7);
+#endif
 							break;
 #endif
 #ifdef MAX_AMMO
@@ -440,7 +527,11 @@ void do_game (void) {
 								player.ammo += AMMO_REFILL;
 							else 
 								player.ammo = MAX_AMMO;
+#ifdef MODE_128K
+							wyz_play_sound (3);
+#else
 							peta_el_beeper (9);
+#endif
 							break;
 #endif
 #ifdef TIMER_ENABLE
@@ -449,7 +540,11 @@ void do_game (void) {
 								ctimer.t += TIMER_REFILL;
 							else
 								ctimer.t = 99;
+#ifdef MODE_128K
+							wyz_play_sound (3);
+#else
 							peta_el_beeper (7);
+#endif
 							break;
 #endif
 					}
@@ -457,7 +552,108 @@ void do_game (void) {
 				}
 				hotspot_x = hotspot_y = 240;
 			}
-			
+#else
+				// Modificación para que los hotspots de tipo 3 sean recargas directas
+				// Was it an object, key or life boost?
+				if (hotspots [n_pant].act) {
+					hotspots [n_pant].act = gpit;
+					switch (hotspots [n_pant].tipo) {
+// =======[CUSTOM MODIFICATION]=======
+//#ifndef DEACTIVATE_OBJECTS					   
+						case 1:
+#ifdef ONLY_ONE_OBJECT
+							if (player.objs == 0) {
+								player.objs ++;
+#ifdef MODE_128K
+								wyz_play_sound (3);
+#else
+								peta_el_beeper (9);
+#endif
+							} else {
+#ifdef MODE_128K
+								wyz_play_sound (5);
+#else
+								peta_el_beeper (4);
+#endif
+								draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), 17);
+								gpit = 1;
+							}
+#else
+							player.objs ++;
+#ifdef MODE_128K
+							wyz_play_sound (5);
+#else
+							peta_el_beeper (9);
+#endif
+#ifdef GET_X_MORE
+							if (level_data.max_objs > player.objs) {
+								print_str (10, 11, 79, spacer);
+								getxmore [5] = '0' + level_data.max_objs - player.objs;
+								print_str (10, 12, 79, getxmore);
+								print_str (10, 13, 79, spacer);
+								sp_UpdateNow ();
+								sp_WaitForNoKey ();
+								espera_activa (100);
+								draw_scr_background ();
+							}
+#endif							
+							break;
+#endif
+// =======[CUSTOM MODIFICATION]=======
+//#endif
+
+#ifndef DEACTIVATE_KEYS
+						case 2:
+							player.keys ++;
+#ifdef MODE_128K
+							wyz_play_sound (3);
+#else
+							peta_el_beeper (7);
+#endif
+							break;
+#endif
+						case 3:
+							player.life += PLAYER_REFILL;
+							if (player.life > PLAYER_LIFE)
+								player.life = PLAYER_LIFE;
+#ifdef MODE_128K
+							wyz_play_sound (5);
+#else
+							peta_el_beeper (8);
+#endif
+							break;
+#ifdef MAX_AMMO
+						case 4:
+							if (MAX_AMMO - player.ammo > AMMO_REFILL)
+								player.ammo += AMMO_REFILL;
+							else
+								player.ammo = MAX_AMMO;
+#ifdef MODE_128K
+							wyz_play_sound (3);
+#else
+							peta_el_beeper (9);
+#endif
+							break;
+#endif
+#ifdef TIMER_ENABLE
+						case 5:
+							if (99 - ctimer.t > TIMER_REFILL)
+								ctimer.t += TIMER_REFILL;
+							else
+								ctimer.t = 99;
+#ifdef MODE_128K
+							wyz_play_sound (3);
+#else
+							peta_el_beeper (7);
+#endif
+							break;
+#endif
+					}
+					
+				}
+				hotspot_x = hotspot_y = 240;
+			}
+#endif
 			// Flick screen checks and scripting related stuff
 			gpit = (joyfunc) (&keys);
 			
@@ -476,6 +672,28 @@ void do_game (void) {
 			}
 #endif
 
+#ifdef PAUSE_ABORT
+			// Pause/Abort handling
+			if (sp_KeyPressed (key_h)) {
+				sp_WaitForNoKey ();
+#ifdef MODE_128K
+				wyz_stop_sound ();
+				wyz_play_sound (1);
+#endif				
+				saca_a_todo_el_mundo_de_aqui ();
+				pause_screen ();
+				while (!sp_KeyPressed (key_h));
+				sp_WaitForNoKey ();
+				draw_scr_background ();
+#ifdef MODE_128K
+				wyz_play_music (levels [level].music_id);
+#endif				
+			}			
+			if (sp_KeyPressed (key_y)) {
+				playing = 0;
+			}
+#endif
+
 			// Change screen
 #ifdef PLAYER_CHECK_MAP_BOUNDARIES		
 			if (player.x == 0 && player.vx < 0 && x_pant > 0) {
@@ -484,20 +702,33 @@ void do_game (void) {
 				draw_scr ();
 				player.x = 14336;
 			}
+#ifdef MODE_128K
+			if (player.x == 14336 && player.vx > 0 && x_pant < (level_data->map_w - 1)) {	
+#else			
 			if (player.x == 14336 && player.vx > 0 && x_pant < (MAP_W - 1)) {	
+#endif
 				n_pant ++;
 				x_pant ++;
 				draw_scr ();
 				player.x = 0;
 			}
 			if (player.y == 0 && player.vy < 0 && y_pant > 0) {
+#ifdef MODE_128K
+				n_pant -= level_data->map_w;
+#else				
 				n_pant -= MAP_W;
+#endif
 				y_pant --;
 				draw_scr ();
 				player.y = 9216;	
 			}
+#ifdef MODE_128K
+			if (player.y == 9216 && player.vy > 0 && y_pant < (level_data->map_h - 1)) {
+				n_pant += level_data->map_w;
+#else			
 			if (player.y == 9216 && player.vy > 0 && y_pant < (MAP_H - 1)) {
 				n_pant += MAP_W;
+#endif
 				y_pant ++;
 				draw_scr ();
 				player.y = 0;
@@ -527,14 +758,24 @@ void do_game (void) {
 				player.x = 0;
 			}
 #endif
+#ifdef MODE_128K
+			if (player.y == 0 && player.vy < 0 && n_pant >= level_data->map_w) {
+				n_pant -= level_data->map_w;
+#else
 			if (player.y == 0 && player.vy < 0 && n_pant >= MAP_W) {
 				n_pant -= MAP_W;
+#endif
 				draw_scr ();
 				player.y = 9216;	
 			}
 			if (player.y == 9216 && player.vy > 0) {				// 9216 = 144 * 64
+#ifdef MODE_128K
+				if (n_pant < level_data->map_w * (level_data->map_h - 1)) {
+					n_pant += level_data->map_w;
+#else
 				if (n_pant < MAP_W * MAP_H - MAP_W) {
 					n_pant += MAP_W;
+#endif				
 					draw_scr ();
 					player.y = 0;
 					if (player.vy > 256) player.vy = 256;
@@ -542,7 +783,11 @@ void do_game (void) {
 				} else {
 					player.vy = -PLAYER_MAX_VY_CAYENDO; 
 					if (player.life > 0) {
+#ifdef MODE_128K
+						wyz_play_sound (1);
+#else
 						peta_el_beeper (4);
+#endif
 						player.life --; 
 					}
 #endif
@@ -576,20 +821,44 @@ void do_game (void) {
 				playing = 0;				
 			}
 		}
+		sp_WaitForNoKey ();
 		
+#ifdef MODE_128K		
+		wyz_stop_sound ();
+#endif
+
 		saca_a_todo_el_mundo_de_aqui ();
 		sp_UpdateNow ();
 		
 #ifdef COMPRESSED_LEVELS
 		if (success) {
+			/*
+			wyz_play_music (6);
+			print_str (10, 11, 79, spacer);
+			print_str (10, 12, 79, " ZONE CLEAR ");
+			print_str (10, 13, 79, spacer);
+			sp_UpdateNow ();
+			sp_WaitForNoKey ();
+			espera_activa (250);			
+			*/
 			level ++;
 			if (level == MAX_LEVELS) {
 				game_ending ();
 				mlplaying = 0;
 			}
 		} else {
+#ifdef MODE_128K
+			//wyz_play_music (8);
+#endif
+#if defined(TIMER_ENABLE) && defined(TIMER_GAMEOVER_0) && defined(SHOW_TIMER_OVER)
+			if (ctimer.zero) time_over (); else game_over ();
+#else
 			game_over ();
+#endif
 			mlplaying = 0;
+#ifdef MODE_128K
+			wyz_stop_sound ();
+#endif
 		}
 	}
 	cortina ();
