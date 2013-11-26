@@ -53,7 +53,7 @@ void do_game (void) {
 		di
 	#endasm
 	
-#ifdef MODE_128
+#ifdef MODE_128K
 	sp_InitIM2(0xf1f1);
 	sp_CreateGenericISR(0xf1f1);
 	sp_RegisterHook(255, ISR);
