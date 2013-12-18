@@ -57,9 +57,6 @@
 #endif
 #include "msc.h"
 #endif
-#ifdef ENABLE_TILANIMS
-#include "tilanim.h"
-#endif
 #include "engine.h"
 #include "mainloop.h"
 

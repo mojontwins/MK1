@@ -370,6 +370,10 @@ unsigned char *map_pointer;
 unsigned char blx, bly;
 #endif
 
+#ifdef ENABLE_TILANIMS
+#include "tilanim.h"
+#endif
+
 void espera_activa (int espera) {
 	do {
 #ifndef MODE_128K
@@ -1329,7 +1333,7 @@ void __FASTCALL__ draw_scr_background (void) {
 #ifdef ENABLE_TILANIMS
 		// Detect tilanims
 		if (gpd >= ENABLE_TILANIMS) {
-			add_tilanim (gpit % 15, gpit / 15, gpd);	
+			add_tilanim (gpx >> 1, gpy >> 1, gpd);	
 		}
 #endif
 			
