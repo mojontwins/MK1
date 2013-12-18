@@ -1,8 +1,10 @@
 // tilanim.h
 // Rutina para animar tiles.
 
-#define MAX_TILANIMS 64;
+#define MAX_TILANIMS 64
+#define UPDATE_FREQ 7
 unsigned char max_tilanims;
+unsigned char tacount;
 
 typedef struct {
 	unsigned char xy;
@@ -18,18 +20,22 @@ void add_tilanim (unsigned char x, unsigned char y, unsigned char t) {
 	max_tilanims ++;
 }
 
+unsigned char tait;
 void do_tilanims (void) {
 	if (max_tilanims == 0) return;
 	
-	// Select tile
-	gpit = rand () % max_tilanims;
-	
-	// Flip bit 7:
-	tilanims [gpit].ft = tilanims [gpit].ft ^ 128;
-	
-	// Draw tile
-	draw_coloured_tile (
-		VIEWPORT_X + (tilanims [gpit].xy >> 4), 
-		VIEWPORT_Y + (tilanims [gpit].xy & 15), 
-		(tilanims [gpit].ft & 127) + (tilanims [gpit].ft >> 7));
+	tacount = (tacount + 1) & UPDATE_FREQ;
+	if (!tacount) {
+		// Select tile
+		tait = rand () % max_tilanims;
+		
+		// Flip bit 7:
+		tilanims [tait].ft = tilanims [tait].ft ^ 128;
+		
+		// Draw tile
+		draw_coloured_tile (
+			VIEWPORT_X + ((tilanims [tait].xy >> 4) << 1), 
+			VIEWPORT_Y + ((tilanims [tait].xy & 15) << 1), 
+			(tilanims [tait].ft & 127) + (tilanims [tait].ft >> 7));
+	}
 }
