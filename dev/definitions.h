@@ -82,6 +82,8 @@ typedef struct {
 	unsigned char frame;
 	unsigned char count;
 	unsigned char *current_frame, *next_frame;
+	unsigned char state;
+	
 #ifdef PLAYER_CAN_FIRE
 	unsigned char morido;
 #if defined (RANDOM_RESPAWN) || defined (ENABLE_CUSTOM_TYPE_6)
@@ -90,7 +92,6 @@ typedef struct {
 	int vx;
 	int vy;
 	unsigned char fanty_activo;
-	unsigned char state;
 #endif
 #endif
 #ifdef ENABLE_PURSUERS
@@ -105,6 +106,7 @@ ANIMADO en_an [3];
 #define TYPE_6_IDLE 		0
 #define TYPE_6_PURSUING		1
 #define TYPE_6_RETREATING	2
+#define GENERAL_DYING 		4
 
 #ifdef PLAYER_CAN_FIRE
 typedef struct {
@@ -183,3 +185,6 @@ void blackout_area (void);
 void get_resource (unsigned char res, unsigned int dest);
 void espera_activa (int espera);
 #endif
+
+unsigned char rand (void);
+void saca_a_todo_el_mundo_de_aqui (void);

@@ -1408,6 +1408,7 @@ void __FASTCALL__ draw_scr (void) {
 		// Back to life!
 		
 		malotes [enoffs + gpit].t &= 0xEF;	
+		en_an [gpit].state = 0;
 #ifdef PLAYER_CAN_FIRE
 #ifdef MODE_128K
 		malotes [enoffs + gpit].life = level_data.enems_life;
@@ -1616,6 +1617,16 @@ void mueve_bicharracos (void) {
 #ifdef ENABLE_RANDOM_RESPAWN
 		if (en_an [gpit].fanty_activo) gpt = 5;
 #endif
+
+		if (en_an [gpit].state == GENERAL_DYING) {
+			en_an [gpit].count --;
+			if (en_an [gpit].count == 0) {
+				en_an [gpit].state = 0;
+				en_an [gpit].next_frame = sprite_18_a;
+				continue;
+			}
+		}
+
 		switch (gpt) {
 			case 1:
 			case 2:
@@ -1762,8 +1773,10 @@ void mueve_bicharracos (void) {
 				}
 				break;	
 #endif
+/*
 			default:
-				en_an [gpit].next_frame = sprite_18_a;
+				if (en_an [gpit].state != GENERAL_DYING) en_an [gpit].next_frame = sprite_18_a;
+*/
 		}
 		
 		if (active) {			
@@ -1885,18 +1898,28 @@ void mueve_bicharracos (void) {
 #ifdef PLAYER_KILLS_ENEMIES
 				// Step over enemy				
 				if (gpy < gpen_cy - 2 && player.vy >= 0 && malotes [enoffsmasi].t >= PLAYER_MIN_KILLABLE) {
+
+#ifdef MODE_128K
+					wyz_play_sound (6);										
+					en_an [gpit].state = GENERAL_DYING;
+					en_an [gpit].count = 12;
+					en_an [gpit].next_frame = sprite_17_a;
+					malotes [enoffsmasi].t |= 16;			// Mark as dead
+					player.killed ++;
+					player.vy = -256;
+					
+#else
 					en_an [gpit].next_frame = sprite_17_a;
 					sp_MoveSprAbs (sp_moviles [gpit], spritesClip, en_an [gpit].next_frame - en_an [gpit].current_frame, VIEWPORT_Y + (gpen_cy >> 3), VIEWPORT_X + (gpen_cx >> 3), gpen_cx & 7, gpen_cy & 7);
 					en_an [gpit].current_frame = en_an [gpit].next_frame;
 					sp_UpdateNow ();
-#ifdef MODE_128K
-					wyz_play_sound (6);
-#else							
+
 					peta_el_beeper (5);
-#endif
 					en_an [gpit].next_frame = sprite_18_a;
-					malotes [enoffsmasi].t |= 16;			// Mark as dead					
+					malotes [enoffsmasi].t |= 16;			// Mark as dead
+					
 					player.killed ++;
+#endif					
 #ifdef ACTIVATE_SCRIPTING					
 					// Run this screen fire script or "entering any".
 					script = f_scripts [n_pant];
@@ -1905,6 +1928,8 @@ void mueve_bicharracos (void) {
 					run_script ();
 #endif
 				} else if (player.life > 0) {
+
+					
 #else
 				if (player.life > 0) {					
 #endif

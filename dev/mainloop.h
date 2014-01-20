@@ -163,6 +163,9 @@ void do_game (void) {
 		//wyz_play_music (0);
 #endif
 		select_joyfunc ();
+#ifdef MODE_128K
+		//wyz_stop_sound ();
+#endif
 
 #ifdef COMPRESSED_LEVELS
 		mlplaying = 1;
@@ -269,7 +272,11 @@ void do_game (void) {
 
 #ifdef MODE_128K
 		// Play music
-		wyz_play_music (levels [level].music_id);
+#ifdef COMPRESSED_LEVELS		
+		//wyz_play_music (levels [level].music_id);
+#else
+		//wyz_play_music (1);
+#endif		
 #endif
 		while (playing) {
 			
@@ -684,9 +691,13 @@ void do_game (void) {
 				pause_screen ();
 				while (!sp_KeyPressed (key_h));
 				sp_WaitForNoKey ();
-				draw_scr_background ();
+				draw_scr ();
 #ifdef MODE_128K
-				wyz_play_music (levels [level].music_id);
+#ifdef COMPRESSED_LEVELS
+				//wyz_play_music (levels [level].music_id);
+#else
+				//wyz_play_music (1);
+#endif
 #endif				
 			}			
 			if (sp_KeyPressed (key_y)) {
@@ -702,7 +713,7 @@ void do_game (void) {
 				draw_scr ();
 				player.x = 14336;
 			}
-#ifdef MODE_128K
+#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
 			if (player.x == 14336 && player.vx > 0 && x_pant < (level_data->map_w - 1)) {	
 #else			
 			if (player.x == 14336 && player.vx > 0 && x_pant < (MAP_W - 1)) {	
@@ -713,7 +724,7 @@ void do_game (void) {
 				player.x = 0;
 			}
 			if (player.y == 0 && player.vy < 0 && y_pant > 0) {
-#ifdef MODE_128K
+#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
 				n_pant -= level_data->map_w;
 #else				
 				n_pant -= MAP_W;
@@ -722,7 +733,7 @@ void do_game (void) {
 				draw_scr ();
 				player.y = 9216;	
 			}
-#ifdef MODE_128K
+#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
 			if (player.y == 9216 && player.vy > 0 && y_pant < (level_data->map_h - 1)) {
 				n_pant += level_data->map_w;
 #else			
@@ -758,7 +769,7 @@ void do_game (void) {
 				player.x = 0;
 			}
 #endif
-#ifdef MODE_128K
+#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
 			if (player.y == 0 && player.vy < 0 && n_pant >= level_data->map_w) {
 				n_pant -= level_data->map_w;
 #else
@@ -769,7 +780,7 @@ void do_game (void) {
 				player.y = 9216;	
 			}
 			if (player.y == 9216 && player.vy > 0) {				// 9216 = 144 * 64
-#ifdef MODE_128K
+#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
 				if (n_pant < level_data->map_w * (level_data->map_h - 1)) {
 					n_pant += level_data->map_w;
 #else

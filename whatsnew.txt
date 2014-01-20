@@ -1,3 +1,20 @@
+=======
+3.99.3b
+=======
+
+Mínima revisión. Se arregla lo necesario para poder tener juegos de 128K con un
+sólo nivel (es decir, usar MODE_128K sin COMPRESSED_LEVELS).
+
+Ahora mismo hay dos ejemplos que te pueden ayudar si quieres hacer un juego de 128K:
+
+- Goku Mal: 128K con niveles comprimidos. Ver este doc y los fuentes del juego.
+- Las nuevas aventuras de Dogmole Tuppowsky: 128K con un sólo nivel, más info en
+el foro de mojonia.
+
+Además, en spare he añadido el archivo extern-textos.h cuyo contenido podéis usar
+en extern.h si queréis una forma sencilla de mostrar textos en pantalla mediante el
+comando EXTERN n del script.
+
 ======
 3.99.3
 ======
