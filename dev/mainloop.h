@@ -565,34 +565,33 @@ void do_game (void) {
 				if (hotspots [n_pant].act) {
 					hotspots [n_pant].act = gpit;
 					switch (hotspots [n_pant].tipo) {
-// =======[CUSTOM MODIFICATION]=======
-//#ifndef DEACTIVATE_OBJECTS					   
+#ifndef DEACTIVATE_OBJECTS					   
 						case 1:
-#ifdef ONLY_ONE_OBJECT
+	#ifdef ONLY_ONE_OBJECT
 							if (player.objs == 0) {
 								player.objs ++;
-#ifdef MODE_128K
+		#ifdef MODE_128K
 								wyz_play_sound (3);
-#else
+		#else
 								peta_el_beeper (9);
-#endif
+		#endif
 							} else {
-#ifdef MODE_128K
+		#ifdef MODE_128K
 								wyz_play_sound (5);
-#else
+		#else
 								peta_el_beeper (4);
-#endif
+		#endif
 								draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), 17);
 								gpit = 1;
 							}
-#else
+	#else
 							player.objs ++;
-#ifdef MODE_128K
+		#ifdef MODE_128K
 							wyz_play_sound (5);
-#else
+		#else
 							peta_el_beeper (9);
-#endif
-#ifdef GET_X_MORE
+		#endif
+		#ifdef GET_X_MORE
 							if (level_data.max_objs > player.objs) {
 								print_str (10, 11, 79, spacer);
 								getxmore [5] = '0' + level_data.max_objs - player.objs;
@@ -603,11 +602,11 @@ void do_game (void) {
 								espera_activa (100);
 								draw_scr_background ();
 							}
-#endif							
+		#endif							
+
+	#endif
 							break;
 #endif
-// =======[CUSTOM MODIFICATION]=======
-//#endif
 
 #ifndef DEACTIVATE_KEYS
 						case 2:
@@ -874,7 +873,12 @@ void do_game (void) {
 	}
 	cortina ();
 #else
-		if (success) game_ending (); else game_over ();
+		if (success) {
+			game_ending (); 
+		} else {
+			//wyz_play_music (8);
+			game_over ();
+		}
 		cortina ();
 #endif
 	}
