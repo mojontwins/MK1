@@ -409,22 +409,22 @@ void init_bullets (void) {
 
 #ifndef COMPRESSED_LEVELS
 #if defined(PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
-#ifndef MODE_128K
+
 void init_malotes (void) {
 	gpit = 0;
 	while (gpit < MAP_W * MAP_H * 3) {
 		malotes [gpit].t = malotes [gpit].t & 15;	
-#ifdef PLAYER_CAN_FIRE
+		#ifdef PLAYER_CAN_FIRE
 		malotes [gpit].life = ENEMIES_LIFE_GAUGE;
-#ifdef ENABLE_RANDOM_RESPAWN
+			#ifdef ENABLE_RANDOM_RESPAWN
 		if (malotes [gpit].t == 5)
 			malotes [gpit].t |= 16;
-#endif
-#endif
+			#endif
+		#endif
 		gpit ++;
 	}
 }
-#endif
+
 #endif
 #endif
 

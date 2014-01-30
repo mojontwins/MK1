@@ -214,7 +214,7 @@ void do_game (void) {
 #endif
 #endif
 #if defined(PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
-#ifndef MODE_128K
+#ifndef COMPRESSED_LEVELS
 		init_malotes ();
 #endif
 #endif
@@ -563,7 +563,7 @@ void do_game (void) {
 				// Modificación para que los hotspots de tipo 3 sean recargas directas
 				// Was it an object, key or life boost?
 				if (hotspots [n_pant].act) {
-					hotspots [n_pant].act = gpit;
+					hotspots [n_pant].act = 0;
 					switch (hotspots [n_pant].tipo) {
 #ifndef DEACTIVATE_OBJECTS					   
 						case 1:
@@ -582,7 +582,7 @@ void do_game (void) {
 								peta_el_beeper (4);
 		#endif
 								draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), 17);
-								gpit = 1;
+								hotspots [n_pant].act = 1;
 							}
 	#else
 							player.objs ++;
