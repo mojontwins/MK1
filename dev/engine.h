@@ -454,7 +454,7 @@ void fire_bullet (void) {
 					bullets [gpit].mx = -PLAYER_BULLET_SPEED;
 					bullets [gpit].y = (player.y >> 6) + PLAYER_BULLET_Y_OFFSET;
 					bullets [gpit].my = 0;
-					break;	
+					break;
 				case FACING_RIGHT:
 					bullets [gpit].x = (player.x >> 6) + 12;
 					bullets [gpit].mx = PLAYER_BULLET_SPEED;
@@ -476,19 +476,25 @@ void fire_bullet (void) {
 			}
 #else
 			gpjt = (joyfunc) (&keys);
+
+#ifdef CAN_FIRE_UP
 			if (!(gpjt & sp_UP)) {
 				bullets [gpit].y = (player.y >> 6);
-				bullets [gpit].my = -PLAYER_BULLET_SPEED;	
+				bullets [gpit].my = -PLAYER_BULLET_SPEED;
 			} else if (!(gpjt & sp_DOWN)) {
 				bullets [gpit].y = 8 + (player.y >> 6);
 				bullets [gpit].my = PLAYER_BULLET_SPEED;	 
-			} 
-			if ((gpjt & sp_UP) && (gpjt & sp_DOWN)) {
+			} else {
+#endif
 				bullets [gpit].y = (player.y >> 6) + PLAYER_BULLET_Y_OFFSET;
-				bullets [gpit].my = 0;	
+				bullets [gpit].my = 0;
+#ifdef CAN_FIRE_UP
 			}
-			
+#endif
+
+#ifdef CAN_FIRE_UP
 			if (!(gpjt & sp_LEFT) || !(gpjt & sp_RIGHT) || ((gpjt & sp_UP) && (gpjt & sp_DOWN))) {
+#endif
 				if (player.facing == 0) {
 					bullets [gpit].x = (player.x >> 6) - 4;
 					bullets [gpit].mx = -PLAYER_BULLET_SPEED;
@@ -496,19 +502,21 @@ void fire_bullet (void) {
 					bullets [gpit].x = (player.x >> 6) + 12;
 					bullets [gpit].mx = PLAYER_BULLET_SPEED;
 				}
+#ifdef CAN_FIRE_UP
 			} else {
 				bullets [gpit].x = (player.x >> 6) + 4;
 				bullets [gpit].mx = 0;
-			}			
+			}
+#endif
 #endif
 #ifdef MODE_128K
 			wyz_play_sound (4);
 #else
 			peta_el_beeper (6);
 #endif
-			break;	
-		}	
-	}	
+			break;
+		}
+	}
 }
 #endif
 
@@ -1401,16 +1409,16 @@ void __FASTCALL__ draw_scr (void) {
 	for (gpit = 0; gpit < 3; gpit ++) {
 		en_an [gpit].frame = 0;
 		en_an [gpit].count = 3;
+		en_an [gpit].state = 0;
 #ifdef ENABLE_RANDOM_RESPAWN
 		en_an [gpit].fanty_activo = 0;
 #endif
 #ifdef RESPAWN_ON_ENTER
 		// Back to life!
 		
-		malotes [enoffs + gpit].t &= 0xEF;	
-		en_an [gpit].state = 0;
+		malotes [enoffs + gpit].t &= 0xEF;		
 #ifdef PLAYER_CAN_FIRE
-#ifdef MODE_128K
+#if defined (COMPRESSED_LEVELS) && defined (MODE_128K)
 		malotes [enoffs + gpit].life = level_data.enems_life;
 #else
 		malotes [enoffs + gpit].life = ENEMIES_LIFE_GAUGE;
