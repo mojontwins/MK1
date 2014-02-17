@@ -34,13 +34,9 @@ Especiales:
 Sección							Se codifica como
 ENTERING ANY					ENTERING #MAX_PANTS
 ENTERING GAME					ENTERING #(MAX_PANTS+1)
-ON_TIMER_OFF					ENTERING #(MAX_PANTS+2)
 PRESS_FIRE AT ANY               FIRE #MAX_PANTS
 PLAYER_GETS_COIN				FIRE #(MAX_PANTS+1)
 PLAYER_KILLS_ENEMY				FIRE #(MAX_PANTS+2)
-
-Variables (FLAGS) La mayoría de los parámetros numéricos pueden ser sustituidos por el valor
-de un flag con #n significando "el valor del flag n"
 
 I.1. Tipos de cláusulas (IFs)
 =============================
@@ -132,6 +128,10 @@ I.1. Tipos de cláusulas (IFs)
 * IF TIMER <= x
 	Opcode: 71 x
 	
+* IF LEVEL = n
+	Descripción: CIERTO si el nivel actual es n
+	Opcode: 80 n
+	
 * IF TRUE
 	Descripción: Siempre CIERTO
 	Opcode: F0
@@ -166,6 +166,10 @@ I.2. Tipos de acciones
 * SUB FLAGS x, y
     Descripción: x = x - y
     Opcode: 13 x y
+    
+* FLIPFLOP x
+	Descripción: x = 1 - x
+	Opcode: 15 x    
     
 * SET TILE (x, y) = n
     Descripción: Establece que el tile (x, y) de la pantalla sea el n
@@ -233,9 +237,22 @@ I.2. Tipos de acciones
 	Descripción: Sólo redibuja la pantalla.
 	Opcode: 6E
 	
-* WARP_TO n, x, y
-	Descripción: Salta a la pantalla n en x, y
+* WARP_TO n,x,y
+	Descripción: Salta a la pantalla n,x,y
 	Opcode: 6D n x y
+	
+* REPOSTN x, y
+	Descripción: REENTER a x, y sin respawn de enemigos.
+	Opcode: 6C x y
+
+* SETX x
+	Opcode: 6B x
+
+* SETY y
+	Opcode: 6A y
+	
+* WARP_TO_LEVEL l, n_pant, x, y, silent
+	Opcode: 69 l n x y s
 	
 * SET_TIMER a, b
 	Descripción: Timer = a, rate = b
@@ -268,6 +285,14 @@ I.2. Tipos de acciones
 * EXTERN n
 	Descripción: ejecuta una función "extern" pasándole como parámetro N
 	Opcode: E4 n
+	
+* PAUSE n
+	Descripción: Espera "n" ticks.
+	Opcode: E5 n
+	
+* MUSIC n
+	Descripción: Toca la música "n"
+	Opcode: E6 n
 	
 * GAME OVER
     Descripción: Pierde el juego

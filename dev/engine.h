@@ -1800,7 +1800,7 @@ void mueve_bicharracos (void) {
 			
 #ifndef PLAYER_MOGGY_STYLE
 			// Platforms
-			if (malotes [enoffsmasi].t == 4) {
+			/*if (malotes [enoffsmasi].t == 4)*/ {
 				gpxx = gpx >> 4;
 				if (gpx + 15 >= gpen_cx && gpx <= gpen_cx + 15) {
 					if (malotes [enoffsmasi].my < 0) {
