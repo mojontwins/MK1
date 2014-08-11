@@ -1,3 +1,6 @@
+// La Churrera Engine 3.99.3d
+// Copyleft 2010-2014 the Mojon Twins
+
 // mainloop.h
 // Churrera copyleft 2011 by The Mojon Twins.
 
@@ -35,7 +38,7 @@ unsigned char *level_str = "LEVEL 0X";
 #ifdef GET_X_MORE
 unsigned char *getxmore = " GET X MORE ";
 #endif
-void do_game (void) {
+void main (void) {
 	unsigned char *allpurposepuntero;
 	unsigned char playing;
 #ifdef COMPRESSED_LEVELS
@@ -175,9 +178,17 @@ void do_game (void) {
 		//wyz_stop_sound ();
 #endif
 
+#ifdef ENABLE_CHECKPOINTS
+		sg_submenu ();
+#endif
+
 #ifdef COMPRESSED_LEVELS
 		mlplaying = 1;
+#ifdef ENABLE_CHECKPOINTS
+		if (sg_do_load) level = sg_level; else level = 0;
+#else
 		level = 0;
+#endif				
 #ifndef REFILL_ME
 		player.life = PLAYER_LIFE;
 #endif
@@ -277,6 +288,11 @@ void do_game (void) {
 #endif
 #endif
 
+#ifdef ENABLE_CHECKPOINTS
+		if (sg_do_load) {
+			mem_load ();
+		}
+#endif		
 
 #ifdef MODE_128K
 		// Play music
@@ -328,11 +344,11 @@ void do_game (void) {
 #ifdef TIMER_AUTO_RESET 			
 				ctimer.t = TIMER_INITIAL;
 #endif
-				player.life --;
+				
 #ifdef MODE_128K
-				wyz_play_sound (7);
+				kill_player (7);
 #else
-				peta_el_beeper (4);
+				kill_player (4);
 #endif
 #ifdef PLAYER_FLICKERS
 				player.estado = EST_PARP;
@@ -568,6 +584,16 @@ void do_game (void) {
 #endif
 							break;
 #endif
+#ifdef ENABLE_CHECKPOINTS
+						case 6:
+							mem_save ();
+#ifdef MODE_128K
+							wyz_play_sound (3);
+#else
+							peta_el_beeper (7);
+#endif
+							break;						
+#endif
 					}
 					hotspots [n_pant].act = gpit;
 				}
@@ -667,6 +693,16 @@ void do_game (void) {
 							peta_el_beeper (7);
 #endif
 							break;
+#endif
+#ifdef ENABLE_CHECKPOINTS
+						case 6:
+							mem_save ();
+#ifdef MODE_128K
+							wyz_play_sound (3);
+#else
+							peta_el_beeper (7);
+#endif
+							break;						
 #endif
 					}
 					
@@ -826,13 +862,12 @@ void do_game (void) {
 #ifdef MAP_BOTTOM_KILLS
 				} else {
 					player.vy = -PLAYER_MAX_VY_CAYENDO; 
-					if (player.life > 0) {
+					{
 #ifdef MODE_128K
-						wyz_play_sound (1);
+						kill_player (1);
 #else
-						peta_el_beeper (4);
+						kill_player (4);
 #endif
-						player.life --; 
 					}
 #endif
 				}

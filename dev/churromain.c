@@ -1,3 +1,6 @@
+// La Churrera Engine 3.99.3d
+// Copyleft 2010-2014 the Mojon Twins
+
 // churromain.c
 // Esqueleto de juegos de la churrera
 // Copyleft 2010-2014 The Mojon Twins
@@ -80,13 +83,12 @@
 #endif
 
 #include "engine.h"
+
+#ifdef ENABLE_CHECKPOINTS
+	#include "savegame.h"
+#endif
+
 #include "mainloop.h"
-
-// Y el main
-
-void main (void) {
-	do_game ();
-}
 
 #ifndef MODE_128K
 // From beepola. Phaser engine by Shiru.

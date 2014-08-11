@@ -1,3 +1,6 @@
+// La Churrera Engine 3.99.3d
+// Copyleft 2010-2014 the Mojon Twins
+
 // Extrasprites.h
 // Contiene sprites extra para el modo de matar enemigos de la churrera
 // Sólo se incluirá (tras los sprites) si se define PLAYER_KILLS_ENEMIES

@@ -1,3 +1,6 @@
+// La Churrera Engine 3.99.3d
+// Copyleft 2010-2014 the Mojon Twins
+
 // WYZ player hook functions
 
 // WYZ player and songs are loaded into RAM 1 ($C000).

@@ -1,3 +1,6 @@
+// La Churrera Engine 3.99.3d
+// Copyleft 2010-2014 the Mojon Twins
+
 // Beeper.h
 // Rutinas de sonido para beeper por Shiru
 // I removed di's and ei's, not needed here.

@@ -1,3 +1,6 @@
+// La Churrera Engine 3.99.3d
+// Copyleft 2010-2014 the Mojon Twins
+
 // Sprites.h
 // Generado por SprCnv de la Churrera
 // Copyleft 2010 The Mojon Twins

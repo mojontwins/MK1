@@ -1,4 +1,76 @@
 =======
+3.99.3d
+=======
+
+Check Points
+------------
+
+Se trata de definir "check points" en el juego. Se colocan como hotspots de 
+tipo 6. Cuando el jugador los toca, se almacena su estado actual:
+
+- Valor de todos los flags. (si aplica)
+- Posición. (n_pant, tile X, tile Y)
+- Tiempo. (si aplica)
+- Munición. (si aplica)
+
+Cuando esto ocurre, cuando se va a iniciar una nueva partida se da la opción
+entre empezar de nuevo o continuar desde el último check point.
+
+Nótese que no es posible almacenar llaves y objetos, ya que esto implicaría
+hacer copias en memoria de estructuras grandes. Esta funcionalidad está más
+pensada para juegos en los que la lógica venga regida por un script.
+
+También se puede configurar el motor para que la vuelta al check point se de
+siempre que perdamos una vida.
+
+#define ENABLE_CHECKPOINTS			// Activa la funcionalidad.
+#define CP_RESET_WHEN_DYING			// Restaura al jugador siempre que muere.
+#define CP_RESET_ALSO_FLAGS			// y además restaura los flags.
+
+El comportamiento por defecto es que no pase nada al morir, y cuando acabe la
+partida podremos continuar desde el último checkpoint.
+
+Si se activa CP_RESET_WHEN_DYING, además, cada vez que se pierda una vida se
+trasladará al jugador al último checkpoint.
+
+Si se activa CP_RESET_ALSO_VALUES, además de lo anterior, se restaurará el
+valor de los flags.
+
+Disparos con rango
+------------------
+
+Se trata de que los disparos duren "N" frames. Se puede establecer este número de 
+frames de forma prefijada o configurar para que se tome del valor de una FLAG, y 
+así pueda modificarse desde el script.
+
+Debe utilizarse con PLAYER_CAN_FIRE, por supuesto.
+
+#define LIMITED_BULLETS
+
+Esta directiva activa la nueva funcionalidad. Para configurarla, utilizamos una de
+estas otras dos directivas:
+
+#define LB_FRAMES           4
+
+Si activamos LB_FRAMES, la duración es FIJA y se establece al valor especificado.
+En el ejemplo, se establece que tras 4 frames, las balas "morirán".
+
+#define LB_FRAMES_FLAG      2
+
+Si, en cambio, activamos LB_FRAMES_FLAG, la duración se toma del flag especificado
+en la directiva. En el ejemplo, el valor del flag 2 establecerá el número de frames
+que durarán las balas.
+
+Esto puede funcionar bien si definimos PLAYER_BULLET_SPEED a un valor bajo, de 1 o 2
+píxels por frame, aunque lo suyo es encontrar la combinación ganadora.
+
+Si usamos LB_FRAMES_FLAG, podremos implementar "power ups", por ejemplo, simplemente
+modificado el valor del flag definido desde el script cuando se cumplan determinadas
+condiciones (por ejemplo, al coger un objeto). Es importante recordar dar un valor
+al flag en cuestión al principio del script, en la sección ENTERING_GAME, o de lo
+contrario valdrá 0 y el jugador no podrá disparar (aunque puede sernos util).
+
+=======
 3.99.3c
 =======
 
@@ -9,25 +81,25 @@ Se puede usar items y se puede hacer que el usuario los pueda seleccionar con la
 Para activarlos sólo hay que tener activado el scripting y definir una sección ITEMSET
 al principio del script parecida a esta:
 
-	ITEMSET
-		# Número de huecos:
-		SIZE 6
-		
-		# Posición x, y
-		LOCATION 1, 21
-		
-		# Horizonta/vertical, espaciado
-		DISPOSITION HORZ, 3
-		
-		# Color y caracteres para pintar el selector
-		SELECTOR 66, 8, 9
-		
-		# Flag que contiene qué hueco está seleccionado
-		SLOT_FLAG 20
-		
-		# Flag que contiene qué objeto está en el hueco seleccionado
-		ITEM_FLAG 21
-	END
+    ITEMSET
+        # Número de huecos:
+        SIZE 6
+        
+        # Posición x, y
+        LOCATION 1, 21
+        
+        # Horizonta/vertical, espaciado
+        DISPOSITION HORZ, 3
+        
+        # Color y caracteres para pintar el selector
+        SELECTOR 66, 8, 9
+        
+        # Flag que contiene qué hueco está seleccionado
+        SLOT_FLAG 20
+        
+        # Flag que contiene qué objeto está en el hueco seleccionado
+        ITEM_FLAG 21
+    END
 
 Luego tendremos comprobaciones y comandos destinadas a manejar los items:
 
@@ -43,30 +115,30 @@ Luego tendremos comprobaciones y comandos destinadas a manejar los items:
 se puede evitar. Hay formas mejores de gestionar el inventario:
 
 * IF SEL_ITEM = t
-	Descripción: CIERTO si el item seleccionado es T
-	Opcode: 10 ITEM_FLAG t
-	El código generado equivale a IF FLAG ITEM_FLAG = t
-	
+    Descripción: CIERTO si el item seleccionado es T
+    Opcode: 10 ITEM_FLAG t
+    El código generado equivale a IF FLAG ITEM_FLAG = t
+    
 * IF SEL_ITEM <> t
-	Descripción: CIERTO si el item seleccionado no es T
-	Opcode: 13 ITEM_FLAG t
-	El código generado equivale a IF FLAG ITEM_FLAG <> t
-	
+    Descripción: CIERTO si el item seleccionado no es T
+    Opcode: 13 ITEM_FLAG t
+    El código generado equivale a IF FLAG ITEM_FLAG <> t
+    
 * IF ITEM n = t
-	Descripción: CIERTO si en el slot N está T
-	Opcode: 04 n t
-	
+    Descripción: CIERTO si en el slot N está T
+    Opcode: 04 n t
+    
 * IF ITEM n <> t
-	Descripción: CIERTO si en el slot N está T
-	Opcode: 05 n t
-	
+    Descripción: CIERTO si en el slot N está T
+    Opcode: 05 n t
+    
 * SET ITEM n = t
     Descripción: Asigna el item t al slot n
     Opcode: 00 x n
     
 * REDRAW_ITEMS
-	Descripción: fuerza un redibujado de los items
-	Opcode: E7
+    Descripción: fuerza un redibujado de los items
+    Opcode: E7
 
 Para más info, visita este hilo del foro:
 
@@ -85,41 +157,41 @@ en el motor, of course):
 Por ejemplo, imaginemos que decides que el flag que controle este comportamiento 
 es el flag 5. Primero definiríamos esto en config.h:
 
-	#define PLAYER_CAN_KILL_FLAG   5      
+    #define PLAYER_CAN_KILL_FLAG   5      
 
 Luego, en el script, nos aseguraríamos de que ese flag vale 0 al principio del juego
 (o 1, si queremos que se pueda matar a los enemigos desde el principio):
 
-	ENTERING GAME
-	    IF TRUE
-	    THEN
-	        SET FLAG 5 = 0
-	    END
-	END
+    ENTERING GAME
+        IF TRUE
+        THEN
+            SET FLAG 5 = 0
+        END
+    END
 
 Imagina que queremos que el jugador pueda empezar a pisar a los enemigos cuando 
 coja un objeto representado por el tile 24 y situado en la pantalla 6, posición 
 (7, 5). Podríamos hacer algo parecido a esto:
 
-	ENTERING SCREEN 6
-	    # Si no hemos cogido el objeto lo dibujamos
-	    IF FLAG 5 = 0
-	    THEN
-	        SET TILE (7, 5) = 24
-	    END
-	END
-	
-	PRESS_FIRE AT SCREEN 6
-	    # Si pulsamos ACCION sobre el objeto...
-	    IF FLAG 5 = 0
-	    IF PLAYER_TOUCHES 7, 5
-	    THEN
-	        # Lo borramos de la pantalla
-	        SET TILE (7, 5) = 0
-	        # Activamos la habilidad de matar enemigos
-	        SET FLAG 5 = 1
-	    END
-	END
+    ENTERING SCREEN 6
+        # Si no hemos cogido el objeto lo dibujamos
+        IF FLAG 5 = 0
+        THEN
+            SET TILE (7, 5) = 24
+        END
+    END
+    
+    PRESS_FIRE AT SCREEN 6
+        # Si pulsamos ACCION sobre el objeto...
+        IF FLAG 5 = 0
+        IF PLAYER_TOUCHES 7, 5
+        THEN
+            # Lo borramos de la pantalla
+            SET TILE (7, 5) = 0
+            # Activamos la habilidad de matar enemigos
+            SET FLAG 5 = 1
+        END
+    END
 
 =======
 3.99.3b
@@ -147,8 +219,8 @@ Tiles animados
 
 Si se define:
 
-#define ENABLE_TILANIMS			32		// If defined, animated tiles are enabled.
-										// the value especifies firt animated tile pair.
+#define ENABLE_TILANIMS         32      // If defined, animated tiles are enabled.
+                                        // the value especifies firt animated tile pair.
 
 En config.h, los tiles >= que el índice especificado se consideran animados.
 En el tileset, vienen por parejas. Si se define, por ejemplo, "46", entonces
@@ -170,9 +242,9 @@ No podrás tener niveles más largos, pero sí podrás tener varios niveles.
 
 Para usarlo, necesitas activar tres cosas en config.h:
 
-#define MODE_128K						// Experimental!
-#define COMPRESSED_LEVELS				// use levels.h instead of mapa.h and enems.h (!)
-#define MAX_LEVELS			4			// # of compressed levels
+#define MODE_128K                       // Experimental!
+#define COMPRESSED_LEVELS               // use levels.h instead of mapa.h and enems.h (!)
+#define MAX_LEVELS          4           // # of compressed levels
 
 En MAX_LEVELS tienes que especificar el número de niveles que vas a usar.
 
@@ -187,10 +259,10 @@ niveles. En principio se incluye muy poca información:
 
 // Level struct
 LEVEL levels [MAX_LEVELS] = {
-	{3,2},
-	{4,3},
-	{5,4},
-	{6,5}	
+    {3,2},
+    {4,3},
+    {5,4},
+    {6,5}   
 };
 
 El primer valor es el número de recurso (ver más adelante) que contiene el nivel. 
@@ -286,7 +358,7 @@ Hotspots tipo 3
 Hemos hecho esta modificación, propuesta en el foro, fija a golpe de directiva.
 Si defines
 
-#define USE_HOTSPOTS_TYPE_3				// Alternate logic for recharges.
+#define USE_HOTSPOTS_TYPE_3             // Alternate logic for recharges.
 
 Las recargas aparecerán única y exclusivamente donde tú las coloques, usando
 el hotspot de tipo 3.
@@ -296,7 +368,7 @@ Pausa / Abortar
 
 Si se define
 
-#define PAUSE_ABORT						// Add h=PAUSE, y=ABORT
+#define PAUSE_ABORT                     // Add h=PAUSE, y=ABORT
 
 Se añade código para habilitar la tecla "h" para pausar el juego y la tecla
 "y" para interrumpir la partida. Si quieres cambiar la asignación tendrás que
@@ -307,7 +379,7 @@ Mensaje al coger objetos
 
 Se se define
 
-#define GET_X_MORE						// Shows "get X more" 
+#define GET_X_MORE                      // Shows "get X more" 
 
 Aparecerá un mensaje con los objetos que te quedan cada vez que coges uno.
 
@@ -373,9 +445,9 @@ Con TIMER_ENABLE se incluye el código necesario para manejar el temporizador.
 Este código necesitará algunas otras directivas que especifican la forma de
 funcionar:
 
-#define TIMER_INITIAL		99	
-#define TIMER_REFILL		25
-#define TIMER_LAPSE 		32
+#define TIMER_INITIAL       99  
+#define TIMER_REFILL        25
+#define TIMER_LAPSE         32
 
 TIMER_INITIAL especifica el valor inicial del temporizador. Las recargas de
 tiempo, que se ponen con el colocador como hotspots de tipo 5, recargarán el
@@ -391,7 +463,7 @@ Si se define TIMER_START, el temporizador estará activo desde el principio.
 Tenemos, además, algunas directivas que definen qué pasará cuando el temporiza-
 dor llegue a cero. Hay que descomentar las que apliquen:
 
-#define TIMER_SCRIPT_0	
+#define TIMER_SCRIPT_0  
 
 Definiendo esta, cuando llegue a cero el temporizador se ejecutará una sección
 especial del script, ON_TIMER_OFF. Es ideal para llevar todo el control del
@@ -403,8 +475,8 @@ Definiendo esta, el juego terminará cuando el temporizador llegue a cero.
 
 //#define TIMER_KILL_0
 //#define TIMER_WARP_TO 0
-//#define TIMER_WARP_TO_X 	1
-//#define TIMER_WARP_TO_Y 	1
+//#define TIMER_WARP_TO_X   1
+//#define TIMER_WARP_TO_Y   1
 
 Si se define TIMER_KILL_0, se restará una vida cuando el temporizador llegue a
 cero. Si, además, se define TIMER_WARP_TO, además se cambiará a la pantalla
@@ -417,7 +489,7 @@ Si se define esta opción, el temporizador volverá al máximo tras llegar a
 cero de forma automática. Si vas a realizar el control por scripting, mejor
 deja esta comentada.
 
-#define SHOW_TIMER_OVER	
+#define SHOW_TIMER_OVER 
 
 Si se define esta, en el caso de que hayamos definido o bien TIMER_SCRIPT_0 o
 bien TIMER_KILL_0, se mostrará un cartel de "TIME'S UP!" cuando el temporizador
@@ -475,17 +547,17 @@ coloquemos las estatuas sobre los pedestales, por poner un ejemplo.
 
 Recordemos lo que teníamos hasta ahora:
 
-#define PLAYER_PUSH_BOXES 				
-#define FIRE_TO_PUSH					
+#define PLAYER_PUSH_BOXES               
+#define FIRE_TO_PUSH                    
 
 La primera es necesaria para activar los tiles empujables. La segunda obliga al
 jugador a pulsar FIRE para empujar y, por tanto, no es obligatoria. Veamos 
 ahora las nuevas directivas:
 
 #define ENABLE_PUSHED_SCRIPTING
-#define MOVED_TILE_FLAG 		1
-#define MOVED_X_FLAG 			2
-#define MOVED_Y_FLAG 			3
+#define MOVED_TILE_FLAG         1
+#define MOVED_X_FLAG            2
+#define MOVED_Y_FLAG            3
 
 Activando ENABLE_PUSHED_SCRIPTING, el tile que se pisa y sus coordenadas se 
 almacenarán en los flags especificados por las directivas MOVED_TILE_FLAG,
@@ -525,9 +597,9 @@ hemos pensado que no nos cuesta poner uno, de ejemplo. Se comporta como
 los murciélagos de Cheril the Goddess. Para usarlos, ponlos en el colo-
 cador de enemigos como tipo 6 y usa estas directivas:
 
-#define ENABLE_CUSTOM_TYPE_6			
-#define TYPE_6_FIXED_SPRITE 	2		
-#define SIGHT_DISTANCE			96
+#define ENABLE_CUSTOM_TYPE_6            
+#define TYPE_6_FIXED_SPRITE     2       
+#define SIGHT_DISTANCE          96
 
 La primera los activa, la segunda define qué sprite va a usar (menos 1,
 si quieres el sprite del enemigo 3, pon un 2. Sorry por la guarrada,
@@ -538,8 +610,8 @@ con el colocador).
 Esta implementación, además, utiliza dos directivas de los enemigos de
 tipo 5 para funcionar:
 
-#define FANTY_MAX_V             256	
-#define FANTY_A                 12	
+#define FANTY_MAX_V             256 
+#define FANTY_A                 12  
 
 Define ahí la aceleración y la velocidad máxima de tus tipo 6. Si vas a 
 usar también tipo 5 y quieres otros valores, sé un hombre y modifica el
@@ -574,7 +646,7 @@ Disparos hacia arriba y en diagonal para vista lateral
 Ahora podrás permitir que el jugador dispare hacia arriba o en diagonal.
 Para ello define esto:
 
-#define CAN_FIRE_UP	
+#define CAN_FIRE_UP 
 
 Esta configuración funciona mejor con USE_TWO_BUTTONS, ya que así separamos
 "arriba" del botón de salto.

@@ -1,3 +1,6 @@
+// La Churrera Engine 3.99.3d
+// Copyleft 2010-2014 the Mojon Twins
+
 extern unsigned int ram_address [];
 extern unsigned int ram_destination [];
 #ifdef MODE_128K

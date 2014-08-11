@@ -1,3 +1,6 @@
+// La Churrera Engine 3.99.3d
+// Copyleft 2010-2014 the Mojon Twins
+
 // Motor.h
 #ifndef PLAYER_MIN_KILLABLE
 #define PLAYER_MIN_KILLABLE 0
@@ -517,6 +520,15 @@ void fire_bullet (void) {
 #else
 			peta_el_beeper (6);
 #endif
+
+#ifdef LIMITED_BULLETS
+#if defined (LB_FRAMES) || !defined (ACTIVATE_SCRIPTING)
+			bullets [gpit].life = LB_FRAMES;
+#else
+			bullets [gpit].life = flags [LB_FRAMES_FLAG];
+#endif
+#endif
+
 			break;
 		}
 	}
@@ -624,6 +636,26 @@ void process_tile (unsigned char x0, unsigned char y0, signed char x1, signed ch
 #endif
 }
 #endif
+
+void kill_player (unsigned char sound) {
+	if (player.life == 0) return;
+	player.life --;
+#ifdef MODO_128K
+	wyz_play_sound (sound);
+#else
+	peta_el_beeper (sound);
+#endif
+#ifdef CP_RESET_WHEN_DYING
+#ifdef CP_RESET_ALSO_FLAGS
+	mem_load ();
+#else
+	n_pant = sg_pool [MAX_FLAGS];
+	player.x = sg_pool [MAX_FLAGS + 1] << 10;
+	player.y = sg_pool [MAX_FLAGS + 2] << 10;
+#endif	
+	draw_scr ();
+#endif
+}
 
 unsigned char move (void) {
 	wall_v = wall_h = 0;
@@ -1235,18 +1267,17 @@ pushed_any = 0;
 	}
 	if (hit) {
 #ifdef PLAYER_FLICKERS
-		if (player.life > 0 && player.estado == EST_NORMAL) {
+		if (player.estado == EST_NORMAL) {
 			player.estado = EST_PARP;
 			player.ct_estado = 50;
 #else
-		if (player.life > 0) {
+		{
 #endif		
 #ifdef MODE_128K
-			wyz_play_sound (8);
+			kill_player (8);
 #else		
-			peta_el_beeper (4);
+			kill_player (4);
 #endif
-			player.life --;	
 		}
 	}
 #endif
@@ -1537,7 +1568,7 @@ void break_wall (unsigned char x, unsigned char y) {
 #ifdef PLAYER_CAN_FIRE
 void mueve_bullets (void) {
 	for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
-		if (bullets [gpit].estado) {
+		if (bullets [gpit].estado) {			
 			if (bullets [gpit].mx) {
 				bullets [gpit].x += bullets [gpit].mx;								
 				if (bullets [gpit].x > 240) {
@@ -1558,6 +1589,15 @@ void mueve_bullets (void) {
 			if (attr (gpxx, gpyy) & 16) break_wall (gpxx, gpyy);
 #endif
 			if (attr (gpxx, gpyy) > 7) bullets [gpit].estado = 0;
+			
+#ifdef LIMITED_BULLETS
+			if (bullets [gpit].life > 0) {
+				bullets [gpit].life --;
+			} else {
+				bullets [gpit].estado = 0;
+			}
+#endif
+			
 		}	
 	}	
 }
@@ -1942,28 +1982,27 @@ void mueve_bicharracos (void) {
 					script = e_scripts [MAP_W * MAP_H + 1];
 					run_script ();
 #endif
-				} else if (player.life > 0) {
+				} else {
 
 					
 #else
-				if (player.life > 0) {					
+				{
 #endif
 					tocado = 1;
 #if defined(SLOW_DRAIN) && defined(PLAYER_BOUNCES)
 					if (!lasttimehit || ((maincounter & 3) == 0)) {
 #ifdef MODE_128K
-						wyz_play_sound (7);
+						kill_player (7);
 #else							
-						peta_el_beeper (4);
+						kill_player(4);
 #endif
-						player.life --;	
 					}
 #else
-					player.life --;
+					
 #ifdef MODE_128K
-					wyz_play_sound (7);
+					kill_player (7);
 #else							
-					peta_el_beeper (4);
+					kill_player (4);
 #endif
 #endif					
 #ifdef PLAYER_BOUNCES

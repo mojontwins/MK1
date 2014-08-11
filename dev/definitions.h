@@ -1,3 +1,6 @@
+// La Churrera Engine 3.99.3d
+// Copyleft 2010-2014 the Mojon Twins
+
 struct sp_UDK keys;
 void *joyfunc;				// Puntero a la función de manejo seleccionada.
 
@@ -115,6 +118,9 @@ typedef struct {
 	char mx;
 	char my;
 	unsigned char estado;
+#ifdef LIMITED_BULLETS
+	unsigned char life;
+#endif	
 } BULLET;
 
 BULLET bullets [MAX_BULLETS];
@@ -135,11 +141,12 @@ unsigned char pant_final;
 
 // Flags para scripting
 #ifdef ACTIVATE_SCRIPTING
-#define MAX_FLAGS 16
+#define MAX_FLAGS 32
 unsigned char flags[MAX_FLAGS];
 #endif
 
 // Globalized
+unsigned char o_pant;
 unsigned char n_pant;
 unsigned char level = 0;
 unsigned char maincounter;

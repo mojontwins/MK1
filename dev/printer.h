@@ -1,3 +1,6 @@
+// La Churrera Engine 3.99.3d
+// Copyleft 2010-2014 the Mojon Twins
+
 // Printing functions
 
 void attr (char x, char y) {
@@ -131,9 +134,9 @@ void print_str (unsigned char x, unsigned char y, unsigned char c, unsigned char
 	}
 }
 
-#ifdef COMPRESSED_LEVELS
+#if defined (COMPRESSED_LEVELS) || defined (ENABLE_CHECKPOINTS)
 void blackout_area (void) {
-	// blackens gameplay area for LEVEL XX display
+	// blackens gameplay area for LEVEL XX display / submenu display
 	asm_int [0] = 22528 + 32 * VIEWPORT_Y + VIEWPORT_X;
 	#asm
 		ld	hl, _asm_int
