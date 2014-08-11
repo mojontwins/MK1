@@ -1,4 +1,127 @@
 =======
+3.99.3c
+=======
+
+Motor de Items
+--------------
+
+Se puede usar items y se puede hacer que el usuario los pueda seleccionar con la tecla "Z".
+Para activarlos sólo hay que tener activado el scripting y definir una sección ITEMSET
+al principio del script parecida a esta:
+
+	ITEMSET
+		# Número de huecos:
+		SIZE 6
+		
+		# Posición x, y
+		LOCATION 1, 21
+		
+		# Horizonta/vertical, espaciado
+		DISPOSITION HORZ, 3
+		
+		# Color y caracteres para pintar el selector
+		SELECTOR 66, 8, 9
+		
+		# Flag que contiene qué hueco está seleccionado
+		SLOT_FLAG 20
+		
+		# Flag que contiene qué objeto está en el hueco seleccionado
+		ITEM_FLAG 21
+	END
+
+Luego tendremos comprobaciones y comandos destinadas a manejar los items:
+
+* IF PLAYER_HAS_ITEM t      
+    Descripción: Evaluará a CIERTO si el jugador tiene el item de tile T en su inventario.
+    Opcode: 01 x
+    
+* IF PLAYER_HASN'T_ITEM x
+    Descripción: Evaluará a CIERTO si el jugador NO tiene el item de tile T en su inventario.
+    Opcode: 02 x
+    
+¡OJO! Las dos anteriores meten bastante código de intérprete. Es mejor no usarlas si
+se puede evitar. Hay formas mejores de gestionar el inventario:
+
+* IF SEL_ITEM = t
+	Descripción: CIERTO si el item seleccionado es T
+	Opcode: 10 ITEM_FLAG t
+	El código generado equivale a IF FLAG ITEM_FLAG = t
+	
+* IF SEL_ITEM <> t
+	Descripción: CIERTO si el item seleccionado no es T
+	Opcode: 13 ITEM_FLAG t
+	El código generado equivale a IF FLAG ITEM_FLAG <> t
+	
+* IF ITEM n = t
+	Descripción: CIERTO si en el slot N está T
+	Opcode: 04 n t
+	
+* IF ITEM n <> t
+	Descripción: CIERTO si en el slot N está T
+	Opcode: 05 n t
+	
+* SET ITEM n = t
+    Descripción: Asigna el item t al slot n
+    Opcode: 00 x n
+    
+* REDRAW_ITEMS
+	Descripción: fuerza un redibujado de los items
+	Opcode: E7
+
+Para más info, visita este hilo del foro:
+
+http://www.mojontwins.com/mojoniaplus/viewtopic.php?f=9&t=1581
+
+Disparo / pisar enemigos deshabilitable
+---------------------------------------
+
+Se añade la posibilidad de habilitar el disparo / pisar enemigos según el valor
+de una flag (para poder usarlo, disparo / pisar enemigos deben estar activados
+en el motor, of course):
+
+#define PLAYER_CAN_KILL_FLAG   1
+#define PLAYER_CAN_FIRE_FLAG   1
+
+Por ejemplo, imaginemos que decides que el flag que controle este comportamiento 
+es el flag 5. Primero definiríamos esto en config.h:
+
+	#define PLAYER_CAN_KILL_FLAG   5      
+
+Luego, en el script, nos aseguraríamos de que ese flag vale 0 al principio del juego
+(o 1, si queremos que se pueda matar a los enemigos desde el principio):
+
+	ENTERING GAME
+	    IF TRUE
+	    THEN
+	        SET FLAG 5 = 0
+	    END
+	END
+
+Imagina que queremos que el jugador pueda empezar a pisar a los enemigos cuando 
+coja un objeto representado por el tile 24 y situado en la pantalla 6, posición 
+(7, 5). Podríamos hacer algo parecido a esto:
+
+	ENTERING SCREEN 6
+	    # Si no hemos cogido el objeto lo dibujamos
+	    IF FLAG 5 = 0
+	    THEN
+	        SET TILE (7, 5) = 24
+	    END
+	END
+	
+	PRESS_FIRE AT SCREEN 6
+	    # Si pulsamos ACCION sobre el objeto...
+	    IF FLAG 5 = 0
+	    IF PLAYER_TOUCHES 7, 5
+	    THEN
+	        # Lo borramos de la pantalla
+	        SET TILE (7, 5) = 0
+	        # Activamos la habilidad de matar enemigos
+	        SET FLAG 5 = 1
+	    END
+	END
+
+=======
 3.99.3b
 =======
 

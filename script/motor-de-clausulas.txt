@@ -38,16 +38,65 @@ PRESS_FIRE AT ANY               FIRE #MAX_PANTS
 PLAYER_GETS_COIN				FIRE #(MAX_PANTS+1)
 PLAYER_KILLS_ENEMY				FIRE #(MAX_PANTS+2)
 
+I.0. Items
+==========
+
+Se puede usar items y se puede hacer que el usuario los pueda seleccionar con la tecla "Z".
+Todo se hace en una sección que debe definirse al principio del script, parecida a esta:
+
+ITEMSET
+	# Número de huecos:
+	SIZE 6
+	
+	# Posición x, y
+	LOCATION 1, 21
+	
+	# Horizonta/vertical, espaciado
+	DISPOSITION HORZ, 3
+	
+	# Color y caracteres para pintar el selector
+	SELECTOR 66, 8, 9
+	
+	# Flag que contiene qué hueco está seleccionado
+	SLOT_FLAG 20
+	
+	# Flag que contiene qué objeto está en el hueco seleccionado
+	ITEM_FLAG 21
+END
+
+Luego tendremos comprobaciones y comandos destinadas a manejar los items.
+
 I.1. Tipos de cláusulas (IFs)
 =============================
 
-* IF PLAYER_HAS_ITEM x      
-    Descripción: Evaluará a CIERTO si el jugador tiene el item X en su inventario.
+* IF PLAYER_HAS_ITEM t      
+    Descripción: Evaluará a CIERTO si el jugador tiene el item de tile T en su inventario.
     Opcode: 01 x
     
 * IF PLAYER_HASN'T_ITEM x
-    Descripción: Evaluará a CIERTO si el jugador NO tiene el item X en su inventario.
+    Descripción: Evaluará a CIERTO si el jugador NO tiene el item de tile T en su inventario.
     Opcode: 02 x
+    
+¡OJO! Las dos anteriores meten bastante código de intérprete. Es mejor no usarlas si
+se puede evitar. Hay formas mejores de gestionar el inventario:
+
+* IF SEL_ITEM = t
+	Descripción: CIERTO si el item seleccionado es T
+	Opcode: 10 ITEM_FLAG t
+	El código generado equivale a IF FLAG ITEM_FLAG = t
+	
+* IF SEL_ITEM <> t
+	Descripción: CIERTO si el item seleccionado no es T
+	Opcode: 13 ITEM_FLAG t
+	El código generado equivale a IF FLAG ITEM_FLAG <> t
+	
+* IF ITEM n = t
+	Descripción: CIERTO si en el slot N está T
+	Opcode: 04 n t
+	
+* IF ITEM n <> t
+	Descripción: CIERTO si en el slot N está T
+	Opcode: 05 n t
     
 * IF FLAG x = n
     Descripción: Evaluará a CIERTO si el flag "x" vale "n"
@@ -143,8 +192,8 @@ I.1. Tipos de cláusulas (IFs)
 I.2. Tipos de acciones
 ======================
 
-* SET ITEM x = n
-    Descripción: Da al estado del item X el valor N. De entrada, 0 = no lo tienes, 1 = lo tienes.
+* SET ITEM n = t
+    Descripción: Asigna el item t al slot n
     Opcode: 00 x n
     
 * SET FLAG x = n
@@ -293,6 +342,10 @@ I.2. Tipos de acciones
 * MUSIC n
 	Descripción: Toca la música "n"
 	Opcode: E6 n
+	
+* REDRAW_ITEMS
+	Descripción: fuerza un redibujado de los items
+	Opcode: E7
 	
 * GAME OVER
     Descripción: Pierde el juego

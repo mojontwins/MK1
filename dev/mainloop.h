@@ -11,6 +11,16 @@ void saca_a_todo_el_mundo_de_aqui (void) {
 #endif
 }
 
+#ifdef SCRIPTING_KEY_M
+int key_m;
+#endif
+#ifdef PAUSE_ABORT
+int key_h, key_y;
+#endif
+#ifdef MSC_MAXITEMS
+int key_z;
+unsigned char key_z_pressed = 0;
+#endif
 int itj;
 unsigned char objs_old, keys_old, life_old, killed_old;
 #ifdef MAX_AMMO
@@ -31,12 +41,7 @@ void do_game (void) {
 #ifdef COMPRESSED_LEVELS
 	unsigned char mlplaying;
 #endif	
-#ifdef SCRIPTING_KEY_M
-	int key_m;
-#endif
-#ifdef PAUSE_ABORT
-	int key_h, key_y;
-#endif
+
 #ifdef RANDOM_RESPAWN
 	int x, y;
 #else
@@ -94,6 +99,9 @@ void do_game (void) {
 #ifdef PAUSE_ABORT
 	key_h = sp_LookupKey ('h');
 	key_y = sp_LookupKey ('y');
+#endif
+#ifdef MSC_MAXITEMS
+	key_z = sp_LookupKey ('z');
 #endif
 	joyfunc = sp_JoyKeyboard;
 
@@ -278,6 +286,11 @@ void do_game (void) {
 		//wyz_play_music (1);
 #endif		
 #endif
+
+#ifdef MSC_MAXITEMS
+		display_items ();
+#endif
+
 		while (playing) {
 			
 #ifdef TIMER_ENABLE
@@ -293,6 +306,7 @@ void do_game (void) {
 
 #if defined(TIMER_SCRIPT_0) && defined(ACTIVATE_SCRIPTING)
 			if (ctimer.zero) {
+				ctimer.zero = 0;
 #ifdef SHOW_TIMER_OVER
 				saca_a_todo_el_mundo_de_aqui ();
 				time_over ();
@@ -663,7 +677,27 @@ void do_game (void) {
 			// Flick screen checks and scripting related stuff
 			gpit = (joyfunc) (&keys);
 			
-#ifdef ACTIVATE_SCRIPTING		
+#ifdef ACTIVATE_SCRIPTING
+
+			// Select object
+#ifdef MSC_MAXITEMS
+			if (sp_KeyPressed (key_z)) {
+				if (!key_z_pressed) {
+#ifdef MODE_128K
+					wyz_play_sound (0);
+#else
+					peta_el_beeper (2);
+#endif
+					flags [FLAG_SLOT_SELECTED] = (flags [FLAG_SLOT_SELECTED] + 1) % MSC_MAXITEMS;
+					display_items ();
+				}
+				key_z_pressed = 1;
+			} else {
+				key_z_pressed = 0;
+			}
+#endif			
+
+
 #ifdef SCRIPTING_KEY_M			
 			if (sp_KeyPressed (key_m)) {
 #endif

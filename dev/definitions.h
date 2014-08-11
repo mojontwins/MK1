@@ -188,3 +188,4 @@ void espera_activa (int espera);
 
 unsigned char rand (void);
 void saca_a_todo_el_mundo_de_aqui (void);
+void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t);

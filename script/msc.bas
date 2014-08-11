@@ -2,7 +2,7 @@
 ' Copyleft 2010, 2011, 2012, 2013 The Mojon Twins, los masters del código guarro.
 ' Compilar con freeBasic (http://www.freebasic.net).
 
-Const LIST_WORDS_SIZE = 20
+Const LIST_WORDS_SIZE = 200
 Const LIST_CLAUSULES_SIZE = 100
 Dim Shared listaPalabras (LIST_WORDS_SIZE) As String
 Dim Shared listaClausulasEnter (LIST_CLAUSULES_SIZE) As Integer
@@ -18,6 +18,9 @@ Dim Shared clausulasEnter (LIST_CLAUSULES_SIZE) As String
 Dim Shared clausulasFire (LIST_CLAUSULES_SIZE) As String
 Dim AddTo (LIST_WORDS_SIZE) As Integer
 Dim AddToIdx As Integer
+Dim Shared itemTiles (100) As Integer
+Dim Shared As Integer itemSetx, itemSety, itemSetStep, itemSetOr, itemFlag, slotFlag
+Dim Shared As Integer itemSelectClr, itemSelectC1, itemSelectC2
 
 Sub dump ()
 	Dim i As Integer
@@ -54,6 +57,38 @@ Sub stringToArray (in As String)
 			listaPalabras (index) = ""
 		End If
 	Next m
+End Sub
+
+Sub ProcesaItems (f As Integer)
+	Dim terminado As Integer
+	Dim linea As String
+	terminado = 0
+	While Not terminado
+		Line input #f, linea
+		linea = Trim (linea, Any chr (32) + chr (9))		
+		stringToArray (linea)
+		Select Case Ucase (listaPalabras (0))
+			Case "SLOT_FLAG":
+				slotFlag = val (listaPalabras (1))
+			Case "ITEM_FLAG":
+				itemFlag = val (listaPalabras (1))
+			Case "LOCATION":
+				itemSetX = val (listaPalabras (1))
+				itemSetY = val (listaPalabras (3))	
+			Case "DISPOSITION":				
+				itemSetStep = val (listaPalabras (3))
+				If listaPalabras (1) = "HORZ" then itemSetOr = 0 Else ItemSetOr = 1
+			Case "SELECTOR":
+				itemSelectClr = val (listaPalabras (1))
+				itemSelectC1 = val (listaPalabras (3))
+				itemSelectC2 = val (listaPalabras (5))
+			Case "SIZE":
+				maxItem = val (listaPalabras (1))			
+			Case "END": 
+				terminado = Not 0
+		End Select
+		If eof (f) Then terminado = Not 0
+	Wend
 End Sub
 
 Sub displayMe (clausula As String) 
@@ -102,12 +137,19 @@ End Sub
 
 Function pval (s as string) as integer
 	Dim res as integer
-	if (left(s, 1) = "#") Then
-		res = 128 + val (right (s, len(s) - 1))
-	Else
-		res = val (s)
-	End If
-	pval = res
+	' Patch
+	if s = "SLOT_SELECTED" then 
+		pval = 128 + slotFlag
+	elseif s = "ITEM_SELECTED" then
+		pval = 128 + itemFlag
+	else
+		if (left(s, 1) = "#") Then
+			res = 128 + val (right (s, len(s) - 1))
+		Else
+			res = val (s)
+		End If
+		pval = res
+	end if
 end function
 
 Function procesaClausulas (f As integer, nPant As Integer) As String
@@ -144,61 +186,65 @@ Function procesaClausulas (f As integer, nPant As Integer) As String
 							clausula = clausula + chr (&H1) + chr (pval (listaPalabras (2)))
 							numClausulas = numClausulas + 1
 							clausulasUsed (&H1) = -1
-							if maxItem < val (listaPalabras (2)) Then maxItem = val (listaPalabras (2))
 						Case "PLAYER_HASN'T_ITEM":
 							clausula = clausula + chr (&H2) + chr (pval (listaPalabras (2)))
 							numClausulas = numClausulas + 1
 							clausulasUsed (&H2) = -1
-							if maxItem < val (listaPalabras (2)) Then maxItem = val (listaPalabras (2))
+						Case "SEL_ITEM":
+							Select case listaPalabras (2)
+								Case "=":
+									clausula = clausula + chr (&H10) + chr (itemFlag) + chr (pval (listaPalabras (3)))
+									numClausulas = numClausulas + 1
+									clausulasUsed (&H10) = -1
+								Case "<>", "!=":
+									clausula = clausula + chr (&H14) + chr (itemFlag) + chr (pval (listaPalabras (3)))
+									numClausulas = numClausulas + 1
+									clausulasUsed (&H13) = -1
+							End Select
+						Case "ITEM":
+							Select case listaPalabras (3)
+								Case "=":
+									clausula = clausula + chr (&H3) + chr (pval (listaPalabras (2))) + chr (pval(listaPalabras (4)))
+									numClausulas = numClausulas + 1
+									clausulasUsed (&H3) = -1
+								Case "<>", "!=":
+									clausula = clausula + chr (&H4) + chr (pval (listaPalabras (2))) + chr (pval(listaPalabras (4)))
+									numClausulas = numClausulas + 1
+									clausulasUsed (&H4) = -1
+							End Select
 						Case "FLAG":
 							Select Case listaPalabras (3)
 								Case "=":
 									if listaPalabras (4) = "FLAG" Then
 										clausula = clausula + chr (&H14) + chr (pval (listaPalabras (2))) + chr (pval(listaPalabras (5)))
 										clausulasUsed (&H14) = -1
-										if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
-										if maxFlag < val (listaPalabras (5)) Then maxFlag = val (listaPalabras (5))
 									Else
 										clausula = clausula + chr (&H10) + chr (pval (listaPalabras (2))) + chr (pval(listaPalabras (4)))
 										clausulasUsed (&H10) = -1
-										if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
-										if maxFlag < val (listaPalabras (4)) Then maxFlag = val (listaPalabras (4))
 									End If
 								Case "<":
 									If listaPalabras (4) = "FLAG" Then
 										clausula = clausula + chr (&H15) + chr (pval (listaPalabras (2))) + chr (pval(listaPalabras (5)))
 										clausulasUsed (&H15) = -1
-										if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
-										if maxFlag < val (listaPalabras (5)) Then maxFlag = val (listaPalabras (5))
 									Else
 										clausula = clausula + chr (&H11) + chr (pval (listaPalabras (2))) + chr (pval(listaPalabras (4)))
 										clausulasUsed (&H11) = -1
-										if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
-										if maxFlag < val (listaPalabras (4)) Then maxFlag = val (listaPalabras (4))
 									End If
 								Case ">":
 									If listaPalabras (4) = "FLAG" Then
 										clausula = clausula + chr (&H16) + chr (pval (listaPalabras (2))) + chr (pval(listaPalabras (5)))
 										clausulasUsed (&H16) = -1
-										if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
-										if maxFlag < val (listaPalabras (5)) Then maxFlag = val (listaPalabras (5))
 									Else
 										clausula = clausula + chr (&H12) + chr (pval (listaPalabras (2))) + chr (pval(listaPalabras (4)))
 										clausulasUsed (&H12) = -1
-										if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
-										if maxFlag < val (listaPalabras (4)) Then maxFlag = val (listaPalabras (4))
 									End If
 								Case "<>", "!=":
 									If listaPalabras (4) = "FLAG" Then
 										clausula = clausula + chr (&H17) + chr (pval (listaPalabras (2))) + chr (pval(listaPalabras (5)))
 										clausulasUsed (&H17) = -1
-										if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
-										if maxFlag < val (listaPalabras (5)) Then maxFlag = val (listaPalabras (5))
 									Else
 										clausula = clausula + chr (&H13) + chr (pval (listaPalabras (2))) + chr (pval(listaPalabras (4)))
 										clausulasUsed (&H13) = -1
-										if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
-										if maxFlag < val (listaPalabras (4)) Then maxFlag = val (listaPalabras (4))
 									End If
 							End Select
 							numClausulas = numClausulas + 1
@@ -265,7 +311,7 @@ Function procesaClausulas (f As integer, nPant As Integer) As String
 					End Select
 				case "THEN":
 					clausula = clausula + Chr (255)
-					if numclausulas = 0 Then Print "ERROR: THEN sin cláusulas": terminado = -1
+					if numclausulas = 0 Then Print "ERROR: empty clausule": terminado = -1
 					estado = 1
 				case "END":
 					if estado = 0 then
@@ -280,11 +326,9 @@ Function procesaClausulas (f As integer, nPant As Integer) As String
 						Case "ITEM":
 							clausula = clausula + Chr (&H0) + Chr (pval (listaPalabras (2))) + chr (pval (listaPalabras (4)))
 							actionsUsed (&H0) = -1
-							if maxItem < val (listaPalabras (2)) Then maxItem = val (listaPalabras (2))
 						Case "FLAG":
 							clausula = clausula + Chr (&H1) + Chr (pval (listaPalabras (2))) + chr (pval (listaPalabras (4)))	
 							actionsUsed (&H1) = -1
-							if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
 						Case "TILE":
 							clausula = clausula + Chr (&H20) + Chr (pval (listaPalabras (3))) + Chr (pval (listaPalabras (5))) + Chr (pval (listaPalabras (8)))
 							actionsUsed (&H20) = -1
@@ -294,7 +338,6 @@ Function procesaClausulas (f As integer, nPant As Integer) As String
 						Case "FLAG":
 							clausula = clausula + Chr (&H10) + Chr (pval (listaPalabras (2))) + chr (pval (listaPalabras (4)))	
 							actionsUsed (&H10) = -1
-							if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
 						Case "LIFE":
 							clausula = clausula + Chr (&H30) + Chr (pval (listaPalabras (2)))
 							actionsUsed (&H30) = -1
@@ -307,7 +350,6 @@ Function procesaClausulas (f As integer, nPant As Integer) As String
 						Case "FLAG":
 							clausula = clausula + Chr (&H11) + Chr (pval (listaPalabras (2))) + chr (pval (listaPalabras (4)))						
 							actionsUsed (&H11) = -1
-							if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
 						Case "LIFE":
 							clausula = clausula + Chr (&H31) + Chr (pval (listaPalabras (2)))
 							actionsUsed (&H31) = -1
@@ -318,13 +360,9 @@ Function procesaClausulas (f As integer, nPant As Integer) As String
 				Case "ADD":
 					clausula = clausula + Chr (&H12) + Chr (pval (listaPalabras (2))) + chr (pval (listaPalabras (4)))						
 					actionsUsed (&H12) = -1
-					if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
-					if maxFlag < val (listaPalabras (4)) Then maxFlag = val (listaPalabras (4))
 				Case "SUB":
 					clausula = clausula + Chr (&H13) + Chr (pval (listaPalabras (2))) + chr (pval (listaPalabras (4)))						
 					actionsUsed (&H13) = -1
-					if maxFlag < val (listaPalabras (2)) Then maxFlag = val (listaPalabras (2))
-					if maxFlag < val (listaPalabras (4)) Then maxFlag = val (listaPalabras (4))
 				Case "SWAP":
 					clausula = clausula + Chr (&H14) + Chr (pval (listaPalabras (1))) + chr (pval (listaPalabras (3)))
 					actionsUsed (&H14) = -1
@@ -426,7 +464,10 @@ Function procesaClausulas (f As integer, nPant As Integer) As String
 					actionsUsed (&HE5) = -1
 				Case "MUSIC"
 					clausula = clausula + Chr (&HE6) + Chr (Pval (listaPalabras (1)))
-					actionsUsed (&HE6) = -1				
+					actionsUsed (&HE6) = -1
+				Case "REDRAW_ITEMS"
+					clausula = clausula + Chr (&HE7)
+					actionsUsed (&HE7) = -1
 				Case "GAME":
 					clausula = clausula + Chr (240)
 					actionsUsed (240) = -1
@@ -465,7 +506,7 @@ outFileName = command (2)
 maxpants = pval (command (3))
 
 if command (1) = "" or command (2) = "" or maxpants = 0 then
-	print "msc 4.7 / 3.99.2"
+	print "msc 4.7 / 3.99.3c"
 	print "uso: msc input output maxpants"
 	system
 end if
@@ -490,9 +531,11 @@ While not eof (f)
 	Line input #f, linea
 	linea = Trim (linea, Any chr (32) + chr (9))
 	stringToArray (linea)
-
+	
 	' ESTADO 1: Buscando ENTERING SCREEN x ó PRESS_FIRE AT SCREEN x
 	Select Case listaPalabras (0)
+		Case "ITEMSET":
+			procesaItems f
 		Case "ENTERING":
 			If listaPalabras (1) = "GAME" Then
 				AddToIdx = 1
@@ -510,11 +553,13 @@ While not eof (f)
 				Next i
 			End If
 			clausulas = procesaClausulas (f, 0)
+			
 			clausulasEnter (clausulasEnterIdx) = clausulas	
 			For i = 0 To AddToIdx - 1
+				'?AddTo(i) ;"->";clausulasEnterIdx
 				listaClausulasEnter (AddTo(i)) = clausulasEnterIdx
 			Next i
-			
+					
 			clausulasEnterIdx = clausulasEnterIdx + 1
 		Case "ON_TIMER_OFF":
 			clausulas = procesaClausulas (f, 0)
@@ -556,6 +601,13 @@ While not eof (f)
 			clausulasFireIdx = clausulasFireIdx + 1
 		
 	End Select
+	
+
+'For i = 0 to maxpants + 2
+'	? listaClausulasEnter (i);",";
+'next i
+'?	
+	
 Wend
 
 ' Fin
@@ -571,20 +623,62 @@ Close #f
 f = FreeFile
 open "msc-config.h" for output as #f
 
-print #f, "// msc.h"
-print #f, "// Generado por Mojon Script Compiler de la Churrera 4.7 / 3.99.2"
+print #f, "// msc-config.h"
+print #f, "// Generado por Mojon Script Compiler de la Churrera 4.7 / 3.99.3c"
 print #f, "// Copyleft 2013 The Mojon Twins"
 print #f, " "
 If maxItem > 0 then
-	print #f, "#define MSC_MAXITEMS    " + str (maxitem)
+	print #f, "#define MSC_MAXITEMS " & str (maxitem)
+	print #f, "#define FLAG_SLOT_SELECTED " & slotFlag 
+	print #f, "#define ITEM_SLOT_SELECTED " & itemFlag
 	print #f, " "
-	print #f, "typedef struct {"
-	print #f, "    unsigned char status;"
-	print #f, "    unsigned char supertile;"
-	print #f, "    unsigned char n_pant;"
-	print #f, "    unsigned char x, y;"
-	print #f, "} ITEM;"
-	print #f, "ITEM items [MSC_MAXITEMS];"
+	print #f, "unsigned char items [MSC_MAXITEMS];"
+	print #f, "unsigned char its_it, its_p;"
+	print #f, " "
+	
+	' Generate display_items
+	If itemSetOr = 0 Then
+		' Horizontal
+		print #f, "void display_items (void) {"
+		print #f, "    its_p = " & itemSetX & ";"
+		print #f, "    for (its_it = 0; its_it < MSC_MAXITEMS; its_it ++) {"
+		print #f, "        draw_coloured_tile (its_p, " & itemSetY & ", items [its_it]);"
+		print #f, "        if (its_it != flags [FLAG_SLOT_SELECTED]) {"
+		print #f, "            sp_PrintAtInv (" & (itemSetY + 2) & ", its_p, 0, 0);"
+		print #f, "            sp_PrintAtInv (" & (itemSetY + 2) & ", its_p + 1, 0, 0);"
+		print #f, "        } else {"
+		print #f, "            sp_PrintAtInv (" & (itemSetY + 2) & ", its_p, " & itemSelectClr & ", " & itemSelectC1 & ");"
+		print #f, "            sp_PrintAtInv (" & (itemSetY + 2) & ", its_p + 1, " & itemSelectClr & ", " & itemSelectC2 & ");"
+		print #f, "        }"
+		print #f, "        its_p += " & itemSetStep & ";"
+		print #f, "    }"
+		print #f, "}"
+	Else
+		' Vertical
+		print #f, "void display_items (void) {"
+		print #f, "    its_p = " & itemSetY & ";"
+		print #f, "    for (its_it = 0; its_it < MSC_MAXITEMS; its_it ++) {"
+		print #f, "        draw_coloured_tile (" & itemSetY & ", its_p, items [its_it]);"
+		print #f, "        if (its_it != flags [FLAG_SLOT_SELECTED]) {"
+		print #f, "            sp_PrintAtInv (its_p + 2, " & itemSetX & ", 0, 0);"
+		print #f, "            sp_PrintAtInv (its_p + 2, " & (itemSetX + 1) & ", 0, 0);"
+		print #f, "        } else {"
+		print #f, "            sp_PrintAtInv (its_p + 2, " & itemSetX & ", " & itemSelectClr & ", " & itemSelectC1 & ");"
+		print #f, "            sp_PrintAtInv (its_p + 2, " & (itemSetX + 1) & ", " & itemSelectClr & ", " & itemSelectC2 & ");"
+		print #f, "        }"
+		print #f, "        its_p += " & itemSetStep & ";"
+		print #f, "    }"
+		print #f, "}"
+	End If
+	
+	' Search item
+	print #f, "unsigned char search_item (unsigned char t) {"
+	print #f, "    for (its_it = 0; its_it < MSC_MAXITEMS; its_it ++) {"
+	print #f, "        if (items [its_it] == t) return 1;"
+	print #f, "    }"
+	print #f, "    return 0;"
+	print #f, "}"
+	
 end if
 print #f, " "
 print #f, "unsigned char script_result = 0;"
@@ -657,7 +751,7 @@ print #f, "void msc_init_all (void) {"
 print #f, "    unsigned char i;"
 If maxItem > 0 then
 print #f, "    for (i = 0; i < MSC_MAXITEMS; i ++)"
-print #f, "        items [i].status = 0;"
+print #f, "        items [i] = 0;"
 End If
 print #f, "    for (i = 0; i < MAX_FLAGS; i ++)"
 print #f, "        flags [i] = 0;"
@@ -694,6 +788,9 @@ print #f, "        c = read_byte ();"
 print #f, "        if (c == 0xFF) break;"
 print #f, "        next_script = script + c;"
 print #f, "        terminado = continuar = 0;"
+If maxItem > 0 then
+	print #f, "        flags [" & itemFlag & "] = items [flags [" & slotFlag & "]];"
+End If
 print #f, "        while (!terminado) {"
 print #f, "            c = read_byte ();"
 print #f, "            switch (c) {"
@@ -702,8 +799,7 @@ if clausulasUsed (&H1) Then
 	print #f, "                case 0x01:"
 	print #f, "                    // IF PLAYER_HAS_ITEM x"
 	print #f, "                    // Opcode: 01 x"
-	print #f, "                    x = read_vbyte ();"
-	print #f, "                    terminado = (items [x].status == 0);"
+	print #f, "                    terminado = (!search_item (read_vbyte ()));"
 	print #f, "                    break;"
 end if
 
@@ -711,10 +807,25 @@ if clausulasUsed (&H2) Then
 	print #f, "                case 0x02:"
 	print #f, "                    // IF PLAYER_HASN'T_ITEM x"
 	print #f, "                    // Opcode: 02 x"
-	print #f, "                    x = read_vbyte ();"
-	print #f, "                    terminado = (items [x].status != 0);"
+	print #f, "                    terminado = (search_item (read_vbyte ()));"
 	print #f, "                    break;"
 end if
+
+If clausulasUsed (&H3) Then
+	print #f, "                case 0x03:"
+	print #f, "                    // IF ITEM x = n"
+	print #f, "                    // Opcode: 03 x n"
+	print #f, "                    terminado = items [read_vbyte ()] != read_vbyte ();"
+	print #f, "                    break;"
+End If
+
+If clausulasUsed (&H4) Then
+	print #f, "                case 0x04:"
+	print #f, "                    // IF ITEM x <> n"
+	print #f, "                    // Opcode: 04 x n"
+	print #f, "                    terminado = items [read_vbyte ()] == read_vbyte ();"
+	print #f, "                    break;"
+End If
 
 if clausulasUsed (&H10) Then
 	print #f, "                case 0x10:"
@@ -941,7 +1052,7 @@ if actionsUsed (&H0) Then
 	print #f, "                        // Opcode: 00 x n"
 	print #f, "                        x = read_vbyte ();"
 	print #f, "                        n = read_vbyte ();"
-	print #f, "                        items [x].status = n;"
+	print #f, "                        items [x] = n;"
 	print #f, "                        break;"
 End If
 
@@ -1328,9 +1439,21 @@ End If
 If actionsUsed (&HE6) Then
 	print #f, "                    case 0xE6:"
 	print #f, "                        // MUSIC n"
+	print #f, "#ifdef COMPRESSED_LEVELS"
 	print #f, "                        level_data->music_id = read_vbyte ();"
-	print #f, "						wyz_play_music (level_data->music_id);"
+	print #f, "                        wyz_play_music (level_data->music_id);"
+	print #f, "#else"
+	print #f, "                        wyz_play_music (read_vbyte ());"
+	print #f, "#endif"
 	print #f, "                        break;"
+End If
+
+If actionsUsed (&HE7) Then
+	print #f, "                    case 0xE7:"
+	print #f, "                        // REDRAW_ITEMS"
+	print #f, "                        // Opcode: 0xE7"
+	print #f, "                        display_items ();"
+	print #f, "                        break;"	
 End If
 
 if actionsUsed (&HF0) Then

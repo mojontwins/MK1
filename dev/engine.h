@@ -439,6 +439,9 @@ void init_hotspots (void) {
 
 #ifdef PLAYER_CAN_FIRE
 void fire_bullet (void) {
+#ifdef PLAYER_CAN_FIRE_FLAG 
+	if (flags [PLAYER_CAN_FIRE_FLAG] == 0) return;
+#endif
 #ifdef MAX_AMMO
 	if (!player.ammo) return;
 	player.ammo --;
@@ -1800,7 +1803,7 @@ void mueve_bicharracos (void) {
 			
 #ifndef PLAYER_MOGGY_STYLE
 			// Platforms
-			/*if (malotes [enoffsmasi].t == 4)*/ {
+			if (malotes [enoffsmasi].t == 4) {
 				gpxx = gpx >> 4;
 				if (gpx + 15 >= gpen_cx && gpx <= gpen_cx + 15) {
 					if (malotes [enoffsmasi].my < 0) {
@@ -1904,9 +1907,13 @@ void mueve_bicharracos (void) {
 			if (!tocado && collide (gpx, gpy, gpen_cx, gpen_cy) && player.estado == EST_NORMAL) {
 #endif			
 #ifdef PLAYER_KILLS_ENEMIES
-				// Step over enemy				
+				// Step over enemy		
+#ifdef PLAYER_CAN_KILL_FLAG
+				if (flags [PLAYER_CAN_KILL_FLAG] != 0 && 
+					gpy < gpen_cy - 2 && player.vy >= 0 && malotes [enoffsmasi].t >= PLAYER_MIN_KILLABLE) {
+#else
 				if (gpy < gpen_cy - 2 && player.vy >= 0 && malotes [enoffsmasi].t >= PLAYER_MIN_KILLABLE) {
-
+#endif				
 #ifdef MODE_128K
 					wyz_play_sound (6);										
 					en_an [gpit].state = GENERAL_DYING;
