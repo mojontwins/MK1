@@ -540,6 +540,9 @@ void main (void) {
 							}
 #else
 							player.objs ++;
+#ifdef OBJECT_COUNT
+							flags [OBJECT_COUNT] = player.objs;
+#endif
 #ifdef MODE_128K
 							wyz_play_sound (3);
 #else
@@ -626,6 +629,10 @@ void main (void) {
 							}
 	#else
 							player.objs ++;
+		#ifdef OBJECT_COUNT
+							flags [OBJECT_COUNT] = player.objs;
+		#endif
+
 		#ifdef MODE_128K
 							wyz_play_sound (5);
 		#else
