@@ -1,4 +1,50 @@
 =======
+3.99.99
+=======
+
+Versión final. 
+
+- La Churrera (MTE MK1) queda totalmente liberada para que hagas lo que mejor te 
+parezca con ella.
+- Abandonamos completamente el soporte. Es código muy viejo que no podemos 
+recordar.
+- Hemos quitado el colocador.exe
+
+¿Y en vez de colocador.exe, qué?
+
+Pues tenemos ponedor.exe. Es más mejor y más usable. Escribe ponedor.exe en el 
+directorio enems desde la linea de comandos para ver el resumen de los parámetros, 
+aunque los he copiado aquí:
+
+8<-----------------------------------------------------------------------------
+> ponedor.exe
+Edit an existing set:
+$ ponedor.exe file.ene [x2]
+
+Create new set:
+$ ponedor.exe new out=file.ene map=file.map tiles=file.png|bmp [adjust=n] size=w,h
+                  [scrsize=w,h] [nenems=n] [x2]
+
+out           output filename
+map           map file (raw, headerless, 1 byte per tile, row order)
+tiles         tileset in png or bmp format.
+adjust        substract this number from every byte read from the map file. Def=0
+size          map size in screens
+scrsize       screen size in tiles. Def=16,12
+nenems        number of enemies per screen. Def=3
+x2            zoom x2 (hacky)
+----------------------------------------------------------------------------->8
+
+En resumen:
+
+- para editar un .ene que ya exista, simplemente pásaselo como parámetro a 
+ponedor.exe. Añade "x2" para que se vea más grande.
+- Para crear un .ene nuevo, le pasas los parámetros de tu mapeado tal y como se
+indica. 
+
+Y poco más. Ea, a cascal.
+
+=======
 3.99.3d
 =======
 

@@ -1,20 +1,35 @@
-// La Churrera Engine 3.99.3d
-// Copyleft 2010-2014 the Mojon Twins
+// MTE MK1 (la Churrera) v3.99.99 (final)
+// Copyleft 2010-2017 by the Mojon Twins
 
 // churromain.c
 // Esqueleto de juegos de la churrera
 // Copyleft 2010-2014 The Mojon Twins
 
-// version FORK 3.99.3b
-
 #include <spritepack.h>
 
-// Para 128K descomenta la 24099 y comenta la otra
-//#pragma output STACKPTR=24099
-#pragma output STACKPTR=61952
-#define AD_FREE			60655
+// NUMBLOCKS es el número de bloques necesario para mover los sprites
+// Configurar bien este número es MUY IMPORTANTE
 
-// MAX BINARY SIZE = 35655 (make @ 25000) or 36155 (make @ 24500)
+#define NUMBLOCKS 40
+
+// La regla es esta: cada sprite de 16x16 ocupa 10 bloques.
+// Cada proyectil ocupa 5 bloques.
+
+// Si, por ejemplo, tu juego no tiene disparos, sólo necesitas bloques
+// para el sprite principal y tres enemigos, o sea, 4*10 = 40 bloques.
+
+// Si, por ejemplo, tu juego además lleva 3 proyectiles, necesitarás
+// 4*10 + 3*5 = 55 bloques.
+
+// Versión para 48K
+#pragma output STACKPTR=61952
+#define FREEPOOL 61440
+#define AD_FREE FREEPOOL - NUMBLOCKS * 15
+
+// Versión para 128K
+//#pragma output STACKPTR=24199
+//#define FREEPOOL 61697
+//#define AD_FREE 61440 - NUMBLOCKS * 15
 
 // Optimal place to compile if using COMPRESSED_LEVELS:
 // 23296 + MAP_W * MAP_H * (108) + MAX_CERROJOS * 4 + 49

@@ -1,5 +1,5 @@
-// La Churrera Engine 3.99.3d
-// Copyleft 2010-2014 the Mojon Twins
+// MTE MK1 (la Churrera) v3.99.99 (final)
+// Copyleft 2010-2017 by the Mojon Twins
 
 // mainloop.h
 // Churrera copyleft 2011 by The Mojon Twins.
@@ -78,7 +78,7 @@ void main (void) {
 	// splib2 initialization
 	sp_Initialize (7, 0);
 	sp_Border (BLACK);
-	sp_AddMemory(0, 56, 14, AD_FREE);
+	sp_AddMemory(0, NUMBLOCKS, 14, AD_FREE);
 	
 	// Define keys and default controls
 #ifdef USE_TWO_BUTTONS	
@@ -603,7 +603,7 @@ void main (void) {
 				hotspot_x = hotspot_y = 240;
 			}
 #else
-				// Modificación para que los hotspots de tipo 3 sean recargas directas
+				// Modificaci?n para que los hotspots de tipo 3 sean recargas directas
 				// Was it an object, key or life boost?
 				if (hotspots [n_pant].act) {
 					hotspots [n_pant].act = 0;

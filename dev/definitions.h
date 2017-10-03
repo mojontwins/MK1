@@ -1,5 +1,5 @@
-// La Churrera Engine 3.99.3d
-// Copyleft 2010-2014 the Mojon Twins
+// MTE MK1 (la Churrera) v3.99.99 (final)
+// Copyleft 2010-2017 by the Mojon Twins
 
 struct sp_UDK keys;
 void *joyfunc;				// Puntero a la función de manejo seleccionada.
@@ -129,7 +129,7 @@ BULLET bullets [MAX_BULLETS];
 // atributos de la pantalla: Contiene información
 // sobre qué tipo de tile hay en cada casilla
 unsigned char map_attr [150];
-unsigned char map_buff [150];
+unsigned char map_buff [150] @ FREEPOOL;
 
 // posición del objeto (hotspot). Para no objeto,
 // se colocan a 240,240, que está siempre fuera de pantalla.

@@ -1,5 +1,5 @@
-// La Churrera Engine 3.99.3d
-// Copyleft 2010-2014 the Mojon Twins
+// MTE MK1 (la Churrera) v3.99.99 (final)
+// Copyleft 2010-2017 by the Mojon Twins
 
 // Motor.h
 #ifndef PLAYER_MIN_KILLABLE
@@ -1412,7 +1412,7 @@ void __FASTCALL__ draw_scr_background (void) {
 
 #ifndef DEACTIVATE_KEYS
 	// Open locks
-#ifdef COMPRESSED_LEVELS
+#if defined (COMPRESSED_LEVELS) && !defined (MODE_128K)
 	for (gpit = 0; gpit < n_bolts; gpit ++) {
 #else
 	for (gpit = 0; gpit < MAX_CERROJOS; gpit ++) {
@@ -1430,6 +1430,9 @@ void __FASTCALL__ draw_scr_background (void) {
 }
 
 void __FASTCALL__ draw_scr (void) {
+#ifdef ENABLE_TILANIMS
+	max_tilanims = 0;
+#endif
 
 #ifdef ENABLE_FIRE_ZONE
 	f_zone_ac = 0;
