@@ -1,7 +1,7 @@
 // MTE MK1 (la Churrera) v3.99.99 (final)
 // Copyleft 2010-2017 by the Mojon Twins
 
-// churromain.c
+// mk1.c
 // Esqueleto de juegos de la churrera
 // Copyleft 2010-2014 The Mojon Twins
 
