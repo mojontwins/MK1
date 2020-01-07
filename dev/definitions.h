@@ -177,22 +177,39 @@ CTIMER ctimer;
 unsigned char just_pushed;
 #endif
 
-#ifdef ACTIVATE_SCRIPTING
-void __FASTCALL__ draw_scr_background (void);
-void __FASTCALL__ draw_scr (void);
-#endif
-void espera_activa (int espera);
-
 #ifdef USE_TWO_BUTTONS
 int key_jump, key_fire;
 #endif
 
-#ifdef MODE_128K
-void blackout_area (void);
-void get_resource (unsigned char res, unsigned int dest);
+// Engine globals (for speed) & size!
+unsigned char gpx, gpy, gpd, gpc, gpt;
+unsigned char gpxx, gpyy, gpcx, gpcy;
+unsigned char possee, hit_v, hit_h, hit, wall_h, wall_v;
+unsigned char gpen_x, gpen_y, gpen_cx, gpen_cy, gpen_xx, gpen_yy, gpaux;
+unsigned char tocado, active;
+unsigned char gpit, gpjt;
+unsigned char enoffsmasi;
+unsigned char *map_pointer;
+#ifdef PLAYER_CAN_FIRE
+	unsigned char blx, bly;
+#endif
+
+// Some declarations
+
+#ifdef ACTIVATE_SCRIPTING
+	void  draw_scr_background (void);
+	void  draw_scr (void);
+#endif
 void espera_activa (int espera);
+
+
+#ifdef MODE_128K
+	void blackout_area (void);
+	void get_resource (unsigned char res, unsigned int dest);
+	void espera_activa (int espera);
 #endif
 
 unsigned char rand (void);
 void saca_a_todo_el_mundo_de_aqui (void);
 void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t);
+
