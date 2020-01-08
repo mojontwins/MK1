@@ -67,7 +67,6 @@
 #define ENABLE_CUSTOM_TYPE_6			// If defined, add code to type 6 enemies.
 #define TYPE_6_FIXED_SPRITE 	2		// Sprite used - 1.
 #define SIGHT_DISTANCE			104 	// Used in our type 6 enemies.
-#define USE_TWO_BUTTONS 				// Alternate keyboard scheme for two-buttons games
 #define USE_HOTSPOTS_TYPE_3 			// Alternate logic for recharges.
 */
 // Pushable tile
@@ -161,6 +160,45 @@
 #define PLAYER_STEP_SOUND				// Sound while walking. No effect in the BOOTEE engine.
 //#define PLAYER_BOUNCE_WITH_WALLS		// Bounce when hitting a wall. Only really useful in MOGGY_STYLE mode
 //#define PLAYER_CUMULATIVE_JUMP		// Keep pressing JUMP to JUMP higher in several bounces
+
+// Configure keyboard
+
+// To define different keys, the first two hex digits are the COLUMN, the next the ROW
+/*
+	    01 02 04 08 10
+	f7   1  2  3  4  5
+	fb   Q  W  E  R  T
+	fd   A  S  D  F  G
+	fe  CS  Z  X  C  V
+
+	ef   0  9  8  7  6
+	df   P  O  I  U  Y
+	bf  EN  L  K  J  H
+	7f  SP SS  M  N  B
+
+*/
+
+#define USE_TWO_BUTTONS 				// Alternate keyboard scheme for two-buttons games
+#ifdef USE_TWO_BUTTONS
+	struct sp_UDK keys = {
+		0x047f,	// .fire
+		0x04fd, // .right
+		0x01fd, // .left
+		0x02fd, // .down
+		0x02f7  // .up
+	};
+	
+	int key_jump = 0x087f;
+	int key_fire = 0x047f;
+#else
+	struct sp_UDK keys = {
+		0x017f,	// .fire
+		0x01df, // .right
+		0x02df, // .left
+		0x01fd, // .down
+		0x01fb  // .up
+	};
+#endif
 
 // ============================================================================
 // III. Screen configuration

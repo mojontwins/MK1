@@ -1,8 +1,16 @@
 // MTE MK1 (la Churrera) v3.99.99 (final)
 // Copyleft 2010-2017 by the Mojon Twins
 
-struct sp_UDK keys;
-void *joyfunc;				// Puntero a la función de manejo seleccionada.
+void *joyfunc = sp_JoyKeyboard;		// Puntero a la función de manejo seleccionada.
+const void *joyfuncs [] = {
+	sp_JoyKeyboard, sp_JoyKempston, sp_JoySinclair1
+};
+unsigned char pad0;
+
+#define KEY_M 0x047f
+#define KEY_H 0x10bf
+#define KEY_Y 0x10df
+#define KEY_Z 0x02fe
 
 void *my_malloc(uint bytes) {
    return sp_BlockAlloc(0);
@@ -69,12 +77,14 @@ unsigned char pkilled;
 unsigned char pdisparando;
 unsigned char pfacing_v, pfacing_h;
 unsigned char pammo;
+unsigned char pkillme;
 
 #define FACING_RIGHT 0
 #define FACING_LEFT 2
 #define FACING_UP 4
 #define FACING_DOWN 6
 
+const unsigned char *spacer = "            ";
 
 unsigned char en_an_base_frame [3];
 unsigned char en_an_frame [3];
@@ -169,11 +179,8 @@ CTIMER ctimer;
 unsigned char just_pushed;
 #endif
 
-#ifdef USE_TWO_BUTTONS
-int key_jump, key_fire;
-#endif
-
 // Engine globals (for speed) & size!
+
 unsigned char gpx, gpy, gpd, gpc, gpt;
 unsigned char gpxx, gpyy, gpcx, gpcy;
 unsigned char possee, hit_v, hit_h, hit, wall_h, wall_v;
@@ -184,6 +191,43 @@ unsigned char enoffsmasi;
 unsigned char *map_pointer;
 #ifdef PLAYER_CAN_FIRE
 	unsigned char blx, bly;
+#endif
+unsigned char rdx, rdy;
+
+// More stuff
+
+#ifdef MSC_MAXITEMS
+	unsigned char key_z_pressed = 0;
+#endif
+
+int itj;
+unsigned char objs_old, keys_old, life_old, killed_old;
+
+#ifdef MAX_AMMO
+	unsigned char ammo_old;
+#endif
+
+#if defined(TIMER_ENABLE) && defined(PLAYER_SHOW_TIMER)
+	unsigned char timer_old;
+#endif
+
+#ifdef COMPRESSED_LEVELS
+	unsigned char *level_str = "LEVEL 0X";
+#endif
+
+#ifdef GET_X_MORE
+	unsigned char *getxmore = " GET X MORE ";
+#endif
+
+unsigned char *allpurposepuntero;
+unsigned char playing;
+#ifdef COMPRESSED_LEVELS
+	unsigned char mlplaying;
+#endif	
+
+unsigned char success;
+#ifdef PLAYER_CHECK_MAP_BOUNDARIES
+	unsigned char x_pant, y_pant;
 #endif
 
 // Some declarations

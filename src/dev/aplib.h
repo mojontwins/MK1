@@ -160,17 +160,17 @@ void unpack_RAMn (unsigned char n, unsigned int address, unsigned int destinatio
 		ei
 	#endasm
 }
-#else
-void unpack (unsigned int address, unsigned int destination) {
-	if (address != 0) {
-		ram_address [0] = address;
-		ram_destination [0] = destination;
-
-		#asm	
-			ld hl, (_ram_address)
-			ld de, (_ram_destination)
-			call depack
-		#endasm
-	}
-}
 #endif
+#ifdef COMPRESSED_LEVELS
+	#ifndef MODE_128K
+		void unpack (unsigned int address, unsigned int destination) {
+			ram_address [0] = address; ram_destination [0] = destination;
+			#asm
+				ld hl, (_ram_address)
+				ld de, (_ram_destination)
+				call depack
+			#endasm
+		}
+	#endif
+#endif
+		
