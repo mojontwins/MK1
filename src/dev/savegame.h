@@ -15,10 +15,10 @@ void mem_save (void) {
 		sg_pool [sgit] = flags [sgit ++];
 	}
 	sg_pool [MAX_FLAGS] = n_pant;
-	sg_pool [MAX_FLAGS + 1] = px >> 10;
-	sg_pool [MAX_FLAGS + 2] = py >> 10;
+	sg_pool [MAX_FLAGS + 1] = p_x >> 10;
+	sg_pool [MAX_FLAGS + 2] = p_y >> 10;
 #ifdef MAX_AMMO
-	sg_pool [MAX_FLAGS + 3] = pammo;
+	sg_pool [MAX_FLAGS + 3] = p_ammo;
 #endif
 #ifdef TIMER_ENABLE
 	sg_pool [MAX_FLAGS + 4] = ctimer.t;
@@ -33,10 +33,10 @@ void mem_load (void) {
 		flags [sgit] = sg_pool [sgit ++];
 	}
 	n_pant = sg_pool [MAX_FLAGS];
-	px = sg_pool [MAX_FLAGS + 1] << 10;
-	py = sg_pool [MAX_FLAGS + 2] << 10;
+	p_x = sg_pool [MAX_FLAGS + 1] << 10;
+	p_y = sg_pool [MAX_FLAGS + 2] << 10;
 #ifdef MAX_AMMO
-	pammo = sg_pool [MAX_FLAGS + 3];
+	p_ammo = sg_pool [MAX_FLAGS + 3];
 #endif
 #ifdef TIMER_ENABLE
 	ctimer.t = sg_pool [MAX_FLAGS + 4];
@@ -55,8 +55,8 @@ void sg_submenu (void) {
 	sg_do_load = 0;
 	if (sg_saved) {
 		blackout_area ();
-		print_str (VIEWPORT_X + 11, VIEWPORT_Y + 8, 71, "0 START");
-		print_str (VIEWPORT_X + 11, VIEWPORT_Y + 8, 71, "9 CONTINUE");
+		_x = VIEWPORT_X + 11; _y = VIEWPORT_Y + 8; _t = 71; _gp_gen = "0 START"; print_str ();
+		_x = VIEWPORT_X + 11; _y = VIEWPORT_Y + 8; _t = 71; _gp_gen = "9 CONTINUE"; print_str ();
 		while (1) {
 			sgit = sp_GetKey ();
 			if (sgit == '0') break;

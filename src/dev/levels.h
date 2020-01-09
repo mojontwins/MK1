@@ -35,7 +35,7 @@ unsigned char *mapa = (unsigned char *) (MAP_DATA);
 CERROJOS *cerrojos = (CERROJOS *) (BOLTS_DATA);
 MALOTE *malotes = (MALOTE *) (ENEMS_DATA);
 HOTSPOT *hotspots = (HOTSPOT *) (HOTSPOTS_DATA);
-unsigned char *comportamiento_tiles = (unsigned char *) (BEHAVIOURS);
+unsigned char *behs = (unsigned char *) (BEHAVIOURS);
 
 extern unsigned char *level1c;
 extern unsigned char *level2c;

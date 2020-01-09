@@ -21,30 +21,95 @@
 	#endif
 #endif
 
-void enems_move (void) {
-	gpx = px >> 6;
-	gpy = py >> 6;
+void enems_load (void) {
+	// Movemos y cambiamos a los enemigos según el tipo que tengan
+	enoffs = n_pant * 3;
 	
-	tocado = 0;
-	pgotten = 0;
+	for (gpit = 0; gpit < 3; ++ gpit) {
+		en_an_frame [gpit] = 0;
+		en_an_count [gpit] = 3;
+		en_an_state [gpit] = 0;
+		#ifdef ENABLE_RANDOM_RESPAWN
+			en_an_fanty_activo [gpit] = 0;
+		#endif
+
+		#ifdef RESPAWN_ON_ENTER
+			// Back to life!
+			enoffsmasi = enoffs + gpit:
+			malotes [enoffsmasi].t &= 0xEF;		
+			#ifdef PLAYER_CAN_FIRE
+				#if defined (COMPRESSED_LEVELS) && defined (MODE_128K)
+					malotes [enoffsmasi].life = level_data.enems_life;
+				#else
+					malotes [enoffsmasi].life = ENEMIES_LIFE_GAUGE;
+				#endif
+			#endif
+		#endif
+					
+		switch (malotes [enoffsmasi].t) {
+			case 1:
+			case 2:
+			case 3:
+			case 4:
+				en_an_base_frame [gpit] = (malotes [enoffs + gpit].t - 1) << 1;
+				break;
+			#ifdef ENABLE_RANDOM_RESPAWN
+				case 5: 
+					en_an_base_frame [gpit] = 4;
+					break;
+			#endif
+			#ifdef ENABLE_CUSTOM_TYPE_6
+				case 6:
+					// Añade aquí tu código custom. Esto es un ejemplo:
+					en_an_base_frame [gpit] = TYPE_6_FIXED_SPRITE << 1;
+					en_an_x [gpit] = malotes [enoffsmasi].x << 6;
+					en_an_y [gpit] = malotes [enoffsmasi].y << 6;
+					en_an_vx [gpit] = en_an_vy [gpit] = 0;
+					en_an_state [gpit] = TYPE_6_IDLE;				
+					break;				
+			#endif
+			#ifdef ENABLE_PURSUERS
+				case 7:
+					en_an_alive [gpit] = 0;
+					en_an_dead_row [gpit] = 0;//DEATH_COUNT_EXPRESSION;
+					break;
+			#endif
+			default:
+				en_an_next_frame [gpit] = sprite_18_a;
+		}
+	}
+}
+
+void enems_move (void) {
+	tocado = p_gotten = ptgmx = ptgmy = 0;
+
 	for (gpit = 0; gpit < 3; gpit ++) {
 		active = 0;
 		enoffsmasi = enoffs + gpit;
 		gpen_x = malotes [enoffsmasi].x;
 		gpen_y = malotes [enoffsmasi].y;		
+		
 		gpt = malotes [enoffsmasi].t;
 		#ifdef ENABLE_RANDOM_RESPAWN
 			if (en_an_fanty_activo [gpit]) gpt = 5;
 		#endif
 
 		if (en_an_state [gpit] == GENERAL_DYING) {
-			en_an_count [gpit] --;
+			-- en_an_count [gpit];
 			if (en_an_count [gpit] == 0) {
 				en_an_state [gpit] = 0;
 				en_an_next_frame [gpit] = sprite_18_a;
 				continue;
 			}
 		}
+
+		#ifndef PLAYER_MOGGY_STYLE
+			#if defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_8_BOTTOM)
+				pregotten = (gpx + 12 >= gpen_x && gpx <= gpen_x + 12);
+			#else
+				pregotten = (gpx + 15 >= gpen_x && gpx <= gpen_x + 15);
+			#endif
+		#endif
 
 		switch (gpt) {
 			case 1:
@@ -77,17 +142,17 @@ void enems_move (void) {
 					gpen_cy = en_an_y [gpit] >> 6;
 					if (player_hidden ()) {
 						en_an_vx [gpit] = limit (
-							en_an_vx [gpit] + addsign (en_an_x [gpit] - px, FANTY_A >> 1),
+							en_an_vx [gpit] + addsign (en_an_x [gpit] - p_x, FANTY_A >> 1),
 							-FANTY_MAX_V, FANTY_MAX_V);
 						en_an_vy [gpit] = limit (
-							en_an_vy [gpit] + addsign (en_an_y [gpit] - py, FANTY_A >> 1),
+							en_an_vy [gpit] + addsign (en_an_y [gpit] - p_y, FANTY_A >> 1),
 							-FANTY_MAX_V, FANTY_MAX_V);
 					} else if ((rand () & 7) > 1) {
 						en_an_vx [gpit] = limit (
-							en_an_vx [gpit] + addsign (px - en_an_x [gpit], FANTY_A),
+							en_an_vx [gpit] + addsign (p_x - en_an_x [gpit], FANTY_A),
 							-FANTY_MAX_V, FANTY_MAX_V);
 						en_an_vy [gpit] = limit (
-							en_an_vy [gpit] + addsign (py - en_an_y [gpit], FANTY_A),
+							en_an_vy [gpit] + addsign (p_y - en_an_y [gpit], FANTY_A),
 							-FANTY_MAX_V, FANTY_MAX_V);
 					}
 									
@@ -112,10 +177,10 @@ void enems_move (void) {
 								en_an_state [gpit] = TYPE_6_RETREATING;
 							} else {
 								en_an_vx [gpit] = limit (
-									en_an_vx [gpit] + addsign (px - en_an_x [gpit], FANTY_A),
+									en_an_vx [gpit] + addsign (p_x - en_an_x [gpit], FANTY_A),
 									-FANTY_MAX_V, FANTY_MAX_V);
 								en_an_vy [gpit] = limit (
-									en_an_vy [gpit] + addsign (py - en_an_y [gpit], FANTY_A),
+									en_an_vy [gpit] + addsign (p_y - en_an_y [gpit], FANTY_A),
 									-FANTY_MAX_V, FANTY_MAX_V);
 									
 								en_an_x [gpit] = limit (en_an_x [gpit] + en_an_vx [gpit], 0, 14336);
@@ -172,7 +237,7 @@ void enems_move (void) {
 							break;
 						case 2:
 							active = 1;
-							if (pestado == EST_NORMAL) {
+							if (p_estado == EST_NORMAL) {
 								malotes [enoffsmasi].mx = (signed char) (addsign (((gpx >> 2) << 2) - gpen_x, en_an_rawv [gpit]));
 								malotes [enoffsmasi].x += malotes [enoffsmasi].mx;
 								gpen_xx = malotes [enoffsmasi].x >> 4;
@@ -210,119 +275,43 @@ void enems_move (void) {
 			
 			// Collide with player
 			
-#ifndef PLAYER_MOGGY_STYLE
-			// Platforms
-			if (malotes [enoffsmasi].t == 4) {
-				gpxx = gpx >> 4;
-				if (gpx + 15 >= gpen_cx && gpx <= gpen_cx + 15) {
-					if (malotes [enoffsmasi].my < 0) {
-						if (gpy + 16 >= gpen_cy && gpy + 9 <= gpen_cy && pvy >= -(PLAYER_INCR_SALTO)) {
-							pgotten = 1;
-							py = (gpen_cy - 16) << 6;
-							#ifdef PLAYER_CUMULATIVE_JUMP
-								if (!psaltando)	
-							#endif							
-							pvy = 0;
-							gpyy = gpy >> 4;
-#ifdef BOUNDING_BOX_8_BOTTOM	
-							if ((gpy & 15) < 8) {
-								if ( ((gpx & 15) < 12 && attr (gpxx, gpyy) & 8) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy) & 8)) {
-#else
-#ifdef BOUNDING_BOX_8_CENTERED
-							if ((gpy & 15) < 12) {
-								if ( ((gpx & 15) < 12 && attr (gpxx, gpyy) & 8) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy) & 8)) {
-#else				
-							{
-								if (attr (gpxx, gpyy) & 8 || ((gpx & 15) && attr (gpxx + 1, gpyy) & 8)) {
-#endif
-#endif
-									py = (gpyy + 1) << 10;
-								}
+			#ifndef PLAYER_MOGGY_STYLE
+				// Platforms
+				if (malotes [enoffsmasi].t == 4) {
+					if (pregotten && (p_gotten == 0)) {
+
+						// Horizontal moving platforms
+						if (malotes [enoffsmasi].mx) {
+							if (gpy + 16 >= gpen_cy && gpy + 10 <= gpen_cy) {
+								p_gotten = 1;
+								ptgmx = malotes [enoffsmasi].mx << 6;
+								gpy = (gpen_cy - 16); p_y = gpy << 6;
 							}
 						}
-					} else if (malotes [enoffsmasi].my > 0) {
-						if (gpy + 20 >= gpen_cy && gpy + 14 <= gpen_cy && pvy >= 0) {
-							pgotten = 1;
-							py = (gpen_cy - 16) << 6;
-#ifdef PLAYER_CUMULATIVE_JUMP
-							if (!psaltando)	
-#endif							
-							pvy = 0;
-							gpyy = gpy >> 4;
-#ifdef BOUNDING_BOX_8_BOTTOM
-							if ((gpy & 15) < 8) {
-								if ( ((gpx & 15) < 12 && attr (gpxx, gpyy + 1) & 12) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 12)) {
-#else									
-#ifdef BOUNDING_BOX_8_CENTERED
-							if ((gpy & 15) >= 4) {
-								if ( ((gpx & 15) < 12 && attr (gpxx, gpyy + 1) & 12) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 12)) {
-#else							
-							{
-								if (attr (gpxx, gpyy + 1) & 8 || ((gpx & 15) && attr (gpxx + 1, gpyy + 1) & 8)) {
-#endif
-#endif								
-									py = gpyy << 10;
-								}
-							}
+
+						// Vertical moving platforms
+						if (
+							(malotes [enoffsmasi].my < 0 && gpy + 18 >= gpen_cy && gpy + 10 <= gpen_cy) ||
+							(malotes [enoffsmasi].my > 0 && gpy + 17 + malotes [enoffsmasi].my >= gpen_cy && gpy + 10 <= gpen_cy)
+						) {
+							p_gotten = 1;
+							ptgmy = malotes [enoffsmasi].my << 6;
+							gpy = (gpen_cy - 16); p_y = gpy << 6;						
 						}
+
 					}
-					gpy = py >> 6;
-					if (malotes [enoffsmasi].mx && gpy + 16 >= gpen_cy && gpy + 8 <= gpen_cy && pvy >= 0) {
-						pgotten = 1;
-						py = (gpen_cy - 16) << 6;
-						gpyy = gpy >> 4;
-						gpx = gpx + malotes [enoffsmasi].mx;
-						px = gpx << 6;
-						gpxx = gpx >> 4;
-						if (malotes [enoffsmasi].mx < 0) {
-#ifdef BOUNDING_BOX_8_BOTTOM
-							if ((gpx & 15) < 12) {
-								if ( ((gpy & 15) < 8 && attr (gpxx, gpyy) & 8) || ((gpy & 15) && attr (gpxx, gpyy + 1) & 8)) {
-#else
-#ifdef BOUNDING_BOX_8_CENTERED
-							if ((gpx & 15) < 12) {
-								if ( ((gpy & 15) < 12 && attr (gpxx, gpyy) & 8) || ((gpy & 15) > 4 && attr (gpxx, gpyy + 1) & 8)) {
-#else							
-							{
-								if (attr (gpxx, gpyy) & 8 || ((gpy & 15) && attr (gpxx, gpyy + 1) & 8)) {
-#endif
-#endif
-									pvx = 0;
-									px = (gpxx + 1) << 10;
-								}
-							}
-						} else {
-#ifdef BOUNDING_BOX_8_BOTTOM
-							if ((gpx & 15) >= 4) {
-								if ( ((gpy & 15) < 8 && attr (gpxx + 1, gpyy) & 8) || ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 8)) {
-#else
-#ifdef BOUNDING_BOX_8_CENTERED
-							if ((gpx & 15) >= 4) {
-								if ( ((gpy & 15) < 12 && attr (gpxx + 1, gpyy) & 8) || ((gpy & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 8)) {
-#else									
-							{
-								if (attr (gpxx + 1, gpyy) & 8 || ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 8)) {
-#endif
-#endif									
-									pvx = 0;
-									px = gpxx << 10;
-								}
-							}
-						}
-					}
-				}
-			} else
-#endif			
+				} else
+			#endif			
 			{
 				cx2 = gpen_cx; cy2 = gpen_cy;
-				if (!tocado && collide () && pestado == EST_NORMAL) {
+				if (!tocado && collide () && p_estado == EST_NORMAL) {
 					#ifdef PLAYER_KILLS_ENEMIES
 					// Step over enemy		
 						#ifdef PLAYER_CAN_KILL_FLAG
 							if (flags [PLAYER_CAN_KILL_FLAG] != 0 && 
-								gpy < gpen_cy - 2 && pvy >= 0 && malotes [enoffsmasi].t >= PLAYER_MIN_KILLABLE)
+								gpy < gpen_cy - 2 && p_vy >= 0 && malotes [enoffsmasi].t >= PLAYER_MIN_KILLABLE)
 						#else
-							if (gpy < gpen_cy - 2 && pvy >= 0 && malotes [enoffsmasi].t >= PLAYER_MIN_KILLABLE)
+							if (gpy < gpen_cy - 2 && p_vy >= 0 && malotes [enoffsmasi].t >= PLAYER_MIN_KILLABLE)
 						#endif				
 						{
 							#ifdef MODE_128K
@@ -331,8 +320,8 @@ void enems_move (void) {
 								en_an_count [gpit] = 12;
 								en_an_next_frame [gpit] = sprite_17_a;
 								malotes [enoffsmasi].t |= 16;			// Mark as dead
-								pkilled ++;
-								pvy = -256;					
+								p_killed ++;
+								p_vy = -256;					
 							#else
 								en_an_next_frame [gpit] = sprite_17_a;
 								sp_MoveSprAbs (sp_moviles [gpit], spritesClip, en_an_next_frame [gpit] - en_an_current_frame [gpit], VIEWPORT_Y + (gpen_cy >> 3), VIEWPORT_X + (gpen_cx >> 3), gpen_cx & 7, gpen_cy & 7);
@@ -343,7 +332,7 @@ void enems_move (void) {
 								en_an_next_frame [gpit] = sprite_18_a;
 								malotes [enoffsmasi].t |= 16;			// Mark as dead
 							
-								pkilled ++;
+								p_killed ++;
 							#endif					
 							#ifdef ACTIVATE_SCRIPTING					
 								// Run this screen fire script or "entering any".
@@ -359,17 +348,17 @@ void enems_move (void) {
 						#if defined(SLOW_DRAIN) && defined(PLAYER_BOUNCES)
 							if (!lasttimehit || ((maincounter & 3) == 0)) {
 								#ifdef MODE_128K
-									pkillme = 7;
+									p_killme = 7;
 								#else							
-									pkillme = 4;
+									p_killme = 4;
 								#endif
 							}
 						#else
 						
 							#ifdef MODE_128K
-								pkillme = 7;
+								p_killme = 7;
 							#else							
-								pkillme = 4;
+								p_killme = 4;
 							#endif
 						#endif					
 						
@@ -377,28 +366,28 @@ void enems_move (void) {
 							#ifndef PLAYER_MOGGY_STYLE	
 								#ifdef RANDOM_RESPAWN
 									if (!en_an_fanty_activo [gpit]) {
-										pvx = addsign (malotes [enoffsmasi].mx, PLAYER_MAX_VX);
-										pvy = addsign (malotes [enoffsmasi].my, PLAYER_MAX_VX);
+										p_vx = addsign (malotes [enoffsmasi].mx, PLAYER_MAX_VX);
+										p_vy = addsign (malotes [enoffsmasi].my, PLAYER_MAX_VX);
 									} else {
-										pvx = en_an_vx [gpit] + en_an_vx [gpit];
-										pvy = en_an_vy [gpit] + en_an_vy [gpit];	
+										p_vx = en_an_vx [gpit] + en_an_vx [gpit];
+										p_vy = en_an_vy [gpit] + en_an_vy [gpit];	
 									}
 								#else
-									pvx = addsign (malotes [enoffsmasi].mx, PLAYER_MAX_VX);
-									pvy = addsign (malotes [enoffsmasi].my, PLAYER_MAX_VX);
+									p_vx = addsign (malotes [enoffsmasi].mx, PLAYER_MAX_VX);
+									p_vy = addsign (malotes [enoffsmasi].my, PLAYER_MAX_VX);
 								#endif
 							#else
 								if (malotes [enoffsmasi].mx) {
-									pvx = addsign (gpx - gpen_cx, abs (malotes [enoffsmasi].mx) << 8);
+									p_vx = addsign (gpx - gpen_cx, abs (malotes [enoffsmasi].mx) << 8);
 								}
 								if (malotes [enoffsmasi].my) {
-									pvy = addsign (gpy - gpen_cy, abs (malotes [enoffsmasi].my) << 8);
+									p_vy = addsign (gpy - gpen_cy, abs (malotes [enoffsmasi].my) << 8);
 								}
 							#endif
 						#endif
 						#ifdef PLAYER_FLICKERS
-							pestado = EST_PARP;
-							pct_estado = 50;
+							p_estado = EST_PARP;
+							p_ct_estado = 50;
 						#endif
 					}
 				}
@@ -449,7 +438,7 @@ void enems_move (void) {
 									#endif
 									en_an_next_frame [gpit] = sprite_18_a;
 									if (gpt != 7) malotes [enoffsmasi].t |= 16;
-									pkilled ++;
+									p_killed ++;
 									#ifdef RANDOM_RESPAWN								
 										en_an_fanty_activo [gpit] = 0;
 										malotes [enoffsmasi].life = FANTIES_LIFE_GAUGE;
@@ -471,7 +460,7 @@ void enems_move (void) {
 
 				if (malotes [enoffsmasi].t > 15 && en_an_fanty_activo [gpit] == 0 && (rand () & 31) == 1) {
 					en_an_fanty_activo [gpit] = 1;
-					if (py > 5120) en_an_y [gpit] = -1024; else en_an_y [gpit] = 10240;
+					if (p_y > 5120) en_an_y [gpit] = -1024; else en_an_y [gpit] = 10240;
 					en_an_x [gpit] = (rand () % 240 - 8) << 6;
 					en_an_vx [gpit] = en_an_vy [gpit] = 0;
 					en_an_base_frame [gpit] = 4;

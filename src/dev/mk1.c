@@ -6,11 +6,21 @@
 // Copyleft 2010-2014 The Mojon Twins
 
 #include <spritepack.h>
+
+// We are using some stuff from splib2 directly.
+#asm
+		LIB SPMoveSprAbs
+		LIB SPPrintAtInv
+		LIB SPTileArray
+		LIB SPInvalidate
+		LIB SPCompDListAddr
+#endasm
+
 #include "config.h"
 
 #ifdef MODE_128K
 	// Versión para 128K
-	#pragma output STACKPTR=24199
+	#pragma output STACKPTR=23999
 	#define FREEPOOL 61697
 #else
 	// Versión para 48K

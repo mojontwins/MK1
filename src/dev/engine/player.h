@@ -8,35 +8,35 @@ void player_init (void) {
 	// (de ahí lo de inicializar).
 		
 	#ifndef COMPRESSED_LEVELS
-		gpx = PLAYER_INI_X << 4; px = gpx << 6;
-		gpy = PLAYER_INI_Y << 4; py = gpy << 6;
+		gpx = PLAYER_INI_X << 4; p_x = gpx << 6;
+		gpy = PLAYER_INI_Y << 4; p_y = gpy << 6;
 	#endif	
-	pvy = 0;
-	pvx = 0;
-	pcont_salto = 1;
-	psaltando = 0;
-	pframe = 0;
-	psubframe = 0;
+	p_vy = 0;
+	p_vx = 0;
+	p_cont_salto = 1;
+	p_saltando = 0;
+	p_frame = 0;
+	p_subframe = 0;
 	#ifdef PLAYER_MOGGY_STYLE
-		pfacing = FACING_DOWN;
-		pfacing_v = pfacing_h = 0xff;
+		p_facing = FACING_DOWN;
+		p_facing_v = p_facing_h = 0xff;
 	#else
-		pfacing = 1;
+		p_facing = 1;
 	#endif	
-	pestado = 	EST_NORMAL;
-	pct_estado = 0;
+	p_estado = 	EST_NORMAL;
+	p_ct_estado = 0;
 	#if !defined(COMPRESSED_LEVELS) || defined(REFILL_ME)	
-		plife = 		PLAYER_LIFE;
+		p_life = 		PLAYER_LIFE;
 	#endif
-	pobjs =	0;
-	pkeys = 0;
-	pkilled = 0;
-	pdisparando = 0;
+	p_objs =	0;
+	p_keys = 0;
+	p_killed = 0;
+	p_disparando = 0;
 	#ifdef MAX_AMMO
 		#ifdef INITIAL_AMMO
-			pammo = INITIAL_AMMO
+			p_ammo = INITIAL_AMMO
 		#else
-			pammo = MAX_AMMO;
+			p_ammo = MAX_AMMO;
 		#endif
 	#endif	
 	pant_final = SCR_FIN;
@@ -57,491 +57,485 @@ void player_init (void) {
 	#endif
 }
 
+
+void player_calc_bounding_box (void) {
+	#if defined (BOUNDING_BOX_8_BOTTOM)
+		#asm
+			ld  a, (_gpx)
+			add 4
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_ptx1), a
+			ld  a, (_gpx)
+			add 11
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_ptx2), a
+			ld  a, (_gpy)
+			add 8
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_pty1), a
+			ld  a, (_gpy)
+			add 15
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_pty2), a
+		#endasm
+	#elif defined (BOUNDING_BOX_8_CENTERED)
+		#asm
+			ld  a, (_gpx)
+			add 4
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_ptx1), a
+			ld  a, (_gpx)
+			add 11
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_ptx2), a
+			ld  a, (_gpy)
+			add 4
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_pty1), a
+			ld  a, (_gpy)
+			add 11
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_pty2), a
+		#endasm
+	#else
+		#asm
+			ld  a, (_gpx)
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_ptx1), a
+			ld  a, (_gpx)
+			add 15
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_ptx2), a
+			ld  a, (_gpy)
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_pty1), a
+			ld  a, (_gpy)
+			add 15
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_pty2), a
+		#endasm
+	#endif
+}
+
 unsigned char player_move (void) {
 	wall_v = wall_h = 0;
 		
-	/* Por partes. Primero el movimiento vertical. La ecuación de movimien-
-	   to viene a ser, en cada ciclo:
-
-	   1.- vy = vy + g
-	   2.- y = y + vy
-
-	   O sea la velocidad afectada por la gravedad. 
-	   Para no colarnos con los nmeros, ponemos limitadores:
-	*/
+	// ***************************************************************************
+	//  MOVEMENT IN THE VERTICAL AXIS
+	// ***************************************************************************
 
 	#ifndef PLAYER_MOGGY_STYLE
-		// Si el tipo de movimiento no es MOGGY_STYLE, entonces nos afecta la gravedad.
-		if (pvy < PLAYER_MAX_VY_CAYENDO)
-			pvy += PLAYER_G;
-		else
-			pvy = PLAYER_MAX_VY_CAYENDO;
 		
-		#ifdef PLAYER_CUMULATIVE_JUMP
-			if (!psaltando)
-		#endif
+		// Do gravity
 		
-		if (pgotten) pvy = 0;		
+		#asm
+				; Signed comparisons are hard
+				; p_vy <= PLAYER_MAX_VY_CAYENDO - PLAYER_G
+
+				; We are going to take a shortcut.
+				; If p_vy < 0, just add PLAYER_G.
+				; If p_vy > 0, we can use unsigned comparition anyway.
+
+				ld  hl, (_p_vy)
+				bit 7, h
+				jr  nz, _player_gravity_add 	; < 0
+
+				ld  de, PLAYER_MAX_VY_CAYENDO - PLAYER_G
+				or  a
+				push hl
+				sbc hl, de
+				pop hl
+				jr  nc, _player_gravity_maximum
+
+			._player_gravity_add
+				ld  de, PLAYER_G
+				add hl, de
+				jr  _player_gravity_vy_set
+
+			._player_gravity_maximum
+				ld  hl, PLAYER_MAX_VY_CAYENDO
+
+			._player_gravity_vy_set
+				ld  (_p_vy), hl
+
+			._player_gravity_done
+
+			#ifdef PLAYER_CUMULATIVE_JUMP
+				ld  a, (_p_jmp_on)
+				or  a
+				jr  nz, _player_gravity_p_gotten_done
+			#endif
+
+				ld  a, (_p_gotten)
+				or  a
+				jr  z, _player_gravity_p_gotten_done
+
+				xor a
+				ld  (_p_vy), a
+
+			._player_gravity_p_gotten_done
+		#endasm	
 	#else
-		// Si lo es, entonces el movimiento vertical se comporta exactamente igual que 
-		// el horizontal.
+
+		// Pad do
+
 		if ( ! ((pad0 & sp_UP) == 0 || (pad0 & sp_DOWN) == 0)) {
-			pfacing_v = 0xff;
-			if (pvy > 0) {
-				pvy -= PLAYER_RX;
-				if (pvy < 0)
-					pvy = 0;
-			} else if (pvy < 0) {
-				pvy += PLAYER_RX;
-				if (pvy > 0)
-					pvy = 0;
+			p_facing_v = 0xff;
+			if (p_vy > 0) {
+				p_vy -= PLAYER_RX;
+				if (p_vy < 0) p_vy = 0;
+			} else if (p_vy < 0) {
+				p_vy += PLAYER_RX;
+				if (p_vy > 0) p_vy = 0;
 			}
 		}
 
 		if ((pad0 & sp_UP) == 0) {
-			pfacing_v = FACING_UP;
-			if (pvy > -PLAYER_MAX_VX) {
-				pvy -= PLAYER_AX;
-			}
+			p_facing_v = FACING_UP;
+			if (p_vy > -PLAYER_MAX_VX) p_vy -= PLAYER_AX;
 		}
 
 		if ((pad0 & sp_DOWN) == 0) {
-			pfacing_v = FACING_DOWN;
-			if (pvy < PLAYER_MAX_VX) {
-				pvy += PLAYER_AX;
-			}
+			p_facing_v = FACING_DOWN;
+			if (p_vy < PLAYER_MAX_VX) p_vy += PLAYER_AX;
 		}
 	#endif
 
 	#ifdef PLAYER_HAS_JETPAC
 		if ((pad0 & sp_UP) == 0) {
-			pvy -= PLAYER_INCR_JETPAC;
-			if (pvy < -PLAYER_MAX_VY_JETPAC) pvy = -PLAYER_MAX_VY_JETPAC;
+			p_vy -= PLAYER_INCR_JETPAC;
+			if (p_vy < -PLAYER_MAX_VY_JETPAC) p_vy = -PLAYER_MAX_VY_JETPAC;
 		}
 	#endif
 
-	py += pvy;
+	p_y += p_vy;
 	
+	#if !defined (PLAYER_MOGGY_STYLE)
+		if (p_gotten) p_y += ptgmy;
+	#endif
+
 	// Safe
 		
-	if (py < 0)
-		py = 0;
-		
-	if (py > 9216)
-		py = 9216;
+	if (p_y < 0) p_y = 0;
+	if (p_y > 9216) p_y = 9216;
 
-	
-	/* El problema es que no es tan fácil... Hay que ver si no nos chocamos.
-	   Si esto pasa, hay que "recular" hasta el borde del obstáculo.
+	gpy = p_y >> 6;
 
-	   Por eso miramos el signo de vy, para que los cálculos sean más sencillos.
-	   De paso vamos a precalcular un par de cosas para que esto vaya más rápido.
-	*/
+	// Collision, may set possee, hit_v
 
-	gpx = px >> 6;				// dividimos entre 64 para pixels, y luego entre 16 para tiles.
-	gpy = py >> 6;
-	gpxx = gpx >> 4;
-	gpyy = gpy >> 4;
-	
-	// Ya	
-	possee = 0;
+	player_calc_bounding_box ();
+
 	hit_v = 0;
-	#ifdef BOUNDING_BOX_8_BOTTOM	
-		if (pvy < 0) { 			// estamos ascendiendo
-			if ((gpy & 15) < 8) {
-				if ( ((gpx & 15) < 12 && attr (gpxx, gpyy) & 8) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy) & 8)) {
-					#ifdef PLAYER_BOUNCE_WITH_WALLS
-						pvy = -(pvy / 2);
-					#else				
-						pvy = 0;
-					#endif
-					py = ((gpyy + 1) << 10) - 512;
-					wall_v = WTOP;
-				} else if ( ((gpx & 15) < 12 && attr (gpxx, gpyy) & 1) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy) & 1)) {
-					hit_v = 1; 
-				}
-			}
-		} else if (pvy > 0 && (gpy & 15) < 8) { 	// estamos descendiendo
-			if (py < 9216) {
-				if ( ((gpx & 15) < 12 && attr (gpxx, gpyy + 1) & 12) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 12)) {
-					#if defined(PLAYER_BOUNCE_WITH_WALLS) && defined(PLAYER_MOGGY_STYLE)
-						pvy = -(pvy / 2);
-					#else				
-						#ifdef PLAYER_CUMULATIVE_JUMP
-							if (!psaltando)
-						#endif				
-						pvy = 0;
-					#endif
-					py = gpyy << 10;
-					wall_v = WBOTTOM;
-					possee = 1;
-				} else if ( ((gpx & 15) < 12 && attr (gpxx, gpyy + 1) & 1) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 1)) {
-					hit_v = 1;
-				}
-			}
+	cx1 = ptx1; cx2 = ptx2;
+	#if defined (PLAYER_MOGGY_STYLE)
+		if (p_vy < 0)
+	#else	
+		if (p_vy + ptgmy < 0) 
+	#endif
+	{
+		cy1 = cy2 = pty1;
+		cm_two_points ();
+
+		if ((at1 & 8) || (at2 & 8)) {
+			#ifdef PLAYER_BOUNCE_WITH_WALLS
+				p_vy = -(p_vy / 2);
+			#else
+				p_vy = 0;
+			#endif
+
+			#if defined (BOUNDING_BOX_8_BOTTOM)			
+				gpy = ((pty1 + 1) << 4) - 8;
+			#elif defined (BOUNDING_BOX_8_CENTERED)
+				gpy = ((pty1 + 1) << 4) - 4;
+			#elif defined (BOUNDING_BOX_TINY_BOTTOM)
+				gpy = ((pty1 + 1) << 4) - 14;
+			#else
+				gpy = ((pty1 + 1) << 4);
+			#endif
+
+			p_y = gpy << 6;
+
+			wall_v = WTOP;
 		}
-	#else
-		#ifdef BOUNDING_BOX_8_CENTERED
-			if (pvy < 0) { 			
-				if ((gpy & 15) < 12) {
-					if ( ((gpx & 15) < 12 && attr (gpxx, gpyy) & 8) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy) & 8)) {
-						#ifdef PLAYER_BOUNCE_WITH_WALLS
-							pvy = -(pvy / 2);
-						#else				
-							pvy = 0;
-						#endif
-						py = ((gpyy + 1) << 10) - 256;
-						wall_v = WTOP;
-					} else if ( ((gpx & 15) < 12 && attr (gpxx, gpyy) & 1) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy) & 1)) {
-						hit_v = 1; 
-					}
-				}
-			} else if (pvy > 0 && (gpy & 15) >= 4) { 	
-				if (py < 9216) {
-					if ( ((gpx & 15) < 12 && attr (gpxx, gpyy + 1) & 12) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 12)) {
-						#if defined(PLAYER_BOUNCE_WITH_WALLS) && defined(PLAYER_MOGGY_STYLE)
-							pvy = -(pvy / 2);
-						#else
-							#ifdef PLAYER_CUMULATIVE_JUMP
-								if (!psaltando)
-							#endif
-							pvy = 0;
-						#endif
-						py = (gpyy << 10) + 256;
-						wall_v = WBOTTOM;
-						possee = 1;
-					} else if ( ((gpx & 15) < 12 && attr (gpxx, gpyy + 1) & 1) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 1)) {
-						hit_v = 1; 
-					}
-				}
-			}
+	}
+	
+	#if defined (PLAYER_MOGGY_STYLE)
+		if (p_vy > 0)
+	#else	
+		if (p_vy + ptgmy > 0)
+	#endif
+	{
+		cy1 = cy2 = pty2;
+		cm_two_points ();
+
+		#ifdef PLAYER_MOGGY_STYLE
+			if ((at1 & 8) || (at2 & 8))
 		#else
-			if (pvy < 0) { 		
-				if (attr (gpxx, gpyy) & 8 || ((gpx & 15) && attr (gpxx + 1, gpyy) & 8)) {
-					#ifdef PLAYER_BOUNCE_WITH_WALLS
-						pvy = -(pvy / 2);
-					#else				
-						pvy = 0;
-					#endif
-					py = (gpyy + 1) << 10;
-					wall_v = WTOP;	
-				} else if (attr (gpxx, gpyy) & 1 || ((gpx & 15) && attr (gpxx + 1, gpyy) & 1)) {
-					hit_v = 1; 
-				}
-			} else if (pvy > 0 && (gpy & 15) < 8) {
-				if (py < 9216) {
-					if (attr (gpxx, gpyy + 1) & 12 || ((gpx & 15) && attr (gpxx + 1, gpyy + 1) & 12))
-					{
-						#if defined(PLAYER_BOUNCE_WITH_WALLS) && defined(PLAYER_MOGGY_STYLE)
-							pvy = -(pvy / 2);
-						#else				
-							#ifdef PLAYER_CUMULATIVE_JUMP
-								if (!psaltando)
-							#endif
-							pvy = 0;
-						#endif
-						py = gpyy << 10;
-						possee = 1;
-						wall_v = WBOTTOM;
-					} else if (attr (gpxx, gpyy + 1) & 1 || ((gpx & 15) && attr (gpxx + 1, gpyy + 1) & 1)) {
-						hit_v = 1; 
-					}
-				}
-			}
-		#endif
+			// Greed Optimization tip! Remove this line and uncomment the next one:
+			// (As long as you don't have type 8 blocks over type 4 blocks in your game, the short line is fine)
+			if ((at1 & 8) || (at2 & 8) || (((gpy - 1) & 15) < 8 && ((at1 & 4) || (at2 & 4))))
+			//if (((gpy - 1) & 15) < 7 && ((at1 & 12) || (at2 & 12))) {
+		#endif			
+		{
+			#ifdef PLAYER_BOUNCE_WITH_WALLS
+				p_vy = -(p_vy / 2);
+			#else
+				p_vy = 0;
+			#endif
+				
+			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_TINY_BOTTOM)
+				gpy = (pty2 - 1) << 4;
+			#elif defined (BOUNDING_BOX_8_CENTERED)				
+				gpy = ((pty2 - 1) << 4) + 4;
+			#else
+				gpy = (pty2 - 1) << 4;				
+			#endif
+
+			p_y = gpy << 6;
+			
+			wall_v = WBOTTOM;
+		}
+	}
+
+	#ifndef DEACTIVATE_EVIL_TILE
+		if (p_vy) hit_v = ((at1 & 1) || (at2 & 1));
 	#endif
 	
-	/* Salto: El salto se reduce a dar un valor negativo a vy. Esta es la forma más
-	   sencilla. Sin embargo, para más control, usamos el tipo de salto "mario bros".
-	   Para ello, en cada pulsación dejaremos decrementar vy hasta un mínimo, y de-
-	   tectando que no se vuelva a pulsar cuando estemos en el aire. Juego de banderas ;)
-	*/
+	gpxx = gpx >> 4;
+	gpyy = gpy >> 4;
+
+	#ifndef PLAYER_MOGGY_STYLE
+		cy1 = cy2 = (gpy + 16) >> 4;
+		cx1 = ptx1; cx2 = ptx2;
+		cm_two_points ();
+		possee = ((at1 & 12) || (at2 & 12)) && (gpy & 15) < 8;
+	#endif
+
+	// Jump
 
 	#ifdef PLAYER_HAS_JUMP
-
-		#if defined (PLAYER_CAN_FIRE) && !defined (USE_TWO_BUTTONS)
-	
-			#ifdef PLAYER_CUMULATIVE_JUMP
-				if (((pad0 & sp_UP) == 0) && (possee || pgotten || hit_v)) {
-					pvy = -pvy - PLAYER_VY_INICIAL_SALTO;
-					if (pvy < -PLAYER_MAX_VY_SALTANDO) pvy = -PLAYER_MAX_VY_SALTANDO;
-			#else		
-				if (((pad0 & sp_UP) == 0) && psaltando == 0 && (possee || pgotten || hit_v)) {
-			#endif
-				psaltando = 1;
-				pcont_salto = 0;
-				#ifdef MODE_128K
-					wyz_play_sound (2);
-				#else
-					beeper_fx (3);
-				#endif
-			}
-
-			#ifndef PLAYER_CUMULATIVE_JUMP	
-				if ( ((pad0 & sp_UP) == 0) && psaltando ) {
-					pvy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (pcont_salto>>1));
-					if (pvy < -PLAYER_MAX_VY_SALTANDO) pvy = -PLAYER_MAX_VY_SALTANDO;
-					pcont_salto ++;
-					if (pcont_salto == 8)
-						psaltando = 0;
-				}
-			#endif
-			
-			if ((pad0 & sp_UP))
-				psaltando = 0;
 		
+		#if defined (PLAYER_CAN_FIRE) && !defined (USE_TWO_BUTTONS)
+			rda = (pad0 & sp_UP) == 0;
 		#elif defined (PLAYER_CAN_FIRE) && defined (USE_TWO_BUTTONS)
-
-			#ifdef PLAYER_CUMULATIVE_JUMP
-				if (sp_KeyPressed (key_jump) && (possee || pgotten || hit_v)) {
-					pvy = -pvy - PLAYER_VY_INICIAL_SALTO;
-					if (pvy < -PLAYER_MAX_VY_SALTANDO) pvy = -PLAYER_MAX_VY_SALTANDO;
-			#else		
-				if (sp_KeyPressed (key_jump) && psaltando == 0 && (possee || pgotten || hit_v)) {
-			#endif
-				psaltando = 1;
-				pcont_salto = 0;
-				#ifdef MODE_128K
-					wyz_play_sound (2);
-				#else				
-					beeper_fx (3);
-				#endif
-			}
-
-			#ifndef PLAYER_CUMULATIVE_JUMP	
-				if (sp_KeyPressed (key_jump) && psaltando ) {
-					pvy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (pcont_salto>>1));
-					if (pvy < -PLAYER_MAX_VY_SALTANDO) pvy = -PLAYER_MAX_VY_SALTANDO;
-					pcont_salto ++;
-					if (pcont_salto == 8)
-						psaltando = 0;
-				}
-			#endif
-	
-			if (!sp_KeyPressed (key_jump))
-				psaltando = 0;
-
+			rda = sp_KeyPressed (key_jump);
 		#else
-
-			#ifdef PLAYER_CUMULATIVE_JUMP
-				if (((pad0 & sp_FIRE) == 0) && (possee || pgotten || hit_v)) {
-					pvy = -pvy - PLAYER_VY_INICIAL_SALTO;
-					if (pvy < -PLAYER_MAX_VY_SALTANDO) pvy = -PLAYER_MAX_VY_SALTANDO;
-			#else
-				if (((pad0 & sp_FIRE) == 0) && psaltando == 0 && (possee || pgotten || hit_v)) {
-			#endif
-				psaltando = 1;
-				pcont_salto = 0;
-				#ifdef MODE_128K
-					wyz_play_sound (2);
-				#else				
-					beeper_fx (3);
-				#endif
-			}
-
-			#ifndef PLAYER_CUMULATIVE_JUMP	
-				if ( ((pad0 & sp_FIRE) == 0) && psaltando ) {
-					pvy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (pcont_salto>>1));
-					if (pvy < -PLAYER_MAX_VY_SALTANDO) pvy = -PLAYER_MAX_VY_SALTANDO;
-					pcont_salto ++;
-					if (pcont_salto == 8)
-						psaltando = 0;
-				}
-			#endif
-
-			if ((pad0 & sp_FIRE))
-				psaltando = 0;
+			rda = (pad0 & sp_FIRE) == 0;
 		#endif
+
+		if (rda) {
+			if (p_saltando == 0) {
+				if (possee || p_gotten || hit_v) {
+					p_saltando = 1;
+					p_cont_salto = 0;
+					#ifdef MODE_128K
+						wyz_play_sound (2);
+					#else
+						beeper_fx (3);
+					#endif
+				}
+			} else {
+				p_vy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (p_cont_salto >> 1));
+				if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
+				++ p_cont_salto;
+				if (p_cont_salto == 8) p_saltando = 0;
+			}
+		} else p_saltando = 0;
+	
 	#endif
 
 	// Bootee engine
+
 	#ifdef PLAYER_BOOTEE
-		if ( psaltando == 0 && (possee || pgotten || hit_v) ) {
-			psaltando = 1;
-			pcont_salto = 0;
+		if ( p_saltando == 0 && (possee || p_gotten || hit_v) ) {
+			p_saltando = 1;
+			p_cont_salto = 0;
 			#ifdef MODE_128K
-					wyz_play_sound (2);
+				wyz_play_sound (2);
 			#else				
-					beeper_fx (3);
+				beeper_fx (3);
 			#endif
 		}
 		
-		if (psaltando ) {
-			pvy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (pcont_salto>>1));
-			if (pvy < -PLAYER_MAX_VY_SALTANDO) pvy = -PLAYER_MAX_VY_SALTANDO;
-			pcont_salto ++;
-			if (pcont_salto == 8)
-				psaltando = 0;
+		if (p_saltando ) {
+			p_vy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (p_cont_salto>>1));
+			if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
+			++ p_cont_salto;
+			if (p_cont_salto == 8)
+				p_saltando = 0;
 		}
 	#endif	
 
-	// ------ ok con el movimiento vertical.
-
-	/* Movimiento horizontal:
-
-	   Mientras se pulse una tecla de dirección, 
-	   
-	   x = x + vx
-	   vx = vx + ax
-
-	   Si no se pulsa nada:
-
-	   x = x + vx
-	   vx = vx - rx
-	*/
+	// ***************************************************************************
+	//  MOVEMENT IN THE HORIZONTAL AXIS
+	// ***************************************************************************
 
 	if ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {
 		#ifdef PLAYER_MOGGY_STYLE		
-			pfacing_h = 0xff;
+			p_facing_h = 0xff;
 		#endif
-		if (pvx > 0) {
-			pvx -= PLAYER_RX;
-			if (pvx < 0)
-				pvx = 0;
-		} else if (pvx < 0) {
-			pvx += PLAYER_RX;
-			if (pvx > 0)
-				pvx = 0;
+		if (p_vx > 0) {
+			p_vx -= PLAYER_RX;
+			if (p_vx < 0) p_vx = 0;
+		} else if (p_vx < 0) {
+			p_vx += PLAYER_RX;
+			if (p_vx > 0) p_vx = 0;
 		}
 	}
 
 	if ((pad0 & sp_LEFT) == 0) {
 		#ifdef PLAYER_MOGGY_STYLE
-			pfacing_h = FACING_LEFT;
+			p_facing_h = FACING_LEFT;
 		#endif
-		if (pvx > -PLAYER_MAX_VX) {
+		if (p_vx > -PLAYER_MAX_VX) {
 			#ifndef PLAYER_MOGGY_STYLE			
-				pfacing = 0;
+				p_facing = 0;
 			#endif
-			pvx -= PLAYER_AX;
+			p_vx -= PLAYER_AX;
 		}
 	}
 
 	if ((pad0 & sp_RIGHT) == 0) {
 		#ifdef PLAYER_MOGGY_STYLE	
-			pfacing_h = FACING_RIGHT;
+			p_facing_h = FACING_RIGHT;
 		#endif
-		if (pvx < PLAYER_MAX_VX) {
-			pvx += PLAYER_AX;
+		if (p_vx < PLAYER_MAX_VX) {
+			p_vx += PLAYER_AX;
 			#ifndef PLAYER_MOGGY_STYLE						
-				pfacing = 1;
+				p_facing = 1;
 			#endif
 		}
 	}
 
-	px = px + pvx;
+	p_x = p_x + p_vx;
+	#ifndef PLAYER_MOGGY_STYLE
+		p_x += ptgmx;
+	#endif
 	
 	// Safe
 	
-	if (px < 0)
-		px = 0;
-		
-	if (px > 14336)
-		px = 14336;
-		
-	/* Ahora, como antes, vemos si nos chocamos con algo, y en ese caso
-	   paramos y reculamos */
+	if (p_x < 0) p_x = 0;
+	if (p_x > 14336) p_x = 14336;
 
-	gpy = py >> 6;
-	gpx = px >> 6;
-	gpyy = gpy >> 4;
-	gpxx = gpx >> 4;
+	gpox = gpx;
+	gpx = p_x >> 6;
+		
+	// Collision. May set hit_h
+	player_calc_bounding_box ();
+
 	hit_h = 0;
-	#ifdef BOUNDING_BOX_8_BOTTOM	
-		if (pvx < 0 && (gpx & 15) < 12) {
-			if ( ((gpy & 15) < 8 && attr (gpxx, gpyy) & 8) || ((gpy & 15) && attr (gpxx, gpyy + 1) & 8)) {
-				#ifdef PLAYER_BOUNCE_WITH_WALLS
-					pvx = -(pvx / 2);
-				#else				
-					pvx = 0;
-				#endif
-				px = ((gpxx + 1) << 10) - 256;
-				wall_h = WLEFT;
-			} else if ( ((gpy & 15) < 8 && attr (gpxx, gpyy) & 1) || ((gpy & 15) && attr (gpxx, gpyy + 1) & 1)) {
-				hit_h = 1; 
-			}
-		} else if ((gpx & 15) >= 4) {
-			if ( ((gpy & 15) < 8 && attr (gpxx + 1, gpyy) & 8) || ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 8)) {
-				#ifdef PLAYER_BOUNCE_WITH_WALLS
-					pvx = -(pvx / 2);
-				#else				
-					pvx = 0;
-				#endif
-				px = (gpxx << 10) + 256;
-				wall_h = WRIGHT;
-			} else if ( ((gpy & 15) < 8 && attr (gpxx + 1, gpyy) & 1) || ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 1)) {
-				hit_h = 1; 
-			}
-		}
-	#else
-		#ifdef BOUNDING_BOX_8_CENTERED
-			if (pvx < 0 && (gpx & 15) < 12) {
-				if ( ((gpy & 15) < 12 && attr (gpxx, gpyy) & 8) || ((gpy & 15) > 4 && attr (gpxx, gpyy + 1) & 8)) {
-					#ifdef PLAYER_BOUNCE_WITH_WALLS
-						pvx = -(pvx / 2);
-					#else				
-						pvx = 0;
-					#endif
-					px = ((gpxx + 1) << 10) - 256;
-					wall_h = WLEFT;
-				} else if ( ((gpy & 15) < 8 && attr (gpxx, gpyy) & 1) || ((gpy & 15) && attr (gpxx, gpyy + 1) & 1)) {
-					hit_h = 1; 
-				}
-			} else if ((gpx & 15) >= 4) {
-				if ( ((gpy & 15) < 12 && attr (gpxx + 1, gpyy) & 8) || ((gpy & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 8)) {
-					#ifdef PLAYER_BOUNCE_WITH_WALLS
-						pvx = -(pvx / 2);
-					#else				
-						pvx = 0;
-					#endif
-					px = (gpxx << 10) + 256;
-					wall_h = WRIGHT;
-				} else if ( ((gpy & 15) < 8 && attr (gpxx + 1, gpyy) & 1) || ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 1)) {
-					hit_h = 1; 
-				}
-			}
-		#else
-			if (pvx < 0) {
-				if (attr (gpxx, gpyy) & 8 || ((gpy & 15) && attr (gpxx, gpyy + 1) & 8)) {
-					#ifdef PLAYER_BOUNCE_WITH_WALLS
-						pvx = -(pvx / 2);
-					#else				
-						pvx = 0;
-					#endif
-					px = (gpxx + 1) << 10;
-					wall_h = WLEFT;
-				} else if (attr (gpxx, gpyy) & 1 || ((gpy & 15) && attr (gpxx, gpyy + 1) & 1)) {
-					hit_h = 1; 
-				}
-			} else {
-				if (attr (gpxx + 1, gpyy) & 8 || ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 8)) {
-					#ifdef PLAYER_BOUNCE_WITH_WALLS
-						pvx = -(pvx / 2);
-					#else				
-						pvx = 0;
-					#endif
-					px = gpxx << 10;
-					wall_h = WRIGHT;
-				} else if (attr (gpxx + 1, gpyy) & 1 || ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 1)) {
-					hit_h = 1; 
-				}
-			}
-		#endif
+	cy1 = pty1; cy2 = pty2;
+
+	#if defined (PLAYER_MOGGY_STYLE)
+		if (p_vx < 0)
+	#else	
+		if (p_vx + ptgmx < 0)
 	#endif
+	{
+		cx1 = cx2 = ptx1;
+		cm_two_points ();
+
+		if ((at1 & 8) || (at2 & 8)) {
+			#ifdef PLAYER_BOUNCE_WITH_WALLS
+				p_vx = -(p_vx / 2);
+			#else
+				p_vx = 0;
+			#endif
+
+			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)				
+				gpx = ((ptx1 + 1) << 4) - 4;
+			#else
+				gpx = ((ptx1 + 1) << 4);
+			#endif
+
+			p_x = gpx << 6;
+			wall_h = WLEFT;
+		}
+		#ifndef DEACTIVATE_EVIL_TILE
+			else hit_h = ((at1 & 1) || (at2 & 1));
+		#endif
+	}
+
+	#if defined (PLAYER_MOGGY_STYLE)
+		if (p_vx > 0)
+	#else	
+		if (p_vx + ptgmx > 0)
+	#endif
+	{
+		cx1 = cx2 = ptx2; 
+		cm_two_points ();
+
+		if ((at1 & 8) || (at2 & 8)) {
+			#ifdef PLAYER_BOUNCE_WITH_WALLS
+				p_vx = -(p_vx / 2);
+			#else
+				p_vx = 0;
+			#endif
+
+			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)				
+				gpx = (ptx1 << 4) + 4;
+			#else
+				gpx = (ptx1 << 4);
+			#endif
+
+			p_x = gpx << 6;
+			wall_h = WRIGHT;
+		}
+		#ifndef DEACTIVATE_EVIL_TILE
+			else hit_h = ((at1 & 1) || (at2 & 1));
+		#endif
+	}
+
+	// Priority to decide facing
 
 	#ifdef PLAYER_MOGGY_STYLE
-		// Priority to decide facing
 		#ifdef TOP_OVER_SIDE
-			if (pfacing_v != 0xff) {
-				pfacing = pfacing_v;
-			} else if (pfacing_h != 0xff) {
-				pfacing = pfacing_h;
+			if (p_facing_v != 0xff) {
+				p_facing = p_facing_v;
+			} else if (p_facing_h != 0xff) {
+				p_facing = p_facing_h;
 			}
 		#else
-			if (pfacing_h != 0xff) {
-				pfacing = pfacing_h;
-			} else if (pfacing_v != 0xff) {
-				pfacing = pfacing_v;
+			if (p_facing_h != 0xff) {
+				p_facing = p_facing_h;
+			} else if (p_facing_v != 0xff) {
+				p_facing = p_facing_v;
 			}
 		#endif	
 	#endif
@@ -550,107 +544,90 @@ unsigned char player_move (void) {
 	pushed_any = 0;
 	#endif
 
-	#if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
-		// Empujar cajas (tile #14)
-		gpx = px >> 6;
-		gpy = py >> 6;
-		gpxx = gpx >> 4;
-		gpyy = gpy >> 4;
-		
-		// En modo plataformas, no se puede empujar verticalmente
-		#ifdef PLAYER_MOGGY_STYLE
-			
+	#if defined (PLAYER_PUSH_BOXES) || !defined (DEACTIVATE_KEYS)
+		gpx = p_x >> 6;
+		cx1 = (gpx + 8) >> 4;
+		cy1 = (gpy + 8) >> 4;
+		#ifdef PLAYER_GENITAL
 			if (wall_v == WTOP) {
-				#if defined(BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED)
-					if (attr (gpxx, gpyy) == 10) {				
-						cx1 = gpxx; cy1 = gpyy; cx2 = gpxx; cy2 = gpyy - 1; process_tile ();
-					}
+				// interact up			
+				#if defined (BOUNDING_BOX_8_BOTTOM)
+					cy1 = (gpy + 7) >> 4;
+				#elif defined (BOUNDING_BOX_8_CENTERED)
+					cy1 = (gpy + 3) >> 4;
 				#else
-					if (attr (gpxx, gpyy - 1) == 10) {				
-						cx1 = gpxx; cy1 = gpyy - 1; cx2 = gpxx; cy2 = gpyy - 2; process_tile ();
-					}
+					cy1 = gpy >> 3;		
 				#endif
-				
-				if ((gpx & 15)) {
-					#if defined(BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED)
-						if (attr (gpxx + 1, gpyy) == 10) {
-							cx1 = gpxx + 1; cy1 = gpyy; cx2 = gpxx + 1; cy2 = gpyy - 1; process_tile ();
-						}
-					#else
-						if (qtile (gpxx + 1, gpyy - 1) == 10) {
-							cx1 = gpxx + 1; cy1 = gpyy - 1; cx2 = gpxx + 1; cy2 = gpyy - 2; process_tile ();
-						}
-					#endif
-				}
-			} else if (wall_v == WBOTTOM) {
-				if (attr (gpxx, gpyy + 1) == 10) {
-					cx1 = gpxx; cy1 = gpyy + 1; cx2 = gpxx; cx2 = gpyy + 2; process_tile ();
-				}
-				if ((gpx & 15)) {
-					if (attr (gpxx + 1, gpyy + 1) == 10) {
-						cx1 = gpxx + 1; cy1 = gpyy + 1; cx2 = gpxx + 1; cy2 = gpyy + 2; process_tile ();
-					}	
-				}
-			}
-		#endif
 
-		// Horizontalmente
-		
-		if (wall_h == WRIGHT) {
-			if (attr (gpxx + 1, gpyy) == 10) {
-				cx1 = gpxx + 1; cy1 = gpyy; cx2 = gpxx + 2; cy2 = gpyy; process_tile ();
-			}
-			if ((gpy & 15)) {
-				if (attr (gpxx + 1, gpyy + 1) == 10) {
-					cx1 = gpxx + 1; cy1 = gpyy + 1; cx2 = gpxx + 2; cy2 = gpyy + 1; process_tile ();
+				if (attr (cx1, cy1) == 10) {
+					x0 = x1 = cx1; y0 = cy1; y1 = cy1 - 1;
+					process_tile ();
 				}
-			}
-		} else if (wall_h == WLEFT) {
-			#if defined(BOUNDING_BOX_8_BOTTOM) || defined(BOUNDING_BOX_8_CENTERED)
-				if (attr (gpxx, gpyy) == 10) {
-					cx1 = gpxx; cy1 = gpyy; cx2 = gpxx - 1; cy2 = gpyy; process_tile ();
-				}
-			#else
-				if (attr (gpxx - 1, gpyy) == 10) {
-					cx1 = gpxx - 1; cy1 = gpyy; cx2 = gpxx - 2; cy2 = gpyy; process_tile ();
-				}
-			#endif
-			
-			if ((gpy & 15)) {
-				#if defined(BOUNDING_BOX_8_BOTTOM) || defined(BOUNDING_BOX_8_CENTERED)
-					if (attr (gpxx, gpyy + 1) == 10) {
-						cx1 = gpxx; cy1 = gpyy + 1; cx2 = gpxx - 1; cy2 = gpyy + 1; process_tile ();
-					}
+
+			} else if (wall_v == WBOTTOM) {
+				// interact down
+				#if defined (BOUNDING_BOX_8_BOTTOM)
+					cy1 = (gpy + 16) >> 4;
+				#elif defined (BOUNDING_BOX_8_CENTERED)
+					cy1 = (gpy + 12) >> 4;
 				#else
-					if (attr (gpxx - 1, gpyy + 1) == 10) {
-						cx1 = gpxx - 1; cy1 = gpyy + 1; cx2 = gpxx - 2; cy2 = gpyy + 1; process_tile ();
-					}
-				#endif
+					cy1 = (gpy + 16) >> 3;				
+				#endif		
+			
+				if (attr (cx1, cy1) == 10) {
+					x0 = x1 = cx1; y0 = cy1; y1 = cy1 + 1;
+					process_tile ();
+				}
+			} else
+		#endif	
+		
+		if (wall_h == WLEFT) {		
+			// interact left
+			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED)
+				cx1 = (gpx + 3) >> 4;
+			#else
+				cx1 = gpx >> 4;		
+			#endif		
+
+			if (attr (cx1, cy1) == 10) {
+				y0 = y1 = cy1; x0 = cx1; x1 = cx1 - 1;
+				process_tile ();
 			}
-		}						
+		} else if (wall_h == WRIGHT) {
+			// interact right
+			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED)
+				cx1 = (gpx + 12) >> 4;
+			#else
+				cx1 = (gpx + 16) >> 4;		
+			#endif		
+			if (attr (cx1, cy1) == 10) {
+				y0 = y1 = cy1; x0 = cx1; x1 = cx1 + 1;
+				process_tile ();
+			}
+		}
 	#endif
 
 	#ifdef PLAYER_CAN_FIRE
 		// Disparos
 		#ifdef USE_TWO_BUTTONS
 			#ifdef FIRE_TO_PUSH	
-				if (((pad0 & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) && pdisparando == 0 && !pushed_any) {
+				if (((pad0 & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) && p_disparando == 0 && !pushed_any) {
 			#else
-				if (((pad0 & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) && pdisparando == 0) {
+				if (((pad0 & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) && p_disparando == 0) {
 			#endif
 		#else
 			#ifdef FIRE_TO_PUSH	
-				if ((pad0 & sp_FIRE) == 0 && pdisparando == 0 && !pushed_any) {
+				if ((pad0 & sp_FIRE) == 0 && p_disparando == 0 && !pushed_any) {
 			#else
-				if ((pad0 & sp_FIRE) == 0 && pdisparando == 0) {
+				if ((pad0 & sp_FIRE) == 0 && p_disparando == 0) {
 			#endif
 		#endif
-			pdisparando = 1;
+			p_disparando = 1;
 			bullets_fire ();
 		}
 		
 		if ((pad0 & sp_FIRE)) 
-			pdisparando = 0;
+			p_disparando = 0;
 
 	#endif
 
@@ -661,29 +638,29 @@ unsigned char player_move (void) {
 		if (hit_v) {
 			hit = 1;
 			#ifdef FULL_BOUNCE
-				pvy = addsign (-pvy, PLAYER_MAX_VX);
+				p_vy = addsign (-p_vy, PLAYER_MAX_VX);
 			#else
-				pvy = -pvy;
+				p_vy = -p_vy;
 			#endif
 		} else if (hit_h) {
 			hit = 1;
 			#ifdef FULL_BOUNCE
-				pvx = addsign (-pvx, PLAYER_MAX_VX);
+				p_vx = addsign (-p_vx, PLAYER_MAX_VX);
 			#else
-				pvx = -pvx;
+				p_vx = -p_vx;
 			#endif
 		}
 		if (hit) {
 			#ifdef PLAYER_FLICKERS
-				if (pestado == EST_NORMAL) {
-					pestado = EST_PARP;
-					pct_estado = 50;
+				if (p_estado == EST_NORMAL) {
+					p_estado = EST_PARP;
+					p_ct_estado = 50;
 			#endif		
 			{
 				#ifdef MODE_128K
-					pkillme = 8;
+					p_killme = 8;
 				#else		
-					pkillme = 4;
+					p_killme = 4;
 				#endif
 			}
 		}
@@ -693,64 +670,49 @@ unsigned char player_move (void) {
 	
 	#ifndef PLAYER_MOGGY_STYLE
 		#ifdef PLAYER_BOOTEE
-			gpit = pfacing << 2;
-			if (pvy == 0) {
-				pnext_frame = player_frames [gpit];
-			} else if (pvy < 0) {
-				pnext_frame = player_frames [gpit + 1];
+			gpit = p_facing << 2;
+			if (p_vy == 0) {
+				p_next_frame = player_frames [gpit];
+			} else if (p_vy < 0) {
+				p_next_frame = player_frames [gpit + 1];
 			} else {
-				pnext_frame = player_frames [gpit + 2];
+				p_next_frame = player_frames [gpit + 2];
 			}
 		#else	
-			if (!possee && !pgotten) {
-				pnext_frame = player_frames [8 + pfacing];
+			if (!possee && !p_gotten) {
+				p_next_frame = player_frames [8 + p_facing];
 			} else {
-				gpit = pfacing << 2;
-				if (pvx == 0) {
-					#ifdef PLAYER_ALTERNATE_ANIMATION
-						pnext_frame = player_frames [gpit];
-					#else
-						pnext_frame = player_frames [gpit + 1];
-					#endif
+				gpit = p_facing << 2;
+				if (p_vx == 0) {
+					rda = 1;
 				} else {
-					psubframe ++;
-					if (psubframe == 4) {
-						psubframe = 0;
-						#ifdef PLAYER_ALTERNATE_ANIMATION
-							pframe ++; if (pframe == 3) pframe = 0;
-						#else
-							pframe = (pframe + 1) & 3;
-						#endif
-						#ifdef PLAYER_STEP_SOUND
-							step ();
-						#endif
-					}
-					pnext_frame = player_frames [gpit + pframe];
+					rda = ((gpx + 4) >> 3) & 3;
 				}
+				p_next_frame = player_frames [gpit + rda];
 			}
 		#endif
 	#else
 		
-		if (pvx || pvy) {
-			psubframe ++;
-			if (psubframe == 4) {
-				psubframe = 0;
-				pframe = !pframe;
+		if (p_vx || p_vy) {
+			++ p_subframe;
+			if (p_subframe == 4) {
+				p_subframe = 0;
+				p_frame = !p_frame;
 				#ifdef PLAYER_STEP_SOUND			
 					step (); 
 				#endif
 			}
 		}
 		
-		pnext_frame = player_frames [pfacing + pframe];
+		p_next_frame = player_frames [p_facing + p_frame];
 	#endif
 }
 
 void player_kill (unsigned char sound) {
-	pkillme = 0;
+	p_killme = 0;
 
-	if (plife == 0) return;
-	-- plife;
+	if (p_life == 0) return;
+	-- p_life;
 
 	#ifdef MODO_128K
 		wyz_play_sound (sound);
@@ -763,8 +725,8 @@ void player_kill (unsigned char sound) {
 			mem_load ();
 		#else
 			n_pant = sg_pool [MAX_FLAGS];
-			px = sg_pool [MAX_FLAGS + 1] << 10;
-			py = sg_pool [MAX_FLAGS + 2] << 10;
+			p_x = sg_pool [MAX_FLAGS + 1] << 10;
+			p_y = sg_pool [MAX_FLAGS + 2] << 10;
 		#endif	
 		o_pant = 0xff; // Reload
 	#endif

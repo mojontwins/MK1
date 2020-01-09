@@ -1,10 +1,17 @@
 // MTE MK1 (la Churrera) v3.99.99 (final)
 // Copyleft 2010-2017 by the Mojon Twins
 
+#asm
+	.vpClipStruct defb VIEWPORT_Y, VIEWPORT_Y + 20, VIEWPORT_X, VIEWPORT_X + 30
+	.fsClipStruct defb 0, 24, 0, 32
+#endasm	
+
 void *joyfunc = sp_JoyKeyboard;		// Puntero a la función de manejo seleccionada.
+
 const void *joyfuncs [] = {
 	sp_JoyKeyboard, sp_JoyKempston, sp_JoySinclair1
 };
+
 unsigned char pad0;
 
 #define KEY_M 0x047f
@@ -24,10 +31,8 @@ void *u_free = sp_FreeBlock;
 struct sp_SS *sp_player;
 struct sp_SS *sp_moviles [3];
 #ifdef PLAYER_CAN_FIRE
-struct sp_SS *sp_bullets [MAX_BULLETS];
+	struct sp_SS *sp_bullets [MAX_BULLETS];
 #endif
-struct sp_Rect spritesClipValues;
-struct sp_Rect *spritesClip;
 
 unsigned char enoffs;
 
@@ -59,25 +64,27 @@ unsigned char half_life;
 #define WBOTTOM 2
 #define WLEFT 3
 #define WRIGHT 4
+#define COORDS(x,y)		((x)+(y<<4)-(y))
 
 // player
-signed int px, py, pcx;
-signed int pvx, pvy;
-signed char pg, pax, prx;
-unsigned char psalto, pcont_salto;
-unsigned char *pcurrent_frame, *pnext_frame;
-unsigned char psaltando;
-unsigned char pframe, psubframe, pfacing;
-unsigned char pestado;
-unsigned char pct_estado;
-unsigned char pgotten;
-unsigned char plife, pobjs, pkeys;
-unsigned char pfuel;
-unsigned char pkilled;
-unsigned char pdisparando;
-unsigned char pfacing_v, pfacing_h;
-unsigned char pammo;
-unsigned char pkillme;
+signed int p_x, p_y;
+signed int p_vx, p_vy;
+signed char p_g, p_ax, p_rx;
+unsigned char p_salto, p_cont_salto;
+unsigned char *p_current_frame, *p_next_frame;
+unsigned char p_saltando;
+unsigned char p_frame, p_subframe, p_facing;
+unsigned char p_estado;
+unsigned char p_ct_estado;
+unsigned char p_gotten, pregotten;
+unsigned char p_life, p_objs, p_keys;
+unsigned char p_fuel;
+unsigned char p_killed;
+unsigned char p_disparando;
+unsigned char p_facing_v, p_facing_h;
+unsigned char p_ammo;
+unsigned char p_killme;
+signed int ptgmx, ptgmy;
 
 #define FACING_RIGHT 0
 #define FACING_LEFT 2
@@ -177,7 +184,7 @@ unsigned char just_pushed;
 
 // Engine globals (for speed) & size!
 
-unsigned char gpx, gpy, gpd, gpc, gpt;
+unsigned char gpx, gpox, gpy, gpd, gpc, gpt;
 unsigned char gpxx, gpyy, gpcx, gpcy;
 unsigned char possee, hit_v, hit_h, hit, wall_h, wall_v;
 unsigned char gpen_x, gpen_y, gpen_cx, gpen_cy, gpen_xx, gpen_yy, gpaux;
@@ -188,7 +195,7 @@ unsigned char *map_pointer;
 #ifdef PLAYER_CAN_FIRE
 	unsigned char blx, bly;
 #endif
-unsigned char rdx, rdy, rdd, rdn;
+unsigned char rdx, rdy, rda, rdb, rdc, rdd, rdn;
 
 // More stuff
 
@@ -228,23 +235,21 @@ unsigned char success;
 
 unsigned char _x, _y, _n, _t;
 unsigned char cx1, cy1, cx2, cy2, at1, at2;
+unsigned char x0, y0, x1, y1;
+unsigned char ptx1, pty1, ptx2, pty2;
+unsigned char *_gp_gen;
 
 // Some declarations
 
-#ifdef ACTIVATE_SCRIPTING
-	void  draw_scr_background (void);
-	void  draw_scr (void);
-#endif
+void draw_scr_background (void);
+void draw_scr (void);
 void espera_activa (int espera);
 void draw_scr (void);
-
-#ifdef MODE_128K
-	void blackout_area (void);
-	void get_resource (unsigned char res, unsigned int dest);
-	void espera_activa (int espera);
-#endif
-
+void blackout_area (void);
+void get_resource (unsigned char res, unsigned int dest);
+void espera_activa (int espera);
 unsigned char rand (void);
 void clear_sprites (void);
-void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t);
-
+void draw_coloured_tile (void);
+void draw_coloured_tile_gamearea (void);
+void enems_load (void);

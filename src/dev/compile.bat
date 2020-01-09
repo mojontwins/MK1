@@ -27,15 +27,15 @@ echo Importando GFX
 ..\utils\sprcnv.exe ..\gfx\sprites.png sprites.h > nul
 
 echo Compilando guego
-zcc +zx -vn mk1.c -o %game.bin -lsplib2_mk2.lib -zorg=24000 > nul
-..\utils\printsize.exe %game.bin
+zcc +zx -vn -m mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+..\utils\printsize.exe %game%.bin
 
 echo Construyendo cinta
 rem cambia LOADER por el nombre que quieres que salga en Program:
 ..\utils\bas2tap -a10 -sLOADER loader.bas loader.tap > nul
 ..\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
-..\utils\bin2tap -o main.tap -a 24000 %game.bin > nul
-copy /b loader.tap + screen.tap + main.tap %game.tap > nul
+..\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
+copy /b loader.tap + screen.tap + main.tap %game%.tap > nul
 
 echo Limpiando
 del loader.tap > nul

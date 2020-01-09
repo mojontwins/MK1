@@ -5,13 +5,70 @@
 // Churrera copyleft 2011 by The Mojon Twins.
 
 void clear_sprites (void) {
-	sp_MoveSprAbs (sp_player, spritesClip, 0, VIEWPORT_Y + 30, VIEWPORT_X + 20, 0, 0);				
-	for (gpit = 0; gpit < 3; gpit ++)
-		sp_MoveSprAbs (sp_moviles [gpit], spritesClip, 0, VIEWPORT_Y + 30, VIEWPORT_X + 20, 0, 0);
-	#ifdef PLAYER_CAN_FIRE
-		for (gpit = 0; gpit < MAX_BULLETS; gpit ++)
-			sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, -2, -2, 0, 0);
-	#endif
+	#asm
+			ld  ix, (_sp_player)
+			ld  iy, vpClipStruct
+			ld  bc, 0
+			ld  hl, 0xdede
+			ld  de, 0
+			call SPMoveSprAbs
+	
+			xor a
+		.hide_sprites_enems_loop
+			ld  (_gpit), a
+
+			sla a
+			ld  c, a
+			ld  b, 0
+			ld  hl, _sp_moviles
+			add hl, bc
+			ld  e, (hl)
+			inc hl
+			ld  d, (hl)
+			push de
+			pop ix
+
+			ld  iy, vpClipStruct
+			ld  bc, 0
+			ld  hl, 0xfefe	// -2, -2
+			ld  de, 0
+
+			call SPMoveSprAbs
+
+			ld  a, (_gpit)
+			inc a
+			cp  3
+			jr  nz, hide_sprites_enems_loop
+
+		#ifdef PLAYER_CAN_FIRE
+				xor a
+			.hide_sprites_bullets_loop
+				ld  (_gpit), a
+
+				sla a
+				ld  c, a
+				ld  b, 0
+				ld  hl, _sp_bullets
+				add hl, bc
+				ld  e, (hl)
+				inc hl
+				ld  d, (hl)
+				push de
+				pop ix
+
+				ld  iy, vpClipStruct
+				ld  bc, 0
+				ld  hl, 0xfefe	// -2, -2
+				ld  de, 0
+
+				call SPMoveSprAbs
+
+				ld  a, (_gpit)
+				inc a
+				cp  MAX_BULLETS
+				jr  nz, hide_sprites_bullets_loop
+		#endif
+	#endasm
 }
 
 void main (void) {
@@ -48,19 +105,12 @@ void main (void) {
 		allpurposepuntero += 8;
 	}
 
-	// Clipping rectangle
-	spritesClipValues.row_coord = VIEWPORT_Y;
-	spritesClipValues.col_coord = VIEWPORT_X;
-	spritesClipValues.height = 20;
-	spritesClipValues.width = 30;
-	spritesClip = &spritesClipValues;
-	
 	// Sprite creation
 	#ifdef NO_MASKS
 		sp_player = sp_CreateSpr (sp_OR_SPRITE, 3, sprite_2_a, 1, TRANSPARENT);
 		sp_AddColSpr (sp_player, sprite_2_b, TRANSPARENT);
 		sp_AddColSpr (sp_player, sprite_2_c, TRANSPARENT);
-		pcurrent_frame = pnext_frame = sprite_2_a;
+		p_current_frame = p_next_frame = sprite_2_a;
 		
 		for (gpit = 0; gpit < 3; gpit ++) {
 			sp_moviles [gpit] = sp_CreateSpr(sp_OR_SPRITE, 3, sprite_9_a, 1, TRANSPARENT);
@@ -72,7 +122,7 @@ void main (void) {
 		sp_player = sp_CreateSpr (sp_MASK_SPRITE, 3, sprite_2_a, 1, TRANSPARENT);
 		sp_AddColSpr (sp_player, sprite_2_b, TRANSPARENT);
 		sp_AddColSpr (sp_player, sprite_2_c, TRANSPARENT);
-		pcurrent_frame = pnext_frame = sprite_2_a;
+		p_current_frame = p_next_frame = sprite_2_a;
 		
 		for (gpit = 0; gpit < 3; gpit ++) {
 			sp_moviles [gpit] = sp_CreateSpr(sp_MASK_SPRITE, 3, sprite_9_a, 2, TRANSPARENT);
@@ -127,14 +177,14 @@ void main (void) {
 				level = 0;
 			#endif				
 			#ifndef REFILL_ME
-				plife = PLAYER_LIFE;
+				p_life = PLAYER_LIFE;
 			#endif
 			while (mlplaying) {
 				prepare_level (level);			
 				blackout_area ();
 
 				level_str [7] = 49 + level;
-				print_str (12, 12, 71, level_str);
+				_x = 12; _y = 12; _t = 71; _gp_gen = level_str; print_str ();
 				sp_UpdateNow ();
 				#ifdef MODE_128K
 					wyz_play_sound (3);
@@ -202,14 +252,11 @@ void main (void) {
 		#ifdef PLAYER_KILLS_ENEMIES 	
 			#ifdef SHOW_TOTAL
 			// Show total of enemies next to the killed amount.
-
-			sp_PrintAtInv (KILLED_Y, 2 + KILLED_X, 71, 15);
-			sp_PrintAtInv (KILLED_Y, 3 + KILLED_X, 71, 16 + BADDIES_COUNT / 10);
-			sp_PrintAtInv (KILLED_Y, 4 + KILLED_X, 71, 16 + BADDIES_COUNT % 10);
+			_x = KILLED_Y; _y = KILLED_X; _t = BADDIES_COUNT; print_number2 ();
 			#endif
 		#endif
 
-		pkillme = success = half_life = 0;
+		p_killme = success = half_life = 0;
 			
 		objs_old = keys_old = life_old = killed_old = 0xff;
 		#ifdef MAX_AMMO 	
@@ -296,19 +343,19 @@ void main (void) {
 						#endif
 						
 						#ifdef MODE_128K
-							pkillme = 7;
+							p_killme = 7;
 						#else
-							pkillme = 4;
+							p_killme = 4;
 						#endif
 
 						#ifdef PLAYER_FLICKERS
-							pestado = EST_PARP;
-							pct_estado = 50;
+							p_estado = EST_PARP;
+							p_ct_estado = 50;
 						#endif
 
 						#if defined(TIMER_WARP_TO_X) && defined(TIMER_WARP_TO_Y)
-							px = TIMER_WARP_TO_X << 10;
-							py = TIMER_WARP_TO_Y << 10;
+							p_x = TIMER_WARP_TO_X << 10;
+							p_y = TIMER_WARP_TO_Y << 10;
 						#endif
 
 						#ifdef TIMER_WARP_TO
@@ -320,37 +367,37 @@ void main (void) {
 			#endif
 
 			#ifndef DEACTIVATE_OBJECTS
-				if (pobjs != objs_old) {
+				if (p_objs != objs_old) {
 					draw_objs ();
-					objs_old = pobjs;
+					objs_old = p_objs;
 				}
 			#endif
 			
-			if (plife != life_old) {
-				print_number2 (LIFE_X, LIFE_Y, plife);
-				life_old = plife;
+			if (p_life != life_old) {
+				_x = LIFE_X; _y = LIFE_Y; _t = p_life; print_number2 ();
+				life_old = p_life;
 			}
 			
 			#ifndef DEACTIVATE_KEYS
-				if (pkeys != keys_old) {
-					print_number2 (KEYS_X, KEYS_Y, pkeys);
-					keys_old = pkeys;
+				if (p_keys != keys_old) {
+					_x = KEYS_X; _y = KEYS_Y; _t = p_keys; print_number2 ();
+					keys_old = p_keys;
 				}
 			#endif
 
 			#if defined(PLAYER_KILLS_ENEMIES) || defined(PLAYER_CAN_FIRE)
 				#ifdef PLAYER_SHOW_KILLS
-					if (pkilled != killed_old) {
-						print_number2 (KILLED_X, KILLED_Y, pkilled);
-						killed_old = pkilled; 
+					if (p_killed != killed_old) {
+						_x = KILLED_X; _y = KILLED_Y; _t = p_killed; print_number2 ();
+						killed_old = p_killed; 
 					}
 				#endif
 			#endif
 
 			#ifdef MAX_AMMO 	
-				if (pammo != ammo_old) {
-					print_number2 (AMMO_X, AMMO_Y, pammo);
-					ammo_old = pammo;
+				if (p_ammo != ammo_old) {
+					_x = AMMO_X; _y = AMMO_Y; _t = p_ammo; print_number2 ();
+					ammo_old = p_ammo;
 				}
 			#endif
 
@@ -370,7 +417,7 @@ void main (void) {
 			// Move enemies
 			enems_move ();
 
-			if (pkillme) player_kill (pkillme);
+			if (p_killme) player_kill (p_killme);
 
 			#ifdef PLAYER_CAN_FIRE
 				// Move bullets 			
@@ -381,7 +428,7 @@ void main (void) {
 				do_tilanims ();
 			#endif
 
-			// Render		
+			// Render
 			for (gpit = 0; gpit < 3; gpit ++) {
 				#if defined (RANDOM_RESPAWN) || defined (ENABLE_CUSTOM_TYPE_6)
 					if (en_an_fanty_activo [gpit] || malotes [enoffs + gpit].t == 6) {
@@ -394,11 +441,96 @@ void main (void) {
 					rdy = malotes [enoffs + gpit].y;
 				}
 
-				sp_MoveSprAbs (sp_moviles [gpit], spritesClip, en_an_next_frame [gpit] - en_an_current_frame [gpit], VIEWPORT_Y + (rdy >> 3), VIEWPORT_X + (rdx >> 3), rdx & 7, rdy & 7);
-				en_an_current_frame [gpit] = en_an_next_frame [gpit];
+				#asm
+					; enter: IX = sprite structure address 
+					;        IY = clipping rectangle, set it to "ClipStruct" for full screen 
+					;        BC = animate bitdef displacement (0 for no animation) 
+					;         H = new row coord in chars 
+					;         L = new col coord in chars 
+					;         D = new horizontal rotation (0..7) ie horizontal pixel position 
+					;         E = new vertical rotation (0..7) ie vertical pixel position 
+
+					// sp_moviles [gpit] = sp_moviles + gpit*2
+					ld  a, (_gpit)
+					sla a
+					ld  c, a
+					ld  b, 0 				// BC = offset to [gpit] in 16bit arrays
+					ld  hl, _sp_moviles
+					add hl, bc
+					ld  e, (hl)
+					inc hl 
+					ld  d, (hl)
+					push de						
+					pop ix
+
+					// Clipping rectangle
+					ld  iy, vpClipStruct
+
+					// Animation
+					// en_an_next_frame [gpit] - en_an_current_frame [gpit]
+					ld  hl, _en_an_current_frame
+					add hl, bc 				// HL -> en_an_current_frame [gpit]
+					ld  e, (hl)
+					inc hl 
+					ld  d, (hl) 			// DE = en_an_current_frame [gpit]
+
+					ld  hl, _en_an_next_frame
+					add hl, bc 				// HL -> en_an_next_frame [gpit]
+					ld  a, (hl)
+					inc hl
+					ld  h, (hl)
+					ld  l, a 				// HL = en_an_next_frame [gpit]
+
+					or  a 					// clear carry
+					sbc hl, de 				// en_an_next_frame [gpit] - en_an_current_frame [gpit]
+
+					push bc 				// Save for later
+
+					ld  b, h
+					ld  c, l 				// ** BC = animate bitdef **
+
+					//VIEWPORT_Y + (rdy >> 3), VIEWPORT_X + (rdx >> 3)
+					ld  a, (_rdy)					
+					srl a
+					srl a
+					srl a
+					add VIEWPORT_Y
+					ld h, a
+
+					ld  a, (_rdx)
+					srl a
+					srl a
+					srl a
+					add VIEWPORT_X
+					ld  l, a
+
+					// rdx & 7, rdy & 7
+					ld  a, (_rdx)
+					and 7
+					ld  d, a
+
+					ld  a, (_rdy)
+					and 7
+					ld  e, a
+
+					call SPMoveSprAbs
+
+					// en_an_current_frame [gpit] = en_an_next_frame [gpit];
+
+					pop bc 					// Retrieve index
+
+					ld  hl, _en_an_current_frame
+					add hl, bc
+					ex  de, hl 				// DE -> en_an_current_frame [gpit]	
+
+					ld  hl, _en_an_next_frame
+					add hl, bc 				// HL -> en_an_next_frame [gpit]
+					
+					ldi
+					ldi
+				#endasm
 			}
 
-					
 			#ifdef ACTIVATE_SCRIPTING
 				#ifdef ENABLE_FIRE_ZONE
 					if (f_zone_ac == 1) {
@@ -409,26 +541,142 @@ void main (void) {
 				#endif
 			#endif			
 			
-			if ( !(pestado & EST_PARP) || !(half_life) )
-				sp_MoveSprAbs (sp_player, spritesClip, pnext_frame - pcurrent_frame, VIEWPORT_Y + (gpy >> 3), VIEWPORT_X + (gpx >> 3), gpx & 7, gpy & 7);
-			else
-				sp_MoveSprAbs (sp_player, spritesClip, pnext_frame - pcurrent_frame, -2, -2, 0, 0);
-			
-			pcurrent_frame = pnext_frame;
+			if ( (p_estado & EST_PARP) == 0 || half_life == 0 ) {
+				//sp_MoveSprAbs (sp_player, spritesClip, p_next_frame - p_current_frame, VIEWPORT_Y + (gpy >> 3), VIEWPORT_X + (gpx >> 3), gpx & 7, gpy & 7);
+				#asm
+						ld  ix, (_sp_player)
+						ld  iy, vpClipStruct
+
+						ld  hl, (_p_next_frame)
+						ld  de, (_p_current_frame)
+						or  a
+						sbc hl, de
+						ld  b, h
+						ld  c, l
+
+						ld  a, (_gpy)
+						srl a
+						srl a
+						srl a
+						add VIEWPORT_Y
+						ld  h, a 
+
+						ld  a, (_gpx)
+						srl a
+						srl a
+						srl a
+						add VIEWPORT_X
+						ld  l, a 
+						
+						ld  a, (_gpx)
+						and 7
+						ld  d, a
+
+						ld  a, (_gpy)
+						and 7
+						ld  e, a
+
+						call SPMoveSprAbs
+				#endasm
+			} else {
+				//sp_MoveSprAbs (sp_player, spritesClip, p_next_frame - p_current_frame, -2, -2, 0, 0);
+				#asm
+						ld  ix, (_sp_player)
+						ld  iy, vpClipStruct
+
+						ld  hl, (_p_next_frame)
+						ld  de, (_p_current_frame)
+						or  a
+						sbc hl, de
+						ld  b, h
+						ld  c, l
+
+						ld  hl, 0xfefe
+						ld  de, 0
+						call SPMoveSprAbs
+				#endasm
+			}
+		
+			p_current_frame = p_next_frame;
 			
 			#ifdef PLAYER_CAN_FIRE
 				for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
 					if (bullets_estado [gpit] == 1) {
-						sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, VIEWPORT_Y + (bullets_y [gpit] >> 3), VIEWPORT_X + (bullets_x [gpit] >> 3), bullets_x [gpit] & 7, bullets_y [gpit] & 7);
+						rdx = bullets_x [gpit]; rdy = bullets_y [gpit];
+						//sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, VIEWPORT_Y + (bullets_y [gpit] >> 3), VIEWPORT_X + (bullets_x [gpit] >> 3), bullets_x [gpit] & 7, bullets_y [gpit] & 7);
+						#asm
+								ld  a, (_gpit)
+								sla a
+								ld  c, a
+								ld  b, 0 				// BC = offset to [gpit] in 16bit arrays
+								ld  hl, _sp_bullets
+								add hl, bc
+								ld  e, (hl)
+								inc hl 
+								ld  d, (hl)
+								push de						
+								pop ix
+
+								ld  iy, vpClipStruct
+								ld  bc, 0
+
+								ld  a, (_rdy)
+								srl a
+								srl a
+								srl a
+								add VIEWPORT_Y
+								ld  h, a
+
+								ld  a, (_rdx)
+								srl a
+								srl a
+								srl a
+								add VIEWPORT_X
+								ld  l, a
+
+								ld  a, (_rdx)
+								and 7
+								ld  d, a 
+
+								ld  a, (_rdy)
+								and 7
+								ld  e, a 
+								
+								call SPMoveSprAbs
+						#endasm
 					} else {
-						sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, -2, -2, 0, 0);
+						//sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, -2, -2, 0, 0);
+						#asm
+								ld  a, (_gpit)
+								sla a
+								ld  c, a
+								ld  b, 0 				// BC = offset to [gpit] in 16bit arrays
+								ld  hl, _sp_bullets
+								add hl, bc
+								ld  e, (hl)
+								inc hl 
+								ld  d, (hl)
+								push de						
+								pop ix
+
+								ld  iy, vpClipStruct
+								ld  bc, 0
+
+								ld  hl, 0xfefe
+								ld  de, 0 
+								
+								call SPMoveSprAbs
+						#endasm
 					}
 				}
-			#endif			
-			
+			#endif
+
 			// Update to screen
+			_x=VIEWPORT_X+(gpx >>3); _y=VIEWPORT_Y+(gpy>>3);
+			invalidate_tile ();
+			//_t=99;print_number2();
 			sp_UpdateNow();
-			
+
 			#ifdef PLAYER_CAN_FIRE
 				for (gpit = 0; gpit < 3; gpit ++)
 					if (en_an_morido [gpit] == 1) {
@@ -443,10 +691,10 @@ void main (void) {
 
 			#ifdef PLAYER_FLICKERS
 				// Flickering
-				if (pestado == EST_PARP) {
-					pct_estado --;
-					if (pct_estado == 0)
-						pestado = EST_NORMAL; 
+				if (p_estado == EST_PARP) {
+					p_ct_estado --;
+					if (p_ct_estado == 0)
+						p_estado = EST_NORMAL; 
 				}
 			#endif			
 			
@@ -454,14 +702,15 @@ void main (void) {
 			//if (x >= hotspot_x - 15 && x <= hotspot_x + 15 && y >= hotspot_y - 15 && y <= hotspot_y + 15) {
 			cx2 = hotspot_x; cy2 = hotspot_y; if (collide ()) {
 				// Deactivate hotspot
-				draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), orig_tile);
+				_x = hotspot_x >> 4; _y = hotspot_y >> 4; _t = orig_tile;
+				draw_invalidate_coloured_tile_gamearea ();
 				gpit = 0;
 				#ifndef USE_HOTSPOTS_TYPE_3
 					// Was it an object, key or life boost?
 					if (hotspots [n_pant].act == 0) {
-						plife += PLAYER_REFILL;
-						if (plife > PLAYER_LIFE)
-							plife = PLAYER_LIFE;
+						p_life += PLAYER_REFILL;
+						if (p_life > PLAYER_LIFE)
+							p_life = PLAYER_LIFE;
 						hotspots [n_pant].act = 2;
 						#ifdef MODE_128K
 							wyz_play_sound (5);
@@ -473,8 +722,8 @@ void main (void) {
 							#ifndef DEACTIVATE_OBJECTS						
 								case 1:
 									#ifdef ONLY_ONE_OBJECT
-										if (pobjs == 0) {
-											pobjs ++;
+										if (p_objs == 0) {
+											p_objs ++;
 											#ifdef MODE_128K
 												wyz_play_sound (3);
 											#else
@@ -486,13 +735,14 @@ void main (void) {
 											#else
 												beeper_fx (4); 
 											#endif
-											draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), 17);
+											_x = hotspot_x >> 4; _y = hotspot_y >> 4; _t = 17;
+											draw_invalidate_coloured_tile_gamearea ();
 											gpit = 1;
 										}
 									#else
-										pobjs ++;
+										p_objs ++;
 										#ifdef OBJECT_COUNT
-											flags [OBJECT_COUNT] = pobjs;
+											flags [OBJECT_COUNT] = p_objs;
 										#endif
 										#ifdef MODE_128K
 											wyz_play_sound (3);
@@ -505,7 +755,7 @@ void main (void) {
 
 							#ifndef DEACTIVATE_KEYS
 								case 2:
-									pkeys ++;
+									p_keys ++;
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
@@ -516,10 +766,10 @@ void main (void) {
 
 							#ifdef MAX_AMMO
 								case 4:
-									if (MAX_AMMO - pammo > AMMO_REFILL)
-										pammo += AMMO_REFILL;
+									if (MAX_AMMO - p_ammo > AMMO_REFILL)
+										p_ammo += AMMO_REFILL;
 									else 
-										pammo = MAX_AMMO;
+										p_ammo = MAX_AMMO;
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
@@ -567,8 +817,8 @@ void main (void) {
 							#ifndef DEACTIVATE_OBJECTS					   
 								case 1:
 									#ifdef ONLY_ONE_OBJECT
-										if (pobjs == 0) {
-											pobjs ++;
+										if (p_objs == 0) {
+											p_objs ++;
 											#ifdef MODE_128K
 												wyz_play_sound (3);
 											#else
@@ -580,13 +830,14 @@ void main (void) {
 											#else
 												beeper_fx (4);
 											#endif
-											draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), 17);
+											_x = hotspot_x >> 4; _y = hotspot_y >> 4; _t = 17;
+											draw_invalidate_coloured_tile_gamearea ();
 											hotspots [n_pant].act = 1;
 										}
 									#else
-										++ pobjs;
+										++ p_objs;
 										#ifdef OBJECT_COUNT
-											flags [OBJECT_COUNT] = pobjs;
+											flags [OBJECT_COUNT] = p_objs;
 										#endif
 
 										#ifdef MODE_128K
@@ -596,11 +847,11 @@ void main (void) {
 										#endif
 
 										#ifdef GET_X_MORE
-											if (level_data.max_objs > pobjs) {
-												print_str (10, 11, 79, spacer);
-												getxmore [5] = '0' + level_data.max_objs - pobjs;
-												print_str (10, 12, 79, getxmore);
-												print_str (10, 13, 79, spacer);
+											if (level_data.max_objs > p_objs) {
+												_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
+												getxmore [5] = '0' + level_data.max_objs - p_objs;
+												_x = 10; _y = 12; _t = 79; _gp_gen = getxmore; print_str ();
+												_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
 												sp_UpdateNow ();
 												sp_WaitForNoKey ();
 												espera_activa (100);
@@ -613,7 +864,7 @@ void main (void) {
 
 							#ifndef DEACTIVATE_KEYS
 								case 2:
-									pkeys ++;
+									p_keys ++;
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
@@ -623,9 +874,9 @@ void main (void) {
 							#endif
 
 							case 3:
-								plife += PLAYER_REFILL;
-								if (plife > PLAYER_LIFE)
-									plife = PLAYER_LIFE;
+								p_life += PLAYER_REFILL;
+								if (p_life > PLAYER_LIFE)
+									p_life = PLAYER_LIFE;
 								#ifdef MODE_128K
 									wyz_play_sound (5);
 								#else	
@@ -635,10 +886,10 @@ void main (void) {
 
 							#ifdef MAX_AMMO
 								case 4:
-									if (MAX_AMMO - pammo > AMMO_REFILL)
-										pammo += AMMO_REFILL;
+									if (MAX_AMMO - p_ammo > AMMO_REFILL)
+										p_ammo += AMMO_REFILL;
 									else
-										pammo = MAX_AMMO;
+										p_ammo = MAX_AMMO;
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
@@ -701,7 +952,6 @@ void main (void) {
 					}
 				#endif			
 
-
 				#ifdef SCRIPTING_KEY_M			
 					if (sp_KeyPressed (KEY_M))
 				#endif
@@ -745,25 +995,25 @@ void main (void) {
 
 			// Change screen				
 			#ifdef PLAYER_CHECK_MAP_BOUNDARIES		
-				if (gpx == 0 && pvx < 0 && x_pant > 0) {
+				if (gpx == 0 && p_vx < 0 && x_pant > 0) {
 					n_pant --;
 					x_pant --;
 					gpx = 224
-					px = 14336;
+					p_x = 14336;
 				}
 
 				#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
-					if (gpx == 224 && pvx > 0 && x_pant < (level_data->map_w - 1))
+					if (gpx == 224 && p_vx > 0 && x_pant < (level_data->map_w - 1))
 				#else			
-					if (gpx == 224 && pvx > 0 && x_pant < (MAP_W - 1))
+					if (gpx == 224 && p_vx > 0 && x_pant < (MAP_W - 1))
 				#endif
 				{
 					n_pant ++;
 					x_pant ++;					
-					gpx = px = 0;
+					gpx = p_x = 0;
 				}
 
-				if (gpy == 0 && pvy < 0 && y_pant > 0) {
+				if (gpy == 0 && p_vy < 0 && y_pant > 0) {
 					#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
 						n_pant -= level_data->map_w;
 					#else				
@@ -771,53 +1021,53 @@ void main (void) {
 					#endif
 					y_pant --;					
 					gpy = 144;
-					py = 9216;	
+					p_y = 9216;	
 				}
 
 				#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
-					if (gpy == 144 && pvy > 0 && y_pant < (level_data->map_h - 1)) {
+					if (gpy == 144 && p_vy > 0 && y_pant < (level_data->map_h - 1)) {
 						n_pant += level_data->map_w;
 				#else			
-					if (gpy == 144 && pvy > 0 && y_pant < (MAP_H - 1)) {
+					if (gpy == 144 && p_vy > 0 && y_pant < (MAP_H - 1)) {
 						n_pant += MAP_W;
 				#endif
 					y_pant ++;					
-					gpy = py = 0;
-					if (pvy > 256) pvy = 256;	
+					gpy = p_y = 0;
+					if (p_vy > 256) p_vy = 256;	
 				}
 			#else			
 				#ifdef PLAYER_AUTO_CHANGE_SCREEN
-					if (gpx == 0 && pvx < 0) {
+					if (gpx == 0 && p_vx < 0) {
 						n_pant --;
-						gpx = 224; px = 14336;
+						gpx = 224; p_x = 14336;
 					}
-					if (gpx == 224 && pvx > 0) {
+					if (gpx == 224 && p_vx > 0) {
 						n_pant ++;
-						gpx = px = 0;
+						gpx = p_x = 0;
 					}
 				#else
 					if (gpx == 0 && ((pad0 & sp_LEFT) == 0)) {
 						n_pant --;
-						gpx = 224; px = 14336;
+						gpx = 224; p_x = 14336;
 					}
 					if (gpx == 224 && ((pad0 & sp_RIGHT) == 0)) {		// 14336 = 224 * 64
 						n_pant ++;
-						gpx = px = 0;
+						gpx = p_x = 0;
 					}
 				#endif
 
 				#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
-					if (gpy == 0 && pvy < 0 && n_pant >= level_data->map_w) {
+					if (gpy == 0 && p_vy < 0 && n_pant >= level_data->map_w) {
 						n_pant -= level_data->map_w;
 				#else
-					if (gpy == 0 && pvy < 0 && n_pant >= MAP_W) {
+					if (gpy == 0 && p_vy < 0 && n_pant >= MAP_W) {
 						n_pant -= MAP_W;
 				#endif
 					gpy = 144;
-					py = 9216;	
+					p_y = 9216;	
 				}
 
-				if (gpy == 144 && pvy > 0) {				// 9216 = 144 * 64
+				if (gpy == 144 && p_vy > 0) {				// 9216 = 144 * 64
 					#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
 						if (n_pant < level_data->map_w * (level_data->map_h - 1)) {
 							n_pant += level_data->map_w;
@@ -825,17 +1075,17 @@ void main (void) {
 						if (n_pant < MAP_W * MAP_H - MAP_W) {
 							n_pant += MAP_W;
 					#endif				
-						gpy = py = 0;
-						if (pvy > 256) pvy = 256;
+						gpy = p_y = 0;
+						if (p_vy > 256) p_vy = 256;
 					}
 					#ifdef MAP_BOTTOM_KILLS
 						else {
-							pvy = -PLAYER_MAX_VY_CAYENDO; 
+							p_vy = -PLAYER_MAX_VY_CAYENDO; 
 							{
 								#ifdef MODE_128K
-									pkillme = 1;
+									p_killme = 1;
 								#else
-									pkillme = 4;
+									p_killme = 4;
 								#endif
 							}
 						}
@@ -846,13 +1096,13 @@ void main (void) {
 			// Win game condition
 			
 			#ifdef ACTIVATE_SCRIPTING
-				if (pobjs == PLAYER_NUM_OBJETOS || script_result == 1)
+				if (p_objs == PLAYER_NUM_OBJETOS || script_result == 1)
 			#else			
-				if (pobjs == PLAYER_NUM_OBJETOS)
+				if (p_objs == PLAYER_NUM_OBJETOS)
 			#endif
 			{
 				if (
-					(n_pant == pant_final && ((px >> 10) == PLAYER_FIN_X && (py >> 10) == PLAYER_FIN_Y)) ||
+					(n_pant == pant_final && ((p_x >> 10) == PLAYER_FIN_X && (p_y >> 10) == PLAYER_FIN_Y)) ||
 					pant_final == 99
 				) {
 					success = 1;
@@ -861,7 +1111,7 @@ void main (void) {
 			}
 			
 			// Game over condition
-			if (plife == 0
+			if (p_life == 0
 				#ifdef ACTIVATE_SCRIPTING
 					|| script_result == 2
 				#endif
@@ -885,9 +1135,9 @@ void main (void) {
 			if (success) {
 				/*
 				wyz_play_music (6);
-				print_str (10, 11, 79, spacer);
-				print_str (10, 12, 79, " ZONE CLEAR ");
-				print_str (10, 13, 79, spacer);
+				_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
+				_x = 10; _y = 12; _t = 79; _gp_gen = " ZONE CLEAR "; print_str ();
+				_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
 				sp_UpdateNow ();
 				sp_WaitForNoKey ();
 				espera_activa (250);			

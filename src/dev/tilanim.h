@@ -20,7 +20,7 @@ void add_tilanim (unsigned char x, unsigned char y, unsigned char t) {
 	tilanims [max_tilanims].xy = (x << 4) + y;
 	tilanims [max_tilanims].ft = t;
 	
-	max_tilanims ++;
+	++ max_tilanims;
 }
 
 unsigned char tait;
@@ -36,9 +36,9 @@ void do_tilanims (void) {
 		tilanims [tait].ft = tilanims [tait].ft ^ 128;
 		
 		// Draw tile
-		draw_coloured_tile (
-			VIEWPORT_X + ((tilanims [tait].xy >> 4) << 1), 
-			VIEWPORT_Y + ((tilanims [tait].xy & 15) << 1), 
-			(tilanims [tait].ft & 127) + (tilanims [tait].ft >> 7));
+		_x = tilanims [tait].xy >> 4; 
+		_y = tilanims [tait].xy & 15;
+		_t = (tilanims [tait].ft & 127) + (tilanims [tait].ft >> 7);
+		draw_invalidate_coloured_tile_gamearea ();
 	}
 }

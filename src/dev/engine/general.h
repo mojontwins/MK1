@@ -11,6 +11,81 @@ unsigned char collide (void) {
 	#endif
 }
 
+unsigned char cm_two_points (void) {
+	/*
+	if (cx1 > 14 || cy1 > 9) at1 = 0; 
+	else at1 = map_attr [cx1 + (cy1 << 4) - cy1];
+
+	if (cx2 > 14 || cy2 > 9) at2 = 0; 
+	else at2 = map_attr [cx2 + (cy2 << 4) - cy2];
+	*/
+	#asm
+			ld  a, (_cx1)
+			cp  15
+			jr  nc, _cm_two_points_at1_reset
+
+			ld  a, (_cy1)
+			cp  10
+			jr  c, _cm_two_points_at1_do
+
+		._cm_two_points_at1_reset
+			xor a
+			jr  _cm_two_points_at1_done
+
+		._cm_two_points_at1_do
+			ld  a, (_cy1)
+			ld  b, a
+			sla a
+			sla a
+			sla a
+			sla a
+			sub b
+			ld  b, a
+			ld  a, (_cx1)
+			add b
+			ld  e, a
+			ld  d, 0
+			ld  hl, _map_attr
+			add hl, de
+			ld  a, (hl)
+
+		._cm_two_points_at1_done
+			ld (_at1), a
+
+			ld  a, (_cx2)
+			cp  15
+			jr  nc, _cm_two_points_at2_reset
+
+			ld  a, (_cy2)
+			cp  10
+			jr  c, _cm_two_points_at2_do
+
+		._cm_two_points_at2_reset
+			xor a
+			jr  _cm_two_points_at2_done
+
+		._cm_two_points_at2_do
+			ld  a, (_cy2)
+			ld  b, a
+			sla a
+			sla a
+			sla a
+			sla a
+			sub b
+			ld  b, a
+			ld  a, (_cx2)
+			add b
+			ld  e, a
+			ld  d, 0
+			ld  hl, _map_attr
+			add hl, de
+			ld  a, (hl)
+
+		._cm_two_points_at2_done
+			ld (_at2), a
+	#endasm
+}
+
 unsigned char rand (void) {
 	#asm
 		.rand16

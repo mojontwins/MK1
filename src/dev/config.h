@@ -159,7 +159,6 @@
 //#define PLAYER_BOOTEE 				// Always jumping engine. Don't forget to disable "HAS_JUMP" and "HAS_JETPAC"!!!
 #define PLAYER_STEP_SOUND				// Sound while walking. No effect in the BOOTEE engine.
 //#define PLAYER_BOUNCE_WITH_WALLS		// Bounce when hitting a wall. Only really useful in MOGGY_STYLE mode
-//#define PLAYER_CUMULATIVE_JUMP		// Keep pressing JUMP to JUMP higher in several bounces
 
 // Configure keyboard
 
@@ -178,7 +177,7 @@
 
 */
 
-#define USE_TWO_BUTTONS 				// Alternate keyboard scheme for two-buttons games
+//#define USE_TWO_BUTTONS 				// Alternate keyboard scheme for two-buttons games
 #ifdef USE_TWO_BUTTONS
 	struct sp_UDK keys = {
 		0x047f,	// .fire
@@ -238,7 +237,6 @@
 //#define USE_AUTO_TILE_SHADOWS 		// Automatic shadows using specially defined tiles 32-47.
 //#define UNPACKED_MAP					// Full, uncompressed maps. Shadows settings are ignored.
 //#define NO_MASKS						// Sprites are rendered using OR instead of masks.
-//#define PLAYER_ALTERNATE_ANIMATION	// If defined, animation is 1,2,3,1,2,3... 
 //#define MASKED_BULLETS				// If needed
 //#define ENABLE_TILANIMS			32	// If defined, animated tiles are enabled.
 										// the value especifies firt animated tile pair.
@@ -289,7 +287,7 @@
 // You can add the numbers to get combined behaviours
 // Save for 10 (special), but that's obvious, innit?
 #ifndef COMPRESSED_LEVELS
-unsigned char comportamiento_tiles [] = {
+unsigned char behs [] = {
 	0, 8, 8, 0, 0, 8, 8, 1, 8, 8, 8, 8, 8, 8,10,10,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,

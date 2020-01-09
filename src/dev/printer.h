@@ -18,147 +18,679 @@ void qtile (unsigned char x, unsigned char y) {
 	return map_buff [x + (y << 4) - y];	
 }
 
-#ifdef UNPACKED_MAP
-// Función que pinta un tile para mapas unpacked
+void draw_coloured_tile (void) {
+	#if defined (USE_AUTO_TILE_SHADOWS) || defined (USE_AUTO_SHADOWS)		
+		#asm
+			// Undo screen coordinates -> buffer coordinates
+				ld  a, (__x)
+				sub VIEWPORT_X
+				srl a
+				ld  (_xx), a
 
-void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t) {
-	unsigned char *pointer;
-	unsigned char xx, yy;
-	t = 64 + (t << 2);
-	pointer = (unsigned char *) &tileset [2048 + t];
-	sp_PrintAtInv (y, x, pointer [0], t);
-	sp_PrintAtInv (y, x + 1, pointer [1], t + 1);
-	sp_PrintAtInv (y + 1, x, pointer [2], t + 2);
-	sp_PrintAtInv (y + 1, x + 1, pointer [3], t + 3);	
+				ld  a, (__y)
+				sub VIEWPORT_Y
+				srl a
+				ld  (_yy), a
+		#endasm
+
+		// Nocast for tiles which never get shadowed
+		cx1 = xx; cy1 = yy; nocast = !((attr () & 8) || (_t >= 16 && _t != 19));
+
+		// Precalc 
+		#asm
+				ld  a, (__t)
+				sla a 
+				sla a 
+				add 64
+				ld  (__ta), a
+
+				ld  hl, _tileset + 2048
+				ld  b, 0
+				ld  c, a
+				add hl, bc
+				ld  (_gen_pt), hl
+		#endasm
+
+		// Fill up c1, c2, c3, c4 then use them
+		#ifdef USE_AUTO_SHADOWS			
+			cx1 = xx - 1; cy1 = yy - 1; rda = *gen_pt; c1 = (nocast && (attr () & 8)) ? (rda & 7) - 1 : rda; t1 = _ta; ++ gen_pt; ++ _ta;
+			cx1 = xx    ; cy1 = yy - 1; rda = *gen_pt; c2 = (nocast && (attr () & 8)) ? (rda & 7) - 1 : rda; t2 = _ta; ++ gen_pt; ++ _ta;
+			cx1 = xx - 1; cy1 = yy    ; rda = *gen_pt; c3 = (nocast && (attr () & 8)) ? (rda & 7) - 1 : rda; t3 = _ta; ++ gen_pt; ++ _ta;			
+		#endif
+		#ifdef USE_AUTO_TILE_SHADOWS
+			// Precalc
+			
+			if (_t == 19) {
+				#asm
+					ld  hl, _tileset + 2048 + 192
+					ld  (_gen_pt_alt), hl
+				#endasm
+				t_alt = 192;
+			} else {
+				#asm
+					ld  hl, _tileset + 2048 + 128
+					ld  de, (__ta)
+					ld  d, 0
+					add hl, de
+					ld  (_gen_pt_alt), hl
+				#endasm
+				t_alt = 128 + _ta;
+			}
+			
+			gen_pt_alt = tileset + 2048 + t_alt;
+
+			// cx1 = xx - 1; cy1 = yy ? yy - 1 : 0; a1 = (nocast && (attr () & 8));
+			#asm
+				// cx1 = xx - 1; 
+					ld  a, (_xx)
+					dec a
+					ld  (_cx1), a
+
+				// cy1 = yy ? yy - 1 : 0;
+					ld  a, (_yy)
+					or  a
+					jr  z, _dct_1_set_yy
+					dec a
+				._dct_1_set_yy
+					ld  (_cy1), a
+
+				// a1 = (nocast && (attr () & 8));
+					ld  a, (_nocast)
+					or  a
+					jr  z, _dct_a1_set
+
+					call _attr
+					ld  a, l
+					and 8
+					jr  z, _dct_a1_set
+
+					ld  a, 1
+
+				._dct_a1_set
+					ld  (_a1), a
+			#endasm			
+
+			// cx1 = xx    ; cy1 = yy ? yy - 1 : 0; a2 = (nocast && (attr () & 8));
+			#asm
+									// cx1 = xx; 
+					ld  a, (_xx)					
+					ld  (_cx1), a
+
+				// cy1 = yy ? yy - 1 : 0;
+					ld  a, (_yy)
+					or  a
+					jr  z, _dct_2_set_yy
+					dec a
+				._dct_2_set_yy
+					ld  (_cy1), a
+
+				// a2 = (nocast && (attr () & 8))
+					ld  a, (_nocast)
+					or  a
+					jr  z, _dct_a2_set
+
+					call _attr
+					ld  a, l
+					and 8
+					jr  z, _dct_a2_set
+
+					ld  a, 1
+
+				._dct_a2_set
+					ld  (_a2), a
+			#endasm
+
+			// cx1 = xx - 1; cy1 = yy             ; a3 = (nocast && (attr () & 8));
+			#asm
+					// cx1 = xx - 1; 
+					ld  a, (_xx)
+					dec a
+					ld  (_cx1), a
+
+				// cy1 = yy;
+					ld  a, (_yy)					
+					ld  (_cy1), a
+
+				// a3 = (nocast && (attr () & 8));
+					ld  a, (_nocast)
+					or  a
+					jr  z, _dct_a3_set
+
+					call _attr
+					ld  a, l
+					and 8
+					jr  z, _dct_a3_set
+
+					ld  a, 1
+
+				._dct_a3_set
+					ld  (_a3), a
+			#endasm
+
+			/*
+			if (a1 || (a2 && a3)) { c1 = *gen_pt_alt; t1 = t_alt; }
+				else { c1 = *gen_pt; t1 = _ta; }
+			++ gen_pt; ++ gen_pt_alt; ++ _ta; ++ t_alt;
+			*/
+			#asm
+					ld  a, (_a1)
+					or  a
+					jr  nz, _dct_1_shadow
+
+					ld  a, (_a2)
+					or  a
+					jr  z, _dct_1_no_shadow
+
+					ld  a, (_a3)
+					or  a
+					jr  z, _dct_1_no_shadow
+
+				._dct_1_shadow
+				// { c1 = *gen_pt_alt; t1 = t_alt; }
+					ld  hl, (_gen_pt_alt)
+					ld  a, (hl)
+					ld  (_c1), a
+
+					ld  a, (_t_alt)
+					ld  (_t1), a
+
+					jr  _dct_1_increment
+				
+				._dct_1_no_shadow
+				// else { c1 = *gen_pt; t1 = _ta; }
+					ld  hl, (_gen_pt)
+					ld  a, (hl)
+					ld  (_c1), a
+
+					ld  a, (__ta)
+					ld  (_t1), a
+
+				._dct_1_increment
+				// ++ gen_pt; ++ gen_pt_alt; ++ _ta; ++ t_alt;
+					ld  hl, (_gen_pt)
+					inc hl
+					ld  (_gen_pt), hl
+
+					ld  hl, (_gen_pt_alt)
+					inc hl
+					ld  (_gen_pt_alt), hl
+
+					ld  hl, __ta
+					inc (hl)
+
+					ld  hl, _t_alt
+					inc (hl)
+			#endasm 
+
+			/*		
+			if (a2) { c2 = *gen_pt_alt; t2 = t_alt; }
+				else { c2 = *gen_pt; t2 = _ta; }
+			++ gen_pt; ++ gen_pt_alt; ++ _ta; ++ t_alt;
+			*/
+			#asm
+					ld  a, (_a2)
+					or  a
+					jr  z, _dct_2_no_shadow
+
+				._dct_2_shadow
+				// { c1 = *gen_pt_alt; t1 = t_alt; }
+					ld  hl, (_gen_pt_alt)
+					ld  a, (hl)
+					ld  (_c2), a
+
+					ld  a, (_t_alt)
+					ld  (_t2), a
+
+					jr  _dct_2_increment
+				
+				._dct_2_no_shadow
+				// else { c1 = *gen_pt; t1 = _ta; }
+					ld  hl, (_gen_pt)
+					ld  a, (hl)
+					ld  (_c2), a
+
+					ld  a, (__ta)
+					ld  (_t2), a
+
+				._dct_2_increment
+				// ++ gen_pt; ++ gen_pt_alt; ++ _ta; ++ t_alt;
+					ld  hl, (_gen_pt)
+					inc hl
+					ld  (_gen_pt), hl
+
+					ld  hl, (_gen_pt_alt)
+					inc hl
+					ld  (_gen_pt_alt), hl
+
+					ld  hl, __ta
+					inc (hl)
+
+					ld  hl, _t_alt
+					inc (hl)
+			#endasm 		
+
+			/*
+			if (a3) { c3 = *gen_pt_alt; t3 = t_alt; }
+				else { c3 = *gen_pt; t3 = _ta; }
+			++ gen_pt; ++ gen_pt_alt; ++ _ta; ++ t_alt;	
+			*/
+
+			#asm
+					ld  a, (_a3)
+					or  a
+					jr  z, _dct_3_no_shadow
+
+				._dct_3_shadow
+				// { c1 = *gen_pt_alt; t1 = t_alt; }
+					ld  hl, (_gen_pt_alt)
+					ld  a, (hl)
+					ld  (_c3), a
+
+					ld  a, (_t_alt)
+					ld  (_t3), a
+
+					jr  _dct_3_increment
+				
+				._dct_3_no_shadow
+				// else { c1 = *gen_pt; t1 = _ta; }
+					ld  hl, (_gen_pt)
+					ld  a, (hl)
+					ld  (_c3), a
+
+					ld  a, (__ta)
+					ld  (_t3), a
+
+				._dct_3_increment
+				// ++ gen_pt; ++ gen_pt_alt; ++ _ta; ++ t_alt;
+					ld  hl, (_gen_pt)
+					inc hl
+					ld  (_gen_pt), hl
+
+					ld  hl, (_gen_pt_alt)
+					inc hl
+					ld  (_gen_pt_alt), hl
+
+					ld  hl, __ta
+					inc (hl)
+
+					ld  hl, _t_alt
+					inc (hl)
+			#endasm 
+			
+		#endif
+
+		// c4 = *gen_pt; t4 = _ta;
+		#asm
+				ld  hl, (_gen_pt)
+				ld  a, (hl)
+				ld  (_c4), a
+
+				ld  a, (__ta)
+				ld  (_t4), a
+		#endasm	
+
+		// Paint tile
+		#asm
+				// Calculate address in the display list
+
+				ld  a, (__x)
+				ld  c, a
+				ld  a, (__y)
+				call SPCompDListAddr
+				
+				// Now write 4 attributes and 4 chars.
+
+				// For each char: write colour, inc DE, write tile, inc DE*3
+				
+				ld  a, (_c1) 		// read colour			
+				ld  (hl), a 		// write colour
+				inc hl
+
+				ld  a, (_t1)		// read tile
+				ld  (hl), a			// write tile
+				inc hl
+				
+				inc hl
+				inc hl 				// next DisplayList cell
+
+				ld  a, (_c2) 		// read colour			
+				ld  (hl), a 		// write colour
+				inc hl				
+
+				ld  a, (_t2)  		// read tile
+				ld  (hl), a			// write tile
+								
+				ld  bc, 123
+				add hl, bc 			// next DisplayList cell
+				
+				ld  a, (_c3) 		// read colour			
+				ld  (hl), a 		// write colour
+				inc hl				
+
+				ld  a, (_t3)		// read tile
+				ld  (hl), a			// write tile
+				inc hl
+				
+				inc hl
+				inc hl 				// next DisplayList cell
+
+				ld  a, (_c4) 		// read colour			
+				ld  (hl), a 		// write colour
+				inc hl
+
+				ld  a, (_t4)		// read tile
+				ld  (hl), a			// write tile
+		#endasm
+	#else
+		#asm
+			/*
+			_t = 64 + (_t << 2);
+			gen_pt = tileset + 2048 + _t;
+			sp_PrintAtInv (_y, _x, *gen_pt ++, _t ++);
+			sp_PrintAtInv (_y, _x + 1, *gen_pt ++, _t ++);
+			sp_PrintAtInv (_y + 1, _x, *gen_pt ++, _t ++);
+			sp_PrintAtInv (_y + 1, _x + 1, *gen_pt, _t);
+			*/
+			// Calculate address in the display list
+
+				ld  a, (__x)
+				ld  c, a
+				ld  a, (__y)
+				call SPCompDListAddr
+				ex de, hl
+
+				// Now write 4 attributes and 4 chars.
+
+				// Make a pointer to the metatile colour array	
+				ld  a, (__t)
+				sla a
+				sla a 				// A = _t * 4
+				add 64 				// A = _t * 4 + 64
+				
+				ld  hl, _tileset + 2048
+				ld  b, 0
+				ld  c, a
+				add hl, bc 			// HL = tileset + _taux
+				
+				ld  c, a 			// C = current pattern #
+
+				// For each char: write colour, inc DE, write tile, inc DE*3
+				
+				ld  a, (hl) 		// read colour			
+				ld  (de), a 		// write colour
+				inc de
+				inc hl 				// next colour
+
+				ld  a, c  			// read tile
+				ld  (de), a			// write tile
+				inc de
+				inc a 				// next tile
+				ld  c, a 
+
+				inc de
+				inc de 				// next DisplayList cell
+
+				ld  a, (hl) 		// read colour			
+				ld  (de), a 		// write colour
+				inc de
+				inc hl 				// next colour
+
+				ld  a, c  			// read tile
+				ld  (de), a			// write tile
+				inc a 				// next tile
+				
+				ex  de, hl
+				ld  bc, 123
+				add hl, bc
+				ex  de, hl			// next DisplayList cell
+				ld  c, a 
+
+				ld  a, (hl) 		// read colour			
+				ld  (de), a 		// write colour
+				inc de
+				inc hl 				// next colour
+
+				ld  a, c  			// read tile
+				ld  (de), a			// write tile
+				inc de
+				inc a 				// next tile
+				ld  c, a 
+
+				inc de
+				inc de 				// next DisplayList cell
+
+				ld  a, (hl) 		// read colour			
+				ld  (de), a 		// write colour
+				inc de
+
+				ld  a, c  			// read tile
+				ld  (de), a			// write tile
+		#endasm
+	#endif
 }
 
-#else
-// Función que pinta un tile para mapas packed
+void invalidate_tile (void) {
+	#asm
+			; Invalidate Rectangle
+			;
+			; enter:  B = row coord top left corner
+			;         C = col coord top left corner
+			;         D = row coord bottom right corner
+			;         E = col coord bottom right corner
+			;        IY = clipping rectangle, set it to "ClipStruct" for full screen
 
-void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t) {
-	unsigned char *pointer;
-	unsigned char xx, yy;
-#ifdef USE_AUTO_TILE_SHADOWS
-	unsigned char *pointer_alt;
-	unsigned char t_alt;
-#endif
-	
-#ifdef USE_AUTO_SHADOWS
-	xx = (x - VIEWPORT_X) >> 1;
-	yy = (y - VIEWPORT_Y) >> 1;	
-	if (!(attr (xx, yy) & 8) && (t < 16 || t == 19)) {
-		t = 64 + (t << 2);
-		pointer = (unsigned char *) &tileset [2048 + t];
-		sp_PrintAtInv (y, x, attr (xx - 1, yy - 1) & 8 ? (pointer[0] & 7)-1 : pointer [0], t);
-		sp_PrintAtInv (y, x + 1, attr (xx, yy - 1) & 8 ? (pointer[1] & 7)-1 : pointer [1], t + 1);
-		sp_PrintAtInv (y + 1, x, attr (xx - 1, yy) & 8 ? (pointer[2] & 7)-1 : pointer [2], t + 2);
-		sp_PrintAtInv (y + 1, x + 1, pointer [3], t + 3);
-	} else {
-#endif
-
-#ifdef USE_AUTO_TILE_SHADOWS
-	xx = (x - VIEWPORT_X) >> 1;
-	yy = (y - VIEWPORT_Y) >> 1;	
-	if (!(attr (xx, yy) & 8) && (t < 16 || t == 19)) {
-		t = 64 + (t << 2);
-		if (t == 140) {
-			pointer = (unsigned char *) &tileset [2188];
-			t_alt = 192;
-			pointer_alt = (unsigned char *) &tileset [2048 + 192];
-		} else {
-			pointer = (unsigned char *) &tileset [2048 + t];
-			t_alt = 128 + t;
-			pointer_alt = (unsigned char *) &tileset [2048 + t + 128];
-		}
-		
-		if (attr (xx - 1, yy - 1) & 8) {
-			sp_PrintAtInv (y, x, pointer_alt [0], t_alt);
-		} else {
-			sp_PrintAtInv (y, x, pointer [0], t);
-		}
-		if (attr (xx, yy - 1) & 8) {
-			sp_PrintAtInv (y, x + 1, pointer_alt [1], t_alt + 1);
-		} else {
-			sp_PrintAtInv (y, x + 1, pointer [1], t + 1);
-		}
-		if (attr (xx - 1, yy) & 8) {
-			sp_PrintAtInv (y + 1, x, pointer_alt [2], t_alt + 2);
-		} else {
-			sp_PrintAtInv (y + 1, x, pointer [2], t + 2);
-		} 
-		sp_PrintAtInv (y + 1, x + 1, pointer [3], t + 3);
-	} else {
-#endif
-		t = 64 + (t << 2);
-		pointer = (unsigned char *) &tileset [2048 + t];
-		sp_PrintAtInv (y, x, pointer [0], t);
-		sp_PrintAtInv (y, x + 1, pointer [1], t + 1);
-		sp_PrintAtInv (y + 1, x, pointer [2], t + 2);
-		sp_PrintAtInv (y + 1, x + 1, pointer [3], t + 3);
-#ifdef USE_AUTO_SHADOWS
-	}
-#endif
-
-#ifdef USE_AUTO_TILE_SHADOWS
-	}
-#endif
+			ld  a, (__x)
+			ld  c, a
+			inc a
+			ld  e, a
+			ld  a, (__y)
+			ld  b, a
+			inc a
+			ld  d, a
+			ld  iy, fsClipStruct
+			call SPInvalidate			
+	#endasm
 }
-#endif
 
-void print_number2 (unsigned char x, unsigned char y, unsigned char number) {
-	sp_PrintAtInv (y, x, 7, 16 + (number / 10));
-	sp_PrintAtInv (y, x + 1, 7, 16 + (number % 10));
+void invalidate_viewport (void) {
+	#asm
+			; Invalidate Rectangle
+			;
+			; enter:  B = row coord top left corner
+			;         C = col coord top left corner
+			;         D = row coord bottom right corner
+			;         E = col coord bottom right corner
+			;        IY = clipping rectangle, set it to "ClipStruct" for full screen
+
+			ld  b, VIEWPORT_Y
+			ld  c, VIEWPORT_X
+			ld  d, VIEWPORT_Y+19
+			ld  e, VIEWPORT_X+29
+			ld  iy, vpClipStruct
+			call SPInvalidate
+	#endasm
+}
+
+void draw_invalidate_coloured_tile_gamearea (void) {
+	draw_coloured_tile_gamearea ();
+	invalidate_tile ();
+}
+
+void draw_coloured_tile_gamearea (void) {
+	_x = VIEWPORT_X + (_x << 1); _y = VIEWPORT_Y + (_y << 1); draw_coloured_tile ();
+}
+
+void print_number2 (void) {
+	rda = 16 + (_t / 10); rdb = 16 + (_t % 10);
+	#asm
+			; enter:  A = row position (0..23)
+			;         C = col position (0..31/63)
+			;         D = pallette #
+			;         E = graphic #
+
+			ld  a, (_rda)
+			ld  e, a
+
+			ld  d, 7
+			
+			ld  a, (__x)
+			ld  c, a
+
+			ld  a, (__y)
+
+			call SPPrintAtInv
+
+			ld  a, (_rdb)
+			ld  e, a
+
+			ld  d, 7
+			
+			ld  a, (__x)
+			inc a
+			ld  c, a
+
+			ld  a, (__y)
+
+			call SPPrintAtInv
+	#endasm
 }
 
 #ifndef DEACTIVATE_OBJECTS
-void draw_objs () {
-#if defined(ONLY_ONE_OBJECT) && defined(ACTIVATE_SCRIPTING)
-	if (pobjs) {
-		sp_PrintAtInv (OBJECTS_ICON_Y, OBJECTS_ICON_X, 135, 132);
-		sp_PrintAtInv (OBJECTS_ICON_Y, OBJECTS_ICON_X + 1, 135, 133);
-		sp_PrintAtInv (OBJECTS_ICON_Y + 1, OBJECTS_ICON_X, 135, 134);
-		sp_PrintAtInv (OBJECTS_ICON_Y + 1, OBJECTS_ICON_X + 1, 135, 135);
-	} else {
-		draw_coloured_tile (OBJECTS_ICON_X, OBJECTS_ICON_Y, 17);
+	void draw_objs () {
+		#if defined (ONLY_ONE_OBJECT) && defined (ACTIVATE_SCRIPTING)
+			#if OBJECTS_ICON_X != 99
+				if (p_objs) {
+					// Make tile 17 flash
+					/*
+					sp_PrintAtInv (OBJECTS_ICON_Y, OBJECTS_ICON_X, 135, 132);
+					sp_PrintAtInv (OBJECTS_ICON_Y, OBJECTS_ICON_X + 1, 135, 133);
+					sp_PrintAtInv (OBJECTS_ICON_Y + 1, OBJECTS_ICON_X, 135, 134);
+					sp_PrintAtInv (OBJECTS_ICON_Y + 1, OBJECTS_ICON_X + 1, 135, 135);
+					*/
+					#asm
+							// Calculate address in the display list
+
+							ld  a, (OBJECTS_ICON_X)
+							ld  (__x), a
+							ld  c, a
+							ld  a, (OBJECTS_ICON_Y)
+							ld  (__y), a
+							call SPCompDListAddr // -> HL
+
+							ld  a, 135
+							ld  (hl), a 		// Colour 1
+							inc hl
+							ld  a, 132
+							ld  (hl), a 		// Tile 1
+
+							inc hl
+							inc hl 				// Next cell
+
+							ld  a, 135
+							ld  (hl), a 		// Colour 2
+							inc hl
+							ld  a, 133
+							ld  (hl), a 		// Tile 2
+
+							ld  bc, 123
+							add hl, bc 			// Next cell
+
+							ld  a, 135
+							ld  (hl), a 		// Colour 3
+							inc hl
+							ld  a, 134
+							ld  (hl), a 		// Tile 3
+
+							inc hl
+							inc hl 				// Next cell
+
+							ld  a, 135
+							ld  (hl), a 		// Colour 4
+							inc hl
+							ld  a, 135
+							ld  (hl), a 		// Tile 4
+
+							// Invalidate
+							call _invalidate_tile
+					#endasm						
+				} else {
+					_x = OBJECTS_ICON_X; _y = OBJECTS_ICON_Y; _t = 17; 
+					draw_coloured_tile ();
+					invalidate_tile ();
+				}
+			#endif
+				
+			#if OBJECTS_X != 99
+				_x = OBJECTS_X; _y = OBJECTS_Y; _t = flags [OBJECT_COUNT]; print_number2 ();
+			#endif
+		#else
+			#if OBJECTS_X != 99
+				_x = OBJECTS_X; _y = OBJECTS_Y; 
+				#ifdef REVERSE_OBJECTS_COUNT
+					_t = 
+						#ifdef COMPRESSED_LEVELS
+							level_data->max_objs
+						#else						
+							PLAYER_MAX_OBJECTS
+						#endif
+						- p_objs;
+				#else
+					_t = p_objs; 
+				#endif
+				print_number2 ();
+			#endif
+		#endif
 	}
-	print_number2 (OBJECTS_X, OBJECTS_Y, flags [OBJECT_COUNT]);
-#else
-	print_number2 (OBJECTS_X, OBJECTS_Y, pobjs);
-#endif
-}
 #endif
 
-void print_str (unsigned char x, unsigned char y, unsigned char c, unsigned char *s) {
-	while (*s)	{
-		sp_PrintAtInv (y, x ++, c, (*s ++) - 32);
-	}
-}
-
-#if defined (COMPRESSED_LEVELS) || defined (ENABLE_CHECKPOINTS)
-void blackout_area (void) {
-	// blackens gameplay area for LEVEL XX display / submenu display
-	asm_int [0] = 22528 + 32 * VIEWPORT_Y + VIEWPORT_X;
+void print_str (void) {
 	#asm
-		ld	hl, _asm_int
-		ld	a, (hl)
-		ld	e, a
-		inc	hl
-		ld	a, (hl)
-		ld	d, a
-		
-		ld b, 20
-	.bal1
-		push bc
-		push de
-		pop hl
-		ld	(hl), 0
-		inc de
-		ld bc, 29
-		ldir
-		inc de
-		inc de
-		pop bc
-		djnz bal1	
+		ld  hl, (__gp_gen)
+		.print_str_loop
+			ld  a, (hl)
+			or  a
+			ret z 
+
+			inc hl
+			
+			sub 32
+			ld  e, a
+
+			ld  a, (__t)
+			ld  d, a
+
+			ld  a, (__x)
+			ld  c, a
+			inc a
+			ld  (__x), a
+			
+			ld  a, (__y)
+
+			push hl
+			call SPPrintAtInv
+			pop  hl
+			
+			jr  print_str_loop
 	#endasm
 }
+
+#if defined (COMPRESSED_LEVELS) || defined (SHOW_LEVEL_ON_SCREEN)
+	void blackout_area (void) {
+		#asm
+			ld  de, 22528 + 32 * VIEWPORT_Y + VIEWPORT_X
+			ld  b, 20
+		.bal1
+			push bc
+			ld  h, d 
+			ld  l, e
+			ld	(hl), 0
+			inc de
+			ld  bc, 29
+			ldir
+			inc de
+			inc de
+			pop bc
+			djnz bal1
+		#endasm
+	}
 #endif

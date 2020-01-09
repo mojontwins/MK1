@@ -127,9 +127,9 @@ extern HOTSPOT hotspots [0];
 #asm
 	._hotspots defs MAP_W * MAP_H * 3
 #endasm
-extern unsigned char comportamiento_tiles [0];
+extern unsigned char behs [0];
 #asm
-	._comportamiento_tiles defs 48
+	._behs defs 48
 #endasm
 
 // Level struct
