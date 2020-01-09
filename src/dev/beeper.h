@@ -282,7 +282,7 @@
 	
 */
 
-void peta_el_beeper (unsigned char n) {
+void beeper_fx (unsigned char n) {
 	// Cargar en A el valor de n
 	asm_int [0] = n;
 	#asm

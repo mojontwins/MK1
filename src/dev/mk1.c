@@ -95,7 +95,10 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 	#include "msc.h"
 #endif
 
+#include "engine/general.h"
 #include "engine.h"
+#include "engine/player.h"
+#include "engine/enengine.h"
 
 #ifdef ENABLE_CHECKPOINTS
 	#include "savegame.h"

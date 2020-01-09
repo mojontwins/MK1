@@ -4,7 +4,7 @@
 // mainloop.h
 // Churrera copyleft 2011 by The Mojon Twins.
 
-void saca_a_todo_el_mundo_de_aqui (void) {
+void clear_sprites (void) {
 	sp_MoveSprAbs (sp_player, spritesClip, 0, VIEWPORT_Y + 30, VIEWPORT_X + 20, 0, 0);				
 	for (gpit = 0; gpit < 3; gpit ++)
 		sp_MoveSprAbs (sp_moviles [gpit], spritesClip, 0, VIEWPORT_Y + 30, VIEWPORT_X + 20, 0, 0);
@@ -139,7 +139,7 @@ void main (void) {
 				#ifdef MODE_128K
 					wyz_play_sound (3);
 				#else			
-					peta_el_beeper (1);
+					beeper_fx (1);
 				#endif
 
 				espera_activa (100);
@@ -154,7 +154,7 @@ void main (void) {
 				get_resource (1, 16384);
 			#else		
 				#asm
-					ld hl, _s_title
+					ld hl, _s_marco
 					ld de, 16384
 					call depack
 				#endasm
@@ -164,26 +164,22 @@ void main (void) {
 		// Let's do it.
 
 		playing = 1;
-		init_player ();
+		player_init ();
 
 		#ifndef COMPRESSED_LEVELS		
-			init_hotspots ();
+			hotspots_init ();
 		#endif
 
 		#ifndef COMPRESSED_LEVELS		
 			#ifndef DEACTIVATE_KEYS
-				init_cerrojos ();
+				locks_init ();
 			#endif
 		#endif
 
 		#if defined(PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
 			#ifndef COMPRESSED_LEVELS
-				init_malotes ();
+				enems_init ();
 			#endif
-		#endif
-
-		#ifdef PLAYER_CAN_FIRE
-			init_bullets ();
 		#endif	
 
 		#ifndef COMPRESSED_LEVELS	
@@ -256,8 +252,11 @@ void main (void) {
 			pad0 = (joyfunc) (&keys);
 
 			if (o_pant != n_pant) {
-				draw_scr (); 
+				draw_scr ();
 				o_pant = n_pant;
+				#ifdef PLAYER_CAN_FIRE
+					bullets_init ();
+				#endif
 			}
 			
 			#ifdef TIMER_ENABLE
@@ -275,7 +274,7 @@ void main (void) {
 					if (ctimer.zero) {
 						ctimer.zero = 0;
 						#ifdef SHOW_TIMER_OVER
-							saca_a_todo_el_mundo_de_aqui ();
+							clear_sprites ();
 							time_over ();
 						#endif
 						script = e_scripts [MAP_W * MAP_H + 2];
@@ -287,7 +286,7 @@ void main (void) {
 					if (ctimer.zero) {
 						#ifdef SHOW_TIMER_OVER
 							#ifndef TIMER_SCRIPT_0
-								saca_a_todo_el_mundo_de_aqui ();
+								clear_sprites ();
 								time_over ();
 							#endif
 						#endif				
@@ -366,16 +365,16 @@ void main (void) {
 			half_life = !half_life;
 			
 			// Move player
-			move ();
+			player_move ();
 			
 			// Move enemies
-			mueve_bicharracos ();
+			enems_move ();
 
-			if (pkillme) kill_player (pkillme);
+			if (pkillme) player_kill (pkillme);
 
 			#ifdef PLAYER_CAN_FIRE
 				// Move bullets 			
-				mueve_bullets ();
+				bullets_move ();
 			#endif
 
 			#ifdef ENABLE_TILANIMS
@@ -419,8 +418,8 @@ void main (void) {
 			
 			#ifdef PLAYER_CAN_FIRE
 				for (gpit = 0; gpit < MAX_BULLETS; gpit ++) {
-					if (bullets [gpit].estado == 1) {
-						sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, VIEWPORT_Y + (bullets [gpit].y >> 3), VIEWPORT_X + (bullets [gpit].x >> 3), bullets [gpit].x & 7, bullets [gpit].y & 7);
+					if (bullets_estado [gpit] == 1) {
+						sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, VIEWPORT_Y + (bullets_y [gpit] >> 3), VIEWPORT_X + (bullets_x [gpit] >> 3), bullets_x [gpit] & 7, bullets_y [gpit] & 7);
 					} else {
 						sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, -2, -2, 0, 0);
 					}
@@ -436,7 +435,7 @@ void main (void) {
 					#ifdef MODE_128K
 						wyz_play_sound (7);
 					#else
-						peta_el_beeper (1);
+						beeper_fx (1);
 					#endif
 					en_an_morido [gpit] = 0;
 				}	
@@ -453,7 +452,7 @@ void main (void) {
 			
 			// Hotspot interaction.
 			//if (x >= hotspot_x - 15 && x <= hotspot_x + 15 && y >= hotspot_y - 15 && y <= hotspot_y + 15) {
-			if (collide (gpx, gpy, hotspot_x, hotspot_y)) {
+			cx2 = hotspot_x; cy2 = hotspot_y; if (collide ()) {
 				// Deactivate hotspot
 				draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), orig_tile);
 				gpit = 0;
@@ -467,7 +466,7 @@ void main (void) {
 						#ifdef MODE_128K
 							wyz_play_sound (5);
 						#else
-							peta_el_beeper (8);
+							beeper_fx (8);
 						#endif
 					} else {					
 						switch (hotspots [n_pant].tipo) {
@@ -479,13 +478,13 @@ void main (void) {
 											#ifdef MODE_128K
 												wyz_play_sound (3);
 											#else
-												peta_el_beeper (9);
+												beeper_fx (9);
 											#endif 
 										} else {
 											#ifdef MODE_128K
 												wyz_play_sound (5);
 											#else
-												peta_el_beeper (4); 
+												beeper_fx (4); 
 											#endif
 											draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), 17);
 											gpit = 1;
@@ -498,7 +497,7 @@ void main (void) {
 										#ifdef MODE_128K
 											wyz_play_sound (3);
 										#else
-											peta_el_beeper (9);
+											beeper_fx (9);
 										#endif
 									#endif
 									break;
@@ -510,7 +509,7 @@ void main (void) {
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
-										peta_el_beeper (7);
+										beeper_fx (7);
 									#endif
 									break;
 							#endif
@@ -524,7 +523,7 @@ void main (void) {
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
-										peta_el_beeper (9);
+										beeper_fx (9);
 									#endif
 									break;
 							#endif
@@ -538,7 +537,7 @@ void main (void) {
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
-										peta_el_beeper (7);
+										beeper_fx (7);
 									#endif
 									break;
 							#endif
@@ -549,7 +548,7 @@ void main (void) {
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
-										peta_el_beeper (7);
+										beeper_fx (7);
 									#endif
 									break;						
 							#endif
@@ -573,13 +572,13 @@ void main (void) {
 											#ifdef MODE_128K
 												wyz_play_sound (3);
 											#else
-												peta_el_beeper (9);
+												beeper_fx (9);
 											#endif
 										} else {
 											#ifdef MODE_128K
 												wyz_play_sound (5);
 											#else
-												peta_el_beeper (4);
+												beeper_fx (4);
 											#endif
 											draw_coloured_tile (VIEWPORT_X + (hotspot_x >> 3), VIEWPORT_Y + (hotspot_y >> 3), 17);
 											hotspots [n_pant].act = 1;
@@ -593,7 +592,7 @@ void main (void) {
 										#ifdef MODE_128K
 											wyz_play_sound (5);
 										#else
-											peta_el_beeper (9);
+											beeper_fx (9);
 										#endif
 
 										#ifdef GET_X_MORE
@@ -618,7 +617,7 @@ void main (void) {
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
-										peta_el_beeper (7);
+										beeper_fx (7);
 									#endif
 									break;
 							#endif
@@ -630,7 +629,7 @@ void main (void) {
 								#ifdef MODE_128K
 									wyz_play_sound (5);
 								#else	
-									peta_el_beeper (8);
+									beeper_fx (8);
 								#endif
 								break;
 
@@ -643,7 +642,7 @@ void main (void) {
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
-										peta_el_beeper (9);
+										beeper_fx (9);
 									#endif
 									break;
 							#endif
@@ -657,7 +656,7 @@ void main (void) {
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
-										peta_el_beeper (7);
+										beeper_fx (7);
 									#endif
 									break;
 							#endif
@@ -668,7 +667,7 @@ void main (void) {
 									#ifdef MODE_128K
 										wyz_play_sound (3);
 									#else
-										peta_el_beeper (7);
+										beeper_fx (7);
 									#endif
 									break;						
 							#endif
@@ -691,7 +690,7 @@ void main (void) {
 							#ifdef MODE_128K
 								wyz_play_sound (0);
 							#else
-								peta_el_beeper (2);
+								beeper_fx (2);
 							#endif
 							flags [FLAG_SLOT_SELECTED] = (flags [FLAG_SLOT_SELECTED] + 1) % MSC_MAXITEMS;
 							display_items ();
@@ -726,7 +725,7 @@ void main (void) {
 						wyz_stop_sound ();
 						wyz_play_sound (1);
 					#endif				
-					saca_a_todo_el_mundo_de_aqui ();
+					clear_sprites ();
 					pause_screen ();
 					while (!sp_KeyPressed (key_h));
 					sp_WaitForNoKey ();
@@ -879,7 +878,7 @@ void main (void) {
 			wyz_stop_sound ();
 		#endif
 
-		saca_a_todo_el_mundo_de_aqui ();
+		clear_sprites ();
 		sp_UpdateNow ();
 		
 		#ifdef COMPRESSED_LEVELS

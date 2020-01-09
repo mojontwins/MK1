@@ -23,7 +23,7 @@
 #define PLAYER_LIFE 			99		// Max and starting life gauge.
 #define PLAYER_REFILL			10		// Life recharge
 //#define COMPRESSED_LEVELS 			// use levels.h instead of mapa.h and enems.h (!)
-//#define MAX_LEVELS			4			// # of compressed levels
+//#define MAX_LEVELS			4		// # of compressed levels
 //#define REFILL_ME 					// If defined, refill player on each level
 
 // ============================================================================
@@ -259,8 +259,8 @@
 #define PLAYER_MAX_VY_CAYENDO	512 	// Max falling speed (512/64 = 8 pixels/frame)
 #define PLAYER_G				32		// Gravity acceleration (32/64 = 0.5 p?xeles/frame^2)
 
-#define PLAYER_VY_INICIAL_SALTO 64 	// Initial junp velocity (64/64 = 1 p?xel/frame)
-#define PLAYER_MAX_VY_SALTANDO	512 	// Max jump velocity (320/64 = 5 p?xels/frame)
+#define PLAYER_VY_INICIAL_SALTO 64 		// Initial junp velocity (64/64 = 1 p?xel/frame)
+#define PLAYER_MAX_VY_SALTANDO	320 	// Max jump velocity (320/64 = 5 p?xels/frame)
 #define PLAYER_INCR_SALTO		48		// acceleration while JUMP is pressed (48/64 = 0.75 p?xeles/frame^2)
 
 #define PLAYER_INCR_JETPAC		32		// Vertical jetpac gauge

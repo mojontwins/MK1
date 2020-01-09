@@ -9,7 +9,7 @@ copy *.h ..\dev > nul
 cd ..\dev
 
 echo Convirtiendo mapa
-..\utils\mapcnv.exe ..\map\mapa.map 5 5 15 10 15 packed > nul
+..\utils\mapcnv.exe ..\map\mapa.map 6 5 15 10 15 packed > nul
 cd ..\dev
 
 echo Convirtiendo enemigos/hotspots
@@ -44,4 +44,4 @@ del main.tap > nul
 del ..\gfx\*.scr > nul
 del *.bin > nul
 
-echo ¡Hecho!
+echo Hecho!

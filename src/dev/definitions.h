@@ -114,18 +114,14 @@ unsigned char en_an_state [3];
 #define GENERAL_DYING 		4
 
 #ifdef PLAYER_CAN_FIRE
-typedef struct {
-	unsigned char x;
-	unsigned char y;
-	char mx;
-	char my;
-	unsigned char estado;
-#ifdef LIMITED_BULLETS
-	unsigned char life;
-#endif	
-} BULLET;
-
-BULLET bullets [MAX_BULLETS];
+	unsigned char bullets_x [MAX_BULLETS];
+	unsigned char bullets_y [MAX_BULLETS];
+	char bullets_mx [MAX_BULLETS];
+	char bullets_my [MAX_BULLETS];
+	unsigned char bullets_estado [MAX_BULLETS];
+	#ifdef LIMITED_BULLETS
+		unsigned char bullets_life [MAX_BULLETS];
+	#endif	
 #endif
 
 // atributos de la pantalla: Contiene información
@@ -192,7 +188,7 @@ unsigned char *map_pointer;
 #ifdef PLAYER_CAN_FIRE
 	unsigned char blx, bly;
 #endif
-unsigned char rdx, rdy;
+unsigned char rdx, rdy, rdd, rdn;
 
 // More stuff
 
@@ -230,6 +226,9 @@ unsigned char success;
 	unsigned char x_pant, y_pant;
 #endif
 
+unsigned char _x, _y, _n, _t;
+unsigned char cx1, cy1, cx2, cy2, at1, at2;
+
 // Some declarations
 
 #ifdef ACTIVATE_SCRIPTING
@@ -246,6 +245,6 @@ void draw_scr (void);
 #endif
 
 unsigned char rand (void);
-void saca_a_todo_el_mundo_de_aqui (void);
+void clear_sprites (void);
 void draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t);
 
