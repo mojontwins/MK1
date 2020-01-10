@@ -2,6 +2,8 @@
 
 ## ¿Pero qué seto?
 
+![Seto](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/01_seto.png)
+
 Eso digo yo ¿Pero qué seto? Ufff. Hay tanto que decir, y tan poco espacio. Podría tirarme horas charlando y diciendo chorradas, pero intentaré no hacerlo. Me han dicho que tengo que ser claro y conciso y, aunque me cueste, trataré de serlo.
 
 Empecemos por el principio. En realidad un poquito más adelante, que hay mucha gresca entre creacionistas y evolucionistas. Vayámonos a 2010. A principios de ese año tuvimos una idea en Mojonia. Básicamente estábamos hartos de copiar y pegar a la hora de hacer güegos. Porque, a ver, no todo es cuestión de copiar y pegar, pero bien es cierto que cantidad de cosas siempre se hacen igual, cambiando varios parámetros. A ver, si te piensas que los que hacemos güegos escribimos la misma rutina de pintar la pantalla con tiles cada vez que hacemos un güego... po no. También estábamos hartos del arduo trabajo manual. Que si pasar a mano los sprites al formato de la splib2, que si ordenar a mano los tiles para que SevenuP los cogiese en el orden correcto, que si pasar el mapa, que si colocar enemigos con una hoja de cuadritos... Había mil quehaceres a la hora de hacer güegos que resultaban tediosos y aburridos. ¿Y quién quiere aburrirse mientras hace algo que supuestamente le gusta? Nosotros no. Y tú tampoco, supongo.
@@ -38,6 +40,8 @@ Para poneros un ejemplo, el *proyecto por defecto* (que no es más que la versi�
 
 Pues un montón de cosas. A nosotros se nos han ocurrido ya un montón. Si bien es cierto que hay elementos comunes y ciertas limitaciones, muchas veces te puedes sacar de la manga una paranoia nueva solamente combinando de forma diferente los elementos que tienes a tu disposición. ¿Quieres ejemplos? Pues para eso mismo hemos acompañamientos el lanzamiento de la rama 3.99 con la **Mojon Twins Covertape #2**. Si todavía no la tienes, bájatela. AHORA.
 
+![Mono](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/01_mono.png)
+
 Para la **Mojon Twins Covertape #2** lo que hicimos fue contratar a una tribu de indios pies-sucios (oriundos de la Jungla de Badajoz). A cada uno le escribimos una característica de **MTE MK1** en la espalda y otra en el pecho, y les animamos a descender por las colinas haciendo la croqueta. Cuando llegaban abajo hacíamos una foto y anotábamos las combinaciones. Con esas combinaciones hacíamos un güego. Luego llamábamos a Alberto, el Mono Tuerto, que el tío se inventa una historias de la leche, para que las justificase con un argumento convincente. Y funciona, en serio.
 
 ## Vamos a echarle un vistazo a las cosas que tenemos.
@@ -73,6 +77,7 @@ El truco está en combinar estas cosas, echarle imaginación, timar un poco con 
 ## Entonces ¿Cómo empezamos?
 
 Con imaginación. No me vale que cojas un juego nuestro que ya esté hecho y le cambies cosas. No. Así no vas a llegar a ningún sitio. La gente se cree que sí, pero NO. Invéntate algo, empieza de cero, y lo vamos construyendo poco a poco.
+
 Si no se te da bien dibujar, búscate a un amigo que sepa, que siempre hay. En serio, siempre hay. Si no encuentras a nadie, no pasa nada: puedes usar cualquier gráfico que hayamos hecho nosotros. En los paquetes de código fuente de todos los güegos están todos los gráficos en png y tal. Aprender a recortar y pegar con un editor de gráficos es un mínimo que deberás aprender.
 
 De todos modos, para empezar, y siendo conscientes de que realmente no sabéis qué se puede y qué no se puede hacer, os invito a que vayamos construyendo, poco a poco, el juego **Dogmole Tuppowski**. ¿Por qué este? Pues porque usa un montón de cosas, incluyendo el scripting. Pero no quiero que vayas, te pilles el paquete de fuentes de la **Covertape #2**, y te limites a seguir el tutorial mirando los archivos y tal. No. Lo suyo es que empieces con el paquete del engine vacío que os vamos a ofrecer más abajo, y que, para cada capítulo, vayas obteniendo los diferentes recursos y realizando las acciones necesarias, como si realmente estuvieses creando el juego desde cero.
@@ -151,6 +156,8 @@ Para probar que todo está correctamente instalado, abre una ventana de linea de
 ```
 
 Esto generará el archivo `lala_beta.tap` que podrás ejecutar en tu emulador de Spectrum favorito.
+
+![Lala Beta](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/01_lala.png)
 
 ## Empezando un nuevo proyecto
 
