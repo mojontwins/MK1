@@ -12,10 +12,11 @@ El material necesario para seguir este capítulo os lo he dejado aquí:
 
 Descárgalo y ponlo en una carpeta temporal, que ya iremos poniendo cosas en nuestro proyecto según las vayamos necesitando. Dentro hay cosas bonitas.
 
-Tileset… ¿De qué leches estamos hablando?
+## Tileset... ¿De qué leches estamos hablando?
 
-Pues de tiles. ¿Que qué es un tile? Pues para ponerlo sencillo, no es más que un cachito de gráfico que es del mismo tamaño y forma que otros cachitos de gráficos. Para que lo veas, busca la traducción: tile significa “azulejo”, (aunque nosotros preferimos pensar que en ralidad se trata de las siglas “Tengo Ideas Locas y Estrafalarias”). Ahora piensa en la pared de tu cuarto de baño, e imagina que en cada azulejo hay un cachito de gráfico. Tenemos el azulejo con un cachito de ladrillo, el azulejo con un cachito de hierba, y el azulejo negro y el azulejo con un cachito de suelo. Con varios de cada uno podemos ordenarlos de forma que hagamos un dibujo que se parezca a una casa de campo. Un cuarto de baño así molaría de la hostia, por cierto.
+Pues de tiles. ¿Que qué es un tile? Pues para ponerlo sencillo, no es más que un cachito de gráfico que es del mismo tamaño y forma que otros cachitos de gráficos. Para que lo veas, busca la traducción: tile significa “azulejo”, (aunque nosotros preferimos pensar que en ralidad se trata de las siglas “Tengo Ideas Locas y Estrafalarias”). Ahora piensa en la pared de tu cuarto de baño, e imagina que en cada azulejo hay un cachito de gráfico. Tenemos el azulejo con un cachito de ladrillo, el azulejo con un cachito de hierba, y el azulejo negro y el azulejo con un cachito de suelo. Con varios de cada uno podemos ordenarlos de forma que hagamos un dibujo que se parezca a una casa de campo. Un cuarto de baño así molaría de la hostia, por cierto. Siempre hay que hacer pipí. Y caca.
 
+![Una casa de campo](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_tiles.png)
 
 Esto es lo que usa la Churrera para pintar los gráficos de fondo. Como guardar una pantalla gráfica completa ocupa un huevo, lo que se hace es guardar un cierto número de cachitos y luego una lista de qué cachitos ocupa cada pantalla. La colección de cachitos de un güego es lo que se conoce como “tileset”. En este capítulo vamos a explicar cómo son los tilesets de la Churrera, cómo se crean, cómo se convierten, cómo se importan y cómo se usan. Pero antes necesitamos entender varios conceptos. Vete preparando un zumito.
 

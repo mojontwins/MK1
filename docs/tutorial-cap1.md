@@ -171,4 +171,6 @@ Esto generará el archivo `lala_beta.tap` que podrás ejecutar en tu emulador de
 
 Simplemente cambia `lala_beta` por el nombre de tu juego.
 
+Este archivo `compile.bat` contiene todos los pasos que hay que ejecutar para convertir cada archivo de datos (imagenes, mapa, ...) de tu juego y luego compilar el motor para obtener un archivo `.tap`. En los siguientes capítulos veremos cada conversión e incluso la ejecutaremos de forma manual para entender qué está pasando tras las entretelas de los visillos, pero a la hora de hacer un juego, a menos que estés haciendo algo muy avanzado, te bastará con sustituir los archivos que vienen en el proyecto de ejemplo y ejecutar `compile.bat` cada vez.
+
 Ahora ya estamos listos para que empiece lo bueno.
