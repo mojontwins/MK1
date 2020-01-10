@@ -28,7 +28,7 @@ Pues eso mismo: **MTE MK1** es un framework que se compone de varias cosas muy c
 
 **MTE MK1** ha tenido muchas versiones a lo largo de los últimos tres años. Desde 2010 hasta principios de 2013 fuimos evolucionando hasta llegar a la versión 4.7, pero el pifostio se nos lió tanto que no era, para nada, presentable. Cuando por aquella época se nos ocurrió hacer un tutorial decidimos irnos para atrás un poco, a un punto del pasado en el que el tema era aún manejable: la versión 3.1 (**Trabajo Basura**, **Zombie Calavera Prologue**). 
 
-Durante un par de meses nos dedicamos exclusivamente a coger la versión 3.1, corregirle todas las cosas que estaban chungas, cambiar la mitad de los componentes para hacerlos más rápidos y más compactos, y añadir un montón de características. Así construímos las versiones **3.99***, que fueron las que pusimos a vuestra disposición y fuimos evolucionando poco a poco hasta que, de forma poco natural, mutó en **MK2** a mediados de 2014.
+Durante un par de meses nos dedicamos exclusivamente a coger la versión 3.1, corregirle todas las cosas que estaban chungas, cambiar la mitad de los componentes para hacerlos más rápidos y más compactos, y añadir un montón de características. Así construímos las versiones **3.99**, que fueron las que pusimos a vuestra disposición y fuimos evolucionando poco a poco hasta que, de forma poco natural, mutó en **MK2** a mediados de 2014.
 
 Años después, aprovechando el décimo aniversario de **MTE MK1**, hemos revisado la última versión, actualizado el *toolchain* para automatizar al máximo todo el proceso, e incorporado en el *engine* muchísimas mejoras propias de motores más modernos, para hacer un híbrido tan sencillo como **MTE MK1** original pero que rindiese como nuestros últimos productos.
 
@@ -83,7 +83,7 @@ De todos modos, para empezar, y siendo conscientes de que realmente no sabéis q
 
 Lo primero es inventarse una historia que apunte al gameplay. No vamos a escribir todavía una historia para el güego (porque ahora no la necesitamos) – eso vendrá dentro de poco. Primero vamos a decidir qué hay que hacer. Vamos a hacer un güego con **Dogmole Tuppowski**, un personaje que nos inventamos hace tiempo y que tiene esta pinta:
 
-[[IMAGEN DOGMOLE]]
+![Dogmole Tuppowski](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/01_dogmole.jpg)
 
 En primer lugar vamos a hacer un juego de perspectiva lateral, de plataformas, en el que el personaje salte. No saltará demasiado, pongamos que podrá cubrir una distancia de unos cuatro o cinco tiles horizontalmente y dos tiles verticalmente. Esto lo tenemos que decidir en este punto porque tendremos que diseñar el mapa y habrá que asegurarse de que el jugador podrá llegar a los sitios a los que decidamos que se puede llegar.
 
@@ -109,7 +109,7 @@ Y ya, con esto, podemos empezar a diseñar nuestro juego. En realidad el tema su
 
 Ah, que se me olvidaba. También hicimos un dibujo de la Meemaid. Es esta:
 
-[[DIBUJO DE MEEMAID]]
+![The Mesmerizing Meemaid From Miscatonic](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/01_meemaid.jpg)
 
 ## Metiendo la cara en el barro
 
