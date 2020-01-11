@@ -1,167 +1,167 @@
-Una de las caracter°sticas m†s recordada de nuestra querida Microhobby fue aquella que nos permiti¢ a muchos hacer nuestros pinitos en programaci¢n y hardware. Entre otras cosas, y casi siempre en forma de talleres breves, pod°amos ÆpicarØ l°neas y l°neas de c¢digo para hacer nuestros propios juegos. Luego pod°amos modificarlos y hasta aprender de forma autodidacta. Fue lo m†s parecido a aquella promesa eterna de Æc¢mprame el Spectrum que me ayudar† a estudiarØ. Pues bien, salvando las distancias, siempre
+# Cap√≠tulo 1: Introducci√≥n
 
-Dividido en cap°tulos, los Mojon Twins ir†n cont†ndonos, con su tradicional estilo surrealista y mucho humor, el mÇtodo para usar su Churrera v3.99b. VerÇis lo sencillo que es cuando te lo explican. Y si tenÇis alguna duda podÇis preguntar lo que sea por
+## ¬øPero qu√© seto?
 
-Sin m†s, aqu° tenÇis el primer cap°tulo de La Churrera v3.99b - Tutorial y mandanga - Copyleft 2013 The Mojon Twins.
+Eso digo yo ¬øPero qu√© seto? Ufff. Hay tanto que decir, y tan poco espacio. Podr√≠a tirarme horas charlando y diciendo chorradas, pero intentar√© no hacerlo. Me han dicho que tengo que ser claro y conciso y, aunque me cueste, tratar√© de serlo.
 
-Pulsa aqu° para ver el cap°tulo 1 del Taller Crea tu propio juego de Spectrum.
+Empecemos por el principio. En realidad un poquito m√°s adelante, que hay mucha gresca entre creacionistas y evolucionistas. Vay√°monos a 2010. A principios de ese a√±o tuvimos una idea en Mojonia. B√°sicamente est√°bamos hartos de copiar y pegar a la hora de hacer g√ºegos. Porque, a ver, no todo es cuesti√≥n de copiar y pegar, pero bien es cierto que cantidad de cosas siempre se hacen igual, cambiando varios par√°metros. A ver, si te piensas que los que hacemos g√ºegos escribimos la misma rutina de pintar la pantalla con tiles cada vez que hacemos un g√ºego... po no. Tambi√©n est√°bamos hartos del arduo trabajo manual. Que si pasar a mano los sprites al formato de la splib2, que si ordenar a mano los tiles para que SevenuP los cogiese en el orden correcto, que si pasar el mapa, que si colocar enemigos con una hoja de cuadritos... Hab√≠a mil quehaceres a la hora de hacer g√ºegos que resultaban tediosos y aburridos. ¬øY qui√©n quiere aburrirse mientras hace algo que supuestamente le gusta? Nosotros no. Y t√∫ tampoco, supongo.
 
-Cap°tulo 1: Introducci¢n
+Ya lo s√©. Que eso de dise√±ar el g√ºego y hacer las cosas en papel milimetrado es muy de los 80 y tal pero, a ver, en serio, es un co√±azo. Uno puede ser friki, pero masoquista no.
 
+Se nos ocurri√≥ que lo que necesit√°bamos era un framework, que le llaman ahora, que nos permitiese disponer de los m√≥dulos de c√≥digo que quer√≠amos utilizar de forma sencilla, y que nos hiciese llevadero todo el tema de la conversi√≥n e integraci√≥n de datos (gr√°ficos, mapas, posicionamiento de enemigos y objetos...). Empezamos t√≠midamente escribiendo las utilidades de conversi√≥n, para luego ir levantando, usando trocitos de aqu√≠ y de all√°, un engine que sirviese como base.
 
-®Pero quÇ seto?
+Ten√≠amos un mont√≥n de ideas para el engine. Podr√≠amos habernos puesto a desarrollarlo poco a poco y luego sacar el g√ºego definitivo, pero nosotros no funcionamos as√≠. Como se nos iban ocurriendo paranoias, √≠bamos sacando g√ºegos cada vez que le met√≠amos una cosa nueva al engine. As√≠, en cuanto estuvo listo el ‚Äúm√≠nimo operativo‚Äù, lo estrenamos con **Lala the Magical**, **Cheril of the Bosque**, **Sir Ababol** y **Viaje al Centro de la Napia**.
 
-Eso digo yo ®Pero quÇ seto? Ufff. Hay tanto que decir, y tan poco espacio. Podr°a tirarme horas charlando y diciendo chorradas, pero intentarÇ no hacerlo. Me han dicho que tengo que ser claro y conciso y, aunque me cueste, tratarÇ de serlo.
+Como la gracieta, dentro de la retroescena, era que nosotros hac√≠amos juegos ‚Äúcomo churros‚Äù (¬°pero qu√© churros, se√±ora!), decidimos llamarle al sistema **MTE MK1 (*Mojon Twins Engine MK1*)**, o **la Churrera**. Y as√≠ empez√≥ todo... Mala idea, por cierto, porque hay gente a la que por lo visto le ha sentado muy mal que hagamos un motor reutilizable y usan el nombre de forma muy despectiva.
 
-Empecemos por el principio. En realidad un poquito m†s adelante, que hay mucha gresca entre creacionistas y evolucionistas. Vay†monos a 2010. (Aqu° suena la m£sica t°pica de poner imagenes del pasado, esa que hace taaaa, tararar† tar†aaa, tararara tar†aa
+## Pero entonces ¬øqu√© es exactamente **MTE MK1**?
 
-A principios de a§o tuvimos una idea en Mojonia. B†sicamente est†bamos hartos de copiar y pegar a la hora de hacer gÅegos. Porque, a ver, no todo es cuesti¢n de copiar y pegar, pero bien es cierto que cantidad de cosas siempre se hacen igual, cambiando v
+Pues eso mismo: **MTE MK1** es un framework que se compone de varias cosas muy chulas:
 
-Ya lo sÇ. Que eso de dise§ar el gÅego y hacer las cosas en papel milimetrado es muy de los 80 y tal pero, a ver, en serio, es un co§azo. Uno puede ser friki, pero masoquista no.
+1. El *engine*, o *motor*, el coraz√≥n de **MTE MK1**. Se trata de un pifostio de c√≥digo bestial que se ‚Äúgobierna‚Äù mediante un archivo principal llamado ‚Äúconfig.h‚Äù en el que decimos qu√© partes del motor usaremos en nuestro g√ºego y c√≥mo se comportar√°n.
 
-Se nos ocurri¢ que lo que necesit†bamos era un framework, que le llaman ahora, que nos permitiese disponer de los m¢dulos de c¢digo que quer°amos utilizar de forma sencilla, y que nos hiciese llevadero todo el tema de la conversi¢n e integraci¢n de datos
+2. Las utilidades de conversi√≥n, que nos permiten dise√±ar nuestro g√ºego en nuestros editores preferidos y, de forma incolora, inodora e ins√≠pida, meter todos esos datos en nuestro g√ºego.
 
+3. Un mont√≥n de monos, imprescindibles para cualquier cosa que se quiera hacer en condiciones.
 
+4. Tortilla.
 
-Ten°amos un mont¢n de ideas para el engine. Podr°amos habernos puesto a desarrollarlo poco a poco y luego sacar el gÅego definitivo, pero nosotros no funcionamos as°. Como se nos iban ocurriendo paranoias, °bamos sacando gÅegos cada vez que le met°amos u
+**MTE MK1** ha tenido muchas versiones a lo largo de los √∫ltimos tres a√±os. Desde 2010 hasta principios de 2013 fuimos evolucionando hasta llegar a la versi√≥n 4.7, pero el pifostio se nos li√≥ tanto que no era, para nada, presentable. Cuando por aquella √©poca se nos ocurri√≥ hacer un tutorial decidimos irnos para atr√°s un poco, a un punto del pasado en el que el tema era a√∫n manejable: la versi√≥n 3.1 (**Trabajo Basura**, **Zombie Calavera Prologue**). 
 
-Como la gracieta, dentro de la retroescena, era que nosotros hac°amos juegos "como churros" (≠pero quÇ churros, se§ora!), decidimos llamarle al sistema "la Churrera". Y as° empez¢ todo.
+Durante un par de meses nos dedicamos exclusivamente a coger la versi√≥n 3.1, corregirle todas las cosas que estaban chungas, cambiar la mitad de los componentes para hacerlos m√°s r√°pidos y m√°s compactos, y a√±adir un mont√≥n de caracter√≠sticas. As√≠ constru√≠mos las versiones **3.99***, que fueron las que pusimos a vuestra disposici√≥n y fuimos evolucionando poco a poco hasta que, de forma poco natural, mut√≥ en **MK2** a mediados de 2014.
 
-Pero entonces ®quÇ es exactamente la Churrera?
+A√±os despu√©s, aprovechando el d√©cimo aniversario de **MTE MK1**, hemos revisado la √∫ltima versi√≥n, actualizado el *toolchain* para automatizar al m√°ximo todo el proceso, e incorporado en el *engine* much√≠simas mejoras propias de motores m√°s modernos, para hacer un h√≠brido tan sencillo como **MTE MK1** original pero que rindiese como nuestros √∫ltimos productos.
 
-Pues eso mismo: la Churrera es un framework que se compone de varias cosas muy chulas:
+Para poneros un ejemplo, el *proyecto por defecto* (que no es m√°s que la versi√≥n beta de **Lalal Prologue** portada a **MTE MK1** v5.0) ocupa 2.5Kb menos y corre un 20% m√°s r√°pido (con cambio de pantallas instantaneo) que utilizando la versi√≥n 3.99 del motor. Adem√°s, grabada en un diskette da la consistencia necesaria al material magn√©tico para que, lanzado en plan ninja, cercene limpiamente las cabezas de los enemigos.
 
-1. El engine, o "motor", el coraz¢n de la Churrera. Se trata de un pifostio de c¢digo bestial que se "gobierna" mediante un archivo principal llamado "config.h" en el que decimos quÇ partes del motor usaremos en nuestro gÅego y c¢mo se comportar†n.
+## Pero ¬øqu√© se puede hacer con esto?
 
-2. Las utilidades de conversi¢n, que nos permiten dise§ar nuestro gÅego en nuestros editores preferidos y, de forma incolora, inodora e ins°pida, meter todos esos datos en nuestro gÅego.
+Pues un mont√≥n de cosas. A nosotros se nos han ocurrido ya un mont√≥n. Si bien es cierto que hay elementos comunes y ciertas limitaciones, muchas veces te puedes sacar de la manga una paranoia nueva solamente combinando de forma diferente los elementos que tienes a tu disposici√≥n. ¬øQuieres ejemplos? Pues para eso mismo hemos acompa√±amientos el lanzamiento de la rama 3.99 con la **Mojon Twins Covertape #2**. Si todav√≠a no la tienes, b√°jatela. AHORA.
 
-3. Un mont¢n de monos, imprescindibles para cualquier cosa que se quiera hacer en condiciones.
+Para la **Mojon Twins Covertape #2** lo que hicimos fue contratar a una tribu de indios pies-sucios (oriundos de la Jungla de Badajoz). A cada uno le escribimos una caracter√≠stica de **MTE MK1** en la espalda y otra en el pecho, y les animamos a descender por las colinas haciendo la croqueta. Cuando llegaban abajo hac√≠amos una foto y anot√°bamos las combinaciones. Con esas combinaciones hac√≠amos un g√ºego. Luego llam√°bamos a Alberto, el Mono Tuerto, que el t√≠o se inventa una historias de la leche, para que las justificase con un argumento convincente. Y funciona, en serio.
 
+## Vamos a echarle un vistazo a las cosas que tenemos.
 
-La Churrera ha tenido muchas versiones a lo largo de los £ltimos tres a§os. De forma interna hemos llegado a la versi¢n 4.7, pero el pifostio se nos li¢ tanto que no es, para nada, presentable. Tiene demasiados hacks y est† muy desordenada. As° que cuand
+1. **Valores**: Todos los valores relacionados con el movimiento del protagonista son modificables. Podemos hacer que salte m√°s o menos, que caiga m√°s despacio, que resbale m√°s, que corra poco o mucho, y m√°s cosas.
 
-Durante un par de meses nos hemos dedicado exclusivamente a coger la versi¢n 3.1, corregirle todas las cosas que estaban chungas, cambiar la mitad de los componentes para hacerlos m†s r†pidos y m†s compactos, y a§adir un mont¢n de caracter°sticas. As° co
+2. **Orientaci√≥n**: Podemos hacer que nuestro g√ºego se vea de lado o desde arriba (lo que, en mojonia, conocemos como ‚Äúperspectiva genital‚Äù). Es lo primero que tendremos que decidir, porque esto condicionar√° todo el dise√±o del g√ºego.
 
-La versi¢n 3.99b est† tan optimizada que, si recompilamos los viejos juegos con ella, obtenemos binarios entre 2 y 5Kb m†s peque§os, con movimientos m†s r†pidos y mucho m†s fluidos. Y est† a vuestra disposici¢n.
+3. **¬øSartar? ¬øVolar? ¬øc√≥mor?**: Si elegimos una perspectiva lateral (que el g√ºego se vea de lado) tendremos que decidir c√≥mo se mover√° el mu√±eco. Podemos hacer que sarte cuando se pulse salto (**Lala Lah**, **Julifrustris**, **Journey to the Centre of the Nose**, **Dogmole Tuppowski**...), que sarte siempre (**Bootee**)... Tambi√©n podemos hacer que vuele (**Jetpaco**).
 
-Adem†s, grabada en un diskette da la consistencia necesaria al material magnÇtico para que, lanzado en plan ninja, cercene limpiamente las cabezas de los enemigos.
+4. **Rebotar contra las paredes**. Si elegimos que nuestro g√ºego tenga perspectiva genital, podemos hacer que el prota rebote un poco cuando se choque con una pared.
 
-Pero ®quÇ se puede hacer con esto?
+5. **Bloques especiales**. Podemos activar o desactivar llaves y cerrojos, o bloques que se pueden empujar. Esto funciona para ambas orientaciones, si bien en la vista lateral los bloques solo pueden empujarse lateralmente.
 
-Pues un mont¢n de cosas. A nosotros se nos han ocurrido ya un mont¢n. Si bien es cierto que hay elementos comunes y ciertas limitaciones, muchas veces te puedes sacar de la manga una paranoia nueva solamente combinando de forma diferente los elementos qu
+6. **Disparar**. Tambi√©n podemos hacer que el prota dispare. En los g√ºegos de vista genital disparar√° en cualquiera de las cuatro direcciones principales. Tambi√©n podemos indicarle al motor qu√© direcci√≥n (vertical u horizontal) tiene preferencia en las diagonales. En los de vista lateral, disparar√° en un sentido u otro seg√∫n mire a izquierda o derecha.
 
-Para la Mojon Twins Covertape #2 lo que hicimos fue contratar a una tribu de indios pies-sucios (oriundos de la Jungla de Badajoz). A cada uno le escribimos una caracter°stica de la churrera en la espalda y otra en el pecho, y les animamos a descender po
+7. **Enemigos voladores**: que te persiguen sin tregua.
 
+8. **Pinchos y cosas del escenario que te matan**, no necesariamente pinchos.
 
-Vamos a echarle un vistazo a las cosas que tenemos.
+10. **Matar**: en los g√ºegos de perspectiva lateral podemos hacer que los enemigos, un cierto tipo de enemigos, se mueran si les pisas la cabeza.
 
-1. Valores: Todos los valores relacionados con el movimiento del protagonista son modificables. Podemos hacer que salte m†s o menos, que caiga m†s despacio, que resbale m†s, que corra poco o mucho, y m†s cosas.
+11. **Objetos coleccionables**: para que haya cosas que ir recopilando y guard√°ndose en la buchaca.
 
-2. Orientaci¢n: Podemos hacer que nuestro gÅego se vea de lado o desde arriba (lo que, en mojonia, conocemos como "perspectiva genital"). Es lo primero que tendremos que decidir, porque esto condicionar† todo el dise§o del gÅego.
+12. **Scripting** Si lo de arriba no es suficiente, podemos inventarnos muchas m√°s cosas usando el sencillo lenguaje de scripting incorporado.
 
-3. ®Sartar? ®Volar? ®c¢mor?: Si elegimos una perspectiva lateral (que el gÅego se vea de lado) tendremos que decidir c¢mo se mover† el mu§eco. Podemos hacer que sarte cuando se pulse salto (Lala Lah, Julifrustris, Journey to the Centre of the Nose, Dogmo
+Y m√°s cosas que ahora mismo no recuerdo pero que ir√°n surgiendo a medida que vayamos haciendo cosas.
 
-4. Rebotar contra las paredes. Si elegimos que nuestro gÅego tenga perspectiva genital, podemos hacer que el prota rebote un poco cuando se choque con una pared.
+El truco est√° en combinar estas cosas, echarle imaginaci√≥n, timar un poco con los gr√°ficos, y, en definitiva, ser un poco creativo. Por ejemplo, si ponemos una gravedad d√©bil (que har√° que el prota caiga muy lentamente) y habilitamos la capacidad de volar con muy poca aceleraci√≥n, ponemos un fondo azul y el personaje tiene forma de buzo, podemos hacer como si estuvi√©semos debajo del agua. Tambi√©n se pueden probar cosas extremas, como por ejemplo poner los valores de aceleraci√≥n vertical y de gravedad en negativo, con lo que el mu√±eco se ver√≠a empujado hacia arriba y har√≠a fuerza para hundirse... cosa que, por cierto, no hemos probado nunca y que me acaba de dar una idea... En cuanto hable con Alberto y se invente un argumento tenemos g√ºego nuevo.
 
-5. Bloques especiales. Podemos activar o desactivar llaves y cerrojos, o bloques que se pueden empujar. Esto funciona para ambas orientaciones, si bien en la vista lateral los bloques solo pueden empujarse lateralmente.
+¬øV√©is? ¬°As√≠ funciona! Mandadme un email y os doy el tel√©fono de Alberto.
 
-6. Disparar. TambiÇn podemos hacer que el prota dispare. En los gÅegos de vista genital disparar† en cualquiera de las cuatro direcciones principales. TambiÇn podemos indicarle al motor quÇ direcci¢n (vertical u horizontal) tiene preferencia en las diago
+## Entonces ¬øC√≥mo empezamos?
 
-7. Enemigos voladores: que te persiguen sin tregua.
+Con imaginaci√≥n. No me vale que cojas un juego nuestro que ya est√© hecho y le cambies cosas. No. As√≠ no vas a llegar a ning√∫n sitio. La gente se cree que s√≠, pero NO. Inv√©ntate algo, empieza de cero, y lo vamos construyendo poco a poco.
+Si no se te da bien dibujar, b√∫scate a un amigo que sepa, que siempre hay. En serio, siempre hay. Si no encuentras a nadie, no pasa nada: puedes usar cualquier gr√°fico que hayamos hecho nosotros. En los paquetes de c√≥digo fuente de todos los g√ºegos est√°n todos los gr√°ficos en png y tal. Aprender a recortar y pegar con un editor de gr√°ficos es un m√≠nimo que deber√°s aprender.
 
-8. Enemigos perseguidores: parecidos pero diferentes. Ya hablaremos de ellos.
+De todos modos, para empezar, y siendo conscientes de que realmente no sab√©is qu√© se puede y qu√© no se puede hacer, os invito a que vayamos construyendo, poco a poco, el juego **Dogmole Tuppowski**. ¬øPor qu√© este? Pues porque usa un mont√≥n de cosas, incluyendo el scripting. Pero no quiero que vayas, te pilles el paquete de fuentes de la **Covertape #2**, y te limites a seguir el tutorial mirando los archivos y tal. No. Lo suyo es que empieces con el paquete del engine vac√≠o que os vamos a ofrecer m√°s abajo, y que, para cada cap√≠tulo, vayas obteniendo los diferentes recursos y realizando las acciones necesarias, como si realmente estuvieses creando el juego desde cero.
 
-9. Pinchos y cosas del escenario que te matan, no necesariamente pinchos.
+¬øPara qu√© tanto teatro? Pues porque cuando te quieras poner a hacer el tuyo ya no ser√° la primera vez y, cr√©eme, es toda una ventaja. Y porque el teatro mola. ¬°Salen tetas!
 
-10. Matar: en los gÅegos de perspectiva lateral podemos hacer que los enemigos, un cierto tipo de enemigos, se mueran si les pisas la cabeza.
+## Venga, va. Vamos a ello
 
-11. Objetos: para que haya cosas que ir recopilando y guard†ndose en la buchaca.
+Lo primero es inventarse una historia que apunte al gameplay. No vamos a escribir todav√≠a una historia para el g√ºego (porque ahora no la necesitamos) ‚Äì eso vendr√° dentro de poco. Primero vamos a decidir qu√© hay que hacer. Vamos a hacer un g√ºego con **Dogmole Tuppowski**, un personaje que nos inventamos hace tiempo y que tiene esta pinta:
 
-12. Scripting Si lo de arriba no es suficiente, podemos inventarnos muchas m†s cosas usando el sencillo lenguaje de scripting incorporado.
+[[IMAGEN DOGMOLE]]
 
-Y m†s cosas que ahora mismo no recuerdo pero que ir†n surgiendo a medida que vayamos haciendo cosas.
+En primer lugar vamos a hacer un juego de perspectiva lateral, de plataformas, en el que el personaje salte. No saltar√° demasiado, pongamos que podr√° cubrir una distancia de unos cuatro o cinco tiles horizontalmente y dos tiles verticalmente. Esto lo tenemos que decidir en este punto porque tendremos que dise√±ar el mapa y habr√° que asegurarse de que el jugador podr√° llegar a los sitios a los que decidamos que se puede llegar.
 
-El truco est† en combinar estas cosas, echarle imaginaci¢n, timar un poco con los gr†ficos, y, en definitiva, ser un poco creativo. Por ejemplo, si ponemos una gravedad dÇbil (que har† que el prota caiga muy lentamente) y habilitamos la capacidad de vola
+Vamos a hacer que en el juego haya que llevar a cabo dos misiones para poder terminarlo. Esto lo conseguiremos mediante scripting, que ser√° algo que dejaremos para el final del desarrollo. Las dos misiones ser√°n sencillas y emplear√°n caracter√≠sticas autom√°ticas del motor para que no haya que hacer un script demasiado complicado:
 
-®VÇis? ≠As° funciona! Mandadme un email y os doy el telÇfono de Alberto.
+1. Habr√° cierto tipo de enemigos a los que tendremos que eliminar. Una vez eliminados, tendremos acceso a la segunda misi√≥n, porque se eliminar√° un bloque de piedra en la pantalla que da acceso a una parte del mapa.
 
-Entonces ®C¢mo empezamos?
+2. Habr√° que llevar, uno a uno, objetos a la parte del mapa que se desbloquea con la primera misi√≥n.
 
-Con imaginaci¢n. No me vale que cojas un juego nuestro que ya estÇ hecho y le cambies cosas. No. As° no vas a llegar a ning£n sitio. La gente se cree que s°, pero NO. InvÇntate algo, empieza de cero, y lo vamos construyendo poco a poco.
-Si no se te da bien dibujar, b£scate a un amigo que sepa, que siempre hay. En serio, siempre hay. Si no encuentras a nadie, no pasa nada: puedes usar cualquier gr†fico que hayamos hecho nosotros. En los paquetes de c¢digo fuente de todos los gÅegos est†n
+Para justificar esto, explicaremos que los enemigos que hay que eliminar son unos brujos o monjes o algo as√≠ m√°gico que hacen un podewwwr que mantiene cerrada la parte del escenario donde hay que llevar los objetos. ¬°La historia se nos escribe sola!
 
-De todos modos, para empezar, y siendo conscientes de que realmente no sabÇis quÇ se puede y quÇ no se puede hacer, os invito a que vayamos construyendo, poco a poco, el Dogmole Tuppowski. ®Por quÇ este? Pues porque usa un mont¢n de cosas, incluyendo el 
+Por tanto, ya sabemos que tendremos que construir un g√ºego de vista lateral, con saltos, que se pueda pisar a cierto tipo de enemigos y matarlos, que s√≥lo se pueda llevar un objeto encima, y que necesitaremos scripting para que se pinte la piedra en la entrada del sitio donde hay que llevar los objetos si no hemos matado a los enemigos. Adem√°s, el hecho de llevar las cosas una a una para dejarlas en un sitio necesitar√° otro poquito de scripting tambi√©n.
 
-®Para quÇ tanto teatro? Pues porque cuando te quieras poner a hacer el tuyo ya no ser† la primera vez y, crÇeme, es toda una ventaja. Y porque el teatro mola. ≠Salen tetas!
+Como lo tenemos a huevo, nos inventamos la historia, que, si te le√≠ste en su d√≠a la ficha del **Covertape #2**, ya conocer√°s:
 
-Venga, va. Vamos a ello
+**Dogmole Tuppowski** es el patr√≥n de un esquife de lata que hace transportes de extraperlo de objetos raros y dem√°s artefactos de dudosa procedencia (algunos dicen que con propiedades m√°gicas) para cierto departamento de la Universidad de Miskatonic (provincia de Badajoz). Sin embargo, una noche, justo cuando iba a hacer su entrega con cajas repletas de misteriosos y m√°gicos objetos, se levant√≥ una tempestad del copet√≠n que estrell√≥ su barco contra un mont√≥n de pieras hostioneras con lo que el revent√≥n fue de a√∫pa, y todas las cajas quedaron desperdigadas por la playa y alrededores.
 
-Lo primero es inventarse una historia que apunte al gameplay. No vamos a escribir todav°a una historia para el gÅego (porque ahora no la necesitamos) - eso vendr† dentro de poco. Primero vamos a decidir quÇ hay que hacer.
-Vamos a hacer un gÅego con Dogmole Tuppowski, un personaje que nos inventamos hace tiempo y que tiene esta pinta:
+La se√±orita Meemaid de Miskatonic, que se encontraba peinando sus Nancys a la luz de la luna llena en su torre√≥n del acantilado, lo vio todo y, consciente de que el contenido de las cajas podr√≠a ser muy preciado por ocultistas y dem√°s gente raruna, decidi√≥ llev√°rselas para ella. Como su cami√≥n estaba roto y repar√°ndose y no lo tendr√≠a hasta el d√≠a siguiente, puso a sus esbirros de dudosa procedencia a guardar las cajas, y, por si acaso, tambi√©n mand√≥ a los veinte Brujetes de la Religi√≥n de Petete que hicieran un hechizo mental para cerrar las puertas de la Universidad.
 
+La misi√≥n de Dogmole, por tanto, es doble: primero tiene que eliminar a los veinte Brujetes de la Religi√≥n de Petete y, una vez abierta la puerta de la Universidad, tendr√° que buscar y llevar, una por una, cada una de las diez cajas al vest√≠bulo del edificio, donde deber√° dejarlas en donde pone ‚ÄúBOXES‚Äù pulsando ‚ÄúA‚Äù.
 
-En primer lugar vamos a hacer un juego de perspectiva lateral, de plataformas, en el que el personaje salte. No saltar† demasiado, pongamos que podr† cubrir una distancia de unos cuatro o cinco tiles horizontalmente y dos tiles verticalmente. Esto lo ten
+Y ya, con esto, podemos empezar a dise√±ar nuestro juego. En realidad el tema suele salir as√≠. En nuestro a veces hacemos trampas y jugamos con ventaja: muchos de nuestros juegos han surgido porque hemos a√±adido una nueva capacidad a **MTE MK1** y hab√≠a que probarla, como ocurri√≥ con Bootee, Balowwwn, Zombie Calavera o Cheril the Goddess. El proceso creativo es insondable y requiere que tengas algo de inventiva e imaginaci√≥n y eso, desgraciadamente, no es algo que se pueda ense√±ar.
 
-Vamos a hacer que en el juego haya que llevar a cabo dos misiones para poder terminarlo. Esto lo conseguiremos mediante scripting, que ser† algo que dejaremos para el final del desarrollo. Las dos misiones ser†n sencillas y emplear†n caracter°sticas auto
+Ah, que se me olvidaba. Tambi√©n hicimos un dibujo de la Meemaid. Es esta:
 
-1. Habr† cierto tipo de enemigos a los que tendremos que eliminar. Una vez eliminados, tendremos acceso a la segunda misi¢n, porque se eliminar† un bloque de piedra en la pantalla que da acceso a una parte del mapa.
+[[DIBUJO DE MEEMAID]]
 
-2. Habr† que llevar, uno a uno, objetos a la parte del mapa que se desbloquea con la primera misi¢n.
+## Metiendo la cara en el barro
 
-Para justificar esto, explicaremos que los enemigos que hay que eliminar son unos brujos o monjes o algo as° m†gico que hacen un podewwwr que mantiene cerrada la parte del escenario donde hay que llevar los objetos. ≠La historia se nos escribe sola!
+Vamos a empezar a montar cosas. En primer lugar, necesitar√°s **z88dk**, que es un compilador de C, y **splib2**, que es la biblioteca de gr√°ficos y dem√°s E/S que usamos. Como no tenemos ganas de que te compliques instalando cosas (sobre todo porque la splib2 es muy vieja y es complicado compilarla usando un z88dk moderno, y porque la splib2 que usamos en el motor est√° modificada por El√≠as, el mono modificalibrer√≠as), hemos preparado, para los usuarios de Windows, un paquete `z88dk10-stripped.zip` que encontrar√°s en el directorio `env` de este repositorio y que deber√°s descomprimir en C:. 
 
-Por tanto, ya sabemos que tendremos que construir un gÅego de vista lateral, con saltos, que se pueda pisar a cierto tipo de enemigos y matarlos, que s¢lo se pueda llevar un objeto encima, y que necesitaremos scripting para que se pinte la piedra en la e
+Tambi√©n vamos a necesitar un editor de textos. Si eres programador ya tendr√°s uno que te guste de la hostia. Si no lo eres, por favor, no utilices el bloc de notas de Windows.
 
-Como lo tenemos a huevo, nos inventamos la historia, que, si te le°ste en su d°a la ficha del Covertape #2, ya conocer†s:
-
-Dogmole Tuppowski es el patr¢n de un esquife de lata que hace transportes de extraperlo de objetos raros y dem†s artefactos de dudosa procedencia (algunos dicen que con propiedades m†gicas) para cierto departamento de la Universidad de Miskatonic (provin
-
-La se§orita Meemaid de Miskatonic, que se encontraba peinando sus Nancys a la luz de la luna llena en su torre¢n del acantilado, lo vio todo y, consciente de que el contenido de las cajas podr°a ser muy preciado por ocultistas y dem†s gente raruna, decid
-
-La misi¢n de Dogmole, por tanto, es doble: primero tiene que eliminar a los veinte Brujetes de la Religi¢n de Petete y, una vez abierta la puerta de la Universidad, tendr† que buscar y llevar, una por una, cada una de las diez cajas al vest°bulo del edif
-
-Y ya, con esto, podemos empezar a dise§ar nuestro juego. En realidad el tema suele salir as°. En nuestro a veces hacemos trampas y jugamos con ventaja: muchos de nuestros juegos han surgido porque hemos a§adido una nueva capacidad a la churrera y hab°a q
-
-Ah, que se me olvidaba. TambiÇn hicimos un dibujo de la Meemaid. Es esta:
-
-
-
-Metiendo la cara en el barro
-
-Vamos a empezar a montar cosas. En primer lugar, necesitar†s z88dk, que es un compilador de C y splib2, que es la biblioteca de gr†ficos que usamos. Como no tenemos ganas de que te compliques instalando cosas (sobre todo porque la splib2 es muy vieja y e
-
-http://www.mojontwins.com/churrera/mt-z88dk10.zip
-
-Los usuarios de Linux y otros sistemas no deber°an tener ning£n problema en instalar la £ltima versi¢n de z88dk en sus sistemas y copiar el archivo splib2.lib y splib2t.lib en donde las clibs y spritepack.h en donde los includes. Estos dos archivos los h
-
-http://www.mojontwins.com/churrera/mt-splib2.zip
-
-TambiÇn vamos a necesitar un editor de textos. Si eres programador ya tendr†s uno que te guste de la hostia. Si no lo eres, por favor, no utilices el bloc de notas de Windows. B†jate Crimson Editor, por ejemplo. En realidad cualquiera es mejor que el blo
-
-Nos har† falta el editor Mappy para hacer los mapas del juego. Puedes bajarte la versi¢n oficial, aunque es mejor usar la versi¢n mojona que est† modificada con las cosas que necesitamos y un par de caracter°sticas custom que vienen muy bien y que ya ver
-
-http://www.mojontwins.com/churrera/mt-mappy.zip
-
-Otra cosa que necesitaremos ser† SevenuP para realizar la conversi¢n de gr†ficos. B†jatelo de su web oficial, aqu°:
-
-http://metalbrain.speccy.org/
+Nos har√° falta el editor Mappy para hacer los mapas del juego. La versi√≥n mojona `mappy-mojon.zip`, que est√° modificada con las cosas que necesitamos y un par de caracter√≠sticas custom que vienen muy bien, tambi√©n la hemos incluido en e directorio `env` de este repositorio.
 
 Cuando lleguemos a la parte del sonido hablaremos de las utilidades Beepola y BeepFX. Puedes buscarlas y descargarlas ahora si quieres, pero no las utilizaremos hasta el final.
 
-Otra cosa que necesitar†s ser† un buen editor de gr†ficos para pintar los monitos y los cachitos de escenario. Te vale cualquiera que grabe en .png. Te reitero que si no sabes dibujar y no tienes ning£n amigo que sepa puedes pillar los gr†ficos de Mojon 
-Una vez que eso estÇ instalado y tal, necesitaremos la Churrera. En la siguiente direcci¢n est† el paquete completo de la versi¢n 3.99b:
+Otra cosa que necesitar√°s ser√° un buen editor de gr√°ficos para pintar los monitos y los cachitos de escenario. Te vale cualquiera que grabe en `.png`. Te reitero que si no sabes dibujar y no tienes ning√∫n amigo que sepa puedes pillar los gr√°ficos de Mojon Twins. Igualmente vas a necesitar un editor gr√°fico para recortar y pegar nuestros gr√°ficos en los tuyos. Te vale cualquier cosa. Yo uso una versi√≥n super vieja de Photoshop o el genial Aseprite porque es a lo que estoy acostumbrado. Mucha gente usa Gimp. Hay un mont√≥n, elije el que m√°s te guste. Pero que grabe .png. Remember. Se bebes no kandusikas.
 
-http://www.mojontwins.com/churrera/mt-churrera-3.99b.zip
+Una vez que eso est√© instalado y tal, necesitaremos **MTE MK1**. Descarga este repositorio a tu disco duro.
 
-Para empezar a trabajar, descomprimimos el paquete de la Churrera en un sitio chuli y lo personalizamos para nuestro juego siguiendo estos pasos:
+## Probando que todo est√° bien instalado
 
-1. Le cambiamos el nombre al directorio principal Churrera3.99b por el de nuestro juego. Por ejemplo "Dogmole Tuppowski".
+Para probar que todo est√° correctamente instalado, abre una ventana de linea de comandos, mu√©vete al directorio `src/dev`, y:
 
-2. Le cambiamos el nombre al m¢dulo C principal por el de nuestro juego. Este m¢dulo est† en /dev/ y se llama churromain.c. Le cambiaremos el nombre a dogmole.c.
+1. Ejecuta `setenv.bat` la primera vez, para establecer las variables de entorno que har√°n que **z88dk** est√© encontrable. Si todo est√° donde debe estar, deber√°s obtener este mensaje en tu consola:
 
-3. Editaremos el archivo make.bat que est† en /dev/ con nuestro editor de texto para adaptarlo a nuestro juego. En primer lugar hay que sustituir donde pone %1 y poner el nombre que le pusiste a churromain.c. En nuestro caso, dogmole. Deber°a quedar as°:
+```
+	zcc - Frontend for the z88dk Cross-C Compiler
+	v2.59 (C) 16.4.2010 D.J.Morris
+```
 
+2. Ejecuta `compile.bat` para compilar el juego de ejemplo. Deber√°s ver el proceso en tu consola:
 
-Cada vez que hagamos un juego nuevo tendremos que descomprimir una nueva copia de la Churrera y personalizarlo igualmente.
+```
+	Compilando script
+	Convirtiendo mapa
+	Convirtiendo enemigos/hotspots
+	Importando GFX
+	Compilando guego
+	lala_beta.bin: 28566 bytes
+	Construyendo cinta
+	Limpiando
+	Hecho!
+```
 
-Ya estamos listos para empezar. Pero os tendrÇis que esperar al pr¢ximo cap°tulo.
+Esto generar√° el archivo `lala_beta.tap` que podr√°s ejecutar en tu emulador de Spectrum favorito.
+
+## Empezando un nuevo proyecto
+
+1. Copia el contenido de `src` en un nuevo directorio con el nombre de tu juego.
+
+2. Luego entra en `dev` y edita el archivo `compile.bat`. Al principio encontrar√°s una linea parecida a esta:
+
+```
+	set game=lala_beta
+```
+
+Simplemente cambia `lala_beta` por el nombre de tu juego.
+
+Ahora ya estamos listos para que empiece lo bueno.
