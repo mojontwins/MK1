@@ -374,7 +374,7 @@ unsigned char player_move (void) {
 				p_vy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (p_cont_salto >> 1));
 				if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
 				++ p_cont_salto;
-				if (p_cont_salto == 8) p_saltando = 0;
+				if (p_cont_salto == 9) p_saltando = 0;
 			}
 		} else p_saltando = 0;
 	

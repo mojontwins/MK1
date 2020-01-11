@@ -258,7 +258,7 @@
 
 #define PLAYER_VY_INICIAL_SALTO 64 		// Initial junp velocity (64/64 = 1 p?xel/frame)
 #define PLAYER_MAX_VY_SALTANDO	320 	// Max jump velocity (320/64 = 5 p?xels/frame)
-#define PLAYER_INCR_SALTO		48		// acceleration while JUMP is pressed (48/64 = 0.75 p?xeles/frame^2)
+#define PLAYER_INCR_SALTO		64		// acceleration while JUMP is pressed (48/64 = 0.75 p?xeles/frame^2)
 
 #define PLAYER_INCR_JETPAC		32		// Vertical jetpac gauge
 #define PLAYER_MAX_VY_JETPAC	256 	// Max vertical jetpac speed
