@@ -60,6 +60,8 @@ Esto tiene **dos posibles soluciones**. La primera, y más tonta, y la que se ha
 
 La segunda solución se basa en **permitir que Mappy haga sus mierdas** y meta el tile negro que tanto le gusta, pero luego tendremos que acordarnos de este detalle porque habrá que modificar `compile.bat` para añadir un parámetro extra al conversor de mapas, y a la hora de crear nuestro archivo de enemigos (en próximos capítulos). Lo mencionaremos cuando sea el momento.
 
+En el caso de que optemos por la segunda solución, podemos llenar todo el mapa de nuestro tile 0 (que para mappy será el 1) usando `Custom → Tile Replace`, introduciendo `0, 1` y pulsando `OK`.
+
 ## Guías
 
 Ahora sólo queda una cosa más por hacer antes de empezar: necesitamos una ayuda para saber dónde empieza y termina cada pantalla, ya que los bordes de cada pantalla tienen que ser consistentes con los de las pantallas colindantes: si hay un obstáculo al borde derecho de una pantalla, deberá haber otro obstáculo al borde izquierdo de la pantalla que esté a su derecha. A veces se nos olvida, como estaréis pensando los que nos sigáis normalmente: la mayoría de los bugs tradicionales de los Mojon Twins tiene que ver con que no hemos hecho bien el mapa. No nos tomes como ejemplo y fíjate bien en los bordes 😀
