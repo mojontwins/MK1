@@ -130,13 +130,13 @@ Aquí tenemos el tileset de **Lala lah**. Como vemos,el primer tile es el fondo 
 
 Este es el tileset de **D'Veel'Ng**, un güego de perspectiva genital. Este empieza con dos tiles para suelo (tipo 0), seguidos por cuatro obstáculos (tipo 8) – los buesos, la calavera, la canina y el piedro, dos tiles matadores y malignos (tipo 1), que son esas calaveras rojas tan feas, otro obstáculo en forma de ladrillos amarillos (tipo 8), otro suelo embaldosado (tipo 0), otro tile que te mata en forma de seta maligna (tipo 1), ladrillos blancos (tipo 8), más suelo (tipo 0), y otra calavera obstaculizante (tipo 8). Este güego tiene tiles que se empujan, por lo que el tile 14 es una caja roja de tipo 10. También tenemos llaves, por lo que el tile 15 es un cerrojo, también de tipo 10. Luego tenemos la típica recarga de vida, el objeto y la llave, y el tile alternativo para el fondo que se pinta aleatoriamente. En la fila de abajo, volvemos a tener una versión sombreada de los tiles de fondo. Fíjate como los tiles que matan los he dejado igual en la tira “sombreada”: esto es para que siempre se vean bien destacados. Venga, más:
 
-![Monono](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_ts_monono)
+![Monono](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_ts_monono.png)
 
-Ahora toca el del Monono. Este es muy sencillo de ver: empezamos con el tile de fondo principal, vacío del todo (tipo 0). Seguimos con seis obstáculos (tipo 8). Luego tenemos dos tiles de fondo más, para adornar los fondos: la ventanica para asomarse y desi ola k ase y el escudo . Luego hay tres tiles-obstáculo más (tipo 8), unos pinches venenozos (tipo 1), nuestra típica plataforma metálica copyright Mojon Twins signature special (tipo 4), una caja que se puede empujar (tile 14, tipo 10) y un cerrojo (tile 15, tipo 10). Luego lo de siempre: recarga, objeto, llave, alternativo. Este no tiene sombreado automático.
+Ahora toca el del **Monono**. Este es muy sencillo de ver: empezamos con el tile de fondo principal, vacío del todo (tipo 0). Seguimos con seis obstáculos (tipo 8). Luego tenemos dos tiles de fondo más, para adornar los fondos: la ventanica para asomarse y desi ola k ase y el escudo. Luego hay tres tiles-obstáculo más (tipo 8), unos pinches venenozos (tipo 1), nuestra típica plataforma metálica copyright Mojon Twins signature special (tipo 4), una caja que se puede empujar (tile 14, tipo 10) y un cerrojo (tile 15, tipo 10). Luego lo de siempre: recarga, objeto, llave, alternativo. Este no tiene sombreado automático.
 
 Podría seguir, pero es que no tengo más ganas.
 
-Haciendo un tileset de 48 tiles
+## Haciendo un tileset de 48 tiles
 
 Como hemos advertido, los mapas hechos con tilesets de 48 tiles ocupan el doble que los que están hechos con tilesets de 16. Si aún así decides seguir esta ruta, aquí tienes una explicación de cómo hacerlo.
 
@@ -146,99 +146,84 @@ En los tilesets de 48 tiles, podemos usar los tiles de 0 a 47 para hacer las pan
 
 Como único ejemplo tenemos el tileset de Zombie Calavera. Si te fijas, en Zombie Calavera no hay llaves (ni cerrojos), por lo que sólo están ocupados como “especiales” el 16 para las recargas y el 17 para los objetos. Tampoco hay tiles empujables. Todos los demás se usan para pintar el escenario:
 
+![Zombie Calavera Prologue](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_ts_zcp.png)
 
+## Ya tenemos el tileset pintado. Ahora ¿qué?
 
-Ya tenemos el tileset pintado. Ahora ¿qué?
+**MTE MK2** utiliza un set de 256 "patrones" para las partes "fijas" (fondo, textos, marcadores). Un "patrón", o carácter, no es más que una imagen de 8x8 píxeles. De los 256 "patrones", los 64 primeros contendrán letras, números y símbolos, y los 192 restantes los diferentes trozos empleados para construir el tileset que has pintado.
 
-Lo primero es grabarlo como copia maestra dentro de la carpeta /gfx llamándolo work.png. Ahora tenemos que prepararlo para usarlo. Haremos dos versiones: la que importaremos en el güego y la que usaremos en el Mappy para hacer el mapa y en el colocador de enemigos y objetos para… bueno, adivina.
+Para conseguir tener todos sus trocitos tal y como los necesita, **MTE_MK2** dispone de un convertidor lamado `ts2bin.exe`, ubicado, como todas las utilidades, en el directorio `src/utils`. `ts2bin.exe` necesita DOS archivos para funcionar: uno con los 64 "patrones" de la fuente, y otro con tu "tileset".
 
-Si estás siguiendo el tutorial con el Dogmole sin hacer experimentos propios, puedes encontrar el work.png del dogmole en el paquetito de archivos de este capítulo.
+Si no quieres tocar nada, lo primero que tienes que hacer es coger tu tileset, llamarlo `work.png`, y grabarlo en `/gfx` (sustituyendo el que viene por defecto). Luego necesitas hacer el archivo con la fuente.
 
-El tileset para Mappy
+Si estás siguiendo el tutorial con **Dogmole** sin hacer experimentos propios, puedes encontrar el `work.png` de este güego en el paquetito de archivos de este capítulo.
 
-Mappy es muy jodío. Necesita que el tile 0 esté vacío, o sea, que sea todo negro. Si le cargas un tileset que no tenga el primer tile todo negro, pone él uno al principio y desplaza todos los demás tiles. Eso es una putada porque estaríamos haciendo un mapa con todos los índices bailados. No, no mola. Como no podemos cambiar ese comportamiento de Mappy, vamos a modificar nuestro tileset. Si has usado un gráfico en el tile 0 (por ejemplo, haciendo que el fondo de tu güego sea azul, o pintando puntitos para simular un césped en vista genital) tendremos que modificar el tileset para mappy de forma que este tile sea negro entero. Vamos a recortar los 16 tiles (si nuestro tileset es de 16 tiles) y vamos a dejar el primero vacío, así (en nuestro caso no hemos tenido que hacer nada porque nuestro tile 0 ya era renegrío, pero en juegos como, por ejemplo, Cheril of the Bosque, sí fue necesario hacerlo):
+## La fuente
 
+El archivo con la fuente, que debe llamarse `font.png` y estar en el directorio `gfx` si no quieres editar `compile.bat`, debe contener, como hemos dicho, 64 "patrones". Estos "patrones" deben representar los caracteres ASCII desde el 32 al 95 y estar organizados en una imagen de 256x16 parecida a esta:
 
+![Zombie Calavera Prologue](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_base_font.png)
 
-Este tileset lo grabamos en la carpeta /gfx como mappy.bmp, más que nada porque Mappy y el colocador se entienden mejor con ese formato.
+Lo más fácil es utilizar como plantilla el archivo `fuente_base.png` incluido en el paquetito de archivos de este capítulo, y dibujar sobre él o adaptar alguna fuente ya existente. La fuente para **Dogmole** también está incluida en el paquetito: `font.png` que deberás copiar en `/gfx` sustituyendo la que viene.
 
-Recuerda, que es importante: (leer esto con voz de madre, para que te cale más) si tu tile 0 no es totalmente negro, tienes que dejarlo totalmente negro. Mira los ejemplos de más arriba. En Zombre Calavera, Lala lah o D'Veel'Ng hubo que hacer esto. Que si no Mappy se hace un lío. Que ya me estoy viendo que me vendrás luego con el mapa terminado y los índices bailados y tendremos que liarla parda para arreglar el desbarajuste.
+## La conversión e importación
 
-El tileset para importar
+Como hemos dicho, la utilidad `ts2bin` incluida en `/utils` se encarga de tomar una fuente y un tileset y generar un binario con todos los patrones en el formato que espera **MTE MK2**. La invocación al conversor está incluida en `compile.bat` para que tú no tengas nada más que hacer que editar los gráficos y ponerlos en su sitio (y hacer todas las modificaciones que necesites de forma indolora) (los que hayan catado la Churrera en sus versiones anteriores estará ahora dando palmas con las orejas porque antes había que hacer bastante trabajo manual).
 
-Splib2, la biblioteca sobre la que funciona **MTE MK1**, maneja un charset de 256 caracteres para pintar los fondos, además de los sprites que van encima. Por tanto, el siguiente paso es crear un charset para importar en el juego usando nuestro tileset y un tipo de letra. **MTE MK1** emplea los 64 caracteres que se corresponden con los códigos ASCII de 32 al 95, o sea, estas letras:
+Sin embargo, por tema del saber, que no ocupa lugar, vamos a explicar como funciona.
 
+`ts2bin` está pensado para ser llamado desde linea de comandos (o desde un archivo de script como `compile.bat`). Si lo ejecutas a pelo desde la ventana de linea de comandos él mismo te chiva qué parámetros espera:
 
-Lo suyo es que te pilles una de por ahí (hay muchas de gratis) o que pintes la tuya encima de ese gráfico (que encontrarás dentro del paquete en el archivo fuente-base.png). Sea lo que sea lo que terminéis haciéndolo, grabadlo en /gfx como fuente.png. Es muy importante que se respeten las posiciones de las letras dentro del gráfico porque si no el texto y los números saldrán mal. Esta es la fuente.png que usamos en Dogmole:
+```
+    $ src\utils\ts2bin.exe
+    ts2bin v0.3 20191202 ~ Usage:
 
+    $ ts2bin font.png/nofont work.png/notiles ts.bin [forcezero]
 
-Lo primero que vamos a hacer es reordenar nuestro tileset. Lo que haremos será “partir” cada tile en cuatro trozos de 8×8. Cada uno de estos trozos se corresponde con lo que los Spectrumeros conocemos como UDG (User Defined Graphic) y, además, llevará un atributo de color asociado. Se trata de obtener algo así para poder convertirlo a código C usando SevenuP:
+    where:
+       * font.png is a 256x16 file with 64 chars ascii 32-95
+         (use 'nofont' if you don't want to include a font & gen. 192 tiles)
+       * work.png is a 256x48 file with your 16x16 tiles
+         (use 'notiles' if you don't want to include a tileset & gen. 64 tiles)
+       * ts.bin is the output, 2304 bytes bin file.
+       * forcezero: adds 0 as 2nd colour when there's only one per 8x8 cell
+```
 
+El primer parámetro es el nombre de archivo de la fuente (incluyendo su ubicación si es necesaria), o la palabra `nofont` si sólo quieres convertir el tileset (cosa que viene bien para hacer otras cosas que no son un juego de la churrera normal). 
 
+El segundo parámetro es el nombre del archivo con el tileset (incluyendo su ubicación si es necesaria), o la palabra `notiles` si sólo quieres convertir la fuente (bla bla bla, no con la churrera en situaciones normales).
 
-Hace años hacíamos esto a mano y era un verdadero coñazo. De hecho, la primera aplicación que hicimos para **MTE MK1** fue la que se encarga, precisamente, de reordenar tilesets en UDGs. La aplicación está en la carpeta /util de **MTE MK1** y se llama reordenator.exe. Para usarlo, abrimos una ventana de linea de comandos, nos metemos en la carpeta /gfx de nuestro proyecto, y escribimos algo así:
+El tercer parámetro es el nombre del archivo que quieres generar (incluyendo su ubicación si es necesaria). En el caso de la churrera, el archivo resultante ocupará 2304 y contendrá todos los patrones (fuente y tileset) y los colores que se usan en el tileset.
 
-../utils/reordenator.exe work.png udgs.png
+El cuarto parámetro es `forcezero` y es opcional. Si se incluye y se encuentra algún "patrón" que sea un cuadrado de color sólido, se usará el negro como "segundo color virtual". Si sabes de Spectrum le encontrarás sentido a esto.
 
-Esto pondrá a reordenator.exe a trabajar, generando un nuevo archivo udgs.png que será exactamente igual que el que hemos visto justo arriba.
+Si abres `compile.bat` verás que los parámetros que se emplean en la llamada para obtener los patrones se corresponden con los que hemos mencionado más arriba (la fuente se llama `font.png` y el tileset `work.png`, y se ubican en `gfx`). El archivo de salida es `tileset.bin` y se emplea `forcezero`.:
 
-Ahora que tenemos nuestra fuente en fuente.png y los udg en udgs.png, volvemos a nuestro editor gráfico, creamos un archivo nuevo de 256×64 píxels, y pegamos los udg debajo de la fuente, justo así:
+```
+    ..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png tileset.bin forcezero
+```
 
+Los `..\utils\` y `..\gfx` hacen referencia a que los archivos se ubican en esas carpetas que están un nivel más *abajo* de donde está `compile.bat`. El `> nul` del final hace que las mierdas que dice `ts2bin` no se muestren.
 
-Eso será lo que vamos a importar en nuestro güuego. Lo grabamos en /gfx como tileset.png. Esto es muy importante, ya que SevenuP generará el código a partir de nuestra imagen y a la estructura de datos la llamara, exactamente, “tileset”, que es lo que necesita **MTE MK1**.
+Puedes probar a ejecutar el comando desde `dev` tal y como aparece para ver como se genera `tileset.bin`:
 
-Perfecto. Con todo esto hecho, abrimos, por fin, SevenuP. Una vez abierto, pulsamos “I” para “Importar”, lo que abrirá un diálogo de selección de archivos donde navegaremos hasta la carpeta /gfx de nuestro proyecto y seleccionaremos tileset.png. SevenuP lo importará y lo convertirá a formato Spectrum.
+```
+    $ ..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png tileset.bin forcezero
+    ts2bin v0.3 20191202 ~ Reading font ~ reading metatiles ~  2304 bytes written
 
-Ahora hay que configurar la exportación de datos del programa para que nos saque el charset en el orden que necesitamos. Para ello nos vamos al menú File->Output Options, con lo que se abrirá un cuadro de diálogo con muchas opciones. No habrá que tocar nada excepto el cuadro que pone Byte Sort Priority, que deberemos dejar exactamente así (pulsad sobre “Char line” y luego pulsad el botón “Move up”).
+    $ dir tileset.bin
+     El volumen de la unidad C es Local Disk
+     El número de serie del volumen es: 6009-D6D4
 
+     Directorio de C:\git\MK1\src\dev
 
+    11/01/2020  16:06             2.304 tileset.bin
+                   1 archivos          2.304 bytes
+               0 dirs  27.100.073.984 bytes libres
+```
 
-Hecho esto, le damos a OK. Ahora vamos a exportar los datos: le damos a “D” para “exportar Datos” y se nos abrirá otro diálogo de selección de archivos. Ahora tenemos que navegar hasta nuestra carpeta /dev y grabar el archivo como tileset.h (habrá que seleccionar “C” en el tipo de archivo, porque creo que por defecto viene ASM).
+**Repetimos**, esta tarea, si no tienes necesidades especiales, está ya cubierta en `compile.bat`.
 
-De esta forma, SevenuP generará un archivo /dev/tileset.h con el código necesario para tener nuestro charset en el güego. En concreto, escribirá 8 bytes para cada uno de los 256 caracteres, más 256 bytes con los atributos de los mismos.
-
-Apréndete eso de arriba de memoria. No, en serio, quiero que generes tileset.h por tí mismo. Por eso no lo he puesto en el paquete.
-
-Un poco de trabajo manual
-
-Tranquilos, será muy poco.
-
-Seguro que a estar alturas del cuento entenderéis cómo funcionan los gráficos en un Spectrum y todo el tema del “colour clash” o mezcla de atributos. Con esto sabido, es fácil entender el concepto de que, en **MTE MK1**, los sprites no tienen color propio, sino que toman el color del fondo.
-
-El motor pintará la pantalla y luego pondrá los sprites encima. Si has sido cuidadoso y todos los tiles marcados como “fondo” son amarillos, el juego te quedará bastante homogeneo y no se notará mucho la mezcla de colores. El problema son los caracteres que son enteros del mismo color: SevenuP es bastante inteligente a la hora de seleccionar los dos colores que tiene cada carácter, pero si sólo hay un color en el carácter no tiene demasiado que hacer al respecto. Lo que termina haciendo no nos suele valer, sobre todo en el caso que nos ocupa, el Dogmole, en el que el tile 0 de fondo es todo negro: codifica los atributos como PAPER 0 e INK 0. Con esto así, los sprites no se verán, como es lógico. Y esto hay que arreglarlo a mano.
-
-
-
-Abre /dev/tileset.h en un editor de textos. Hay que irse a la linea 279. Si tu editor de textos no te marca el número de linea es que deberías cambiar de editor de textos, por cierto. Cuando tengas un editor de textos en condiciones, te vas a la linea 279. Esta es la primera linea donde se definen los atributos de los caracteres que forman nuestro tileset. Como verás, SevenuP formatea los datos de forma que hay 8 bytes por linea. Eso significa que en cada linea de atributos están los colores de dos tiles. Si te fijas, (y si estás siguiendo el tutorial con los datos del Dogmole), SevenuP habrá generado una linea tal que así:
-
-0, 0, 0, 0, 70, 6, 66, 2,
-
-¿Ves lo que te decía? Esos cuatro ceros son los cuatro atributos del primer tile. Bien, pues vamos a cambiarlos. Vamos a poner la tinta a blanco, o sea, INK 7. Si recuerdas, los valores de los atributos se calculan con INK + 8*PAPER + 64*BRIGHT, así que para poner PAPER 0, INK 7 y BRIGHT 0 tenemos que cambiar esos ceros por sietes.
-
-7, 7, 7, 7, 70, 6, 66, 2,
-
-De hecho, deberíamos fijarnos si de ahí al final sale otro “0” que no queramos, y cambiarlo también por un el mismo valor. Si no te das cuenta ahora, créeme que te darás cuenta cuando montes el juego y veas como trozos de sprites desaparecen al pasar por ciertos sitios.
-
-Vale, ya está todo.
-
-Bien. Si has llegado hasta aquí has pasado la primera prueba de fuego. Hay que usar la linea de comandos para ejecutar cosas con parámetros. Hay que editar gráficos y cortar y pegar. Hay que usar aplicaciones de conversión. ¡Hay que modificar cosas a mano! Sé que muchos estaréis pensando “eh, esto no es como lo pensábamos”. Bueno, por muy fácil que te lo pongan, para hacer un güego hay que currárselo. Todo tiene su trabajo por detrás. El primer requisito que necesitamos a la hora de hacer un güego es tener ganas de hacerlo, constancia, y el propósito de currárnoslo un poco.
+## Vale, ya está todo.
 
 Y con el ladrillo escamondao, os ubicamos en este mismo canal para el próximo capítulo, donde montaremos el mapa.
-
-Pequeña aclaración
-
-Ha habido un par de dudas sobre el tema del tileset normal y el tileset de Mappy y tal. Vamos a poner algunos ejemplos para ilustrar el tema.
-
-En primer lugar, veamos nuestro Dogmole Tuppowski. Para obtener el tileset de Mappy, sencillamente recortaremos los primeros 16 tiles (la tira superior) y lo grabaremos como mappy.bmp. No hay que hacer nada más, ya que el primer tile ya es totalmente negro.
-
-
-
-
-Aquí tenemos otro ejemplo. Aquí vemos el tileset de Cheril of the Bosque. Para obtener el tileset de Mappy recortaremos, como siempre, los primeros 16 tiles, y además tendremos que dejar el primero completamente negro, ya que originalmente tiene una texturilla de hierba chula minimalista. Una vez eso esto, lo grabamos como mappy.bmp.
-
-
-
-
-Creo que ya se pilla, pero pongamos un ejemplo más. He aquí el tileset de Viaje al Centro de la Napia. Aquí el tile 0 es rosa. Tampoco nos vale. Recortamos los 16 tiles y dejamos el tile rosa en negro. Y lo grabamos como mappy.bmp.
-
-
