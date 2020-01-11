@@ -106,17 +106,19 @@ De nuevo, los ocho primeros gráficos sirven para animar al personaje principal,
 
 Los ocho gráficos restantes corresponden a cuatro tipo de enemigos, ya que en un güego de vista genital no hay plataforma móvil que valga.
 
-Una vez más, para que quede bien claro, veamos algunos ejemplos:
+### algunos ejemplos:
 
+![El spriteset de Dogmole](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/04_spriteset_hobbit.png) 
 
-Este es el spriteset de nuestra genial conversión de el Hobbit (uno de nuestros grandes honores: quedar los últimos en un concurso. Es casi mejor que quedar los primeros). Fíjate como el tema cambia: arriba tenemos 8 gráficos con 2 frames para cada dirección, y abajo tenemos cuatro tipos de enemigos en lugar de tres más las plataformas.
+Este es el spriteset de nuestra genial conversión de **el Hobbit** (uno de nuestros grandes honores: quedar los últimos en un concurso. Es casi mejor que quedar los primeros). Fíjate como el tema cambia: arriba tenemos 8 gráficos con 2 frames para cada dirección, y abajo tenemos cuatro tipos de enemigos en lugar de tres más las plataformas.
 
+![El spriteset de Dogmole](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/04_spriteset_meghan.png) 
 
-Este otro spriteset es el de Mega Meghan. Aquí volvemos a tener a la prota (Meghan, la asesina malvada) en las cuatro direcciones posibles con dos frames de animación para cada una en la tira superior, y a cuatro mujeres encueras (que hacen de enemigas) en la tira inferior.
+Este otro spriteset es el de **Mega Meghan**. Aquí volvemos a tener a la prota (Meghan, la asesina malvada) en las cuatro direcciones posibles con dos frames de animación para cada una en la tira superior, y a cuatro mujeres encueras (que hacen de enemigas) en la tira inferior.
 
 Fíjate como, en este caso, nuestra vista genital la hemos diseñado con cierta perspectiva: cuando los muñecos van para arriba se dan la vuelta y cuando van para abajo miran de frente. Eso queda super chuli.
 
-Dibujando nuestro spriteset
+## Dibujando nuestro spriteset
 
 Nada más fácil que crear un nuevo archivo de 256×32 píxels, activar la rejilla para no salirnos, y dibujar los gráficos. Aquí tendremos que respetar una regla muy sencilla (o dos, según se mire). Para pintar gráficos y máscaras usaremos dos colores:
 

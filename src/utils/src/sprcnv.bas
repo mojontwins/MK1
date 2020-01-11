@@ -9,19 +9,13 @@
 #define RGBA_A( c ) ( CUInt( c ) Shr 24         )
 
 Sub WarningMessage ()
-	Print "** WARNING **"
-	Print "   SprCnv convierte los sprites en un PNG en formato churrera"
-	Print "   código C usable directamente en el juego."
-	Print "   CutreCode Disclaimer: este programa es cutrecode, esto significa"
-	Print "   que si el PNG de entrada no tiene el formato churrera especificado"
-	Print "   en la documentación, cosas divertidas pueden ocurrir."
-	Print
 End Sub
 
 Sub Usage () 
 	Print "** USO **"
 	Print "   sprcnv archivo.png archivo.h [nomask]"
 	Print
+	Print "Convierte un Spriteset de 16 sprites"
 End Sub
 
 '
@@ -43,7 +37,7 @@ End If
 If lcase(Command (3)) = "nomask" Then nomask = -1 else nomask = 0
 
 ' Primero cargo el archivo de imagen
-screenres 640, 480, 32, , GFX_NULL
+screenres 640, 480, 32, , -1
 
 filename = Command (1)
 img = png_load ( filename )
