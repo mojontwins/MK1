@@ -52,7 +52,9 @@ Los PQSPDLs son los Programas Que Se Pasan de Listos, otro nombre para los Progr
 
 **Mappy necesita que el tile 0 sea un tile completamente negro**. Como habrás visto, en **Dogmole** esto es así, con lo que no hay problema. El problema viene cuando el primer tile de nuestro tileset **no es completamente negro**. 
 
-Cuando intentas cargar un tileset así en **Mappy** lo que ocurrirá es que **Mappy** meterá mamporreramente su querido tile 0 negro, **desplazando todo el tileset a la derecha**. 
+Cuando intentas cargar un tileset así en **Mappy** lo que ocurrirá es que **Mappy** meterá mamporreramente su querido tile 0 negro, **desplazando todo el tileset a la derecha**:
+
+![¡Ay, pillín!](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/03_pillin.png) 
 
 Esto tiene **dos posibles soluciones**. La primera, y más tonta, y la que se ha venido usando de toda la vida con **MTE MK1**, consiste en **crear un tileset alternativo en el que sustituyamos el tile 0 por un tile completamente negro**. Usaremos ese tileset en **Mappy** y todo solucionado.
 
