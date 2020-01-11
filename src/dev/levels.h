@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v3.99.99 (final)
-// Copyleft 2010-2017 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.0
+// Copyleft 2010-2014, 2020 by the Mojon Twins
 
 // Level Manager
 

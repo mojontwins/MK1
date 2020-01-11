@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v3.99.99 (final)
-// Copyleft 2010-2017 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.0
+// Copyleft 2010-2014, 2020 by the Mojon Twins
 
 // Config.h
 
@@ -204,6 +204,7 @@
 // ============================================================================
 
 // This sections defines how stuff is rendered, where to show counters, etcetera
+// Set to 99 so it doesn't show even if it should!!
 
 #define VIEWPORT_X				1		//
 #define VIEWPORT_Y				2		// Viewport character coordinates
@@ -213,16 +214,14 @@
 #define OBJECTS_Y				0		// Objects counter character coordinates
 #define OBJECTS_ICON_X			99		// 
 #define OBJECTS_ICON_Y			99		// Objects icon character coordinates (use with ONLY_ONE_OBJECT)
-#define KEYS_X					99		//
-#define KEYS_Y					99		// Keys counter character coordinates
+#define KEYS_X					16		//
+#define KEYS_Y					0		// Keys counter character coordinates
 #define KILLED_X				99		//
 #define KILLED_Y				99		// Kills counter character coordinates
-//#define PLAYER_SHOW_KILLS 			// If defined, show kill counter.
 #define AMMO_X					99		// 
 #define AMMO_Y					99		// Ammo counter character coordinates
 #define TIMER_X 				99		//
 #define TIMER_Y 				99		// Timer counter coordinates
-//#define PLAYER_SHOW_TIMER 			// If defined, show timer counter
 
 // Text
 /*

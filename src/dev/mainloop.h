@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v3.99.99 (final)
-// Copyleft 2010-2017 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.0
+// Copyleft 2010-2014, 2020 by the Mojon Twins
 
 // mainloop.h
 // Churrera copyleft 2011 by The Mojon Twins.
@@ -157,10 +157,13 @@ void main (void) {
 				call depack
 			#endasm
 		#endif
+		
 		#ifdef MODE_128K
 			//wyz_play_music (0);
 		#endif
+		
 		select_joyfunc ();
+		
 		#ifdef MODE_128K
 			//wyz_stop_sound ();
 		#endif
@@ -305,7 +308,7 @@ void main (void) {
 					bullets_init ();
 				#endif
 			}
-			
+
 			#ifdef TIMER_ENABLE
 				// Timer
 				if (ctimer.on) {
@@ -366,47 +369,7 @@ void main (void) {
 				#endif
 			#endif
 
-			#ifndef DEACTIVATE_OBJECTS
-				if (p_objs != objs_old) {
-					draw_objs ();
-					objs_old = p_objs;
-				}
-			#endif
-			
-			if (p_life != life_old) {
-				_x = LIFE_X; _y = LIFE_Y; _t = p_life; print_number2 ();
-				life_old = p_life;
-			}
-			
-			#ifndef DEACTIVATE_KEYS
-				if (p_keys != keys_old) {
-					_x = KEYS_X; _y = KEYS_Y; _t = p_keys; print_number2 ();
-					keys_old = p_keys;
-				}
-			#endif
-
-			#if defined(PLAYER_KILLS_ENEMIES) || defined(PLAYER_CAN_FIRE)
-				#ifdef PLAYER_SHOW_KILLS
-					if (p_killed != killed_old) {
-						_x = KILLED_X; _y = KILLED_Y; _t = p_killed; print_number2 ();
-						killed_old = p_killed; 
-					}
-				#endif
-			#endif
-
-			#ifdef MAX_AMMO 	
-				if (p_ammo != ammo_old) {
-					_x = AMMO_X; _y = AMMO_Y; _t = p_ammo; print_number2 ();
-					ammo_old = p_ammo;
-				}
-			#endif
-
-			#if defined(TIMER_ENABLE) && defined(PLAYER_SHOW_TIMER)
-				if (ctimer.t != timer_old) {
-					print_number2 (TIMER_X, TIMER_Y, ctimer.t);
-					timer_old = ctimer.t;
-				}
-			#endif
+			#include "mainloop/hud.h"
 
 			maincounter ++;
 			half_life = !half_life;
@@ -930,7 +893,7 @@ void main (void) {
 				#endif
 			}
 
-			// Flick screen checks and scripting related stuff
+			// Scripting related stuff
 			
 			#ifdef ACTIVATE_SCRIPTING
 
@@ -993,105 +956,9 @@ void main (void) {
 				}
 			#endif
 
-			// Change screen				
-			#ifdef PLAYER_CHECK_MAP_BOUNDARIES		
-				if (gpx == 0 && p_vx < 0 && x_pant > 0) {
-					n_pant --;
-					x_pant --;
-					gpx = 224
-					p_x = 14336;
-				}
-
-				#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
-					if (gpx == 224 && p_vx > 0 && x_pant < (level_data->map_w - 1))
-				#else			
-					if (gpx == 224 && p_vx > 0 && x_pant < (MAP_W - 1))
-				#endif
-				{
-					n_pant ++;
-					x_pant ++;					
-					gpx = p_x = 0;
-				}
-
-				if (gpy == 0 && p_vy < 0 && y_pant > 0) {
-					#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
-						n_pant -= level_data->map_w;
-					#else				
-						n_pant -= MAP_W;
-					#endif
-					y_pant --;					
-					gpy = 144;
-					p_y = 9216;	
-				}
-
-				#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
-					if (gpy == 144 && p_vy > 0 && y_pant < (level_data->map_h - 1)) {
-						n_pant += level_data->map_w;
-				#else			
-					if (gpy == 144 && p_vy > 0 && y_pant < (MAP_H - 1)) {
-						n_pant += MAP_W;
-				#endif
-					y_pant ++;					
-					gpy = p_y = 0;
-					if (p_vy > 256) p_vy = 256;	
-				}
-			#else			
-				#ifdef PLAYER_AUTO_CHANGE_SCREEN
-					if (gpx == 0 && p_vx < 0) {
-						n_pant --;
-						gpx = 224; p_x = 14336;
-					}
-					if (gpx == 224 && p_vx > 0) {
-						n_pant ++;
-						gpx = p_x = 0;
-					}
-				#else
-					if (gpx == 0 && ((pad0 & sp_LEFT) == 0)) {
-						n_pant --;
-						gpx = 224; p_x = 14336;
-					}
-					if (gpx == 224 && ((pad0 & sp_RIGHT) == 0)) {		// 14336 = 224 * 64
-						n_pant ++;
-						gpx = p_x = 0;
-					}
-				#endif
-
-				#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
-					if (gpy == 0 && p_vy < 0 && n_pant >= level_data->map_w) {
-						n_pant -= level_data->map_w;
-				#else
-					if (gpy == 0 && p_vy < 0 && n_pant >= MAP_W) {
-						n_pant -= MAP_W;
-				#endif
-					gpy = 144;
-					p_y = 9216;	
-				}
-
-				if (gpy == 144 && p_vy > 0) {				// 9216 = 144 * 64
-					#if defined (MODE_128K) && defined (COMPRESSED_LEVELS)
-						if (n_pant < level_data->map_w * (level_data->map_h - 1)) {
-							n_pant += level_data->map_w;
-					#else
-						if (n_pant < MAP_W * MAP_H - MAP_W) {
-							n_pant += MAP_W;
-					#endif				
-						gpy = p_y = 0;
-						if (p_vy > 256) p_vy = 256;
-					}
-					#ifdef MAP_BOTTOM_KILLS
-						else {
-							p_vy = -PLAYER_MAX_VY_CAYENDO; 
-							{
-								#ifdef MODE_128K
-									p_killme = 1;
-								#else
-									p_killme = 4;
-								#endif
-							}
-						}
-					#endif
-				}
-			#endif			
+			// Flick the screen ?
+				
+			#include "mainloop/flick_screen.h"			
 
 			// Win game condition
 			
