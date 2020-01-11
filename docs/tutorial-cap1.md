@@ -132,22 +132,22 @@ Para probar que todo está correctamente instalado, abre una ventana de linea de
 1. Ejecuta `setenv.bat` la primera vez, para establecer las variables de entorno que harán que **z88dk** esté encontrable. Si todo está donde debe estar, deberás obtener este mensaje en tu consola:
 
 ```
-	zcc - Frontend for the z88dk Cross-C Compiler
-	v2.59 (C) 16.4.2010 D.J.Morris
+    zcc - Frontend for the z88dk Cross-C Compiler
+    v2.59 (C) 16.4.2010 D.J.Morris
 ```
 
 2. Ejecuta `compile.bat` para compilar el juego de ejemplo. Deberás ver el proceso en tu consola:
 
 ```
-	Compilando script
-	Convirtiendo mapa
-	Convirtiendo enemigos/hotspots
-	Importando GFX
-	Compilando guego
-	lala_beta.bin: 28566 bytes
-	Construyendo cinta
-	Limpiando
-	Hecho!
+    Compilando script
+    Convirtiendo mapa
+    Convirtiendo enemigos/hotspots
+    Importando GFX
+    Compilando guego
+    lala_beta.bin: 28566 bytes
+    Construyendo cinta
+    Limpiando
+    Hecho!
 ```
 
 Esto generará el archivo `lala_beta.tap` que podrás ejecutar en tu emulador de Spectrum favorito.
@@ -159,7 +159,7 @@ Esto generará el archivo `lala_beta.tap` que podrás ejecutar en tu emulador de
 2. Luego entra en `dev` y edita el archivo `compile.bat`. Al principio encontrarás una linea parecida a esta:
 
 ```
-	set game=lala_beta
+    set game=lala_beta
 ```
 
 Simplemente cambia `lala_beta` por el nombre de tu juego.
