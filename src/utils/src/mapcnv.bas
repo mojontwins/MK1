@@ -5,16 +5,11 @@
 ' ¡OLE!
 
 Sub WarningMessage ()
-	Print "** WARNING **"
-	Print "   MapCnv convierte un archivo raw de mappy (mapa.map, por ejemplo)"
-	Print "   a un array directamente usable por los juegos de la churrera."
-	Print "   Si metes mal los parámetros ocurrirán cosas divertidas."
-	Print
 End Sub
 
 sub usage () 
 	Print "** USO **"
-	Print "   MapCnv archivo.map ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo packed"
+	Print "   MapCnv archivo.map ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]"
 	Print
 	Print "   - archivo.map : Archivo de entrada exportado con mappy en formato raw."
 	Print "   - ancho_mapa : Ancho del mapa en pantallas."
@@ -23,14 +18,29 @@ sub usage ()
 	Print "   - alto_pantalla : Alto de la pantalla en tiles."
 	Print "   - tile_cerrojo : Nº del tile que representa el cerrojo."
 	Print "   - packed : Escribe esta opción para mapas de la churrera de 16 tiles."
+	Print "   - fixmappy : Escribe esta opción para arreglar lo del tile 0 no negro"
 	Print
 	Print "Por ejemplo, para un mapa de 6x5 pantallas para la churrera:"
 	Print
 	Print "   MapCnv mapa.map 6 5 15 10 15 packed"
 end sub
 
+Function inCommand (spec As String) As Integer
+	Dim As Integer res, i
+
+	i = 0: res = 0
+
+	Do
+		If Command (i) = "" Then Exit Do
+		If Command (i) = spec Then res = -1: Exit Do
+		i = i + 1
+	Loop
+
+	Return res
+End Function
+
 Dim As Integer map_w, map_h, scr_w, scr_h, bolt
-Dim As Integer x, y, xx, yy, i, j, f, packed, ac, ct
+Dim As Integer x, y, xx, yy, i, j, f, packed, ac, ct, fixmappy
 Dim As Byte d
 Dim As String o
 
@@ -61,15 +71,19 @@ scr_w = Val (Command (4))
 scr_h = Val (Command (5))
 bolt = Val (Command (6))
 
-if lcase(Command (7)) = "packed" then
-	print lcase(command(7))
+If InCommand ("packed") then
 	packed = 1
 else
 	packed = 0
 end if
 
-Dim As Integer BigOrigMap (map_h * scr_h - 1, map_w * scr_w - 1)
+If InCommand ("fixmappy") Then
+	fixmappy = -1
+Else
+	fixmappy = 0
+End If
 
+Dim As Integer BigOrigMap (map_h * scr_h - 1, map_w * scr_w - 1)
 
 ' Leemos el mapa original
 
@@ -79,6 +93,7 @@ Open Command (1) for binary as #f
 For y = 0 To (map_h * scr_h - 1)
 	For x = 0 To (map_w * scr_w - 1)
 		get #f , , d
+		If fixmappy Then d = d - 1
 		BigOrigMap (y, x) = d
 	Next x
 Next y
