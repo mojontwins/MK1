@@ -43,11 +43,11 @@ Para los güegos de vista lateral, los 16 gráficos de 16×16 (acompañados por 
 |#|Qué tiene
 |---|---
 |0|Personaje principal, derecha, andando, frame 1
-|1|Personaje principal, derecha, andando, frame 2
+|1|Personaje principal, derecha, andando, frame 2, o parado
 |2|Personaje principal, derecha, andando, frame 3
 |3|Personaje principal, derecha, en el aire
 |4|Personaje principal, izquierda, andando, frame 1
-|5|Personaje principal, izquierda, andando, frame 2
+|5|Personaje principal, izquierda, andando, frame 2, o parado
 |6|Personaje principal, izquierda, andando, frame 3
 |7|Personaje principal, izquierda, en el aire
 |8|Enemigo tipo 1, frame 1
@@ -63,28 +63,44 @@ Como vemos, los ocho primeros gráficos sirven para animar al personaje principa
 
 Tenemos tres animaciones básicas para el personaje: parado, andando, y saltando/cayendo:
 
-Parado: La primera es cuando el personaje está parado (como su propio nombre indica). Parado significa que no se está moviendo por sí mismo (si lo mueve un ente externo sigue estando “parado”). Cuando el personaje está parado, el motor lo dibuja usando el frame 2 (gráfico número 1 si mira a la derecha o 5 si mira a la izquierda).
+1. **Parado**: La primera es cuando el personaje está parado (como su propio nombre indica). Parado significa que no se está moviendo por sí mismo (si lo mueve un ente externo sigue estando “parado”). Cuando el personaje está parado, el motor lo dibuja usando el frame 2 (gráfico número 1 si mira a la derecha o 5 si mira a la izquierda).
 
-Andando: Es cuando el personaje se desplaza lateralmente por encima de una plataforma. En ese caso se realiza una animación de cuatro pasos usando los frames 1, 2, 3, 2, … en ese orden (gráficos 0, 1, 2, 1… si miramos a la derecha o 4, 5, 6, 5… si miramos a la izquierda). A la hora de dibujar, el personaje deberá tener ambos pies en el suelo para el frame 2, y las piernas extendidas (con la izquierda o la derecha delante) en los frames 1 y 3. Por eso usamos el frame 2 en la animación “parado”.
+2. **Andando**: Es cuando el personaje se desplaza lateralmente por encima de una plataforma. En ese caso se realiza una animación de cuatro pasos usando los frames 1, 2, 3, 2, … en ese orden (gráficos 0, 1, 2, 1… si miramos a la derecha o 4, 5, 6, 5… si miramos a la izquierda). A la hora de dibujar, el personaje deberá tener ambos pies en el suelo para el frame 2, y las piernas extendidas (con la izquierda o la derecha delante) en los frames 1 y 3. Por eso usamos el frame 2 en la animación “parado”.
 
-Saltando/Cayendo: Es cuando el personaje salta o cae (joder, ¡menos mal que lo he aclarado!). Entonces el motor dibuja el frame “saltando” (gráfico número 3 si mira a la derecha o número 7 si mira a la izquierda.
+3. **Saltando/Cayendo**: Es cuando el personaje salta o cae (joder, ¡menos mal que lo he aclarado!). Entonces el motor dibuja el frame “saltando” (gráfico número 3 si mira a la derecha o número 7 si mira a la izquierda.
 
 Los siguientes seis gráficos se usan para representar a los enemigos. Los enemigos pueden ser de tres tipos, y cada uno tiene dos frames de animación.
 
 Para acabar, los dos últimos gráficos se usan para las plataformas móviles, que también tienen dos frames de animación. Las plataformas móviles son, precisamente, y como su nombre indica, plataformas que se mueven. El personaje principal podrá subirse en ellas para desplazarse. Para dibujar los gráficos tenemos que cuidar que la superficie sobre la que se debe posar el personaje principal debe tocar el borde superior del gráfico.
 
-Para que quede claro, veamos algunos ejemplos:
+### Para que quede claro, veamos otro ejemplo
 
+![El spriteset de Dogmole](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/04_spriteset_perils.png) 
 
-El spriteset de arriba corresponde al Cheril Perils. Como vemos, los ocho primeros gráficos son los correspondientes a Cheril, primero mirando a la derecha y luego mirando a la izquierda. Luego tenemos los tres enemigos que vemos en el güego, y al final la plataforma móvil. Fíjate bien en el tema de la animación de andar, imaginate pasar del frame 1 al 2, del 2 al 3, del 3 al 2, y del 2 al 1. Mira el gráfico e imagínatelo en tu cabeza. ¿lo ves? ¿ves como mueve las paticas? Ping, pong, ping, pong… Fíjate también como el frame 2 es el que mejor queda para cuando el muñeco está parado.
+El spriteset de arriba corresponde a **Cheril Perils**. Como vemos, los ocho primeros gráficos son los correspondientes a Cheril, primero mirando a la derecha y luego mirando a la izquierda. Luego tenemos los tres enemigos que vemos en el güego, y al final la plataforma móvil. Fíjate bien en el tema de la animación de andar, imaginate pasar del frame 1 al 2, del 2 al 3, del 3 al 2, y del 2 al 1. Mira el gráfico e imagínatelo en tu cabeza. ¿lo ves? ¿ves como mueve las paticas? Ping, pong, ping, pong… Fíjate también como el frame 2 es el que mejor queda para cuando el muñeco está parado.
 
-
-Este otro spriteset corresponde al Monono. De la misma forma, tenemos 8 gráficos para Eleuterio (¡qué guapo sale el joío, qué porte!), tres tipos de enemigos, y al final la plataforma móvil. Fíjate como siempre la superficie superior de la paltaforma móvil toca el borde superior del cuadro del sprite. Fíjate también en como está hecha la animación de andar de Eleuterio y como la cabeza está más baja en los frames en los que las piernas se extienden. Esto queda de la hostia de chulo.
-
-Spritesets de vista genital
+## Spritesets de vista genital
 
 Para los güegos de vista genital, los 16 gráficos del spriteset tienen que tener este orden:
 
+|#|Qué tiene
+|---|---
+|0|Personaje principal, derecha, andando, frame 1
+|1|Personaje principal, derecha, andando, frame 2
+|2|Personaje principal, izquierda, andando, frame 1
+|3|Personaje principal, izquierda, andando, frame 2
+|4|Personaje principal, arriba, andando, frame 1
+|5|Personaje principal, arriba, andando, frame 2
+|6|Personaje principal, abajo, andando, frame 1
+|7|Personaje principal, abajo, andando, frame 2
+|8|Enemigo tipo 1, frame 1
+|9|Enemigo tipo 1, frame 2
+|10|Enemigo tipo 2, frame 1
+|11|Enemigo tipo 2, frame 2
+|12|Enemigo tipo 3, frame 1
+|13|Enemigo tipo 3, frame 2
+|14|Enemigo tipo 4, frame 1
+|15|Enemigo tipo 4, frame 2
 
 De nuevo, los ocho primeros gráficos sirven para animar al personaje principal, pero esta vez el tema es más sencillo: como tenemos cuatro direcciones en las que el personaje principal puede moverse, sólo disponemos de dos frames para cada dirección.
 
