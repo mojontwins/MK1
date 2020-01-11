@@ -120,28 +120,38 @@ Fíjate como, en este caso, nuestra vista genital la hemos diseñado con cierta 
 
 ## Dibujando nuestro spriteset
 
-Nada más fácil que crear un nuevo archivo de 256×32 píxels, activar la rejilla para no salirnos, y dibujar los gráficos. Aquí tendremos que respetar una regla muy sencilla (o dos, según se mire). Para pintar gráficos y máscaras usaremos dos colores:
+Nada más fácil que crear un nuevo archivo de 256×32 píxels, activar la rejilla para no salirnos, y dibujar los gráficos. Cuando acabemos, lo guardamos como `sprites.png` en `/gfx`. Aquí tendremos que respetar una regla muy sencilla (o dos, según se mire). Para pintar gráficos y máscaras usaremos dos colores:
 
-En los gráficos, el negro PURO es el color del PAPER, y el otro color (el que queramos, es buena idea usar el blanco) es el color del INK. Recuerda que los sprites tomarán el color de los tiles que tienen de fondo al moverse por la pantalla.
+En los gráficos, el **negro PURO** es el color del PAPER, y el otro color (el que queramos, es buena idea usar el blanco) es el color del INK. Recuerda que los sprites tomarán el color de los tiles que tienen de fondo al moverse por la pantalla.
 
-En las máscaras, el negro PURO es la parte del gráfico que debe permanecer sólida, y cualquier otro color sirve para definir las partes transparentes (a través de las que se ve el fondo).
+En las máscaras, el **negro PURO** es la parte del gráfico que debe permanecer sólida, y cualquier otro color sirve para definir las partes transparentes (a través de las que se ve el fondo).
 
 En nuestros ejemplos verás que usamos un color diferente (además del negro) en gráficos y máscaras, pero es más que nada por claridad. Puedes usar los colores que quieras. Yo, personalmente, uso colores diferentes porque suelo pintar la máscara y el sprite en la misma casilla de 16×16, para luego seleccionar sólo los píxeles del “color máscara” y moverlos a la casilla siguiente. Es un truco que puedes aplicar si eres mañoso con tu editor de gráficos.
 
 Una vez que tengamos todos nuestros gráficos y sus máscaras dibujaditos en el archivo del spriteset, lo guardamos como sprites.png en gfx y estamos listos para convertirlos en código C directamente usable por **MTE MK1**.
 
-Por cierto, vuelve a asegurarte que el negro que has usado es negro PURO. Todos los píxeles negros deben ser RGB = (0, 0, 0).
+Por cierto, vuelve a asegurarte que el negro que has usado es **negro PURO**. Todos los píxeles negros deben ser `RGB = (0, 0, 0)`.
 
-Convirtiendo nuestro spriteset
+## Convirtiendo nuestro spriteset
 
-De nuevo tenemos entre manos un poquito de trabajo de ventana de linea de comandos. Usaremos otra utilidad de **MTE MK1** la cual, como habréis podido adivinar, fue la tercera que hicimos: sprcnv.exe, el conversor de spritesets. Esta utilidad es realmente tontorrona y sencilla, y únicamente toma dos parámetros. Nos vamos a \gfx y ejecutamos:
+Al igual que con todas las conversiones, la de los sprites también está incluida en `compile.bat` y no deberás preocuparte de nada más que de poner el archivo con los sprites `sprites.png` en `/gfx`.
 
-..\utils\sprncv.exe sprites.png ..\dev\sprites.h
+Sin embargo, para seguir con la tradición, veamos como funciona el conversor, que en este caso se llama `sprcnv` y está, como los demás, en `/utils`. Si lo ejecutamos sin parámetros también nos los chiva:
 
-Ejecutando esto, y mediante un mágico y misterioso proceso, obtendremos un archivo sprites.h en nuestra carpeta dev. Y ya hemos terminado.
+```
+	$ ..\utils\sprcnv.exe
+	** USO **
+	   sprcnv archivo.png archivo.h [nomask]
 
-Jodó, ¿ya?
+	Convierte un Spriteset de 16 sprites
+```
 
-Sí, tío. El tema de los sprites era sencillo y tenía muy poca chicha… O al menos eso creo. Si crees que algo no queda claro ya sabes qué hacer: te aguantas. No, que es coña. Si crees que algo no queda claro simplemente pregúntanos. Pero tienes que poner voz de niña.
+Este es mucho más sencillo. Toma dos parámetros obligatorios: el archivo de entrada (nuestro `sprites.png`), un archivo de salida, que para **MTE MK1** debe ser `sprites.h` en `/dev`, y el parámetro `nomask`, que es optativo, y que generará los sprites sin máscara (algo que solo hemos usado en Zombie Calavera y que por ahora dejaremos "ahí").
+
+Si abres `/dev/compile.bat` verás que el valor de los parámetros son, precisamente, los que hemos mencionado arriba.
+
+## Jodó, ¿ya?
+
+Sí, tío o tía. El tema de los sprites era sencillo y tenía muy poca chicha… O al menos eso creo. Si crees que algo no queda claro ya sabes qué hacer: te aguantas. No, que es coña. Si crees que algo no queda claro simplemente pregúntanos. Pero tienes que poner voz de niña repipi.
 
 En el próximo capítulo vamos a explicar el tema de las pantallas fijas: el título, el marco del juego, y la pantalla del final. Hasta entonces, ¡a hacer sprites!
