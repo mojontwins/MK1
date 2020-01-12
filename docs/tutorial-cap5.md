@@ -132,10 +132,10 @@ En este caso deberemos pasar como parámetros el nombre de archivo de entrada en
 Si abres `compile.bat` en tu editor de textos verás toda una sección dedicada a convertir al formato Spectrum las cuatro pantallas fijas (carga, título, marco y final). Fíjate como los nombres de archivo son los que hemos mencionado y que todas deben ubicarse en `/gfx`:
 
 ```
-	..\utils\png2scr.exe ..\gfx\title.png ..\gfx\title.scr > nul
-	..\utils\png2scr.exe ..\gfx\marco.png ..\gfx\marco.scr > nul
-	..\utils\png2scr.exe ..\gfx\ending.png ..\gfx\ending.scr > nul
-	..\utils\png2scr.exe ..\gfx\loading.png loading.bin > nul	
+    ..\utils\png2scr.exe ..\gfx\title.png ..\gfx\title.scr > nul
+    ..\utils\png2scr.exe ..\gfx\marco.png ..\gfx\marco.scr > nul
+    ..\utils\png2scr.exe ..\gfx\ending.png ..\gfx\ending.scr > nul
+    ..\utils\png2scr.exe ..\gfx\loading.png loading.bin > nul   
 ```
 
 ## Comprimiendo las pantallas
@@ -145,9 +145,9 @@ Como te habrás dado cuenta, los 6912 bytes que ocupa cada pantalla por tres (o 
 De nuevo, `compile.bat` se encargará de comprimir las pantallas de título, marco y final (la de carga va a pelo en el `.tap` ya que usaremos un sencillo cargador BASIC de toda la vida):
 
 ```
-..\utils\apack.exe ..\gfx\title.scr title.bin > nul
-..\utils\apack.exe ..\gfx\marco.scr marco.bin > nul
-..\utils\apack.exe ..\gfx\ending.scr ending.bin > nul
+    ..\utils\apack.exe ..\gfx\title.scr title.bin > nul
+    ..\utils\apack.exe ..\gfx\marco.scr marco.bin > nul
+    ..\utils\apack.exe ..\gfx\ending.scr ending.bin > nul
 ```
 
 ## Y ya hemos terminado
