@@ -139,7 +139,7 @@ void main (void) {
 			#else		
 				sp_bullets [gpit] = sp_CreateSpr (sp_OR_SPRITE, 2, sprite_19_a, 1, TRANSPARENT);
 			#endif
-			sp_AddColSpr (sp_bullets [gpit], sprite_19_b, TRANSPARENT);
+			sp_AddColSpr (sp_bullets [gpit], sprite_19_a+32, TRANSPARENT);
 		}
 	#endif
 
