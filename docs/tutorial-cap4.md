@@ -1,10 +1,10 @@
-## Capítulo 4: Sprites
+# Capítulo 4: Sprites
 
 Antes que nada, bájate el paquete de materiales correspondiente a este capítulo pulsando en este enlace:
 
-http://www.mojontwins.com/churrera/churreratut-capitulo4.zip
+[Material del capítulo 4](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-zip/churreratut-capitulo4.zip)
 
-¿Qué son los sprites?
+## ¿Qué son los sprites?
 
 A estas alturas del cuento, si no sabes lo que es un sprite, mal vamos… Y no, no voy a hacer la típica gracia de la bebida carbonatada, (jajá, jijí, qué graciosos somos, los reyes de la fiesta, tralarí, alocados, divertidos, amigos de nuestros amigos). Sin embargo, como este capítulo va sobre sprites, habrá que empezar explicando que son. Por si no lo sabes, se trata de una de las leyes de los tutoriales de videogüegos. No importa de qué nivel sean o sobre qué sistema traten: es obligatorio explicar qué es un sprite. Lo manda su eminencia ilustrísima Paco Perales, el papa de los tutoriales.
 
