@@ -393,7 +393,7 @@ void main (void) {
 
 			// Render
 			for (gpit = 0; gpit < 3; gpit ++) {
-				#if defined (RANDOM_RESPAWN) || defined (ENABLE_CUSTOM_TYPE_6)
+				#if defined (RANDOM_RESPAWN) || defined (ENABLE_FANTIES)
 					if (en_an_fanty_activo [gpit] || malotes [enoffs + gpit].t == 6) {
 						rdx = en_an_x [gpit] >> 6;
 						rdy = en_an_y [gpit] >> 6;

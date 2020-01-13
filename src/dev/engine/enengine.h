@@ -53,27 +53,28 @@ void enems_load (void) {
 			case 4:
 				en_an_base_frame [gpit] = (malotes [enoffs + gpit].t - 1) << 1;
 				break;
-			#ifdef ENABLE_RANDOM_RESPAWN
-				case 5: 
-					en_an_base_frame [gpit] = 4;
-					break;
-			#endif
-			#ifdef ENABLE_CUSTOM_TYPE_6
+
+			#ifdef ENABLE_FANTIES
 				case 6:
 					// Añade aquí tu código custom. Esto es un ejemplo:
-					en_an_base_frame [gpit] = TYPE_6_FIXED_SPRITE << 1;
+					en_an_base_frame [gpit] = FANTIES_BASE_CELL << 1;
 					en_an_x [gpit] = malotes [enoffsmasi].x << 6;
 					en_an_y [gpit] = malotes [enoffsmasi].y << 6;
 					en_an_vx [gpit] = en_an_vy [gpit] = 0;
-					en_an_state [gpit] = TYPE_6_IDLE;				
+					malotes [enoffsmasi].life = FANTIES_LIFE_GAUGE;			
+					#ifdef FANTIES_TYPE_HOMING
+						en_an_state [gpit] = TYPE_6_IDLE;
+					#endif
 					break;				
 			#endif
+
 			#ifdef ENABLE_PURSUERS
 				case 7:
 					en_an_alive [gpit] = 0;
 					en_an_dead_row [gpit] = 0;//DEATH_COUNT_EXPRESSION;
 					break;
 			#endif
+
 			default:
 				en_an_next_frame [gpit] = sprite_18_a;
 		}
@@ -135,74 +136,61 @@ void enems_move (void) {
 						malotes [enoffsmasi].my = -malotes [enoffsmasi].my;
 				#endif
 				break;
-			#ifdef ENABLE_RANDOM_RESPAWN
-				case 5:
-					active = 1;
-					gpen_cx = en_an_x [gpit] >> 6;
-					gpen_cy = en_an_y [gpit] >> 6;
-					if (player_hidden ()) {
-						en_an_vx [gpit] = limit (
-							en_an_vx [gpit] + addsign (en_an_x [gpit] - p_x, FANTY_A >> 1),
-							-FANTY_MAX_V, FANTY_MAX_V);
-						en_an_vy [gpit] = limit (
-							en_an_vy [gpit] + addsign (en_an_y [gpit] - p_y, FANTY_A >> 1),
-							-FANTY_MAX_V, FANTY_MAX_V);
-					} else if ((rand () & 7) > 1) {
-						en_an_vx [gpit] = limit (
-							en_an_vx [gpit] + addsign (p_x - en_an_x [gpit], FANTY_A),
-							-FANTY_MAX_V, FANTY_MAX_V);
-						en_an_vy [gpit] = limit (
-							en_an_vy [gpit] + addsign (p_y - en_an_y [gpit], FANTY_A),
-							-FANTY_MAX_V, FANTY_MAX_V);
-					}
-									
-					en_an_x [gpit] = limit (en_an_x [gpit] + en_an_vx [gpit], 0, 14336);
-					en_an_y [gpit] = limit (en_an_y [gpit] + en_an_vy [gpit], 0, 9216);
-								
-					break;
-			#endif
-			#ifdef ENABLE_CUSTOM_TYPE_6
+
+			#ifdef ENABLE_FANTIES
 				case 6:	
 					active = 1;
+					
 					cx2 = gpen_cx = en_an_x [gpit] >> 6;
 					cy2 = gpen_cy = en_an_y [gpit] >> 6;
-					rdd = distance ();
-					switch (en_an_state [gpit]) {
-						case TYPE_6_IDLE:
-							if (rdd <= SIGHT_DISTANCE)
-								en_an_state [gpit] = TYPE_6_PURSUING;
-							break;
-						case TYPE_6_PURSUING:
-							if (rdd > SIGHT_DISTANCE) {
-								en_an_state [gpit] = TYPE_6_RETREATING;
-							} else {
-								en_an_vx [gpit] = limit (
-									en_an_vx [gpit] + addsign (p_x - en_an_x [gpit], FANTY_A),
-									-FANTY_MAX_V, FANTY_MAX_V);
-								en_an_vy [gpit] = limit (
-									en_an_vy [gpit] + addsign (p_y - en_an_y [gpit], FANTY_A),
-									-FANTY_MAX_V, FANTY_MAX_V);
-									
-								en_an_x [gpit] = limit (en_an_x [gpit] + en_an_vx [gpit], 0, 14336);
-								en_an_y [gpit] = limit (en_an_y [gpit] + en_an_vy [gpit], 0, 9216);
-							}
-							break;
-						case TYPE_6_RETREATING:
-							en_an_x [gpit] += addsign (malotes [enoffsmasi].x - gpen_cx, 64);
-							en_an_y [gpit] += addsign (malotes [enoffsmasi].y - gpen_cy, 64);
-							
-							if (rdd <= SIGHT_DISTANCE)
-								en_an_state [gpit] = TYPE_6_PURSUING;
-							break;						
-					}
+
+					#ifdef FANTIES_TYPE_HOMING
+						rdd = distance ();
+						switch (en_an_state [gpit]) {
+							case TYPE_6_IDLE:
+								if (rdd <= FANTIES_SIGHT_DISTANCE)
+									en_an_state [gpit] = TYPE_6_PURSUING;
+								break;
+							case TYPE_6_PURSUING:
+								if (rdd > FANTIES_SIGHT_DISTANCE) {
+									en_an_state [gpit] = TYPE_6_RETREATING;
+								} else {
+					#endif
+
+									en_an_vx [gpit] = limit (
+										en_an_vx [gpit] + addsign (p_x - en_an_x [gpit], FANTIES_A),
+										-FANTIES_MAX_V, FANTIES_MAX_V);
+									en_an_vy [gpit] = limit (
+										en_an_vy [gpit] + addsign (p_y - en_an_y [gpit], FANTIES_A),
+										-FANTIES_MAX_V, FANTIES_MAX_V);
+										
+									en_an_x [gpit] = limit (en_an_x [gpit] + en_an_vx [gpit], 0, 14336);
+									en_an_y [gpit] = limit (en_an_y [gpit] + en_an_vy [gpit], 0, 9216);
+
+					#ifdef FANTIES_TYPE_HOMING									
+								}
+								break;
+							case TYPE_6_RETREATING:
+								en_an_x [gpit] += addsign (malotes [enoffsmasi].x - gpen_cx, 64);
+								en_an_y [gpit] += addsign (malotes [enoffsmasi].y - gpen_cy, 64);
+								
+								if (rdd <= FANTIES_SIGHT_DISTANCE)
+									en_an_state [gpit] = TYPE_6_PURSUING;
+								break;						
+						}
+					#endif
+					
 					gpen_cx = en_an_x [gpit] >> 6;
 					gpen_cy = en_an_y [gpit] >> 6;
-					if (en_an_state [gpit] == TYPE_6_RETREATING && 
-						gpen_cx == malotes [enoffsmasi].x && 
-						gpen_cy == malotes [enoffsmasi].y
-						) 
-						en_an_state [gpit] = TYPE_6_IDLE;
-					break;
+					
+					#ifdef FANTIES_TYPE_HOMING
+						if (en_an_state [gpit] == TYPE_6_RETREATING && 
+							gpen_cx == malotes [enoffsmasi].x && 
+							gpen_cy == malotes [enoffsmasi].y
+							) 
+							en_an_state [gpit] = TYPE_6_IDLE;
+						break;
+					#endif
 			#endif
 			#ifdef ENABLE_PURSUERS
 				case 7:
@@ -258,10 +246,10 @@ void enems_move (void) {
 					}
 					break;	
 			#endif
-/*
+			/*
 			default:
 				if (en_an_state [gpit] != GENERAL_DYING) en_an_next_frame [gpit] = sprite_18_a;
-*/
+			*/
 		}
 		
 		if (active) {			
@@ -409,7 +397,7 @@ void enems_move (void) {
 										en_an_vx [gpit] += addsign (bullets_mx [gpjt], 128);
 									}
 								#endif
-								#ifdef ENABLE_CUSTOM_TYPE_6
+								#ifdef ENABLE_FANTIES
 									if (malotes [enoffsmasi].t == 6) {
 										en_an_vx [gpit] += addsign (bullets_mx [gpjt], 128);
 									}
@@ -439,10 +427,7 @@ void enems_move (void) {
 									en_an_next_frame [gpit] = sprite_18_a;
 									if (gpt != 7) malotes [enoffsmasi].t |= 16;
 									p_killed ++;
-									#ifdef RANDOM_RESPAWN								
-										en_an_fanty_activo [gpit] = 0;
-										malotes [enoffsmasi].life = FANTIES_LIFE_GAUGE;
-									#endif
+
 									#ifdef ENABLE_PURSUERS
 										en_an_alive [gpit] = 0;
 										en_an_dead_row [gpit] = DEATH_COUNT_EXPRESSION;
