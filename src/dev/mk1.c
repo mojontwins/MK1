@@ -109,6 +109,7 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #include "engine.h"
 #include "engine/player.h"
 #include "engine/enengine.h"
+#include "engine/hotspots.h"
 
 #ifdef ENABLE_CHECKPOINTS
 	#include "savegame.h"

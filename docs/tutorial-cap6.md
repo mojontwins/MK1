@@ -2,80 +2,109 @@
 
 Antes que nada, bájate el paquete de materiales correspondiente a este capítulo pulsando en este enlace:
 
-http://www.mojontwins.com/churrera/churreratut-capitulo6.zip
+[Material del capítulo 6](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-zip/churreratut-capitulo6.zip)
 
-¿Ahora qué?
+## ¿Ahora qué?
 
 Ahora es cuando colocamos las cosas. Es el acto equivalente a cuando llegas del supermercado cargado de bolsas y las tienes que colocar por toda la cocina. Es un proceso tedioso, pero necesario. Puedes optar no hacerlo, por supuesto, pero luego a ver quién encuentra las salchichas. O, yo qué sé, los filtros de la cafetera. ¿Alguien sigue usando filtros para cafetera?
 
 Básicamente lo que vamos a hacer es poner en el mapa los enemigos, los objetos y las llaves. Y no, no nos referimos precisamente a hacer esto:
 
-Pulsa aquí para ver el capítulo completo.
+![Enemigos en el mapa](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_colocar_en_el_mapa.jpg)
 
+Cada ítem pertenecerá a una pantalla en concreto y tendrá una serie de valores que indiquen su posición, su tipo, su velocidad en el caso de que se muevan, y otras cosas por el estilo. En realidad estamos hablando de una tabla de números enorme que sería todo un coñazo crear a mano. Por eso hemos hecho una aplicación para poder completar este trabajo de forma visual.
 
+Quien haya catado nuestros motores recordarán el infame **colocador**. A ellos queremos dedicar su sucesor, el **ponedor**, que, entre otras cosas es:
 
-Cada ítem pertenecerá a una pantalla en concreto y tendrá una serie de valores que indiquen su posición, su tipo, su velocidad en el caso de que se muevan, y otras cosas por el estilo. En realidad estamos hablando de una tabla de números enorme que sería todo un coñazo crear a mano. Por eso hemos hecho una aplicación de la hostia de cutre para poder completar este trabajo de forma visual.
+1. Más mejor.
+2. Menos peor.
 
-La herramienta de la que os hemos hablado, a la cual llamamos muy imaginativamente El Colocador (nada que ver con sustancias ilegales), no sólo es útil para hacer güegos con la Churrera. Cualquier proyecto que tengáis con tiles de 16×16 píxels, para cualquier tamaño de pantalla, podría beneficiarse de esta utilidad. Sin ir más lejos, la usamos para colocar los bichos en güegos como el Uwol 2 de CPC, el Lala Prologue de MSDOS, o cierto experimento para cierta consola de 16 bits que a ver si algún día nos animamos a terminar y sacar de una santísima vez. O sea, que el programa parecerá muy cutre, pero lo cierto es que hace el apaño estupendísimamente.
+La herramienta no sólo es útil para hacer güegos con **MTE MK1**. Cualquier proyecto que tengáis con tiles de 16×16 píxels, para cualquier tamaño de pantalla, podría beneficiarse de esta utilidad. Sin ir más lejos, la usamos para colocar los bichos en güegos como **Uwol 2** de CPC, **Lala Prologue** de MSDOS, o el muy nefasto port de **Cheril Perils** para Megadrive. 
 
-[Pedigüeño mode] Por cierto, el Colocador es un programa para plataformas Windows. Sin embargo, al estar compilado con gcc y usar Allegro como biblioteca gráfica, debería ser muy fácilmente portable a Linux. Si estás dispuesto a hacerlo y así aportar una herramienta más para los usuarios de esta plataforma, contacta con nosotros. El programa está completamente contenido en un archivo .c por lo que generar un ejecutable Linux debería ser la tarea más sencilla del globo.
-Conceptos básicos: enemigos y hotspots
+## Conceptos básicos: enemigos y hotspots
 
-Vamos a empezar explicando algunos conceptos básicos antes de ponernos a chulear de aplicación colocadora, más que nada porque la nomenclatura que usamos suele ser menos intuitiva que el control de Uchi-Mata.
+Vamos a empezar explicando algunos conceptos básicos antes de ponernos a chulear de aplicación ponedora, más que nada porque la nomenclatura que usamos suele ser menos intuitiva que el control de Uchi-Mata.
 
+![Uchi Mata](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_uchi_mata.jpg)
 
+### Enemigos
 
-Enemigos
-
-En primer lugar tenemos el concepto de enemigo. Un enemigo, para la Churrera, son esas cosas que se mueven en la pantalla y que te matan y, además, las plataformas móviles. Sí, para la Churrera las plataformas móviles son enemigos. Así que cuando hablamos de colocar enemigos, también hablamos de colocar plataformas móviles. Y cuando decimos que en la pantalla puede haber un máximo de 3 enemigos, hay que contar también las plataformas móviles. Sí, podríamos haberlos llamado “móviles”, por ejemplo, pero lo cierto es que las plataformas móviles se nos ocurrieron cuando ya teníamos empezado el motor y Amador, nuestro mono programador, no consintió cambiarles el nombre.
+En primer lugar tenemos el concepto de enemigo. Un enemigo, para **MTE MK1**, son esas cosas que se mueven en la pantalla y que te matan y, además, las plataformas móviles. Sí, para **MTE MK1** las plataformas móviles son enemigos. Así que cuando hablamos de colocar enemigos, también hablamos de colocar plataformas móviles. Y cuando decimos que en la pantalla puede haber un máximo de 3 enemigos, hay que contar también las plataformas móviles. Sí, podríamos haberlos llamado *móviles*, por ejemplo, pero lo cierto es que las plataformas móviles se nos ocurrieron cuando ya teníamos empezado el motor y Amador, nuestro mono programador, no consintió cambiarles el nombre porque estaba pegao y ni con rasqueta.
 
 Los enemigos tienen asociados diversos valores y algo muy importante: el tipo. El tipo de enemigo define su comportamiento y, además, el gráfico con el que se pinta. Atención porque esto es un tanto confuso, sobre todo porque no se diseñó a priori y está algo parcheado (léase más arriba el asunto de las plataformas móviles):
 
-Los enemigos de tipos 1, 2 o 3 (y el 4 en los güegos de vista genital) describen trayectorias lineales y se dibujan con el primer, segundo o tercer (o cuarto) sprite de enemigos del tileset. Cuando hablamos de trayectorias lineales nos referimos a dos posibles casos:
+Los enemigos de **tipos 1, 2 o 3** (y el **4** en los güegos de vista genital) describen trayectorias lineales y se dibujan con el primer, segundo o tercer (o cuarto) sprite de enemigos del tileset. Cuando hablamos de trayectorias lineales nos referimos a dos posibles casos:
 
-Trayectorias rectilineas, verticales u horizontales: se definen el punto de inicio y el punto de final describiendo una linea recta vertical u horizontal. El enemigo sigue esa linea imaginaria yendo y viniendo ad infinitum.
+1. **Trayectorias rectilineas**, verticales u horizontales: se definen el punto de inicio y el punto de final describiendo una linea recta vertical u horizontal. El enemigo sigue esa linea imaginaria yendo y viniendo ad infinitum.
 
+![Trayectoria lineal](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_lineal.png)
 
+2. **Trayectorias diagonales**: estas surgieron de un *feature* del motor (efecto colateral no plenado debido a un algoritmo cutre, o, lo que es lo mismo, cuando un bug te sale bien), pero las dejamos porque molan. Las hemos usado mucho. Si el punto de inicio y el del final no están en la misma fila o columna, el muñeco se mueve dentro del rectángulo que describen ambos puntos, rebotando en sus paredes y moviéndose en diagonal.
 
-Trayectorias diagonales: estas surgieron de un “feature” del motor (efecto colateral no plenado debido a un algoritmo cutre), pero las dejamos porque molan. Las hemos usado mucho. Si el punto de inicio y el del final no están en la misma fila o columna, el muñeco se mueve dentro del rectángulo que describen ambos puntos, rebotando en sus paredes y moviéndose en diagonal.
+![Trayectoria diagonal](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_diagonal.png)
 
+Los enemigos de **tipo 4**, cuando la vista es lateral, son **plataformas móviles**. Se comportan exactamente igual que los enemigos lineales, pero con una limitación: aunque podemos definirles una trayectoria diagonal, no garantizamos que el funcionamiento sea el correcto en todos los casos. Por tanto, sólo pueden usarse trayectorias verticales u horizontales.
 
+Los enemigos de **tipo 6** son **voladores perseguidores**. Simplemente persiguen al personaje principal por toda la pantalla y son la peste. Todos se pintan usando el gráfico 1, 2, 3 o 4 del tileset según se configure en el motor. Son como fantasmas porque pueden traspasar el escenario.
 
-Los enemigos de tipo 4, cuando la vista es lateral, son plataformas móviles. Se comportan exactamente igual que los enemigos lineales, pero con una limitación: aunque podemos definirles una trayectoria diagonal, no garantizamos que el funcionamiento sea el correcto en todos los casos. Por tanto, sólo pueden usarse trayectorias verticales u horizontales.
+Los enemigos de **tipo 7** son los que denominamos **EIJ**, o sea, **Enemigos Increíblemente Jartibles**. Se trata de perseguidores lineales. Estos enemigos aparecen en el punto donde los creas y se dedican a perseguir al jugador. No pueden traspasar el escenario. Si el jugador puede disparar y los mata, volverán a aparecer al ratito en el mismo sitio de donde salieron por primera vez. El gráfico con el que se dibujan se elige al azar entre todos los disponibles a menos que configures uno fijo. Funcionan mejor en güegos de vista genital y puedes verlos en acción en **Mega Meghan**. 
 
-Los enemigos de tipo 5 fueron añadidos cuando hicimos el Zombie Calavera. Es el tipo de los murciélagos. Se pintan con el gráfico del tercer enemigo del tileset y tienen este comportamiento especial: se crean fuera de pantalla, y si el protagonista no está escondido, lo persiguen. Si el protagonista se esconde, se alejan hasta volver a salir de la pantalla. No hemos probado este tipo de enemigos en esta versión revisada de la Churrera, por lo que no podemos asegurar que funcionen bien. ¿te animas a probar?. Por defecto, el código para mover y gestionar los enemigos de tipo 5 no se incluye en el motor, sino que ha de ser activado de forma explícita.
+El código para gestionar los enemigos lineales (y plataformas) se añade por defecto al motor; los enemigos de tipo 6 o 7 hay que activarlos de forma explícita cuando configuremos el motor.
 
-Los enemigos de tipo 6 no están implementados en esta versión de la Churrera por una sencilla razón: siempre han sido total y completamente custom. En el Cheril the Goddess eran los murciélagos miopes que sólo te perseguían si te acercabas a cierta distancia, y que al alejarte volvían a su sitio. En los güegos de Ramiro el Vampiro son los murciélagos de las criptas que aparecen cuando activas la trampa y te persiguen hasta que cojas todas las cruces. En Uwol 2 para CPC, son el Fanty de las plantas inferiores. Para cada juego en el que hemos usado el tipo 6 hemos programado un comportamiento diferente (reaprovechando cosas, eso sí). Por eso hemos dejado este “hueco”, por si es necesario un comportamiento custom para algún juego tengamos donde añadirlo. Tal y como está el motor, si creas un enemigo de tipo 6 ni siquiera aparecerá en pantalla.
+Nosotros en **Dogmole** sólo vamos a usar los enemigos de tipos 1 a 3 y las plataformas móviles de tipo 4.
 
-Los enemigos de tipo 7 son los que denominamos EIJ, o sea, Enemigos Increíblemente Jartibles. Se trata de perseguidores lineales. Estos enemigos aparecen en el punto donde los creas y se dedican a perseguir al jugador. No pueden traspasar el escenario. Si el jugador puede disparar y los mata, volverán a aparecer al ratito en el mismo sitio de donde salieron por primera vez. El gráfico con el que se dibujan se elige al azar entre todos los disponibles. Funcionan mejor en güegos de vista genital y puedes verlos en acción en Mega Meghan. Al igual que los enemigos de tipo 5, el código para gestionarlos no se incluye en el motor por defecto y hay que hacerlo explícitamente.
+Si [me invitáis a café](https://ko-fi.com/I2I0JUJ9), al final del tutorial podemos ver cómo modificar todo el motor de enemigos para poder usar más de 4 tipos lineales básicos de dos formas: usando 8 tipos diferentes sin animación, o añadiendo más frames para tener 8 tipos diferentes con animación (gastando un montón de memoria en el proceso). Pero para esto todavía queda un montón. No te vayas a emocionar ya, que estás hecho un bochinche.
 
+### Hotspots
 
+Los **hotspots** son, simple y llanamente, una posición dentro de la pantalla donde puede haber un objeto, una llave, una recarga de vida, una recarga de munición, o una recarga de tiempo. En cada pantalla se define un único hotspot. Cada hotspot tiene asociado un valor:
 
-Nosotros en Dogmole sólo vamos a usar los enemigos de tipos 1 a 3 y las plataformas móviles de tipo 4.
+|#|Significado
+|---|---
+|1|Objeto o item coleccionable
+|2|Llave
+|3|Recarga de vida
+|4|Recarga de munición
+|5|Recarga de tiempo 
 
-Para los capítulos finales de este tutorial, que tratarán de añadidos y modificaciones, veremos como hacer dos cosas con el motor: añadir un tipo 6 con un comportamiento custom y cómo modificar todo el motor de enemigos para poder usar más de 4 tipos lineales básicos de dos formas: usando 8 tipos diferentes sin animación, o añadiendo más frames para tener 8 tipos diferentes con animación (gastando un montón de memoria en el proceso). Pero para esto todavía queda un montón. No te vayas a emocionar ya, que estás hecho un bochinche.
-
-Hotspots
-
-Los hotspots son, simple y llanamente, una posición dentro de la pantalla donde puede haber un objeto, una llave, o una recarga. En cada pantalla se define un único hotspot. Cada hotspot tiene asociado un valor. Si se le da un valor “0” este hotspot estará desactivado y nunca aparecerá nada. Si se le da un valor “1”, en esta posición aparecerá un objeto. Si se le da un valor “2”, aparecerá una llave. Los hotspots con valores “1” o “2” se consideran “activos”. Una vez que hayamos cogido el objeto o la llave de un hotspot activo, el motor puede que haga aparecer una recarga de vida en ese lugar la próxima vez que entremos en esa pantalla.
-
-Cuando hablamos de objetos nos referimos al item que se dibuja con el tile número 17 del tileset y que será contado automáticamente por el motor del juego sin necesidad de tener que hacer nosotros nada más que decirle al motor que vamos a usar objetos. Se trata de las pócimas en Lala Prologue, o las cruces de Zombie Calavera, los lápices en Viaje al Centro de la Napia o los diskettes en Trabajo Basura. Nosotros vamos a usar objetos para representar las cajas que tenemos que recoger y llevar a la universidad de Miskatonic en nuestro güego. Luego, mediante scripting y configuración, haremos que el comportamiento de los objetos sea diferente (no se contará el objeto hasta que, después de cogerlo, lo hayamos depositado en un punto determinado de la universidad, de forma muy parecida a cómo funcionan los diskettes en Trabajo Basura), pero básicamente se trata de objetos que habrá que colocar en el mapa usando hotspots de tipo objeto (tipo 1).
+Cuando hablamos de objetos nos referimos al item que se dibuja con el tile número 17 del tileset y que será contado automáticamente por el motor del juego sin necesidad de tener que hacer nosotros nada más que decirle al motor que vamos a usar objetos. Se trata de las pócimas en **Lala Prologue**, o las cruces de **Zombie Calavera**, los lápices en **Viaje al Centro de la Napia** o los diskettes en **Trabajo Basura**. Nosotros vamos a usar objetos para representar las cajas que tenemos que recoger y llevar a la universidad de Miskatonic en nuestro güego. Luego, mediante scripting y configuración, haremos que el comportamiento de los objetos sea diferente (no se contará el objeto hasta que, después de cogerlo, lo hayamos depositado en un punto determinado de la universidad, de forma muy parecida a cómo funcionan los diskettes en **Trabajo Basura**), pero básicamente se trata de objetos que habrá que colocar en el mapa usando hotspots de tipo objeto (tipo 1).
 
 Como sé que lo vais a preguntar: no, no se puede asignar más de un hotspot por pantalla tal y como está programado el motor.
 
-Preparando los materiales necesarios
+## Preparando los materiales necesarios
 
-Bien. Vamos a ponernos manos a la obra. Lo primero que tendremos que hacer es copiar los materiales necesarios al directorio donde está el Colocador, que es el directorio \enems. Necesitamos dos cosas: el mapa del güego en formato .map, y el tileset que preparamos para Mappy en formato .bmp. Por tanto, copiamos \map\mapa.map y \gfx\mappy.bmp en \enems. ¡Ya estamos preparados para la marcha!
+Bien. Vamos a ponernos manos a la obra. Lo primero que tendremos que hacer es copiar los materiales necesarios al directorio `/enems`. Necesitamos dos cosas: el mapa del güego en formato `MAP`, y el tileset del juego `work.png`. Por tanto, copiamos `/map/mapa.map` y `/gfx/work.png` en `/enems`. ¡Ya estamos preparados para la marcha!
 
-Configuración de nuestro proyecto
+## Configuración de nuestro proyecto
 
-Cuando ejecutas el Colocador (por ejemplo, haciendo doble click sobre colocador.exe) aparecerá la pantalla principal en al que, o bien cargaremos un proyecto existente, o configuraremos uno nuevo. Como no tenemos un proyecto existente, crearemos uno nuevo.
+Ponedor era originalmente una aplicación que, aunque tiene su interfaz gráfica, estaba pensada para ser lanzada desde la ventana de linea de comandos. Sin embargo, por petición popular, le he añadido un diálogo de entrada para que se pueda usar tal y como se usaba el viejo colocador. Si estáis interesados en usarlo desde la ventana de linea de comandos, ejecutad el programa con e parámetro -h:
+
+```
+    $ ..\utils\ponedor.exe -h
+    Edit an existing set:
+    $ ponedor.exe file.ene
+
+    Create new set:
+    $ ponedor.exe new out=file.ene map=file.map tiles=file.png|bmp [adjust=n] size=w,h
+                      [scrsize=w,h] [nenems=n] [x2]
+
+    out           output filename
+    map           map file (raw, headerless, 1 byte per tile, row order)
+    tiles         tileset in png or bmp format.
+    adjust        substract this number from every byte read from the map file. Def=0
+    size          map size in screens
+    scrsize       screen size in tiles. Def=16,12
+    nenems        number of enemies per screen. Def=3
+    x2            zoom x2 (hacky)
+```
+
+Cuando ejecutas el Colocador (por ejemplo, haciendo doble click sobre `ponedor.bat` en `/enems`) aparecerá la pantalla principal en al que, o bien cargaremos un proyecto existente, o configuraremos uno nuevo. Como no tenemos un proyecto existente, crearemos uno nuevo.
 
 
 
-Como vemos, en las dos primeras casillas habrá que introducir el nombre de nuestro mapa y de nuestro tileset (mapa.map y mappy.bmp, que deberían estar ya en el directorio \enems). Posteriormente hay cuatro casillas que definen el tamaño del mapa y de las pantallas. MAP_W y MAP_H deberían contener el ancho y alto de tu mapa medido en pantallas. SCR_W y SCR_H son para especificar el ancho y alto de las pantallas en tiles. Paras los güegos de la Churrera estos valores son, como ya deberías saber de sobra, 15 y 10.
+Como vemos, en las dos primeras casillas habrá que introducir el nombre de nuestro mapa y de nuestro tileset (mapa.map y mappy.bmp, que deberían estar ya en el directorio /enems). Posteriormente hay cuatro casillas que definen el tamaño del mapa y de las pantallas. MAP_W y MAP_H deberían contener el ancho y alto de tu mapa medido en pantallas. SCR_W y SCR_H son para especificar el ancho y alto de las pantallas en tiles. Paras los güegos de **MTE MK1** estos valores son, como ya deberías saber de sobra, 15 y 10.
 
-La última casilla que hay que rellenar es el número de enemigos que aparecerá en cada pantalla. En la Churrera son 3. No, si pones más no saldrán más en el güego. Sólo conseguirás que todo funcione mal. Pon 3. Te aseguro que 3 son suficientes.
+La última casilla que hay que rellenar es el número de enemigos que aparecerá en cada pantalla. En **MTE MK1** son 3. No, si pones más no saldrán más en el güego. Sólo conseguirás que todo funcione mal. Pon 3. Te aseguro que 3 son suficientes.
 
 Cuando esté todo relleno pulsamos en NUEVO y entonces podremos empezar a trabajar.
 
@@ -89,11 +118,11 @@ Si pulsamos ESC se cerrará el programa, algo tremendamente útil cuando hemos t
 
 Precisamente para grabar tenemos la tecla S. De hecho, vamos a usarla ya mismo, aunque no hayamos colocado ningún enemigo. Por convención, nosotros usamos .ene como extensión para los archivos del Colocador. Pulsa S y, en el cuadro de diálogo que sale, escribe enems.ene y haz click sobre el botón Ok. Ya hemos grabado nuestras colocaciones. Haz esto muy a menudo. Haznos caso.
 
-Vamos a ver esto en acción. Pulsa ESC para salir. Fíjate que ahora hay un archivo enems.ene en \enems. Vuelve a ejecutar colocador.exe. Esta vez, en lugar de rellenar los valores, escribe enems.ene en el cuadro que está etiquetado Abrir un proyecto existente y haz click sobre el botón que pone Cargar. Si todo sale bien, te debería volver a salir la primera pantalla del mapa.
+Vamos a ver esto en acción. Pulsa ESC para salir. Fíjate que ahora hay un archivo enems.ene en /enems. Vuelve a ejecutar colocador.exe. Esta vez, en lugar de rellenar los valores, escribe enems.ene en el cuadro que está etiquetado Abrir un proyecto existente y haz click sobre el botón que pone Cargar. Si todo sale bien, te debería volver a salir la primera pantalla del mapa.
 
 
 
-Este archivo enems.ene no nos sirve para usarlo directamente en el güego. Para poder tener nuestros enemigos en el güego necesitaremos que el colocador exporte código C. Esto es hace pulsando la tecla E. Cuando lo hagamos, aparecerá un cuadro de diálogo parecido al del guardar. Ahí deberemos escribir enems.h, pulsar OK, y copiar este archivo a \dev. Esto será lo que haremos cuando hayamos terminado de colocar todos los enemigos y queramos integrarlos en el güego.
+Este archivo enems.ene no nos sirve para usarlo directamente en el güego. Para poder tener nuestros enemigos en el güego necesitaremos que el colocador exporte código C. Esto es hace pulsando la tecla E. Cuando lo hagamos, aparecerá un cuadro de diálogo parecido al del guardar. Ahí deberemos escribir enems.h, pulsar OK, y copiar este archivo a /dev. Esto será lo que haremos cuando hayamos terminado de colocar todos los enemigos y queramos integrarlos en el güego.
 
 Poniendo enemigos y plataformas
 
@@ -121,7 +150,7 @@ Colocando hotspots
 
 Como dijimos antes, un hotspot es la casilla donde aparecerá una llave o un objeto durante el güego, y donde puede que aparezca una recarga si volvemos a la pantalla después de haber cogido dicha llave o dicho objeto.
 
-Se recordáis, mencionamos que cada hotspot tiene un tipo. Para la churrera, este tipo puede ser 0 (desactivado), 1 (contiene un objeto) o 2 (contiene una llave). Si luego te pones guay puedes expandir el engine para que haya más, pero tal y como está la churrera admite estos tres tipos.
+Se recordáis, mencionamos que cada hotspot tiene un tipo. Para **MTE MK1**, este tipo puede ser 0 (desactivado), 1 (contiene un objeto) o 2 (contiene una llave). Si luego te pones guay puedes expandir el engine para que haya más, pero tal y como está **MTE MK1** admite estos tres tipos.
 
 Recordemos que cada pantalla admite un único hotspot. Eso significa que el número total de llaves y objetos necesarios para terminar el güego no puede exceder el número de pantallas. Por ejemplo, en Lala Prologue tenemos 30 pantallas. Para terminar el güego con éxito hay que recoger 25 objetos, y además hay cuatro cerrojos que abrir, por lo que necesitamos 4 llaves. Esto significa que en 25 de las 30 pantallas habrá un objeto, y en 4 habrá una llave. Perfecto: necesitamos 29 pantallas de las 30. Es importante planear esto de antemano. Si te emocionas colocando un montón de cerrojos puede que luego no te quepan todas las llaves y todos los objetos que hay que recoger.
 
@@ -135,7 +164,7 @@ Con mucha paciencia iremos pantalla por pantalla colocando el hotspot, indicando
 
 Generando el código
 
-Una vez que hayamos terminado de colocarlo todo, como dijimos antes, tendremos que generar el código que necesita la Churrera. ¿recordáis la super tabla de valores que os mencionamos al principio del capítulo? Pues eso. Cuando hayas terminado, pues, pulsa E y graba el código como enems.h. Copia este archivo en \dev. Si te pica la curiosidad, puedes abrirlo en el editor de textos y ver la cantidad de números que te has ahorrado escribir.
+Una vez que hayamos terminado de colocarlo todo, como dijimos antes, tendremos que generar el código que necesita **MTE MK1**. ¿recordáis la super tabla de valores que os mencionamos al principio del capítulo? Pues eso. Cuando hayas terminado, pues, pulsa E y graba el código como enems.h. Copia este archivo en /dev. Si te pica la curiosidad, puedes abrirlo en el editor de textos y ver la cantidad de números que te has ahorrado escribir.
 
 ¡Y hemos terminado!
 

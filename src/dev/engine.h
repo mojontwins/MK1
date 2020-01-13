@@ -210,14 +210,6 @@ void espera_activa (int espera) {
 	}
 #endif
 
-#ifndef COMPRESSED_LEVELS
-	void hotspots_init (void) {
-		gpit = 0; while (gpit < MAP_W * MAP_H) {
-			hotspots [gpit].act = 1; ++ gpit;
-		}
-	}
-#endif
-
 #ifdef PLAYER_CAN_FIRE
 	void bullets_fire (void) {
 		#ifdef PLAYER_CAN_FIRE_FLAG 
@@ -468,25 +460,13 @@ void draw_scr_background (void) {
 	rdx = (hotspots [n_pant].xy >> 4);
 	rdy = (hotspots [n_pant].xy & 15);
 
-	#ifndef USE_HOTSPOTS_TYPE_3
-		if ((hotspots [n_pant].act == 1 && hotspots [n_pant].tipo) ||
-			(hotspots [n_pant].act == 0 && (rand () & 7) == 2)) {
-			hotspot_x = rdx << 4;
-			hotspot_y = rdy << 4;
-			orig_tile = map_buff [COORDS (rdx, rdy)];
-			_x = rdx; _y = rdy; _t = 16 + (hotspots [n_pant].act ? hotspots [n_pant].tipo : 0); 
-			draw_coloured_tile_gamearea ();
-		}
-	#else
-		// Modificación para que los hotspots de tipo 3 sean recargas directas:
-		if (hotspots [n_pant].act == 1 && hotspots [n_pant].tipo) {
-			hotspot_x = rdx << 4;
-			hotspot_y = rdy << 4;
-			orig_tile = map_buff [COORDS (rdx, rdy)];
-			_x = rdx; _y = rdy; _t = 16 + (hotspots [n_pant].tipo != 3 ? hotspots [n_pant].tipo : 0);
-			draw_coloured_tile_gamearea ();
-		}
-	#endif
+	if (hotspots [n_pant].act == 1 && hotspots [n_pant].tipo) {
+		hotspot_x = rdx << 4;
+		hotspot_y = rdy << 4;
+		orig_tile = map_buff [COORDS (rdx, rdy)];
+		_x = rdx; _y = rdy; _t = 16 + (hotspots [n_pant].tipo != 3 ? hotspots [n_pant].tipo : 0);
+		draw_coloured_tile_gamearea ();
+	}
 
 	#ifndef DEACTIVATE_KEYS
 		// Open locks
