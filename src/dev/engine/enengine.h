@@ -11,9 +11,6 @@
 				malotes [gpit].t = malotes [gpit].t & 15;	
 				#ifdef PLAYER_CAN_FIRE
 					malotes [gpit].life = ENEMIES_LIFE_GAUGE;
-					#ifdef ENABLE_RANDOM_RESPAWN
-						if (malotes [gpit].t == 5) malotes [gpit].t |= 16;
-					#endif
 				#endif
 				gpit ++;
 			}
@@ -58,10 +55,12 @@ void enems_load (void) {
 				case 6:
 					// Añade aquí tu código custom. Esto es un ejemplo:
 					en_an_base_frame [gpit] = FANTIES_BASE_CELL << 1;
-					en_an_x [gpit] = malotes [enoffsmasi].x << 6;
-					en_an_y [gpit] = malotes [enoffsmasi].y << 6;
+					en_an_x [gpit] = malotes [enoffsmasi].x1 << 6;
+					en_an_y [gpit] = malotes [enoffsmasi].y1 << 6;
 					en_an_vx [gpit] = en_an_vy [gpit] = 0;
-					malotes [enoffsmasi].life = FANTIES_LIFE_GAUGE;			
+					#ifdef PLAYER_CAN_FIRE
+						malotes [enoffsmasi].life = FANTIES_LIFE_GAUGE;	
+					#endif
 					#ifdef FANTIES_TYPE_HOMING
 						en_an_state [gpit] = TYPE_6_IDLE;
 					#endif

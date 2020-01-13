@@ -631,7 +631,7 @@ unsigned char mons_col_sc_y (void) {
 	unsigned char lasttimehit;
 #endif
 
-#ifdef ENABLE_FANTIES
+#if defined (ENABLE_FANTIES) && defined (FANTIES_TYPE_HOMING)
 	// Funciones auxiliares custom
 	unsigned char distance (void) {
 		rdx = abs (cx2 - gpx);
@@ -641,7 +641,7 @@ unsigned char mons_col_sc_y (void) {
 	}
 #endif
 
-#if defined(ENABLE_FANTIES) || defined(ENABLE_RANDOM_RESPAWN)
+#if defined(ENABLE_FANTIES)
 	int limit (int val, int min, int max) {
 		if (val < min) return min;
 		if (val > max) return max;

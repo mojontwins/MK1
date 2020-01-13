@@ -101,14 +101,15 @@ unsigned char en_an_state [3];
 	
 #ifdef PLAYER_CAN_FIRE
 	unsigned char en_an_morido [3];
-	#if defined (RANDOM_RESPAWN) || defined (ENABLE_FANTIES)
-		int en_an_x [3];
-		int en_an_y [3];
-		int en_an_vx [3];
-		int en_an_vy [3];
-		unsigned char en_an_fanty_activo [3];
-	#endif
 #endif
+
+#if defined (ENABLE_FANTIES)
+	int en_an_x [3];
+	int en_an_y [3];
+	int en_an_vx [3];
+	int en_an_vy [3];
+#endif
+
 #ifdef ENABLE_PURSUERS
 	unsigned char en_an_alive [3];
 	unsigned char en_an_dead_row [3];

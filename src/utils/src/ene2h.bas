@@ -62,6 +62,7 @@ Print #fOut, ""
 Print #fOut, "MALOTE malotes [] = {"
 
 For i = 1 To mapPants
+	Print #fOut, "	// Pantalla " & (i-1)
 	For j = 1 To nEnems
 		Get #fIn, , t
 		Get #fIn, , x
@@ -85,6 +86,7 @@ For i = 1 To mapPants
 
 		If i < mapPants Or j < nEnems Then Print #fOut, "," Else Print #fOut, ""
 	Next j
+	Print #fOut, ""
 Next i
 
 Print #fOut, "};"
