@@ -45,7 +45,7 @@ Los enemigos de **tipos 1, 2 o 3** (y el **4** en los güegos de vista genital) 
 
 Los enemigos de **tipo 4**, cuando la vista es lateral, son **plataformas móviles**. Se comportan exactamente igual que los enemigos lineales, pero con una limitación: aunque podemos definirles una trayectoria diagonal, no garantizamos que el funcionamiento sea el correcto en todos los casos. Por tanto, sólo pueden usarse trayectorias verticales u horizontales.
 
-Los enemigos de **tipo 6** son **voladores perseguidores**. Simplemente persiguen al personaje principal por toda la pantalla y son la peste. Todos se pintan usando el gráfico 1, 2, 3 o 4 del tileset según se configure en el motor. Son como fantasmas porque pueden traspasar el escenario.
+Los enemigos de **tipo 6** son **voladores perseguidores**. Simplemente persiguen al personaje principal por toda la pantalla y son la peste. Todos se pintan usando el gráfico 1, 2, 3 o 4 del tileset según se configure en el motor. Son como fantasmas porque pueden traspasar el escenario. Se pueden configurar normales o de tipo "HOMING", que aparecen en el sitio donde se colocan y te persiguen si te acercas. Si te alejas vuelven a su sitio. Como los celebros de **Goku Mal**.
 
 Los enemigos de **tipo 7** son los que denominamos **EIJ**, o sea, **Enemigos Increíblemente Jartibles**. Se trata de perseguidores lineales. Estos enemigos aparecen en el punto donde los creas y se dedican a perseguir al jugador. No pueden traspasar el escenario. Si el jugador puede disparar y los mata, volverán a aparecer al ratito en el mismo sitio de donde salieron por primera vez. El gráfico con el que se dibujan se elige al azar entre todos los disponibles a menos que configures uno fijo. Funcionan mejor en güegos de vista genital y puedes verlos en acción en **Mega Meghan**. 
 
@@ -98,47 +98,88 @@ Ponedor era originalmente una aplicación que, aunque tiene su interfaz gráfica
     x2            zoom x2 (hacky)
 ```
 
-Cuando ejecutas el Colocador (por ejemplo, haciendo doble click sobre `ponedor.bat` en `/enems`) aparecerá la pantalla principal en al que, o bien cargaremos un proyecto existente, o configuraremos uno nuevo. Como no tenemos un proyecto existente, crearemos uno nuevo.
+Cuando ejecutas el Ponedor (por ejemplo, haciendo doble click sobre `ponedor.bat` en `/enems`) aparecerá la pantalla principal en al que podemos cargar un proyecto existente o configurar uno nuevo. Como no tenemos un proyecto existente, crearemos uno nuevo rellenando las casillas del recuadro superior:
 
+![Creando un nuevo proyecto](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_ponedor_create_new.png)
 
+Aquí hay un porrón de casillas que rellenar. Vamos a ir explicando qué son cada una de ellas, aunque la verdad es que a estas alturas casi todo debería resultar bastante intuitivo. Empezando desde arriba:
 
-Como vemos, en las dos primeras casillas habrá que introducir el nombre de nuestro mapa y de nuestro tileset (mapa.map y mappy.bmp, que deberían estar ya en el directorio /enems). Posteriormente hay cuatro casillas que definen el tamaño del mapa y de las pantallas. MAP_W y MAP_H deberían contener el ancho y alto de tu mapa medido en pantallas. SCR_W y SCR_H son para especificar el ancho y alto de las pantallas en tiles. Paras los güegos de **MTE MK1** estos valores son, como ya deberías saber de sobra, 15 y 10.
+1. `Map W` y `Map H` son el **ancho** y el **alto** de nuestro mapa **en pantallas**, o sea, las **dimensiones del mapa**. En el caso de **dogmole** habría que rellenar 8 y 3.
 
-La última casilla que hay que rellenar es el número de enemigos que aparecerá en cada pantalla. En **MTE MK1** son 3. No, si pones más no saldrán más en el güego. Sólo conseguirás que todo funcione mal. Pon 3. Te aseguro que 3 son suficientes.
+2. `Scr W` y `Scr H` son las **dimensiones de cada pantalla**, en **tiles**. Para todos los güegos de **MTE MK1** estos valores son 15 y 10 (de hecho, vienen ya puestos por defecto). No toques aquí.
 
-Cuando esté todo relleno pulsamos en NUEVO y entonces podremos empezar a trabajar.
+3. `Nenems` es el número de enemigos máximo por pantalla. En **MTE MK1** debe ser 3, ni más ni menos. También viene puesto por defecto. No toques aquí tampoco.
 
-Manejo básico del programa
+4. `Adjust` podrá valer 0 o 1, dependiendo se Mappy hizo fullerías. Si recordarás, a la hora de explicar cómo se montaba el mapa, mencionamos que Mappy quiere un tile negro como tile 0 y que si no se lo das, él se lo pone desplazando un espacio todos los tuyos. **Si te pasó esto, deberás cambiar el 0 que aparece en esta casilla por un 1**. De ese modo nuestro Ponedor estará coscado y pintará bien el mapa.
+
+5. Donde pone `TS` tenemos que poner la ruta del archivo con el tileset, que debería ser `work.png` a secas si lo has copiado en `enems`, aunque puedes usar el botón `Find` para ubicarlo desde un explorador si no te apetece escribir 8 caracteres.
+
+6. En `Map` hay que poner la ruta del archivo con el mapa, que debería ser `mapa.map` a secas si lo copiaste a `enems`. También puedes usar `Find`.
+
+7. No te olvides de poner **el nombre de archivo de salida** en la casilla `Output`. Si no quieres tocar `compile.bat`, este nombre debe ser `enems.ene`. 
+
+En la parte inferior izquierda de la ventana, por cierto, verás un botón que pone `Size`. Puedes pulsarlo para que en vez de `Normal` salga `Double` y así el Ponedor se mostrará ampliado 2X y se verá mejor todo. Consciente que soy de que cada vez se manejan resoluciones más bestias y que cada vez estamos más cegatones, tengo en mente añadir más opciones (3x y 4x).
+
+Cuando esté todo relleno **revísalo**, que luego vienen los llantos y el crujir de dientes (nunca entendí esta expresión, pero la decía mucho una maestra de Badajoz que tuve), y cuando estés seguro de que todo está en su sitio, pulsa `Create New`.
+
+## Manejo básico del programa
 
 El manejo es muy sencillo. Más que nada porque el programa es muy sencillo. Si te fijas, hay una rejilla con la pantalla actual. Si no sale la rejilla, o lo que sale en la rejilla no es la primera pantalla de tu mapa, mal vamos. Revisa los pasos anteriores, sobre todo los referidos a las dimensiones del mapa y de las pantallas.
 
 Para navegar por el mapa (para que salga otra pantalla en la rejilla) usaremos las teclas de los cursores. Pruébalo. Deberías poder hacer un bonito recorrido turístico por tu mapa.
 
-Si pulsamos ESC se cerrará el programa, algo tremendamente útil cuando hemos terminado y queremos salir. Pero cuidado: se sale sin más. Cuidado, cuidado, cuidado. No pulses ESC sin grabar antes. Que no avisa. Que se cierra.
+La pantalla se divide en tres zonas, de arriba a abajo:
 
-Precisamente para grabar tenemos la tecla S. De hecho, vamos a usarla ya mismo, aunque no hayamos colocado ningún enemigo. Por convención, nosotros usamos .ene como extensión para los archivos del Colocador. Pulsa S y, en el cuadro de diálogo que sale, escribe enems.ene y haz click sobre el botón Ok. Ya hemos grabado nuestras colocaciones. Haz esto muy a menudo. Haznos caso.
+### Indicadores
 
-Vamos a ver esto en acción. Pulsa ESC para salir. Fíjate que ahora hay un archivo enems.ene en /enems. Vuelve a ejecutar colocador.exe. Esta vez, en lugar de rellenar los valores, escribe enems.ene en el cuadro que está etiquetado Abrir un proyecto existente y haz click sobre el botón que pone Cargar. Si todo sale bien, te debería volver a salir la primera pantalla del mapa.
+En la parte superior de la pantalla ves un montón de indicadores que te vendrán muy bien para algunas cosas (por ejemplo para hacer el script del juego). De izquierda a derecha:
 
+1. Coordenadas de la pantalla actual dentro del mapa (XP, YP).
+2. Número actual de la pantalla (que será `YP * MAP_W + XP`).
+3. `2b` o `3b` dependiendo si el archivo que estás editando es de formato antiguo o de formato nuevo, respectivamente. Con la versión 5.0 de **MTE MK1** verás siempre `3b`. Se puede convertir de formato pulsando `L`.
+4. Las coordenadas de la casilla sobre la que pasa el ratón, cuando está en el área de edición.
 
+### Área de edición
 
-Este archivo enems.ene no nos sirve para usarlo directamente en el güego. Para poder tener nuestros enemigos en el güego necesitaremos que el colocador exporte código C. Esto es hace pulsando la tecla E. Cuando lo hagamos, aparecerá un cuadro de diálogo parecido al del guardar. Ahí deberemos escribir enems.h, pulsar OK, y copiar este archivo a /dev. Esto será lo que haremos cuando hayamos terminado de colocar todos los enemigos y queramos integrarlos en el güego.
+Donde ponemos las cosas que hay que poner.
 
-Poniendo enemigos y plataformas
+### Botones
 
-Lo más sencillo es colocar enemigos lineales (horizontales, verticales, o los raros esos diagonales que vimos antes). Lo que se hace es definir una trayectoria, un tipo, y una velocidad. Vamos a hacerlo.
+Abajo del todo verás un montón de botones. El primero pone `Save`, y graba una copia de lo que estás haciendo en el archivo que configuraste como archivo de salida. Púlsalo a menudo. Muy a menudo. También puedes darle a la tecla **S**.
 
-Lo primero que tenemos que hacer es colocar el ratón sobre la casilla de inicio de la trayectoria y hacer click. Esta posición será la inicial, donde aparecerá el enemigo, y además servirá como uno de los límites de su trayectoria (mirad los dibujitos de más arriba, de cuando hablábamos de los tipos de enemigos). Cuando hagamos esto, aparecerá un cuadro de diálogo donde deberemos introducir el tipo del enemigo. Recuerda que en el caso de enemigos lineales será un valor de 1 a 4, 4 para las plataformas en los güegos de vista lateral. Ponemos el numerito y pulsamos OK.
+Los que hayáis sufrido el colocador recordaréis lo divertido que era pulsar **ESC** sin querer y perder todos los cambios. Ahora ya no, te sale un diálogo de confirmación. Igualmente puedes pulsar el botón `Exit`. 
 
-Ahora lo que el programa espera es que le digamos donde acabaría la trayectoria. Nos vamos a la casilla donde debe acabar la trayectoria y hacemos click de nuevo. Veremos como se nos muestra gráficamente la trayectoria y aparece un nuevo cuadro de diálogo en el que nos preguntan por la velocidad.
+El botón **Grid** activa o desactiva la rejilla. No sé para qué lo puse o para qué carajo puede servir. También vale pulsar la tecla **G**.
 
-El valor introducido será el número de píxels que avanzará el enemigo o plataforma por cada cuadro de juego. Estos valores, para que no haya problemas, deberían ser potencias de dos. O sea, 1, 2, 4, 8… En realidad, los valores que valen son 1, 2 o 4. Algo más allá es ya demasiado rápido y daría problemas de todas clases. Valores que no sean potencias de dos también pueden dar problemas. Si quieres puedes probar a poner un 3 o algo a ver qué pasa, pero te digo ya que es probable que termines con el enemigo yéndose a pescar fuera de la pantalla o cosas peores. Una vez que hayamos puesto el numerico, pulsamos OK y ya tenemos nuestro primer enemigo colocado.
+El siguiente botón pone **Reload** y sirve para recargar los recursos (mapa y gráficos) de nuevo. A veces puedes estar poniendo enemigos y ver una cagada en el mapa. Entonces abres mappy, apañas, copias el `mapa.map` de nuevo en `enems`, y pulsar **Reload** para que el Ponedor se cosque de los cambios.
 
+El último botón que pone **H** es por si quieres trabajar con la churrera antigua o con las primeras versiones de MK1_NES (lo que ahora es AGNES). Genera un archivo `enems.h` con los enemigos en un array de código C, **pero esto ya no se usa y no es necesario**. Ahora en `compile.bat` hay una llamada a un conversor que pilla lo que necesita directamente de tu `enems.ene`. Así que olvídate de exportar y hostias como en la Churrera vieja. No he quitado este botón porque ¿y si hay que modificar un juego viejo? Pues eso.
 
+### Grabando y cargando
 
-Para enemigos de otros tipos (5 o 7, por ahora) el tema cambia un poco. Por ejemplo, los enemigos tipo 5 da igual donde los pongas: siempre aparecen desde fuera de la pantalla (mira los murciélagos de Zombie Calavera para saber a qué me refiero). Puedes establecer el inicio y fin de la trayectoria donde te de la gana. La velocidad que pongas también es lo de menos. Con los enemigos de tipo 7 (Mega Meghan) sólo se tendrá en cuenta la posición de inicio. La velocidad y la posición del final serán ignoradas igualmente.
+Aunque no hayas puesto nada todavía, graba tu proyecto pulsando `Save` o **S**. Verás que en el directorio `/enems` aparecerá el archivo `enems.ene` que referenciaste en el diálogo inicial al crear el proyecto. Ahora cierra el Ponedor. Ahora vuelve a ejecutarlo pulsando sobre `ponedor.bat` en `/enems`.
 
-Cuando nos pongamos, en un futuro, a programar en el motor un tipo de enemigo custom para el tipo 6, lo haremos teniendo en cuenta que tenemos las posiciones de inicio y fin y un valor de velocidad para jugar. Por ejemplo, si vamos a hacer una bala de cañón que se dispare, podemos usar la posición de final para definir la dirección hacia la que se disparará. Pero bueno, no adelantemos acontecimientos. Además, Dogmole no utiliza enemigos que no sean lineales, y mucho menos cosas raras como estas.
+Esta vez, en lugar de rellenar los valores, escribe `enems.ene` en el cuadro `Input` situado en el recuadro inferior que está etiquetado `Open existing` y haz click sobre el botón que pone `Load Existing`. Si todo sale bien, te debería volver a salir la primera pantalla del mapa.
+
+![Cargando un proyecto existente](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_ponedor_load_existing.png)
+
+Como mencionamos antes, sólo tenemos que preocuparnos de poner las cosas en el Ponedor y grabar el archivo `enems.ene` a menudo. `compile.bat` se encargará de hacer las conversiones necesarias y de meter los numeritos en el juego.
+
+## Poniendo enemigos y plataformas
+
+Lo primero es aprender a colocar enemigos lineales (horizontales, verticales, o los raros esos diagonales que vimos antes). Lo que se hace es definir una trayectoria, un tipo, y una velocidad. Vamos a hacerlo.
+
+Para empezar, colocamos el ratón sobre la casilla de inicio de la trayectoria y hacer click. Esta posición será la inicial, donde aparecerá el enemigo, y además servirá como uno de los límites de su trayectoria (mirad los dibujitos de más arriba, de cuando hablábamos de los tipos de enemigos). Cuando hagamos esto, aparecerá un cuadro de diálogo donde deberemos introducir el tipo del enemigo. Recuerda que en el caso de enemigos lineales será un valor de 1 a 4, 4 para las plataformas en los güegos de vista lateral. Ponemos el numerito y pulsamos OK.
+
+Ahora lo que el programa espera es que le digamos donde acabaría la trayectoria. Nos vamos a la casilla donde debe acabar la trayectoria y hacemos click de nuevo. Veremos como se nos muestra gráficamente la trayectoria y aparece un nuevo cuadro de diálogo algo más complejo:
+
+![Cargando un proyecto existente](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_ponedor_attr.png)
+
+En **MTE MK1** sólo tendremos que rellenar el recuadro `Attr`. Los otros dos están ahí porque Ponedor pretende ser una herramienta más general y **la usamos con otros motores que sí que necesitan más parámetros**. 
+
+El valor introducido en `Attr` será el número de píxels que avanzará el enemigo o plataforma por cada cuadro de juego. Estos valores, para que no haya problemas, deberían ser potencias de dos. O sea, 1, 2, 4, 8… En realidad, los valores que valen son 1, 2 o 4. Algo más allá es ya demasiado rápido y daría problemas de todas clases. Valores que no sean potencias de dos también pueden dar problemas. Si quieres puedes probar a poner un 3 o algo a ver qué pasa, pero te digo ya que es probable que termines con el enemigo yéndose a pescar fuera de la pantalla o cosas peores. Una vez que hayamos puesto el numerico, pulsamos OK y ya tenemos nuestro primer enemigo colocado.
+
+Para los enemigos de tipo 6 (los que vuelan, que nosotros llamamos **Fantys**) y los de tipo 7 (los que aparecen continuamente en un punto fijo y se tiran para tí a toda leche) sólo importa la casilla de inicio. La otra casilla da igual donde la pongas. Para no guarrear, se suele poner en la casilla de al lado. Para ambos tipos de enemigos puedes dejar vacío el cuadro `Attr`, ya que no se usa tampoco.
 
 Puedes poner un máximo de tres por pantalla (el programa no te dejará meter más). No tiene por que haber tres en cada pantalla, puedes tener pantallas con uno, con dos, o con ninguno.
 

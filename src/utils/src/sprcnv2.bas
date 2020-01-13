@@ -56,6 +56,9 @@ f = FreeFile
 
 Open Command (2) for Output as f
 
+Print #f, "// MTE MK1 (la Churrera) v5.0"
+Print #f, "// Copyleft 2010-2014, 2020 by the Mojon Twins"
+Print #f, ""
 print #f, "// Sprites.h"
 print #f, "// Generado por SprCnv de la Churrera"
 print #f, "// Copyleft 2010, 2013 The Mojon Twins"
