@@ -26,13 +26,10 @@ void enems_load (void) {
 		en_an_frame [gpit] = 0;
 		en_an_count [gpit] = 3;
 		en_an_state [gpit] = 0;
-		#ifdef ENABLE_RANDOM_RESPAWN
-			en_an_fanty_activo [gpit] = 0;
-		#endif
+		enoffsmasi = enoffs + gpit;
 
 		#ifdef RESPAWN_ON_ENTER
 			// Back to life!
-			enoffsmasi = enoffs + gpit:
 			malotes [enoffsmasi].t &= 0xEF;		
 			#ifdef PLAYER_CAN_FIRE
 				#if defined (COMPRESSED_LEVELS) && defined (MODE_128K)
@@ -42,22 +39,23 @@ void enems_load (void) {
 				#endif
 			#endif
 		#endif
-					
+
 		switch (malotes [enoffsmasi].t) {
 			case 1:
 			case 2:
 			case 3:
 			case 4:
-				en_an_base_frame [gpit] = (malotes [enoffs + gpit].t - 1) << 1;
+				en_an_base_frame [gpit] = (malotes [enoffsmasi].t - 1) << 1;
 				break;
 
 			#ifdef ENABLE_FANTIES
 				case 6:
 					// Añade aquí tu código custom. Esto es un ejemplo:
 					en_an_base_frame [gpit] = FANTIES_BASE_CELL << 1;
-					en_an_x [gpit] = malotes [enoffsmasi].x1 << 6;
-					en_an_y [gpit] = malotes [enoffsmasi].y1 << 6;
+					en_an_x [gpit] = malotes [enoffsmasi].x = malotes [enoffsmasi].x1 << 6;
+					en_an_y [gpit] = malotes [enoffsmasi].y = malotes [enoffsmasi].y1 << 6;
 					en_an_vx [gpit] = en_an_vy [gpit] = 0;
+
 					#ifdef PLAYER_CAN_FIRE
 						malotes [enoffsmasi].life = FANTIES_LIFE_GAUGE;	
 					#endif
@@ -90,10 +88,7 @@ void enems_move (void) {
 		gpen_y = malotes [enoffsmasi].y;		
 		
 		gpt = malotes [enoffsmasi].t;
-		#ifdef ENABLE_RANDOM_RESPAWN
-			if (en_an_fanty_activo [gpit]) gpt = 5;
-		#endif
-
+		
 		if (en_an_state [gpit] == GENERAL_DYING) {
 			-- en_an_count [gpit];
 			if (en_an_count [gpit] == 0) {
@@ -163,8 +158,8 @@ void enems_move (void) {
 										en_an_vy [gpit] + addsign (p_y - en_an_y [gpit], FANTIES_A),
 										-FANTIES_MAX_V, FANTIES_MAX_V);
 										
-									en_an_x [gpit] = limit (en_an_x [gpit] + en_an_vx [gpit], 0, 14336);
-									en_an_y [gpit] = limit (en_an_y [gpit] + en_an_vy [gpit], 0, 9216);
+									en_an_x [gpit] = limit (en_an_x [gpit] + en_an_vx [gpit], 0, 224<<6);
+									en_an_y [gpit] = limit (en_an_y [gpit] + en_an_vy [gpit], 0, 144<<6);
 
 					#ifdef FANTIES_TYPE_HOMING									
 								}
@@ -264,7 +259,7 @@ void enems_move (void) {
 			
 			#ifndef PLAYER_MOGGY_STYLE
 				// Platforms
-				if (malotes [enoffsmasi].t == 4) {
+				if (gpt == 4) {
 					if (pregotten && (p_gotten == 0)) {
 
 						// Horizontal moving platforms
@@ -296,9 +291,9 @@ void enems_move (void) {
 					// Step over enemy		
 						#ifdef PLAYER_CAN_KILL_FLAG
 							if (flags [PLAYER_CAN_KILL_FLAG] != 0 && 
-								gpy < gpen_cy - 2 && p_vy >= 0 && malotes [enoffsmasi].t >= PLAYER_MIN_KILLABLE)
+								gpy < gpen_cy - 2 && p_vy >= 0 && gpt >= PLAYER_MIN_KILLABLE)
 						#else
-							if (gpy < gpen_cy - 2 && p_vy >= 0 && malotes [enoffsmasi].t >= PLAYER_MIN_KILLABLE)
+							if (gpy < gpen_cy - 2 && p_vy >= 0 && gpt >= PLAYER_MIN_KILLABLE)
 						#endif				
 						{
 							#ifdef MODE_128K
@@ -350,25 +345,26 @@ void enems_move (void) {
 						#endif					
 						
 						#ifdef PLAYER_BOUNCES
+							#ifdef ENABLE_FANTIES
+								if (gpt == 6) {
+									p_vx = en_an_vx [gpit] + en_an_vx [gpit];
+									p_vy = en_an_vy [gpit] + en_an_vy [gpit];	
+								} else
+							#endif
+							
 							#ifndef PLAYER_MOGGY_STYLE	
-								#ifdef RANDOM_RESPAWN
-									if (!en_an_fanty_activo [gpit]) {
-										p_vx = addsign (malotes [enoffsmasi].mx, PLAYER_MAX_VX);
-										p_vy = addsign (malotes [enoffsmasi].my, PLAYER_MAX_VX);
-									} else {
-										p_vx = en_an_vx [gpit] + en_an_vx [gpit];
-										p_vy = en_an_vy [gpit] + en_an_vy [gpit];	
-									}
-								#else
+								{
 									p_vx = addsign (malotes [enoffsmasi].mx, PLAYER_MAX_VX);
 									p_vy = addsign (malotes [enoffsmasi].my, PLAYER_MAX_VX);
-								#endif
-							#else
-								if (malotes [enoffsmasi].mx) {
-									p_vx = addsign (gpx - gpen_cx, abs (malotes [enoffsmasi].mx) << 8);
 								}
-								if (malotes [enoffsmasi].my) {
-									p_vy = addsign (gpy - gpen_cy, abs (malotes [enoffsmasi].my) << 8);
+							#else
+								{
+									if (malotes [enoffsmasi].mx) {
+										p_vx = addsign (gpx - gpen_cx, abs (malotes [enoffsmasi].mx) << 8);
+									}
+									if (malotes [enoffsmasi].my) {
+										p_vy = addsign (gpy - gpen_cy, abs (malotes [enoffsmasi].my) << 8);
+									}
 								}
 							#endif
 						#endif
@@ -383,7 +379,7 @@ void enems_move (void) {
 			#ifdef PLAYER_CAN_FIRE
 				// Collide with bullets
 				#ifdef FIRE_MIN_KILLABLE
-					if (malotes [enoffsmasi].t >= FIRE_MIN_KILLABLE)
+					if (gpt >= FIRE_MIN_KILLABLE)
 				#endif				
 				{
 					for (gpjt = 0; gpjt < MAX_BULLETS; gpjt ++) {
@@ -391,13 +387,8 @@ void enems_move (void) {
 							blx = bullets_x [gpjt] + 3; 
 							bly = bullets_y [gpjt] + 3;
 							if (blx >= gpen_cx && blx <= gpen_cx + 15 && bly >= gpen_cy && bly <= gpen_cy + 15) {
-								#ifdef RANDOM_RESPAWN		
-									if (en_an_fanty_activo [gpit]) {
-										en_an_vx [gpit] += addsign (bullets_mx [gpjt], 128);
-									}
-								#endif
 								#ifdef ENABLE_FANTIES
-									if (malotes [enoffsmasi].t == 6) {
+									if (gpt == 6) {
 										en_an_vx [gpit] += addsign (bullets_mx [gpjt], 128);
 									}
 								#endif
@@ -407,7 +398,7 @@ void enems_move (void) {
 								en_an_morido [gpit] = 1;
 								bullets_estado [gpjt] = 0;
 								#ifndef PLAYER_MOGGY_STYLE							
-									if (malotes [enoffsmasi].t != 4) malotes [enoffsmasi].life --;
+									if (gpt != 4) malotes [enoffsmasi].life --;
 								#else
 									malotes [enoffsmasi].life --;
 								#endif
@@ -436,18 +427,6 @@ void enems_move (void) {
 						}
 					}
 
-				}
-			#endif
-			
-			#ifdef RANDOM_RESPAWN
-				// Activar fanty
-
-				if (malotes [enoffsmasi].t > 15 && en_an_fanty_activo [gpit] == 0 && (rand () & 31) == 1) {
-					en_an_fanty_activo [gpit] = 1;
-					if (p_y > 5120) en_an_y [gpit] = -1024; else en_an_y [gpit] = 10240;
-					en_an_x [gpit] = (rand () % 240 - 8) << 6;
-					en_an_vx [gpit] = en_an_vy [gpit] = 0;
-					en_an_base_frame [gpit] = 4;
 				}
 			#endif
 		} 
