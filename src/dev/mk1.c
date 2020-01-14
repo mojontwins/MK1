@@ -16,7 +16,7 @@
 		LIB SPCompDListAddr
 #endasm
 
-#include "config.h"
+#include "my/config.h"
 
 #ifdef MODE_128K
 	// Versión para 128K

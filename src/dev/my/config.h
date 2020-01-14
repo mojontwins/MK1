@@ -9,10 +9,10 @@
 
 //#define MODE_128K 						// Experimental!
 
-// In this section we define map dimmensions, initial and authomatic ending conditions, etc.
+// In this section we define map dimensions, initial and authomatic ending conditions, etc.
 
 #define MAP_W						6		//
-#define MAP_H						5		// Map dimmensions in screens
+#define MAP_H						5		// Map dimensions in screens
 #define SCR_INICIO					24		// Initial screen
 #define PLAYER_INI_X				2		//
 #define PLAYER_INI_Y				2		// Initial tile coordinates
@@ -253,7 +253,7 @@
 
 // IV.1. Vertical movement. Only for side-view.
 
-#define PLAYER_MAX_VY_CAYENDO		12 		// Max falling speed 
+#define PLAYER_MAX_VY_CAYENDO		512 		// Max falling speed 
 #define PLAYER_G					32		// Gravity acceleration 
 
 #define PLAYER_VY_INICIAL_SALTO		64 		// Initial junp velocity 
