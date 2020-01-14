@@ -206,8 +206,8 @@ void enems_move (void) {
 							break;
 						case 1:
 							if (!en_an_dead_row [gpit]) {
-								#ifdef TYPE_7_FIXED_SPRITE
-									en_an_base_frame [gpit] = (TYPE_7_FIXED_SPRITE - 1) << 1;
+								#ifdef PURSUERS_BASE_CELL
+									en_an_base_frame [gpit] = PURSUERS_BASE_CELL << 1;
 								#else							
 									en_an_base_frame [gpit] = (rand () & 3) << 1;
 								#endif							

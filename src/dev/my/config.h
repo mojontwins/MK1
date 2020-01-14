@@ -53,8 +53,8 @@
 //#define ONLY_ONE_OBJECT					// If defined, only one object can be carried at a time.
 //#define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
 //#define DEACTIVATE_EVIL_TILE				// If defined, no killing tiles (behaviour 1) are detected.
-//#define FULL_BOUNCE 						// If defined, evil tile bounces equal MAX_VX, otherwise v/2
 #define PLAYER_BOUNCES						// If defined, collisions make player bounce
+//#define FULL_BOUNCE 						// If defined, evil tile bounces equal MAX_VX, otherwise v/2
 //#define SLOW_DRAIN						// Works with bounces. Drain is 4 times slower
 //#define PLAYER_FLICKERS 					// If defined, collisions make player flicker instead.
 //#define MAP_BOTTOM_KILLS					// If defined, exiting the map bottomwise kills.
@@ -62,10 +62,11 @@
 //#define EVERYTHING_IS_A_WALL				// If defined, any tile <> type 0 is a wall, otherwise just 8.
 
 // Extra enemy types
+// -----------------
 
 //#define ENABLE_PURSUERS					// If defined, type 7 enemies are active
 //#define DEATH_COUNT_EXPRESSION	20+(rand()&15)
-//#define TYPE_7_FIXED_SPRITE		4		// If defined, type 7 enemies are always #
+//#define PURSUERS_BASE_CELL		4		// If defined, type 7 enemies are always #
 
 //#define ENABLE_FANTIES					// If defined, Fanties are enabled!
 //#define FANTIES_BASE_CELL 		2		// Base sprite cell (0, 1, 2 or 3)

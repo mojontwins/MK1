@@ -117,132 +117,248 @@ Vayamos por partes, como dijo Victor Frankenstein…
 
 La caja de colisión se refiere al cuadrado que ocupa “realmente” nuestro sprite. Para entendernos, nuestro sprite va a chocar contra el escenario. Dicha colisión se calcula con un cuadrado imaginario que puede tener dos tamaños: 16×16 u 8×8. El motor sencillamente comprueba que ese cuadrado no se meta en un bloque obstáculo.
 
-Para que entiendas la diferencia, fíjate cómo interactúa Lala con el escenario en Lala Prologue (que tiene una caja de colisión de 16×16 que ocupa todo el sprite) y en Lala Lah (en la que usamos una caja de colisión de 8×8, más pequeña que el sprite). La colisión de 8×8 ha sido uno de los añadidos para esta versión especial 3.99b de **MTE MK1**, y, en nuestra opinión, hace que el control sea más natural. De todas formas, hemos dejado que el desarrollador (o sea, tú), elija si prefiere la colisión antigua de 16×16, que puede ser más adecuada para depende de qué situaciones.
+Para que entiendas la diferencia, fíjate cómo interactúa Lala con el escenario en **Lala Prologue** (que tiene una caja de colisión de 16×16 que ocupa todo el sprite) y en **Lala Lah** (en la que usamos una caja de colisión de 8×8, más pequeña que el sprite). 
 
 Si elegimos una colisión de 8×8 con el escenario, tenemos dos opciones: que el recuadro esté centrado en el sprite o que esté en la parte baja:
 
+![Tipos de colisión 8×8](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/07_colision.png)
 
+La primera opción (recuadro centrado) está pensada para güegos con vista genital, como **Balowwwn** o **D'Veel'Ng**. La segunda funciona bien con güegos de vista lateral o güegos con vista genital “con un poco de perspectiva”, como **Mega Meghan**.
 
-La primera opción (recuadro centrado) está pensada para güegos con vista genital, como Balowwwn o D'Veel'Ng. La segunda funciona bien con güegos de vista lateral o güegos con vista genital “con un poco de perspectiva”, como Mega Meghan.
+Las dos primeras directivas se refieren a colisiones **contra el escenario**. Solo una de las dos directivas puede estar activa (porque son excluyentes): si queremos colisión 8×8 centrada activamos `BOUNDING_BOX_8_CENTERED` y desactivamos la otra. Si queremos colisión 8×8 en la parte baja activamos `BOUNDING_BOX_8_BOTTOM` y desactivamos la otra. **Si queremos colisión de 16×16 desactivamos ambas**.
 
-Solo una de las dos directivas puede estar activa (porque son excluyentes): si queremos colisión 8×8 centrada activamos BOUNDING_BOX_8_CENTERED y desactivamos la otra. Si queremos colisión 8×8 en la parte baja activamos BOUNDING_BOX_8_BOTTOM y desactivamos la otra. Si queremos colisión de 16×16 desactivamos ambas.
+La tercera directiva se refiere a las colisiones **contra los enemigos**. Si activamos `SMALL_COLLISION`, los sprites tendrán que tocarnos mucho más para darnos. Con `SMALL_COLLISION` los enemigos son más fáciles de esquivar. Funciona bien en güegos con movimientos rápidos, como **Bootee**. Nosotros la vamos a dejar desactivada para **Dogmole**.
 
-La tercera directiva se refiere a las colisiones contra los enemigos. Si activamos SMALL_COLLISION, los sprites tendrán que tocarnos mucho más para darnos. Con SMALL_COLLISION los enemigos son más fáciles de esquivar. Funciona bien en güegos con movimientos rápidos, como Bootee. Nosotros la vamos a dejar desactivada para Dogmole.
+### Directivas generales
 
-Directivas generales
-
-#define PLAYER_AUTO_CHANGE_SCREEN // Player changes screen automaticly
+```c
+    #define PLAYER_AUTO_CHANGE_SCREEN           // Player changes screen automaticly (no need to press direction)
+```
 
 Si definimos esto, el jugador cambiará de pantalla cuando salga por el borde. Si no se define, habrá que estar pulsando la dirección concreta para que esto ocurra. Normalmente se deja activada, para que si el jugador se mueve sólo por inercia también cambie de pantalla. No se nos ocurre una situación en la que esto no sea deseable, pero de todos modos ahí está la opción de desactivarlo.
 
-//#define PLAYER_PUSH_BOXES // If defined, tile #14 is pushable
-//#define FIRE_TO_PUSH
+```c
+    //#define PLAYER_CHECK_MAP_BOUNDARIES       // If defined, you can't exit the map.
+```
+
+Si se activa, el motor comprobará que no nos salimos del mapa. Si tu mapa está bien delimitado con tiles obstáculos por todos los lados, puedes desactivar esta directiva y ahorrar espacio. Tampoco hace falta activarla si el único sitio no delimitado es la parte superior del mapa, como es nuestro caso en **Dogmole**, por lo que la dejamos deshabilitada.
+
+```c
+    #define DIRECT_TO_PLAY                      // If defined, title screen is also the game frame.
+```
+
+Activamos esto para conseguir lo que dijimos cuando estábamos haciendo las pantallas fijas: que el título del juego sirva también como marco. Si tienes un `title.png` y un `marco.png` separados, deberás desactivarla. En nuestro caso, en el que sólo tenemos un `title.png` que también incluye marco, la dejamos activada.
+
+```c
+    //#define DEACTIVATE_KEYS                   // If defined, keys are not present.
+    //#define DEACTIVATE_OBJECTS                // If defined, objects are not present.
+```
+
+Estas dos directivas sirven para desactivar llaves u objetos. Si tu juego no usa llaves y cerrojos, deberás activar `DEACTIVATE_KEYS`. Si no vas a usar objetos, activamos `DEACTIVATE_OBJECTS`. Así ahorramos toneladas de código.
+
+Seguramente alguno de vosotros estará pensando ¿por qué no activamos `DEACTIVATE_OBJECTS` en **Dogmole**, si hemos dicho que los objetos los vamos a controlar por scripting? ¡Buena pregunta! Es sencillo: lo que vamos a controlar por scripting es el **conteo de objetos** y la **condición final**, pero necesitamos que el motor gestione la **recogida** y **colocación** de los objetos. No nos los podemos fumar.
+
+```c
+    #define ONLY_ONE_OBJECT                     // If defined, only one object can be carried at a time.
+    #define OBJECT_COUNT                1       // Defines which FLAG will be used to store the object count.
+```
+
+Seguimos con dos directivas con una aplicación muy específica: si activamos la primera, `ONLY_ONE_OBJECT`, sólo podremos llevar un objeto *cada vez*. Una vez que cojas un objeto, la recogida de objetos se bloquea y no puedes coger más. Para volver a activar la recogida de objetos hay que *liberar el objeto*, y para eso tendremos que usar scripting o *inyección de código* (que algún día explicaremos en otro tutorial). 
+
+Con esto conseguimos en **Dogmole** el efecto que necesitamos de que haya que ir llevando las cajas una a una: configuramos el motor para que sólo permita que llevemos un objeto (una caja), y luego, cuando hagamos el script, haremos que cuando llevemos la caja al sitio donde hay que irlas depositando (un sitio concreto de la Universidad) *liberemos el objeto* para que se vuelva a activar la recogida de objetos y así podamos ir a por la siguiente caja.
+
+La segunda directiva, `OBJECT_COUNT`, sirve para que en el **marcador de objetos**, en lugar de la cuenta interna de objetos recogidos, **se muestre el valor de uno de los *flags* del sistema de scripting**. Ya lo veremos en el futuro, cuando expliquemos el motor de scripting, pero los scripts tienen hasta 32 variables o *flags* que podemos usar para almacenar valores y realizar comprobaciones. Cada variable tiene un número. Si definimos esta directiva, el motor mostrará el valor del flag indicado en el contador de objetos del marcador, en lugar del contador interno de objetos. Desde el script iremos incrementando dicho valor cada vez que el jugador llegue a la Universidad y deposite un objeto.
+
+En definitiva, sólo necesitaremos definir `OBJECT_COUNT` si somos nosotros los que vamos a llevar la cuenta, a mano, desde el script (o mediante inyección de código), usando uno de sus flags. Si no vamos a usar scripting, o no vamos a necesitar controlar a mano el número de objetos recogidos, tendremos que comentar esta directiva para que no sea tomada en cuenta.
+
+```c
+    //#define DEACTIVATE_EVIL_TILE              // If defined, no killing tiles (behaviour 1) are detected.
+```
+
+Activa esta directiva si quieres desactivar los tiles que te matan (tipo 1). Si no usas tiles de tipo 1 en tu juego, descomenta esta linea y ahorrarás espacio, ya que así la detección de tiles matantes no se incluirá en el código.
+
+```c
+    #define PLAYER_BOUNCES                      // If defined, collisions make player bounce
+    //#define FULL_BOUNCE                       // If defined, evil tile bounces equal MAX_VX, otherwise v/2
+    //#define SLOW_DRAIN                        // Works with bounces. Drain is 4 times slower
+    #define PLAYER_FLICKERS                     // If defined, collisions make player flicker instead.
+```
+
+Estas directivas controlan los rebotes. Si activas `PLAYER_BOUNCES`, el jugador rebotará contra los enemigos al tocarlos. La fuerza de dicho rebote se controla con `FULL_BOUNCE`: si se activa, los rebotes serán mucho más bestias porque se empleará la velocidad con la que el jugador avanzaba originalmente, pero en sentido contrario. Desactivando `FULL_BOUNCE` el rebote es a la mitad de la velocidad (y por tanto menos desagradable).
+
+Si definimos, además, `SLOW_DRAIN`, la velocidad a la que perderemos energía si nos quedamos atrapados en la trayectoria del enemigo (acuérdense de **Lala Prologue**, **Sir Ababol** o la versión original de **Viaje al Centro de la Napia**) será cuatro veces menor. Esto se usa en **Bootee**, donde es fácil quedarse atrapado en la trayectoria de un enemigo y complicado salir de la misma. Esto hace el juego más asequible.
+
+Como podrás imaginar, `FULL_BOUNCE` y `SLOW_DRAIN` dependen de `PLAYER_BOUNCES`. Si `PLAYER_BOUNCES` está desactivada, las otras dos directivas son ignoradas.
+
+Activando `PLAYER_FLICKERS` logramos que el personaje parpadee si colisiona con un enemigo (siendo invulnerable durante un corto período de tiempo). Normalmente elegiremos entre `PLAYER_BOUNCES` y `PLAYER_FLICKERS`, **pero pueden funcionar juntas**. Nosotros, en **Dogmole**, queremos que el protagonista únicamente parpadee al colisionar con un enemigo, por lo que desactivamos `PLAYER_BOUNCES` y activamos `PLAYER_FLICKERS`.
+
+```c
+    //#define MAP_BOTTOM_KILLS                  // If defined, exiting the map bottomwise kills.
+```
+
+Desactiva esta directiva si quieres que, en el caso de que el personaje vaya a salirse del mapa por abajo, el motor le haga rebotar y le reste vida, como ocurre en **Zombie Calavera**. Si tu mapa está cerrado por abajo, desactívala para ganar unos bytes.
+
+```c
+    //#define WALLS_STOP_ENEMIES                // If defined, enemies react to the scenary
+    //#define EVERYTHING_IS_A_WALL              // If defined, any tile <> type 0 is a wall, otherwise just 8.
+```
+
+Si activas `WALLS_STOP_ENEMIES`, los tiles de tipo 8 pararán la trayectoria de los enemigos lineales, haciéndolos cambiar de dirección igual que si llegasen a sus límites de trayectoria. Esto es interesante por ejemplo si quieres hacer trayectorias diagonales interesantes o tienes tiles empujables o escenario destructible.
+
+Si además activas `EVERYTHING_IS_A_WALL`, cualquier tile de comportamiento distinto de 0 (recuerda los tipos de tile que explicamos en el capítulo 2) será considerado un obstáculo.
+
+## Tipos de enemigos extra
+
+Vamos a ver ahora un conjunto de directivas que nos servirán para activar los enemigos de tipos 6 o 7. Recordad lo que mencionamos sobre este tipo de enemigos: el 6 son los Fanties y el 7 son los enemigos que te persiguen de **Mega Meghan** y **Sgt. Helmet: Training Day**.
+
+En **Dogmole** no usamos ningún tipo de enemigo extra. Para tus juegos, puedes experimentar con estos bicharracos. Aquí explicamos cómo se configuran y para qué sirven las cosas
+
+### Los Fanties
+
+Los Fanties van volando por la pantalla en trayectorias suaves y persiguen al jugador. Hay dos tipos de Fanties: los sencillos, que simplemente aparecen donde los has puesto en Ponedor y persiguen al jugador, y los tipo "Homing Fanties", que permanecen en su sitio a menos que te acerques a determinada distancia. Es como si fueran cegatos. Si no te ven, no te persiguen. Si te alejas, dejarán de verte y volverán a su sitio inicial (que nosotros llamamos *su nido*).
+
+Los Fanties se activan con esta directiva (en **Dogmole** la dejamos desactivada):
+
+```c
+    //#define ENABLE_FANTIES                    // If defined, Fanties are enabled!
+```
+
+Y se configuran con estas otras:
+
+```c
+    //#define FANTIES_BASE_CELL         2       // Base sprite cell (0, 1, 2 or 3)
+    //#define FANTIES_SIGHT_DISTANCE    104     // Used in our type 6 enemies.
+    //#define FANTIES_MAX_V             256     // Flying enemies max speed (also for custom type 6 if you want)
+    //#define FANTIES_A                 16      // Flying enemies acceleration.
+    //#define FANTIES_LIFE_GAUGE        10      // Amount of shots needed to kill flying enemies.
+    //#define FANTIES_TYPE_HOMING               // Unset for simple fanties.
+```
+
+1. `FANTIES_BASE_CELL` selecciona con qué gráfico pintaremos a los fanties de entre los 4 disponibles (3 si estás en vista lateral y usas plataformas). El valor debe ser 0, 1, 2 o 3, porque recuerda, los verdaderos desarrolladores empiezan a contar desde 0.
+
+2. `FANTIES_SIGHT_DISTANCE` sólo tiene sentido para los fanties de tipo "Homing". Es la distancia, en píxel, a la que ven. Si no te acercas a menos de esa distancia se quedarán en su *nido* (donde los pones con el Ponedor).
+
+3. `FANTY_MAX_V` define la velocidad máxima. Para hacerte una idea, divide el valor entre 64 y el resultado es el número de píxels que avanzará por cada cuadro (frame) de juego como máximo. Si definimos 256, el enemigo volador podrá acelerar hasta los 4 píxels por frame.
+
+4. `FANTY_A` es el valor de aceleración. Cada cuadro de juego, la velocidad se incrementará en el valor indicado en dirección hacia el jugador, si no está escondido. Cuanto menor sea este valor, más tardará el enemigo en reaccionar a un cambio de dirección del jugador.
+
+5. `FANTIES_LIFE_GAUGE` define cuántos tiros deberá recibir el bicharraco para morirse, si es que hemos activado los tiros (ver más adelante).
+
+6. `FANTIES_TYPE_HOMING` sirve para seleccionar el tipo de Fanties. Si la activas, serán de tipo "Homing". Si la desactivas, serán de los sencillos.
+
+### Los Enemigos Increíblemente Jartibles
+
+La casilla donde los pones en Ponedor será el "punto de aparición", o el "spawning point" para los que les guste el Checoslovaco. En ese punto, cada cierto tiempo, aparecerá un enemigo que perseguirá al jugador. Cuando el enemigo muera (a tiros, normalmente), tras ese cierto tiempo, aparecerá un nuevo enemigo. Y así *ad nauseam*. De ahí el nombre del tipo de enemigos. Los enemigos que te persiguen, por cierto, se detienen con los obstáculos del escenario, lo cual es de agradecer.
+
+Los EIJs se activan con esta directiva (en **Dogmole** la dejamos desactivada):
+
+```c
+    //#define ENABLE_PURSUERS                   // If defined, type 7 enemies are active
+```
+
+Y se configuran con estas otras:
+
+```c
+    //#define DEATH_COUNT_EXPRESSION    20+(rand()&15)
+    //#define PURSUERS_BASE_CELL        3       // If defined, type 7 enemies are always #
+```
+
+1. `DEATH_COUNT_EXPRESSION`. Si tenemos activado el motor de disparos, cuando matemos a un enemigo de tipo 7 tardará un tiempo en volver a salir. Dicho tiempo, expresado en número de cuadros (frames), se calcula usando la expresión definida en esta directiva. La que se ve en el ejemplo es la que se emplea en **Sgt. Helmet: Training Day**: 20 más un número al azar entre 0 y 15 (o sea, entre 20 y 35 frames).
+
+2. `PURSUERS_BASE_CELL` selecciona con qué gráfico pintaremos a los EIJs de entre los 4 disponibles (3 si estás en vista lateral y usas plataformas). El valor debe ser 0, 1, 2 o 3, porque recuerda, bla bli blu.
+
+### Motor de bloques empujables
 
 Estas dos directivas activan y configuran los bloques empujables. Nosotros no vamos a usar bloques empujables en Dogmole, por lo que las desactivamos. Activar la primera (PLAYER_PUSH_BOXES) activa los bloques, de forma que los tiles #14 (con comportamiento tipo 10, recuerda) podrán ser empujados.
 
-La segunda directiva, FIRE_TO_PUSH, es para definir si el jugador debe pulsar fire además de la dirección en la que empuja o no. En Cheril Perils, por ejemplo, no hay que pulsar fire: sólo tocando el bloque mientras avanzamos se desplazará. En D'Veel'Ng, sí que es necesario pulsar fire para empujar un bloque. Si vas a usar bloques empujables, debes decidir la opción que más te gusta (y que mejor se adecue al tipo de gameplay que quieras conseguir).
+El motor de bloques empujables se activa con:
 
-#define DIRECT_TO_PLAY // If defined, title screen = game frame.
+```c
+    //#define PLAYER_PUSH_BOXES                 // If defined, tile #14 is pushable. Must be type 10.
+```
 
-Esta directiva, se activa para conseguir lo que dijimos cuando estábamos haciendo las pantallas fijas: que el título del juego sirva también como marco. Si tienes un title.bin y un marco.bin separados, deberás desactivarla. En nuestro caso, en el que sólo tenemos un title.bin que también incluye marco, la dejamos activada.
+Y se configura con:
 
-//#define DEACTIVATE_KEYS // If defined, keys are not present.
-//#define DEACTIVATE_OBJECTS // If defined, objects are not present.
+```c
+    //#define FIRE_TO_PUSH                      // If defined, you have to press FIRE+direction to push.
+    //#define ENABLE_PUSHED_SCRIPTING           // If defined, nice goodies (below) are activated:
+    //#define MOVED_TILE_FLAG           1       // Current tile "overwritten" with block is stored here.
+    //#define MOVED_X_FLAG              2       // X after pushing is stored here.
+    //#define MOVED_Y_FLAG              3       // Y after pushing is stored here.
+    //#define PUSHING_ACTION                    // If defined, pushing a tile runs PRESS_FIRE script
+```
 
-Estas dos directivas sirven para desactivar llaves u objetos. Si tu juego no usa llaves y cerrojos, deberás activar DEACTIVATE_KEYS. Si no vas a usar objetos, activamos DEACTIVATE_OBJECTS.
+1. `FIRE_TO_PUSH`: Si está activa, el jugador debe pulsar fire además de la dirección en la que empuja o no. En **Cheril of the Bosque**, por ejemplo, no hay que pulsar fire: sólo tocando el bloque mientras avanzamos se desplazará. En **D'Veel'Ng**, sí que es necesario pulsar fire para empujar un bloque. Si vas a usar bloques empujables, debes decidir la opción que más te gusta (y que mejor se adecue al tipo de gameplay que quieras conseguir).
 
-Seguramente alguno de vosotros estará pensando ¿por qué no activamos DEACTIVATE_OBJECTS en Dogmole, si hemos dicho que los objetos los vamos a controlar por scripting? ¡Buena pregunta! Es sencillo: lo que vamos a controlar por scripting es el conteo de objetos y la condición final, pero necesitamos que el motor gestione la recogida y colocación de los objetos.
+2. `ENABLE_PUSHED_SCRIPTING` activa la integración del sistema de scripting con los bloques empujables. Dicha integración se configura con las siguientes directivas:
 
-Joder, qué lío ¿verdad? Paciencia.
+3. `MOVED_TILE_FLAG`, `MOVED_X_FLAG` y `MOVED_Y_FLAG`: Cuando se empuja un bloque empujable, el tile que "pisa" se almacena en el flag que diga `MOVED_TILE_FLAG`, y sus coordenadas en los flags que digan `MOVED_X_FLAG` y `MOVED_Y_FLAG`. Con esto sabemos, desde el scripting, un montón de cosas útiles sólo mirando el valor de esas flags.
 
-#define ONLY_ONE_OBJECT // If defined, only one object can be carried
-#define OBJECT_COUNT 1 // Defines FLAG to be used to store object #
+4. `PUSHING_ACTION`: Si la activamos, las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual serán ejecutadas tras copias los valores a los flags definidos más arriba cuando movamos un bloque empujable. Cuando expliquemos el sistema de scripting esto no te sonará a chino, sólo a croata.
 
-Seguimos con dos directivas con una aplicación muy específica: si activamos la primera, ONLY_ONE_OBJECT, sólo podremos llevar un objeto. Una vez que cojas un objeto, la recogida de objetos se bloquea y no puedes coger más. Para volver a activar la recogida de objetos tendremos que usar scripting. Con esto conseguimos el efecto que necesitamos de que haya que ir llevando las cajas una a una: configuramos el motor para que sólo permita que llevemos un objeto (una caja), y luego, cuando hagamos el script, haremos que cuando llevemos la caja al sitio donde hay que irlas depositando (un sitio concreto de la Universidad) se vuelva a activar la recogida de objetos para que podamos ir a por la siguiente caja.
-La segunda directiva, OBJECT_COUNT, sirve para que en el marcador de objetos, en lugar de la cuenta interna de objetos recogidos, se muestre el valor de uno de los flags del sistema de scripting. Ya lo veremos en el futuro, cuando expliquemos el motor de scripting, pero los scripts tienen hasta 32 variables o “flags” que podemos usar para almacenar valores y realizar comprobaciones. Cada variable tiene un número. Si definimos esta directiva, el motor mostrará el valor del flag indicado en el contador de objetos del marcador. Desde el script iremos incrementando dicho valor cada vez que el jugador llegue a la Universidad y deposite un objeto.
+### Motor de disparos
 
-En definitiva, sólo necesitaremos definir OBJECT_COUNT si somos nosotros los que vamos a llevar la cuenta, a mano, desde el script. Si no vamos a usar scripting, o no vamos a necesitar controlar a mano el número de objetos recogidos, tendremos que comentar esta directiva para que no sea tomada en cuenta.
+El motor de disparos es bastante costoso en cuanto a memoria. Activarlo incluye bastantes trozos de código, ya que hay que comprobar más colisiones y tener en cuenta muchas cosas, además de los sprites extra necesarios. Tiene mogollón de cosas configurables y se puede usar para cosas que en un principio no se parecen a un motor de disparos. Échale imaginación, que de eso se trata.
 
-//#define DEACTIVATE_EVIL_TILE // If defined, no killing tiles are detected.
+El motor de disparos se activa con (desactivada en **Dogmole**):
 
-Descomenta esta directiva si quieres desactivar los tiles que te matan (tipo 1). Si no usas tiles de tipo 1 en tu juego, descomenta esta linea y ahorrarás espacio, ya que así la detección de tiles matantes no se incluirá en el código.
+```c
+    //#define PLAYER_CAN_FIRE                   // If defined, shooting engine is enabled.
+```
 
-//#define PLAYER_BOUNCES // If defined, collisions make player bounce
-//#define FULL_BOUNCE
-//#define SLOW_DRAIN // Works with bounces. Drain is 4 times slower
-#define PLAYER_FLICKERS // If defined, collisions make player flicker
+Y se configura con todas estas, que partimos en bloques:
 
-Estas dos directivas controlan los rebotes. Si activas PLAYER_BOUNCES, el jugador rebotará contra los enemigos al tocarlos. La fuerza de dicho rebote se controla con FULL_BOUNCE: si se activa, los rebotes serán mucho más bestias porque se empleará la velocidad con la que el jugador avanzaba originalmente, pero en sentido contrario. Desactivando FULL_BOUNCE el rebote es a la mitad de la velocidad.
+```c
+    //#define PLAYER_CAN_FIRE_FLAG      1       // If defined, player can only fire when flag # is 1
+    //#define PLAYER_BULLET_SPEED       8       // Pixels/frame. 
+    //#define MAX_BULLETS               3       // Max number of bullets on screen. Be careful!.
+```
 
-Si definimos, además, SLOW_DRAIN, la velocidad a la que perderemos energía si nos quedamos atrapados en la trayectoria del enemigo (acuérdense de Lala Prologue, Sir Ababol o la versión original de Viaje al Centro de la Napia) será cuatro veces menor. Esto se usa en Bootee, donde es fácil quedarse atrapado en la trayectoria de un enemigo y complicado salir de la misma. Esto hace el juego más asequible.
+1. `PLAYER_CAN_FIRE_FLAG` se usa con scripting o inyección de código. Si está activa, el jugador sólo podrá disparar si el valor del flag que indica es 1. Puedes usarlo para que no se pueda matal hasta que se encuentre la pihtola.
 
-Como podrás imaginar, FULL_BOUNCE y SLOW_DRAIN dependen de PLAYER_BOUNCES. Si PLAYER_BOUNCES está desactivada, las otras dos directivas son ignoradas.
+2. `PLAYER_BULLET_SPEED` controla la velocidad de las balas. 8 píxels por cuadro es un buen valor y es el que hemos usado en todos los güegos. Un valor mayor puede hacer que se pierdan colisiones, ya que todo lo que ocurre en pantalla es discreto (no continuo) y si un enemigo se mueve rápidamente en dirección contraria a una bala que se mueve demasiado rápido, es posible que de frame a frame se crucen sin colisionar. Si piensas un poco en ello y te imaginas el juego en cámara lenta como una sucesión de frames lo entenderás.
 
-Activando PLAYER_FLICKERS logramos que el personaje parpadee si colisiona con un enemigo (siendo invulnerable durante un corto período de tiempo). Normalmente elegiremos entre PLAYER_BOUNCES y PLAYER_FLICKERS, pero pueden funcionar juntas. Nosotros, en Dogmole, queremos que el protagonista únicamente parpadee al colisionar con un enemigo, por lo que desactivamos PLAYER_BOUNCES y activamos PLAYER_FLICKERS.
+3. El valor de `MAX_BULLETS` controla el número máximo de balas que podrá haber en pantalla. Ten cuidado con esto, porque valores muy altos podrían comer mucha memoria y además ralentizar bastante el juego. 
 
-//#define MAP_BOTTOM_KILLS // If defined, exiting the map bottom kills.
-Desactiva esta directiva si quieres que, en el caso de que el personaje vaya a salirse del mapa por abajo, el motor le haga rebotar y le reste vida, como ocurre en Zombie Calavera. Si tu mapa está cerrado por abajo, desactívala para ganar unos bytes.
+```c
+    //#define PLAYER_BULLET_Y_OFFSET    6       // vertical offset from the player's top.
+    //#define PLAYER_BULLET_X_OFFSET    0       // vertical offset from the player's left/right.
+```
 
-//#define WALLS_STOP_ENEMIES // If defined… erm…
+Estas dos directivas definen dónde aparecen las balas cuando se disparan. El comportamiento de estos valores cambia según la vista:
 
-Esta directiva está relacionada con los tiles empujables. Si defines bloques empujables, puede interesarte que los enemigos reaccionen ante ellos y alteren sus trayectorias, como ocurre, por ejemplo, en Monono o Cheril of the Bosque (entre muchos otros). Si no usas tiles empujables o te da igual que los enemigos los traspasen, desactívala para ganar un montón de espacio.
+* Si el güego es en **vista lateral**, sólo podemos disparar a la izquierda o a la derecha (y, si lo configuramos, también en diagonal, pero sólo influye si el jugador mira a izquierda o a derecha). En ese caso, `PLAYER_BULLET_Y_OFFSET` define la altura, en píxels, a la que aparecerá la bala contando desde la parte superior del sprite del personaje. Esto sirve para ajustar de forma que salgan de la pistola o de donde queramos (de la pisha por ejemplo). `PLAYER_BULLET_X_OFFSET` se ignora completamente.
 
-Tipos de enemigos extra
+* Si el güego es en **vista genital**, el comportamiento es igual que el descrito si miramos para la izquierda o para la derecha, pero si miramos para arriba o para abajo la bala aparecerá desplazada lateralmente `PLAYER_BULLET_X_OFFSET` píxels desde la izquierda si miramos hacia abajo o desde la derecha si miramos hacia arriba. **Esto significa que nuestro personaje es diestro** a menos que seamos más listos que la quina *y juguemos con valores negativos*. Fijáos en los sprites de **Mega Meghan**.
 
-Vamos a ver ahora un conjunto de directivas que nos servirán para activar los enemigos de tipos 5, 6 o 7. Recordad lo que mencionamos sobre este tipo de enemigos: el 5 son los murciélagos de Zombie Calavera, el 7 son los enemigos que te persiguen de Mega Meghan, y el 6 está reservado para que implementemos un nuevo tipo de enemigos.
+```c
+    //#define ENEMIES_LIFE_GAUGE        4       // Amount of shots needed to kill enemies.
+    //#define RESPAWN_ON_ENTER                  // Enemies respawn when entering screen
+    //#define FIRE_MIN_KILLABLE         3       // If defined, only enemies >= N can be killed.
+    //#define CAN_FIRE_UP                       // If defined, player can fire upwards and diagonal.
+```
 
-En Dogmole no usamos ningún tipo de enemigo extra. Para tus juegos, puedes experimentar con estos bicharracos, o puedes esperarte al final del tutorial cuando expliquemos cómo implementar un tipo de enemigo custom para el tipo 6.
+Estas de aquí sirven para controlar cosas misceláneas balísticas
 
-//#define ENABLE_RANDOM_RESPAWN // If defined, flying enemies
-//#define FANTY_MAX_V 256 // Flying enemies max speed.
-//#define FANTY_A 12 // Flying enemies acceleration.
-//#define FANTIES_LIFE_GAUGE 10 // Amount of shots needed to kill.
+1. `ENEMIES_LIFE_GAUGE` define el número de tiros que deberán llevarse para morirse. 
 
-Activando ENABLE_RANDOM_RESPAWN activamos los enemigos de tipo 5. Estos enemigos aparecen fuera de la pantalla si hay algún enemigo de tipo 5 o algún enemigo muerto, y persiguen al jugador a menos que este esté tocando un tile de tipo 2 (esté escondido). Las siguientes directivas sirven para configurar su comportamiento:
+2. Si activamos `RESPAWN_ON_ENTER`, los enemigos habrán resucitado si salimos de la pantalla y volvemos a entrar. Como en los güegos clásicos, illo.
 
-FANTY_MAX_V define la velocidad máxima. Para hacerte una idea, divide el valor entre 64 y el resultado es el número de píxels que avanzará por cada cuadro (frame) de juego como máximo. Si definimos 256, el enemigo volador podrá acelerar hasta los 4 píxels por frame.
+3. `FIRE_MIN_KILLABLE` sirve para que algunos enemigos no se puedan matal. Sólo morirán los que tengan un tipo mayor o igual al valor de esta directiva.
 
-FANTY_A es el valor de aceleración. Cada cuadro de juego, la velocidad se incrementará en el valor indicado en dirección hacia el jugador, si no está escondido. Cuanto menor sea este valor, más tardará el enemigo en reaccionar a un cambio de dirección del jugador.
-
-FANTIES_LIFE_GAUGE define cuántos tiros deberá recibir el bicharraco para morirse, si es que hemos activado los tiros (ver más adelante).
-
-//#define ENABLE_PURSUERS // If defined, type 7 enemies are active
-//#define DEATH_COUNT_EXPRESSION 8+(rand()&15)
-
-Activando ENABLE_PURSUERS activamos los enemigos de tipo 7. Estos enemigos aparecen donde los hemos colocado (recordemos el capítulo de los enemigos) y persiguen al jugador. Se detienen con los obstáculos del escenario, a diferencia de los enemigos de tipo 5.
-
-Si tenemos activado el motor de disparos, cuando matemos a un enemigo de tipo 7 tardará un tiempo en volver a salir. Dicho tiempo, expresado en número de cuadros (frames), se calcula usando la expresión definida en DEATH_COUNT_EXPRESSION. La que se ve en el ejemplo es la que se emplea en Mega Meghan: 8 más un número al azar entre 0 y 15 (o sea, entre 8 y 23 frames).
-
-Motor de disparos
-
-El motor de disparos es bastante costoso en cuanto a memoria. Activarlo incluye bastantes trozos de código, ya que hay que comprobar más colisiones y tener en cuenta muchas cosas, además de los sprites extra necesarios.
-
-//#define PLAYER_CAN_FIRE // If defined, shooting engine is enabled.
-Si activamos esta directiva, estamos incluyendo el motor de disparos. Las siguientes directivas sirven para configurar su comportamiento.
-
-//#define PLAYER_BULLET_SPEED 8 // Pixels/frame.
-//#define MAX_BULLETS 3 // Max number of bullets on screen.
-
-La directiva PLAYER_BULLET_SPEED controla la velocidad de las balas. 8 píxels por cuadro es un buen valor y es el que hemos usado en todos los güegos. Un valor mayor puede hacer que se pierdan colisiones, ya que todo lo que ocurre en pantalla es discreto (no continuo) y si un enemigo se mueve rápidamente en dirección contraria a una bala que se mueve demasiado rápido, es posible que de frame a frame se crucen sin colisionar. Si piensas un poco en ello y te imaginas el juego en cámara lenta como una sucesión de frames lo verás.
-
-El valor MAX_BULLETS controla el número máximo de balas que podrá haber en pantalla. Ten cuidado con esto, que ya te estoy viendo las intenciones que subirlo: en teoría podríamos tener más de tres balas, pero para ello habría que modificar la parte del motor que reserva la memoria que necesita el sistema de sprites. Cada sprite en movimiento gasta bastante memoria (14 bytes por bloque, y un sprite de 8×8 usa cuatro bloques), por lo que la reserva es la justa. La verdad es que está todo apretado al máximo y no cabe ni el pelo de una gamba, pero puede que para el final del tutorial explique como modificar el número de bloques que se reservan para los sprites de forma que podamos tener más balas.
-¿Para qué dejamos definirlo, entonces? Pues para poder poner menos. Poder disparar sólo una bala puede venir bien para algunos juegos, por ejemplo.
-
-//#define PLAYER_BULLET_Y_OFFSET 6 // vertical offset from the player's top.
-//#define PLAYER_BULLET_X_OFFSET 0 // horz offset from the player's left/right.
-
-Estas dos directivas definen dónde aparecen las balas cuando se disparan. El comportamiento de estos valores es relativamente complejo (bueno, no tanto) y cambia según la vista:
-
-Si el güego es en vista lateral, sólo podemos disparar a la izquierda o a la derecha. En ese caso, PLAYER_BULLET_Y_OFFSET define la altura, en píxels, a la que aparecerá la bala contando desde la parte superior del sprite del personaje. Esto sirve para ajustar de forma que salgan de la pistola o de donde queramos (de la pisha o algo). PLAYER_BULLET_X_OFFSET se ignora completamente.
-
-Si el güego es en vista genital, el comportamiento es igual que el descrito si miramos para la izquierda o para la derecha, pero si miramos para arriba o para abajo la bala aparecerá desplazada lateralmente PLAYER_BULLET_X_OFFSET píxels desde la izquierda si miramos hacia abajo o desde la derecha si miramos hacia arriba. Esto significa que nuestro personaje es diestro. Fijáos en los sprites de Mega Meghan. Para hacer jugadores zurdos hay que cambiar dos lineas del motor. Si estás super interesado y de ello depende tu vida, escríbenos y te lo contamos, amigo Flanders.
-
-//#define ENEMIES_LIFE_GAUGE 4 // Amount of shots needed to kill enemies.
-//#define RESPAWN_ON_ENTER // Enemies respawn when entering screen
-
-Estas de aquí sirven para controlar qué ocurre cuando las balas golpean a los enemigos normales (de tipo 1, 2 o 3). En primer lugar, ENEMIES_LIFE_GAUGE define el número de tiros que deberán llevarse para morirse. Si activamos RESPAWN_ON_ENTER, los enemigos habrán resucitado si salimos de la pantalla y volvemos a entrar. Como en los güegos clásicos, illo.
+4. `CAN_FIRE_UP` deja que el jugador dispare en diagonales y para arriba en juegos de vista lateral, como en **Goku Mal**.
 
 Por cierto, los enemigos matados se van contando y dicho valor puede controlarse desde el script.
+
+Las balas, además, pueden tener un alcance limitado, lo que da mucho juego para hacer *cosas que no son balas con balas*. Este comportamiento se puede configurar con las siguientes directivas:
+
+```c
+    //#define LIMITED_BULLETS                   // If defined, bullets die after N frames
+    //#define LB_FRAMES                 4       // If defined, defines the # of frames bullets live (fixed)
+    //#define LB_FRAMES_FLAG            2       // If defined, defines which flag determines the # of frames
+```
+
+Si activamos `LIMITED_BULLETS`, las balas durarán solo cierto número de frames. Este número de frames será el valor del flag `LB_FRAMES_FLAG` si se activa esta directiva, o el valor de `LB_FRAMES` directamente si queremos que sea fijo.
 
 Scripting
 
