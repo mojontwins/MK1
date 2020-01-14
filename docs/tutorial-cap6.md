@@ -173,42 +173,67 @@ Para empezar, colocamos el ratón sobre la casilla de inicio de la trayectoria y
 
 Ahora lo que el programa espera es que le digamos donde acabaría la trayectoria. Nos vamos a la casilla donde debe acabar la trayectoria y hacemos click de nuevo. Veremos como se nos muestra gráficamente la trayectoria y aparece un nuevo cuadro de diálogo algo más complejo:
 
-![Cargando un proyecto existente](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_ponedor_attr.png)
+![El atributo sirve para la velocidad de los enemigos lineales](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_ponedor_attr.png)
 
 En **MTE MK1** sólo tendremos que rellenar el recuadro `Attr`. Los otros dos están ahí porque Ponedor pretende ser una herramienta más general y **la usamos con otros motores que sí que necesitan más parámetros**. 
 
 El valor introducido en `Attr` será el número de píxels que avanzará el enemigo o plataforma por cada cuadro de juego. Estos valores, para que no haya problemas, deberían ser potencias de dos. O sea, 1, 2, 4, 8… En realidad, los valores que valen son 1, 2 o 4. Algo más allá es ya demasiado rápido y daría problemas de todas clases. Valores que no sean potencias de dos también pueden dar problemas. Si quieres puedes probar a poner un 3 o algo a ver qué pasa, pero te digo ya que es probable que termines con el enemigo yéndose a pescar fuera de la pantalla o cosas peores. Una vez que hayamos puesto el numerico, pulsamos OK y ya tenemos nuestro primer enemigo colocado.
 
-Para los enemigos de tipo 6 (los que vuelan, que nosotros llamamos **Fantys**) y los de tipo 7 (los que aparecen continuamente en un punto fijo y se tiran para tí a toda leche) sólo importa la casilla de inicio. La otra casilla da igual donde la pongas. Para no guarrear, se suele poner en la casilla de al lado. Para ambos tipos de enemigos puedes dejar vacío el cuadro `Attr`, ya que no se usa tampoco.
+Para los enemigos de tipo 6 (los que vuelan, que nosotros llamamos **Fantys**) y los de tipo 7 (los que aparecen continuamente en un punto fijo y se tiran para tí a toda leche, o **EIJ**) sólo importa la casilla de inicio. La otra casilla da igual donde la pongas. Para no guarrear, se suele poner en la casilla de al lado. Para ambos tipos de enemigos puedes dejar vacío el cuadro `Attr`, ya que no se usa tampoco.
 
 Puedes poner un máximo de tres por pantalla (el programa no te dejará meter más). No tiene por que haber tres en cada pantalla, puedes tener pantallas con uno, con dos, o con ninguno.
 
 Para eliminar o editar los valores de un enemigo que ya hayamos colocado, basta con hacer click sobre la casilla de inicio de la trayectoria (donde aparece el numerito que indica el tipo). Entonces nos aparecerá un cuadro de diálogo donde podremos cambiar su tipo o la velocidad o eliminarlo completamente.
 
+![Editar un enemigo](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_ponedor_edit.png)
+
 Y así, poco a poco, iremos colocando nuestros enemigos y plataformas en el mapa, con un máximo de 3 por pantalla, cuidándonos de no meter un valor fuera de rango como tipo de enemigo, y no olvidándonos de que la velocidad debe ser 1, 2 o 4.
 
-Colocando hotspots
+## Colocando hotspots
 
-Como dijimos antes, un hotspot es la casilla donde aparecerá una llave o un objeto durante el güego, y donde puede que aparezca una recarga si volvemos a la pantalla después de haber cogido dicha llave o dicho objeto.
+Como dijimos antes, un hotspot es la casilla donde aparecerá una llave, un objeto o una recarga de vida, munición o tiempo.
 
-Se recordáis, mencionamos que cada hotspot tiene un tipo. Para **MTE MK1**, este tipo puede ser 0 (desactivado), 1 (contiene un objeto) o 2 (contiene una llave). Si luego te pones guay puedes expandir el engine para que haya más, pero tal y como está **MTE MK1** admite estos tres tipos.
+Se recordáis, mencionamos que cada hotspot tiene un tipo. Para **MTE MK1**, este tipo puede ser 0 (desactivado) o uno de esta tabla que pusimos antes y que ponemos de nuevo porque github es gratis:
 
-Recordemos que cada pantalla admite un único hotspot. Eso significa que el número total de llaves y objetos necesarios para terminar el güego no puede exceder el número de pantallas. Por ejemplo, en Lala Prologue tenemos 30 pantallas. Para terminar el güego con éxito hay que recoger 25 objetos, y además hay cuatro cerrojos que abrir, por lo que necesitamos 4 llaves. Esto significa que en 25 de las 30 pantallas habrá un objeto, y en 4 habrá una llave. Perfecto: necesitamos 29 pantallas de las 30. Es importante planear esto de antemano. Si te emocionas colocando un montón de cerrojos puede que luego no te quepan todas las llaves y todos los objetos que hay que recoger.
+|#|Significado
+|---|---
+|1|Objeto o item coleccionable
+|2|Llave
+|3|Recarga de vida
+|4|Recarga de munición
+|5|Recarga de tiempo 
+
+Recordemos que **cada pantalla admite un único hotspot**. Eso significa que el número total de llaves y objetos necesarios para terminar el güego no puede exceder el número de pantallas. Por ejemplo, en Lala Prologue tenemos 30 pantallas. Para terminar el güego con éxito hay que recoger 25 objetos, y además hay cuatro cerrojos que abrir, por lo que necesitamos 4 llaves. Esto significa que en 25 de las 30 pantallas habrá un objeto, y en 4 habrá una llave. Perfecto: necesitamos 29 pantallas de las 30. Es importante planear esto de antemano. Si te emocionas colocando un montón de cerrojos puede que luego no te quepan todas las llaves y todos los objetos que hay que recoger.
 
 También deberías asegurarte de que pones suficientes llaves para abrir todos los cerrojos y que siempre hay una forma de terminarse el juego sin quedarnos encerrados. Ten cuidado con esto, es posible construir combinaciones de llaves y cerrojos incorrectas si haces bifurcaciones y puede que el jugador gaste las llaves en una ruta que no tenías planeada y luego no pueda seguir avanzando.
 
-Para colocar el hotspot de la pantalla actual, simplemente hacemos click con el botón derecho en la casilla donde queremos que aparezca la llave o el objeto, con lo que haremos aparecer un pequeño cuadro de diálogo donde deberemos introducir el tipo. En esta captura estoy colocando una de las llaves de Lala Prologue.
+Para colocar el hotspot de la pantalla actual, simplemente **hacemos click con el botón derecho en la casilla donde queremos que aparezca** la llave, el objeto o la recarga, con lo que haremos aparecer un pequeño cuadro de diálogo donde deberemos introducir el tipo:
 
+![Colocando un hotspot](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_ponedor_hotspot.png)
 
+Huelga decir que no todas las pantallas tienen por qué tener un hotspot. Para editar o borrar un hotspot, simplemente haz click *con el botón derecho* sobre él para mostrar el diálogo de edición desde el que también te lo puedes cargar.
 
-Con mucha paciencia iremos pantalla por pantalla colocando el hotspot, indicando el valor 1 en los sitios donde deba salir un objeto (las cajas en Dogmole) y el valor 2 en los sitios donde debería salir una llave.
+## Conversión e importación
 
-Generando el código
+Esto antes era una tarea manual. Ahora es algo de lo que se encarga automaticamente `compile.bat`. En concreto, lo hace gracias a la utilidad `ene2h`, que lee nuestro archivo `.ene` y, mediante un mágico y misterioso proceso, obtiene el código que necesita para enchufarle al motor. Como ya es costumbre, veamos como funciona, sólo por el placer de adquirir conocimiento. Ejecutándolo en la ventana de linea de comandos, como siempre, nos chiva los parámetros:
 
-Una vez que hayamos terminado de colocarlo todo, como dijimos antes, tendremos que generar el código que necesita **MTE MK1**. ¿recordáis la super tabla de valores que os mencionamos al principio del capítulo? Pues eso. Cuando hayas terminado, pues, pulsa E y graba el código como enems.h. Copia este archivo en /dev. Si te pica la curiosidad, puedes abrirlo en el editor de textos y ver la cantidad de números que te has ahorrado escribir.
+```
+    $ ..\utils\ene2h.exe
+    $ ene2h.exe enems.ene enems.h [2bytes]
 
-¡Y hemos terminado!
+    The 2bytes parameter is for really old .ene files which
+    stored the hotspots 2 bytes each instead of 3 bytes.
+    As a rule of thumb:
+    .ene file created with ponedor.exe -> 3 bytes.
+    .ene file created with colocador.exe for MK1 -> 2 bytes.
+```
 
-Además, con más emoción: en el próximo número vamos a compilar por primera vez nuestro güego, aunque sea sin scripting, para ver cómo va quedando.
+Para **MTE MK1** sólo utilizaremos el parámetro de entrada, que deberá apuntar a nuestro archivo `.ene`, conteniendo la ruta si es necesario, nuestro archivo de salida, que para **MTE MK1** **debe** ser `enems.h`, y listo. De hecho, si editas una vez más `compile.bat` encontrarás la linea de conversión tal que así:
 
-The Mojon Twins
+```
+    ..\utils\ene2h.exe ..\enems\enems.ene enems.h
+```
+
+## ¡Y hemos terminado!
+
+Además, con más emoción: en el próximo número vamos a configurar y compilar por primera vez nuestro güego, aunque sea sin scripting, para ver cómo va quedando.
