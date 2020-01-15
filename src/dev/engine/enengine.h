@@ -19,17 +19,9 @@
 #endif
 
 void enems_draw_current (void) {
-	#if defined (RANDOM_RESPAWN) || defined (ENABLE_FANTIES)
-		if (malotes [enoffsmasi].t == 6) {
-			_en_x = en_an_x [enit] >> 6;
-			_en_y = en_an_y [enit] >> 6;
-		} else
-	#endif
-	{
-		_en_x = malotes [enoffsmasi].x;
-		_en_y = malotes [enoffsmasi].y;
-	}
-
+	_en_x = malotes [enoffsmasi].x;
+	_en_y = malotes [enoffsmasi].y;
+	
 	#asm
 		; enter: IX = sprite structure address 
 		;        IY = clipping rectangle, set it to "ClipStruct" for full screen 
@@ -126,8 +118,8 @@ void enems_load (void) {
 	
 	for (enit = 0; enit < 3; ++ enit) {
 		en_an_frame [enit] = 0;
-		en_an_count [enit] = 3;
 		en_an_state [enit] = 0;
+		en_an_count [enit] = 3;
 		enoffsmasi = enoffs + enit;
 
 		#ifdef RESPAWN_ON_ENTER
@@ -152,10 +144,9 @@ void enems_load (void) {
 
 			#ifdef ENABLE_FANTIES
 				case 6:
-					// Añade aquí tu código custom. Esto es un ejemplo:
 					en_an_base_frame [enit] = FANTIES_BASE_CELL << 1;
-					en_an_x [enit] = malotes [enoffsmasi].x = malotes [enoffsmasi].x1 << 6;
-					en_an_y [enit] = malotes [enoffsmasi].y = malotes [enoffsmasi].y1 << 6;
+					en_an_x [enit] = malotes [enoffsmasi].x1 << 6;
+					en_an_y [enit] = malotes [enoffsmasi].y1 << 6;
 					en_an_vx [enit] = en_an_vy [enit] = 0;
 
 					#ifdef PLAYER_CAN_FIRE

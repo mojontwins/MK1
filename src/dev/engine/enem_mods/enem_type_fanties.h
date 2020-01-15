@@ -5,12 +5,41 @@
 
 	active = 1;
 
-	// Rewrite in assembly:
-	_en_an_x = _en_an_x [enit];
-	_en_an_y = _en_an_y [enit];
-	_en_an_vx = _en_an_vx [enit];
-	_en_an_vy = _en_an_vy [enit];
-	//
+	// Copy from arrays as fast as possible:
+	#asm
+			ld  a, (_enit)
+			sla a
+			ld  c, a
+			ld  b, 0
+
+			ld  hl, _en_an_x
+			add hl, bc
+			ld  e, (hl)
+			inc hl
+			ld  d, (hl)
+			ld  (__en_an_x), de
+
+			ld  hl, _en_an_y
+			add hl, bc
+			ld  e, (hl)
+			inc hl
+			ld  d, (hl)
+			ld  (__en_an_y), de
+
+			ld  hl, _en_an_vx
+			add hl, bc
+			ld  e, (hl)
+			inc hl
+			ld  d, (hl)
+			ld  (__en_an_vx), de
+
+			ld  hl, _en_an_vy
+			add hl, bc
+			ld  e, (hl)
+			inc hl
+			ld  d, (hl)
+			ld  (__en_an_vy), de
+	#endasm
 
 	cx2 = _en_x = _en_an_x >> 6;
 	cy2 = _en_y = _en_an_y >> 6;
@@ -42,8 +71,8 @@
 				}
 				break;
 			case TYPE_6_RETREATING:
-				_en_an_x += addsign (_en_x - _en_x, 64);
-				_en_an_y += addsign (_en_y - _en_y, 64);
+				_en_an_x += addsign (_en_x1 - _en_x, 64);
+				_en_an_y += addsign (_en_y1 - _en_y, 64);
 				
 				if (rdd <= FANTIES_SIGHT_DISTANCE)
 					en_an_state [enit] = TYPE_6_PURSUING;
@@ -62,9 +91,38 @@
 			en_an_state [enit] = TYPE_6_IDLE;
 	#endif
 
-	// Rewrite in assembly:
-	_en_an_x [enit] = _en_an_x;
-	_en_an_y [enit] = _en_an_y;
-	_en_an_vx [enit] = _en_an_vx;
-	_en_an_vy [enit] = _en_an_vy;
-	//
+	// Update arrays as fast as possible:
+	#asm
+			ld  a, (_enit)
+			sla a
+			ld  c, a
+			ld  b, 0
+
+			ld  hl, _en_an_x
+			add hl, bc
+			ld  de, (__en_an_x)
+			ld  (hl), e 
+			inc hl
+			ld  (hl), d
+
+			ld  hl, _en_an_y
+			add hl, bc
+			ld  de, (__en_an_y)
+			ld  (hl), e 
+			inc hl
+			ld  (hl), d
+
+			ld  hl, _en_an_vx
+			add hl, bc
+			ld  de, (__en_an_vx)
+			ld  (hl), e 
+			inc hl
+			ld  (hl), d
+
+			ld  hl, _en_an_vy
+			add hl, bc
+			ld  de, (__en_an_vy)
+			ld  (hl), e 
+			inc hl
+			ld  (hl), d
+	#endasm

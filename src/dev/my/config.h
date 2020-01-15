@@ -68,13 +68,13 @@
 //#define DEATH_COUNT_EXPRESSION	20+(rand()&15)
 //#define PURSUERS_BASE_CELL		3		// If defined, type 7 enemies are always #
 
-//#define ENABLE_FANTIES					// If defined, Fanties are enabled!
-//#define FANTIES_BASE_CELL 		2		// Base sprite cell (0, 1, 2 or 3)
-//#define FANTIES_SIGHT_DISTANCE	104 	// Used in our type 6 enemies.
-//#define FANTIES_MAX_V 			256 	// Flying enemies max speed (also for custom type 6 if you want)
-//#define FANTIES_A 				16		// Flying enemies acceleration.
-//#define FANTIES_LIFE_GAUGE		10		// Amount of shots needed to kill flying enemies.
-//#define FANTIES_TYPE_HOMING				// Unset for simple fanties.
+#define ENABLE_FANTIES					// If defined, Fanties are enabled!
+#define FANTIES_BASE_CELL 		2		// Base sprite cell (0, 1, 2 or 3)
+#define FANTIES_SIGHT_DISTANCE	64 	// Used in our type 6 enemies.
+#define FANTIES_MAX_V 			256 	// Flying enemies max speed (also for custom type 6 if you want)
+#define FANTIES_A 				16		// Flying enemies acceleration.
+#define FANTIES_LIFE_GAUGE		10		// Amount of shots needed to kill flying enemies.
+#define FANTIES_TYPE_HOMING				// Unset for simple fanties.
 
 // Pushable tile
 // -------------
