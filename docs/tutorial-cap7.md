@@ -793,11 +793,13 @@ Para poner los valores, simplemente abrimos el tileset y nos fijamos, están en 
 
 ![Tileset de Dogmole](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_tileset_16.png)
 
-unsigned char behs [] = {
-    0, 8, 8, 8, 8, 8, 0, 8, 4, 0, 8, 1, 0, 0, 0,10,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
-};
+```c
+    unsigned char behs [] = {
+        0, 8, 8, 8, 8, 8, 0, 8, 4, 0, 8, 1, 0, 0, 0,10,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+        0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+    };
+```
 
 Como vemos, tenemos el primer tile vacío (tipo 0), luego tenemos cinco tiles de roca que son obstáculos (tipo 8), otro tile de fondo (la columnita, tipo 0), el tile de ladrillos (tipo 8), los dos tiles que forman un arco (tipo 4, plataforma, y tipo 0, traspasable), las tejas (tipo 8), unos pinchos que matan (tipo 1), tres tiles de fondo (tipo 0), y el tile cerrojo (tipo 10, interactuable).
 
