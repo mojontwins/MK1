@@ -5,7 +5,7 @@
 // Copyleft 2010, 2017 by The Mojon Twins
 
 typedef struct {
-	int x, y;
+	unsigned char x, y;
 	unsigned char x1, y1, x2, y2;
 	char mx, my;
 	char t;

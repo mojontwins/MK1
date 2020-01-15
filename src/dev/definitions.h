@@ -93,6 +93,8 @@ signed int ptgmx, ptgmy;
 
 const unsigned char *spacer = "            ";
 
+unsigned char enit;
+
 unsigned char en_an_base_frame [3];
 unsigned char en_an_frame [3];
 unsigned char en_an_count [3];
@@ -115,6 +117,13 @@ unsigned char en_an_state [3];
 	unsigned char en_an_dead_row [3];
 	unsigned char en_an_rawv [3];
 #endif
+
+unsigned char _en_x, _en_y;
+unsigned char _en_x1, _en_y1, _en_x2, _en_y2;
+signed char _en_mx, _en_my;
+signed char _en_t;
+signed char _en_life;
+int _en_an_x, _en_an_y, _en_an_vx, _en_an_vy;
 
 #define TYPE_6_IDLE 		0
 #define TYPE_6_PURSUING		1

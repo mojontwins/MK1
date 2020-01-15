@@ -66,7 +66,7 @@
 
 //#define ENABLE_PURSUERS					// If defined, type 7 enemies are active
 //#define DEATH_COUNT_EXPRESSION	20+(rand()&15)
-//#define PURSUERS_BASE_CELL		4		// If defined, type 7 enemies are always #
+//#define PURSUERS_BASE_CELL		3		// If defined, type 7 enemies are always #
 
 //#define ENABLE_FANTIES					// If defined, Fanties are enabled!
 //#define FANTIES_BASE_CELL 		2		// Base sprite cell (0, 1, 2 or 3)
@@ -243,7 +243,7 @@
 //#define NO_MASKS							// Sprites are rendered using OR instead of masks.
 //#define MASKED_BULLETS					// If needed
 //#define ENABLE_TILANIMS			32		// If defined, animated tiles are enabled.
-											// the value especifies firt animated tile pair.
+											// the value especifies first animated tile pair.
 //#define PAUSE_ABORT						// Add h=PAUSE, y=ABORT
 //#define GET_X_MORE						// Shows "get X more" when getting an object
 

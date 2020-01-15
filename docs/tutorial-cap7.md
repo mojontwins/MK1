@@ -842,7 +842,7 @@ Como no nos gustan las cajas negras vamos a echar un vistazo a `compile.bat` par
     cd ..\dev
 
     echo Convirtiendo mapa
-    ..\utils\mapcnv.exe ..\map\mapa.map 6 5 15 10 15 packed > nul
+    ..\utils\mapcnv.exe ..\map\mapa.map 8 3 15 10 15 packed > nul
     cd ..\dev
 
     echo Convirtiendo enemigos/hotspots

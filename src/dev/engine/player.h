@@ -655,8 +655,9 @@ unsigned char player_move (void) {
 				if (p_estado == EST_NORMAL) {
 					p_estado = EST_PARP;
 					p_ct_estado = 50;
+			#else
+				{
 			#endif		
-			{
 				#ifdef MODE_128K
 					p_killme = 8;
 				#else		

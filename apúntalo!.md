@@ -6,3 +6,4 @@
 [ ] De-struct enemigos
 [ ] Intentar automatizar la reserva de bloques!! Aquí hay menos varianza que en MK2, así que debéría ser factible.
 [ ] Revisa la detección de tilanims
+[ ] Meter DECORATIONS en el scripting

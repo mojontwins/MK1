@@ -1,0 +1,14 @@
+# Título tonto
+# Copyleft 201X tu grupo roneón soft.
+# Churrera 3.1
+
+# flags:
+# 1	- 
+
+ENTERING GAME
+	IF TRUE
+	THEN
+		SET FLAG 1 = 0
+	END
+END
+

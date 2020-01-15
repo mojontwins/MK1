@@ -50,7 +50,7 @@ Print #fOut, "// Copyleft 2010, 2017 by The Mojon Twins"
 Print #fOut, ""
 
 Print #fOut, "typedef struct {"
-Print #fOut, "	int x, y;"
+Print #fOut, "	unsigned char x, y;"
 Print #fOut, "	unsigned char x1, y1, x2, y2;"
 Print #fOut, "	char mx, my;"
 Print #fOut, "	char t;"

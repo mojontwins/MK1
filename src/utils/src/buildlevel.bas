@@ -1,7 +1,16 @@
+' Buildlevel v0.4 20191212 [MK2 1.0+]
+' Copyleft 2015 by The Mojon Twins
+
+' Compile with fbc buildlevel.bas cmdlineparser.bas
+
 #include "file.bi"
 #include "fbpng.bi"
 #include "fbgfx.bi"
 #include once "crt.bi"
+
+' Needs cmdlineparser.bas
+
+#include "cmdlineparser.bi"
 
 #define RGBA_R( c ) ( CUInt( c ) Shr 16 And 255 )
 #define RGBA_G( c ) ( CUInt( c ) Shr  8 And 255 )
@@ -9,24 +18,48 @@
 #define RGBA_A( c ) ( CUInt( c ) Shr 24         )
 
 Sub usage
-	Puts ("buildlevel v 0.1")
-	Puts ("usage:")
-	Puts ("")
-	Puts ("$ buildlevel mapa.map map_w map_h lock font.png work.png spriteset.png extrasprites.bin enems.ene scr_ini x_ini y_ini max_objs enems_life behs.txt level.bin")
-	Puts ("")
-	Puts ("where:")
-	Puts ("   * mapa.map is your map from mappy .map")
-	Puts ("   * map_w, map_h are map dimmensions in screens")
-	Puts ("   * lock is 15 to autodetect lock, 99 otherwise")
-	Puts ("   * font.png is a 256x16 file with 64 chars ascii 32-95")
-	Puts ("   * work.png is a 256x48 file with your 16x16 tiles")
-	Puts ("   * spriteset.png is a 256x32 file with your spriteset")
-	Puts ("   * extrasprites.bin as provided.")
-	Puts ("   * enems.ene enems/hotspots directly from colocador.exe")
-	Puts ("   * scr_ini, scr_x, scr_y, max_objs, enems_life general level data header")
-	Puts ("   * behs.txt is a tile behaviours file")
-	Puts ("   * level.bin is the output filename.")
-	Puts ("")
+	Print "usage"
+	Print ""
+	Print "$ buildlevel.exe output.bin key1=value1 key2=value2 ... "
+	Print ""
+	Print "output.bin     Output file name."
+	Print ""
+	Print "Parameters to buildlevel.exe are specified as key=value, where keys are as "
+	Print "follows:"
+	Print ""
+	Print "MAP DATA"
+	Print ""
+	Print "mapfile        EspecIfies the .map file. packed/unpacked autodetected."
+	Print "map_w          Map width in screens."
+	Print "map_h          Map height in screens."
+	Print "decorations    Output filename for decorations. This makes your map packed."
+	Print "lock           Tile # for locks. (optional)"
+	Print "attrsfile      map_w*map_h comma separated attrs. for screens (optional)"
+	Print ""
+	Print "TILESET/CHARSET DATA"
+	Print ""
+	Print "fontfile       font.png (256x16) containing 64 8x8 chars, ASCII 32-95."
+	Print "tilesfile      work.png (256x48) containing 48 16x16 tiles."
+	Print "behsfile       behs.txt containing 48 comma-separated values."
+	Print ""
+	Print "SPRITESET"
+	Print ""
+	Print "spritesfile    sprites.png (256x?) containing N 16x16 sprites + masks."
+	Print "nsprites       # of sprites in sprites.png. If omitted, defaults to 16."
+	Print ""
+	Print "ENEMIES"
+	Print ""
+	Print "enemsfile      enems.ene file"
+	Print "nohotspots     (without value) If MK2 is configured without hotspots."	
+	Print ""
+	Print "HEADER STUFF"
+	Print ""
+	Print "scr_ini        Initial screen #"
+	Print "ini_x          Initial x position (tiles)"
+	Print "ini_y          Initial y position (tiles)"
+	Print "max_objs       Max objects (can be omitted If not appliable)"
+	Print "enems_life     Enems life"
+	Print ""
 End Sub
 
 Function speccyColour (colour As Unsigned Long) As uByte
@@ -71,12 +104,12 @@ Sub getUDGIntoCharset (img As Any Ptr, x0 As integer, y0 As Integer, tileset () 
 	If c1 And 128 Then b = 64: c1 = c1 And 127
 	If c2 And 128 Then b = 64: c2 = c2 And 127
 	If c1 = c2 Then 
-		if c2 < 4 then
+		If c2 < 4 Then
 			c1 = 7
-		else 
+		Else 
 			c1 = 0
-		end if
-	end if
+		End If
+	End If
 	' Darker colour = PAPER (c2)
 	If c2 > c1 Then Swap c1, c2
 	' Build attribute
@@ -108,22 +141,7 @@ Function getBitPattern (img As Any Ptr, x0 As Integer, y0 As Integer) as uByte
 	getBitPattern = res
 End Function
 
-Const C_MAPNAME = 1
-Const C_MAPW = 2
-Const C_MAPH = 3
-Const C_LOCK = 4
-Const C_FONTNAME = 5
-Const C_WORKNAME = 6
-Const C_SPRITESETNAME = 7
-Const C_EXTRASPRITESNAME = 8
-Const C_ENEMSNAME = 9
-Const C_SCRINI = 10
-Const C_SCRX = 11
-Const C_SCRY = 12
-Const C_MAXOBJS = 13
-Const C_ENEMSLIFE = 14
-Const C_BEHSNAME = 15
-Const C_OUTPUTFILE = 16
+'' My types
 
 Type EnemyIn
 	t As uByte
@@ -143,6 +161,13 @@ Type LockType
 	st as uByte
 End Type
 
+'' My vars
+
+Dim As String neededParamsArray (1 To 12) => { _
+	"mapfile", "map_w", "map_h", "fontfile", "tilesfile", "behsfile", _
+	"spritesfile", "enemsfile", "scr_ini", "ini_x", "ini_y", "enems_life" _
+}
+Dim As Integer errors
 Dim As Byte flag, is_packed
 Dim As integer i, j, x, y, xx, yy, f, fout, idx, byteswritten, totalsize
 Dim As uByte d, life, numlocks
@@ -150,48 +175,111 @@ Dim As Byte sd
 Dim As integer map_w, map_h, tile_lock, max
 ReDim As uByte map_data (0, 0)
 Dim As uByte whole_screen (149)
-Dim As String levelBin
+Dim As String levelBin, amalgamer(255), wholeme
 Dim As Any Ptr img
 Dim As uByte tileset (2303)
 Dim As String dummy
 Dim As EnemyIn e
 Dim As LockType l (32)
 Dim as uByte x_pant, y_pant
+Dim As Integer somethingOn (255)	
+Dim As Integer doForce, fExtra, forceDone, n_pant,  doYawn, decoCtr
+Dim As Integer nSprites
 
-'' Command line syntax check
-'' Not very comprehensive, y'know...
 
-flag = 0
-For i = 1 To 15
-	If Len (Command (i)) = 0 Then flag = -1: Exit For
+'' DO 
+
+Print "buildlevel v0.4 20191212"
+Print "Builds a level bundle for MK2 1.0+"
+Print ""
+
+' Get command line parameters parsed.
+sclpParseAttrs
+
+' Check If all we need is in.
+If Len (Command (1)) = 0 Then 
+	usage
+	End
+End If
+
+errors = 0
+
+' This is lame, but better than nothing:
+If Instr (Command (1), "=") Then 
+	Print "1st Parameter must be output file name!"
+	errors = -1
+End If
+
+For i = LBound (neededParamsArray) To UBound (neededParamsArray)  ' So I can add more.
+	If sclpGetValue (neededParamsArray (i)) = "" Then
+		Print "Param """ & neededParamsArray (i) & """ is missing..."
+		errors = -1
+	End If
 Next i
 
-If Len (Command (C_OUTPUTFILE)) = 0 Then levelBin = "level.bin" Else levelBin = Command (C_OUTPUTFILE)
+' Prepare some stuff...
 
-If flag Then usage: End
+levelBin = Command (1)
 
-map_w = Val (Command (C_MAPW))
-map_h = Val (Command (C_MAPH))
-If map_w = 0 Or map_h = 0 Then usage: End
-tile_lock = Val (Command (C_LOCK))
-If tile_lock = 0 Then usage: End
-life = Val (Command (C_ENEMSLIFE))
-If life = 0 Then Puts ("Enemies can't have life = 0!") : End
+map_w = Val (sclpGetValue ("map_w"))
+map_h = Val (sclpGetValue ("map_h"))
+If map_w = 0 Or map_h = 0 Then 
+	Print "map_w or map_h values are incorrect or out of range."
+	errors = -1
+End If
 
-If Not FileExists (Command (C_MAPNAME)) Then Puts ("map file specified does not exist"): End
-If Not FileExists (Command (C_FONTNAME)) Then Puts ("font file specified does not exist"): End
-If Not FileExists (Command (C_WORKNAME)) Then Puts ("tileset file specified does not exist"): End
-If Not FileExists (Command (C_SPRITESETNAME)) Then Puts ("spriteset file specified does not exist"): End
-If Not FileExists (Command (C_EXTRASPRITESNAME)) Then Puts ("'extra sprites' file specified does not exist"): End
-If Not FileExists (Command (C_ENEMSNAME)) Then Puts ("enems file specified does not exist"): End
-If Not FileExists (Command (C_BEHSNAME)) Then Puts ("behaviours file specified does not exist"): End
+If sclpGetValue ("lock") <> "" Then 
+	tile_lock = Val (sclpGetValue ("lock"))
+Else
+	tile_lock = 99
+End If	
+If tile_lock = 0 Then 
+	Print "Invalid lock tile #, use 1-47"
+	errors = -1
+End If
+
+life = Val (sclpGetValue ("enems_life"))
+If life = 0 Then 
+	Print "Enems life must be >= 1"
+	errors = -1
+End If
+
+If Not FileExists (sclpGetValue ("mapfile")) Then Puts ("map file specified does not exist"): errors = -1
+If sclpGetValue ("attrsfile") <> "" Then 
+	If Not FileExists (sclpGetValue ("mapfile")) Then Puts ("map attributes file specified does not exist"): errors = -1
+End If
+If Not FileExists (sclpGetValue ("fontfile")) Then Puts ("font file specified does not exist"): errors = -1
+If Not FileExists (sclpGetValue ("tilesfile")) Then Puts ("tileset file specified does not exist"): errors = -1
+If Not FileExists (sclpGetValue ("spritesfile")) Then Puts ("spriteset file specified does not exist"): errors = -1
+If Not FileExists (sclpGetValue ("enemsfile")) Then Puts ("enems file specified does not exist"): errors = -1
+If Not FileExists (sclpGetValue ("behsfile")) Then Puts ("behaviours file specified does not exist"): errors = -1
+
+If sclpGetValue ("nsprites") <> "" Then
+	nSprites = Val (sclpGetValue ("nsprites"))
+	If nSprites < 16 Then
+		Puts ("If especified, nsprites must be >= 16")
+		errors = -1
+	End If
+Else
+	nSprites = 16
+End If
+
+If errors Then
+	Print
+	Print "Failed. Run buildlevel.exe with no params to get help."
+	End
+End If
+
+If sclpGetValue ("decorations") <> "" Then
+	Puts ("Output decorations to " & sclpGetValue ("decorations"))
+	doForce = -1
+End If
 
 '' Ok. Start conversion. 
 
 screenres 640, 480, 32, , -1
 Kill levelBin
-Puts ("")
-Puts ("output filename = " & levelbin)
+Puts ("Output filename = " & levelbin)
 Puts ("")
 
 fout = FreeFile
@@ -205,18 +293,28 @@ totalsize = 0
 
 Puts ("writing header...")
 Puts ("    map_w = " & map_w & ", map_h = " & map_h)
-Puts ("    ini @ " & val (command (c_scrini)) & " (" & val (command (c_scrx)) & "," & val (command (c_scry)) & ")")
-Puts ("    max_objs = " & val (command (c_maxobjs)))
+Puts ("    ini @ " & val (sclpGetValue ("scr_ini")) & " (" & val (sclpGetValue ("ini_x")) & "," & val (sclpGetValue ("ini_y")) & ")")
+If sclpGetValue ("max_objs") <> "" Then
+	Puts ("    max_objs = " & val (sclpGetValue ("max_objs")))
+Else
+	Puts ("    No max_objs especified, defaulting to 99 (unreachable?)")
+End If
 Puts ("    enems life gauge = " & life)
 ' 16 bytes. ff padded.
 d = map_w: Put #fout, , d
 d = map_h: Put #fout, , d
-d = Val (Command (C_SCRINI)): Put #fout, , d
-d = Val (Command (C_SCRX)): Put #fout, , d
-d = Val (Command (C_SCRY)): Put #fout, , d
-d = Val (Command (C_MAXOBJS)): Put #fout, , d
+d = Val (sclpGetValue ("scr_ini")): Put #fout, , d
+d = Val (sclpGetValue ("ini_x")): Put #fout, , d
+d = Val (sclpGetValue ("ini_y")): Put #fout, , d
+If sclpGetValue ("max_objs") <> "" Then
+	d = Val (sclpGetValue ("max_objs"))
+Else
+	d = 99
+End If
+Put #fout, , d
 d = life: Put #fout, , d
 d = &Hff: For i = 1 TO 9: Put #fout, , d: Next i
+Puts ("    16 bytes writen")
 Puts ("")
 
 totalsize = totalsize + 16
@@ -226,24 +324,35 @@ totalsize = totalsize + 16
 '' *********
 
 Puts ("reading map...")
-Puts ("    map filename = " & Command (C_MAPNAME))
+Puts ("    map filename = " & sclpGetValue ("mapfile"))
 Puts ("    width in tiles = " & (map_w * 15))
 Puts ("    height in tiles = " & (map_h * 10))
 is_packed = -1
 ReDim As uByte map_data (map_h * 10, map_w * 15)
-numlocks = 0
+numlocks = 0: forceDone = 0
 f = FreeFile
-Open Command(C_MAPNAME) For Binary as #f
+Open sclpGetValue ("mapfile") For Binary as #f
+decoCtr = 0
 For y = 0 To (10 * map_h) - 1
 	For x = 0 To (15 * map_w) - 1
 		Get #f, , d
 		map_data (y, x) = d
 		' Autodetect unpacked:
-		If d > 15 Then is_packed = 0
+		If d > 15 Then
+			If Not doForce Then 
+				is_packed = 0 
+			Else
+				If Not forceDone Then 
+					Puts ("    Tile(s) > 15 found, but you said 'force'")
+					forceDone = -1
+				End If
+			End If
+		End If
 		' Autodetect lock
 		If d = tile_lock Then
 			If numlocks = 32 Then Puts ("ERROR! No more than 32 locks allowed!!"): End
-			x_pant = x / 15: y_pant = y / 10
+			x_pant = x \ 15: y_pant = y \ 10
+			Puts "    lock @ (" & x & ", " & y & ") => (" & x_pant & ", " & y_pant & ")=" & (x_pant + y_pant * map_w) & "."
 			l (numlocks).np = x_pant + y_pant * map_w
 			l (numlocks).x = x Mod 15
 			l (numlocks).y = y Mod 15
@@ -255,21 +364,72 @@ Next y
 Close #f
 Puts ("    total bytes read = " & ((map_w * 15) * (map_h * 10)))
 
-If is_packed Then Puts ("    packed map detected (16 tiles).") else puts ("    unpacked map detected (48 tiles)")
-Puts ("    " & numlocks & " bolts found.")
+If doForce Then
+	Puts ("    packed map (16 tiles) + decorations mode.")
+Else
+	If is_packed Then Puts ("    packed map detected (16 tiles).") Else puts ("    unpacked map detected (48 tiles)")
+End If
+If tile_lock <> 99 Then Puts ("    " & numlocks & " bolts found.")
 
 Puts ("writing map...")
 byteswritten = 0
+If doForce Then 
+	fExtra = freefile
+	Open sclpGetValue ("decorations") For Output as #fExtra
+End If
 For y = 0 To map_h - 1
 	For x = 0 To map_w - 1
 		If is_packed Then
 			idx = 0
+			n_pant = map_w * y + x
+			
+			doYawn = 0
+			If doForce Then
+				' Is this needed? YES. Only useful code should be output so msc3 behaves.
+				For yy = 0 To 9
+					For xx = 0 To 14
+						If map_data (10 * y + yy, 15 * x + xx) Then doYawn = -1: Exit For
+					Next xx
+					If doYawn Then Exit For
+				Next yy
+					
+			End If
+			
+			If doYawn Then 
+				Print #fExtra, "ENTERING SCREEN " & Trim (Str (n_pant))
+				Print #fExtra, "	IF TRUE"
+				Print #fExtra, "	THEN"
+				Print #fExtra, "		DECORATIONS"
+				
+				somethingOn (n_pant) = 0
+				amalgamer (n_pant) = "const unsigned char ep_scr_" + hex (n_pant, 2) + " [] = { "
+			End If
+	
 			For yy = 0 To 9
 				For xx = 0 To 14
-					whole_screen (idx) = map_data (10 * y + yy, 15 * x + xx)
+					d = map_data (10 * y + yy, 15 * x + xx)
+					If doYawn And d > 15 Then
+						decoCtr = decoCtr + 1
+						Print #fExtra, "			" & Trim (Str (xx)) & ", " & Trim (Str (yy)) & ", " & Trim (Str (d))
+						If somethingOn (n_pant) Then
+							amalgamer (n_pant) = amalgamer (n_pant) & ", "
+						Else
+							somethingOn (n_pant) = -1
+						End If
+						amalgamer (n_pant) = amalgamer (n_pant) & "0x" & hex (xx * 16 + yy) & ", " & trim (Str (d))
+						d = 0
+					End If
+					whole_screen (idx) = d
 					idx = idx + 1
-				Next xx				
+				Next xx
 			Next yy
+			If doYawn Then 
+				amalgamer (n_pant) = amalgamer (n_pant) & " };"
+				Print #fExtra, "		END"
+				Print #fExtra, "	END"
+				Print #fExtra, "END"
+				Print #fExtra, " "
+			End If
 			For i = 0 To 74
 				d = (whole_screen (i + i) Shl 4) + (whole_screen (1 + i + i) And 15)
 				Put #fout, , d
@@ -286,79 +446,133 @@ For y = 0 To map_h - 1
 		End If
 	Next x
 Next y
+If doForce Then
+	Print #fExtra, " "
+	Print #fExtra, "// If you use extraprints.h, trim this bit and use it!"
+	wholeme = "const unsigned char *prints [] = { "
+	For i = 0 To (map_w * map_h) - 1
+		If i > 0 Then wholeme = wholeme & ", "
+		If somethingOn (i) Then
+			Print #fExtra, amalgamer (i)
+			wholeme = wholeme & "ep_scr_" + hex (i, 2)
+		Else
+			wholeme = wholeme & "0"
+		End If
+	Next i
+	wholeme = wholeme & " };"
+	Print #fExtra, wholeme
+End If
 Puts ("    " & byteswritten & " bytes written.")
-totalsize = totalsize + byteswritten
-byteswritten = 0
+If doForce Then
+	Puts ("    Out of range tiles written to " & sclpGetValue ("decorations"))
+	Puts ("    " & decoCtr & " decorations written.")
+End If
 
-Puts ("writing bolts...")
-For i = 0 To 31
-	d = l (i).np: Put #fout, , d
-	d = l (i).x: Put #fout, , d
-	d = l (i).y: Put #fout, , d
-	d = l (i).st: Put #fout, , d
-	byteswritten = byteswritten + 4
-Next i
-
-Puts ("    " & byteswritten & " bytes written.")
 totalsize = totalsize + byteswritten
+
+' Map attributes
+
+If sclpGetValue ("attrsfile") <> "" Then 
+	Puts ("Writting map attributes")
+	byteswritten = 0
+	f = Freefile
+	Open sclpGetValue ("attrsfile") For Input as #f
+	For i = 1 To map_h
+		dummy = "    "
+		For j = 1 To map_w
+			If Eof (f) Then
+				Puts ("Not enough attributes in attr file... Aborting.")
+				End
+			End If
+			Input #f, d
+			Put #fout, , d
+			dummy = dummy & hex (d, 2) & " "
+			byteswritten = byteswritten + 1
+		Next j
+		Puts (dummy)
+	Next i
+	Close #f
+	Puts ("    " & byteswritten & " bytes written.")
+	totalsize = totalsize + byteswritten
+End If
+
+' Bolts
+
+If tile_lock = 99 Then
+	Puts ("No bolts will be output.")
+Else
+	Puts ("writing bolts...")
+	byteswritten = 0
+	For i = 0 To 31
+		d = l (i).np: Put #fout, , d
+		d = l (i).x: Put #fout, , d
+		d = l (i).y: Put #fout, , d
+		d = l (i).st: Put #fout, , d
+		byteswritten = byteswritten + 4
+	Next i
+	Puts ("    " & byteswritten & " bytes written.")
+	totalsize = totalsize + byteswritten
+End If
+
 Puts ("")
-
-
 
 '' *************
 '' ** TILESET **
 '' *************
 
-' Puts ("building tileset")
 idx = 0
 
 Puts ("reading font")
-img = png_load (Command (C_FONTNAME))
-Puts ("    font filename = " & Command (C_FONTNAME))
+img = png_load (sclpGetValue ("fontfile"))
+Puts ("    font filename = " & sclpGetValue ("fontfile"))
+byteswritten = 0
 idx = 0
 For y = 0 To 1
 	For x = 0 To 31
 		getUDGIntoCharset img, x * 8, y * 8, tileset (), idx
 		idx = idx + 1	
+		byteswritten = byteswritten + 9
 	Next x
 Next y
 Puts ("    converted 64 chars")
 Puts ("reading 16x16 tiles")
-img = png_load (Command (C_WORKNAME))
-Puts ("    tileset filename = " & Command (C_WORKNAME))
+img = png_load (sclpGetValue ("tilesfile"))
+If ImageInfo (img, xx, yy, , , , ) Then
+	Puts ("Something wrong happened"): End
+End If
+Puts ("    tileset filename = " & sclpGetValue ("tilesfile"))
 x = 0
 y = 0
-For idx = 0 to 47
+For idx = 0 to (((xx\16)*(yy\16)) - 1)
 	getUDGIntoCharset img, x, y, tileset (), idx * 4 + 64
 	getUDGIntoCharset img, x + 8, y, tileset (), idx * 4 + 65
 	getUDGIntoCharset img, x, y + 8, tileset (), idx * 4 + 66
 	getUDGIntoCharset img, x + 8, y + 8, tileset (), idx * 4 + 67
-	x = x + 16: If x = 256 Then x = 0: y = y + 16
+	x = x + 16: If x = xx Then x = 0: y = y + 16
+	byteswritten = byteswritten + 36
 Next idx
-Puts ("    converted 192 chars")
+Puts ("    converted " & (((xx\16)*(yy\16))*4) & " chars")
 Puts ("writing tileset")
 
-For idx = 0 To 2303
+For idx = 0 To byteswritten - 1
 	d = tileset (idx)
 	put #fout, , d
 Next idx
-Puts ("    2304 bytes written")
+Puts ("    " & byteswritten & " bytes written")
 Puts ("")
 
-totalsize = totalsize + 2304
-
+totalsize = totalsize + byteswritten
 
 '' ***************
 '' ** SPRITESET **
 '' ***************
 
-' Puts ("converting spriteset")
-
 Puts ("reading spriteset")
-img = png_load (Command (C_SPRITESETNAME))
-Puts ("    spriteset filename = " & Command (C_SPRITESETNAME))
+img = png_load (sclpGetValue ("spritesfile"))
+Puts ("    spriteset filename = " & sclpGetValue ("spritesfile"))
 
 Puts ("converting & writing spriteset")
+Puts ("    sprite count = " & nSprites)
 
 x = 0
 y = 0
@@ -368,7 +582,7 @@ For idx = 0 To 7
 	d = 255: Put #fout, , d
 	byteswritten = byteswritten + 2
 Next idx
-For idx = 0 To 15
+For idx = 0 To nSprites - 1
 	' First & second columns
 	For xx = 0 To 8 Step 8
 		For yy = 0 To 15
@@ -396,28 +610,7 @@ For idx = 0 To 15
 	Next yy
 	x = x + 32: If x = 256 Then x = 0: y = y + 16
 Next idx
-Puts ("    " & byteswritten & " bytes written in 16 frames")
-Puts ("")
-
-totalsize = totalsize + byteswritten
-
-'' ******************
-'' ** EXTRASPRITES **
-'' ******************
-
-Puts ("pasting extra sprites binary")
-Puts ("    extra sprites binary filename = " & Command (C_EXTRASPRITESNAME))
-Puts ("    reading & writing file")
-f = freefile
-Open Command (C_EXTRASPRITESNAME) For Binary as #f
-byteswritten = 0
-While Not Eof (f)
-	Get #f, , d
-	Put #fout, , d
-	byteswritten = byteswritten + 1
-Wend
-Close #f
-Puts ("    " & byteswritten & " bytes written")
+Puts ("    " & byteswritten & " bytes written in " & nSprites & " frames")
 Puts ("")
 
 totalsize = totalsize + byteswritten
@@ -428,9 +621,9 @@ totalsize = totalsize + byteswritten
 
 byteswritten = 0
 Puts ("reading enems file")
-Puts ("    enems filename = " & Command (C_ENEMSNAME))
+Puts ("    enems filename = " & sclpGetValue ("enemsfile"))
 f = freefile
-Open Command (C_ENEMSNAME) For Binary as #f
+Open sclpGetValue ("enemsfile") For Binary as #f
 ' Skip header
 dummy = Input (261, f)
 ' Read enems
@@ -448,14 +641,9 @@ For idx = 1 To max
 	Get #f, , e.s2
 	
 	' Write		
-	' int16 x, y; lsb msb
-	x = e.x * 16
-	d = x And &hff: Put #fout, , d
-	d = (x Shr 8) And &hff: Put #fout, , d
-	
-	y = e.y * 16
-	d = y And &hff: Put #fout, , d
-	d = (y Shr 8) And &hff: Put #fout, , d
+	' ubyte x, y;
+	d = e.x * 16: Put #fout, , d
+	d = e.y * 16: Put #fout, , d
 	
 	' ubyte x1, y1, x2, y2
 	d = 16 * e.x: Put #fout, , d
@@ -474,40 +662,50 @@ For idx = 1 To max
 	d = life: Put #fout, , d
 	
 	'puts ("->" & x & ", " & y & ", " & e.x & ", " & e.y & ", " & e.xx & ", " & e.yy & ", " & 
-	byteswritten = byteswritten + 12	
+	byteswritten = byteswritten + 10
 Next idx
 Puts ("    written " & max & " enemies")
 Puts ("    " & byteswritten & " bytes written.")
 totalsize = totalsize + byteswritten
 byteswritten = 0
-max = map_w * map_h
-Puts ("    reading " & max & " hotspots")
-For idx = 1 To max
-	' Read
-	get #f, , e.x
-	get #f, , e.t
-	
-	' Write
-	' unsigned char xy
-	d = e.x: put #fout, , d
-	' unsigned char t
-	d = e.t: put #fout, , d
-	' unsigned char act
-	d = 1: put #fout, , d
-	
-	byteswritten = byteswritten + 3
-Next idx
-Close #f
-Puts ("    " & byteswritten & " bytes written.")
-Puts ("")
 
-totalsize = totalsize + byteswritten
+If sclpGetValue ("nohotspots") <> "" Then
+	Puts ("    no hotspots will be processed / included")
+Else
+	
+	max = map_w * map_h
+	Puts ("    reading " & max & " hotspots")
+	For idx = 1 To max
+		' Read
+		get #f, , e.x
+		get #f, , e.t
+		
+		' Write
+		' unsigned char xy
+		d = e.x: put #fout, , d
+		' unsigned char t
+		d = e.t: put #fout, , d
+		' unsigned char act
+		d = 1: put #fout, , d
+		
+		byteswritten = byteswritten + 3
+	Next idx
+	Close #f
+	Puts ("    " & byteswritten & " bytes written.")
+	Puts ("")
+	
+	totalsize = totalsize + byteswritten
+End If
+
+'' ****************
+'' ** BEHAVIOURS **
+'' ****************
 
 Puts ("reading behaviours")
-Puts ("    Behaviours file = " & Command (C_BEHSNAME))
+Puts ("    Behaviours file = " & sclpGetValue ("behsfile"))
 f = Freefile
 byteswritten = 0
-Open Command (C_BEHSNAME) For Input as #f
+Open sclpGetValue ("behsfile") For Input as #f
 	For i = 1 To 3	
 		dummy = "    "
 		For j = 1 To 16
