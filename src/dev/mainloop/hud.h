@@ -24,7 +24,7 @@
 	}
 #endif
 
-#if defined(PLAYER_KILLS_ENEMIES) || defined(PLAYER_CAN_FIRE)
+#if defined(PLAYER_STEPS_ON_ENEMIES) || defined(PLAYER_CAN_FIRE)
 	#if KILLED_X != 99
 		if (p_killed != killed_old) {
 			_x = KILLED_X; _y = KILLED_Y; _t = p_killed; print_number2 ();

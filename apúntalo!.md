@@ -5,4 +5,4 @@
 [ ] Las comprobaciones de WIN GAME son todas aditivas! Si son != 99
 [ ] De-struct enemigos
 [ ] Intentar automatizar la reserva de bloques!! Aquí hay menos varianza que en MK2, así que debéría ser factible.
-
+[ ] Revisa la detección de tilanims

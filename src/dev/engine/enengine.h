@@ -4,7 +4,7 @@
 // enengine.h
 
 #ifndef COMPRESSED_LEVELS
-	#if defined(PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
+	#if defined(PLAYER_STEPS_ON_ENEMIES) || defined (PLAYER_CAN_FIRE)
 		void enems_init (void) {
 			gpit = 0;
 			while (gpit < MAP_W * MAP_H * 3) {
@@ -197,7 +197,7 @@ void enems_move (void) {
 								en_an_rawv [gpit] = 1 << (rand () % 5);
 								if (en_an_rawv [gpit] > 4) en_an_rawv [gpit] = 2;
 								en_an_dead_row [gpit] = 11 + (rand () & 7);
-								#if defined(PLAYER_KILLS_ENEMIES) || defined(PLAYER_CAN_FIRE)							
+								#if defined(PLAYER_STEPS_ON_ENEMIES) || defined(PLAYER_CAN_FIRE)							
 									malotes [enoffsmasi].life = ENEMIES_LIFE_GAUGE;
 								#endif							
 							} else {
@@ -287,10 +287,10 @@ void enems_move (void) {
 			{
 				cx2 = gpen_cx; cy2 = gpen_cy;
 				if (!tocado && collide () && p_estado == EST_NORMAL) {
-					#ifdef PLAYER_KILLS_ENEMIES
+					#ifdef PLAYER_STEPS_ON_ENEMIES
 					// Step over enemy		
-						#ifdef PLAYER_CAN_KILL_FLAG
-							if (flags [PLAYER_CAN_KILL_FLAG] != 0 && 
+						#ifdef PLAYER_CAN_STEP_ON_FLAG
+							if (flags [PLAYER_CAN_STEP_ON_FLAG] != 0 && 
 								gpy < gpen_cy - 2 && p_vy >= 0 && gpt >= PLAYER_MIN_KILLABLE)
 						#else
 							if (gpy < gpen_cy - 2 && p_vy >= 0 && gpt >= PLAYER_MIN_KILLABLE)

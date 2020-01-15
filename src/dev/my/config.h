@@ -149,18 +149,18 @@
 
 //#define PLAYER_MOGGY_STYLE				// Enable top view.
 //#define TOP_OVER_SIDE 					// UP/DOWN has priority over LEFT/RIGHT
+//#define PLAYER_BOUNCE_WITH_WALLS			// Bounce when hitting a wall. Only really useful in MOGGY_STYLE mode
 
 // Side view:
 // ----------
 
 #define PLAYER_HAS_JUMP 					// If defined, player is able to jump.
 //#define PLAYER_HAS_JETPAC 				// If defined, player can thrust a vertical jetpac
-//#define PLAYER_KILLS_ENEMIES				// If defined, stepping on enemies kills them
-//#define PLAYER_CAN_KILL_FLAG		1		// If defined, player can only kill when flag # is "1"
+//#define PLAYER_STEPS_ON_ENEMIES			// If defined, stepping on enemies kills them
+//#define PLAYER_CAN_STEP_ON_FLAG	1		// If defined, player can only kill when flag # is "1"
 //#define PLAYER_MIN_KILLABLE		3		// Only kill enemies with id >= PLAYER_MIN_KILLABLE
 //#define PLAYER_BOOTEE 					// Always jumping engine. Don't forget to disable "HAS_JUMP" and "HAS_JETPAC"!!!
 #define PLAYER_STEP_SOUND					// Sound while walking. No effect in the BOOTEE engine.
-//#define PLAYER_BOUNCE_WITH_WALLS			// Bounce when hitting a wall. Only really useful in MOGGY_STYLE mode
 
 // Configure keyboard
 
@@ -179,25 +179,29 @@
 
 */
 
-//#define USE_TWO_BUTTONS 					// Alternate keyboard scheme for two-buttons games
+//#define USE_TWO_BUTTONS					// Alternate keyboard scheme for two-buttons games
 #ifdef USE_TWO_BUTTONS
+	// Define here if you selected the TWO BUTTONS configuration
+
 	struct sp_UDK keys = {
-		0x047f,	// .fire
+		0x047f, // .fire
 		0x04fd, // .right
 		0x01fd, // .left
 		0x02fd, // .down
-		0x02f7  // .up
+		0x02f7	// .up
 	};
 	
 	int key_jump = 0x087f;
 	int key_fire = 0x047f;
 #else
+	// Define here if you selected the NORMAL configuration
+
 	struct sp_UDK keys = {
-		0x017f,	// .fire
+		0x017f, // .fire
 		0x01df, // .right
 		0x02df, // .left
 		0x01fd, // .down
-		0x01fb  // .up
+		0x01fb	// .up
 	};
 #endif
 

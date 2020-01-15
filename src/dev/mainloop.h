@@ -229,7 +229,7 @@ void main (void) {
 			#endif
 		#endif
 
-		#if defined(PLAYER_KILLS_ENEMIES) || defined (PLAYER_CAN_FIRE)
+		#if defined(PLAYER_STEPS_ON_ENEMIES) || defined (PLAYER_CAN_FIRE)
 			#ifndef COMPRESSED_LEVELS
 				enems_init ();
 			#endif
@@ -252,7 +252,7 @@ void main (void) {
 			run_script ();
 		#endif
 				
-		#ifdef PLAYER_KILLS_ENEMIES 	
+		#ifdef PLAYER_STEPS_ON_ENEMIES 	
 			#ifdef SHOW_TOTAL
 			// Show total of enemies next to the killed amount.
 			_x = KILLED_Y; _y = KILLED_X; _t = BADDIES_COUNT; print_number2 ();
