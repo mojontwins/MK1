@@ -173,10 +173,6 @@ signed int addsign (signed int n, signed int value) {
 	if (n >= 0) return value; else return -value;
 }
 
-unsigned char ctileoff (char n) {
-	return n > 0;
-}
-
 #ifdef ENABLE_TILANIMS
 	#include "tilanim.h"
 #endif
@@ -602,29 +598,27 @@ void select_joyfunc (void) {
 // Total rewrite
 
 #ifdef WALLS_STOP_ENEMIES
-unsigned char mons_col_sc_x (void) {
-	gpaux = gpen_xx + ctileoff (malotes [enoffsmasi].mx);
+	unsigned char mons_col_sc_x (void) {
+		cx1 = cx2 = (_en_mx > 0 ? _en_x + 15 : _en_x) >> 4;
+		cy1 = _en_y >> 4; cy2 = (_en_y + 15) >> 4;
+		cm_two_points ();
 		#ifdef EVERYTHING_IS_A_WALL
-			if (attr (gpaux, gpen_yy) || ((malotes [enoffsmasi].y & 15) && attr (gpaux, gpen_yy + 1))) {
-		#else	
-			if (attr (gpaux, gpen_yy) & 8 || ((malotes [enoffsmasi].y & 15) && attr (gpaux, gpen_yy + 1) & 8)) {
+			return (at1 || at2);
+		#else
+			return ((at1 & 8) || (at2 & 8));
 		#endif
-		return 1;
 	}
-	return 0;
-}
-	
-unsigned char mons_col_sc_y (void) {
-	gpaux = gpen_yy + ctileoff (malotes [enoffsmasi].my);
+		
+	unsigned char mons_col_sc_y (void) {
+		cy1 = cy2 = (_en_my > 0 ? _en_y + 15 : _en_y) >> 4;
+		cx1 = _en_x >> 4; cx2 = (_en_x + 15) >> 4;
+		cm_two_points ();
 		#ifdef EVERYTHING_IS_A_WALL
-			if (attr (gpen_xx, gpaux) || ((malotes [enoffsmasi].x & 15) && attr (gpen_xx + 1, gpaux))) {
-		#else	
-			if (attr (gpen_xx, gpaux) & 8 || ((malotes [enoffsmasi].x & 15) && attr (gpen_xx + 1, gpaux) & 8)) {
+			return (at1 || at2);
+		#else
+			return ((at1 & 8) || (at2 & 8));
 		#endif
-		return 1;
 	}
-	return 0;
-}
 #endif
 
 #if defined(SLOW_DRAIN) && defined(PLAYER_BOUNCES)

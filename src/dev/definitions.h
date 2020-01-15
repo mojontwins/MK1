@@ -124,6 +124,7 @@ signed char _en_mx, _en_my;
 signed char _en_t;
 signed char _en_life;
 int _en_an_x, _en_an_y, _en_an_vx, _en_an_vy;
+unsigned char *_baddies_pointer;
 
 #define TYPE_6_IDLE 		0
 #define TYPE_6_PURSUING		1
@@ -197,7 +198,7 @@ unsigned char just_pushed;
 unsigned char gpx, gpox, gpy, gpd, gpc, gpt;
 unsigned char gpxx, gpyy, gpcx, gpcy;
 unsigned char possee, hit_v, hit_h, hit, wall_h, wall_v;
-unsigned char gpen_x, gpen_y, gpen_cx, gpen_cy, gpen_xx, gpen_yy, gpaux;
+unsigned char gpen_x, gpen_y, gpen_cx, gpen_cy, gpaux;
 unsigned char tocado, active;
 unsigned char gpit, gpjt;
 unsigned char enoffsmasi;
