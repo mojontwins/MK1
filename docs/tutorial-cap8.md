@@ -4,15 +4,15 @@ Antes que nada, bájate el paquete de materiales correspondiente a este capítul
 
 http://www.mojontwins.com/churrera/churreratut-capitulo8.zip
 
-¡Hombre, por fin!
+## ¡Hombre, por fin!
 
 Sí, ya. Pero ahora te vas a cagar. Porque esto puede ser tan denso y chungo como tú quieras. Nah, en serio, no es nada. Vamos a hacerlo además con vaselina. En este primer capítulo explicaremos cómo está montado el sistema, para que entiendas qué hace, para qué sirve, y cómo funciona, y terminaremos viendo ejemplos super sencillos de nivel 1, fácil fácil. El siguiente capítulo terminaremos de hacer el script de Dogmole Tuppowski y, a partir de ahí, exploraremos, parte por parte, lo que se puede hacer con el script. Porque se puede hacer mucho y variado.
 
-¡Vamos a ello, pues!
+## ¡Vamos a ello, pues!
 
-Vale. ¿Qué es un script de la churrera? Pues no es más que un conjunto de comprobaciones con acciones asociadas, organizadas en secciones, que sirven para definir el gameplay de tu güego. O sea, las cosas que pasan, y las cosas que tienen que pasar para que todo vaya guay, o para que todo vaya mal.
+Vale. ¿Qué es un script de *MTE MK1*? Pues no es más que un conjunto de comprobaciones con acciones asociadas, organizadas en secciones, que sirven para definir el gameplay de tu güego. O sea, las cosas que pasan, y las cosas que tienen que pasar para que todo vaya guay, o para que todo vaya mal.
 
-A ver, sin script tienes un gameplay básico. Coger X objetos para terminar, matar X bichos… Ir más allá de eso precisa comprobaciones y acciones relacionadas: si estamos en tal sitio y hemos hecho tal cosa, abrir la puerta del castillo. Si entramos en la pantalla tal y hablamos con el personaje cual, que salga el texto “OLA K ASE” y suene un ruidito. A eso nos referimos.
+A ver, sin script tienes un gameplay básico. Coger X objetos para terminar, matar X bichos... Ir más allá de eso precisa comprobaciones y acciones relacionadas: si estamos en tal sitio y hemos hecho tal cosa, abrir la puerta del castillo. Si entramos en la pantalla tal y hablamos con el personaje cual, que salga el texto “OLA K ASE” y suene un ruidito. A eso nos referimos.
 
 El script te sirve desde para colocar un tile bonito en la pantalla 4 y un texto que ponga “ESTÁS EN TU CASA” hasta para reaccionar a lo que hagas en una pantalla, comprobar que has hecho otras cosas, ver que has empujado tal tile, y entonces encender el temporizador o cambiar el escenario o lo que sea.
 
@@ -20,29 +20,27 @@ En cuanto sepas las herramientas de las que dispones seguro que se te ocurren mi
 
 ¡Esto es lo realmente divertido!
 
-Pero es programar.
+## Pero es programar.
 
 Claro, cojones, pero una cosa es tener que programar un gameplay en C y meterlo en el motor y otra cosa es tener un lenguaje específicamente diseñado para describir un gameplay y que es tan sencillo de aprender y dominar. Porque estoy seguro de que a muchos o va a sonar cómo está montado esto, sobre todo si algún día habéis hecho una aventura con el PAWS o el GAC o habéis trasteado con algún game maker. Porque a los Mojones nos encanta eso de reinventar ruedas, y resulta que el super sistema que ideamos es el más usado para estos menesteres de todos cuantos existen. Ya lo verás.
 
-Vale, cuéntame como va eso.
+## Vale, cuéntame como va eso.
 
 De acuerdo. A ver si lo puedo decir de un tirón, y luego ya lo vamos desglosando: un script se compone de secciones. Cada sección no es más que un conjunto de cláusulas. Cada cláusula está formada por una lista de comprobaciones y una lista de comandos. Si se cumplen todas y cada una de las comprobaciones de la lista, se ejecutarán, en orden, todos y cada uno de los comandos. El motor del güego llamará al motor de scripting en determinadas ocasiones, ejecutando una de esas secciones. Ejecutar una sección significa ir cláusula por cláusula haciendo las comprobaciones de su lista de comprobaciones y, si se cumplen, ejecutar en orden los comandos de su lista de comandos. Ese es el concepto importante que hay que tener claro.
 
 Para saber en qué momentos el motor del güego llama al motor de scripting, tenemos que entender qué son las secciones y qué tipos de sección hay:
 
-ENTERING SCREEN n: con n siendo un número de pantalla, se ejecutan justo al entrar en una nueva pantalla, una vez dibujado el escenario, inicializados los enemigos, y colocados los hotspots. Las podemos utilizar para modificar el escenario o inicializar variables. Por ejemplo, asociada a la pantalla 3, podemos colocar un script que compruebe si hemos matado a todos los enemigos y, si no, que pinte un obstáculo para que no podamos pasar.
+1. `ENTERING SCREEN n`: con `n` siendo un número de pantalla, se ejecutan justo al entrar en una nueva pantalla, una vez dibujado el escenario, inicializados los enemigos, y colocados los hotspots. Las podemos utilizar para modificar el escenario o inicializar variables. Por ejemplo, asociada a la pantalla 3, podemos colocar un script que compruebe si hemos matado a todos los enemigos y, si no, que pinte un obstáculo para que no podamos pasar.
 
-ENTERING ANY: se ejecutan para TODAS las pantallas, justo antes de ENTERING SCREEN n. O sea, cuando tú entras en la pantalla 3, se ejecutará primero la sección ENTERING ANY (si existe en el script), y justo después se ejecutará la sección ENTERING SCREEN 3 (si existe en el script).
+2. `ENTERING ANY`: es una sección especial que se ejecuta para TODAS las pantallas, justo antes de `ENTERING SCREEN n`. O sea, cuando tú entras en la pantalla 3, se ejecutará primero la sección `ENTERING ANY` (si existe en el script), y justo después se ejecutará la sección `ENTERING SCREEN 3` (si existe en el script).
 
-ENTERING GAME: se ejecuta una sola vez al empezar el juego. Es lo primero que se ejecuta. Lo puedes usar para inicializar el valor de variables, por ejemplo. Ya veremos esto luego.
+3. `ENTERING GAME`: se ejecuta una sola vez al empezar el juego. Es lo primero que se ejecuta. Lo puedes usar para inicializar el valor de variables, por ejemplo. Ya veremos esto luego.
 
-PRESS_FIRE AT SCREEN n: con n siendo un número de pantalla, se ejecuta en varios supuestos estando en la pantalla n: si el jugador pulsa el botón de acción, al empujar un bloque si hemos activado la directiva PUSHING_ACTION, o al entrar en una zona especial definida desde scripting llamada “fire zone” (que ya explicaremos) si hemos activado la directiva ENABLE_FIRE_ZONE. Normalmente usaremos estas secciones para reaccionar a las acciones del jugador.
+4. `PRESS_FIRE AT SCREEN n`: con `n` siendo un número de pantalla, se ejecuta en varios supuestos estando en la pantalla `n`: si el jugador pulsa el botón de acción, al empujar un bloque si hemos activado la directiva `PUSHING_ACTION`, al matar un enemigo, o al entrar en una zona especial definida desde scripting llamada “fire zone” (que ya explicaremos) si hemos activado la directiva `ENABLE_FIRE_ZONE`. Normalmente usaremos estas secciones para reaccionar a las acciones del jugador.
 
-PRESS_FIRE AT ANY: se ejecuta en todos los supuestos anteriores, para cualquier pantalla, justo antes de PRESS_FIRE AT SCREEN n. O sea, si pulsamos acción en la pantalla 7, se ejecutarán las cláusulas de PRESS_FIRE AT ANY y luego las de PRESS_FIRE AT SCREEN 7.
+5. `PRESS_FIRE AT ANY`: se ejecuta en todos los supuestos anteriores, para cualquier pantalla, justo antes de `PRESS_FIRE AT SCREEN n`. O sea, si pulsamos acción en la pantalla 7, se ejecutarán las cláusulas de `PRESS_FIRE AT ANY` y luego las de `PRESS_FIRE AT SCREEN 7`.
 
-ON_TIMER_OFF: se ejecuta cuando el temporizador llegue a cero, si tenemos activado el temporizador y hemos configurado que ocurra esto con la directiva TIMER_SCRIPT_0.
-
-Para la versión 3.99.2 estas son las secciones posibles, aunque añadiremos más en futuras versiones. Por ejemplo, al eliminar un enemigo. Pero por ahora no.
+6. `ON_TIMER_OFF`: se ejecuta cuando el temporizador llegue a cero, si tenemos activado el temporizador y hemos configurado que ocurra esto con la directiva `TIMER_SCRIPT_0`.
 
 Por cierto, que no es obligatorio escribir todas las secciones posibles. El motor ejecutará una sección sólo si existe. Por ejemplo, si no hay nada que hacer en la pantalla 8, pues no habrá que escribir ninguna sección para la pantalla 8. Si no hay ninguna acción común al entrar en todas las pantallas, no habrá sección ENTERING ANY. Y así. Si no hay nada que ejecutar, el motor no ejecuta nada y ya.
 

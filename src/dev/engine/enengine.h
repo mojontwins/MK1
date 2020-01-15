@@ -477,7 +477,15 @@ void enems_move (void) {
 									#ifdef ENABLE_PURSUERS
 										en_an_alive [enit] = 0;
 										en_an_dead_row [enit] = DEATH_COUNT_EXPRESSION;
-									#endif							
+									#endif	
+
+									#ifdef ACTIVATE_SCRIPTING					
+										// Run this screen fire script or "entering any".
+										script = f_scripts [n_pant];
+										run_script ();
+										script = e_scripts [MAP_W * MAP_H + 1];
+										run_script ();
+									#endif						
 								}
 							}
 						}
