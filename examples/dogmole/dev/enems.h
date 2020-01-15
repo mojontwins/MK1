@@ -5,7 +5,7 @@
 // Copyleft 2010, 2017 by The Mojon Twins
 
 typedef struct {
-	int x, y;
+	unsigned char x, y;
 	unsigned char x1, y1, x2, y2;
 	char mx, my;
 	char t;
@@ -154,42 +154,38 @@ typedef struct {
 } HOTSPOT;
 
 HOTSPOT hotspots [] = {
-	{50, 131, 0}, 
-	{19, 1, 0}, 
-	{0, 146, 0}, 
-	{17, 1, 0}, 
-	{81, 179, 0}, 
-	{16, 0, 0}, 
-	{49, 0, 0}, 
-	{7, 1, 0}, 
-	{97, 35, 0}, 
-	{20, 1, 0}, 
+	{19, 2, 0}, 
+	{131, 1, 0}, 
+	{211, 1, 0}, 
 	{0, 0, 0}, 
-	{7, 1, 0}, 
-	{130, 0, 0}, 
-	{2, 1, 0}, 
-	{33, 0, 0}, 
-	{2, 1, 0}, 
+	{146, 1, 0}, 
+	{49, 1, 0}, 
+	{213, 1, 0}, 
+	{179, 1, 0}, 
 	{0, 0, 0}, 
+	{115, 1, 0}, 
+	{0, 0, 0}, 
+	{167, 1, 0}, 
+	{198, 1, 0}, 
+	{35, 1, 0}, 
+	{132, 1, 0}, 
 	{0, 0, 0}, 
 	{0, 0, 0}, 
+	{71, 1, 0}, 
+	{152, 2, 0}, 
 	{0, 0, 0}, 
+	{194, 1, 0}, 
+	{66, 1, 0}, 
 	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}
+	{18, 1, 0}
 };
 
-#define N_HOTSPOTS_TYPE_0 13
-#define N_HOTSPOTS_TYPE_1 7
-#define N_HOTSPOTS_TYPE_2 0
+#define N_HOTSPOTS_TYPE_0 7
+#define N_HOTSPOTS_TYPE_1 15
+#define N_HOTSPOTS_TYPE_2 2
 #define N_HOTSPOTS_TYPE_3 0
 #define N_HOTSPOTS_TYPE_4 0
 #define N_HOTSPOTS_TYPE_5 0
 #define N_HOTSPOTS_TYPE_6 0
 #define N_HOTSPOTS_TYPE_7 0
-#define N_HOTSPOTS_TYPE_35 1
-#define N_HOTSPOTS_TYPE_131 1
-#define N_HOTSPOTS_TYPE_146 1
-#define N_HOTSPOTS_TYPE_179 1
 

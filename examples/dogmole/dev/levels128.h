@@ -75,7 +75,7 @@ typedef struct {
 } CERROJOS;
 
 typedef struct {
-	int x, y;
+	unsigned char x, y;
 	unsigned char x1, y1, x2, y2;
 	char mx, my;
 	unsigned char t, life;
