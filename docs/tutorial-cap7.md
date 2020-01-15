@@ -6,7 +6,7 @@ Antes que nada, bájate el paquete de materiales correspondiente a este capítul
 
 ## Venga ya. ¡Quiero ver cosas moviéndose!
 
-En eso estamos. Este capítulo va a ser densote, pero densote. Prepárate para absorver cual porífero abisal toneladas y toneladas de información. Para seguir este capítulo recomendamos que te comas un buen tico-tico de sandía, que fortalece el cerebro y el peshito.
+En eso estamos. Este capítulo va a ser densote, pero densote. Prepárate para absorber cual porífero abisal toneladas y toneladas de información. Para seguir este capítulo recomendamos que te comas un buen tico-tico de sandía, que fortalece el cerebro y el peshito.
 
 ![Enemigos en el mapa](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/07_tico_tico.jpg)
 
