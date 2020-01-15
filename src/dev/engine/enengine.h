@@ -285,125 +285,17 @@ void enems_move (void) {
 			case 2:
 			case 3:
 			case 4:
-				active = 1;
-				_en_x += _en_mx;
-				_en_y += _en_my;
-				#ifdef WALLS_STOP_ENEMIES
-					if (_en_x == _en_x1 || _en_x == _en_x2 || mons_col_sc_x ())
-						_en_mx = -_en_mx;
-					if (_en_y == _en_y1 || _en_y == _en_y2 || mons_col_sc_y ())
-						_en_my = -_en_my;
-				#else
-					if (_en_x == _en_x1 || _en_x == _en_x2)
-						_en_mx = -_en_mx;
-					if (_en_y == _en_y1 || _en_y == _en_y2)
-						_en_my = -_en_my;
-				#endif
+				#include "engine/enem_mods/enem_type_lineal.h"
 				break;
 
 			#ifdef ENABLE_FANTIES
 				case 6:	
-					active = 1;
-					
-					cx2 = _en_x = en_an_x [enit] >> 6;
-					cy2 = _en_y = en_an_y [enit] >> 6;
-
-					#ifdef FANTIES_TYPE_HOMING
-						rdd = distance ();
-						switch (en_an_state [enit]) {
-							case TYPE_6_IDLE:
-								if (rdd <= FANTIES_SIGHT_DISTANCE)
-									en_an_state [enit] = TYPE_6_PURSUING;
-								break;
-							case TYPE_6_PURSUING:
-								if (rdd > FANTIES_SIGHT_DISTANCE) {
-									en_an_state [enit] = TYPE_6_RETREATING;
-								} else {
-					#endif
-
-									en_an_vx [enit] = limit (
-										en_an_vx [enit] + addsign (p_x - en_an_x [enit], FANTIES_A),
-										-FANTIES_MAX_V, FANTIES_MAX_V);
-									en_an_vy [enit] = limit (
-										en_an_vy [enit] + addsign (p_y - en_an_y [enit], FANTIES_A),
-										-FANTIES_MAX_V, FANTIES_MAX_V);
-										
-									en_an_x [enit] = limit (en_an_x [enit] + en_an_vx [enit], 0, 224<<6);
-									en_an_y [enit] = limit (en_an_y [enit] + en_an_vy [enit], 0, 144<<6);
-
-					#ifdef FANTIES_TYPE_HOMING									
-								}
-								break;
-							case TYPE_6_RETREATING:
-								en_an_x [enit] += addsign (_en_x - _en_x, 64);
-								en_an_y [enit] += addsign (_en_y - _en_y, 64);
-								
-								if (rdd <= FANTIES_SIGHT_DISTANCE)
-									en_an_state [enit] = TYPE_6_PURSUING;
-								break;						
-						}
-					#endif
-					
-					_en_x = en_an_x [enit] >> 6;
-					_en_y = en_an_y [enit] >> 6;
-					
-					#ifdef FANTIES_TYPE_HOMING
-						if (en_an_state [enit] == TYPE_6_RETREATING && 
-							_en_x == _en_x && 
-							_en_y == _en_y
-							) 
-							en_an_state [enit] = TYPE_6_IDLE;
-						break;
-					#endif
+					#include "engine/enem_mods/enem_type_fanties.h"
+					break;
 			#endif
 			#ifdef ENABLE_PURSUERS
 				case 7:
-					switch (en_an_alive [enit]) {
-						case 0:
-							if (!en_an_dead_row [enit]) {
-								_en_x = _en_x1;
-								_en_y = _en_y1;
-								en_an_alive [enit] = 1;
-								en_an_rawv [enit] = 1 << (rand () % 5);
-								if (en_an_rawv [enit] > 4) en_an_rawv [enit] = 2;
-								en_an_dead_row [enit] = 11 + (rand () & 7);
-								#if defined(PLAYER_STEPS_ON_ENEMIES) || defined(PLAYER_CAN_FIRE)							
-									_en_life = ENEMIES_LIFE_GAUGE;
-								#endif							
-							} else {
-								en_an_dead_row [enit] --;
-							}
-							break;
-						case 1:
-							if (!en_an_dead_row [enit]) {
-								#ifdef PURSUERS_BASE_CELL
-									en_an_base_frame [enit] = PURSUERS_BASE_CELL << 1;
-								#else							
-									en_an_base_frame [enit] = (rand () & 3) << 1;
-								#endif							
-								en_an_alive [enit] = 2;
-							} else {
-								en_an_dead_row [enit] --;
-								en_an_next_frame [enit] = sprite_17_a;
-							}
-							break;
-						case 2:
-							active = 1;
-							if (p_estado == EST_NORMAL) {
-								_en_mx = (signed char) (addsign (((gpx >> 2) << 2) - _en_x, en_an_rawv [enit]));
-								_en_x += _en_mx;
-								#ifdef WALLS_STOP_ENEMIES
-									if (mons_col_sc_x ()) _en_x = _en_x;
-								#endif
-								_en_my = (signed char) (addsign (((gpy >> 2) << 2) - _en_y, en_an_rawv [enit]));
-								_en_y += _en_my;
-								#ifdef WALLS_STOP_ENEMIES
-									if (mons_col_sc_y ()) _en_y = _en_y;
-								#endif
-							}
-							_en_x = _en_x;
-							_en_y = _en_y;
-					}
+					#include "engine/enem_mods/enem_type_pursuers.h"
 					break;	
 			#endif
 			/*
