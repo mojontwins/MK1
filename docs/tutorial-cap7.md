@@ -727,162 +727,159 @@ Si se define, se mostrará un cuadro con los objetos que te quedan por coger cad
 
 En esta sección configuraremos como se moverá nuestro jugador. Es muy probable que los valores que pongas aquí tengas que irlos ajustando por medio del método de prueba y error. Si tienes unas nociones básicas de física, te vendrán muy bien para saber cómo afecta cada parámetro.
 
-Básicamente, tendremos lo que se conoce como Movimiento Rectilíneo Uniformemente Acelerado (MRUA) en cada eje: el horizontal y el vertical. Básicamente tendremos una posición (digamos X) que se verá afectada por una velocidad (digamos VX), que a su vez se verá afectada por una aceleración (o sea, AX).
+Básicamente, tendremos lo que se conoce como *Movimiento Rectilíneo Uniformemente Acelerado* (MRUA) en cada eje: el horizontal y el vertical. Básicamente tendremos una posición (digamos X) que se verá afectada por una velocidad (digamos VX), que a su vez se verá afectada por una aceleración (o sea, AX).
 
 Los parámetros siguientes sirven para especificar diversos valores relacionados con el movimiento en cada eje en güegos de vista lateral. En los de vista genital, se tomarán los valores del eje horizontal también para el vertical.
 
-Para obtener la suavidad de los movimientos sin usar valores decimales (que son muy costosos de manejar), usamos aritmética de punto fijo. Básicamente los valores se expresan en 1/64 de pixel. Esto significa que el valor empleado se divide entre 64 a la hora de mover los sprites reales a la pantalla. Eso nos da una precisión de 1/64 pixels en ambos ejes, lo que se traduce en mayor suavidad de movimientos.
+Para obtener la suavidad de los movimientos sin usar valores en coma flotante (que son muy costosos de manejar), usamos aritmética de punto fijo. Básicamente los valores se expresan en 1/64 de pixel. Esto significa que el valor empleado se divide entre 64 a la hora de mover los sprites reales a la pantalla. Eso nos da una precisión de 1/64 pixels en ambos ejes, lo que se traduce en mayor suavidad de movimientos. En palabras techis, estamos usando 10 bits para la parte entera y 6 para la parte "decimal", así que decimos que nuestro punto fijo es **10.6**.
 
 Somos conscientes en mojonia de que este apartado es especialmente densote, así que no te preocupes demasiado si, de entrada, te pierdes un poco. Experimenta con los valores hasta que encuentres la combinación ideal para tu güego.
 
-
-Eje vertical en güegos de vista lateral
+### Eje vertical en güegos de vista lateral
 
 Al movimiento vertical le afecta la gravedad. La velocidad vertical será incrementada por la gravedad hasta que el personaje aterrice sobre una plataforma u obstáculo. Además, a la hora de saltar, habrá un impulso inicial y una aceleración del salto, que también definiremos aquí. Estos son los valores para Dogmole; acto seguido detallaremos cada uno de ellos:
 
-#define PLAYER_MAX_VY_CAYENDO 512 // Max falling speed
-#define PLAYER_G 48 // Gravity acceleration
+```c
+    #define PLAYER_MAX_VY_CAYENDO       512     // Max falling speed
+    #define PLAYER_G                    48      // Gravity acceleration
 
-#define PLAYER_VY_INICIAL_SALTO 96 // Initial junp velocity
-#define PLAYER_MAX_VY_SALTANDO 312 // Max jump velocity
-#define PLAYER_INCR_SALTO 48 // acceleration while JUMP is pressed
+    #define PLAYER_VY_INICIAL_SALTO     96      // Initial junp velocity
+    #define PLAYER_MAX_VY_SALTANDO      312     // Max jump velocity
+    #define PLAYER_INCR_SALTO           48      // acceleration while JUMP is pressed
 
-#define PLAYER_INCR_JETPAC 32 // Vertical jetpac gauge
-#define PLAYER_MAX_VY_JETPAC 256 // Max vertical jetpac speed
+    #define PLAYER_INCR_JETPAC          32      // Vertical jetpac gauge
+    #define PLAYER_MAX_VY_JETPAC        256     // Max vertical jetpac speed
+```
 
-Caída libre: La velocidad del jugador, que medimos en pixels/frame será incrementada en PLAYER_G/64 pixels/frame^2 hasta que llegue al máximo especificado por PLAYER_MAX_CAYENDO/64. Con los valores que hemos elegido para Dogmole, la velocidad vertical en caída libre será incrementada en 48/64=0,75 pixels/frame hasta que llegue a un valor de 512/64=8 píxels/frame. O sea, Dogmole caerá más y más rápido hasta que llegue a la velocidad máxima de 8 píxels por frame. Incrementando PLAYER_G hará que se alcance la velocidad máxima mucho antes. Estos valores afectan al salto: a mayor gravedad, menos saltaremos y menos nos durará el impulso inicial. Modificando PLAYER_MAX_CAYENDO podremos conseguir que la velocidad máxima, que se alcanzará antes o después dependiendo de PLAYER_G, sea mayor o menor. Usando valores pequeños podemos simular entornos de poca gravedad como el espacio exterior, la superficie de la luna, o el fondo del mar. El valor de 512 (equivalente a 8 píxels por frame) podemos considerarlo el máximo, ya que valores superiores y caídas muy largas podrían resultar en glitches y cosas raras.
+#### Caída libre
 
-Salto: Los saltos se controlan usando tres parámetros. El primero, PLAYER_VY_INICIAL_SALTO, será el valor del impulso inicial: cuando el jugador pulse la tecla de salto, la velocidad vertical tomará automáticamente el valor especificado en dirección hacia arriba. Mientras se esté pulsando salto, y durante unos ocho frames, la velocidad se seguirá incrementando en el valor especificado por PLAYER_INCR_SALTO hasta que lleguemos al valor PLAYER_MAX_VY_SALTANDO. Esto se hace para que podamos controlar la fuerza del salto pulsando la tecla de salto más o menos tiempo. El período de aceleración, que dura 8 frames, es fijo y no se puede cambiar (para cambiarlo habría que tocar el motor), pero podemos conseguir saltos más bruscos subiendo el valor de PLAYER_INCR_SALTO y PLAYER_MAX_VY_SALTANDO.
+La velocidad del jugador, que medimos en pixels/frame será incrementada en `PLAYER_G` / 64 pixels/frame hasta que llegue al máximo especificado por `PLAYER_MAX_CAYENDO` / 64. Con los valores que hemos elegido para **Dogmole**, la velocidad vertical en caída libre será incrementada en 48 / 64 = 0,75 pixels/frame hasta que llegue a un valor de 512 / 64 = 8 píxels/frame. O sea, Dogmole caerá más y más rápido hasta que llegue a la velocidad máxima de 8 píxels por frame. 
+
+Incrementar `PLAYER_G` hará que se alcance la velocidad máxima mucho antes (porque la aceleración es mayor). Estos valores afectan al salto: a mayor gravedad, menos saltaremos y menos nos durará el impulso inicial. Modificando `PLAYER_MAX_CAYENDO` podremos conseguir que la velocidad máxima, que se alcanzará antes o después dependiendo del valor de `PLAYER_G`, sea mayor o menor. Usando valores pequeños podemos simular entornos de poca gravedad como el espacio exterior, la superficie de la luna, o el fondo del mar. El valor de 512 (equivalente a 8 píxels por frame) podemos considerarlo el máximo, ya que valores superiores y caídas muy largas podrían resultar en glitches y cosas raras.
+
+#### Salto
+
+Los saltos se controlan usando tres parámetros. El primero, `PLAYER_VY_INICIAL_SALTO`, será el valor del impulso inicial: cuando el jugador pulse la tecla de salto, la velocidad vertical tomará automáticamente el valor especificado en dirección hacia arriba. Mientras se esté pulsando salto, y durante unos ocho frames, la velocidad se seguirá incrementando en el valor especificado por `PLAYER_INCR_SALTO` hasta que lleguemos al valor `PLAYER_MAX_VY_SALTANDO`. Esto se hace para que podamos controlar la fuerza del salto pulsando la tecla de salto más o menos tiempo. El período de aceleración, que dura 8 frames, es fijo y no se puede cambiar (para cambiarlo habría que tocar el motor), pero podemos conseguir saltos más bruscos subiendo el valor de `PLAYER_INCR_SALTO` y `PLAYER_MAX_VY_SALTANDO`.
 
 Normalmente encontrar los valores ideales exige un poco de prueba y error. Hay que tener en cuenta que al saltar horizontalmente de una plataforma a otra también entran en juego los valores del movimiento horizontal, por lo que si has decidido que en tu güego el prota debería poder sortear distancias de X tiles tendrás que encontrar la combinación óptima jugando con todos los parámetros.
 
-Los dos valores que quedan no se usan en Dogmole porque tienen que ver con el jetpac. El primero es la aceleración que se produce mientras pulsamos la tecla arriba y el segundo el valor máximo que puede alcanzarse. Si tu juego no usa jetpac estos valores no se utilizan para nada.
+Los dos valores que quedan no se usan en **Dogmole** porque tienen que ver con el jetpac. El primero es la aceleración que se produce mientras pulsamos la tecla arriba y el segundo el valor máximo que puede alcanzarse. Si tu juego no usa jetpac estos valores no se utilizan para nada.
 
-Eje horizontal en güegos de vista lateral / comportamiento general en vista genital
+### Eje horizontal en güegos de vista lateral / comportamiento general en vista genital
 
 El siguiente set de parámetros describen el comportamiento del movimiento en el eje horizontal si tu güego es en vista lateral, o los de ambos ejes si tu güego es en vista genital. Estos parámetros son mucho más sencillos:
 
-#define PLAYER_MAX_VX 256 // Max velocity
-#define PLAYER_AX 48 // Acceleration
-#define PLAYER_RX 64 // Friction
+```c
+    #define PLAYER_MAX_VX               256     // Max velocity
+    #define PLAYER_AX                   48      // Acceleration
+    #define PLAYER_RX                   64      // Friction
+```
 
-La primera, PLAYER_MAX_VX, indica la velocidad máxima a la que el personaje se desplazará horizontalmente (o en cualquier dirección si el güego es en vista genital). Cuanto mayor sea este número, más correrá, y más lejos llegará cuando salte (horizontalmente). Un valor de 256 significa que el personaje correrá a un máximo de 4 píxels por frame.
-PLAYER_AX controla la aceleración que sufre el personaje mientras el jugador pulsa una tecla de dirección. Cuando mayor sea el valor, antes se alcanzará la velocidad máxima. Valores pequeños hacen que “cueste arrancar”. Un valor de 48 significa que se tardará aproximadamente 6 frames (256/48) en alcanzar la velocidad máxima.
+1. `PLAYER_MAX_VX` indica la velocidad máxima a la que el personaje se desplazará horizontalmente (o en cualquier dirección si el güego es en vista genital). Cuanto mayor sea este número, más correrá, y más lejos llegará cuando salte (horizontalmente). Un valor de 256 significa que el personaje correrá a un máximo de 256/64 = 4 píxels por frame.
 
-PLAYER_RX es el valor de fricción o rozamiento. Cuando el jugador deja de pulsar la tecla de movimiento, se aplica esta aceleración en dirección contraria al movimiento. Cuanto mayor sea el valor, antes se detendrá el personaje. Un valor de 64 significa que tardará 4 frames en detenerse si iba al máximo de velocidad.
+2. `PLAYER_AX` controla la aceleración que sufre el personaje mientras el jugador pulsa una tecla de dirección. Cuando mayor sea el valor, antes se alcanzará la velocidad máxima. Valores pequeños hacen que “cueste arrancar”. Un valor de 48 significa que se tardará aproximadamente 6 frames (256/48) en alcanzar la velocidad máxima.
 
-Usar valores pequeños de PLAYER_AX y PLAYER_RX harán que el personaje parezca resbalar. Es lo que ocurre en güegos como, por ejemplo, Viaje al Centro de la Napia. Salvo excepciones misteriosas, casi siempre “se güega mejor” si el valor de PLAYER_AX es mayor que el de PLAYER_RX.
+3. `PLAYER_RX` es el valor de fricción o rozamiento. Cuando el jugador deja de pulsar la tecla de movimiento, se aplica esta aceleración en dirección contraria al movimiento. Cuanto mayor sea el valor, antes se detendrá el personaje. Un valor de 64 significa que tardará 4 frames en detenerse si iba al máximo de velocidad.
 
-Comportamiento de los tiles
+Usar valores pequeños de `PLAYER_AX` y `PLAYER_RX` harán que el personaje parezca resbalar. Es lo que ocurre en güegos como, por ejemplo, **Viaje al Centro de la Napia**. Salvo excepciones misteriosas, casi siempre “se güega mejor” si el valor de `PLAYER_AX` es mayor que el de `PLAYER_RX`.
 
-¿Recordáis que explicamos como cada tile tiene un tipo de comportamiento asociado? Tiles que matan, que son obstáculos, plataformas, o interactuables. En esta sección (la última, por fin) de config.h definimos el comportamiento de cada uno de los 48 tiles del tileset completo.
+## Comportamiento de los tiles
 
-Tendremos que definir los comportamientos de los 48 tiles sin importar que nuestro güego utilice un tileset de 16. Por lo general, en estos casos, todos los tiles del 16 al 47 tendrán tipo “0”, pero es posible que necesitemos otros valores si empleamos los tiles extra para pintar gráficos y adornos desde el script, como haremos nosotros. En Dogmole no vamos a poner ningún obstáculo “fuera de tileset”, pero güegos como los de la saga de Ramiro el Vampiro sí que tienen obstáculos de este tipo.
+¿Recordáis que explicamos como cada tile tiene un tipo de comportamiento asociado? Tiles que matan, que son obstáculos, plataformas, o interactuables. En esta sección (la última, por fin) de `my/config.h` definimos el comportamiento de cada uno de los 48 tiles del tileset completo **aunque estemos usando mapas *packed* de 16 tiles**.
+
+Tendremos que definir los comportamientos de los 48 tiles sin importar que nuestro güego utilice un tileset de 16 porque los tiles extra que no van en el mapa podrían llegar a aparecer por obra del script o de inyección de código. En Dogmole no vamos a poner ningún obstáculo “fuera de tileset”, pero güegos como los de la saga de **Ramiro el Vampiro** sí que tienen obstáculos de este tipo.
 
 Para poner los valores, simplemente abrimos el tileset y nos fijamos, están en el mismo orden en el que aparecen los tiles en el tileset:
 
+![Tileset de Dogmole](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_tileset_16.jpg)
 
-
-unsigned char comportamiento_tiles [] = {
-0, 8, 8, 8, 8, 8, 0, 8, 4, 0, 8, 1, 0, 0, 0,10,
-0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+unsigned char behs [] = {
+    0, 8, 8, 8, 8, 8, 0, 8, 4, 0, 8, 1, 0, 0, 0,10,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+    0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
 };
 
 Como vemos, tenemos el primer tile vacío (tipo 0), luego tenemos cinco tiles de roca que son obstáculos (tipo 8), otro tile de fondo (la columnita, tipo 0), el tile de ladrillos (tipo 8), los dos tiles que forman un arco (tipo 4, plataforma, y tipo 0, traspasable), las tejas (tipo 8), unos pinchos que matan (tipo 1), tres tiles de fondo (tipo 0), y el tile cerrojo (tipo 10, interactuable).
 
 Cuando modifiques estos valores ten cuidado con las comas y que no se te baile ningún número.
 
-¡Arf, arf, arf!
+## ¡Arf, arf, arf!
 
-Ah, ¿aún estás ahí? Pensaba que ya había conseguido aburrirte y quitarte todas las ganas de seguir con esto. Bien, veo que eres un tipo constante y con mucho podewwwr. Sí, ya hemos terminado de configurar nuestro güego. Ahora viene cuando lo compilamos. Paciencia con esto, sobre todo si no estás acostumbrado a pelearte con un compilador en una ventana de linea de comandos.
+Ah, ¿aún estás ahí? Pensaba que ya había conseguido aburrirte y quitarte todas las ganas de seguir con esto. Bien, veo que eres un tipo constante y con mucho podewwwr. Sí, ya hemos terminado de configurar nuestro güego. Ahora viene cuando lo compilamos. 
 
-Vamos a configurar bien nuestro script de compilación make.bat para que nos sea muy sencillo. El script de compilación, además, se encargará de regenerar el mapa cada vez, lo cual nos viene muy bien si estamos constantemente modificándolo (por ejemplo, durante la etapa de pruebas), ya que se automatiza el proceso bastante.
+A estas alturas del cuento ya tendríamos que tener todo en su sitio y listo (salvo el script) para ser compilado. Incluso `compile.bat` debería tener ya el par de modificaciones necesarias (el nombre del juego y el tamaño del mapa en el conversor).
 
-Preparando nuestro script de compilación
+## Echando un vistazo a `compile.bat`
 
-Vamos a abrir make.bat con nuestro editor de textos para cambiar algunas cositas. Ahora mismo, si me hiciste caso en el primer capítulo, debe tener más o menos una pinta parecida a esta que sale en el recuadrito:
+Como no nos gustan las cajas negras vamos a echar un vistazo a `compile.bat` para que todos le veamos bien el totete.
 
-@echo off
-rem cd ..\script
-rem msc dogmole.spt msc.h 24
-rem copy *.h ..\dev
-rem cd ..\dev
-cd ..\map
-..\utils\mapcnv mapa.map 8 3 15 10 15 packed
-copy mapa.h ..\dev
-cd ..\dev
-zcc +zx -vn dogmole.c -o dogmole.bin -lndos -lsplib2 -zorg=25000
-..\utils\bas2tap -a10 -sLOADER loader.bas loader.tap
-..\utils\bin2tap -o screen.tap -a 16384 loading.bin
-..\utils\bin2tap -o main.tap -a 25000 dogmole.bin
-copy /b loader.tap + screen.tap + main.tap dogmole.tap
-del loader.tap
-del screen.tap
-del main.tap
-del dogmole.bin
-echo DONE
+```
+    @echo off
 
-Asegúrate de que pone “dogmole.*” (o el nombre de tu güego) en todos los sitios que salen en negrita y cursiva. Eso es lo primero. Asegúrate también de que no se te ha olvidado renombrar el churromain.c a dogmole.c (o el nombre de tu güego).
+    set game=dogmole
 
-Vamos a ver qué hace cada linea porque si estás haciendo tu propio güego querrás cambiar cosas.
+    echo Compilando script
+    cd ..\script
+    msc %game.spt msc.h 25 > nul
+    copy *.h ..\dev > nul
+    cd ..\dev
 
-En primer lugar, vemos que hay cuatro lineas que empiezan con rem. Estas lineas están comentadas y no se ejecutarán. Quitaremos los rem cuando empecemos a hacer nuestro script, así que por ahora vamos a pasar de ellas.
+    echo Convirtiendo mapa
+    ..\utils\mapcnv.exe ..\map\mapa.map 6 5 15 10 15 packed > nul
+    cd ..\dev
 
-Acto seguido, el script cambia al directorio del mapa para volver a generar mapa.h y copiarlo a /dev, por si acaso hemos hecho algún cambio para que quede reflejado automáticamente. Esta es una de las lineas que tendrás que cambiar para tu güego, indicando los parámetros correctos de mapcnv (en concreto, el tamaño en pantallas, o si no usas cerrojos para poner 99 en lugar de 15, o si usas mapas de 48 tiles para quitar packed):
+    echo Convirtiendo enemigos/hotspots
+    ..\utils\ene2h.exe ..\enems\enems.ene enems.h
 
-cd ..\map
-..\utils\mapcnv mapa.map 8 3 15 10 15 packed
-copy mapa.h ..\dev
-cd ..\dev
-La siguiente linea compila el güego:
+    echo Importando GFX
+    ..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png tileset.bin forcezero >nul
 
-zcc +zx -vn dogmole.c -o dogmole.bin -lndos -lsplib2 -zorg=25000
+    ..\utils\sprcnv.exe ..\gfx\sprites.png sprites.h > nul
 
-Esto no es más que una ejecución del compilador z88dk que toma como fuente dogmole.c (y todos los archivos .h que incluye), y saca un binario en código máquina dogmole.bin. La dirección de compilación es 25000.
+    ..\utils\sprcnvbin.exe ..\gfx\sprites_extra.png sprites_extra.bin 1 > nul
+    ..\utils\sprcnvbin8.exe ..\gfx\sprites_bullet.png sprites_bullet.bin 1 > nul
 
-Acto seguido, el script crea tres cintas en formato .tap. La primera contiene un cargador en BASIC (que puedes modificar si te pones muy friki, el fuente está en loader.bas). La siguiente contiene la pantalla de carga. Ahora mismo no nos vamos a detener en esto, así que tu güego incluirá la pantalla de carga por defecto de **MTE MK1** (que está en loading.bin). La última contiene el dogmole.bin que acabamos de compilar:
+    ..\utils\png2scr.exe ..\gfx\title.png ..\gfx\title.scr > nul
+    ..\utils\png2scr.exe ..\gfx\marco.png ..\gfx\marco.scr > nul
+    ..\utils\png2scr.exe ..\gfx\ending.png ..\gfx\ending.scr > nul
+    ..\utils\png2scr.exe ..\gfx\loading.png loading.bin > nul
+    ..\utils\apack.exe ..\gfx\title.scr title.bin > nul
+    ..\utils\apack.exe ..\gfx\marco.scr marco.bin > nul
+    ..\utils\apack.exe ..\gfx\ending.scr ending.bin > nul
 
-..\utils\bas2tap -a10 -sLOADER loader.bas loader.tap
-..\utils\bin2tap -o screen.tap -a 16384 loading.bin
-..\utils\bin2tap -o main.tap -a 25000 dogmole.bin
+    echo Compilando guego
+    zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+    ..\utils\printsize.exe %game%.bin
 
-Fíjate en el -sLOADER de la primera linea, la que genera el cargador BASIC. Ese es el nombre que aparece tras el Program: al cargar la cinta en el Spectrum, así que, si quieres, puedes cambiarlo por otra cosa. Recuerda que los nombres de archivo de cinta de Spectrum pueden tener un máximo e 10 caracteres. Vamos a cambiarlo para que salga DOGMOLE:
+    echo Construyendo cinta
+    rem cambia LOADER por el nombre que quieres que salga en Program:
+    ..\utils\bas2tap -a10 -sLOADER loader\loader.bas loader.tap > nul
+    ..\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
+    ..\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
+    copy /b loader.tap + screen.tap + main.tap %game%.tap > nul
 
-..\utils\bas2tap -a10 -sDOGMOLE loader.bas loader.tap
+    echo Limpiando
+    del loader.tap > nul
+    del screen.tap > nul
+    del main.tap > nul
+    del ..\gfx\*.scr > nul
+    del *.bin > nul
 
-Cuando ya tenemos las tres cintas, cada una con un bloque (cargador, pantalla, y güego) lo único que queda por hacer es unirlas:
+    echo Hecho!
+```
 
-copy /b loader.tap + screen.tap + main.tap dogmole.tap
+En él vemos que se realiza toda una serie de fullerías dedicadas a convertir automáticamente todos los archivos implicados en la construcción de nuestro juego: script, mapa, enemigos y gráficos. Acto seguido **compila el juego** y posteriormente **construye la cinta**.
 
-Y, para terminar, hacemos un poco de limpieza, eliminando los archivos intermedios que ya no nos sirven para nada:
-del loader.tap
-del screen.tap
-del main.tap
-del dogmole.bin
+## Preparando el entorno
 
-Graba de nuevo make.bat con los cambios. Ya estamos listos. ¿Nos atrevemos?
+El script `compile.bat` necesita saber donde está **z88dk**. Nosotros sabemos que está en `C:\z88dk10` porque lo descomprimimos ahí en el paso 1, pero cada vez que abramos una ventana de linea de comandos nueva habrá que recordarle al entorno donde está. Para eso ejecutamos `setenv.bat` que debería mostrar la versión de `zcc` si todo fue bien, algo así:
 
-Compilando
+```
+    $ setenv.bat
+    zcc - Frontend for the z88dk Cross-C Compiler
+    v2.59 (C) 16.4.2010 D.J.Morris
+```
 
-Lo primero que tenemos que hacer es abrir una ventana de linea de comandos e irnos a la carpeta /dev de nuestro güego:
+Una vez hecho esto no tenemos más que ejecutar `compila.bat` y, tras un mágico proceso que podremos ver suceder ante nuestros atónitos óculos, obtendremos un archivo `tap` que se llame igual que nuestro juego (el valor de `game` en `compile.bat`). En nuestro caso `dogmole.tap`. Nos vamos rápido y lo cargamos en el emu para ver que todo se mueve y está en su sitio.
 
-
-Una vez hecho esto, vamos a ejecutar un script de z88dk que establece algunas variables de entorno. Recordad que lo instalamos en C:\z88dk10. Ejecutamos esto:
-
-C:\z88dk10\setenv.bat
-
-
-Una vez que hayamos hecho esto (tendremos que hacerlo cada vez que abramos una ventana de linea de comandos para compilar un güego), podemos ejecutar nuestro script make.bat. Salga bien o salga mal, no cierres la ventana de linea de comandos, seguramente tendrás que volver a compilar mil veces más (sobre todo si estás ajustando los valores del movimiento o modificando el mapa para arreglar cosas).
-
-make.bat
-
-Si lo hemos hecho todo bien, no debería haber ningún problema:
-
-
-
-¡Ha sido DONE! ¡Ya lo tenemos! Ahora tenemos nuestro dogmole.tap con el güego listo para ser probado. Por supuesto no funcionará del todo, ya que nos falta el script, pero al menos podremos ver que se mueven los muñecos, que no la hemos cagado con el mapa, que el movimiento está bien, que los hechiceros se mueren al ser pisados, y cosas así. Si hay algo mal, se arregla, se recompila (poniendo make de nuevo), y se vuelve a probar.
-
-Y como ya nos duele la cabeza a tí y a mí, pues lo dejamos hasta el capítulo que viene. Si decidiste empezar con algo sencillo tipo Lala Prologue o Sir Ababol, ya has terminado. Si no, aún hay muchas cosas por hacer.
-
-The Mojon Twins
+Y como ya nos duele la cabeza a tí y a mí, pues lo dejamos hasta el capítulo que viene. Si decidiste empezar con algo sencillo tipo **Lala Prologue** o **Sir Ababol**, ya has terminado. Si no, aún hay muchas cosas por hacer.
