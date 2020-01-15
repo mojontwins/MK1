@@ -49,7 +49,7 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #include "definitions.h"
 
 #ifdef ACTIVATE_SCRIPTING
-	#include "msc-config.h"
+	#include "my/msc-config.h"
 #endif
 
 #ifdef MODE_128K
@@ -100,9 +100,9 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 
 #ifdef ACTIVATE_SCRIPTING
 	#ifdef ENABLE_EXTERN_CODE
-		#include "extern.h"
+		#include "my/extern.h"
 	#endif
-	#include "msc.h"
+	#include "my/msc.h"
 #endif
 
 #include "engine/general.h"
