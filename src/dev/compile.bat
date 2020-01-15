@@ -4,8 +4,10 @@ set game=lala_beta
 
 echo Compilando script
 cd ..\script
-msc %game.spt msc.h 25 > nul
-copy *.h ..\dev > nul
+..\..\..\src\utils\msc3_mk1.exe %game%.spt 24
+copy msc.h ..\dev\my > nul
+copy msc-config.h ..\dev\my > nul
+copy scripts.bin ..\dev\ > nul
 cd ..\dev
 
 echo Convirtiendo mapa

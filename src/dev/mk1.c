@@ -2,8 +2,6 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 // mk1.c
-// Esqueleto de juegos de la churrera
-// Copyleft 2010-2014, 2020 The Mojon Twins
 
 #include <spritepack.h>
 
@@ -28,19 +26,13 @@
 	#define FREEPOOL 61440
 #endif
 
-// NUMBLOCKS es el número de bloques necesario para mover los sprites
-// Configurar bien este número es MUY IMPORTANTE
+// Configure number of blocks and reserve a pool for sprites
 
-#define NUMBLOCKS 40
-
-// La regla es esta: cada sprite de 16x16 ocupa 10 bloques.
-// Cada proyectil ocupa 5 bloques.
-
-// Si, por ejemplo, tu juego no tiene disparos, sólo necesitas bloques
-// para el sprite principal y tres enemigos, o sea, 4*10 = 40 bloques.
-
-// Si, por ejemplo, tu juego además lleva 3 proyectiles, necesitarás
-// 4*10 + 3*5 = 55 bloques.
+#ifdef PLAYER_CAN_FIRE
+	#define NUMBLOCKS 40 + MAX_BULLETS * 5
+#else
+	#define NUMBLOCKS 40
+#endif
 
 unsigned char AD_FREE [NUMBLOCKS * 15];
 

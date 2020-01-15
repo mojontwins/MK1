@@ -637,10 +637,10 @@ unsigned char player_move (void) {
 		hit = 0;
 		if (hit_v) {
 			hit = 1;
-			p_vy = addsign (-p_vy, PLAYER_MAX_VX);			
+				p_vy = addsign (-p_vy, PLAYER_MAX_VX);
 		} else if (hit_h) {
 			hit = 1;
-			p_vx = addsign (-p_vx, PLAYER_MAX_VX);			
+				p_vx = addsign (-p_vx, PLAYER_MAX_VX);
 		}
 		
 		if (hit) {
