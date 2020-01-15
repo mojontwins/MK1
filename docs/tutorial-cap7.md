@@ -360,6 +360,19 @@ Las balas, además, pueden tener un alcance limitado, lo que da mucho juego para
 
 Si activamos `LIMITED_BULLETS`, las balas durarán solo cierto número de frames. Este número de frames será el valor del flag `LB_FRAMES_FLAG` si se activa esta directiva, o el valor de `LB_FRAMES` directamente si queremos que sea fijo.
 
+### Tiles destructibles
+
+Los tiles destructibles están orientados a los güegos que lleven el motor de disparos. Recordemos que el tipo de tile destructible era el 16. Estos tiles se romperán y desaparecerán (serán sustituidos por el tile 0) tras ser alcanzados por cierto número (configurable) de disparos. Para incluirlos, además de tener tiles definidos con el tipo 16, tenemos que configurar algunas cosas:
+
+```c
+    //#define BREAKABLE_WALLS                   // Breakable walls
+    //#define BREAKABLE_WALLS_LIFE  1           // Amount of hits to break wall
+```
+
+La primera directiva, `BREAKABLE_WALLS`, activa esta característica e incluye todo el código necesario para que haya tiles destructibles (si no la activas, por mucho que tengas tiles de tipo 16 no pasará nada). La segunda, `BREAKABLE_WALLS_LIFE`, define el número de disparos que deben recibir los tiles destructibles para romperse. Obviamente, tienes que poner un número mayor de 0. Si pones un 3, el tile se romperá al tercer disparo que reciba.
+
+Recuerda, además, que el tipo 16 por sí mismo no hace nada, sino que **debe ser combinado con otro comportamiento** para que tenga sentido: con obstáculos (8+16 = 24) o con tiles que matan (1+16 = 17).
+
 ## Scripting
 
 Las siguientes directivas sirven para activar el motor de scripting y definir un par de cosas relacionadas con el mismo. Por ahora las vamos a dejar sin activar, para poder ir compilando y probando el güego ya sin tener que hacer un script. Porque tenemos ganas ya, ¿no? Tranquilos, volveremos a ellas más adelante.
@@ -804,6 +817,8 @@ Para poner los valores, simplemente abrimos el tileset y nos fijamos, están en 
 Como vemos, tenemos el primer tile vacío (tipo 0), luego tenemos cinco tiles de roca que son obstáculos (tipo 8), otro tile de fondo (la columnita, tipo 0), el tile de ladrillos (tipo 8), los dos tiles que forman un arco (tipo 4, plataforma, y tipo 0, traspasable), las tejas (tipo 8), unos pinchos que matan (tipo 1), tres tiles de fondo (tipo 0), y el tile cerrojo (tipo 10, interactuable).
 
 Cuando modifiques estos valores ten cuidado con las comas y que no se te baile ningún número.
+
+Recuerda, además, que los tipos de tile son combinables *hasta donde tenga sentido* sumando los valores: por ejemplo, `destructible y que mata` sería 16+1 = 17, etc.
 
 ## ¡Arf, arf, arf!
 

@@ -42,7 +42,9 @@ En los güegos de **MTE MK1** tenemos los siguientes tipos de tiles, o, mejor di
 
 6. *Tipo “10”, interactuable*. Es un obstáculo pero que sea de tipo “10” hace que el motor esté coscao y sepa que es especial. De este tipo son, por ahora, los cerrojos y los bloques que se pueden empujar. Hablaremos de ellos dentro de poco.
 
-Vaya mierda, pensarás, ¡si faltan números! Y más que faltaban antes. Esto está hecho queriendo, amigos, porque simplifica mucho los cálculos y permite meter más tipos en el futuro. Por ejemplo, fíjate como todo lo que sea mayor o igual que 4 parará al protagonista desde arriba, o que todo lo que sea menor que 7 dejará pasar lateralmente. ¿Ves? Trucos de ases de la programación (que, en rigor, no se usan en este motor).
+7. *Tipo “10”, destructible*. Son tiles que se pueden romper disparándoles.
+
+Vaya mierda, pensarás, ¡si faltan números! Y más que faltaban antes. Esto está hecho queriendo, amigos, porque simplifica mucho los cálculos y permite **combinar comportamientos** sumando los números, hasta donde tenga sentido. Por ejemplo, un tile *obstáculo que mata* (8+1 = 9) no tiene sentido porque no lo vamos a poder tocar nunca, pero un *obstáculo destructible* (8+16 = 24) sí que lo tiene. De hecho, si no ponemos los destructibles como obstáculos *se podrán traspasar*.
 
 En un futuro, además, se puede ampliar fácilmente, como hemos dicho. Por ejemplo, se podría añadir código a **MTE MK1** para que los tiles de tipo “5” y “6” fueran como cintas transportadoras a la izquierda y a la derecha, respectivamente. Se podría añadir. Podría. A lo mejor, al final, hacemos un capítulo de arremangarse y meter código nuevo en **MTE MK1**... ¿por qué no? Creo que además ya sabes de sobra que [me encanta el café](https://ko-fi.com/I2I0JUJ9)...
 
