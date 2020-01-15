@@ -53,6 +53,7 @@
 				break;
 			case TYPE_6_PURSUING:
 				if (rdd > FANTIES_SIGHT_DISTANCE) {
+					_en_an_vx = _en_an_vy = 0;
 					en_an_state [enit] = TYPE_6_RETREATING;
 				} else {
 	#endif
@@ -71,8 +72,8 @@
 				}
 				break;
 			case TYPE_6_RETREATING:
-				_en_an_x += addsign (_en_x1 - _en_x, 64);
-				_en_an_y += addsign (_en_y1 - _en_y, 64);
+				_en_an_x += addsign (_en_x1 - _en_x, 48);
+				_en_an_y += addsign (_en_y1 - _en_y, 48);
 				
 				if (rdd <= FANTIES_SIGHT_DISTANCE)
 					en_an_state [enit] = TYPE_6_PURSUING;
@@ -85,8 +86,8 @@
 
 	#ifdef FANTIES_TYPE_HOMING
 		if (en_an_state [enit] == TYPE_6_RETREATING && 
-			_en_x == _en_x && 
-			_en_y == _en_y
+			_en_x == _en_x1 && 
+			_en_y == _en_y1
 			) 
 			en_an_state [enit] = TYPE_6_IDLE;
 	#endif
