@@ -791,7 +791,7 @@ Tendremos que definir los comportamientos de los 48 tiles sin importar que nuest
 
 Para poner los valores, simplemente abrimos el tileset y nos fijamos, están en el mismo orden en el que aparecen los tiles en el tileset:
 
-![Tileset de Dogmole](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_tileset_16.jpg)
+![Tileset de Dogmole](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_tileset_16.png)
 
 unsigned char behs [] = {
     0, 8, 8, 8, 8, 8, 0, 8, 4, 0, 8, 1, 0, 0, 0,10,
