@@ -1,6 +1,6 @@
 # Dogmole Tuppowski And The Mesmerizing Meemaid From Miskatonic
-# Copyleft 2013 by The Mojon Twins.
-# Churrera 3.1
+# Copyleft 2013, 2020 by The Mojon Twins.
+# MTE MK1 v5
 
 # flags:
 # 1	- cuenta general de objetos.
@@ -39,25 +39,27 @@ ENTERING SCREEN 0
 	# Decoración y pedestal
 	IF TRUE
 	THEN
-		# Pedestal
-		SET TILE (3, 7) = 22
-		SET TILE (4, 7) = 23
-		# Decoración
-		SET TILE (1, 5) = 29
-		SET TILE (1, 6) = 20
-		SET TILE (1, 7) = 21
-		SET TILE (6, 6) = 20
-		SET TILE (6, 7) = 21
-		SET TILE (7, 7) = 28
-		SET TILE (1, 2) = 27
-		SET TILE (1, 3) = 28
-		SET TILE (2, 2) = 29
-		SET TILE (2, 3) = 27
-		SET TILE (3, 2) = 32
-		SET TILE (3, 3) = 33
-		SET TILE (9, 1) = 30
-		SET TILE (9, 2) = 30
-		SET TILE (9, 3) = 31
+		DECORATIONS
+			# Pedestal
+			3, 7, 22
+			4, 7, 23
+		
+			# Decoración
+			1, 5, 29
+			1, 6, 20
+			1, 7, 21
+			6, 6, 20
+			6, 7, 21
+			7, 7, 28
+			1, 2, 27
+			1, 3, 28
+			2, 2, 29
+			2, 3, 27
+			3, 2, 32
+			3, 3, 33
+			9, 1, 30
+			9, 2, 30
+			9, 3, 31
 	END
 END
 
@@ -90,13 +92,15 @@ ENTERING SCREEN 1
 	# Cartel de miskatonic, etc.
 	IF TRUE
 	THEN
-		SET TILE (7, 2) = 24
-		SET TILE (8, 2) = 25
-		SET TILE (9, 2) = 26
-		SET TILE (1, 6) = 32
-		SET TILE (1, 7) = 33
-		SET TILE (13, 6) = 32
-		SET TILE (13, 7) = 33
+		DECORATIONS
+			7, 2, 24
+			8, 2, 25
+			9, 2, 26
+			1, 6, 32
+			1, 7, 33
+			13, 6, 32
+			13, 7, 33
+		END
 	END
 END
 

@@ -248,82 +248,141 @@ Donde `(x, y)` es la coordenada (recuerda, tenemos 15×10 tiles en la pantalla, 
 			SET TILE (9, 3) = 31
 		END
 	END
-`` 
-
-Lo que conseguiremos con esto es que ahora la pantalla 0 se muestre así en el juego:
-
-
+```
 
 Vale, has escrito tu primera cláusula. No ha sido tan complicado ¿verdad?. Supongo que para que la satisfacción sea completa querrás verlo. Bien: vamos a añadir un poco de código que luego eliminaremos de la versión definitiva y que usaremos para irnos a la pantalla que queramos al empezar el güego y probar así que lo estamos haciendo todo bien.
 
-Si recuerdas, una de las posibles secciones que podemos añadir al script es la que se ejecuta justo al principio del güego: ENTERING GAME, que es la que venía vacía al principio y hemos borrado porque no nos servía para nada. Bien, pues vamos a hacer una ENTERING GAME que nos servirá para irnos directamente a la pantalla 0 al principio y comprobar que hemos colocado guay todos los tiles en los comandos de la cláusula de la sección ENTERING SCREEN 0. Añadimos, por tanto, este código (puedes añadirlo donde quieras, pero yo suelo dejarlo al principio. Da igual donde lo pongas, pero siempre mola seguir un orden).
+Si recuerdas, una de las posibles secciones que podemos añadir al script es la que se ejecuta justo al principio del güego: `ENTERING GAME`, que es la que venía vacía al principio y hemos borrado porque no nos servía para nada. Bien, pues vamos a hacer una `ENTERING GAME` que nos servirá para irnos directamente a la pantalla 0 al principio y comprobar que hemos colocado guay todos los tiles en los comandos de la cláusula de la sección `ENTERING SCREEN 0`. Añadimos, por tanto, este código (puedes añadirlo donde quieras, pero yo suelo dejarlo al principio. Da igual donde lo pongas, pero siempre mola seguir un orden).
 
-ENTERING GAME
-IF TRUE
-THEN
-WARP_TO 0, 12, 2
-END
-END
+```
+	ENTERING GAME
+		IF TRUE
+		THEN
+			WARP_TO 0, 12, 2
+		END
+	END
+```
+
 ¿Qué hace esto? Pues hará que, al empezar el juego, se ejecute esa lista de cláusulas formada por una única cláusula, que siempre se ejecutará (porque tiene IF TRUE) y que lo que hace es trasladarnos a la coordenada (12, 2) de la pantalla 0, porque eso es lo que hace el comando WARP:
 
-WARP_TO n, x, y
-Nos traslada a la pantalla x, y nos hace aparecer en las coordenadas (x, y).
+`WARP_TO n, x, y` Nos traslada a la pantalla n, y nos hace aparecer en las coordenadas (x, y).
 
-¿Qué pasará? Ooooh, oooh. Es sencillo: cuando el jugador empiece la partida se ejecutará la sección ENTERING GAME. Esta sección lo único que hace es trasladar al jugador a la posición (2, 2) y cambiar a la pantalla 0. Entonces, al entrar en la pantalla 0, se ejecutará la sección ENTERING SCREEN 0, que nos pintará los tiles extra. ¡Vamos a probarlo! Compila el güego y ejecútalo. Si todo va bien, deberíamos aparecer en nuestra pantalla 0 decorada:
+Cuando el jugador empiece la partida se ejecutará la sección `ENTERING GAME`. Esta sección lo único que hace es trasladar al jugador a la posición (12, 2) y cambiar a la pantalla 0. Entonces, al entrar en la pantalla 0, se ejecutará la sección `ENTERING SCREEN 0`, que nos pintará los tiles extra. ¡Vamos a probarlo! Compila el güego y ejecútalo. Si todo va bien, deberíamos aparecer en nuestra pantalla 0 decorada:
 
-
+![Pantalla 0 de Dogmole con decoraciones](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/08_dogmole_screen0_decos.png)
 
 ¡Hala! Jodó, qué bien. Más, más. Vamos a pintar más tiles para decorar otras pantallas. Exactamente de la misma forma que hemos decorado la pantalla 0, vamos a decorar también la pantalla 1, colocando el cartel de la Universidad de Miskatonic (tiles 24, 25, y 26) y unas armaduras (tiles 32 y 33):
 
-# Pasillo de la universidad
-ENTERING SCREEN 1
-# Cartel de miskatonic, etc.
-IF TRUE
-THEN
-SET TILE (7, 2) = 24
-SET TILE (8, 2) = 25
-SET TILE (9, 2) = 26
-SET TILE (1, 6) = 32
-SET TILE (1, 7) = 33
-SET TILE (13, 6) = 32
-SET TILE (13, 7) = 33
-END
-END
-¡Vamos a verlo! Cambia ENTERING_GAME para saltar a la pantalla 1 en vez de la pantalla 0:
+```
+	# Pasillo de la universidad
+	ENTERING SCREEN 1
+		# Cartel de miskatonic, etc.
+		IF TRUE
+		THEN
+			SET TILE (7, 2) = 24
+			SET TILE (8, 2) = 25
+			SET TILE (9, 2) = 26
+			SET TILE (1, 6) = 32
+			SET TILE (1, 7) = 33
+			SET TILE (13, 6) = 32
+			SET TILE (13, 7) = 33
+		END
+	END
+```
 
-ENTERING GAME
-IF TRUE
-THEN
-WARP_TO 1, 12, 2
-END
-END
+¡Vamos a verlo! Cambia `ENTERING_GAME` para saltar a la pantalla 1 en vez de la pantalla 0:
+
+```
+	ENTERING GAME
+		IF TRUE
+			THEN
+			WARP_TO 1, 12, 2
+		END
+	END
+```
+
 Compila, ejecuta… et voie-la!
 
 
+![Pantalla 1 de Dogmole con decoraciones](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/08_dogmole_screen1_decos.png)
 
 De la misma manera añadimos código para poner más decoraciones en el mapa. La verdad es que nos aburrimos pronto y sólo hay mandanga en la pantalla 6 (una lámpara) y la pantalla 18 (un ancla en la playa). ¿Por qué no aprovechas tú y pones más? Estas son las que vienen en el juego original:
 
-ENTERING SCREEN 6
-IF TRUE
-THEN
-SET TILE (10, 1) = 30
-SET TILE (10, 2) = 31
-SET TILE (10, 4) = 35
-END
-END
-ENTERING SCREEN 18
-IF TRUE
-THEN
-SET TILE (4, 8) = 34
-END
-END
+```
+	ENTERING SCREEN 6
+		IF TRUE
+		THEN
+			SET TILE (10, 1) = 30
+			SET TILE (10, 2) = 31
+			SET TILE (10, 4) = 35
+			END
+			END
+			ENTERING SCREEN 18
+			IF TRUE
+			THEN
+			SET TILE (4, 8) = 34
+		END
+	END
+```
 
-Creo que lo voy pillando
+## Decoraciones más mejor (y menos peor)
+
+Cuando tienes que pintar más de tres tiles tenemos un atajo que hace que el script sea más rápido de escribir y que además ocupe menos bytes. Se trata de emplear el comando `DECORATIONS`, al que deberá seguir una lista de posiciones de tile y números de tile, uno por linea, terminados con un `END`. De este modo, el script que habíamos introducido para las pantallas 0 y 1 se convierte en:
+
+```
+	# Vestíbulo de la universidad
+	ENTERING SCREEN 0
+		# Decoración y pedestal
+		IF TRUE
+		THEN
+			DECORATIONS
+				# Pedestal
+				3, 7, 22
+				4, 7, 23
+			
+				# Decoración
+				1, 5, 29
+				1, 6, 20
+				1, 7, 21
+				6, 6, 20
+				6, 7, 21
+				7, 7, 28
+				1, 2, 27
+				1, 3, 28
+				2, 2, 29
+				2, 3, 27
+				3, 2, 32
+				3, 3, 33
+				9, 1, 30
+				9, 2, 30
+				9, 3, 31
+		END
+	END
+
+	# Pasillo de la universidad
+	ENTERING SCREEN 1
+		# Cartel de miskatonic, etc.
+		IF TRUE
+		THEN
+			DECORATIONS
+				7, 2, 24
+				8, 2, 25
+				9, 2, 26
+				1, 6, 32
+				1, 7, 33
+				13, 6, 32
+				13, 7, 33
+			END
+		END
+	END
+```
+
+Semánticamente esto es equivalente 100% a lo que habíamos escrito, pero hace que el script ocupe menos y se ejecute más rápido, ya que al entrar en "modo ristra de impresiones de tiles" el intérprete tiene que hacer menos trabajo. Y es una de las cosas nuevas de msc3 que hemos inyectado directamente de MK2 para la v5 de MK1.
+
+## Creo que lo voy pillando
 
 Pues es el momento para dejarlo. Intenta absorber bien estos conocimientos, empápatelos bien. Si no has pillado algo de aquí, no tengas prisa y espérate a que sigamos, que seguramente lo terminarás entendiendo. Y, como siempre, lo que quieras preguntar ¡pregúntalo!
 
 En el siguiente capítulo meteremos la chicha del gameplay: detectaremos que se han muerto todos los hechiceros para quitar el piedro de la entrada de la universidad, y programaremos la lógica para ir dejando las cajas en el vestíbulo.
 
-Hasta entonces, cacharrea con esto. En el archivo con el material de este capítulo tienes el Dogmole con el script a medio hacer con las cosas que hemos visto en este capítulo.
-
-The Mojon Twins
+Hasta entonces, cacharrea con esto. En el archivo con el material de este capítulo tienes el script de **Dogmole** a medio hacer con las cosas que hemos visto en este capítulo y el `work.png` con el tileset completo.
