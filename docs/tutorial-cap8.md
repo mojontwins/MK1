@@ -2,7 +2,7 @@
 
 Antes que nada, bájate el paquete de materiales correspondiente a este capítulo pulsando en este enlace:
 
-http://www.mojontwins.com/churrera/churreratut-capitulo8.zip
+[Material del capítulo 8](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-zip/churreratut-capitulo8.zip)
 
 ## ¡Hombre, por fin!
 
