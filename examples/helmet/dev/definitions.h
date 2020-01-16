@@ -138,7 +138,7 @@ unsigned char *_baddies_pointer;
 	unsigned char bullets_estado [MAX_BULLETS];
 	#ifdef LIMITED_BULLETS
 		unsigned char bullets_life [MAX_BULLETS];
-	#endif	
+	#endif		
 #endif
 
 // atributos de la pantalla: Contiene información
@@ -190,8 +190,12 @@ CTIMER ctimer;
 #endif
 
 #if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
-unsigned char just_pushed;
+	unsigned char just_pushed;
 #endif
+
+#ifdef FIRE_TO_PUSH	
+	unsigned char pushed_any;
+#endif	
 
 // Engine globals (for speed) & size!
 

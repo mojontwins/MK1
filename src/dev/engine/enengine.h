@@ -254,7 +254,7 @@ void enems_move (void) {
 			#endif
 		#endasm
 
-		#ifdef PLAYER_CAN_FIRE
+		#if defined PLAYER_CAN_FIRE || defined ENABLE_PURSUERS
 			_en_cx = _en_x; _en_cy = _en_y;
 		#endif
 		

@@ -540,16 +540,13 @@ unsigned char player_move (void) {
 		#endif	
 	#endif
 
-	#ifdef FIRE_TO_PUSH	
-	pushed_any = 0;
-	#endif
-
 	#if defined (PLAYER_PUSH_BOXES) || !defined (DEACTIVATE_KEYS)
 		gpx = p_x >> 6;
 		cx1 = (gpx + 8) >> 4;
 		cy1 = (gpy + 8) >> 4;
-		#ifdef PLAYER_GENITAL
+		#ifdef PLAYER_MOGGY_STYLE
 			if (wall_v == WTOP) {
+
 				// interact up			
 				#if defined (BOUNDING_BOX_8_BOTTOM)
 					cy1 = (gpy + 7) >> 4;
@@ -610,20 +607,18 @@ unsigned char player_move (void) {
 	#ifdef PLAYER_CAN_FIRE
 		// Disparos
 		#ifdef USE_TWO_BUTTONS
-			#ifdef FIRE_TO_PUSH	
-				if (((pad0 & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) && p_disparando == 0 && !pushed_any) {
-			#else
-				if (((pad0 & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) && p_disparando == 0) {
-			#endif
+			if (((pad0 & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) && p_disparando == 0) {			
 		#else
-			#ifdef FIRE_TO_PUSH	
-				if ((pad0 & sp_FIRE) == 0 && p_disparando == 0 && !pushed_any) {
-			#else
-				if ((pad0 & sp_FIRE) == 0 && p_disparando == 0) {
-			#endif
+			if ((pad0 & sp_FIRE) == 0 && p_disparando == 0) {			
 		#endif
 			p_disparando = 1;
-			bullets_fire ();
+			#ifdef FIRE_TO_PUSH	
+				if (pushed_any == 0)
+			#endif
+				bullets_fire ();
+			#ifdef FIRE_TO_PUSH	
+				else pushed_any = 0;
+			#endif
 		}
 		
 		if ((pad0 & sp_FIRE)) 

@@ -314,10 +314,6 @@ void espera_activa (int espera) {
 	}
 #endif
 
-#ifdef FIRE_TO_PUSH	
-	unsigned char pushed_any;
-#endif
-
 #ifdef ACTIVATE_SCRIPTING
 	void run_fire_script (void) {
 		run_script (2 * MAP_W * MAP_H + 2); 		// PRESS_FIRE AT ANY
@@ -336,7 +332,7 @@ void process_tile (void) {
 					if ((pad0 & sp_FIRE) == 0)
 				#endif
 			#endif		
-			{
+			{ 
 				if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 < 15 && y1 < 10) {
 					#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
 						flags [MOVED_TILE_FLAG] = map_buff [COORDS(x1,y1)];

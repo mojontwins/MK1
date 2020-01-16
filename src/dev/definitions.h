@@ -121,7 +121,7 @@ signed char _en_life;
 int _en_an_x, _en_an_y, _en_an_vx, _en_an_vy;
 unsigned char *_baddies_pointer;
 
-#ifdef PLAYER_CAN_FIRE
+#if defined PLAYER_CAN_FIRE || defined ENABLE_PURSUERS
 	unsigned char _en_cx, _en_cy;
 #endif
 
@@ -138,7 +138,7 @@ unsigned char *_baddies_pointer;
 	unsigned char bullets_estado [MAX_BULLETS];
 	#ifdef LIMITED_BULLETS
 		unsigned char bullets_life [MAX_BULLETS];
-	#endif	
+	#endif		
 #endif
 
 // atributos de la pantalla: Contiene información
@@ -190,8 +190,12 @@ CTIMER ctimer;
 #endif
 
 #if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
-unsigned char just_pushed;
+	unsigned char just_pushed;
 #endif
+
+#ifdef FIRE_TO_PUSH	
+	unsigned char pushed_any;
+#endif	
 
 // Engine globals (for speed) & size!
 

@@ -123,8 +123,7 @@ unsigned char rand (void) {
 			
 			;; Ahora [SEED] = HL
 		
-			ld 	a, (_asm_int)
-			ld  l, a
+			ld  l, e
 			ret
 	#endasm
 }
