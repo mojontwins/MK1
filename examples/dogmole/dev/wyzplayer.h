@@ -44,7 +44,7 @@ void wyz_init (void) {
 }
 
 void wyz_play_sound (unsigned char fx_number) {
-	asm_int [0] = fx_number;
+	asm_int = fx_number;
 	
 	#asm
 		di
@@ -60,7 +60,7 @@ void wyz_play_sound (unsigned char fx_number) {
 }
 
 void wyz_play_music (unsigned char song_number) {
-	asm_int [0] = song_number;
+	asm_int = song_number;
 
 	#asm
 		di

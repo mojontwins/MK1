@@ -31,13 +31,13 @@ void hotspots_do (void) {
 								#ifdef MODE_128K
 									wyz_play_sound (3);
 								#else
-									beeper_fx (9);
+									beep_fx (9);
 								#endif
 							} else {
 								#ifdef MODE_128K
 									wyz_play_sound (5);
 								#else
-									beeper_fx (4);
+									beep_fx (4);
 								#endif
 								_x = hotspot_x >> 4; _y = hotspot_y >> 4; _t = 17;
 								draw_invalidate_coloured_tile_gamearea ();
@@ -52,7 +52,7 @@ void hotspots_do (void) {
 							#ifdef MODE_128K
 								wyz_play_sound (5);
 							#else
-								beeper_fx (9);
+								beep_fx (9);
 							#endif
 
 							#ifdef GET_X_MORE
@@ -77,7 +77,7 @@ void hotspots_do (void) {
 						#ifdef MODE_128K
 							wyz_play_sound (3);
 						#else
-							beeper_fx (7);
+							beep_fx (7);
 						#endif
 						break;
 				#endif
@@ -89,7 +89,7 @@ void hotspots_do (void) {
 					#ifdef MODE_128K
 						wyz_play_sound (5);
 					#else	
-						beeper_fx (8);
+						beep_fx (8);
 					#endif
 					break;
 
@@ -102,7 +102,7 @@ void hotspots_do (void) {
 						#ifdef MODE_128K
 							wyz_play_sound (3);
 						#else
-							beeper_fx (9);
+							beep_fx (9);
 						#endif
 						break;
 				#endif
@@ -116,7 +116,7 @@ void hotspots_do (void) {
 						#ifdef MODE_128K
 							wyz_play_sound (3);
 						#else
-							beeper_fx (7);
+							beep_fx (7);
 						#endif
 						break;
 				#endif
@@ -127,7 +127,7 @@ void hotspots_do (void) {
 						#ifdef MODE_128K
 							wyz_play_sound (3);
 						#else
-							beeper_fx (7);
+							beep_fx (7);
 						#endif
 						break;						
 				#endif

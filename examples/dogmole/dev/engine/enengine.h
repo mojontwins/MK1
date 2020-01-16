@@ -358,18 +358,14 @@ void enems_move (void) {
 								enems_draw_current ();
 								sp_UpdateNow ();
 
-								beeper_fx (5);
+								beep_fx (5);
 								en_an_next_frame [enit] = sprite_18_a;
 								_en_t |= 16;			// Mark as dead
 							
 								p_killed ++;
 							#endif					
 							#ifdef ACTIVATE_SCRIPTING					
-								// Run this screen fire script or "entering any".
-								script = f_scripts [n_pant];
-								run_script ();
-								script = e_scripts [MAP_W * MAP_H + 1];
-								run_script ();
+								run_script (2 * MAP_W * MAP_H + 5); 	// PLAYER_KILLS_ENEMY
 							#endif
 						} else
 					#endif
@@ -459,7 +455,7 @@ void enems_move (void) {
 										#endasm
 										wyz_play_sound (6);
 									#else															
-										beeper_fx (5);
+										beep_fx (5);
 									#endif
 									en_an_next_frame [enit] = sprite_18_a;
 									if (_en_t != 7) _en_t |= 16;
@@ -471,11 +467,7 @@ void enems_move (void) {
 									#endif	
 
 									#ifdef ACTIVATE_SCRIPTING					
-										// Run this screen fire script or "entering any".
-										script = f_scripts [n_pant];
-										run_script ();
-										script = e_scripts [MAP_W * MAP_H + 1];
-										run_script ();
+										run_script (2 * MAP_W * MAP_H + 5); 	// PLAYER_KILLS_ENEMY
 									#endif						
 								}
 							}

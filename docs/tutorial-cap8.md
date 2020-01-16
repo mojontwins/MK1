@@ -36,177 +36,224 @@ Para saber en qué momentos el motor del güego llama al motor de scripting, ten
 
 3. `ENTERING GAME`: se ejecuta una sola vez al empezar el juego. Es lo primero que se ejecuta. Lo puedes usar para inicializar el valor de variables, por ejemplo. Ya veremos esto luego.
 
-4. `PRESS_FIRE AT SCREEN n`: con `n` siendo un número de pantalla, se ejecuta en varios supuestos estando en la pantalla `n`: si el jugador pulsa el botón de acción, al empujar un bloque si hemos activado la directiva `PUSHING_ACTION`, al matar un enemigo, o al entrar en una zona especial definida desde scripting llamada “fire zone” (que ya explicaremos) si hemos activado la directiva `ENABLE_FIRE_ZONE`. Normalmente usaremos estas secciones para reaccionar a las acciones del jugador.
+4. `PRESS_FIRE AT SCREEN n`: con `n` siendo un número de pantalla, se ejecuta en varios supuestos estando en la pantalla `n`: si el jugador pulsa el botón de acción, al empujar un bloque si hemos activado la directiva `PUSHING_ACTION`, o al entrar en una zona especial definida desde scripting llamada “fire zone” (que ya explicaremos) si hemos activado la directiva `ENABLE_FIRE_ZONE`. Normalmente usaremos estas secciones para reaccionar a las acciones del jugador.
 
 5. `PRESS_FIRE AT ANY`: se ejecuta en todos los supuestos anteriores, para cualquier pantalla, justo antes de `PRESS_FIRE AT SCREEN n`. O sea, si pulsamos acción en la pantalla 7, se ejecutarán las cláusulas de `PRESS_FIRE AT ANY` y luego las de `PRESS_FIRE AT SCREEN 7`.
 
 6. `ON_TIMER_OFF`: se ejecuta cuando el temporizador llegue a cero, si tenemos activado el temporizador y hemos configurado que ocurra esto con la directiva `TIMER_SCRIPT_0`.
 
-Por cierto, que no es obligatorio escribir todas las secciones posibles. El motor ejecutará una sección sólo si existe. Por ejemplo, si no hay nada que hacer en la pantalla 8, pues no habrá que escribir ninguna sección para la pantalla 8. Si no hay ninguna acción común al entrar en todas las pantallas, no habrá sección ENTERING ANY. Y así. Si no hay nada que ejecutar, el motor no ejecuta nada y ya.
+7. `PLAYER_KILLS_ENEMY`: Se ejecuta cuando matamos a un malo.
+
+Por cierto, que no es obligatorio escribir todas las secciones posibles. El motor ejecutará una sección sólo si existe. Por ejemplo, si no hay nada que hacer en la pantalla 8, pues no habrá que escribir ninguna sección para la pantalla 8. Si no hay ninguna acción común al entrar en todas las pantallas, no habrá sección `ENTERING ANY`. Y así. Si no hay nada que ejecutar, el motor no ejecuta nada y ya.
 
 A ver, recapitulemos: ¿para qué tanto pifostio de secciones y cacafuti? Muy sencillo: por un lado porque, por lo general, las comprobaciones y acciones serán específicas de una pantalla. Esto es de cajón. Pero lo más importante es que estamos en un micro de 8 bits y no nos podemos permitir estar continuamente haciendo todas las comprobaciones. No tenemos tiempo de frame, por lo que hay que dejarlas para momentos aislados: nadie se va a coscar si se tardan unos milisegundos más al cambiar de pantalla o si la acción se detiene brevemente al pulsar la tecla de acción.
 
-Guardando valores: las flags
+## Guardando valores: las flags
 
-Antes de que podamos seguir, tenemos que explicar otro concepto más: los flags, que no son más que variables donde podemos almacenar valores que posteriormente podremos consultar o modificar desde el script.
+Antes de que podamos seguir, tenemos que explicar otro concepto más: **los flags**, que no son más que **variables** donde podemos almacenar valores que posteriormente podremos consultar o modificar desde el script, y que además **nos sirven en algunos casos para comunicarnos con el motor**, como habrás podido discernir si te empapaste bien del capítulo anterior.
 
-Muchas veces necesitaremos recordar que hemos hecho algo, o contabilizar cosas. Para ello tendremos que almacenar valores, y para ello tenemos las flags. En principio, tenemos 16 flags, numeradas del 0 a al 15, aunque este número puede modificarse fácilmente cambiando una definición de definitions.h (busca #define MAX_FLAGS y cambia el 16 por otro número).
-Cada flag puede almacenar un valor de 0 a 255, lo cual nos da de sobra para un montón de cosas. La mayoría del tiempo sólo estaremos almacenando un valor booleano (0 o 1).
+Muchas veces necesitaremos recordar que hemos hecho algo, o contabilizar cosas. Para ello tendremos que almacenar valores, y para ello tenemos las flags. En principio, tenemos 32 flags, numeradas del 0 a al 31, aunque este número puede modificarse fácilmente cambiando el valor de `MAX_FLAGS` en `my/config.h`.
 
-En el script, la mayoría de las comprobaciones y comandos toman valores numéricos. Por ejemplo, IF PLAYER_TOUCHES 4, 5 evaluará a “cierto” si el jugador está tocando la casilla de coordenadas (4, 5). Si anteponemos un # al número, estaremos referenciando el valor del flag correspondiente, de forma que IF PLAYER_TOUCHES #4, #5 evaluará a “cierto” si el jugador está tocando la casilla de coordenadas almacenadas en los flags 4 y 5, sea cual sea este valor.
+Cada flag puede almacenar **un valor de 0 a 127**, lo cual nos da de sobra para un montón de cosas. La mayoría del tiempo sólo estaremos almacenando un valor booleano (0 o 1).
 
-Este nivel de indirección (apréndete esa palabra para decirla en la discoteca: las nenas caen fulminadas ante los programadores que conocen este concepto) es realmente util porque así podrás ahorrar mucho código. Por ejemplo, es lo que permite, en Cadàveriön, que el control del número de estatuas colocadas o de eliminar la cancela que bloquea la salida de cada pantalla puedan hacerse desde una única sección común: todas las coordenadas están almacenadas en flags y usamos el operador # para acceder a sus valores en las comprobaciones.
+## Valores numéricos y flags
 
-Pero no te preocupes si no pillas esto ahora, que ya se irá aclarando todo.
+En el script, la mayoría de las comprobaciones y comandos toman valores numéricos. Por ejemplo, `IF PLAYER_TOUCHES 4, 5` evaluará a “cierto” si el jugador está tocando la casilla de coordenadas (4, 5). Si anteponemos un # al número, estaremos **referenciando el valor del flag correspondiente**, de forma que `IF PLAYER_TOUCHES #4, #5` evaluará a “cierto” si el jugador está tocando la casilla de coordenadas almacenadas en los flags 4 y 5, sea cual sea este valor.
 
-Afúf.
+Este nivel de indirección (apréndete esa palabra para decirla en la discoteca: las nenas caen fulminadas ante los programadores que conocen este concepto) es realmente util porque así podrás ahorrar mucho código. Por ejemplo, es lo que permite, en **Cadàveriön**, que el control del número de estatuas colocadas o de eliminar la cancela que bloquea la salida de cada pantalla puedan hacerse desde una única sección común: todas las coordenadas están almacenadas en flags y usamos el operador # para acceder a sus valores en las comprobaciones.
 
-¿Mucha información? Soy consciente de ello. Pero en cuanto lo veas en movimiento seguro que lo pillas del tirón. Vamos a empezar con los ejemplos más sencillos de scripting viendo algunas de las secciones que necesitamos para nuestro Dogmole, que iremos construyendo poco a poco. En esto dedicaremos este capítulo y el siguiente. Luego iremos explicando, de forma temática, todas las posibles comprobaciones y comandos que podemos usar.
+## Afúf.
 
-¿Cómo activo el scripting? ¿Dónde se introduce?
+¿Mucha información? Soy consciente de ello. Pero en cuanto lo veas en movimiento seguro que lo pillas del tirón. Vamos a empezar con los ejemplos más sencillos de scripting viendo algunas de las secciones que necesitamos para nuestro **Dogmole**, que iremos construyendo poco a poco. En esto dedicaremos este capítulo y el siguiente. Luego le llegará el turno a **el manual de MSC3**, donde es explica **todo** lo que puedes hacer con el script de una forma más directa.
 
-Para activar el scripting tendremos que hacer dos cosas: primero activarlo y configurarlo en config.h, y luego modificar nuestro make.bat para incluirlo en el proyecto. Empecemos por config.h. Las directivas relacionadas con la activación y configuración del scripting son estas:
+## ¿Cómo activo el scripting? ¿Dónde se meten los comandos?
 
-#define ACTIVATE_SCRIPTING // Activates msc scripting and flag related stuff.
-#define SCRIPTING_DOWN // Use DOWN as the action key.
-//#define SCRIPTING_KEY_M // Use M as the action key instead.
-//#define SCRIPTING_KEY_FIRE // User FIRE as the action key instead.
-//#define ENABLE_EXTERN_CODE // Enables custom code to be run using EXTERN n
-//#define ENABLE_FIRE_ZONE // Allows to define a zone which auto-triggers «FIRE»
-La primera directiva, ACTIVATE_SCRIPTING, es la que activará el motor de scripting, y añadirá el código necesario para que se ejecute la sección correcta del script en el momento preciso. Es la que tenemos que activar sí o sí.
+Para activar el scripting tendremos activarlo y configurarlo en `my/config.h`. Recordemos que las directivas relacionadas con la activación y configuración del scripting son estas:
 
-De las tres siguientes, tendremos que activar solo una, y sirven para configurar qué tecla será la tecla de acción, la que lance los scripts PRESS_FIRE AT ANY y PRESS_FIRE AT SCREEN n. La primera, SCRIPTING_DOWN, configura la tecla “abajo”. Esta es perfecta para güegos de perspectiva lateral, ya que esta tecla no se usa para nada más. La segunda, SCRIPTING_KEY_M habilita la tecla “M” para lanzar el script. La tercera, SCRIPTING_KEY_FIRE, configura la tecla de disparo (o el botón del joystick) para tal menester. Obviamente, si tu juego incluye disparos, no puedes usar esta configuración. Bueno, si puedes, pero allá tú.
+```c
+	#define ACTIVATE_SCRIPTING					// Activates msc scripting and flag related stuff.
+	#define MAX_FLAGS 					32
+	#define SCRIPTING_DOWN						// Use DOWN as the action key.
+	//#define SCRIPTING_KEY_M					// Use M as the action key instead.
+	//#define SCRIPTING_KEY_FIRE				// User FIRE as the action key instead.
+	//#define ENABLE_EXTERN_CODE				// Enables custom code to be run from the script using EXTERN n
+	//#define ENABLE_FIRE_ZONE					// Allows to define a zone which auto-triggers "FIRE"
+```
 
-La siguiente directiva, ENABLE_EXTERN_CODE, la dejarás normalmente desactivada a menos que seas un maestro churrero. Hay un comando de script especial, EXTERN n, donde n es un número, que lo que hace es llamar a una función de C situada en el archivo extern.h pasándole ese número. En esta función puedes añadir el código C que te de la gana y que necesites para hacer cosas divertidas. Por ejemplo, D_Skywalk lo ha usado en Justin and the Lost Abbey para añadir el código que va pintando los trozos de la espada que hemos recogido en el marcador. Si no vas a necesitar programar tus propios comportamientos en C, déjala desactivada y ahorra unos bytes.
+La primera directiva, `ACTIVATE_SCRIPTING`, es la que activará el motor de scripting, y añadirá el código necesario para que se ejecute la sección correcta del script en el momento preciso. Como hemos mencionado, `MAX_FLAGS` controla el número de flags disponible.
 
-Por último, ENABLE_FIRE_ZONE sirve para que podamos definir un rectángulo especial dentro del area de juego de la pantalla en curso. Normalmente, usaremos en ENTERING SCREEN n para definir el rectángulo usando el comando SET_FIRE_ZONE x1, y1, x2, y2. Cuando el jugador esté dentro de este rectángulo especial, se ejecutarán los scripts PRESS_FIRE AT ANY y PRESS_FIRE AT SCREEN n de la pantalla actual. Esto viene realmente bien para poder ejecutar acciones sin que el jugador tenga que pulsar la tecla de acción. Es lo que usamos en Sgt. Helmet para poner las bombas en la pantalla final o mostrar el mensaje “VENDO MOTO SEMINUEVA”. Si crees que vas a necesitar esto, activa esta directiva. Si no, déjala sin activar y ahorra unos bytes. No te preocupes que ya explicaremos esto más despacio.
-Lo siguiente es configurar bien make.bat, activando la compilación e inclusión del script. Si abres make.bat y te fijas, verás que al principio hay una llamada a msc. Este es el compilador de scripts, que recibe el nombre del archivo de script, el nombre de salida (que será msc.h) y el número de pantallas total de tu juego:
+De las tres siguientes, tendremos que activar solo una, y sirven para configurar qué tecla será la tecla de acción, la que lance los scripts `PRESS_FIRE AT ANY` y `PRESS_FIRE AT SCREEN n`, o sea, **la tecla de acción**. La primera, `SCRIPTING_DOWN`, configura la tecla “abajo”. Esta es perfecta para güegos de perspectiva lateral, ya que esta tecla no se usa para nada más. La segunda, `SCRIPTING_KEY_M` habilita la tecla “M” para lanzar el script. La tercera, `SCRIPTING_KEY_FIRE`, configura la tecla de disparo (o el botón del joystick) para tal menester. Obviamente, si tu juego incluye disparos, no puedes usar esta configuración. Bueno, si puedes, pero allá tú.
 
-echo ### COMPILANDO SCRIPT ###
-cd ..script
-msc cadaver.spt msc.h 20
-copy *.h ..dev
-El nombre de tu script será el nombre de tu juego con un .spt como extensión. El archivo se ubica en script. Si entras en script verás un churromain.spt. Cambiale el nombre para que coincida con el nombre de tu juego (el mismo de tu archivo .c de dev). No te olvides del número de pantallas, que es muy importante. Si no lo pones bien el código del intérprete de scripts se generará mal. Para nuestro Dogmole, el archivo será devdogmole.spt, y en el make.bat tendremos que poner:
+La siguiente directiva, `ENABLE_EXTERN_CODE`, sirve para ejecutar código C que escribas tú desde el script. Hay un comando de script especial, `EXTERN n`, donde `n` es un número de 0 a 255, que lo que hace es llamar a una función de C situada en el archivo `my/extern.h` pasándole ese número. En esta función puedes añadir el código C que te de la gana y que necesites para hacer cosas divertidas. Si no vas a necesitar programar tus propios comportamientos en C, déjala desactivada y ahorra unos bytes.
 
-echo ### COMPILANDO SCRIPT ###
-cd ..script
-msc dogmole.spt msc.h 24
-copy *.h ..dev
-Porque nuestro Dogmole tiene 24 pantallas.
-Si ahora vas a script y abres el archivo con el script (que antes se llamaba churromain.spt y has renombrado con el nombre de tu güego) verás que está vacío, o casi. Sólo trae un esqueleto de una sección. Tiene esta pinta:
+Por último, `ENABLE_FIRE_ZONE` sirve para que podamos definir un rectángulo especial dentro del area de juego de la pantalla en curso. Normalmente, usaremos en `ENTERING SCREEN n` para definir el rectángulo usando el comando `SET_FIRE_ZONE x1, y1, x2, y2` (en pixels) o `SET_FIRE_ZONE_TILES x1, y1, x2, y2` (en coordenadas de tiles, más fáciles de manejar). Cuando el jugador esté dentro de este rectángulo especial, se ejecutarán los scripts `PRESS_FIRE AT ANY` y `PRESS_FIRE AT SCREEN n` de la pantalla actual. Esto viene realmente bien para poder ejecutar acciones sin que el jugador tenga que pulsar la tecla de acción. Es lo que usamos en **Sgt. Helmet** para poner las bombas en la pantalla final o mostrar el mensaje `VENDO MOTO SEMINUEVA`. Si crees que vas a necesitar esto, activa esta directiva. Si no, déjala sin activar y ahorra unos bytes. No te preocupes que ya explicaremos esto más despacio.
 
-# Título tonto
-# Copyleft 201X tu grupo roneón soft.
-# Churrera 3.1
-# flags:
-# 1 –
+### El compilador de scripts `msc3_mk1`
 
-ENTERING GAME
-IF TRUE
-THEN
-SET FLAG 1 = 0
-END
-END
+Lo siguiente que hay que hacer es modificar levemente una linea de `compile.bat`, ya que el compilador de scripts, `msc3_mk1`, **necesita saber el número de pantallas que hay en tu mapa**, esto es, **el valor de `MAP_W * MAP_H`**. En el caso de **Dogmole**, que tenemos un mapa de 8x3 pantallas, este valor será **24**.
 
-Es aquí donde vamos a escribir nuestro script. Fíjate el aspecto que tiene: eso que hay ahí es la sección ENTERING GAME, que se ejecuta nada más empezar la partida. Dentro de esta sección hay una única cláusula. Esta cláusula sólo tiene una comprobación: IF TRUE, que siempre será cierto. Luego hay un THEN y justo ahí, y hasta el END, empieza la lista de comandos. En este caso hay un único comando: SET FLAG 1 = 0, que pone el flag 1 a 0.
+`msc3_mk1`, el compilador de scripts, recibe los siguientes parámetros, que nos chiva el propio programa al ejecutarlo desde la ventana de linea de comandos:
+
+```
+	$ ..\utils\msc3_mk1.exe
+	MojonTwins Scripts Compiler v3.97 20191202
+	MT Engine MK1 v5.00+
+
+	usage: msc3_mk1 input n_rooms [rampage]
+
+	input   - script file
+	n_pants - # of screens
+	rampage - If included, generate code to read script from ram N
+```
+
+Vemos que necesita saber el archivo de entrada que contiene el script (incluyendo la ruta si es necesaria), el número total de habitaciones, y que luego admite un parámetro opcional "rampage" que sirve para generar scripts que puedan almacenarse en la RAM extra de los Spectrum de 128K y que por ahora obviaremos.
+
+Examinemos pues la linea que nos interesa en `compile.bat`. La encontrarás justo al principio. La ajustamos con el número correcto de pantallas para **Dogmole**, que es 24:
+
+```
+	..\utils\msc3_mk1.exe %game%.spt 24
+```
+
+Que el archivo de entrada esté referenciado com %game%.spt significa que tienes que llamarlo justo así: con el identificador que has puesto al principio de este archivo en la linea `set game=dogmole`, o sea, `dogmole.spt`. El archivo deberá estar en `/script`.
+
+Puedes crear un archivo `dogmole.spt` vacío o **renombrar** el archivo base que hay, `script.spt`. Hagamos esto último. Le cambiamos el nombre a `script.spt` por `dogmole.spt`. Si lo abres verás este sencillo script mínimo.
+
+```
+	# Script mínimo que no hace nada
+	# MTE MK1 v5.0
+
+	# flags:
+	# 1	- 
+
+	ENTERING GAME
+		IF TRUE
+		THEN
+			SET FLAG 1 = 0
+		END
+	END
+```
+
+Es aquí donde vamos a escribir nuestro script. Fíjate el aspecto que tiene: eso que hay ahí es la sección `ENTERING GAME`, que se ejecuta nada más empezar la partida. Dentro de esta sección hay una única cláusula. Esta cláusula sólo tiene una comprobación: `IF TRUE`, que siempre será cierto. Luego hay un `THEN` y justo ahí, y hasta el `END`, empieza la **lista de comandos**. En este caso hay un único comando: `SET FLAG 1 = 0`, que sencillamente pone el flag 1 a 0.
 
 Este script no sirve absolutamente para nada. Además de no hacer nada, resulta que el sistema pone todos los flags a 0 al principio, así que no hace falta inicializarlos a cero. ¿Por qué está ahí? No se, joder, para que hubiera algo. De hecho, lo primero que vas a hacer es BORRARLO.
 
-Es interesante modificar esa cabecera. Las lineas que empiezan por # (no tiene por qué ser #, puedes usar ;, por ejemplo, o ', o //, o lo que quieras) son comentarios. Acostúmbrate de poner los comentarios en su propia linea. No pongas comentarios al final de una comprobación o un comando, que el compilador es vago y puede interpretar lo que no es. Y, sobre todo, acostúmbrate a poner comentarios. Así podrás entender qué leches hiciste hace tres días, antes de la borrachera y ese affair con la morena de recepción.
+Es interesante modificar esa cabecera. Las lineas que empiezan por # (no tiene por qué ser #, puedes usar ;, por ejemplo, o ', o //, o lo que quieras) son comentarios. Acostúmbrate de poner los comentarios en su propia linea. No pongas comentarios al final de una comprobación o un comando, que el compilador es vago y puede interpretar lo que no es. Y, sobre todo, acostúmbrate a poner comentarios. Así podrás entender qué leches hiciste hace tres días, antes de la borrachera y ese affair con el moreno de recepción.
 
-Como por ahora las variables (flags) se identifican con un número (tengo pendiente mejorar el compilador para poder definir alias, como bien sugirió D_Skywalk) es buena idea hacerse una lista de qué hace cada una para luego no liarnos. Yo siempre lo hago, mira:
+Como por ahora las variables (flags) se identifican con un número (a partir de cierta versión también se pudo empezar definir alias, que asignan un identificardor a un flag, pero eso lo dejaremos para más adelante) es buena idea hacerse una lista de qué hace cada una para luego no liarnos. Yo siempre lo hago, mira:
 
-# Cadàveriön
-# Copyleft 2013 Mojon Twins
-# Churrera 3.99.2
-# flags:
-# 1 – Tile pisado por el bloque que se empuja
-# 2, 3 – coordenadas X e Y
-# 4, 5 – coordenadas X e Y del tile «retry»
-# 6, 7 – coordenadas X e Y del tile puerta
-# 8 – número de pantallas finalizadas
-# 9 – número de estatuas que hay que colocar
-# 10 – número de estatuas colocadas
-# 11 – Ya hemos quitado la cancela
-# 12 – Pantalla a la que volvemos al agotarse el tiempo
-# 13, 14 – Coordenadas a las que volvemos… bla
-# 15 – Piso
-# 0 – valor de 8 almacenado
-# 16 – Vendo moto seminueva.
+```
+	# Cadàveriön
+	# Copyleft 2013 Mojon Twins
+	# Churrera 3.99.2
+	# flags:
+	# 1 – Tile pisado por el bloque que se empuja
+	# 2, 3 – coordenadas X e Y
+	# 4, 5 – coordenadas X e Y del tile «retry»
+	# 6, 7 – coordenadas X e Y del tile puerta
+	# 8 – número de pantallas finalizadas
+	# 9 – número de estatuas que hay que colocar
+	# 10 – número de estatuas colocadas
+	# 11 – Ya hemos quitado la cancela
+	# 12 – Pantalla a la que volvemos al agotarse el tiempo
+	# 13, 14 – Coordenadas a las que volvemos… bla
+	# 15 – Piso
+	# 0 – valor de 8 almacenado
+	# 16 – Vendo moto seminueva.
+```
 
 ¿Ves? Eso viene genial para saber dónde tienes que tocar.
 
-Mis primeras cláusulas
+## Tus primeras cláusulas chispas
 
 Ya que sabemos dónde tocar, vamos a empezar con nuestro script. Veamos la sintaxis básica. Esto de aquí es la pinta que tiene un script:
 
-SECCION
-COMPROBACIONES
-THEN
-COMANDOS
-END
-…
-END
-…
-Como vemos, cada sección empieza con el nombre de la sección y termina con END. Entre el nombre de la sección y el END están las cláusulas que la componen, que puede ser una, o pueden ser varias. Cada cláusula empieza con una lista de comprobaciones, cada una en una linea, la palabra THEN, una lista de comandos, cada uno en una linea, y la palabra END. Luego puede o no venir otra cláusula.
+```
+	SECCION
+		COMPROBACIONES
+		THEN
+			COMANDOS
+		END
+		…
+	END
+	…
+```
 
-Recuerda el funcionamiento: ejecutar una sección es ejecutar cada una de sus cláusulas, en orden. Ejecutar una cláusula es realizar todas las comprobaciones de la lista de comprobaciones. Si no falla ninguna, o sea, todas son ciertas, se ejecutarán todos los comandos de la lista.
+Como vemos, cada sección empieza con el nombre de la sección y termina con `END`. Entre el nombre de la sección y el `END` están las cláusulas que la componen, que puede ser una, o pueden ser varias. Cada cláusula empieza con una lista de comprobaciones, cada una en una linea, la palabra `THEN`, seguida de una lista de comandos, cada uno en una linea, y la palabra `END`. Luego pueden venir más cláusulas.
 
-Para verlo, vamos a crear un script sencillo que introduzca adornos en algunas pantallas. Vamos a extender el tileset de Dogmole, incluyendo nuevos tiles que no colocaremos desde el mapa (porque ya hemos usado los 16 que tenemos como máximo), sino que colocaremos desde el script. Este es nuestro nuevo tileset ampliado:
+Recuerda el funcionamiento: ejecutar una sección es ejecutar cada una de sus cláusulas, en orden, de arriba a abajo. Ejecutar una cláusula es realizar todas las comprobaciones de la lista de comprobaciones. Si no falla ninguna, o sea, **todas son ciertas**, se ejecutará todos los comandos de la lista.
 
+Para verlo, vamos a crear un script sencillo que introduzca adornos en algunas pantallas. Vamos a extender el tileset de **Dogmole**, incluyendo nuevos tiles que no colocaremos desde el mapa (porque ya hemos usado los 16 que tenemos como máximo), sino que colocaremos desde el script. Este es nuestro nuevo tileset ampliado con adornos o, como los llamamos en el argot mojono, **decoraciones**:
 
+![Tileset de Dogmole con decoraciones](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/08_tileset_dogmole_completo.png)
 
-(Ya sabes qué hacer: reordena, monta con la fuente, cárgalo en SevenuP, pásalo a código, y muevelo a /dev/tileset.h).
+(La magina de esta versión de **MTE MK1** es que cuando cambias el tileset no tienes más que dejarlo en `gfx/work.png`; los usuarios del motor de toda la vida recordarán que antes había que hacerle encaje de bolillos, incluido un paso por el programa SevenuP. ¿Veis? Para hacer este tipo de cosas [utilizo todo el café](https://ko-fi.com/I2I0JUJ9) que me dais).
 
-Ahí hay un montón de cosas que vamos a colocar desde el scripting. El sitio ideal para hacerlo son las secciones ENTERING SCREEN n de las pantallas que queramos adornar, ya que se ejecutan cuando todo lo demás está en su sitio: el fondo ya estará dibujado, por lo que podremos pintar encima. Vamos a empezar decorando la pantalla número 0, que es donde hay que ir a llevar las cajas. Tendremos que colocar el pedestal, formado por los tiles 22 y 23, y además pondremos más adornos: unas vasijas (29), unas cuantas estanterías (20 y 21), unas cuantas cajas (27 y 28), una armadura (32 y 33) y una bombilla colgando de un cable (30 y 31). Empezamos creando la sección ENTERING SCREEN 0 en nuestro scriptdogmole.spt:
+Ahí hay un montón de tiles decorativos que vamos a colocar desde el scripting. El sitio para hacerlo son las secciones `ENTERING SCREEN n` de las pantallas que queramos adornar, ya que se ejecutan cuando todo lo demás está en su sitio: el fondo ya estará dibujado, por lo que podremos pintar encima. Vamos a empezar decorando la pantalla número 0, que es donde hay que ir a llevar las cajas. Tendremos que colocar el pedestal, formado por los tiles 22 y 23, y además pondremos más adornos: unas vasijas (29), unas cuantas estanterías (20 y 21), unas cuantas cajas (27 y 28), una armadura (32 y 33) y una bombilla colgando de un cable (30 y 31). Empezamos creando la sección `ENTERING SCREEN 0` en nuestro script `dogmole.spt`:
 
-# Vestíbulo de la universidad
-ENTERING SCREEN 0
-END
+```
+	# Vestíbulo de la universidad
+	ENTERING SCREEN 0
 
-El pintado de los tiles extra se hace desde la lista de comandos de una cláusula. Como queremos que la cláusula se ejecute siempre, emplearemos la condición más sencilla que existe: la que siempre evalúa a cierto y ya vimos más arriba:
+	END
+```
 
-# Vestíbulo de la universidad
-ENTERING SCREEN 0
-# Decoración y pedestal
-IF TRUE
-THEN
-END
-END
+El pintado de los tiles extra se hace desde la lista de comandos de una cláusula. Como queremos que la cláusula se ejecute siempre, emplearemos la condición más sencilla que existe: la que siempre evalúa a cierto y ya vimos más arriba (como verás, utilizo tabulaciones para ayudarme a distinguir mejor la estructura del script. Esto se llama *indentar* y deberías hacerlo tú también. `msc3_mk1` ignora los espacios en blanco así que los usamos simplemente como guía visual humana):
+
+```
+	# Vestíbulo de la universidad
+	ENTERING SCREEN 0
+		# Decoración y pedestal
+		IF TRUE
+		THEN
+		
+		END
+	END
+```
 
 Esto significa que siempre que entremos en la pantalla 0, se ejecutarán los comandos de la lista de comandos de esa cláusula, ya que su única condición SIEMPRE evalúa a cierto.
 
 El comando para pintar un tile en la pantalla tiene esta forma:
 
-SET TILE (x, y) = t
-Donde (x, y) es la coordenada (recuerda, tenemos 15×10 tiles en la pantalla, por lo que x podrá ir de 0 a 14 e y de 0 a 9) y t es el número del tile que queremos pintar. Con el mapa abierto en mappy delante para contar casillas y ver donde tenemos que pintar las cosas, vamos colocando primero el pedestal y luego todas las decoraciones:
+```
+	SET TILE (x, y) = t
+```
 
-# Vestíbulo de la universidad
-ENTERING SCREEN 0
-# Decoración y pedestal
-IF TRUE
-THEN
-# Pedestal
-SET TILE (3, 7) = 22
-SET TILE (4, 7) = 23
-# Decoración
-SET TILE (1, 5) = 29
-SET TILE (1, 6) = 20
-SET TILE (1, 7) = 21
-SET TILE (6, 6) = 20
-SET TILE (6, 7) = 21
-SET TILE (7, 7) = 28
-SET TILE (1, 2) = 27
-SET TILE (1, 3) = 28
-SET TILE (2, 2) = 29
-SET TILE (2, 3) = 27
-SET TILE (3, 2) = 32
-SET TILE (3, 3) = 33
-SET TILE (9, 1) = 30
-SET TILE (9, 2) = 30
-SET TILE (9, 3) = 31
-END
-END
+Donde `(x, y)` es la coordenada (recuerda, tenemos 15×10 tiles en la pantalla, por lo que x podrá ir de 0 a 14 e y de 0 a 9) y t es el número del tile que queremos pintar. Es aquí donde Ponedor vuelve a ser muy util: recuerda que si pasas el ratón por el área de edición **te va chivando las coordenadas de las casillas**. Así pues, con el Ponedor delante para chivar casillas y ver donde tenemos que pintar las cosas, vamos colocando primero el pedestal y luego todas las decoraciones:
+
+```
+	# Vestíbulo de la universidad
+	ENTERING SCREEN 0
+		# Decoración y pedestal
+		IF TRUE
+		THEN
+			# Pedestal
+			SET TILE (3, 7) = 22
+			SET TILE (4, 7) = 23
+			
+			# Decoración
+			SET TILE (1, 5) = 29
+			SET TILE (1, 6) = 20
+			SET TILE (1, 7) = 21
+			SET TILE (6, 6) = 20
+			SET TILE (6, 7) = 21
+			SET TILE (7, 7) = 28
+			SET TILE (1, 2) = 27
+			SET TILE (1, 3) = 28
+			SET TILE (2, 2) = 29
+			SET TILE (2, 3) = 27
+			SET TILE (3, 2) = 32
+			SET TILE (3, 3) = 33
+			SET TILE (9, 1) = 30
+			SET TILE (9, 2) = 30
+			SET TILE (9, 3) = 31
+		END
+	END
+`` 
+
+Lo que conseguiremos con esto es que ahora la pantalla 0 se muestre así en el juego:
+
+
+
 Vale, has escrito tu primera cláusula. No ha sido tan complicado ¿verdad?. Supongo que para que la satisfacción sea completa querrás verlo. Bien: vamos a añadir un poco de código que luego eliminaremos de la versión definitiva y que usaremos para irnos a la pantalla que queramos al empezar el güego y probar así que lo estamos haciendo todo bien.
 
 Si recuerdas, una de las posibles secciones que podemos añadir al script es la que se ejecuta justo al principio del güego: ENTERING GAME, que es la que venía vacía al principio y hemos borrado porque no nos servía para nada. Bien, pues vamos a hacer una ENTERING GAME que nos servirá para irnos directamente a la pantalla 0 al principio y comprobar que hemos colocado guay todos los tiles en los comandos de la cláusula de la sección ENTERING SCREEN 0. Añadimos, por tanto, este código (puedes añadirlo donde quieras, pero yo suelo dejarlo al principio. Da igual donde lo pongas, pero siempre mola seguir un orden).

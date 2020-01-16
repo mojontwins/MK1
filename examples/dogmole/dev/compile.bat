@@ -36,6 +36,7 @@ echo Importando GFX
 echo Compilando guego
 zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 ..\..\..\src\utils\printsize.exe %game%.bin
+..\..\..\src\utils\printsize.exe script.bin
 
 echo Construyendo cinta
 rem cambia LOADER por el nombre que quieres que salga en Program:

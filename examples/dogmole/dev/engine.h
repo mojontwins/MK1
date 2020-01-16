@@ -113,10 +113,10 @@ void game_ending (void) {
 	#ifdef MODE_128K
 	#else
 		gpit = 4; do {
-			beeper_fx (7);
-			beeper_fx (2);
+			beep_fx (7);
+			beep_fx (2);
 		} while (-- gpit);
-		beeper_fx (9);
+		beep_fx (9);
 	#endif
 	
 	espera_activa (500);
@@ -131,10 +131,10 @@ void game_over (void) {
 	#ifdef MODE_128K
 	#else
 		gpit = 4; do {
-			beeper_fx (7);
-			beeper_fx (2);
+			beep_fx (7);
+			beep_fx (2);
 		} while (-- gpit);
-		beeper_fx (9);
+		beep_fx (9);
 	#endif
 
 	espera_activa (500);
@@ -150,10 +150,10 @@ void game_over (void) {
 		#ifdef MODE_128K
 		#else
 			bs = 4; do {
-				beeper_fx (1);
-				beeper_fx (2);
+				beep_fx (1);
+				beep_fx (2);
 			} while (--bs);
-			beeper_fx (0);
+			beep_fx (0);
 		#endif
 		
 		espera_activa (250);
@@ -284,7 +284,7 @@ void espera_activa (int espera) {
 				#ifdef MODE_128K
 					wyz_play_sound (4);
 				#else
-					beeper_fx (6);
+					beep_fx (6);
 				#endif
 
 				#ifdef LIMITED_BULLETS
@@ -320,10 +320,8 @@ void espera_activa (int espera) {
 
 #ifdef ACTIVATE_SCRIPTING
 	void run_fire_script (void) {
-		script = f_scripts [MAP_W * MAP_H];
-		run_script ();
-		script = f_scripts [n_pant];
-		run_script ();
+		run_script (2 * MAP_W * MAP_H + 2); 		// PRESS_FIRE AT ANY
+		run_script ((n_pant << 1) + 1); 			// PRESS_FIRE AT SCREEN n
 	}
 #endif
 
@@ -346,21 +344,15 @@ void process_tile (void) {
 						flags [MOVED_Y_FLAG] = y1;
 					#endif			
 					
-					// Mover
-					map_attr [15 * y1 + x1] = 10;
-					map_buff [15 * y1 + x1] = 14;
-					map_attr [15 * y0 + x0] = 0;
-					map_buff [15 * y0 + x0] = 0;
-					
 					// Pintar
-					_x = x0; _y = y0; _t = 0;  draw_invalidate_coloured_tile_gamearea ();
-					_x = x1; _y = y1; _t = 14; draw_invalidate_coloured_tile_gamearea ();
+					_x = x0; _y = y0; _t = 0; _n = 0; update_tile ();
+					_x = x1; _y = y1; _t = 14; _n = 10; update_tile ();
 					
 					// Sonido
 					#ifdef MODE_128K
 						wyz_play_sound (3);
 					#else			
-						beeper_fx (2);	
+						beep_fx (2);	
 					#endif
 
 					#ifdef FIRE_TO_PUSH			
@@ -380,22 +372,19 @@ void process_tile (void) {
 
 		#ifndef DEACTIVATE_KEYS
 			if (qtile (x0, y0) == 15 && p_keys) {
-				map_attr [COORDS(x0,y0)] = 0;
-				map_buff [COORDS(x0,y0)] = 0;
-		
 				for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) {
 					if (cerrojos [gpit].x == x0 && cerrojos [gpit].y == y0 && cerrojos [gpit].np == n_pant) {
 						cerrojos [gpit].st = 0;
 						break;
 					}
 				}
-				_x = x0; _y = y0; _t = 0;  draw_invalidate_coloured_tile_gamearea ();
+				_x = x0; _y = y0; _t = 0; _n = 0; update_tile ();
 				-- p_keys;
 		
 				#ifdef MODE_128K
 					wyz_play_sound (3);
 				#else
-					beeper_fx (8);
+					beep_fx (8);
 				#endif
 			}
 		#endif
@@ -409,7 +398,7 @@ void draw_scr_background (void) {
 		map_pointer = mapa + (n_pant * 75);
 	#endif
 		
-	seed [0] = n_pant;
+	seed = n_pant;
 
 	_x = VIEWPORT_X; _y = VIEWPORT_Y;
 
@@ -480,6 +469,8 @@ void draw_scr_background (void) {
 }
 
 void draw_scr (void) {
+	is_rendering = 1;
+
 	#ifdef ENABLE_TILANIMS
 		max_tilanims = 0;
 	#endif
@@ -497,10 +488,8 @@ void draw_scr (void) {
 			_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT; _t = LINE_OF_TEXT_ATTR; _gp_gen = "                              "; print_str ();
 		#endif
 		// Ejecutamos los scripts de entrar en pantalla:
-		script = e_scripts [MAP_W * MAP_H + 1];
-		run_script ();
-		script = e_scripts [n_pant];
-		run_script ();
+		run_script (2 * MAP_W * MAP_H + 1); 	// ENTERING ANY
+		run_script (n_pant << 1); 				// ENTERING SCREEN n
 	#endif
 
 	#ifdef PLAYER_CAN_FIRE
@@ -508,6 +497,7 @@ void draw_scr (void) {
 	#endif
 
 	invalidate_viewport ();
+	is_rendering = 0;
 }
 
 void select_joyfunc (void) {
@@ -553,7 +543,7 @@ void select_joyfunc (void) {
 		#ifdef MODE_128K
 			wyz_play_sound (gpaux);
 		#else			
-			beeper_fx (gpaux);
+			beep_fx (gpaux);
 		#endif
 	}
 #endif

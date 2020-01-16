@@ -13,7 +13,7 @@
 
 #define MAP_W						8		//
 #define MAP_H						3		// Map dimensions in screens
-#define SCR_INICIO					16		// Initial screen
+#define SCR_INICIO					0//16		// Initial screen
 #define PLAYER_INI_X				1		//
 #define PLAYER_INI_Y				7		// Initial tile coordinates
 #define SCR_FIN 					99		// Last screen. 99 = deactivated.
@@ -114,7 +114,8 @@
 // Scripting
 // ---------
 
-//#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
+#define ACTIVATE_SCRIPTING					// Activates msc scripting and flag related stuff.
+#define MAX_FLAGS 					32
 #define SCRIPTING_DOWN						// Use DOWN as the action key.
 //#define SCRIPTING_KEY_M					// Use M as the action key instead.
 //#define SCRIPTING_KEY_FIRE				// User FIRE as the action key instead.

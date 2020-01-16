@@ -11,5 +11,6 @@
 [ ] Meter DECORATIONS en el scripting
 [ ] Injection points como en nin nin + mk2
 [ ] Centralizar la muerte de un enemigo
-[ ] `ON_ENEMY_KILLED` en el script (y modificar capítulo 8 del tuto)
-[ ] Integrar msc3
+[X] `ON_ENEMY_KILLED` en el script (y modificar capítulo 8 del tuto)
+[X] Integrar msc3
+[ ] En custom multilevel debe poder establecerse `main_script_offset` al gusto, o soportarlo directamente en una estructura "levels" (para 128K), o algo así.

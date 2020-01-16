@@ -34,6 +34,30 @@ END
 # UNIVERSIDAD DE MISKATONIC #
 #############################
 
+# Entrada de la universidad
+ENTERING SCREEN 2
+	# Control de la puerta de la universidad.
+	IF FLAG 3 = 1
+	THEN
+		SET TILE (12, 7) = 0
+	END
+END
+
+# Pasillo de la universidad
+ENTERING SCREEN 1
+	# Cartel de miskatonic, etc.
+	IF TRUE
+	THEN
+		SET TILE (7, 2) = 24
+		SET TILE (8, 2) = 25
+		SET TILE (9, 2) = 26
+		SET TILE (1, 6) = 32
+		SET TILE (1, 7) = 33
+		SET TILE (13, 6) = 32
+		SET TILE (13, 7) = 33
+	END
+END
+
 # Vestíbulo de la universidad
 ENTERING SCREEN 0
 	# Decoración y pedestal
@@ -85,31 +109,10 @@ PRESS_FIRE AT SCREEN  0
 	END IF
 END
 
-# Pasillo de la universidad
-ENTERING SCREEN 1
-	# Cartel de miskatonic, etc.
-	IF TRUE
-	THEN
-		SET TILE (7, 2) = 24
-		SET TILE (8, 2) = 25
-		SET TILE (9, 2) = 26
-		SET TILE (1, 6) = 32
-		SET TILE (1, 7) = 33
-		SET TILE (13, 6) = 32
-		SET TILE (13, 7) = 33
-	END
-END
+####################
+# TILES DE BONITOR #
+####################
 
-# Entrada de la universidad
-ENTERING SCREEN 2
-	# Control de la puerta de la universidad.
-	IF FLAG 3 = 1
-	THEN
-		SET TILE (12, 7) = 0
-	END
-END
-
-# Más adornos
 ENTERING SCREEN 6
 	IF TRUE
 	THEN

@@ -144,6 +144,10 @@ void main (void) {
 	#endif
 
 	while (1) {
+		#ifdef ACTIVATE_SCRIPTING
+			main_script_offset = (int) (main_script);
+		#endif
+
 		// Here the title screen
 		sp_UpdateNow();
 		blackout ();
@@ -192,7 +196,7 @@ void main (void) {
 				#ifdef MODE_128K
 					wyz_play_sound (3);
 				#else			
-					beeper_fx (1);
+					beep_fx (1);
 				#endif
 
 				espera_activa (100);
@@ -243,13 +247,11 @@ void main (void) {
 		
 		#ifdef ACTIVATE_SCRIPTING		
 			script_result = 0;
-			msc_init_all ();
 		#endif
 
 		#ifdef ACTIVATE_SCRIPTING
 			// Entering game
-			script = e_scripts [MAP_W * MAP_H];
-			run_script ();
+			run_script (2 * MAP_W * MAP_H);
 		#endif
 				
 		#ifdef PLAYER_STEPS_ON_ENEMIES 	
@@ -327,8 +329,7 @@ void main (void) {
 							clear_sprites ();
 							time_over ();
 						#endif
-						script = e_scripts [MAP_W * MAP_H + 2];
-						run_script ();	
+						run_script (2 * MAP_W * MAP_H + 3); 	// ON_TIMER_OFF	
 					}	
 				#endif
 
@@ -411,7 +412,7 @@ void main (void) {
 					#ifdef MODE_128K
 						wyz_play_sound (7);
 					#else
-						beeper_fx (1);
+						beep_fx (1);
 					#endif
 					en_an_morido [gpit] = 0;
 				}	
@@ -440,7 +441,7 @@ void main (void) {
 							#ifdef MODE_128K
 								wyz_play_sound (0);
 							#else
-								beeper_fx (2);
+								beep_fx (2);
 							#endif
 							flags [FLAG_SLOT_SELECTED] = (flags [FLAG_SLOT_SELECTED] + 1) % MSC_MAXITEMS;
 							display_items ();

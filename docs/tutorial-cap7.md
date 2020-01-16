@@ -386,6 +386,7 @@ Con la primera activamos el sistema de scripting:
 Con las siguientes lo configuramos:
 
 ```c
+#define MAX_FLAGS                   32
 #define SCRIPTING_DOWN                      // Use DOWN as the action key.
 //#define SCRIPTING_KEY_M                   // Use M as the action key instead.
 //#define SCRIPTING_KEY_FIRE                // User FIRE as the action key instead.
@@ -394,11 +395,13 @@ Con las siguientes lo configuramos:
 //#define ENABLE_FIRE_ZONE                  // Allows to define a zone which auto-triggers "FIRE"
 ```
 
-1. Las tres primeras directivas sirven para elegir qué tecla de acción activará el scripting. Habrá que activar una de ellas y desactivar las otras dos. Podemos elegir entre que la tecla de acción sea "abajo", **M** o el botón de disparo (usando la configuración de controles que sea).
+1. `MAX_FLAGS` sirve para configurar el número de *flags* que estarán disponibles para el sistema de scripting. 32 es un valor muy adecuado para la mayoría de las cosas, pero siempre puedes ir aquí y ajustar el número una vez que hayas terminado de hacer el juego para afeitar unos cuantos bytes.
 
-2. `ENABLE_EXTERN_CODE` permite que escribamos código C para responder al comando `EXTERN` del script. `EXTERN` tomará un parámetro y el intérprete lo pasará tal cual a una función especial `do_extern_action` que está en `/dev/my` y donde podremos añadir nuestro código. Ya lo trataremos en más detalle cuando hablemos del scripting.
+2. Las tres siguientes directivas sirven para elegir qué tecla de acción activará el scripting. Habrá que activar una de ellas y desactivar las otras dos. Podemos elegir entre que la tecla de acción sea "abajo", **M** o el botón de disparo (usando la configuración de controles que sea).
 
-3. `ENABLE_FIRE_ZONE` permite utilizar el comando `SET_FIRE_ZONE` del script, que activa un rectángulo en pantalla que lanzará las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual cuando el personaje la toque. De nuevo, ya lo trataremos más adelante.
+3. `ENABLE_EXTERN_CODE` permite que escribamos código C para responder al comando `EXTERN` del script. `EXTERN` tomará un parámetro y el intérprete lo pasará tal cual a una función especial `do_extern_action` que está en `/dev/my` y donde podremos añadir nuestro código. Ya lo trataremos en más detalle cuando hablemos del scripting.
+
+4. `ENABLE_FIRE_ZONE` permite utilizar el comando `SET_FIRE_ZONE` del script, que activa un rectángulo en pantalla que lanzará las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual cuando el personaje la toque. De nuevo, ya lo trataremos más adelante.
 
 Como te he dicho, por ahora dejamos `ACTIVATE_SCRIPTING` desactivada. Ya la activaremos cuando empecemos a hacer nuestro script.
 
