@@ -98,6 +98,12 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #endif
 
 #include "engine/general.h"
+#ifdef BREAKABLE_WALLS
+	#include "engine/breakable.h"
+#endif
+#ifdef PLAYER_CAN_FIRE
+	#include "engine/bullets.h"
+#endif
 #include "engine.h"
 #include "engine/player.h"
 #include "engine/enengine.h"

@@ -139,6 +139,10 @@ unsigned char *_baddies_pointer;
 	#ifdef LIMITED_BULLETS
 		unsigned char bullets_life [MAX_BULLETS];
 	#endif		
+
+	unsigned char _b_estado;
+	unsigned char b_it, _b_x, _b_y;
+	signed char _b_mx, _b_my;
 #endif
 
 // atributos de la pantalla: Contiene información
