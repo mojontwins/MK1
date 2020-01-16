@@ -202,7 +202,7 @@ void espera_activa (int espera) {
 	void bullets_init (void) {
 		gpit = 0; while (gpit < MAX_BULLETS) { 
 			bullets_estado [gpit] = 0; ++ gpit;
-			
+		}	
 	}
 #endif
 
@@ -337,9 +337,9 @@ void process_tile (void) {
 				#endif
 			#endif		
 			{
-				if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 >= 0 && x1 < 15 && y1 >= 0 && y1 < 10) {
+				if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 < 15 && y1 < 10) {
 					#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
-						flags [MOVED_TILE_FLAG] = map_buff [15 * y1 + x1];
+						flags [MOVED_TILE_FLAG] = map_buff [COORDS(x1,y1)];
 						flags [MOVED_X_FLAG] = x1;
 						flags [MOVED_Y_FLAG] = y1;
 					#endif			
@@ -429,10 +429,10 @@ void draw_scr_background (void) {
 
 		draw_coloured_tile ();
 
-		#ifdef ENABLE_TILANIMS
+		#if defined ENABLE_TILANIMS && defined UNPACKED_MAP
 			// Detect tilanims
 			if (_t >= ENABLE_TILANIMS) {
-				add_tilanim (gpx >> 1, gpy >> 1, _t);	
+				add_tilanim ((_x - VIEWPORT_X) >> 1, (_y - VIEWPORT_Y) >> 1, _t);	
 			}
 		#endif
 			
@@ -493,7 +493,7 @@ void draw_scr (void) {
 	#endif
 
 	#ifdef PLAYER_CAN_FIRE
-		init_bullets ();
+		bullets_init ();
 	#endif
 
 	invalidate_viewport ();

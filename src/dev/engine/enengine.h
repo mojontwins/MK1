@@ -253,15 +253,21 @@ void enems_move (void) {
 				ld  (__en_life), a
 			#endif
 		#endasm
+
+		#ifdef PLAYER_CAN_FIRE
+			_en_cx = _en_x; _en_cy = _en_y;
+		#endif
 		
-		if (en_an_state [enit] == GENERAL_DYING) {
-			-- en_an_count [enit];
-			if (en_an_count [enit] == 0) {
-				en_an_state [enit] = 0;
-				en_an_next_frame [enit] = sprite_18_a;
-				continue;
+		#ifdef MODE_128K
+			if (en_an_state [enit] == GENERAL_DYING) {
+				-- en_an_count [enit];
+				if (en_an_count [enit] == 0) {
+					en_an_state [enit] = 0;
+					en_an_next_frame [enit] = sprite_18_a;
+					continue;
+				}
 			}
-		}
+		#endif
 
 		#ifndef PLAYER_MOGGY_STYLE
 			#if defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_8_BOTTOM)
@@ -350,20 +356,19 @@ void enems_move (void) {
 								en_an_state [enit] = GENERAL_DYING;
 								en_an_count [enit] = 12;
 								en_an_next_frame [enit] = sprite_17_a;
-								_en_t |= 16;			// Mark as dead
-								p_killed ++;
-								p_vy = -256;					
+								p_vy = -256;
 							#else
 								en_an_next_frame [enit] = sprite_17_a;
 								enems_draw_current ();
 								sp_UpdateNow ();
 
 								beep_fx (5);
-								en_an_next_frame [enit] = sprite_18_a;
-								_en_t |= 16;			// Mark as dead
-							
-								p_killed ++;
+								en_an_next_frame [enit] = sprite_18_a;								
 							#endif					
+
+							_en_t |= 16;			// Mark as dead
+							p_killed ++;
+
 							#ifdef ACTIVATE_SCRIPTING					
 								run_script (2 * MAP_W * MAP_H + 5); 	// PLAYER_KILLS_ENEMY
 							#endif
@@ -436,8 +441,8 @@ void enems_move (void) {
 										en_an_vx [enit] += addsign (bullets_mx [gpjt], 128);
 									}
 								#endif
-								_en_x = _en_x;
-								_en_y = _en_y;
+								_en_x = _en_cx;
+								_en_y = _en_cy;
 								en_an_next_frame [enit] = sprite_17_a;
 								en_an_morido [enit] = 1;
 								bullets_estado [gpjt] = 0;

@@ -1,0 +1,162 @@
+# Comando
+# Copyleft 2013 MojonTwins
+# Churrera 3.1
+
+# flags:
+# 1	- Hemos colocado los cinco objetos
+
+###########################
+# Para cualquier pantalla #
+###########################
+
+# Esta sección se ejecuta justo antes del ENTERING SCREEN n
+# en cada una de las pantallas del güego.
+
+# Usamos esto para poner los mensajes en todas las pantallas.
+# Las pantallas con mensajes "custom" sobrescribirán estos,
+# ya que las secciones propias de las pantallas se ejecutan
+# justo después:
+
+ENTERING ANY
+	IF FLAG 1 = 0
+	THEN
+		#TEXT BUSCA_5_BOMBAS_Y_EL_ORDENADOR!
+		TEXT _SET_5_BOMBS_IN_EVIL_COMPUTER_
+	END
+	
+	IF FLAG 1 = 1
+	THEN
+		#TEXT MISION_CUMPLIDA!_VUELVE_A_BASE
+		TEXT BOMBS_ARE_SET!_RETURN_TO_BASE!
+	END
+END
+
+##############
+# Pantalla 0 #
+##############
+
+# Esta es la pantalla del super ordenador malo.
+# Cuando entremos en la pantalla tendremos dos cláusulas:
+# la primera se ejecuta siempre (IF TRUE) y pinta el ordenador.
+# la segunda se ejecuta si hemos colocado las bombas (FLAG 1 = 1),
+# y pinta las bombas. Es por si salimos y luego volvemos a
+# entrar una vez que hemos colocado las bombas
+
+# Además, definimos un FIRE_ZONE alrededor del ordenador malo
+# y así el jugador no tiene que pulsar ACCION para activar nada.
+# Además, hay que descomentar el #define ENABLE_FIRE_ZONE en config.h
+
+ENTERING SCREEN 0
+
+	# Siempre: pintar el ordenador.
+	IF TRUE
+	THEN
+		SET TILE (6, 3) = 32
+		SET TILE (7, 3) = 33
+		SET TILE (8, 3) = 34
+		SET TILE (6, 4) = 36
+		SET TILE (7, 4) = 37
+		SET TILE (8, 4) = 38
+		SET_FIRE_ZONE 80, 32, 159, 95
+	END
+	
+	# Si ya hemos puesto las bombas: pintarlas.
+	IF FLAG 1 = 1
+	THEN
+		SET TILE (4, 4) = 17
+		SET TILE (4, 2) = 17
+		SET TILE (7, 1) = 17
+		SET TILE (10, 2) = 17
+		SET TILE (10, 4) = 17
+	END
+	
+	# Si no, mensajito.
+	IF FLAG 1 = 0
+	THEN
+		#TEXT _PON_LAS_CINCO_BOMBAS_Y_CORRE_
+		TEXT SET_BOMBS_IN_COMPUTER_AND_RUN!
+	END
+END
+
+# Si pulsamos FIRE en la pantalla cero, estamos cerca del
+# ordenador, no hemos colocado las bombas, y llevamos las cinco,
+# se colocan las bombas (con un efecto guay) y se pone el FLAG 1 a 1.
+
+# Tendremos que estar pegados al ordenador, o sea, dentro del rectángulo
+# que va desde 80,32 hasta 159,95:
+
+PRESS_FIRE AT SCREEN 0
+	IF PLAYER_IN_X 80, 159
+	IF PLAYER_IN_Y 32, 95
+	IF OBJECT_COUNT = 5
+	IF FLAG 1 = 0
+	THEN
+		SET FLAG 1 = 1
+		SET TILE (4, 4) = 17
+		SHOW
+		SOUND 0
+		SET TILE (4, 2) = 17
+		SHOW
+		SOUND 0
+		SET TILE (7, 1) = 17
+		SHOW
+		SOUND 0
+		SET TILE (10, 2) = 17
+		SHOW
+		SOUND 0
+		SET TILE (10, 4) = 17
+		SHOW
+		SOUND 0
+		#TEXT ____AHORA_VUELVE_A_LA_BASE____
+		TEXT __DONE!_NOW_GO_BACK_TO_BASE!__
+	END
+END
+
+###############
+# Pantalla 21 #
+###############
+
+# Vendo moto seminueva. Al entrar en la pantalla pintaremos
+# el amoto en el sitio correcto. Estableceremos el fire zone
+# y pondremos un flag para que el mensaje solo salga una vez.
+
+ENTERING SCREEN 21
+	IF TRUE
+	THEN
+		SET TILE (1, 3) = 40
+		SET TILE (2, 3) = 41
+		SET FLAG 2 = 0
+		SET_FIRE_ZONE 32, 32, 50, 50
+	END
+END
+
+# Cuando se pulse la tecla de acción, comprobaremos que tocamos
+# la moto y pondremos en mensajito:
+
+PRESS_FIRE AT SCREEN 21
+	IF PLAYER_IN_X 32, 63
+	IF PLAYER_IN_Y 32, 63
+	IF FLAG 2 = 0
+	THEN
+		SET FLAG 2 = 1
+		SOUND 9
+		TEXT _HALF_NEW_MOTORBIKE_FOR_SALE!_
+		SHOW
+		SOUND 0
+		SOUND 8
+	END
+END
+
+###############
+# Pantalla 23 #
+###############
+
+# Aquí se comprueba si el flag 1 está a 1 para terminar el 
+# güego. Si no, se dice qué hay que hacer:
+
+ENTERING SCREEN 23
+	IF FLAG 1 = 1
+	THEN
+		WIN GAME
+	END
+END

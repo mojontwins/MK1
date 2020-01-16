@@ -119,8 +119,8 @@
 #define SCRIPTING_DOWN						// Use DOWN as the action key.
 //#define SCRIPTING_KEY_M					// Use M as the action key instead.
 //#define SCRIPTING_KEY_FIRE				// User FIRE as the action key instead.
-#define ENABLE_EXTERN_CODE					// Enables custom code to be run from the script using EXTERN n
-//#define ENABLE_FIRE_ZONE					// Allows to define a zone which auto-triggers "FIRE"
+//#define ENABLE_EXTERN_CODE				// Enables custom code to be run from the script using EXTERN n
+#define ENABLE_FIRE_ZONE					// Allows to define a zone which auto-triggers "FIRE"
 
 // Timer
 // -----

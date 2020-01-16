@@ -99,11 +99,12 @@ void main (void) {
 	sp_AddMemory(0, NUMBLOCKS, 14, AD_FREE);
 	
 	// Load tileset
-	allpurposepuntero = tileset;
-	for (itj = 0; itj < 256; itj++) {
-		sp_TileArray (itj, allpurposepuntero);
-		allpurposepuntero += 8;
-	}
+	gen_pt = tileset;
+	gpit = 0; do {
+		sp_TileArray (gpit, gen_pt);
+		gen_pt += 8;
+		gpit ++;
+	} while (gpit);
 
 	// Sprite creation
 	#ifdef NO_MASKS

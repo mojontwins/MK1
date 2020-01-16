@@ -190,15 +190,10 @@ void run_script (unsigned char whichs) {
                     sc_terminado = (!((p_y >> FIXBITS) >= sc_x && (p_y >> FIXBITS) <= sc_y));
 #endif
                     break;
-                case 0x31:
-                    // IF ENEMIES_KILLED_EQUALS sc_n
-                    // Opcode: 31 sc_n
-                    sc_terminado = (p_killed != read_vbyte ());
-                    break;
-                case 0x40:
-                     // IF PLAYER_HAS_OBJECTS
-                     // Opcode: 40
-                     sc_terminado = (p_objs == 0);
+                case 0x41:
+                     // IF OBJECT_COUNT = sc_n
+                     // Opcode: 41 sc_n
+                     sc_terminado = (p_objs != read_vbyte ());
                      break;
                 case 0xF0:
                      // IF TRUE
@@ -229,21 +224,6 @@ void run_script (unsigned char whichs) {
                                 ld  (hl), a
                         #endasm
                         break;
-                    case 0x10:
-                        // INC FLAG sc_x, sc_n
-                        // Opcode: 10 sc_x sc_n
-                        #asm
-                                call _readxy
-                                ld  de, (_sc_x)
-                                ld  d, 0
-                                ld  hl, _flags
-                                add hl, de
-                                ld  c, (hl)
-                                ld  a, (_sc_y)
-                                add c
-                                ld  (hl), a
-                        #endasm
-                        break;
                     case 0x20:
                         // SET TILE (sc_x, sc_y) = sc_n
                         // Opcode: 20 sc_x sc_y sc_n
@@ -251,18 +231,15 @@ void run_script (unsigned char whichs) {
                         sc_n = read_vbyte ();
                         _x = sc_x; _y = sc_y; _n = behs [sc_n]; _t = sc_n; update_tile ();
                         break;
-                    case 0x41:
-                        // DEC OBJECTS sc_n
-                        // Opcode: 41 sc_n
-                        p_objs -= read_vbyte ();
+                    case 0x51:
+                        // SET_FIRE_ZONE x1, y1, x2, y2
+                        // Opcode: 51 x1 y1 x2 y2
+                        fzx1 = read_byte ();
+                        fzy1 = read_byte ();
+                        fzx2 = read_byte ();
+                        fzy2 = read_byte ();
+                        f_zone_ac = 1;
                         break;
-                    case 0x6D:
-                        // WARP_TO sc_n
-                        // Opcode: 6D sc_n
-                        n_pant = read_vbyte ();
-                        o_pant = 99;
-                        reloc_player ();
-                        return;
                     case 0xE0:
                         // SOUND sc_n
                         // Opcode: E0 sc_n
@@ -272,17 +249,24 @@ void run_script (unsigned char whichs) {
                         beep_fx (read_vbyte ());
 #endif
                         break;
+                    case 0xE1:
+                        // SHOW
+                        // Opcode: E1
+                        sp_UpdateNow ();
+                        break;
+                    case 0xE3:
+                        sc_x = 0;
+                        while (1) {
+                           sc_n = read_byte ();
+                           if (sc_n == 0xEE) break;
+                           sp_PrintAtInv (LINE_OF_TEXT, LINE_OF_TEXT_X + sc_x, LINE_OF_TEXT_ATTR, sc_n);
+                           sc_x ++;
+                        }
+                        break;
                     case 0xF1:
                         // WIN
                         script_result = 1;
                         return;
-                    case 0xF4:
-                        // DECORATIONS
-                        while (0xff != (sc_x = read_byte ())) {
-                            sc_n = read_byte ();
-                            _x = sc_x >> 4; _y = sc_x & 15; _n = behs [sc_n]; _t = sc_n; update_tile ();
-                        }
-                        break;
                     case 0xFF:
                         sc_terminado = 1;
                         break;

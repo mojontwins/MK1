@@ -121,6 +121,10 @@ signed char _en_life;
 int _en_an_x, _en_an_y, _en_an_vx, _en_an_vy;
 unsigned char *_baddies_pointer;
 
+#ifdef PLAYER_CAN_FIRE
+	unsigned char _en_cx, _en_cy;
+#endif
+
 #define TYPE_6_IDLE 		0
 #define TYPE_6_PURSUING		1
 #define TYPE_6_RETREATING	2
@@ -229,7 +233,7 @@ unsigned char objs_old, keys_old, life_old, killed_old;
 	unsigned char *getxmore = " GET X MORE ";
 #endif
 
-unsigned char *allpurposepuntero;
+unsigned char *gen_pt;
 unsigned char playing;
 #ifdef COMPRESSED_LEVELS
 	unsigned char mlplaying;

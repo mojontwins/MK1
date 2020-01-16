@@ -29,7 +29,7 @@
 // Configure number of blocks and reserve a pool for sprites
 
 #ifdef PLAYER_CAN_FIRE
-	#define NUMBLOCKS 40 + MAX_BULLETS * 5
+	#define NUMBLOCKS (40 + (MAX_BULLETS * 5))
 #else
 	#define NUMBLOCKS 40
 #endif

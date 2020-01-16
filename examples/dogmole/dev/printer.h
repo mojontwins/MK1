@@ -522,6 +522,13 @@ void draw_coloured_tile_gamearea (void) {
 
 unsigned char utaux = 0;
 void update_tile (void) {
+	#ifdef ENABLE_TILANIMS
+		// Detect tilanims
+		if (_t >= ENABLE_TILANIMS) {
+			add_tilanim (_x, _y, _t);	
+		}
+	#endif
+
 	/*
 	utaux = (_y << 4) - _y + _x;
 	map_attr [utaux] = _n;
