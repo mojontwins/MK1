@@ -1,6 +1,8 @@
 // MTE MK1 (la Churrera) v5.0
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
+#define FIXBITS 6	// DON'T touch this
+
 #asm
 	.vpClipStruct defb VIEWPORT_Y, VIEWPORT_Y + 20, VIEWPORT_X, VIEWPORT_X + 30
 	.fsClipStruct defb 0, 24, 0, 32
@@ -26,6 +28,10 @@ void *my_malloc(uint bytes) {
 void *u_malloc = my_malloc;
 void *u_free = sp_FreeBlock;
 
+// Safe stuff in low(est) RAM
+
+unsigned char safe_byte @ 23296;
+
 // Globales muy globalizadas
 
 struct sp_SS *sp_player;
@@ -38,22 +44,11 @@ unsigned char enoffs;
 
 // Aux
 
-extern char asm_number[1];
-extern unsigned int asm_int [1];
-extern unsigned int asm_int_2 [1];
-extern unsigned int seed [1];
+char asm_number;
+unsigned int asm_int;
+unsigned int asm_int_2;
+unsigned int seed;
 unsigned char half_life;
-
-#asm
-._asm_number 
-	defb 0
-._asm_int
-	defw 0
-._asm_int_2
-	defw 0
-._seed	
-	defw 0
-#endasm
 
 #define EST_NORMAL 		0
 #define EST_PARP 		2
@@ -156,14 +151,15 @@ unsigned char orig_tile;	// Tile que había originalmente bajo el objeto
 unsigned char pant_final;
 
 // Flags para scripting
-#ifdef ACTIVATE_SCRIPTING
-#define MAX_FLAGS 32
-unsigned char flags[MAX_FLAGS];
+#ifndef MAX_FLAGS
+	#define MAX_FLAGS 16
 #endif
+unsigned char flags[MAX_FLAGS];
 
 // Globalized
 unsigned char o_pant;
 unsigned char n_pant;
+unsigned char is_rendering;
 unsigned char level = 0;
 unsigned char maincounter;
 

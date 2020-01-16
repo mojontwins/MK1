@@ -610,10 +610,10 @@ void print_number2 (void) {
 					#asm
 							// Calculate address in the display list
 
-							ld  a, (OBJECTS_ICON_X)
+							ld  a, OBJECTS_ICON_X
 							ld  (__x), a
 							ld  c, a
-							ld  a, (OBJECTS_ICON_Y)
+							ld  a, OBJECTS_ICON_Y
 							ld  (__y), a
 							call SPCompDListAddr // -> HL
 
@@ -622,6 +622,7 @@ void print_number2 (void) {
 							inc hl
 							ld  a, 132
 							ld  (hl), a 		// Tile 1
+							inc hl
 
 							inc hl
 							inc hl 				// Next cell
@@ -640,6 +641,7 @@ void print_number2 (void) {
 							inc hl
 							ld  a, 134
 							ld  (hl), a 		// Tile 3
+							inc hl
 
 							inc hl
 							inc hl 				// Next cell

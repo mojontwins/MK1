@@ -367,7 +367,7 @@ unsigned char player_move (void) {
 					#ifdef MODE_128K
 						wyz_play_sound (2);
 					#else
-						beeper_fx (3);
+						beep_fx (3);
 					#endif
 				}
 			} else {
@@ -389,7 +389,7 @@ unsigned char player_move (void) {
 			#ifdef MODE_128K
 				wyz_play_sound (2);
 			#else				
-				beeper_fx (3);
+				beep_fx (3);
 			#endif
 		}
 		
@@ -711,7 +711,7 @@ void player_kill (unsigned char sound) {
 	#ifdef MODO_128K
 		wyz_play_sound (sound);
 	#else
-		beeper_fx (sound);
+		beep_fx (sound);
 	#endif
 
 	#ifdef CP_RESET_WHEN_DYING

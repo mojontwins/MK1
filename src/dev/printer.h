@@ -520,6 +520,46 @@ void draw_coloured_tile_gamearea (void) {
 	_x = VIEWPORT_X + (_x << 1); _y = VIEWPORT_Y + (_y << 1); draw_coloured_tile ();
 }
 
+unsigned char utaux = 0;
+void update_tile (void) {
+	/*
+	utaux = (_y << 4) - _y + _x;
+	map_attr [utaux] = _n;
+	map_buff [utaux] = _t;
+	draw_invalidate_coloured_tile_gamearea ();
+	*/
+	#asm
+		ld  a, (__x)
+		ld  c, a
+		ld  a, (__y)
+		ld  b, a
+		sla a 
+		sla a 
+		sla a 
+		sla a 
+		sub b
+		add c
+		ld  b, 0
+		ld  c, a
+		ld  hl, _map_attr
+		add hl, bc
+		ld  a, (__n)
+		ld  (hl), a
+		ld  hl, _map_buff
+		add hl, bc
+		ld  a, (__t)
+		ld  (hl), a
+
+		call _draw_coloured_tile_gamearea
+
+		ld  a, (_is_rendering)
+		or  a
+		ret nz
+
+		call _invalidate_tile
+	#endasm
+}
+
 void print_number2 (void) {
 	rda = 16 + (_t / 10); rdb = 16 + (_t % 10);
 	#asm
@@ -570,10 +610,10 @@ void print_number2 (void) {
 					#asm
 							// Calculate address in the display list
 
-							ld  a, (OBJECTS_ICON_X)
+							ld  a, OBJECTS_ICON_X
 							ld  (__x), a
 							ld  c, a
-							ld  a, (OBJECTS_ICON_Y)
+							ld  a, OBJECTS_ICON_Y
 							ld  (__y), a
 							call SPCompDListAddr // -> HL
 
@@ -582,6 +622,7 @@ void print_number2 (void) {
 							inc hl
 							ld  a, 132
 							ld  (hl), a 		// Tile 1
+							inc hl
 
 							inc hl
 							inc hl 				// Next cell
@@ -600,6 +641,7 @@ void print_number2 (void) {
 							inc hl
 							ld  a, 134
 							ld  (hl), a 		// Tile 3
+							inc hl
 
 							inc hl
 							inc hl 				// Next cell

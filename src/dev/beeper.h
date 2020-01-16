@@ -282,9 +282,9 @@
 	
 */
 
-void beeper_fx (unsigned char n) {
+void beep_fx (unsigned char n) {
 	// Cargar en A el valor de n
-	asm_int [0] = n;
+	asm_int = n;
 	#asm
 		ld a, (_asm_int)
 		call playsfx
