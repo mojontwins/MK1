@@ -34,19 +34,19 @@
 			break;
 		case 2:
 			active = 1;
+
 			if (p_estado == EST_NORMAL) {
 				_en_mx = (signed char) (addsign (((gpx >> 2) << 2) - _en_x, en_an_rawv [enit]));
-				_en_x += _en_mx;
+				if (rand () & 3) _en_x += _en_mx;
 				#ifdef WALLS_STOP_ENEMIES
-					if (mons_col_sc_x ()) _en_x = _en_x;
+					if (mons_col_sc_x ()) _en_x = _en_cx;
 				#endif
 				_en_my = (signed char) (addsign (((gpy >> 2) << 2) - _en_y, en_an_rawv [enit]));
-				_en_y += _en_my;
+				if (rand () & 3) _en_y += _en_my;
 				#ifdef WALLS_STOP_ENEMIES
-					if (mons_col_sc_y ()) _en_y = _en_y;
+					if (mons_col_sc_y ()) _en_y = _en_cy;
 				#endif
 			}
-			_en_x = _en_x;
-			_en_y = _en_y;
+			
 	}
 	

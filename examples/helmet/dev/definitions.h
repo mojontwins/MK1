@@ -121,7 +121,7 @@ signed char _en_life;
 int _en_an_x, _en_an_y, _en_an_vx, _en_an_vy;
 unsigned char *_baddies_pointer;
 
-#ifdef PLAYER_CAN_FIRE
+#if defined PLAYER_CAN_FIRE || defined ENABLE_PURSUERS
 	unsigned char _en_cx, _en_cy;
 #endif
 
