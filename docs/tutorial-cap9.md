@@ -331,186 +331,131 @@ Como a lo mejor has adivinado, en **MSC3** `SET_FIRE_ZONE` también tiene una ve
     END
 ```
 
+## ¡Vamos a usar EXTERN!
+
+En el capítulo 7 vimos que había una directiva `ENABLE_EXTERN_CODE`que dijimos que era para poder ejecutar código C desde nuestro script. En concreto, lo que se hace es llamar a la función `do_extern_action (unsigned char n)` que está en el archivo `my/extern.h` pasándole el numerito que pongamos en nuestro script. Esto viene cojonudo para hacer cosas personalizadas, y lo veremos con un ejemplo muy sencillo.
+
+Cuando hayas matado a todos los monjes se retirará el piedro, pero no será algo que veamos. Esto queda muy poco intuitivo, y como ya no estamos en los 80, vamos a hacer algo para remediarlo: vamos a avisar al jugador imprimiendo un cartelito. Es por esto por lo que decidimos no hacer la optimización para ahorrarnos el flag 3 y eliminar `PLAYER_KILLS_ENEMY`.
+
+Lo primero es añadir el código C que vamos a ejecutar a la función `do_extern_action`. Obviamente para poder hacer esto os vendría bien conocer cosas de las tripas del motor de **MTE MK1**, pero por ahora no te preocupes si te suena a checoslovaco. Ya buscaré tiempo para documentarle bien el totete al motor. Sólo quiero que veamos cómo funciona la integración:
+
+```c
+    unsigned char my_spacer = "                ";
+    unsigned char my_message = " PUERTA ABIERTA ";
+
+    void do_extern_action (unsigned char n) {
+        // Add custom code here.
+
+        // Discard n, we don't need it. There's only one action to perform
+
+        // Print message
+        _x = 8; _y = 10; gp_gen = my_spacer;  print_scr ();
+                _y = 12;                      print_scr ();
+                _y = 11; gp_gen = my_message; print_scr ();
+
+        sp_UpdateNow ();
+
+        // Wait
+        espera_activa (150);
+
+        // Force reenter
+        o_pant = 99;
+    }
+```
+
+Como vemos, al tener sólo una acción *externa* posible, pasamos completamente del parámetro `n`. Poner `EXTERN 0` o `EXTERN 100` en el script dará lo mismo, por tanto.
+
+Lo siguiente será modificar el script para que ejecute el `EXTERN` una vez que hayamos eliminado a los 20 monjes. Por tanto toqueteamos de nuevo la sección `PLAYER_KILLS_ENEMY`, que se quedaría así:
+
+```
+    # Abrir la universidad
+    PLAYER_KILLS_ENEMY
+        IF ENEMIES_KILLED_EQUALS 20
+        THEN
+            SET FLAG 3 = 1
+            EXTERN 0
+        END
+    END
+```
+
 ## Tío, estoy un poco perdido
 
-Me hago cargo. Hay que hacerse un poco el coco al funcionamiento del script. Creo que es ideal empezar por algo muy sencillo, incluso más sencillo que el Dogmole que hemos visto, e ir progresando.
+Me hago cargo. Hay que hacerse un poco el coco al funcionamiento del script. Creo que es ideal empezar por algo muy sencillo, incluso más sencillo que el **Dogmole** que hemos visto, e ir progresando.
 
 Se me ocurre algo genial: íbamos a terminar aquí el capítulo de scripting básico, pero creo que nos vendría muy bien ver juntos los scripts de algunos de nuestros juegos. Voy a elegir unos cuantos juegos con un script sencillo, y lo iremos explicando paso por paso. Sería interesante que, mientras tanto, fueses jugando al juego para ver cómo afectan las diferentes cláusulas.
 
-Cheril Perils
+## Cheril Perils
 
-El güego con el que estrenamos el motor de scripting fue Cheril Perils. Entonces todo estaba en pañales y era muy sencillo. El script de Cheril Perils es el script más sencillo de todos nuestros güegos con Script: aquí sólo se hace una cosa: que hayamos matado a todos los enemigos, en cuyo caso quitaremos los pinchos de la primera pantalla. Estos pinchos:
+El güego con el que estrenamos el motor de scripting fue **Cheril Perils**. Entonces todo estaba en pañales y era muy sencillo. El script de **Cheril Perils** es el script más sencillo de todos nuestros güegos con Script. Aquí sólo se hace una cosa: que hayamos matado a todos los enemigos, en cuyo caso quitaremos los pinchos de la primera pantalla. Estos pinchos:
 
+![Bloqueando la salida](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/09_perils.png)
 
+En principio se parece mucho a parte de lo que hemos hecho en **Dogmole**: al entrar en la pantalla, comprobamos que hemos matado a todos los enemigos (hay 60 en total). Si se da el caso, imprimimos el tile vacío sobre los pinchos:
 
-En principio se parece mucho a parte de lo que hemos hecho en Dogmole: al entrar en la pantalla, comprobamos que hemos matado a todos los enemigos (hay 60 en total). Si se da el caso, imprimimos el tile vacío sobre los pinchos:
-
-
-
-ENTERING SCREEN 20
-
-    IF ENEMIES_KILLED_EQUALS 60
-
-    THEN
-
-        SET TILE (2, 7) = 0
-
-        SET TILE (2, 8) = 0
-
+```
+    ENTERING SCREEN 20
+        IF ENEMIES_KILLED_EQUALS 60
+        THEN
+            SET TILE (2, 7) = 0
+            SET TILE (2, 8) = 0
+        END
     END
+```
 
-END
-Pero aquí ocurre algo que no nos pasaba en el Dogmole: hay enemigos en la pantalla donde hay que quitar los pinchos. No nos vale con detectar esto al entrar, ya que si matamos al último bicho en esta pantalla (puede suceder) necesitaríamos salir y volver a entrar en la pantalla para que el motor se coscase. Necesitamos más código que detecte que hemos matado al último bicho y que se ejecute cuando lo matemos. Recordemos que había una peculiaridad en el motor: cuando pisamos a un bicho se ejecuta la sección PRESS_FIRE AT SCREEN correspondiente a la pantalla actual. Esto nos viene genial: poniendo el mismo código en esta sección que en ENTERING SCREEN solucionamos el problema.
+Pero aquí ocurre algo que no nos pasaba en el Dogmole: hay enemigos en la pantalla donde hay que quitar los pinchos. No nos vale con detectar esto al entrar, ya que si matamos al último bicho en esta pantalla (puede suceder) necesitaríamos salir y volver a entrar en la pantalla para que el motor se coscase. Necesitamos más código que detecte que hemos matado al último bicho y que se ejecute cuando lo matemos. Ni cortos ni perezosos, añadimos esto otro:
 
-Ni cortos ni perezosos…
-
-
-
-PRESS_FIRE AT SCREEN 20
-
-    IF ENEMIES_KILLED_EQUALS 60
-
-    THEN
-
-        SET TILE (2, 7) = 0
-
-        SET TILE (2, 8) = 0
-
+```
+    PLAYER_KILLS_ENEMY
+        IF ENEMIES_KILLED_EQUALS 60
+        THEN
+            SET TILE (2, 7) = 0
+            SET TILE (2, 8) = 0
+        END
     END
+```
 
-END
-Ahora vamos a detectar que “salimos”. Si no hiciésemos nada, saliendo de la pantalla 20 por la izquierda nos encajamos en la pantalla 19… Que además está en la otra punta del mapa. En el juego original, esto estaba solucionado con un hack guarro, pero con la versión actual de **MTE MK1** puede hacerse bien.
+Ahora vamos a detectar que “salimos”. Si no hiciésemos nada, saliendo de la pantalla 20 por la izquierda nos encajamos en la pantalla 19 (cosas de como funciona internamente el mapa)... Que además está en la otra punta del mapa. En el juego original, esto estaba solucionado con un hack guarro, pero con la versión actual de **MTE MK1** puede hacerse bien.
 
-Lo primero será definir una zona de fuego que cubra la parte izquierda de la pantalla, de forma que se ejecute la sección PRESS_FIRE AT SCREEN 20 cuando nos acerquemos a ella. Añadimos, pues, la definición de la zona de fuego en la sección ENTERING SCREEN 20 (no nos olvidemos, además, de activar la funcionalidad en config.h). Nos queda así:
+Lo primero será definir una zona de fuego que cubra la parte izquierda de la pantalla, de forma que se ejecute la sección `PRESS_FIRE AT SCREEN 20` cuando nos acerquemos a ella. Añadimos, pues, la definición de la zona de fuego en la sección `ENTERING SCREEN 20`. Esta sección, por tanto, queda así (actualizado a MSC3):
 
+``` 
+    ENTERING SCREEN 20
+        IF ENEMIES_KILLED_EQUALS 60
+        THEN
+            SET TILE (2, 7) = 0
+            SET TILE (2, 8) = 0
+        END
 
-
-ENTERING SCREEN 20
-
-    IF ENEMIES_KILLED_EQUALS 60
-
-    THEN
-
-        SET TILE (2, 7) = 0
-
-        SET TILE (2, 8) = 0
-
+        IF TRUE
+        THEN
+            SET_FIRE_ZONE_TILES 0, 7, 0, 8
+        END
     END
+```
 
+¿Queda claro? Al entrar en la pantalla 20 pasan dos cosas: primero se comprueba si el número de enemigos vale 60, en cuyo caso se eliminan los tiles-pincho que bloquean la salida. Luego, en cualquier caso (`IF TRUE`) se define una zona de fuego que cubre todo una tira pegada a la izquierda de 15 pixels de ancho. En cuanto el jugador entre en esta zona (no podrá hacerlo si no se ha eliminado la barrera: simplemente no puede pasar), se ejecutará la sección `PRESS_FIRE AT SCREEN 20`. Ahora tendremos que añadir código en la sección `PRESS_FIRE AT SCREEN 20` para detectar que el jugador está intentando salir por la izquierda y, en ese caso, terminar el juego con éxito. Quedaría así:
 
-
-    IF TRUE
-
-    THEN
-
-        SET_FIRE_ZONE 0, 0, 15, 159
-
+```
+    PRESS_FIRE AT SCREEN 20
+        IF PLAYER_IN_X_TILES 0, 0
+        THEN
+            WIN
+        END
     END
+```
 
-END
-¿Queda claro? Al entrar en la pantalla 20 pasan dos cosas: primero se comprueba si el número de enemigos vale 60, en cuyo caso se eliminan los tiles-pincho que bloquean la salida. Luego, en cualquier caso (IF TRUE) se define una zona de fuego que cubre todo una tira pegada a la izquierda de 15 pixels de ancho. En cuanto el jugador entre en esta zona (no podrá hacerlo si no se ha eliminado la barrera: simplemente no puede pasar), se ejecutará la sección PRESS_FIRE AT SCREEN 20. Ahora tendremos que añadir código en la sección PRESS_FIRE AT SCREEN 20 para detectar que el jugador está intentando salir por la izquierda y, en ese caso, terminar el juego con éxito. Quedaría así:
-
-
-
-PRESS_FIRE AT SCREEN 20
-
-    IF ENEMIES_KILLED_EQUALS 60
-
-    THEN
-
-        SET TILE (2, 7) = 0
-
-        SET TILE (2, 8) = 0
-
-    END
-
-    
-
-    IF PLAYER_IN_X 0, 15
-
-    THEN
-
-        WIN
-
-    END
-
-END
 Recapitulemos para que quede bien claro. Veamos lo que pasaría, paso por paso. Imaginemos que llegamos a la pantalla 20 después de haber matado a todos los malos. Esta es la secuencia de acontecimientos:
 
-1. Al entrar en la pantalla 20, después de dibujarla y tal, se ejecuta la sección ENTERING SCREEN 20. En ella, se comprueba que llevamos 60 enemigos matados, cosa que es cierta, y se elimina la barrera. Además, se define una zona de fuego de 15 pixels de ancho en la parte izquierda del área de juego.
+1. Al entrar en la pantalla 20, después de dibujarla y tal, se ejecuta la sección `ENTERING SCREEN 20`. En ella, se comprueba que llevamos 60 enemigos matados, cosa que es cierta, y se elimina la barrera. Además, se define una zona de fuego de que ocupa los tiles (0,7) y (0,8), que es básicamente la zona "por la que se saldría del mapa".
 
 2. Se ejecuta el bucle principal del juego. El jugador juega y tal y cual, ve la barrera abierta, y se dirige a la izquierda.
 
-3. Cuando el jugador entra en la zona de fuego, se ejecuta la sección PRESS_FIRE AT SCREEN 20. En ella, se comprueba que llevamos 60 enemigos matados y se elimina la barrera. Esto es redundante y podría evitarse con un flag, pero nos da igual… tampoco se nota. Lo importante es lo que ocurre luego: comprueba que la coordenada X del jugador, en pixels, esté entre 0 y 15, cosa que es cierta (ya que hemos entrado en esta sección por haber entrado en la zona de fuego, que está definida justo en ese area), por lo que ejecuta WIN y se nos muestra el final del güego.
+3. Cuando el jugador entra en la zona de fuego tocando los tiles (0,7) o (0,8), se ejecuta la sección `PRESS_FIRE AT SCREEN 20`. En ella se comprueba que la coordenada X del jugador,en la columna 0 de la pantalla, cosa que es cierta (ya que hemos entrado en esta sección por haber entrado en la zona de fuego, que está definida justo en ese area), por lo que ejecuta WIN y se nos muestra el final del güego.
 
-¿Se pilla? ¿Vemos otro? ¿Que quieres ver lo del flag para eliminar la redundancia? Perfecto.
-
-Tenemos todos los flags libres, así que pillaremos el 1. El método es sencillo: lo ponemos a 0 al entrar en la pantalla, a 1 cuando eliminemos la barrera, y sólo eliminaremos la barrera en PRESS_FIRE AT SCREEN 20 si está a 0. Lo pongo todo junto, ya deberías poder seguirlo solo:
-
-
-
-ENTERING SCREEN 20
-
-    IF TRUE
-
-    THEN
-
-        SET_FIRE_ZONE 0, 0, 15, 159
-
-        SET FLAG 1 = 0
-
-    END
-
-
-
-    IF ENEMIES_KILLED_EQUALS 60
-
-    THEN
-
-        SET TILE (2, 7) = 0
-
-        SET TILE (2, 8) = 0
-
-        SET FLAG 1 = 1
-
-    END
-
-END
-
-
-
-PRESS_FIRE AT SCREEN 20
-
-    IF ENEMIES_KILLED_EQUALS 60
-
-    IF FLAG 1 = 0
-
-    THEN
-
-        SET FLAG 1 = 1
-
-        SET TILE (2, 7) = 0
-
-        SET TILE (2, 8) = 0
-
-    END
-
-    
-
-    IF PLAYER_IN_X 0, 15
-
-    THEN
-
-        WIN
-
-    END
-
-END
-Ahora sí, vamos a ver otro.
-
-Sgt. Helmet Training Day
+## Sgt. Helmet Training Day
 
 Vamos a ver ahora un script un poco más largo, pero igualmente sencillo. En este juego la misión es recoger las cinco bombas, llevarlas a la pantalla del ordenador (pantalla 0) para depositarlas, y luego volver al principio (pantalla 24).
+
 Hay muchas formas de hacer esto. La que usamos nosotros para montarlos es bastante sencilla:
 
 Podemos contar el número de objetos que llevamos desde el script, por lo que las bombas serán objetos normales y corrientes del motor. Las colocamos con el colocador como hotspot de tipo 1.
@@ -521,221 +466,164 @@ Usaremos el flag 1 para comprobar que hemos colocado las bombas. Al principio de
 
 Cuando entremos en la pantalla 24, que es la pantalla principal, comprobaremos el valor del flag 1, y si vale 1, terminará el juego.
 
-Además, iremos imprimiendo textos en la pantalla con lo que vamos haciendo. Recordemos que en config.h había tres directivas que mencionamos por encima hace algunos capítulos:
+Además, iremos imprimiendo textos en la pantalla con lo que vamos haciendo. Recordemos que en `my/config.h` había tres directivas que mencionamos por encima hace algunos capítulos:
 
+```c
+    #define LINE_OF_TEXT              0       // If defined, scripts can show text @ Y = #
+    #define LINE_OF_TEXT_X            1       // X coordinate.
+    #define LINE_OF_TEXT_ATTR         71      // Attribute
+```
 
-
-#define LINE_OF_TEXT        0   // If defined, scripts can show text @ Y = #
-
-#define LINE_OF_TEXT_X      1   // X coordinate.
-
-#define LINE_OF_TEXT_ATTR   71  // Attribute
 Sirven para configurar donde sale una linea de texto que podremos escribir desde el script con el comando TEXT. Para ello dejamos sitio libre en el marco: fíjate como hay sitio en la fila de arriba, ya que hemos configurado la linea de texto en las coordenadas (x, y) = (1, 0).
 
+![Sgt. Helmet](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/09_helmet.png)
 
+Lo primero que hará nuestro script, por tanto, será definir un par de mensajes que aparecerán por defecto al entrar en cada pantalla, dependiendo de valor del flag 1. Esto lo hacemos en la sección `ENTERING ANY`. Esta sección, recordemos, se ejecuta al entrar en cada pantalla, justo antes de la sección `ENTERING SCREEN n` correspondiente. Atención a esto: nos permitirá definir un texto general que podamos sobrescribir fácilmente si hace falta para alguna pantalla en concreto, ya que si ponemos texto en `ENTERING SCREEN n` sobrescribirá el que pusomos en `ENTERING ANY` al ejecutarse después.
 
-Lo primero que hará nuestro script, por tanto, será definir un par de mensajes que aparecerán por defecto al entrar en cada pantalla, dependiendo de valor del flag 1. Esto lo hacemos en la sección ENTERING ANY. Esta sección, recordemos, se ejecuta al entrar en cada pantalla, justo antes de la sección ENTERING SCREEN n correspondiente. Atención a esto: nos permitirá definir un texto general que podamos sobrescribir fácilmente si hace falta para alguna pantalla en concreto, ya que si ponemos texto en ENTERING SCREEN n sobrescribirá el que pusomos en ENTERING ANY al ejecutarse después.
-
-Para imprimir texto en la linea de texto definida, usamos el comando TEXT. El texto que le sigue va sin comillas. Usaremos el carácter de subrayado _ para representar los espacios. Es conveniente, además, rellenar con espacios para que, si hay que sobrescribir un texto largo con uno corto, se borre entero.
+Para imprimir texto en la linea de texto definida, usamos el comando `TEXT`. El texto que le sigue va sin comillas. Usaremos el carácter de subrayado `_` para representar los espacios. Es conveniente, además, rellenar con espacios para que, si hay que sobrescribir un texto largo con uno corto, se borre entero.
 
 La longitud máxima de los textos dependerá de tu marco de juego y de cómo hayas definido su posición. En nuestro caso la hemos colocado en (x, y) = (1, 0) porque tenemos borde a la izquierda y a la derecha, con lo que la longitud máxima será de 30 caracteres.
 
 Escribamos nuestra sección ENTERING ANY, pues. Hemos dicho que imprimiremos un texto u otro dependiendo del valor del flag 1:
 
-
-
-ENTERING ANY
-
-    IF FLAG 1 = 0
-
-    THEN
-
-        TEXT BUSCA_5_BOMBAS_Y_EL_ORDENADOR!
-
+```
+    ENTERING ANY
+        IF FLAG 1 = 0
+        THEN
+            TEXT BUSCA_5_BOMBAS_Y_EL_ORDENADOR!
+        END
+        
+        IF FLAG 1 = 1
+        THEN
+            TEXT MISION_CUMPLIDA!_VUELVE_A_BASE
+        END
     END
+```
 
-    
-
-    IF FLAG 1 = 1
-
-    THEN
-
-        TEXT MISION_CUMPLIDA!_VUELVE_A_BASE
-
-    END
-
-END
-No tiene misterio ¿verdad? Si el flag 1 vale 0, o sea, la situación del principio del juego (todos los flags de ponen a 0 al empezar), al entrar en cada pantalla aparecerá el texto “BUSCA 5 BOMBAS Y EL ORDENADOR” en la zona del marco definida para la linea de texto. Si el flag 1 vale 1, cosa que ocurrirá cuando coloquemos las bombas en el ordenador, el texto por defecto que aparecerá al entrar en las pantallas será “MISION CUMPLIDA! VUELVE A BASE”.
+No tiene misterio ¿verdad? Si el flag 1 vale 0, o sea, la situación del principio del juego (todos los flags de ponen a 0 al empezar), al entrar en cada pantalla aparecerá el texto `BUSCA 5 BOMBAS Y EL ORDENADOR` en la zona del marco definida para la linea de texto. Si el flag 1 vale 1, cosa que ocurrirá cuando coloquemos las bombas en el ordenador, el texto por defecto que aparecerá al entrar en las pantallas será `MISION CUMPLIDA! VUELVE A BASE`.
 
 Vamos a hacernos un croquis mierder de la pantalla para ver donde va el ordenador y las bombas:
 
-
+![Sgt. Helmet](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/09_esquema.jpg)
 
 Vamos ahora con la chicha. Lo primero que haremos será escribir las condiciones para la pantalla del ordenador, que es la pantalla 0. En esta pantalla tenemos que hacer varias cosas. Tengámoslas claras antes de empezar:
 
-Siempre que entremos tendremos que pintar el ordenador, que está compuesto por los tiles 32 a 38 del tileset. Lo haremos como hemos visto, con SET TILE.
+Siempre que entremos tendremos que pintar el ordenador, que está compuesto por los tiles 32 a 38 del tileset. Lo haremos como hemos visto, con `SET TILE` o, mejor, con `DECORATIONS`.
 
 Además, tendremos que definir un area de fuego alrededor del ordenador para que el juego detecte automáticamente cuando nos acercamos a él.
 
 Si volvemos a entrar en la pantalla después de haber colocado las bombas (puede pasar), tendremos que coscarnos de ello y pintar también las bombas.
 
-Si entramos por primera vez (no hemos puesto las bombas) escribiremos un mensajito de ayuda que diga “PON LAS CINCO BOMBAS Y CORRE”
+Si entramos por primera vez (no hemos puesto las bombas) escribiremos un mensajito de ayuda que diga `PON LAS CINCO BOMBAS Y CORRE`
 
 Si nos acercamos al ordenador, habrá que hacer la animación chula de poner las bombas, y además colocar el flag 1 a 1.
 
 Ahora que tenemos algo de experiencia, nos daremos cuenta que las cuatro primeras cosas se hacen al entrar en la pantalla, y la última al pulsar acción (o entrar en la zona de fuego). Vayamos una por una. Empecemos por las cosas que hay que hacer al entrar en esta pantalla. Me gusta empezar por las cosas que hay que hacer siempre: pintar el ordenador y definir la zona de fuego:
 
+```
+    ENTERING SCREEN 0
 
+        # Siempre: pintar el ordenador.
+        IF TRUE
+        THEN
+            DECORATIONS
+                6, 3, 32
+                7, 3, 33
+                8, 3, 34
+                6, 4, 36
+                7, 4, 37
+                8, 4, 38
+            END
+            SET_FIRE_ZONE_TILES 5, 2, 9, 5
+        END
+```
 
-ENTERING SCREEN 0
+El área que lanzará el script equivale al rectángulo formado desde el tile (x, y) = (5, 2) hasta el (9, 5). O sea, un reborde de un tile alrededor de los seis tiles que ocupa el ordenador. Coge un papel de cuadritos y te lías menos.
 
-
-
-    # Siempre: pintar el ordenador.
-
-    IF TRUE
-
-    THEN
-
-        SET TILE (6, 3) = 32
-
-        SET TILE (7, 3) = 33
-
-        SET TILE (8, 3) = 34
-
-        SET TILE (6, 4) = 36
-
-        SET TILE (7, 4) = 37
-
-        SET TILE (8, 4) = 38
-
-        SET_FIRE_ZONE 80, 32, 159, 95
-
-    END
-Si te fijas, hemos usado las fórmulas que explicamos antes para definir un área amplia alrededor del ordenador. En concreto, el área equivale al rectángulo formado desde el tile (x, y) = (5, 2) hasta el (9, 5). O sea, un reborde de un tile alrededor de los seis tiles que ocupa el ordenador. Coge un papel de cuadritos y te lías menos.
 Seguimos: si entramos luego de haber colocado las bombas (algo que puede pasar) tendremos que coscarnos y pintar las bombas. Nada más sencillo:
 
+```
+        # Si ya hemos puesto las bombas: pintarlas.
+        IF FLAG 1 = 1
+        THEN
+            DECORATIONS
+                4, 4, 17
+                4, 2, 17
+                7, 1, 17
+                10, 2, 17
+                10, 4, 17
+            END
+        END
+```
 
-
-    # Si ya hemos puesto las bombas: pintarlas.
-
-    IF FLAG 1 = 1
-
-    THEN
-
-        SET TILE (4, 4) = 17
-
-        SET TILE (4, 2) = 17
-
-        SET TILE (7, 1) = 17
-
-        SET TILE (10, 2) = 17
-
-        SET TILE (10, 4) = 17
-
-    END
 Nos hemos fijado en el croquis, por supuesto, para saber las posiciones de las bombas. La bomba está en el tile 17, que es el tile que se usa para pintar los objetos, si recordáis.
 
-Ahora solo queda poner un texto de ayuda si no hemos colocado aún las bombas. Fíjate que ocurre lo que dijimos: como esta sección se ejecuta después de ENTERING ANY, el texto que imprimamos aquí sobrescribirá el que ya hubiese. Es por eso, además, que usamos espacios en blanco alrededor: centrarán el texto y eliminarán los caracteres del texto anterior, que es más largo:
+Ahora solo queda poner un texto de ayuda si no hemos colocado aún las bombas. Fíjate que ocurre lo que dijimos: como esta sección se ejecuta después de `ENTERING ANY`, el texto que imprimamos aquí sobrescribirá el que ya hubiese. Es por eso, además, que usamos espacios en blanco alrededor: centrarán el texto y eliminarán los caracteres del texto anterior, que es más largo:
 
-
-
-    # Si no, mensajito.
-
-    IF FLAG 1 = 0
-
-    THEN
-
-        TEXT _PON_LAS_CINCO_BOMBAS_Y_CORRE_
-
+```
+        # Si no, mensajito.
+        IF FLAG 1 = 0
+        THEN
+            TEXT _PON_LAS_CINCO_BOMBAS_Y_CORRE_
+        END
     END
+```
 
-END
-Listo. Ahora sólo queda reaccionar a la zona de fuego, en la sección PRESS_FIRE AT SCREEN 0. Haremos algunas comprobaciones y luego haremos la animación:
+Listo. Ahora sólo queda reaccionar a la zona de fuego, en la sección `PRESS_FIRE AT SCREEN 0`. Haremos algunas comprobaciones y luego haremos la animación:
 
-
-
-PRESS_FIRE AT SCREEN 0
-
-    IF PLAYER_IN_X 80, 159
-
-    IF PLAYER_IN_Y 32, 95
-
-    IF OBJECT_COUNT = 5
-
-    IF FLAG 1 = 0
-
-    THEN
-
-        SET FLAG 1 = 1
-
-        SET TILE (4, 4) = 17
-
-        SHOW
-
-        SOUND 0
-
-        SET TILE (4, 2) = 17
-
-        SHOW
-
-        SOUND 0
-
-        SET TILE (7, 1) = 17
-
-        SHOW
-
-        SOUND 0
-
-        SET TILE (10, 2) = 17
-
-        SHOW
-
-        SOUND 0
-
-        SET TILE (10, 4) = 17
-
-        SHOW
-
-        SOUND 0
-
-        TEXT ____AHORA_VUELVE_A_LA_BASE____
-
+```
+    PRESS_FIRE AT SCREEN 0
+        IF PLAYER_IN_X_TILES 5, 9
+        IF PLAYER_IN_Y_TILES 2, 5
+        IF OBJECT_COUNT = 5
+        IF FLAG 1 = 0
+        THEN
+            SET FLAG 1 = 1
+            SET TILE (4, 4) = 17
+            SHOW
+            SOUND 0
+            SET TILE (4, 2) = 17
+            SHOW
+            SOUND 0
+            SET TILE (7, 1) = 17
+            SHOW
+            SOUND 0
+            SET TILE (10, 2) = 17
+            SHOW
+            SOUND 0
+            SET TILE (10, 4) = 17
+            SHOW
+            SOUND 0
+            TEXT ____AHORA_VUELVE_A_LA_BASE____
+        END
     END
+```
 
-END
 Veámoslo poco a poco, porque hay cosas nuevas:
 
-Lo primero es comprobar que estamos donde tenemos que estar (el jugador siempre puede pulsar la tecla acción en vez de entrar en la zona de fuego, y no mola ejecutarlo si el jugador está en cualquier sitio). Eso lo hacemos como ya hemos visto: con PLAYER_IN_X y PLAYER_IN_Y y las mismas coordenadas de la zona de fuego.
+Lo primero es comprobar que estamos donde tenemos que estar (el jugador siempre puede pulsar la tecla acción en vez de entrar en la zona de fuego, y no mola ejecutarlo si el jugador está en cualquier sitio). Eso lo hacemos como ya hemos visto: con `PLAYER_IN_X_TILES` y `PLAYER_IN_Y_TILES` y las mismas coordenadas de la zona de fuego.
 
-Lo siguiente es comprobar que tenemos las cinco bombas, o lo que es lo mismo, que tenemos cinco objetos. Esto se hace con OBJECT_COUNT, que representa el número de objetos que el jugador lleva recogidos.
+Lo siguiente es comprobar que tenemos las cinco bombas, o lo que es lo mismo, que tenemos cinco objetos. Esto se hace con `OBJECT_COUNT`, que representa el número de objetos que el jugador lleva recogidos.
 
 Por último, muy importante, hay que comprobar que aún no hemos dejado las bombas, o cosas divertidas podrían pasar.
-Si se cumplen todas estas condiciones, pondremos el flag 1 a 1 (ya hemos puesto las bombas) y hacemos la animación, que consiste en ir pintando una a una las bombas y tocando un sonido. Ves ahí el comando SHOW, necesario porque los cambios que hagamos en la pantalla no serán visibles hasta que se actualice, cosa que pasa normalmente al volver al bucle principal, pero no en medio de la ejecución de una cláusula. Como queremos que se vea cada bomba justo después de pintarla, llamamos a SHOW. Cada sonido, además, parará la ejecución durante unos instantes (estamos en modo 48K), lo que nos viene genial. Por último, imprimiremos un texto de ayuda, de nuevo con espacios a los lados para completar los 30 caracteres máximos y borrar lo que hubiese del texto anterior.
+
+Si se cumplen todas estas condiciones, pondremos el flag 1 a 1 (ya hemos puesto las bombas) y hacemos la animación, que consiste en ir pintando una a una las bombas y tocando un sonido. Ves ahí el comando `SHOW`, necesario porque los cambios que hagamos en la pantalla no serán visibles hasta que se actualice, cosa que pasa normalmente al volver al bucle principal, pero no en medio de la ejecución de una cláusula. Como queremos que se vea cada bomba justo después de pintarla, ejecutamos `SHOW`. Cada sonido, además, parará la ejecución durante unos instantes (estamos en modo 48K), lo que nos viene genial. Por último, imprimiremos un texto de ayuda, de nuevo con espacios a los lados para completar los 30 caracteres máximos y borrar lo que hubiese del texto anterior.
 
 Y con esto hemos terminado todo lo que había que hacer en la pantalla 0.
 
-Si seguimos con nuestro guión, lo próximo que había que hacer era volver a la pantalla inicial, que es la 24. Lo que queda por hacer es bastante sencillo: consiste en comprobar, al entrar en la pantalla 24, que el flag 1 vale 1. Esto sólo pasará si anteriormente hemos colocado las bombas, por lo que no necesitamos más… Simplemente comprobamos eso y, si se cumple, terminamos el juego con éxito… Nada más sencillo que hacer esto:
+Si seguimos con nuestro guión, lo próximo que había que hacer era volver a la pantalla inicial, que es la 24. Lo que queda por hacer es bastante sencillo: consiste en comprobar, al entrar en la pantalla 23, que el flag 1 vale 1. Esto sólo pasará si anteriormente hemos colocado las bombas, por lo que no necesitamos más… Simplemente comprobamos eso y, si se cumple, terminamos el juego con éxito… Nada más sencillo que hacer esto:
 
-
-
-ENTERING SCREEN 23
-
-    IF FLAG 1 = 1
-
-    THEN
-
-        WIN
-
+```
+    ENTERING SCREEN 23
+        IF FLAG 1 = 1
+        THEN
+            WIN
+        END
     END
+```
 
-END
-¡Ea! Ya tenemos el juego programado. En el script de Sgt. Helmet hay un detalle más: nuestro habitual “vendo moto seminueva”. Pero eso lo dejo ya, no tiene nada de especial: imprimir tiles, definir zona de fuego, detectar posición, y escribir un texto. Todo eso lo sabes hacer ya.
+¡Ea! Ya tenemos el juego programado. En el script de **Sgt. Helmet** hay un detalle más: nuestro habitual “vendo moto seminueva”. Pero eso lo dejo ya, no tiene nada de especial: imprimir tiles, definir zona de fuego, detectar posición, y escribir un texto. Todo eso lo sabes hacer ya.
 
-Arf, arf.
+## Arf, arf.
 
-Podría seguir, pero mejor lo dejamos por ahora. En el próximo capítulo seguiremos viendo ejemplos paso por paso, pero ya con scripts más complejos como, por ejemplo, el de Cadàveriön. Luego ya seguiremos viendo cosas interesantes, como juegos de 128K, cambiar la música y los efectos, fases comprimidas… Uf, no vamos a terminar nunca.
-
-Entretanto te recuerdo que en el archivo motor_de_clausulas.txt que está en /script puedes ver una lista de los comandos y las comprobaciones disponibles, por si te pica la curiosidad.
-
-¡Hasta otra!
+Podría seguir, pero mejor lo dejamos por ahora. En el próximo capítulo seguiremos viendo ejemplos paso por paso, pero ya con scripts más complejos como, por ejemplo, el de **Cadàveriön**. Luego ya seguiremos viendo cosas interesantes, como juegos de 128K, cambiar la música y los efectos, fases comprimidas… Uf, no vamos a terminar nunca.

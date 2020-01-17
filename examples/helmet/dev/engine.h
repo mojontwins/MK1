@@ -178,6 +178,7 @@ signed int addsign (signed int n, signed int value) {
 #endif
 
 void espera_activa (int espera) {
+	while (sp_GetKey ());
 	do {
 		#ifndef MODE_128K
 			gpjt = 250; do { gpit = 1; } while (--gpjt);
