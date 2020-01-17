@@ -83,7 +83,7 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #endif
 
 #ifdef MODE_128K
-	#include "wyzph"
+	#include "wyzplayer.h"
 #else
 	#include "beeper.h"
 #endif

@@ -14,11 +14,12 @@ void do_extern_action (unsigned char n) {
 	// Discard n, we don't need it. There's only one action to perform
 
 	// Print message
+	_t = 79;
 	_x = 8; _y = 10; _gp_gen = my_spacer;  print_str ();
-	        _y = 12;                       print_str ();
-	        _y = 11; _gp_gen = my_message; print_str ();
+	_x = 8; _y = 12;                       print_str ();
+	_x = 8; _y = 11; _gp_gen = my_message; print_str ();
 
-	sp_UpdateNow ();
+	sp_UpdateNowEx (0);
 
 	// Wait
 	espera_activa (150);

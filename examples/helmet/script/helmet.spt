@@ -51,23 +51,27 @@ ENTERING SCREEN 0
 	# Siempre: pintar el ordenador.
 	IF TRUE
 	THEN
-		SET TILE (6, 3) = 32
-		SET TILE (7, 3) = 33
-		SET TILE (8, 3) = 34
-		SET TILE (6, 4) = 36
-		SET TILE (7, 4) = 37
-		SET TILE (8, 4) = 38
-		SET_FIRE_ZONE 80, 32, 159, 95
+		DECORATIONS
+			6, 3, 32
+			7, 3, 33
+			8, 3, 34
+			6, 4, 36
+			7, 4, 37
+			8, 4, 38
+		END
+		SET_FIRE_ZONE_TILES 5, 2, 9, 5
 	END
 	
 	# Si ya hemos puesto las bombas: pintarlas.
 	IF FLAG 1 = 1
 	THEN
-		SET TILE (4, 4) = 17
-		SET TILE (4, 2) = 17
-		SET TILE (7, 1) = 17
-		SET TILE (10, 2) = 17
-		SET TILE (10, 4) = 17
+		DECORATIONS
+			4, 4, 17
+			4, 2, 17
+			7, 1, 17
+			10, 2, 17
+			10, 4, 17
+		END
 	END
 	
 	# Si no, mensajito.
@@ -86,8 +90,8 @@ END
 # que va desde 80,32 hasta 159,95:
 
 PRESS_FIRE AT SCREEN 0
-	IF PLAYER_IN_X 80, 159
-	IF PLAYER_IN_Y 32, 95
+	IF PLAYER_IN_X_TILES 5, 9
+	IF PLAYER_IN_Y_TILES 2, 5
 	IF OBJECT_COUNT = 5
 	IF FLAG 1 = 0
 	THEN
@@ -126,7 +130,7 @@ ENTERING SCREEN 21
 		SET TILE (1, 3) = 40
 		SET TILE (2, 3) = 41
 		SET FLAG 2 = 0
-		SET_FIRE_ZONE 32, 32, 50, 50
+		SET_FIRE_ZONE_TILES 0, 2, 3, 4
 	END
 END
 
@@ -134,8 +138,8 @@ END
 # la moto y pondremos en mensajito:
 
 PRESS_FIRE AT SCREEN 21
-	IF PLAYER_IN_X 32, 63
-	IF PLAYER_IN_Y 32, 63
+	IF PLAYER_IN_X_TILES 0, 3
+	IF PLAYER_IN_Y_TILES 2, 4
 	IF FLAG 2 = 0
 	THEN
 		SET FLAG 2 = 1

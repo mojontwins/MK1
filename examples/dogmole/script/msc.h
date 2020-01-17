@@ -265,13 +265,6 @@ void run_script (unsigned char whichs) {
                         fzy2 = read_byte ();
                         f_zone_ac = 1;
                         break;
-                    case 0x6D:
-                        // WARP_TO sc_n
-                        // Opcode: 6D sc_n
-                        n_pant = read_vbyte ();
-                        o_pant = 99;
-                        reloc_player ();
-                        return;
                     case 0xE0:
                         // SOUND sc_n
                         // Opcode: E0 sc_n

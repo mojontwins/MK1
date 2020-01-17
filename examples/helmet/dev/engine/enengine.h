@@ -315,11 +315,11 @@ void enems_move (void) {
 			#ifndef PLAYER_MOGGY_STYLE
 				// Platforms
 				if (_en_t == 4) {
-					if (pregotten && (p_gotten == 0)) {
+					if (pregotten) {
 
 						// Horizontal moving platforms
 						if (_en_mx) {
-							if (gpy + 16 >= _en_y && gpy + 10 <= _en_y) {
+							if (gpy + 17 >= _en_y && gpy + 8 <= _en_y) {
 								p_gotten = 1;
 								ptgmx = _en_mx << 6;
 								gpy = (_en_y - 16); p_y = gpy << 6;
@@ -328,8 +328,8 @@ void enems_move (void) {
 
 						// Vertical moving platforms
 						if (
-							(_en_my < 0 && gpy + 18 >= _en_y && gpy + 10 <= _en_y) ||
-							(_en_my > 0 && gpy + 17 + _en_my >= _en_y && gpy + 10 <= _en_y)
+							(_en_my < 0 && gpy + 18 >= _en_y && gpy + 8 <= _en_y) ||
+							(_en_my > 0 && gpy + 17 + _en_my >= _en_y && gpy + 8 <= _en_y)
 						) {
 							p_gotten = 1;
 							ptgmy = _en_my << 6;
@@ -367,7 +367,11 @@ void enems_move (void) {
 							#endif					
 
 							_en_t |= 16;			// Mark as dead
-							p_killed ++;
+							++ p_killed;
+
+							#ifdef BODY_COUNT_ON
+								flags [BODY_COUNT_ON] = p_killed;
+							#endif
 
 							#ifdef ACTIVATE_SCRIPTING					
 								run_script (2 * MAP_W * MAP_H + 5); 	// PLAYER_KILLS_ENEMY
@@ -464,7 +468,11 @@ void enems_move (void) {
 									#endif
 									en_an_next_frame [enit] = sprite_18_a;
 									if (_en_t != 7) _en_t |= 16;
-									p_killed ++;
+									++ p_killed;
+
+									#ifdef BODY_COUNT_ON
+										flags [BODY_COUNT_ON] = p_killed;
+									#endif
 
 									#ifdef ENABLE_PURSUERS
 										en_an_alive [enit] = 0;

@@ -340,8 +340,8 @@ Cuando hayas matado a todos los monjes se retirará el piedro, pero no será alg
 Lo primero es añadir el código C que vamos a ejecutar a la función `do_extern_action`. Obviamente para poder hacer esto os vendría bien conocer cosas de las tripas del motor de **MTE MK1**, pero por ahora no te preocupes si te suena a checoslovaco. Ya buscaré tiempo para documentarle bien el totete al motor. Sólo quiero que veamos cómo funciona la integración:
 
 ```c
-    unsigned char my_spacer = "                ";
-    unsigned char my_message = " PUERTA ABIERTA ";
+    unsigned char *my_spacer = "                ";
+    unsigned char *my_message = " PUERTA ABIERTA ";
 
     void do_extern_action (unsigned char n) {
         // Add custom code here.
@@ -349,11 +349,12 @@ Lo primero es añadir el código C que vamos a ejecutar a la función `do_extern
         // Discard n, we don't need it. There's only one action to perform
 
         // Print message
-        _x = 8; _y = 10; gp_gen = my_spacer;  print_scr ();
-                _y = 12;                      print_scr ();
-                _y = 11; gp_gen = my_message; print_scr ();
+        _t = 79;
+        _x = 8; _y = 10; _gp_gen = my_spacer;  print_str ();
+        _x = 8; _y = 12;                       print_str ();
+        _x = 8; _y = 11; _gp_gen = my_message; print_str ();
 
-        sp_UpdateNow ();
+        sp_UpdateNowEx (0);
 
         // Wait
         espera_activa (150);
