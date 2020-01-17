@@ -2,317 +2,336 @@
 
 Aquí te he dejado el paquete de materiales de este capítulo, que en realidad consiste en el script de **Dogmole** terminado.
 
+[Material del capítulo 9](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-zip/churreratut-capitulo9.zip)
+
 ## ¿Scripting básico?
 
 Eso mismo pone. En este capítulo vamos a definir el gameplay de **Dogmole Tuppowski** y vamos a aprender algunas nociones básicas de scripting.
 
 El sistema de scripting de **MTE MK1** es muy sencillo y parece bastante limitado, pero te puedes empepinar bastante y conseguir cosas medianamente complejas con algo de maña. De hecho, el scripting a partir de v5.0 es bastante más potente ya que se ha integrado la versión más reciente de MSC3, el sistema empleado en MK2, sustituyendo al MSC original, por lo que si practicas puedes lograr en tu juegos diseños de gameplay bastante complejos. Las reglas de **Dogmole** son sencillas a propósito, y nos servirán para ilustrar un comportamiento sencillo y aprender. Luego veremos el script de diferentes juegos mojonos para que veáis cómo hemos conseguido hacer las cosas.
 
-El sistema de scripting tiene muchos comandos y comprobaciones diferentes. Como no quiero convertir este curso en una referencia con una lista de cosas interminables. Para ello puedes consultar la referencia completa de MSC3. No está de más echarle un ojaldre cuando tengas las nociones básicas.
+El sistema de scripting tiene muchos comandos y comprobaciones diferentes. Como no quiero convertir este curso en una referencia con una lista de cosas interminables. Para ello puedes consultar la [referencia completa de MSC3](https://github.com/mojontwins/MK1/blob/master/docs/scripting.md). No está de más echarle un ojaldre cuando tengas las nociones básicas.
 
-Refresquemos un poco
+## Refresquemos un poco
 
 Recordemos que el script está formado por secciones, y que cada sección incluye cláusulas. Cada cláusula no es más que una lista de comprobaciones y una lista de comandos: si todas las comprobaciones son ciertas, se ejecutarán los comandos.
 
-Controlamos qué cláusulas se ejecutarán colocándolas en una u otra sección. Recordemos las secciones que existen y cuándo se ejecutan:
+Controlamos qué cláusulas se ejecutarán colocándolas en una u otra sección. Echa un vistazo de nuevo al capítulo 8 para recordar qué secciones había disponibles. Hasta ahora sólo hemos usado `ENTERING GAME` y `ENTERING_SCREEN n`, pero ahora veremos algunas más.
 
-ENTERING GAME: Esta sección se ejecutará nada más empezar la partida, y nunca más.
+## ¡Vamos a ello!
 
-ENTERING ANY: Esta sección se ejecutará al entrar en cada pantalla, y también al pisar un enemigo. Sí, no tiene lógica alguna, pero es así porque viene muy bien para determinadas cosas.
+Antes de empezar vamos a recapitular, porque es importante que sepamos qué estamos haciendo. Recordemos, pues, cuál era el diseño de gameplay de nuestro **Dogmole Tuppowsky**:
 
-ENTERING SCREEN n: Esta sección se ejecutará al entrar en la pantalla N.
+En primer lugar, **la puerta de la universidad está cerrada**, y para abrirla **hay que matar a todos los monjes**. Hay **20 monjes** puestos por todo el mapa, en la parte de abajo (las dos filas inferiores) y hay que cargárselos a todos. Cuando estén todos muertos, habrá que **quitar el piedro** que colocamos en el mapa a la entrada de la universidad.
 
-PRESS_FIRE AT ANY: Esta sección se ejecutará al pulsar acción, sin importar en qué pantalla estemos.
-
-FRESS_FIRE AT SCREEN n: Esta sección se ejecutará al pusar acción, si estamos en la pantalla N, y también al pisar un enemigo. Tampoco tiene lógica, pero también viene bien.
-
-ON_TIMER_OFF: Esta sección se ejecutará si tenemos un temporizador, este llega a 0, y hemos configurado en config.h que ocurra esto.
-
-¡Vamos a ello!
-
-Antes de empezar vamos a recapitular, porque es importante que sepamos qué estamos haciendo. Recordemos, pues, cuál era el diseño de gameplay de nuestro Dogmole Tuppowsky:
-
-En primer lugar, la puerta de la universidad está cerrada, y para abrirla hay que matar a todos los monjes. Hay 20 monjes puestos por todo el mapa, en la parte de abajo (las dos filas inferiores) y hay que cargárselos a todos. Cuando estén todos muertos, habrá que quitar el piedro que colocamos en el mapa a la entrada de la universidad.
-
-Luego hay que programar la lógica del pedestal, dentro de la universidad. Si tocamos el pedestal llevando un objeto, lo perdemos y se incrementará un flag contando el número de objetos que hemos depositado. Cuando este número llegue a 10, habremos ganado el juego.
+Luego hay que programar la lógica del pedestal, dentro de la universidad. Si **tocamos el pedestal llevando un objeto**, lo **perdemos** y se **incrementará un flag** contando el número de objetos que hemos depositado. Cuando este número **llegue a 10**, habremos **ganado** el juego.
 
 El script de este juego va a ser muy sencillo. Lo primero que tenemos que mirar es qué vamos a necesitar almacenar para destinar algunas flags para ello. En nuestro caso, como el motor ya se encarga de contar los monjes que hemos matado, sólo necesitaremos ir contando las cajas que vamos depositando y además necesitaremos recordar si hemos quitado el piedro o no. Vamos a usar dos flags: la 1 y la 3. ¿Por qué estas dos y no otras? Pues porque sí. En realidad, da igual.
+
 Recordemos que mencionamos en el anterior capítulo que era interesante apuntar qué hacía cada flag al principio de nuestro script:
 
-# flags:
-# 1 – cuenta general de objetos.
-# 3 – 1 = puerta de la universidad abierta.
-Contando monjes muertos
+```
+    # flags:
+    # 1 – cuenta general de objetos.
+    # 3 – 1 = puerta de la universidad abierta.
+```
 
-Vaya título ¿eh? Pero mola. Lo primero que vamos a ver es cómo contar los monjes muertos para quitar el piedro de la pantalla 2. Antes que nada, tenemos que ver qué es lo que vamos a quitar. La pantalla 2 es esta, y he marcado el piedro que tenemos que quitar por scripting:
+## Contando monjes muertos
 
+No, no es el título del último disco del grupo de Death Metal Yitan Vayin. Lo primero que vamos a ver es cómo contar los monjes muertos para quitar el piedro de la pantalla 2. Antes que nada, tenemos que ver qué es lo que vamos a quitar. La pantalla 2 es esta, y he marcado el piedro que tenemos que quitar por scripting:
 
+![El Piedro](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/09_dogmole_piedro.png)
 
 Si contamos un poquito, nos damos cuenta de que el piedro ocupa las coordenadas (12, 7). Las apuntamos.
 Hemos dicho que vamos a usar el flag 3 para almacenar si ya hemos matado a todos los monjes o no. Si el flag 3 vale 1, significará que hemos matado a todos los monjes, y en ese caso habría que modificar esa pantalla para borrar el piedro de la posición que tenemos anotada. ¿Por qué no empezar por ahí? Creemos, pues, una cláusula para cuando entremos en la pantalla 2:
 
-# Entrada de la universidad
+```
+    # Entrada de la universidad
+    ENTERING SCREEN 2
+        # Control de la puerta de la universidad.
+        IF FLAG 3 = 1
+        THEN
+            SET TILE (12, 7) = 0
+        END
+    END
+```
 
-ENTERING SCREEN 2
-
-	# Control de la puerta de la universidad.
-
-	IF FLAG 3 = 1
-
-	THEN
-
-		SET TILE (12, 7) = 0
-
-	END
-
-END
-Poco hay de nuevo en esta primera cláusula de gameplay que hemos escrito: se trata de la comprobación del valor de un flag. En vez de el IF TRUE que habíamos usado hasta ahora, escribimos IF FLAG 3 = 1 que sólo evaluará a cierto si el valor de nuestro flag 3 es, precisamente, 1. En este caso, se ejecutará el cuerpo de la cláusula: SET TILE (12, 7) = 0 escribirá el tile vacío sobre el espacio que ocupa el piedro, eliminándolo. Por tanto, cuando entremos en esta pantalla con el flag 3 a 1, se borrará el piedro y no habrá obstáculo. ¿Se pilla el concepto?
+Poco hay de nuevo en esta primera cláusula de gameplay que hemos escrito: se trata de la comprobación del valor de un flag. En vez de el IF TRUE que habíamos usado hasta ahora, escribimos `IF FLAG 3 = 1` que sólo evaluará a cierto si el valor de nuestro flag 3 es, precisamente, 1. En este caso, se ejecutará el cuerpo de la cláusula: `SET TILE (12, 7) = 0` escribirá el tile vacío sobre el espacio que ocupa el piedro, eliminándolo. Por tanto, cuando entremos en esta pantalla con el flag 3 a 1, se borrará el piedro y no habrá obstáculo. ¿Se pilla el concepto?
 
 Sigamos, entonces. Hemos dicho que el flag 3 a 1 significa que hemos matado a todos los enemigos, pero el flag 3 no se va a poner a 1 automáticamente. Necesitamos crear una regla que, efectivamente, lo ponga a 1.
 
-Como en la pantalla donde aparece el piedro no hay monjes, nunca se dará la situación de que matemos al último monje en la pantalla del piedro. Esto es: siempre estaremos en otra pantalla cuando matemos al último monje. Por tanto, un buen sitio para comprobar que hemos matado a todos los monjes es al entrar en cualquier pantalla, o sea, en nuestra sección ENTERING ANY. Y mejor todavía, por la particularidad esa que mencionamos antes de que ENTERING ANY se ejecuta también cuando pisamos a un enemigo. Cada vez que entremos en una pantalla, comprobaremos que el número de enemigos eliminados vale 20 y, si se da el caso, pondremos el flag 3 a 1:
+Como en la pantalla donde aparece el piedro no hay monjes, nunca se dará la situación de que matemos al último monje en la pantalla del piedro. Esto es: siempre estaremos en otra pantalla cuando matemos al último monje. Esta es una de esas decisiones de diseño que se toman para poder simplificar mucho el tema y ahorrar por todos los lados. Te vas a tener que hartar de hacer cosas así si vas a dedicarte a esto de hacer güegos para 8 bits.
 
+Un buen sitio para comprobar que hemos matado a todos los monjes es en esa sección del script que se ejecutará cada vez que matemos uno, o sea, en nuestra sección `PLAYER_KILLS_ENEMY`. Ahí comprobaremos que el número de enemigos eliminados vale 20 y, si se da el caso, pondremos el flag 3 a 1:
 
+```
+    # Abrir la universidad
+    PLAYER_KILLS_ENEMY
+        IF ENEMIES_KILLED_EQUALS 20
+        THEN
+            SET FLAG 3 = 1        
+        END
+    END
+```
 
-# Abrir la universidad
-
-ENTERING ANY
-
-	IF ENEMIES_KILLED_EQUALS 20
-
-	IF FLAG 3 = 0
-
-	THEN
-
-		SET FLAG 3 = 1
-
-		SOUND 7
-
-		SOUND 8
-
-		SOUND 9
-
-		SOUND 7
-
-		SOUND 8
-
-		SOUND 9
-
-	END
-
-END
 Con esto conseguimos justo lo que queremos. Fíjate que hay una nueva comprobación: IF ENEMIES_KILLED_EQUALS 20 será cierta si el número de enemigos eliminados (o monjes) vale exactamente 20. Si eso es cierto, acto seguido comprobamos el valor del flag 3 para ver que vale 0. Con esto lo que hacemos es asegurarnos de que esta cláusula sólo se ejecutará una vez, o de lo contrario se ejecutaría al entrar en cada pantalla.
 
 Si todo se ha cumplido, pondremos el flag 3 a 1 (que es lo que queríamos) además de soltar una serie de pitidos pochos. Sí, el comando SOUND n toca el sonido n. Se trata de los sonidos del engine. Puedes mirar a qué corresponde cada número en el archivo beeper.h, al final.
 
 Con esto tendremos lista la primera parte de nuestro gameplay: si todos los enemigos están muertos, colocamos el flag 3 a 1. En la pantalla 2, si el flag 3 vale 1, quitamos el piedro.
 
-Lógica de las cajas
+Por cierto: todo esto funcionará sólo si realmente hay 20 monjes en el mapa y están accesibles. Lo primero se puede comprobar muy fácilmente sin tener que andar contando en el Ponedor simplemente compilando y examinando el archivo `enems.h` generado. Buscamos una `N_ENEMS_TYPE_3` y su valor deberá ser 20.
 
-Ahora sólo nos queda definir la segunda parte del gameplay. Si recordáis, tenemos configurado el motor con ONLY_ONE_OBJECT. Eso significa que el máximo de objetos que podemos recoger es uno, o sea, que sólo podemos llevar una caja.
+## Optimizando
+
+Probablemente te hayas dado cuenta de que podemos ahorrar un flag y código de script si hacemos esto de otra forma equivalente: en vez de comprobar que hemos matado 20 enemigos al matar para poner un flag y luego usar el valor de ese flag al entrar en la pantalla 2, podríamos hacer directamente la comprobación en `ENTERING SCREEN 2` y fumarnos `PLAYER_KILLS_ENEMY`, así:
+
+```
+    # Entrada de la universidad
+    ENTERING SCREEN 2
+        # Control de la puerta de la universidad.
+        IF ENEMIES_KILLED_EQUALS 20
+        THEN
+            SET TILE (12, 7) = 0
+        END
+    END
+```
+
+¡Y tienes razón! Pero hemos elegirlo hacerlo de la otra forma porque luego vamos a meter más mierdas y necesitamos la detección donde está. Pronto lo veremos. Vamos ahora al otro punto básico del diseño de gameplay:
+
+## Lógica de las cajas
+
+Ahora sólo nos queda definir la segunda parte del gameplay. Si recordáis, tenemos configurado el motor con `ONLY_ONE_OBJECT`. Eso significa que el máximo de objetos que podemos recoger es uno, o sea, que sólo podemos llevar una caja, y que no se podrá coger otra hasta que *liberemos* el objeto, y que una de las formas de hacerlo es con el script.
 
 El objetivo del juego es llevar 10 cajas al mostrador de la Universidad, por tanto tendremos que programar en el script la lógica que haga que, si llevamos un objeto y activamos el mostrador, se nos reste ese objeto y se incremente el contador de objetos entregados, que hemos dicho que será el flag 1.
 
-El mostrador está en la pantalla 0, si recordáis: lo hemos pintado con SET TILE desde nuestro script en la sección ENTERING SCREEN 0. El pedestal ocupa las posiciones (3, 7) y (4, 7).
+El mostrador está en la pantalla 0, si recordáis: lo hemos pintado con `SET TILE` desde nuestro script en la sección `ENTERING SCREEN 0`. El pedestal ocupa las posiciones (3, 7) y (4, 7).
 
 Vamos a escribir ahora un trozo de script que, si pulsamos la tecla de acción en la pantalla 0, comprueba que estamos tocando el pedestal y que llevamos un objeto, para eliminar ese objeto e incrementar en uno la cuenta.
 
 Lo primero que tenemos que resolver es la detección de que estamos tocando el pedestal. Si el pedestal ocupase un sólo tile en (x, y), sería muy sencillo:
 
-IF PLAYER_TOUCHES x, y
-Si cualquier pixel del jugador toca el tile (x, y), esa condición evalúa a cierto. El problema es que nuestro pedestal ocupa dos tiles. Una solución sería escribir dos cláusulas idénticas, una con un PLAYER_TOUCHES 3, 7 y la otra con un PLAYER_TOUCHES 4, 7, pero eso no será necesario ya que tenemos otras herramientas.
+```
+    IF PLAYER_TOUCHES x, y
+```
+
+Si cualquier pixel del jugador toca el tile (x, y), esa condición evalúa a cierto. El problema es que nuestro pedestal ocupa dos tiles. Una solución sería escribir dos cláusulas idénticas, una con un `PLAYER_TOUCHES 3, 7` y la otra con un `PLAYER_TOUCHES 4, 7`, pero eso no será necesario ya que tenemos otras herramientas.
+
+Hay dos formas de hacerlo. Primer veremos la *antigua*, la que se usaba en el viejo MSC de **MTE MK1**, porque nos servirá para entender algunos conceptos importantes. Luego veremos una mucho más cómoda. 
 
 Para comprobar que estamos dentro de un area tenemos dos comprobaciones especiales:
 
-IF PLAYER_IN_X x1, x2
-IF PLAYER_IN_Y y1, y2
-
+```
+    IF PLAYER_IN_X x1, x2
+    IF PLAYER_IN_Y y1, y2
+```
 
 La primera evaluará a cierto si la coordenada x, en píxels, de la esquina superior izquierda del cuadro del sprite de nuestro personaje está entre x1 y x2. La segunda lo hará si la coordenada y, en píxels, de la esquina superior izquierda del cuadro del sprite de nuestro personaje está entre y1 e y2.
 
 Veámoslo con un dibujo. Aquí vemos un área delimitada por x1, x2 y por y1, y2. El jugador estará “dentro” de ese área si el píxel marcado en rojo (el de la esquina superior izquierda del sprite) está “dentro” de ese área.
 
+![Jugador dentro de un área](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/09_player_touches.png)
+
 Cuando queremos comprobar que nuestro personaje esté dentro del área rectangular que ocupa un conjunto de tiles, tendremos que seguir la siguiente fórmula para calcular los valores de x1, x2, y1 e y1. Si (tx1,ty1) son las coordenadas (en tiles) del tile superior izquierdo del rectángulo y (tx2, ty2) son las coordenadas (también en tiles) del tile inferior derecho, esto es:
 
-
+![Jugador dentro de un área](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/09_coordenadas.png)
 
 Con el área definida aquí, los valores de x1, x2 e y1, y2 que tendremos que usar en el script son los que se obtienen con las siguientes fórmulas:
 
-x1 = tx1 * 16 – 15
-x2 = tx2 * 16 + 15	y1 = ty1 * 16 – 15
-y2 = ty2 * 16 + 15
+|x1 = tx1 * 16 – 15| |
+|y1 = ty1 * 16 – 15| |
+| |x2 = tx2 * 16 + 15|
+| |y2 = ty2 * 16 + 15|
+
 Para verlo, de nuevo, un dibujito. Fíjate que he superpuesto un sprite para que veáis que para que “toque” los tiles debe estar en el rectángulo definido por las coordenadas (x1, y1) y (x2, y2):
 
-
+![Jugador dentro de un área](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/09_coordenadas_3.png)
 
 Sí, si no estáis acostumbrados a hacer números programando esto es un lío de cojones, pero en realidad no lo es tanto cuando memorizáis la fórmula, o, mejor, si la comprendéis. Se multiplica por 16 para pasar de coordenadas de tiles a coordenadas de pixels porque los tiles miden 16×16 pixels. La suma y resta de 15 es para hacer “colisión por caja” con el sprite.
 
-Sé que podríamos haber diseñado el scripting para ocultar un poco estos tejemanejes, pero así, exigiendo que el programador haga un par de operaciones matemáticas por su cuenta, eliminamos mucha complejidad en el código ya que le estamos dando al motor los datos “mascaditos”.
-
 Para terminar de verlo, trasladémonos a nuestro caso y hagamos las operaciones necesarias utilizando los valores de nuestro juego. Aquí, el rectángulo está formado únicamente por dos tiles en las coordenadas (3, 7) y (4, 7). Los tiles de las esquinas son esos dos tiles, precisamente, por lo que tx1 valdra 3, ty1 valdrá 7, tx2 valdrá 4 y ty2 valdrá también 7. De ese modo, siguiendo las fórmulas:
 
-x1 = 3 * 16 – 15 = 33
-x2 = 4 * 16 + 15 = 79	y1 = 7 * 16 – 15 = 97
-y2 = 7 * 16 + 15 = 127
+|x1 = 3 * 16 – 15 = 33| |
+|y1 = 7 * 16 – 15 = 97| |
+| |x2 = 4 * 16 + 15 = 79|
+| |y2 = 7 * 16 + 15 = 127|
+
 O sea, que para tocar el mostrador, el sprite debe estar entre 33 y 79 en la coordenada X y entre 97 y 127 en la coordenada Y. Veámoslo gráficamente con un gráfico lioso: fíjate como para que el sprite esté tocando el mostrador, el píxel superior izquierdo del cuadrado de su sprite (marcado en rojo) debe estar dentro del área que hemos definido:
 
-
+![Esquema del mostrador](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/09_coordenadas_4.png)
 
 Además, tendremos que comprobar que llevemos una caja en el inventario. Sería algo así:
 
+```
+    PRESS_FIRE AT SCREEN  0
+        # Detectar pedestal. 
+        # Lo detectamos definiendo un rectángulo de píxels. 
+        # Luego comprobamos si el jugador ha cogido un objeto. 
+        # Si todo se cumple, decrementamos el número de objetos e incrementamos FLAG 1
+        IF PLAYER_IN_X 33, 79
+        IF PLAYER_IN_Y 97, 127
+        IF PLAYER_HAS_OBJECTS
+        THEN
+            INC FLAG 1, 1
+            DEC OBJECTS 1
+            SOUND 7
+        END
+    END
+```
 
+Ahí está todo lo que hemos visto: primeramente, comprobamos la posición de Dogmole con `IF PLAYER_IN_X` e `IF_PLAYER_IN_Y`. Si todo se cumple, comprobamos que tengamos un objeto recogido con `IF PLAYER_HAS_OBJECTS`. Si se cumple todo haremos tres cosas: primero, incrementaremos en 1 el flag 1 mediante `INC FLAG 1, 1`. Luego decrementaremos en 1 en número de objetos recogidos (con lo que volverá a ser 0, y podremos volver a recoger otra caja) con `DEC OBJECTS 1`. Finalmente, tocaremos el sonido número 7.
 
-PRESS_FIRE AT SCREEN  0
+### ¡Cálculos manuales! ¡Como en los 80!
 
-	# Detectar pedestal. 
+Sí. Pero los tiempos cambian y pronto nos dimos cuenta que con un sencillo apaño a nivel del compilador de scripts podíamos ofrecer una interfaz más amable para el programador que hiciera esos cálculos automáticamente. Para cuando haya que comprobar rangos de coordenadas asociadas a tile tenemos estas dos comprobaciones:
 
-	# Lo detectamos definiendo un rectángulo de píxels. 
+```
+    IF PLAYER_IN_X_TILES tx1, tx2
+    IF PLAYER_IN_Y_TILES ty1, ty2
+```
 
-	# Luego comprobamos si el jugador ha cogido un objeto. 
+Que comprobará que el jugador esté entre las coordenadas **de tile** indicadas, ambos límites inclusive. Se pueden comprobar filas o columnas de un solo tile repitiendo el valor (`PLAYER_IN_X_TILES 3, 3` se cumplirá cuando el player esté tocando la columna del tile 3).
 
-	# Si todo se cumple, decrementamos el número de objetos e incrementamos FLAG 1
+De este modo nuestro script quedaría así, que es mucho más legible y, desde luego, mucho más fácil de modificar:
 
-	IF PLAYER_IN_X 33, 79
+```
+    PRESS_FIRE AT SCREEN  0
+        # Detectar pedestal. 
+        # Lo detectamos definiendo un rectángulo de píxels. 
+        # Luego comprobamos si el jugador ha cogido un objeto. 
+        # Si todo se cumple, decrementamos el número de objetos e incrementamos FLAG 1
+        IF PLAYER_IN_X_TILES 3, 4
+        IF PLAYER_IN_Y_TILES 7, 7
+        IF PLAYER_HAS_OBJECTS
+        THEN
+            INC FLAG 1, 1
+            DEC OBJECTS 1
+            SOUND 7
+        END
+    END
+```
 
-	IF PLAYER_IN_Y 97, 127
+## Más comprobaciones.
 
-	IF PLAYER_HAS_OBJECTS
+Hecho esto, sólo nos queda una cosa que hacer: comprobar que hemos llevado las 10 cajas. Un buen sitio para hacerlo es justo después de la anterior cláusula. Como todas las cláusulas de una sección se ejecutan en orden, justo después de contabilizar colocaremos la comprobación de que ya hemos puesto 10 para terminar el juego. Ampliamos, por tanto, la sección `PRESS_FIRE AT SCREEN 0` con la nueva cláusula. Quedaría así:
 
-	THEN
+```
+    PRESS_FIRE AT SCREEN  0
+        # Detectar pedestal. 
+        # Lo detectamos definiendo un rectángulo de píxels. 
+        # Luego comprobamos si el jugador ha cogido un objeto. 
+        # Si todo se cumple, decrementamos el número de objetos e incrementamos FLAG 1
+        IF PLAYER_IN_X_TILES 3, 4
+        IF PLAYER_IN_Y_TILES 7, 7
+        IF PLAYER_HAS_OBJECTS
+        THEN
+            INC FLAG 1, 1
+            DEC OBJECTS 1
+            SOUND 7
+        END
+        
+        # Fin del juego
+        # Si llevamos 10 cajas, ¡hemos ganado!
+        IF PLAYER_IN_X 48, 79
+        IF PLAYER_IN_Y 112, 127
+        IF FLAG 1 = 10
+        THEN
+            WIN GAME
+        END IF
+    END
+```
 
-		INC FLAG 1, 1
+De nuevo, muy sencillo: si llevamos 10 cajas (o sea, si el flag1 vale 10), habremos ganado. El comando `WIN GAME` hace que el juego termine con éxito y se muestre la pantalla del final.
 
-		DEC OBJECTS 1
+¿Ves que no ha sido tanto?
 
-		SOUND 7
+## Mejora interesante
 
-	END
-
-END
-Ahí está todo lo que hemos visto: primeramente, comprobamos la posición de Dogmole con IF PLAYER_IN_X e IF_PLAYER_IN_Y. Si todo se cumple, comprobamos que tengamos un objeto recogido con IF PLAYER_HAS_OBJECTS. Si se cumple todo haremos tres cosas: primero, incrementaremos en 1 el flag 1 mediante INC FLAG 1, 1. Luego decrementaremos en 1 en número de objetos recogidos (con lo que volverá a ser 0, y podremos volver a recoger otra caja) con DEC OBJECTS 1. Finalmente, tocaremos el sonido número 7.
-
-Hecho esto, sólo nos queda una cosa que hacer: comprobar que hemos llevado las 10 cajas. Un buen sitio para hacerlo es justo después de la anterior cláusula. Como todas las cláusulas de una sección se ejecutan en orden, justo después de contabilizar colocaremos la comprobación de que ya hemos puesto 10 para terminar el juego. Ampliamos, por tanto, la sección PRESS_FIRE AT SCREEN 0 con la nueva cláusula. Quedaría así:
-
-
-
-PRESS_FIRE AT SCREEN  0
-
-	# Detectar pedestal. 
-
-	# Lo detectamos definiendo un rectángulo de píxels. 
-
-	# Luego comprobamos si el jugador ha cogido un objeto. 
-
-	# Si todo se cumple, decrementamos el número de objetos e incrementamos FLAG 1
-
-	IF PLAYER_IN_X 33, 79
-
-	IF PLAYER_IN_Y 97, 127
-
-	IF PLAYER_HAS_OBJECTS
-
-	THEN
-
-		INC FLAG 1, 1
-
-		DEC OBJECTS 1
-
-		SOUND 7
-
-	END
-
-
-
-	# Fin del juego
-
-	# Si llevamos 10 cajas, ¡hemos ganado!
-
-	IF FLAG 1 = 10
-
-	THEN
-
-		WIN GAME
-
-	END IF
-
-END
-De nuevo, muy sencillo: si llevamos 10 cajas (o sea, si el flag1 vale 10), habremos ganado. El comando WIN GAME hace que el juego termine con éxito y se muestre la pantalla del final.
-
-¿Ves que no ha sido tanto? Vale, lo de las coordenadas es un poco lío, pero tampoco es para echarse a llorar. O sí, si eres una persona sensible.
-
-Mejora interesante
-
-Tal y como hemos configurado nuestro güego, el jugador tiene que pulsar acción para activar el mostrador y depositar un objeto. No es un problema, pero molaría más que el jugador no tuviese que pulsar nada. Precisamente para eso introdujimos en el motor lo que hemos llamado “la zona de fuego”, o fire zone. Esta zona de fuego no es más que un rectángulo en pantalla, especificado en píxels. Si el jugador entra en el rectángulo, el motor se comporta como si hubiese pulsado acción. La zona de fuego se desactiva automáticamente al cambiar de pantalla, por lo que si la definimos en un ENTERING SCREEN n, sólo estará activo mientras estemos en esa pantalla.
+Tal y como hemos configurado nuestro güego, el jugador tiene que pulsar acción para activar el mostrador y depositar un objeto. No es un problema, pero molaría más que el jugador no tuviese que pulsar nada. Precisamente para eso introdujimos en el motor lo que hemos llamado “la zona de fuego”, o *fire zone*. Esta zona de fuego no es más que un rectángulo en pantalla, especificado en píxels. Si el jugador entra en el rectángulo, el motor se comporta como si hubiese pulsado acción. La zona de fuego se desactiva automáticamente al cambiar de pantalla, por lo que si la definimos en un `ENTERING SCREEN n`, sólo estará activo mientras estemos en esa pantalla.
 
 Esto viene divinamente para nuestros propósitos: si al entrar en la pantalla 0 definimos una zona de fuego alrededor del mostrador, en cuanto el jugador lo toque se ejecutará la lógica que hemos programado en el script para dejar el objeto que lleve e incrementar el contador.
 
-La zona de fuego se define con el comando SET_FIRE_ZONE, que recibe las coordenadas x1, y1, x2, e y2 del rectángulo que queramos usar como zona de fuego. Si queremos hacer coincidir la zona de fuego con un rectángulo formado por tiles, como es nuestro caso, se aplican las mismas fórmulas que explicamos antes. O sea, que vamos a usar exactamente los mismos valores.
+La zona de fuego se define con el comando `SET_FIRE_ZONE`, que recibe las coordenadas x1, y1, x2, e y2 del rectángulo que queramos usar como zona de fuego. Si queremos hacer coincidir la zona de fuego con un rectángulo formado por tiles, como es nuestro caso, se aplican las mismas fórmulas que explicamos antes. O sea, que vamos a usar exactamente los mismos valores.
 
-Lo primer que tenemos que hacer es decirle al motor que vamos a usar zonas de fuego. Para ello, tenemos que activar la directiva correspondiente en nuestro config.h:
+Lo primer que tenemos que hacer es decirle al motor que vamos a usar zonas de fuego. Para ello, tenemos que activar la directiva correspondiente en nuestro `my/config.h`:
 
-#define ENABLE_FIRE_ZONE // Allows to define a zone which auto-triggers «FIRE»
-Hecho esto, sólo tendremos que modificar la sección ENTERING SCREEN 0 añadiendo el comando SET_FIRE_ZONE x1, y1, x2, y2 al final del todo:
+```c
+    #define ENABLE_FIRE_ZONE                    // Allows to define a zone which auto-triggers "FIRE"
+```
 
+Hecho esto, sólo tendremos que modificar la sección `ENTERING SCREEN 0` añadiendo el comando `SET_FIRE_ZONE x1, y1, x2, y2` al final del todo:
 
+```
+    # Vestíbulo de la universidad
+    ENTERING SCREEN 0
+        # Decoración y pedestal
+        IF TRUE
+        THEN
+            DECORATIONS
+                # Pedestal
+                3, 7, 22
+                4, 7, 23
+            
+                # Decoración
+                1, 5, 29
+                1, 6, 20
+                1, 7, 21
+                6, 6, 20
+                6, 7, 21
+                7, 7, 28
+                1, 2, 27
+                1, 3, 28
+                2, 2, 29
+                2, 3, 27
+                3, 2, 32
+                3, 3, 33
+                9, 1, 30
+                9, 2, 30
+                9, 3, 31
+            END
 
-# Vestíbulo de la universidad
+            SET_FIRE_ZONE 33, 97, 79, 127
+        END
+    END
+```
 
-ENTERING SCREEN 0
+Como a lo mejor has adivinado, en **MSC3** `SET_FIRE_ZONE` también tiene una versión que emplea coordenadas de casillas de tiles, que nos viene super genial cuando el *fire zone* corresponde con un rectángulo de tiles, como es el caso: `SET_FIRE_ZONE_TILES`. El script quedaría así:
 
-	# Decoración y pedestal
+```
+    # Vestíbulo de la universidad
+    ENTERING SCREEN 0
+        # Decoración y pedestal
+        IF TRUE
+        THEN
+            DECORATIONS
+                # Pedestal
+                3, 7, 22
+                4, 7, 23
+            
+                # Decoración
+                1, 5, 29
+                1, 6, 20
+                1, 7, 21
+                6, 6, 20
+                6, 7, 21
+                7, 7, 28
+                1, 2, 27
+                1, 3, 28
+                2, 2, 29
+                2, 3, 27
+                3, 2, 32
+                3, 3, 33
+                9, 1, 30
+                9, 2, 30
+                9, 3, 31
+            END
 
-	IF TRUE
+            SET_FIRE_ZONE_TILES 3, 7, 4, 7
+        END
+    END
+```
 
-	THEN
-
-		# Pedestal
-
-		SET TILE (3, 7) = 22
-
-		SET TILE (4, 7) = 23
-
-		# Decoración
-
-		SET TILE (1, 5) = 29
-
-		SET TILE (1, 6) = 20
-
-		SET TILE (1, 7) = 21
-
-		SET TILE (6, 6) = 20
-
-		SET TILE (6, 7) = 21
-
-		SET TILE (7, 7) = 28
-
-		SET TILE (1, 2) = 27
-
-		SET TILE (1, 3) = 28
-
-		SET TILE (2, 2) = 29
-
-		SET TILE (2, 3) = 27
-
-		SET TILE (3, 2) = 32
-
-		SET TILE (3, 3) = 33
-
-		SET TILE (9, 1) = 30
-
-		SET TILE (9, 2) = 30
-
-		SET TILE (9, 3) = 31
-
-		# Fire zone (x1, y1, x2, y2):
-
-		SET_FIRE_ZONE 33, 97, 79, 127
-
-	END
-
-END
-La pregunta que te harás es ¿por qué #@!! no lo habéis metido en el juego? Pues porque esta característica, que se incluyó originalmente en la rama 4.0 (en el juego de el Hobbit) se reintrodujo con la versión 3.99.1.
-
-Tío, estoy un poco perdido
+## Tío, estoy un poco perdido
 
 Me hago cargo. Hay que hacerse un poco el coco al funcionamiento del script. Creo que es ideal empezar por algo muy sencillo, incluso más sencillo que el Dogmole que hemos visto, e ir progresando.
 
@@ -506,11 +525,11 @@ Además, iremos imprimiendo textos en la pantalla con lo que vamos haciendo. Rec
 
 
 
-#define LINE_OF_TEXT		0	// If defined, scripts can show text @ Y = #
+#define LINE_OF_TEXT        0   // If defined, scripts can show text @ Y = #
 
-#define LINE_OF_TEXT_X		1	// X coordinate.
+#define LINE_OF_TEXT_X      1   // X coordinate.
 
-#define LINE_OF_TEXT_ATTR	71	// Attribute
+#define LINE_OF_TEXT_ATTR   71  // Attribute
 Sirven para configurar donde sale una linea de texto que podremos escribir desde el script con el comando TEXT. Para ello dejamos sitio libre en el marco: fíjate como hay sitio en la fila de arriba, ya que hemos configurado la linea de texto en las coordenadas (x, y) = (1, 0).
 
 

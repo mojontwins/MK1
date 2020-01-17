@@ -625,6 +625,14 @@ Comprobaciones sobre la posición
         
     IF PLAYER_IN_Y y1, y2   Evaluará a CIERTO si el jugador está verticalmente 
                             entre las coordeandas en pixles y1 e y2.
+
+    IF PLAYER_IN_X_TILES x1, x2 
+                            Evaluará a CIERTO si el jugador está horizontalmente
+                            entre los tiles x1 y x2, ambos inclusive.
+
+    IF PLAYER_IN_Y_TILES y1, y2 
+                            Evaluará a CIERTO si el jugador está verticalmente
+                            entre los tiles y1 e y2, ambos inclusive.
 ```
 
 Cambiando de posición

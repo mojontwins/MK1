@@ -71,13 +71,13 @@ Este nivel de indirección (apréndete esa palabra para decirla en la discoteca:
 Para activar el scripting tendremos activarlo y configurarlo en `my/config.h`. Recordemos que las directivas relacionadas con la activación y configuración del scripting son estas:
 
 ```c
-	#define ACTIVATE_SCRIPTING					// Activates msc scripting and flag related stuff.
-	#define MAX_FLAGS 					32
-	#define SCRIPTING_DOWN						// Use DOWN as the action key.
-	//#define SCRIPTING_KEY_M					// Use M as the action key instead.
-	//#define SCRIPTING_KEY_FIRE				// User FIRE as the action key instead.
-	//#define ENABLE_EXTERN_CODE				// Enables custom code to be run from the script using EXTERN n
-	//#define ENABLE_FIRE_ZONE					// Allows to define a zone which auto-triggers "FIRE"
+    #define ACTIVATE_SCRIPTING                  // Activates msc scripting and flag related stuff.
+    #define MAX_FLAGS                   32
+    #define SCRIPTING_DOWN                      // Use DOWN as the action key.
+    //#define SCRIPTING_KEY_M                   // Use M as the action key instead.
+    //#define SCRIPTING_KEY_FIRE                // User FIRE as the action key instead.
+    //#define ENABLE_EXTERN_CODE                // Enables custom code to be run from the script using EXTERN n
+    //#define ENABLE_FIRE_ZONE                  // Allows to define a zone which auto-triggers "FIRE"
 ```
 
 La primera directiva, `ACTIVATE_SCRIPTING`, es la que activará el motor de scripting, y añadirá el código necesario para que se ejecute la sección correcta del script en el momento preciso. Como hemos mencionado, `MAX_FLAGS` controla el número de flags disponible.
@@ -95,15 +95,15 @@ Lo siguiente que hay que hacer es modificar levemente una linea de `compile.bat`
 `msc3_mk1`, el compilador de scripts, recibe los siguientes parámetros, que nos chiva el propio programa al ejecutarlo desde la ventana de linea de comandos:
 
 ```
-	$ ..\utils\msc3_mk1.exe
-	MojonTwins Scripts Compiler v3.97 20191202
-	MT Engine MK1 v5.00+
+    $ ..\utils\msc3_mk1.exe
+    MojonTwins Scripts Compiler v3.97 20191202
+    MT Engine MK1 v5.00+
 
-	usage: msc3_mk1 input n_rooms [rampage]
+    usage: msc3_mk1 input n_rooms [rampage]
 
-	input   - script file
-	n_pants - # of screens
-	rampage - If included, generate code to read script from ram N
+    input   - script file
+    n_pants - # of screens
+    rampage - If included, generate code to read script from ram N
 ```
 
 Vemos que necesita saber el archivo de entrada que contiene el script (incluyendo la ruta si es necesaria), el número total de habitaciones, y que luego admite un parámetro opcional "rampage" que sirve para generar scripts que puedan almacenarse en la RAM extra de los Spectrum de 128K y que por ahora obviaremos.
@@ -111,7 +111,7 @@ Vemos que necesita saber el archivo de entrada que contiene el script (incluyend
 Examinemos pues la linea que nos interesa en `compile.bat`. La encontrarás justo al principio. La ajustamos con el número correcto de pantallas para **Dogmole**, que es 24:
 
 ```
-	..\utils\msc3_mk1.exe %game%.spt 24
+    ..\utils\msc3_mk1.exe %game%.spt 24
 ```
 
 Que el archivo de entrada esté referenciado com %game%.spt significa que tienes que llamarlo justo así: con el identificador que has puesto al principio de este archivo en la linea `set game=dogmole`, o sea, `dogmole.spt`. El archivo deberá estar en `/script`.
@@ -119,18 +119,18 @@ Que el archivo de entrada esté referenciado com %game%.spt significa que tienes
 Puedes crear un archivo `dogmole.spt` vacío o **renombrar** el archivo base que hay, `script.spt`. Hagamos esto último. Le cambiamos el nombre a `script.spt` por `dogmole.spt`. Si lo abres verás este sencillo script mínimo.
 
 ```
-	# Script mínimo que no hace nada
-	# MTE MK1 v5.0
+    # Script mínimo que no hace nada
+    # MTE MK1 v5.0
 
-	# flags:
-	# 1	- 
+    # flags:
+    # 1 - 
 
-	ENTERING GAME
-		IF TRUE
-		THEN
-			SET FLAG 1 = 0
-		END
-	END
+    ENTERING GAME
+        IF TRUE
+        THEN
+            SET FLAG 1 = 0
+        END
+    END
 ```
 
 Es aquí donde vamos a escribir nuestro script. Fíjate el aspecto que tiene: eso que hay ahí es la sección `ENTERING GAME`, que se ejecuta nada más empezar la partida. Dentro de esta sección hay una única cláusula. Esta cláusula sólo tiene una comprobación: `IF TRUE`, que siempre será cierto. Luego hay un `THEN` y justo ahí, y hasta el `END`, empieza la **lista de comandos**. En este caso hay un único comando: `SET FLAG 1 = 0`, que sencillamente pone el flag 1 a 0.
@@ -142,23 +142,23 @@ Es interesante modificar esa cabecera. Las lineas que empiezan por # (no tiene p
 Como por ahora las variables (flags) se identifican con un número (a partir de cierta versión también se pudo empezar definir alias, que asignan un identificardor a un flag, pero eso lo dejaremos para más adelante) es buena idea hacerse una lista de qué hace cada una para luego no liarnos. Yo siempre lo hago, mira:
 
 ```
-	# Cadàveriön
-	# Copyleft 2013 Mojon Twins
-	# Churrera 3.99.2
-	# flags:
-	# 1 – Tile pisado por el bloque que se empuja
-	# 2, 3 – coordenadas X e Y
-	# 4, 5 – coordenadas X e Y del tile «retry»
-	# 6, 7 – coordenadas X e Y del tile puerta
-	# 8 – número de pantallas finalizadas
-	# 9 – número de estatuas que hay que colocar
-	# 10 – número de estatuas colocadas
-	# 11 – Ya hemos quitado la cancela
-	# 12 – Pantalla a la que volvemos al agotarse el tiempo
-	# 13, 14 – Coordenadas a las que volvemos… bla
-	# 15 – Piso
-	# 0 – valor de 8 almacenado
-	# 16 – Vendo moto seminueva.
+    # Cadàveriön
+    # Copyleft 2013 Mojon Twins
+    # Churrera 3.99.2
+    # flags:
+    # 1 – Tile pisado por el bloque que se empuja
+    # 2, 3 – coordenadas X e Y
+    # 4, 5 – coordenadas X e Y del tile «retry»
+    # 6, 7 – coordenadas X e Y del tile puerta
+    # 8 – número de pantallas finalizadas
+    # 9 – número de estatuas que hay que colocar
+    # 10 – número de estatuas colocadas
+    # 11 – Ya hemos quitado la cancela
+    # 12 – Pantalla a la que volvemos al agotarse el tiempo
+    # 13, 14 – Coordenadas a las que volvemos… bla
+    # 15 – Piso
+    # 0 – valor de 8 almacenado
+    # 16 – Vendo moto seminueva.
 ```
 
 ¿Ves? Eso viene genial para saber dónde tienes que tocar.
@@ -168,14 +168,14 @@ Como por ahora las variables (flags) se identifican con un número (a partir de 
 Ya que sabemos dónde tocar, vamos a empezar con nuestro script. Veamos la sintaxis básica. Esto de aquí es la pinta que tiene un script:
 
 ```
-	SECCION
-		COMPROBACIONES
-		THEN
-			COMANDOS
-		END
-		…
-	END
-	…
+    SECCION
+        COMPROBACIONES
+        THEN
+            COMANDOS
+        END
+        …
+    END
+    …
 ```
 
 Como vemos, cada sección empieza con el nombre de la sección y termina con `END`. Entre el nombre de la sección y el `END` están las cláusulas que la componen, que puede ser una, o pueden ser varias. Cada cláusula empieza con una lista de comprobaciones, cada una en una linea, la palabra `THEN`, seguida de una lista de comandos, cada uno en una linea, y la palabra `END`. Luego pueden venir más cláusulas.
@@ -191,23 +191,23 @@ Para verlo, vamos a crear un script sencillo que introduzca adornos en algunas p
 Ahí hay un montón de tiles decorativos que vamos a colocar desde el scripting. El sitio para hacerlo son las secciones `ENTERING SCREEN n` de las pantallas que queramos adornar, ya que se ejecutan cuando todo lo demás está en su sitio: el fondo ya estará dibujado, por lo que podremos pintar encima. Vamos a empezar decorando la pantalla número 0, que es donde hay que ir a llevar las cajas. Tendremos que colocar el pedestal, formado por los tiles 22 y 23, y además pondremos más adornos: unas vasijas (29), unas cuantas estanterías (20 y 21), unas cuantas cajas (27 y 28), una armadura (32 y 33) y una bombilla colgando de un cable (30 y 31). Empezamos creando la sección `ENTERING SCREEN 0` en nuestro script `dogmole.spt`:
 
 ```
-	# Vestíbulo de la universidad
-	ENTERING SCREEN 0
+    # Vestíbulo de la universidad
+    ENTERING SCREEN 0
 
-	END
+    END
 ```
 
 El pintado de los tiles extra se hace desde la lista de comandos de una cláusula. Como queremos que la cláusula se ejecute siempre, emplearemos la condición más sencilla que existe: la que siempre evalúa a cierto y ya vimos más arriba (como verás, utilizo tabulaciones para ayudarme a distinguir mejor la estructura del script. Esto se llama *indentar* y deberías hacerlo tú también. `msc3_mk1` ignora los espacios en blanco así que los usamos simplemente como guía visual humana):
 
 ```
-	# Vestíbulo de la universidad
-	ENTERING SCREEN 0
-		# Decoración y pedestal
-		IF TRUE
-		THEN
-		
-		END
-	END
+    # Vestíbulo de la universidad
+    ENTERING SCREEN 0
+        # Decoración y pedestal
+        IF TRUE
+        THEN
+        
+        END
+    END
 ```
 
 Esto significa que siempre que entremos en la pantalla 0, se ejecutarán los comandos de la lista de comandos de esa cláusula, ya que su única condición SIEMPRE evalúa a cierto.
@@ -215,39 +215,39 @@ Esto significa que siempre que entremos en la pantalla 0, se ejecutarán los com
 El comando para pintar un tile en la pantalla tiene esta forma:
 
 ```
-	SET TILE (x, y) = t
+    SET TILE (x, y) = t
 ```
 
 Donde `(x, y)` es la coordenada (recuerda, tenemos 15×10 tiles en la pantalla, por lo que x podrá ir de 0 a 14 e y de 0 a 9) y t es el número del tile que queremos pintar. Es aquí donde Ponedor vuelve a ser muy util: recuerda que si pasas el ratón por el área de edición **te va chivando las coordenadas de las casillas**. Así pues, con el Ponedor delante para chivar casillas y ver donde tenemos que pintar las cosas, vamos colocando primero el pedestal y luego todas las decoraciones:
 
 ```
-	# Vestíbulo de la universidad
-	ENTERING SCREEN 0
-		# Decoración y pedestal
-		IF TRUE
-		THEN
-			# Pedestal
-			SET TILE (3, 7) = 22
-			SET TILE (4, 7) = 23
-			
-			# Decoración
-			SET TILE (1, 5) = 29
-			SET TILE (1, 6) = 20
-			SET TILE (1, 7) = 21
-			SET TILE (6, 6) = 20
-			SET TILE (6, 7) = 21
-			SET TILE (7, 7) = 28
-			SET TILE (1, 2) = 27
-			SET TILE (1, 3) = 28
-			SET TILE (2, 2) = 29
-			SET TILE (2, 3) = 27
-			SET TILE (3, 2) = 32
-			SET TILE (3, 3) = 33
-			SET TILE (9, 1) = 30
-			SET TILE (9, 2) = 30
-			SET TILE (9, 3) = 31
-		END
-	END
+    # Vestíbulo de la universidad
+    ENTERING SCREEN 0
+        # Decoración y pedestal
+        IF TRUE
+        THEN
+            # Pedestal
+            SET TILE (3, 7) = 22
+            SET TILE (4, 7) = 23
+            
+            # Decoración
+            SET TILE (1, 5) = 29
+            SET TILE (1, 6) = 20
+            SET TILE (1, 7) = 21
+            SET TILE (6, 6) = 20
+            SET TILE (6, 7) = 21
+            SET TILE (7, 7) = 28
+            SET TILE (1, 2) = 27
+            SET TILE (1, 3) = 28
+            SET TILE (2, 2) = 29
+            SET TILE (2, 3) = 27
+            SET TILE (3, 2) = 32
+            SET TILE (3, 3) = 33
+            SET TILE (9, 1) = 30
+            SET TILE (9, 2) = 30
+            SET TILE (9, 3) = 31
+        END
+    END
 ```
 
 Vale, has escrito tu primera cláusula. No ha sido tan complicado ¿verdad?. Supongo que para que la satisfacción sea completa querrás verlo. Bien: vamos a añadir un poco de código que luego eliminaremos de la versión definitiva y que usaremos para irnos a la pantalla que queramos al empezar el güego y probar así que lo estamos haciendo todo bien.
@@ -255,12 +255,12 @@ Vale, has escrito tu primera cláusula. No ha sido tan complicado ¿verdad?. Sup
 Si recuerdas, una de las posibles secciones que podemos añadir al script es la que se ejecuta justo al principio del güego: `ENTERING GAME`, que es la que venía vacía al principio y hemos borrado porque no nos servía para nada. Bien, pues vamos a hacer una `ENTERING GAME` que nos servirá para irnos directamente a la pantalla 0 al principio y comprobar que hemos colocado guay todos los tiles en los comandos de la cláusula de la sección `ENTERING SCREEN 0`. Añadimos, por tanto, este código (puedes añadirlo donde quieras, pero yo suelo dejarlo al principio. Da igual donde lo pongas, pero siempre mola seguir un orden).
 
 ```
-	ENTERING GAME
-		IF TRUE
-		THEN
-			WARP_TO 0, 12, 2
-		END
-	END
+    ENTERING GAME
+        IF TRUE
+        THEN
+            WARP_TO 0, 12, 2
+        END
+    END
 ```
 
 ¿Qué hace esto? Pues hará que, al empezar el juego, se ejecute esa lista de cláusulas formada por una única cláusula, que siempre se ejecutará (porque tiene IF TRUE) y que lo que hace es trasladarnos a la coordenada (12, 2) de la pantalla 0, porque eso es lo que hace el comando WARP:
@@ -274,31 +274,31 @@ Cuando el jugador empiece la partida se ejecutará la sección `ENTERING GAME`. 
 ¡Hala! Jodó, qué bien. Más, más. Vamos a pintar más tiles para decorar otras pantallas. Exactamente de la misma forma que hemos decorado la pantalla 0, vamos a decorar también la pantalla 1, colocando el cartel de la Universidad de Miskatonic (tiles 24, 25, y 26) y unas armaduras (tiles 32 y 33):
 
 ```
-	# Pasillo de la universidad
-	ENTERING SCREEN 1
-		# Cartel de miskatonic, etc.
-		IF TRUE
-		THEN
-			SET TILE (7, 2) = 24
-			SET TILE (8, 2) = 25
-			SET TILE (9, 2) = 26
-			SET TILE (1, 6) = 32
-			SET TILE (1, 7) = 33
-			SET TILE (13, 6) = 32
-			SET TILE (13, 7) = 33
-		END
-	END
+    # Pasillo de la universidad
+    ENTERING SCREEN 1
+        # Cartel de miskatonic, etc.
+        IF TRUE
+        THEN
+            SET TILE (7, 2) = 24
+            SET TILE (8, 2) = 25
+            SET TILE (9, 2) = 26
+            SET TILE (1, 6) = 32
+            SET TILE (1, 7) = 33
+            SET TILE (13, 6) = 32
+            SET TILE (13, 7) = 33
+        END
+    END
 ```
 
 ¡Vamos a verlo! Cambia `ENTERING_GAME` para saltar a la pantalla 1 en vez de la pantalla 0:
 
 ```
-	ENTERING GAME
-		IF TRUE
-			THEN
-			WARP_TO 1, 12, 2
-		END
-	END
+    ENTERING GAME
+        IF TRUE
+            THEN
+            WARP_TO 1, 12, 2
+        END
+    END
 ```
 
 Compila, ejecuta… et voie-la!
@@ -309,20 +309,20 @@ Compila, ejecuta… et voie-la!
 De la misma manera añadimos código para poner más decoraciones en el mapa. La verdad es que nos aburrimos pronto y sólo hay mandanga en la pantalla 6 (una lámpara) y la pantalla 18 (un ancla en la playa). ¿Por qué no aprovechas tú y pones más? Estas son las que vienen en el juego original:
 
 ```
-	ENTERING SCREEN 6
-		IF TRUE
-		THEN
-			SET TILE (10, 1) = 30
-			SET TILE (10, 2) = 31
-			SET TILE (10, 4) = 35
-			END
-			END
-			ENTERING SCREEN 18
-			IF TRUE
-			THEN
-			SET TILE (4, 8) = 34
-		END
-	END
+    ENTERING SCREEN 6
+        IF TRUE
+        THEN
+            SET TILE (10, 1) = 30
+            SET TILE (10, 2) = 31
+            SET TILE (10, 4) = 35
+            END
+            END
+            ENTERING SCREEN 18
+            IF TRUE
+            THEN
+            SET TILE (4, 8) = 34
+        END
+    END
 ```
 
 ## Decoraciones más mejor (y menos peor)
@@ -330,51 +330,51 @@ De la misma manera añadimos código para poner más decoraciones en el mapa. La
 Cuando tienes que pintar más de tres tiles tenemos un atajo que hace que el script sea más rápido de escribir y que además ocupe menos bytes. Se trata de emplear el comando `DECORATIONS`, al que deberá seguir una lista de posiciones de tile y números de tile, uno por linea, terminados con un `END`. De este modo, el script que habíamos introducido para las pantallas 0 y 1 se convierte en:
 
 ```
-	# Vestíbulo de la universidad
-	ENTERING SCREEN 0
-		# Decoración y pedestal
-		IF TRUE
-		THEN
-			DECORATIONS
-				# Pedestal
-				3, 7, 22
-				4, 7, 23
-			
-				# Decoración
-				1, 5, 29
-				1, 6, 20
-				1, 7, 21
-				6, 6, 20
-				6, 7, 21
-				7, 7, 28
-				1, 2, 27
-				1, 3, 28
-				2, 2, 29
-				2, 3, 27
-				3, 2, 32
-				3, 3, 33
-				9, 1, 30
-				9, 2, 30
-				9, 3, 31
-		END
-	END
+    # Vestíbulo de la universidad
+    ENTERING SCREEN 0
+        # Decoración y pedestal
+        IF TRUE
+        THEN
+            DECORATIONS
+                # Pedestal
+                3, 7, 22
+                4, 7, 23
+            
+                # Decoración
+                1, 5, 29
+                1, 6, 20
+                1, 7, 21
+                6, 6, 20
+                6, 7, 21
+                7, 7, 28
+                1, 2, 27
+                1, 3, 28
+                2, 2, 29
+                2, 3, 27
+                3, 2, 32
+                3, 3, 33
+                9, 1, 30
+                9, 2, 30
+                9, 3, 31
+        END
+    END
 
-	# Pasillo de la universidad
-	ENTERING SCREEN 1
-		# Cartel de miskatonic, etc.
-		IF TRUE
-		THEN
-			DECORATIONS
-				7, 2, 24
-				8, 2, 25
-				9, 2, 26
-				1, 6, 32
-				1, 7, 33
-				13, 6, 32
-				13, 7, 33
-			END
-		END
-	END
+    # Pasillo de la universidad
+    ENTERING SCREEN 1
+        # Cartel de miskatonic, etc.
+        IF TRUE
+        THEN
+            DECORATIONS
+                7, 2, 24
+                8, 2, 25
+                9, 2, 26
+                1, 6, 32
+                1, 7, 33
+                13, 6, 32
+                13, 7, 33
+            END
+        END
+    END
 ```
 
 Semánticamente esto es equivalente 100% a lo que habíamos escrito, pero hace que el script ocupe menos y se ejecute más rápido, ya que al entrar en "modo ristra de impresiones de tiles" el intérprete tiene que hacer menos trabajo. Y es una de las cosas nuevas de msc3 que hemos inyectado directamente de MK2 para la v5 de MK1.
