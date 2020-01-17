@@ -207,6 +207,12 @@ Si activas `WALLS_STOP_ENEMIES`, los tiles de tipo 8 pararán la trayectoria de 
 
 Si además activas `EVERYTHING_IS_A_WALL`, cualquier tile de comportamiento distinto de 0 (recuerda los tipos de tile que explicamos en el capítulo 2) será considerado un obstáculo.
 
+```c 
+    //#define BODY_COUNT_ON             2       // If defined, count enemies on flag #
+```
+
+Si configuras el motor para disparar o pisar, el número de muertes se irá contando en el flag que indiques aquí si defines esta directiva.
+
 ## Tipos de enemigos extra
 
 Vamos a ver ahora un conjunto de directivas que nos servirán para activar los enemigos de tipos 6 o 7. Recordad lo que mencionamos sobre este tipo de enemigos: el 6 son los Fanties y el 7 son los enemigos que te persiguen de **Mega Meghan** y **Sgt. Helmet: Training Day**.

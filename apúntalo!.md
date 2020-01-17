@@ -14,3 +14,5 @@
 [X] `ON_ENEMY_KILLED` en el script (y modificar capítulo 8 del tuto)
 [X] Integrar msc3
 [ ] En custom multilevel debe poder establecerse `main_script_offset` al gusto, o soportarlo directamente en una estructura "levels" (para 128K), o algo así.
+[ ] `WARP_TO_LEVEL`
+[ ] Controlar todas las salidas de MSC3, no solo "WIN" y "GAME OVER", sino la que lleva al final directamente.

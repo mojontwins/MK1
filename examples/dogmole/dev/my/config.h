@@ -60,6 +60,7 @@
 //#define MAP_BOTTOM_KILLS					// If defined, exiting the map bottomwise kills.
 //#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
 //#define EVERYTHING_IS_A_WALL				// If defined, any tile <> type 0 is a wall, otherwise just 8.
+//#define BODY_COUNT_ON 			2		// If defined, count enemies on flag #
 
 // Extra enemy types
 // -----------------

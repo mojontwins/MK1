@@ -2024,7 +2024,7 @@ If actionsUsed (&H80) Then
 	print #f3, "                    case 0x80:"
 	print #f3, "                        // ENEM n ON"
 	print #f3, "                        // Opcode: 0x80 n"
-	print #f3, "                        baddies [enoffs + read_vbyte ()].t &= 0x7F;"
+	print #f3, "                        baddies [enoffs + read_vbyte ()].t &= 0xEF;"
 	print #f3, "                        break;"
 End If
 
@@ -2032,7 +2032,7 @@ If actionsUsed (&H81) Then
 	print #f3, "                    case 0x81:"
 	print #f3, "                        // ENEM n OFF"
 	print #f3, "                        // Opcode: 0x81 n"
-	print #f3, "                        baddies [enoffs + read_vbyte ()].t |= 0x80;"
+	print #f3, "                        baddies [enoffs + read_vbyte ()].t |= 0x10;"
 	print #f3, "                        break;"
 End If
 
@@ -2051,7 +2051,7 @@ If actionsUsed (&H83) Then
 	Print #f3, "                        // ENEMY n TYPE t"
 	Print #f3, "                        sc_n = enoffs + read_vbyte ();"
 	Print #f3, "                        if (baddies [sc_n]) {"
-	Print #f3, "                            baddies [sc_n].t &= 0x80;"
+	Print #f3, "                            baddies [sc_n].t &= 0x10;"
 	Print #f3, "                            baddies [sc_n].t |= read_vbyte ();"
 	Print #f3, "                        }"
 	Print #f3, "                        break;"

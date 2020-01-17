@@ -367,7 +367,11 @@ void enems_move (void) {
 							#endif					
 
 							_en_t |= 16;			// Mark as dead
-							p_killed ++;
+							++ p_killed;
+
+							#ifdef BODY_COUNT_ON
+								flags [BODY_COUNT_ON] = p_killed;
+							#endif
 
 							#ifdef ACTIVATE_SCRIPTING					
 								run_script (2 * MAP_W * MAP_H + 5); 	// PLAYER_KILLS_ENEMY
@@ -464,7 +468,11 @@ void enems_move (void) {
 									#endif
 									en_an_next_frame [enit] = sprite_18_a;
 									if (_en_t != 7) _en_t |= 16;
-									p_killed ++;
+									++ p_killed;
+
+									#ifdef BODY_COUNT_ON
+										flags [BODY_COUNT_ON] = p_killed;
+									#endif
 
 									#ifdef ENABLE_PURSUERS
 										en_an_alive [enit] = 0;

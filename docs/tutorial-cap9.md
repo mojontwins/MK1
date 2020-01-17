@@ -1,14 +1,14 @@
-Capítulo 9: scripting básico
+# Capítulo 9: scripting básico
 
+Aquí te he dejado el paquete de materiales de este capítulo, que en realidad consiste en el script de **Dogmole** terminado.
 
+## ¿Scripting básico?
 
-¿Scripting básico?
+Eso mismo pone. En este capítulo vamos a definir el gameplay de **Dogmole Tuppowski** y vamos a aprender algunas nociones básicas de scripting.
 
-Eso mismo pone. En este capítulo vamos a definir el gameplay de Dogmole Tuppowski y vamos a aprender algunas nociones básicas de scripting.
+El sistema de scripting de **MTE MK1** es muy sencillo y parece bastante limitado, pero te puedes empepinar bastante y conseguir cosas medianamente complejas con algo de maña. De hecho, el scripting a partir de v5.0 es bastante más potente ya que se ha integrado la versión más reciente de MSC3, el sistema empleado en MK2, sustituyendo al MSC original, por lo que si practicas puedes lograr en tu juegos diseños de gameplay bastante complejos. Las reglas de **Dogmole** son sencillas a propósito, y nos servirán para ilustrar un comportamiento sencillo y aprender. Luego veremos el script de diferentes juegos mojonos para que veáis cómo hemos conseguido hacer las cosas.
 
-El sistema de scripting de la Churrera es muy sencillo y parece bastante limitado, pero te puedes empepinar bastante y conseguir cosas medianamente complejas con algo de maña. Además, en cada versión que sacamos de la churrera lo ampliamos y cada vez funciona mejor, por lo que si practicas puedes lograr en tu juegos diseños de gameplay bastante complejos. Las reglas de Dogmole son sencillas a propósito, para ilustrar un comportamiento sencillo y aprender. Luego veremos el script de diferentes juegos mojonos para que veáis cómo hemos conseguido hacer las cosas.
-
-El sistema de scripting tiene muchos comandos y comprobaciones diferentes. Como no quiero convertir este curso en una referencia con una lista de cosas interminables, te remito al archivo motor_de_clausulas.txt que está en la carpeta /script de la churrera: ahí hay una lista de todo lo que msc es capaz de compilar. No está de más echarle un ojaldre.
+El sistema de scripting tiene muchos comandos y comprobaciones diferentes. Como no quiero convertir este curso en una referencia con una lista de cosas interminables. Para ello puedes consultar la referencia completa de MSC3. No está de más echarle un ojaldre cuando tengas las nociones básicas.
 
 Refresquemos un poco
 
@@ -360,7 +360,7 @@ PRESS_FIRE AT SCREEN 20
     END
 
 END
-Ahora vamos a detectar que “salimos”. Si no hiciésemos nada, saliendo de la pantalla 20 por la izquierda nos encajamos en la pantalla 19… Que además está en la otra punta del mapa. En el juego original, esto estaba solucionado con un hack guarro, pero con la versión actual de la churrera puede hacerse bien.
+Ahora vamos a detectar que “salimos”. Si no hiciésemos nada, saliendo de la pantalla 20 por la izquierda nos encajamos en la pantalla 19… Que además está en la otra punta del mapa. En el juego original, esto estaba solucionado con un hack guarro, pero con la versión actual de **MTE MK1** puede hacerse bien.
 
 Lo primero será definir una zona de fuego que cubra la parte izquierda de la pantalla, de forma que se ejecute la sección PRESS_FIRE AT SCREEN 20 cuando nos acerquemos a ella. Añadimos, pues, la definición de la zona de fuego en la sección ENTERING SCREEN 20 (no nos olvidemos, además, de activar la funcionalidad en config.h). Nos queda así:
 
