@@ -77,7 +77,7 @@ _en_y += _en_my;
 	#else
 		jr  nz, _enems_lm_change_axis_y_done
 	#endif
-
+		
 	._enems_lm_change_axis_y
 		ld  a, (__en_my)
 		neg

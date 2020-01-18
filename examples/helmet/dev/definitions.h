@@ -61,6 +61,19 @@ unsigned char half_life;
 #define WRIGHT 4
 #define COORDS(x,y)		((x)+(y<<4)-(y))
 
+// Vertical engine selector 
+// for advanced masters of the universe
+// with a picha or toto very gordo
+
+#define VENG_KEYS		1
+#define VENG_JUMP 		2
+#define VENG_BOOTEE		3
+#define VENG_JETPAC 	4
+
+#ifdef VENG_SELECTOR 
+	unsigned char veng_selector;
+#endif
+
 // player
 signed int p_x, p_y;
 signed int p_vx, p_vy;

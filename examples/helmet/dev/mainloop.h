@@ -144,6 +144,8 @@ void main (void) {
 		}
 	#endif
 
+	#include "my/ci/after_load.h"
+
 	while (1) {
 		#ifdef ACTIVATE_SCRIPTING
 			main_script_offset = (int) (main_script);
@@ -176,6 +178,8 @@ void main (void) {
 		#ifdef ENABLE_CHECKPOINTS
 			sg_submenu ();
 		#endif
+
+		#include "my/ci/before_game.h"
 
 		#ifdef COMPRESSED_LEVELS
 			mlplaying = 1;
@@ -254,6 +258,8 @@ void main (void) {
 			// Entering game
 			run_script (2 * MAP_W * MAP_H);
 		#endif
+
+		#include "my/ci/entering_game.h"
 				
 		#ifdef PLAYER_STEPS_ON_ENEMIES 	
 			#ifdef SHOW_TOTAL
@@ -305,11 +311,9 @@ void main (void) {
 			pad0 = (joyfunc) (&keys);
 
 			if (o_pant != n_pant) {
+				#include "my/ci/before_entering_screen.h"
 				draw_scr ();
 				o_pant = n_pant;
-				#ifdef PLAYER_CAN_FIRE
-					bullets_init ();
-				#endif
 			}
 
 			#ifdef TIMER_ENABLE
@@ -507,7 +511,7 @@ void main (void) {
 			#endif
 			if (0
 				#ifdef ACTIVATE_SCRIPTING
-					|| script_result == 1
+					|| script_result == 1 || script_result == 3
 				#endif
 				#if PLAYER_NUM_OBJETOS != 99
 					|| p_objs == PLAYER_NUM_OBJETOS
@@ -532,7 +536,7 @@ void main (void) {
 			// Game over condition
 			if (p_life == 0
 				#ifdef ACTIVATE_SCRIPTING
-					|| script_result == 2
+					|| (script_result == 2)
 				#endif
 				#if defined(TIMER_ENABLE) && defined(TIMER_GAMEOVER_0)
 					|| ctimer.zero
@@ -540,6 +544,8 @@ void main (void) {
 			) {
 				playing = 0;				
 			}
+
+			#include "my/ci/extra_routines.h"
 		}
 		sp_WaitForNoKey ();
 		
@@ -549,6 +555,8 @@ void main (void) {
 
 		clear_sprites ();
 		sp_UpdateNow ();
+
+		#include "my/ci/after_game_loop.h"
 		
 		#ifdef COMPRESSED_LEVELS
 			if (success) {

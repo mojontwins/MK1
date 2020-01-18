@@ -386,6 +386,8 @@ void draw_scr (void) {
 		run_script (n_pant << 1); 				// ENTERING SCREEN n
 	#endif
 
+	#include "my/ci/entering_screen.h"
+
 	#ifdef PLAYER_CAN_FIRE
 		bullets_init ();
 	#endif
