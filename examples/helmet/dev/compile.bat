@@ -4,7 +4,7 @@ set game=helmet
 
 echo Compilando script
 cd ..\script
-..\..\..\src\utils\msc3_mk1.exe %game%.spt 24
+..\..\..\src\utils\msc3_mk1.exe %game%.spt 24  > nul
 copy msc.h ..\dev\my > nul
 copy msc-config.h ..\dev\my > nul
 copy scripts.bin ..\dev\ > nul

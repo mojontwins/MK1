@@ -261,6 +261,8 @@ unsigned char player_move (void) {
 		}
 	#endif
 
+	#include "my/ci/custom_veng.h"
+
 	p_y += p_vy;
 	
 	#if !defined (PLAYER_MOGGY_STYLE)
@@ -681,32 +683,10 @@ unsigned char player_move (void) {
 	#endif
 
 	// Select animation frame 
-	
-	#ifndef PLAYER_MOGGY_STYLE
-		#ifdef PLAYER_BOOTEE
-			gpit = p_facing << 2;
-			if (p_vy == 0) {
-				p_next_frame = player_frames [gpit];
-			} else if (p_vy < 0) {
-				p_next_frame = player_frames [gpit + 1];
-			} else {
-				p_next_frame = player_frames [gpit + 2];
-			}
-		#else	
-			if (!possee && !p_gotten) {
-				p_next_frame = player_frames [8 + p_facing];
-			} else {
-				gpit = p_facing << 2;
-				if (p_vx == 0) {
-					rda = 1;
-				} else {
-					rda = ((gpx + 4) >> 3) & 3;
-				}
-				p_next_frame = player_frames [gpit + rda];
-			}
-		#endif
-	#else
-		
+
+	#ifdef PLAYER_CUSTOM_ANIMATION
+		#include "my/custom_animation.h"
+	#elif defined PLAYER_MOGGY_STYLE
 		if (p_vx || p_vy) {
 			++ p_subframe;
 			if (p_subframe == 4) {
@@ -719,6 +699,27 @@ unsigned char player_move (void) {
 		}
 		
 		p_next_frame = player_frames [p_facing + p_frame];
+	#elif defined PLAYER_BOOTEE
+		gpit = p_facing << 2;
+		if (p_vy == 0) {
+			p_next_frame = player_frames [gpit];
+		} else if (p_vy < 0) {
+			p_next_frame = player_frames [gpit + 1];
+		} else {
+			p_next_frame = player_frames [gpit + 2];
+		}
+	#else	
+		if (!possee && !p_gotten) {
+			p_next_frame = player_frames [8 + p_facing];
+		} else {
+			gpit = p_facing << 2;
+			if (p_vx == 0) {
+				rda = 1;
+			} else {
+				rda = ((gpx + 4) >> 3) & 3;
+			}
+			p_next_frame = player_frames [gpit + rda];
+		}
 	#endif
 }
 

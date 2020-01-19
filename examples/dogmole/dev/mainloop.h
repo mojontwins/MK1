@@ -482,7 +482,7 @@ void main (void) {
 					#endif				
 					clear_sprites ();
 					pause_screen ();
-					while (!sp_KeyPressed (key_h));
+					while (!sp_KeyPressed (KEY_H));
 					sp_WaitForNoKey ();
 					draw_scr ();
 					#ifdef MODE_128K

@@ -285,3 +285,5 @@ void clear_sprites (void);
 void draw_coloured_tile (void);
 void draw_coloured_tile_gamearea (void);
 void enems_load (void);
+
+#include "my/ci/extra_vars.h"

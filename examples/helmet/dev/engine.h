@@ -41,7 +41,7 @@
 #define PLAYER_MIN_KILLABLE 0
 #endif
 
-#ifdef PLAYER_MOGGY_STYLE
+#if defined PLAYER_MOGGY_STYLE || defined PLAYER_CUSTOM_ANIMATION
 	// right: 0 + frame
 	// left: 2 + frame
 	// up: 4 + frame
@@ -50,25 +50,24 @@
 		sprite_1_a, sprite_2_a, sprite_3_a, sprite_4_a,
 		sprite_5_a, sprite_6_a, sprite_7_a, sprite_8_a
 	};
+#elif defined PLAYER_BOOTEE
+	// vy = 0: 0 + facing
+	// vy < 0: 1 + facing
+	// vy > 0: 2 + facing
+	const unsigned char *player_frames [] = {
+		sprite_5_a, sprite_6_a, sprite_7_a, sprite_8_a,
+		sprite_1_a, sprite_2_a, sprite_3_a, sprite_4_a
+	};
 #else
-	#ifdef PLAYER_BOOTEE
-		// vy = 0: 0 + facing
-		// vy < 0: 1 + facing
-		// vy > 0: 2 + facing
-		const unsigned char *player_frames [] = {
-			sprite_5_a, sprite_6_a, sprite_7_a, sprite_8_a,
-			sprite_1_a, sprite_2_a, sprite_3_a, sprite_4_a
-		};
-	#else
-		// Normal animation:
-		// 0 1 2 3 + facing: walk, 1 = stand. 8 + facing = jump/fall
-		const unsigned char *player_frames [] = {
-			sprite_5_a, sprite_6_a, sprite_7_a, sprite_6_a,
-			sprite_1_a, sprite_2_a, sprite_3_a, sprite_2_a,
-			sprite_8_a, sprite_4_a
-		};
-	#endif
+	// Normal animation:
+	// 0 1 2 3 + facing: walk, 1 = stand. 8 + facing = jump/fall
+	const unsigned char *player_frames [] = {
+		sprite_5_a, sprite_6_a, sprite_7_a, sprite_6_a,
+		sprite_1_a, sprite_2_a, sprite_3_a, sprite_2_a,
+		sprite_8_a, sprite_4_a
+	};
 #endif
+
 const unsigned char *enem_frames [] = {
 	sprite_9_a, sprite_10_a, sprite_11_a, sprite_12_a, 
 	sprite_13_a, sprite_14_a, sprite_15_a, sprite_16_a
@@ -192,7 +191,7 @@ void espera_activa (int espera) {
 }
 
 #ifndef COMPRESSED_LEVELS
-	#ifndef DEACTIVATE_KEYS
+	#if !defined DEACTIVATE_KEYS && MAX_CERROJOS > 0
 		void locks_init (void) {
 			for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) cerrojos [gpit].st = 1;	
 		}
@@ -264,7 +263,7 @@ void process_tile (void) {
 			}			
 		#endif
 
-		#ifndef DEACTIVATE_KEYS
+		#if !defined DEACTIVATE_KEYS && MAX_CERROJOS > 0
 			if (qtile (x0, y0) == 15 && p_keys) {
 				for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) {
 					if (cerrojos [gpit].x == x0 && cerrojos [gpit].y == y0 && cerrojos [gpit].np == n_pant) {
@@ -302,8 +301,8 @@ void draw_scr_background (void) {
 		#ifdef UNPACKED_MAP
 			// Mapa tipo UNPACKED
 			_t = *map_pointer ++;
-			map_attr [gpit] = behs [gpd];
-			map_buff [gpit] = gpd;
+			map_attr [gpit] = behs [_t];
+			map_buff [gpit] = _t;
 		#else
 			// Mapa tipo PACKED
 			if (!(gpit & 1)) {
@@ -347,7 +346,7 @@ void draw_scr_background (void) {
 		draw_coloured_tile_gamearea ();
 	}
 
-	#ifndef DEACTIVATE_KEYS
+	#if !defined DEACTIVATE_KEYS && MAX_CERROJOS > 0
 		// Open locks
 		for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) {
 			if (cerrojos [gpit].np == n_pant && !cerrojos [gpit].st) {
