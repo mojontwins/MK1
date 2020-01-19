@@ -55,21 +55,14 @@ void readxy (void) {
     sc_y = read_vbyte ();
 }
 
-#if !(defined (PHANTOMAS_ENGINE) || defined (HANNA_ENGINE))
 void stop_player (void) {
     p_vx = p_vy = 0;
 }
-#endif
 
 void reloc_player (void) {
-#if defined (PHANTOMAS_ENGINE) || defined (HANNA_ENGINE)
-    p_x = read_vbyte () << 4;
-    p_y = read_vbyte () << 4;
-#else
     p_x = read_vbyte () << (4+FIXBITS);
     p_y = read_vbyte () << (4+FIXBITS);
     stop_player ();
-#endif
 }
 
 void read_two_bytes_D_E (void) {

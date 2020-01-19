@@ -25,3 +25,13 @@
 ### enems_move.h
 
 ### on_enems_killed.h
+
+## Módulo de jugador
+
+### custom_veng.h
+
+## Miscelánea
+
+### on_tile_pushed.h
+
+### on_unlocked_bolt.h

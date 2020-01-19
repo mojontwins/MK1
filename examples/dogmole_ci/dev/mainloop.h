@@ -524,13 +524,8 @@ void main (void) {
 					)
 				#endif
 			) {
-				if (
-					(n_pant == pant_final && ((p_x >> 10) == PLAYER_FIN_X && (p_y >> 10) == PLAYER_FIN_Y)) ||
-					pant_final == 99
-				) {
-					success = 1;
-					playing = 0;					
-				}
+				success = 1;
+				playing = 0;
 			}
 			
 			// Game over condition

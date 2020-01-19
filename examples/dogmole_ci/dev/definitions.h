@@ -92,6 +92,7 @@ unsigned char p_disparando;
 unsigned char p_facing_v, p_facing_h;
 unsigned char p_ammo;
 unsigned char p_killme;
+unsigned char p_tx, p_ty;
 signed int ptgmx, ptgmy;
 
 #define FACING_RIGHT 0
