@@ -165,10 +165,27 @@ void enems_load (void) {
 					break;
 			#endif
 
+				#include "my/ci/enemms_load.h"
+
 			default:
 				en_an_next_frame [enit] = sprite_18_a;
 		}
 	}
+}
+
+void enems_kill (void) {
+	if (_en_t != 7) _en_t |= 16;
+	++ p_killed;
+
+	#ifdef BODY_COUNT_ON
+		flags [BODY_COUNT_ON] = p_killed;
+	#endif
+
+	#include "my/ci/on_enems_killed.h"
+
+	#ifdef ACTIVATE_SCRIPTING					
+		run_script (2 * MAP_W * MAP_H + 5); 	// PLAYER_KILLS_ENEMY
+	#endif
 }
 
 void enems_move (void) {
@@ -295,6 +312,7 @@ void enems_move (void) {
 					#include "engine/enem_mods/enem_type_pursuers.h"
 					break;	
 			#endif
+			#include "my/ci/enemms_move.h"
 			/*
 			default:
 				if (en_an_state [enit] != GENERAL_DYING) en_an_next_frame [enit] = sprite_18_a;
@@ -366,16 +384,7 @@ void enems_move (void) {
 								en_an_next_frame [enit] = sprite_18_a;								
 							#endif					
 
-							_en_t |= 16;			// Mark as dead
-							++ p_killed;
-
-							#ifdef BODY_COUNT_ON
-								flags [BODY_COUNT_ON] = p_killed;
-							#endif
-
-							#ifdef ACTIVATE_SCRIPTING					
-								run_script (2 * MAP_W * MAP_H + 5); 	// PLAYER_KILLS_ENEMY
-							#endif
+							enems_kill ();
 						} else
 					#endif
 					{
@@ -467,21 +476,13 @@ void enems_move (void) {
 										beep_fx (5);
 									#endif
 									en_an_next_frame [enit] = sprite_18_a;
-									if (_en_t != 7) _en_t |= 16;
-									++ p_killed;
-
-									#ifdef BODY_COUNT_ON
-										flags [BODY_COUNT_ON] = p_killed;
-									#endif
-
+									
 									#ifdef ENABLE_PURSUERS
 										en_an_alive [enit] = 0;
 										en_an_dead_row [enit] = DEATH_COUNT_EXPRESSION;
-									#endif	
+									#endif
 
-									#ifdef ACTIVATE_SCRIPTING					
-										run_script (2 * MAP_W * MAP_H + 5); 	// PLAYER_KILLS_ENEMY
-									#endif						
+									enems_kill ();					
 								}
 							}
 						}
