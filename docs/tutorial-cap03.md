@@ -125,7 +125,7 @@ Expliquémoslos uno a uno:
 4. `ancho_pant` es el ancho de cada pantalla en tiles. Para **MTE MK1**, siempre es 15.
 5. `alto_pant` es el alto de cada pantalla en tiles. Para **MTE MK1**, siempre es 10.
 6. `tile_cerrojo` es el número de tile que hace de cerrojo. Para **MTE MK1** siempre ha de ser el tile número 15. Si tu juego no usa cerrojos, pon aquí un valor fuera de rango como 99. Por ejemplo, **Zombie Calavera** no usa cerrojos, así que pusimos aquí un 99 al convertir su mapa. Nosotros sí tenemos cerrojos en Dogmole, así que pondremos un 15.
-7. `packed` se pone, tal cual, si nuestro tileset es de 16 tiles. Si usamos un tileset de 48 tiles, simplemente no ponemos nada.
+7. `packed` se pone, tal cual, si nuestro tileset es de 16 tiles. Si usamos un tileset de 48 tiles, simplemente no ponemos nada. Si hacemos esto, habrá que configurar igualmente el motor activando `UNPACKED_MAP`, aunque eso ya lo veremos en el capítulo 7.
 8. `fixmappy` lo pondremos si nuestro tileset no tiene un primer tile todo a negro y pasamos de hacer un tileset especial, dejando que mappy lo insertase. Así `mapcnv` lo tiene en cuenta y hace sus fullerias.
 
 Por tanto, para convertir el mapa de **Dogmole**, tendremos que ejecutar `mapcnv` así:

@@ -680,7 +680,7 @@ void print_number2 (void) {
 						#ifdef COMPRESSED_LEVELS
 							level_data->max_objs
 						#else						
-							PLAYER_MAX_OBJECTS
+							PLAYER_NUM_OBJETOS
 						#endif
 						- p_objs;
 				#else

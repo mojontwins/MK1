@@ -178,17 +178,18 @@ Sin embargo, por tema del saber, que no ocupa lugar, vamos a explicar como funci
 
 ```
     $ src\utils\ts2bin.exe
-    ts2bin v0.3 20191202 ~ Usage:
+   ts2bin v0.4 20200119 ~ Usage:
 
-    $ ts2bin font.png/nofont work.png/notiles ts.bin [forcezero]
+	$ ts2bin font.png/nofont work.png/notiles ts.bin defaultink
 
-    where:
-       * font.png is a 256x16 file with 64 chars ascii 32-95
-         (use 'nofont' if you don't want to include a font & gen. 192 tiles)
-       * work.png is a 256x48 file with your 16x16 tiles
-         (use 'notiles' if you don't want to include a tileset & gen. 64 tiles)
-       * ts.bin is the output, 2304 bytes bin file.
-       * forcezero: adds 0 as 2nd colour when there's only one per 8x8 cell
+	where:
+	   * font.png is a 256x16 file with 64 chars ascii 32-95
+	     (use 'nofont' if you don't want to include a font & gen. 192 tiles)
+	   * work.png is a 256x48 file with your 16x16 tiles
+	     (use 'notiles' if you don't want to include a tileset & gen. 64 tiles)
+	   * ts.bin is the output, 2304 bytes bin file.
+	   * defaultink: a number 0-7. Use this colour as 2nd colour if there's only
+	     one colour in a 8x8 cell
 ```
 
 El primer parámetro es el nombre de archivo de la fuente (incluyendo su ubicación si es necesaria), o la palabra `nofont` si sólo quieres convertir el tileset (cosa que viene bien para hacer otras cosas que no son un juego de la churrera normal). 
@@ -197,13 +198,15 @@ El segundo parámetro es el nombre del archivo con el tileset (incluyendo su ubi
 
 El tercer parámetro es el nombre del archivo que quieres generar (incluyendo su ubicación si es necesaria). En el caso de la churrera, el archivo resultante ocupará 2304 y contendrá todos los patrones (fuente y tileset) y los colores que se usan en el tileset.
 
-El cuarto parámetro es `forcezero` y es opcional. Si se incluye y se encuentra algún "patrón" que sea un cuadrado de color sólido, se usará el negro como "segundo color virtual". Si sabes de Spectrum le encontrarás sentido a esto.
+El cuarto parámetro es opcional, y sirve para especificar un color de tinta 0-7 que quieres que se utilice si se encuentra algún "patrón" que sea un cuadrado de color sólido como segundo color. Si sabes de Spectrum le encontrarás sentido a esto.
 
-Si abres `compile.bat` verás que los parámetros que se emplean en la llamada para obtener los patrones se corresponden con los que hemos mencionado más arriba (la fuente se llama `font.png` y el tileset `work.png`, y se ubican en `gfx`). El archivo de salida es `tileset.bin` y se emplea `forcezero`.:
+Si abres `compile.bat` verás que los parámetros que se emplean en la llamada para obtener los patrones se corresponden con los que hemos mencionado más arriba (la fuente se llama `font.png` y el tileset `work.png`, y se ubican en `gfx`). El archivo de salida es `tileset.bin` y se emplea `7` como `defaultink`.:
 
 ```
-    ..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png tileset.bin forcezero
+    ..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png tileset.bin 7
 ```
+
+**Si tu juego necesita sprites de otro color sobre cuadros totalmente negros tendrás que modificar esta linea con el color que necesites**.
 
 Los `..\utils\` y `..\gfx` hacen referencia a que los archivos se ubican en esas carpetas que están un nivel más *abajo* de donde está `compile.bat`. El `> nul` del final hace que las mierdas que dice `ts2bin` no se muestren.
 

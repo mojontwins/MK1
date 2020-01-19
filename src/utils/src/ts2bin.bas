@@ -10,7 +10,7 @@
 #define RGBA_B( c ) ( CUInt( c )        And 255 )
 #define RGBA_A( c ) ( CUInt( c ) Shr 24         )
 
-Dim Shared As Integer forceZero
+Dim Shared As Integer defaultInk
 
 Function speccyColour (colour As Unsigned Long) As uByte
 	Dim res as uByte
@@ -54,8 +54,8 @@ Sub getUDGIntoCharset (img As Any Ptr, x0 As integer, y0 As Integer, tileset () 
 	If c1 And 128 Then b = 64: c1 = c1 And 127
 	If c2 And 128 Then b = 64: c2 = c2 And 127
 	If c1 = c2 Then 
-		If forcezero Then
-			If c1 = 0 Then c1 = 7 Else c1 = 0
+		If defaultInk <> -1 Then
+			c1 = defaultInk
 		Else 
 			If c2 < 4 Then
 				c1 = 7
@@ -98,7 +98,7 @@ End Function
 Sub usage
 	Print "Usage: "
 	Print 
-	Print "$ ts2bin font.png/nofont work.png/notiles ts.bin [forcezero]"
+	Print "$ ts2bin font.png/nofont work.png/notiles ts.bin defaultink"
 	Print
 	Print "where:"
 	Print "   * font.png is a 256x16 file with 64 chars ascii 32-95"
@@ -106,7 +106,8 @@ Sub usage
 	Print "   * work.png is a 256x48 file with your 16x16 tiles"
 	Print "     (use 'notiles' if you don't want to include a tileset & gen. 64 tiles)"
 	Print "   * ts.bin is the output, 2304 bytes bin file."
-	Print "   * forcezero: adds 0 as 2nd colour when there's only one per 8x8 cell"
+	Print "   * defaultink: a number 0-7. Use this colour as 2nd colour if there's only"
+	Print "     one colour in a 8x8 cell"
 End Sub
 
 ' VARS.
@@ -120,14 +121,14 @@ Dim As uByte tileset (2303)
 
 ' DO
 
-Print "ts2bin v0.3 20191202 ~ ";
+Print "ts2bin v0.4 20200119 ~ ";
 
 If Len (Command (3)) = 0 Then
 	usage
 	End
 End If
 
-If Command (4) = "forcezero" Then forcezero = -1 Else forcezero = 0
+If Len (Command (4)) = 0 Then defaultInk = -1 Else defaultInk = Val (Command (4))
 
 levelBin = Command (3)
 
