@@ -165,7 +165,7 @@ void enems_load (void) {
 					break;
 			#endif
 
-				#include "my/ci/enemms_load.h"
+				#include "my/ci/enems_load.h"
 
 			default:
 				en_an_next_frame [enit] = sprite_18_a;
@@ -312,7 +312,7 @@ void enems_move (void) {
 					#include "engine/enem_mods/enem_type_pursuers.h"
 					break;	
 			#endif
-			#include "my/ci/enemms_move.h"
+			#include "my/ci/enems_move.h"
 			/*
 			default:
 				if (en_an_state [enit] != GENERAL_DYING) en_an_next_frame [enit] = sprite_18_a;

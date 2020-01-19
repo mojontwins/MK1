@@ -14,6 +14,10 @@
 
 ### after_game_loop.h
 
+## Hotspots
+
+### hotspots_custom.h
+
 ## Módulo de enemigos
 
 ### enems_load.h

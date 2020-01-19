@@ -131,6 +131,8 @@ void hotspots_do (void) {
 						#endif
 						break;						
 				#endif
+
+				#include "my/ci/hotspots_custom.h"
 			}
 			
 		}

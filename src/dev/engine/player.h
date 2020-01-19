@@ -160,87 +160,104 @@ unsigned char player_move (void) {
 	//  MOVEMENT IN THE VERTICAL AXIS
 	// ***************************************************************************
 
-	#ifndef PLAYER_MOGGY_STYLE
-		
-		// Do gravity
-		
-		#asm
-				; Signed comparisons are hard
-				; p_vy <= PLAYER_MAX_VY_CAYENDO - PLAYER_G
+	#if !defined PLAYER_MOGGY_STYLE || defined VENG_SELECTOR
 
-				; We are going to take a shortcut.
-				; If p_vy < 0, just add PLAYER_G.
-				; If p_vy > 0, we can use unsigned comparition anyway.
+		#if defined VENG_SELECTOR && defined PLAYER_VKEYS
+			if (veng_selector != VENG_KEYS)
+		#endif
+		{
+			// Do gravity
+			
+			#asm
+					; Signed comparisons are hard
+					; p_vy <= PLAYER_MAX_VY_CAYENDO - PLAYER_G
 
-				ld  hl, (_p_vy)
-				bit 7, h
-				jr  nz, _player_gravity_add 	; < 0
+					; We are going to take a shortcut.
+					; If p_vy < 0, just add PLAYER_G.
+					; If p_vy > 0, we can use unsigned comparition anyway.
 
-				ld  de, PLAYER_MAX_VY_CAYENDO - PLAYER_G
-				or  a
-				push hl
-				sbc hl, de
-				pop hl
-				jr  nc, _player_gravity_maximum
+					ld  hl, (_p_vy)
+					bit 7, h
+					jr  nz, _player_gravity_add 	; < 0
 
-			._player_gravity_add
-				ld  de, PLAYER_G
-				add hl, de
-				jr  _player_gravity_vy_set
+					ld  de, PLAYER_MAX_VY_CAYENDO - PLAYER_G
+					or  a
+					push hl
+					sbc hl, de
+					pop hl
+					jr  nc, _player_gravity_maximum
 
-			._player_gravity_maximum
-				ld  hl, PLAYER_MAX_VY_CAYENDO
+				._player_gravity_add
+					ld  de, PLAYER_G
+					add hl, de
+					jr  _player_gravity_vy_set
 
-			._player_gravity_vy_set
-				ld  (_p_vy), hl
+				._player_gravity_maximum
+					ld  hl, PLAYER_MAX_VY_CAYENDO
 
-			._player_gravity_done
+				._player_gravity_vy_set
+					ld  (_p_vy), hl
 
-			#ifdef PLAYER_CUMULATIVE_JUMP
-				ld  a, (_p_jmp_on)
-				or  a
-				jr  nz, _player_gravity_p_gotten_done
-			#endif
+				._player_gravity_done
 
-				ld  a, (_p_gotten)
-				or  a
-				jr  z, _player_gravity_p_gotten_done
+				#ifdef PLAYER_CUMULATIVE_JUMP
+					ld  a, (_p_jmp_on)
+					or  a
+					jr  nz, _player_gravity_p_gotten_done
+				#endif
 
-				xor a
-				ld  (_p_vy), a
+					ld  a, (_p_gotten)
+					or  a
+					jr  z, _player_gravity_p_gotten_done
 
-			._player_gravity_p_gotten_done
-		#endasm	
-	#else
+					xor a
+					ld  (_p_vy), a
 
-		// Pad do
+				._player_gravity_p_gotten_done
+			#endasm
+		}	
+	#endif
 
-		if ( ! ((pad0 & sp_UP) == 0 || (pad0 & sp_DOWN) == 0)) {
-			p_facing_v = 0xff;
-			if (p_vy > 0) {
-				p_vy -= PLAYER_RX;
-				if (p_vy < 0) p_vy = 0;
-			} else if (p_vy < 0) {
-				p_vy += PLAYER_RX;
-				if (p_vy > 0) p_vy = 0;
+	#if defined PLAYER_MOGGY_STYLE || (defined VENG_SELECTOR && defined PLAYER_VKEYS)
+
+		#if defined (VENG_SELECTOR)
+			if (veng_selector == VENG_KEYS )
+		#endif
+		{
+			// Pad do
+
+			if ( ! ((pad0 & sp_UP) == 0 || (pad0 & sp_DOWN) == 0)) {
+				p_facing_v = 0xff;
+				if (p_vy > 0) {
+					p_vy -= PLAYER_RX;
+					if (p_vy < 0) p_vy = 0;
+				} else if (p_vy < 0) {
+					p_vy += PLAYER_RX;
+					if (p_vy > 0) p_vy = 0;
+				}
 			}
-		}
 
-		if ((pad0 & sp_UP) == 0) {
-			p_facing_v = FACING_UP;
-			if (p_vy > -PLAYER_MAX_VX) p_vy -= PLAYER_AX;
-		}
+			if ((pad0 & sp_UP) == 0) {
+				p_facing_v = FACING_UP;
+				if (p_vy > -PLAYER_MAX_VX) p_vy -= PLAYER_AX;
+			}
 
-		if ((pad0 & sp_DOWN) == 0) {
-			p_facing_v = FACING_DOWN;
-			if (p_vy < PLAYER_MAX_VX) p_vy += PLAYER_AX;
+			if ((pad0 & sp_DOWN) == 0) {
+				p_facing_v = FACING_DOWN;
+				if (p_vy < PLAYER_MAX_VX) p_vy += PLAYER_AX;
+			}
 		}
 	#endif
 
 	#ifdef PLAYER_HAS_JETPAC
-		if ((pad0 & sp_UP) == 0) {
-			p_vy -= PLAYER_INCR_JETPAC;
-			if (p_vy < -PLAYER_MAX_VY_JETPAC) p_vy = -PLAYER_MAX_VY_JETPAC;
+		#ifdef VENG_SELECTOR
+			if (veng_selector == VENG_JETPAC)
+		#endif
+		{
+			if ((pad0 & sp_UP) == 0) {
+				p_vy -= PLAYER_INCR_JETPAC;
+				if (p_vy < -PLAYER_MAX_VY_JETPAC) p_vy = -PLAYER_MAX_VY_JETPAC;
+			}
 		}
 	#endif
 
@@ -350,55 +367,63 @@ unsigned char player_move (void) {
 	// Jump
 
 	#ifdef PLAYER_HAS_JUMP
-		
-		#if defined (PLAYER_CAN_FIRE) && !defined (USE_TWO_BUTTONS)
-			rda = (pad0 & sp_UP) == 0;
-		#elif defined (PLAYER_CAN_FIRE) && defined (USE_TWO_BUTTONS)
-			rda = sp_KeyPressed (key_jump);
-		#else
-			rda = (pad0 & sp_FIRE) == 0;
+		#ifdef VENG_SELECTOR
+			if (veng_selector == VENG_JUMP)
 		#endif
+		{
+			#if defined (PLAYER_CAN_FIRE) && !defined (USE_TWO_BUTTONS)
+				rda = (pad0 & sp_UP) == 0;
+			#elif defined (PLAYER_CAN_FIRE) && defined (USE_TWO_BUTTONS)
+				rda = sp_KeyPressed (key_jump);
+			#else
+				rda = (pad0 & sp_FIRE) == 0;
+			#endif
 
-		if (rda) {
-			if (p_saltando == 0) {
-				if (possee || p_gotten || hit_v) {
-					p_saltando = 1;
-					p_cont_salto = 0;
-					#ifdef MODE_128K
-						wyz_play_sound (2);
-					#else
-						beep_fx (3);
-					#endif
+			if (rda) {
+				if (p_saltando == 0) {
+					if (possee || p_gotten || hit_v) {
+						p_saltando = 1;
+						p_cont_salto = 0;
+						#ifdef MODE_128K
+							wyz_play_sound (2);
+						#else
+							beep_fx (3);
+						#endif
+					}
+				} else {
+					p_vy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (p_cont_salto >> 1));
+					if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
+					++ p_cont_salto;
+					if (p_cont_salto == 9) p_saltando = 0;
 				}
-			} else {
-				p_vy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (p_cont_salto >> 1));
-				if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
-				++ p_cont_salto;
-				if (p_cont_salto == 9) p_saltando = 0;
-			}
-		} else p_saltando = 0;
-	
+			} else p_saltando = 0;
+		}
 	#endif
 
 	// Bootee engine
 
 	#ifdef PLAYER_BOOTEE
-		if ( p_saltando == 0 && (possee || p_gotten || hit_v) ) {
-			p_saltando = 1;
-			p_cont_salto = 0;
-			#ifdef MODE_128K
-				wyz_play_sound (2);
-			#else				
-				beep_fx (3);
-			#endif
-		}
-		
-		if (p_saltando ) {
-			p_vy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (p_cont_salto>>1));
-			if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
-			++ p_cont_salto;
-			if (p_cont_salto == 8)
-				p_saltando = 0;
+		#ifdef VENG_SELECTOR
+			if (veng_selector == VENG_BOOTEE)
+		#endif
+		{
+			if ( p_saltando == 0 && (possee || p_gotten || hit_v) ) {
+				p_saltando = 1;
+				p_cont_salto = 0;
+				#ifdef MODE_128K
+					wyz_play_sound (2);
+				#else				
+					beep_fx (3);
+				#endif
+			}
+			
+			if (p_saltando ) {
+				p_vy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (p_cont_salto>>1));
+				if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
+				++ p_cont_salto;
+				if (p_cont_salto == 8)
+					p_saltando = 0;
+			}
 		}
 	#endif	
 
