@@ -231,8 +231,10 @@ void process_tile (void) {
 			#endif		
 			{ 
 				if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 < 15 && y1 < 10) {
+					rda = map_buff [COORDS(x1,y1)];
+					
 					#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
-						flags [MOVED_TILE_FLAG] = map_buff [COORDS(x1,y1)];
+						flags [MOVED_TILE_FLAG] = rda; 
 						flags [MOVED_X_FLAG] = x1;
 						flags [MOVED_Y_FLAG] = y1;
 					#endif			
