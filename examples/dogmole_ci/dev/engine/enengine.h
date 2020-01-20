@@ -473,7 +473,7 @@ void enems_move (void) {
 										#endasm
 										wyz_play_sound (6);
 									#else															
-										beep_fx (5);
+										beep_fx (0);
 									#endif
 									en_an_next_frame [enit] = sprite_18_a;
 									

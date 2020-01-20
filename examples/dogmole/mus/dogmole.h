@@ -2,7 +2,7 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 #asm
-                ;org60000
+                ORG 60000
 .BORDER_COL     EQU  $0
 
 ; *****************************************************************************
@@ -197,7 +197,7 @@
              LD   HL,$2758
              EXX
              POP  IY
-             ;ei
+             ;di
              RET
 
 .RENDER

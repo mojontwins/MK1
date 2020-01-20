@@ -138,10 +138,14 @@ Cuando queremos comprobar que nuestro personaje esté dentro del área rectangul
 
 Con el área definida aquí, los valores de x1, x2 e y1, y2 que tendremos que usar en el script son los que se obtienen con las siguientes fórmulas:
 
-|x1 = tx1 * 16 – 15| |
-|y1 = ty1 * 16 – 15| |
-| |x2 = tx2 * 16 + 15|
-| |y2 = ty2 * 16 + 15|
+```
+    x1 = tx1 * 16 – 15  
+    y1 = ty1 * 16 – 15 +---+
+                       |   |
+                       |   |
+                       +---+ x2 = tx2 * 16 + 15
+                             y2 = ty2 * 16 + 15
+```
 
 Para verlo, de nuevo, un dibujito. Fíjate que he superpuesto un sprite para que veáis que para que “toque” los tiles debe estar en el rectángulo definido por las coordenadas (x1, y1) y (x2, y2):
 
@@ -151,10 +155,14 @@ Sí, si no estáis acostumbrados a hacer números programando esto es un lío de
 
 Para terminar de verlo, trasladémonos a nuestro caso y hagamos las operaciones necesarias utilizando los valores de nuestro juego. Aquí, el rectángulo está formado únicamente por dos tiles en las coordenadas (3, 7) y (4, 7). Los tiles de las esquinas son esos dos tiles, precisamente, por lo que tx1 valdra 3, ty1 valdrá 7, tx2 valdrá 4 y ty2 valdrá también 7. De ese modo, siguiendo las fórmulas:
 
-|x1 = 3 * 16 – 15 = 33| |
-|y1 = 7 * 16 – 15 = 97| |
-| |x2 = 4 * 16 + 15 = 79|
-| |y2 = 7 * 16 + 15 = 127|
+```
+    x1 = 3 * 16 – 15 = 33
+    y1 = 7 * 16 – 15 = 97 +---+
+                          |   |
+                          |   |
+                          +---+ x2 = 4 * 16 + 15 = 79
+                                y2 = 7 * 16 + 15 = 127|
+```
 
 O sea, que para tocar el mostrador, el sprite debe estar entre 33 y 79 en la coordenada X y entre 97 y 127 en la coordenada Y. Veámoslo gráficamente con un gráfico lioso: fíjate como para que el sprite esté tocando el mostrador, el píxel superior izquierdo del cuadrado de su sprite (marcado en rojo) debe estar dentro del área que hemos definido:
 

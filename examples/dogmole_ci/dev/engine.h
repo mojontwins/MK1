@@ -148,10 +148,10 @@ void game_over (void) {
 			
 		#ifdef MODE_128K
 		#else
-			bs = 4; do {
+			gpit = 4; do {
 				beep_fx (1);
 				beep_fx (2);
-			} while (--bs);
+			} while (-- gpit);
 			beep_fx (0);
 		#endif
 		

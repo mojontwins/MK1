@@ -33,7 +33,8 @@ End Function
 
 Dim As Integer noints
 Dim As Integer fIn, fOut
-Dim As String linea, whiteSpace, trimmed
+Dim As String linea, whiteSpace, trimmed, m, prefix, sufix
+Dim As Integer i, hasLabel, p
 
 If Command (2) = "" Then usage: End
 noints = Command (3) = "mk1"
@@ -56,12 +57,65 @@ While Not Eof (fIn)
 	whiteSpace = getIndentation (linea)
 	trimmed = Trim (linea, Any Chr (32) + Chr (9))
 	
-	If Right (trimmed, 1) = ":" And Instr (trimmed, Chr (32)) = 0 Then
-		linea = whiteSpace & "." & Left (trimmed, Len (trimmed) - 1)
-	ElseIf noints Then
-		If Lcase (trimmed) = "ei" Or Lcase (trimmed) = "di" Then 
-			linea = whiteSpace & ";" & trimmed
-		End If		
+	' Identify labels
+	hasLabel = 0
+	For i = 1 To Len (trimmed) 
+		m = Mid (trimmed, i, 1)
+		If m = ":" Then hasLabel = -1: Exit For
+		If Not ( _
+			(m >= "A" And m <= "Z") Or _
+			(m >= "a" And m <= "z") Or _
+			(m = "_") Or _
+			(m >= "0" And m <= "9") _
+		) Then Exit For		
+	Next i
+
+	If (hasLabel) Then
+		linea = whiteSpace & "." & Left (trimmed, i - 1) & Right (trimmed, Len (trimmed) - i)
+	End If
+
+	If noints Then
+		p = Instr (lcase (linea), "di")
+		If p Then 
+			If (Len (linea) = p + 1 Or _
+			Instr (" " & Chr (9) & ";", Mid (linea, p + 2, 1))) _
+			And (p = 1 Or _
+			Instr (" " & Chr (9), Mid (linea, p - 1, 1))) _
+			Then
+				If p > 1 Then prefix = Left (linea, p - 1) Else prefix = ""
+				If p < Len (linea) - 1 Then sufix = Right (linea, Len (linea) - p - 1) Else sufix = ""
+
+				linea = prefix & ";di" & sufix
+			End If
+		End If
+
+		p = Instr (lcase (linea), "ei")
+		If p Then 
+			If (Len (linea) = p + 1 Or _
+			Instr (" " & Chr (9) & ";", Mid (linea, p + 2, 1))) _
+			And (p = 1 Or _
+			Instr (" " & Chr (9), Mid (linea, p - 1, 1))) _
+			Then
+				If p > 1 Then prefix = Left (linea, p - 1) Else prefix = ""
+				If p < Len (linea) - 1 Then sufix = Right (linea, Len (linea) - p - 1) Else sufix = ""
+
+				linea = prefix & ";ei" & sufix
+			End If
+		End If
+
+		p = Instr (lcase (linea), "org")
+		If p Then 
+			If (Len (linea) = p + 2 Or _
+			Instr (" " & Chr (9) & ";", Mid (linea, p + 3, 1))) _
+			And (p = 1 Or _
+			Instr (" " & Chr (9), Mid (linea, p - 1, 1))) _
+			Then
+				If p > 1 Then prefix = Left (linea, p - 1) Else prefix = ""
+				If p < Len (linea) - 2 Then sufix = Right (linea, Len (linea) - p - 2) Else sufix = ""
+
+				linea = prefix & ";org" & sufix
+			End If
+		End If
 	End If
 
 	Print #fOut, linea

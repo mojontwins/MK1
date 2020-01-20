@@ -1,9 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
-
-#asm
-                ;org60000
-.BORDER_COL     EQU  $0
+                ORG 60000
+BORDER_COL:     EQU  $0
 
 ; *****************************************************************************
 ; * Phaser1 Engine, With Digital Drum Samples
@@ -14,7 +10,7 @@
 ; * Produced by Beepola v1.05.01
 ; ******************************************************************************
  
-.START
+START:
              LD    HL,MUSICDATA         ;  <- Pointer to Music Data. Change
                                         ;     this to play a different song
              LD   A,(HL)                         ; Get the loop start pointer
@@ -37,8 +33,8 @@
              LD   L,A
              LD   (NOTE_PTR),HL                  ; Set the note offset (within this pattern) to 0
 
-.PLAYER
-             ;di
+PLAYER:
+             DI
              PUSH IY
              LD   A,BORDER_COL
              LD   H,$00
@@ -59,24 +55,24 @@
 ; * Select the next pattern in sequence (and handle looping if we've reached PATTERN_LOOP_END
 ; * Execution falls through to PLAYNOTE to play the first note from our next pattern
 ; ********************************************************************************************************
-.NEXT_PATTERN
+NEXT_PATTERN:
                           LD   A,(PATTERN_PTR)
                           INC  A
                           INC  A
                           DEFB $FE                           ; CP n
-.PATTERN_LOOP_END         DEFB 0
+PATTERN_LOOP_END:         DEFB 0
                           JR   NZ,NO_PATTERN_LOOP
                           ; Handle Pattern Looping at and of song
                           DEFB $3E                           ; LD A,n
-.PATTERN_LOOP_BEGIN       DEFB 0
-.NO_PATTERN_LOOP          LD   (PATTERN_PTR),A
+PATTERN_LOOP_BEGIN:       DEFB 0
+NO_PATTERN_LOOP:          LD   (PATTERN_PTR),A
                           LD   HL,$0000
                           LD   (NOTE_PTR),HL   ; Start of pattern (NOTE_PTR = 0)
 
-.MAIN_LOOP
+MAIN_LOOP:
              LD   IYL,0                        ; Set channel = 0
 
-.READ_LOOP
+READ_LOOP:
              LD   HL,(PATTERN_ADDR)
              LD   A,(PATTERN_PTR)
              LD   E,A
@@ -115,16 +111,16 @@
              EX   DE,HL
 
              DEFB $DD,$21                      ; LD IX,nn
-.CURRENT_INST
+CURRENT_INST:
              DEFW $0000
 
              LD   A,(IX+$00)
              OR   A
              JR   Z,L809B                      ; Original code jumps into byte 2 of the DJNZ (invalid opcode FD)
              LD   B,A
-.L8098       ADD  HL,HL
+L8098:       ADD  HL,HL
              DJNZ L8098
-.L809B       LD   E,(IX+$01)
+L809B:       LD   E,(IX+$01)
              LD   D,(IX+$02)
              ADD  HL,DE
              LD   (DIV_1B),HL
@@ -141,7 +137,7 @@
              LD   (CNT_1B),HL
              JR   READ_LOOP
 
-.SET_NOTE2
+SET_NOTE2:
              LD   (DIV_2),DE
              LD   A,IYH
              LD   HL,OUT_2
@@ -150,7 +146,7 @@
              LD   (CNT_2),HL
              JP   READ_LOOP
 
-.SET_STOP
+SET_STOP:
              LD   HL,$0000
              LD   A,IYL
              OR   A
@@ -162,14 +158,14 @@
              RES  4,(HL)
              LD   IYL,1
              JP   READ_LOOP
-.SET_STOP2
+SET_STOP2:
              ; Stop channel 2 note
              LD   (DIV_2),HL
              LD   HL,OUT_2
              RES  4,(HL)
              JP   READ_LOOP
 
-.OTHER       CP   $3C
+OTHER:       CP   $3C
              JR   Z,SET_STOP                   ; Stop note
              CP   $3E
              JR   Z,SKIP_CH1                   ; No changes to channel 1
@@ -182,50 +178,50 @@
              LD   (NOTE_PTR),DE                ; Increment the note pointer
 
              DEFB $01                          ; LD BC,nn
-.INSTRUM_TBL
+INSTRUM_TBL:
              DEFW $0000
 
              ADD  HL,BC
              LD   (CURRENT_INST),HL
              JP   READ_LOOP
 
-.SKIP_CH1
+SKIP_CH1:
              LD   IYL,$01
              JP   READ_LOOP
 
-.EXIT_PLAYER
+EXIT_PLAYER:
              LD   HL,$2758
              EXX
              POP  IY
-             ;ei
+             EI
              RET
 
-.RENDER
+RENDER:
              AND  $7F                          ; L813A
              CP   $76
              JP   NC,DRUM_TYPE_1
              LD   D,A
              EXX
              DEFB $21                          ; LD HL,nn
-.CNT_1A      DEFW $0000
+CNT_1A:      DEFW $0000
              DEFB $DD,$21                      ; LD IX,nn
-.CNT_1B      DEFW $0000
+CNT_1B:      DEFW $0000
              DEFB $01                          ; LD BC,nn
-.DIV_1A      DEFW $0000
+DIV_1A:      DEFW $0000
              DEFB $11                          ; LD DE,nn
-.DIV_1B      DEFW $0000
+DIV_1B:      DEFW $0000
              DEFB $3E                          ; LD A,n
-.OUT_1       DEFB $0
+OUT_1:       DEFB $0
              EXX
              EX   AF,AF'
              DEFB $21                          ; LD HL,nn
-.CNT_2       DEFW $0000
+CNT_2:       DEFW $0000
              DEFB $01                          ; LD BC,nn
-.DIV_2       DEFW $0000
+DIV_2:       DEFW $0000
              DEFB $3E                          ; LD A,n
-.OUT_2       DEFB $00
+OUT_2:       DEFB $00
 
-.PLAY_NOTE
+PLAY_NOTE:
              ; Read keyboard
              LD   E,A
              XOR  A
@@ -233,94 +229,94 @@
              OR   $E0
              INC  A
 
-.PLAYER_WAIT_KEY
+PLAYER_WAIT_KEY:
              JR   NZ,EXIT_PLAYER
              LD   A,E
              LD   E,0
 
-.L8168       EXX
+L8168:       EXX
              EX   AF,AF'
              ADD  HL,BC
              OUT  ($FE),A
              JR   C,L8171
              JR   L8173
-.L8171       XOR  $10
-.L8173       ADD  IX,DE
+L8171:       XOR  $10
+L8173:       ADD  IX,DE
              JR   C,L8179
              JR   L817B
-.L8179       XOR  $10
-.L817B       EX   AF,AF'
+L8179:       XOR  $10
+L817B:       EX   AF,AF'
              OUT  ($FE),A
              EXX
              ADD  HL,BC
              JR   C,L8184
              JR   L8186
-.L8184       XOR  $10
-.L8186       NOP
+L8184:       XOR  $10
+L8186:       NOP
              JP   L818A
 
-.L818A       EXX
+L818A:       EXX
              EX   AF,AF'
              ADD  HL,BC
              OUT  ($FE),A
              JR   C,L8193
              JR   L8195
-.L8193       XOR  $10
-.L8195       ADD  IX,DE
+L8193:       XOR  $10
+L8195:       ADD  IX,DE
              JR   C,L819B
              JR   L819D
-.L819B       XOR  $10
-.L819D       EX   AF,AF'
+L819B:       XOR  $10
+L819D:       EX   AF,AF'
              OUT  ($FE),A
              EXX
              ADD  HL,BC
              JR   C,L81A6
              JR   L81A8
-.L81A6       XOR  $10
-.L81A8       NOP
+L81A6:       XOR  $10
+L81A8:       NOP
              JP   L81AC
 
-.L81AC       EXX
+L81AC:       EXX
              EX   AF,AF'
              ADD  HL,BC
              OUT  ($FE),A
              JR   C,L81B5
              JR   L81B7
-.L81B5       XOR  $10
-.L81B7       ADD  IX,DE
+L81B5:       XOR  $10
+L81B7:       ADD  IX,DE
              JR   C,L81BD
              JR   L81BF
-.L81BD       XOR  $10
-.L81BF       EX   AF,AF'
+L81BD:       XOR  $10
+L81BF:       EX   AF,AF'
              OUT  ($FE),A
              EXX
              ADD  HL,BC
              JR   C,L81C8
              JR   L81CA
-.L81C8       XOR  $10
-.L81CA       NOP
+L81C8:       XOR  $10
+L81CA:       NOP
              JP   L81CE
 
-.L81CE       EXX
+L81CE:       EXX
              EX   AF,AF'
              ADD  HL,BC
              OUT  ($FE),A
              JR   C,L81D7
              JR   L81D9
-.L81D7       XOR  $10
-.L81D9       ADD  IX,DE
+L81D7:       XOR  $10
+L81D9:       ADD  IX,DE
              JR   C,L81DF
              JR   L81E1
-.L81DF       XOR  $10
-.L81E1       EX   AF,AF'
+L81DF:       XOR  $10
+L81E1:       EX   AF,AF'
              OUT  ($FE),A
              EXX
              ADD  HL,BC
              JR   C,L81EA
              JR   L81EC
-.L81EA       XOR  $10
+L81EA:       XOR  $10
 
-.L81EC       DEC  E
+L81EC:       DEC  E
              JP   NZ,L8168
 
              EXX
@@ -329,20 +325,20 @@
              OUT  ($FE),A
              JR   C,L81F9
              JR   L81FB
-.L81F9       XOR  $10
-.L81FB       ADD  IX,DE
+L81F9:       XOR  $10
+L81FB:       ADD  IX,DE
              JR   C,L8201
              JR   L8203
-.L8201       XOR  $10
-.L8203       EX   AF,AF'
+L8201:       XOR  $10
+L8203:       EX   AF,AF'
              OUT  ($FE),A
              EXX
              ADD  HL,BC
              JR   C,L820C
              JR   L820E
-.L820C       XOR  $10
+L820C:       XOR  $10
 
-.L820E       DEC  D
+L820E:       DEC  D
              JP   NZ,PLAY_NOTE
 
              LD   (CNT_2),HL
@@ -357,33 +353,33 @@
 ; ************************************************************
 ; * DRUM type 1 - Digital
 ; ************************************************************
-.DRUM_TYPE_1
+DRUM_TYPE_1:
              SUB  $74                          ; On entry A=$75+Drum number (i.e. $76 to $7D), this makes it $02 to $09
              LD   B,A
              LD   A,$80
-.L822C       RLA                               ;
+L822C:       RLA                               ;
              DJNZ L822C                        ; Rotates the drum number, giving us the appropriately-set bit in A
 
-.DRUM_DIGITAL
+DRUM_DIGITAL:
              LD   (DRUM_SAMPLE),A
              LD   A,BORDER_COL
              LD   D,A
              LD   HL,SAMPLE_DATA
              LD   BC,1024                      ; Drums are all 1024 samples long, and striped into a byte
-.NEXT_SAMPLE
+NEXT_SAMPLE:
              LD   A,(HL)
 
              DEFB $E6                          ; AND n
-.DRUM_SAMPLE
+DRUM_SAMPLE:
              DEFB $08
 
              LD   A,D                          ; Put border colour bits into A
              JR   NZ,L8247                     ; Sample bit set
              JR   Z,L8249                      ; Sample bit not set
-.L8247       OR   $10
-.L8249       OUT  ($FE),A
+L8247:       OR   $10
+L8249:       OUT  ($FE),A
              LD   E,$04
-.L824D       DEC  E
+L824D:       DEC  E
              JR   NZ,L824D
              INC  HL
              DEC  BC
@@ -392,14 +388,14 @@
              JR   NZ,NEXT_SAMPLE
              JP   MAIN_LOOP
 
-.PATTERN_ADDR   DEFW  $0000
-.PATTERN_PTR    DEFB  0
-.NOTE_PTR       DEFW  $0000
+PATTERN_ADDR:   DEFW  $0000
+PATTERN_PTR:    DEFB  0
+NOTE_PTR:       DEFW  $0000
 
 ; **************************************************************
 ; * Frequency Table
 ; **************************************************************
-.FREQ_TABLE
+FREQ_TABLE:
              DEFW 178,189,200,212,225,238,252,267,283,300,318,337
              DEFW 357,378,401,425,450,477,505,535,567,601,637,675
              DEFW 715,757,802,850,901,954,1011,1071,1135,1202,1274,1350
@@ -409,7 +405,7 @@
 ; *****************************************************************
 ; * Digital Drum Samples - 8 * 1024bit samples, striped into bytes
 ; *****************************************************************
-.SAMPLE_DATA
+SAMPLE_DATA:
              DEFB $02,$02,$02,$02,$00,$00,$02,$00,$0E,$00,$00,$00,$00,$00,$00,$00
              DEFB $0C,$00,$00,$00,$08,$10,$10,$10,$18,$70,$70,$70,$70,$70,$70,$70
              DEFB $74,$70,$50,$50,$D8,$D0,$D0,$D0,$D4,$D0,$D0,$D0,$D0,$D0,$D0,$D0
@@ -476,7 +472,7 @@
              DEFB $48,$40,$40,$40,$58,$50,$50,$50,$58,$50,$D0,$D0,$50,$50,$50,$50
 
 
-.MUSICDATA
+MUSICDATA:
              DEFB 0  ; Pattern loop begin * 2
              DEFB 4  ; Song length * 2
              DEFW 8         ; Offset to start of song (length of instrument table)
@@ -487,11 +483,11 @@
              DEFW 5      ; Detune
              DEFB 0      ; Phase
 
-.PATTERNDATA        DEFW      PAT0
+PATTERNDATA:        DEFW      PAT0
                     DEFW      PAT1
 
 ; *** Pattern data - $00 marks the end of a pattern ***
-.PAT0
+PAT0:
          DEFB 188
          DEFB 152
          DEFB 118
@@ -655,7 +651,7 @@
          DEFB 124
      DEFB 2
          DEFB $00
-.PAT1
+PAT1:
          DEFB $BD,2
          DEFB 168
          DEFB 152
@@ -843,5 +839,3 @@
          DEFB 124
      DEFB 2
          DEFB $00
-#endasm
-
