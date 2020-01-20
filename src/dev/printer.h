@@ -520,6 +520,48 @@ void draw_coloured_tile_gamearea (void) {
 	_x = VIEWPORT_X + (_x << 1); _y = VIEWPORT_Y + (_y << 1); draw_coloured_tile ();
 }
 
+void draw_decorations (void) {
+	// Point _gp_gen to where the decorations are and fire away!
+	#asm
+			ld  hl, (__gp_gen)
+
+		._draw_decorations_loop
+			ld  a, (hl)
+			cp  0xff
+			ret z
+
+			ld  a, (hl)
+			inc hl
+			ld  c, a
+			and 0x0f
+			ld  (__y), a
+			ld  a, c
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (__x), a
+
+			ld  a, (hl)
+			inc hl
+			ld  (__t), a
+
+			push hl
+
+			ld  b, 0
+			ld  c, a
+			ld  hl, _behs
+			add hl, bc
+			ld  a, (hl)
+			ld  (__n), a
+
+			call _update_tile
+
+			pop hl
+			jr  _draw_decorations_loop
+	#endasm
+}
+
 unsigned char utaux = 0;
 void update_tile (void) {
 	#ifdef ENABLE_TILANIMS
@@ -578,7 +620,7 @@ void print_number2 (void) {
 			ld  a, (_rda)
 			ld  e, a
 
-			ld  d, 7
+			ld  d, HUD_INK
 			
 			ld  a, (__x)
 			ld  c, a
@@ -590,7 +632,7 @@ void print_number2 (void) {
 			ld  a, (_rdb)
 			ld  e, a
 
-			ld  d, 7
+			ld  d, HUD_INK
 			
 			ld  a, (__x)
 			inc a

@@ -457,13 +457,13 @@ void enems_move (void) {
 								_en_x = _en_cx;
 								_en_y = _en_cy;
 								en_an_next_frame [enit] = sprite_17_a;
-								en_an_morido [enit] = 1;
 								bullets_estado [gpjt] = 0;
 								#ifndef PLAYER_MOGGY_STYLE							
 									if (_en_t != 4) _en_life --;
 								#else
 									_en_life --;
 								#endif
+								
 								if (_en_life == 0) {
 									enems_draw_current ();
 									sp_UpdateNow ();
@@ -484,6 +484,12 @@ void enems_move (void) {
 
 									enems_kill ();					
 								}
+
+								#ifdef MODE_128K
+									wyz_play_sound (7);
+								#else
+									beep_fx (1);
+								#endif
 							}
 						}
 					}

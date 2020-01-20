@@ -95,10 +95,10 @@ unsigned char p_killme;
 unsigned char p_tx, p_ty;
 signed int ptgmx, ptgmy;
 
-#define FACING_RIGHT 0
-#define FACING_LEFT 2
-#define FACING_UP 4
-#define FACING_DOWN 6
+#define FACING_RIGHT	0
+#define FACING_LEFT 	2
+#define FACING_UP 		4
+#define FACING_DOWN 	6
 
 const unsigned char *spacer = "            ";
 
@@ -109,10 +109,6 @@ unsigned char en_an_frame [3];
 unsigned char en_an_count [3];
 unsigned char *en_an_current_frame [3], *en_an_next_frame [3];
 unsigned char en_an_state [3];
-	
-#ifdef PLAYER_CAN_FIRE
-	unsigned char en_an_morido [3];
-#endif
 
 #if defined (ENABLE_FANTIES)
 	int en_an_x [3];

@@ -567,13 +567,12 @@ unsigned char player_move (void) {
 		#endif	
 	#endif
 
+	cx1 = p_tx = (gpx + 8) >> 4;
+	cy1 = p_ty = (gpy + 8) >> 4;	
+
 	#if defined (PLAYER_PUSH_BOXES) || !defined (DEACTIVATE_KEYS)
-		gpx = p_x >> 6;
-		cx1 = (gpx + 8) >> 4;
-		cy1 = (gpy + 8) >> 4;
 		#ifdef PLAYER_MOGGY_STYLE
 			if (wall_v == WTOP) {
-
 				// interact up			
 				#if defined (BOUNDING_BOX_8_BOTTOM)
 					cy1 = (gpy + 7) >> 4;

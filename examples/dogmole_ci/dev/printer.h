@@ -536,10 +536,10 @@ void draw_decorations (void) {
 			and 0x0f
 			ld  (__y), a
 			ld  a, c
-			sra a
-			sra a
-			sra a
-			sra a
+			srl a
+			srl a
+			srl a
+			srl a
 			ld  (__x), a
 
 			ld  a, (hl)
@@ -620,7 +620,7 @@ void print_number2 (void) {
 			ld  a, (_rda)
 			ld  e, a
 
-			ld  d, 7
+			ld  d, HUD_INK
 			
 			ld  a, (__x)
 			ld  c, a
@@ -632,7 +632,7 @@ void print_number2 (void) {
 			ld  a, (_rdb)
 			ld  e, a
 
-			ld  d, 7
+			ld  d, HUD_INK
 			
 			ld  a, (__x)
 			inc a

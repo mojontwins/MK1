@@ -8,7 +8,7 @@
 			if (gpx == 0 && p_vx < 0 && x_pant > 0) {
 				-- n_pant;
 				-- x_pant;
-				gpx = 224
+				gpx = 224;
 				p_x = 14336;
 			}
 

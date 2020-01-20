@@ -253,6 +253,7 @@
 											// the value especifies first animated tile pair.
 //#define PAUSE_ABORT						// Add h=PAUSE, y=ABORT
 //#define GET_X_MORE						// Shows "get X more" when getting an object
+#define HUD_INK 					7 		// Use this attribute for digits in the hud
 
 // ============================================================================
 // IV. Player movement configuration

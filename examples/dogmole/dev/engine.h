@@ -259,6 +259,8 @@ void process_tile (void) {
 						run_fire_script ();
 						just_pushed = 0;
 					#endif
+
+					#include "my/ci/on_tile_pushed.h"
 				} 
 			}			
 		#endif
@@ -279,6 +281,8 @@ void process_tile (void) {
 				#else
 					beep_fx (8);
 				#endif
+
+				#include "my/ci/on_unlocked_bolt.h"
 			}
 		#endif
 	}

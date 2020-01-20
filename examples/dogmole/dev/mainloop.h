@@ -407,21 +407,11 @@ void main (void) {
 			#endif			
 
 			// Render
+			if (o_pant == n_pant) {
 			#include "mainloop/update_sprites.h"
 
 			sp_UpdateNow();
-
-			#ifdef PLAYER_CAN_FIRE
-				for (gpit = 0; gpit < 3; gpit ++)
-					if (en_an_morido [gpit] == 1) {
-					#ifdef MODE_128K
-						wyz_play_sound (7);
-					#else
-						beep_fx (1);
-					#endif
-					en_an_morido [gpit] = 0;
 				}	
-			#endif
 
 			#ifdef PLAYER_FLICKERS
 				// Flickering
@@ -504,14 +494,9 @@ void main (void) {
 
 			// Win game condition
 			
-			#ifdef ACTIVATE_SCRIPTING
-				if (p_objs == PLAYER_NUM_OBJETOS || script_result == 1)
-			#else			
-				if (p_objs == PLAYER_NUM_OBJETOS)
-			#endif
 			if (0
 				#ifdef ACTIVATE_SCRIPTING
-					|| script_result == 1 || script_result == 3
+					|| script_result == 1 || script_result > 2
 				#endif
 				#if PLAYER_NUM_OBJETOS != 99
 					|| p_objs == PLAYER_NUM_OBJETOS
@@ -524,13 +509,8 @@ void main (void) {
 					)
 				#endif
 			) {
-				if (
-					(n_pant == pant_final && ((p_x >> 10) == PLAYER_FIN_X && (p_y >> 10) == PLAYER_FIN_Y)) ||
-					pant_final == 99
-				) {
 					success = 1;
 					playing = 0;					
-				}
 			}
 			
 			// Game over condition

@@ -729,6 +729,35 @@ Si definimos `UNPACKED_MAP` estaremos diciéndole al motor que nuestro mapa es d
 
 El valor configurado es el del primer par de tiles animados, si `ENABLE_TILANIMS` está activo. Por ejemplo, si pones `44`, tus tiles animados serán la pareja `44, 45` y la pareja `46, 47`. Siempre que pongas un tile `44` o `45` (en tu mapa unpacked, o desde el script si tu tileset para el mapa es de 16 tiles), se animará.
 
+### Color del marcador
+
+```c 
+    #define HUD_INK                     7       // Use this attribute for digits in the hud
+```
+
+Define de qué color se pintan los números en el marcador del juego.
+
+## Animación custom
+
+```c
+    //#define PLAYER_CUSTOM_ANIMATION           // Code your own animation in my/custom_animation.h
+```
+
+Si definimos `PLAYER_CUSTOM_ANIMATION` tendremos que ocuparnos de escribir el código que seleccionará el gráfico del sprite del jugador en cada frame de juego basándonos en el estado actual del jugador y escribirlo en `p_next_frame`. Esto se hace en `my/custom_animation.h`. Para facilitarte el trabajo, estas son algunas de las variables que puedes consultar:
+
+|Variables|Contenido
+|---|---
+|`gpx`, `gpy`|Posición (x, y) en píxels del jugador.
+|`p_vx`, `p_vy`|Velocidad (horizontal, vertical) del jugador.
+|`p_facing`|Dirección a la que mira el jugador (*)
+|`possee`|1 si el jugador está sobre una plataforma fija.
+|`p_gotten`|1 si el jugador está sobre una plataforma movil.
+|`player_frames`|Es un array con los 8 frames del sprite.
+
+(*) `p_facing` será 0 (derecha) y 1 (izquierda) en vista lateral, o tomará los valores `FACING_LEFT`, `FACING_RIGHT`, `FACING_UP` y `FACING_DOWN` en vista genital. 
+
+El código que escribas debe terminar asignando un componente de `player_frames` al puntero `p_next_frame`. Obviamente, no necesitas escribir un código de animación personalizado para el jugador si no estás haciendo cosas muy raras.
+
 ## Pausa y abortar
 
 ```c
