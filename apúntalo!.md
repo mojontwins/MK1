@@ -16,4 +16,4 @@
 [X] En custom multilevel debe poder establecerse `main_script_offset` al gusto, o soportarlo directamente en una estructura "levels" (para 128K), o algo así.
 [ ] `WARP_TO_LEVEL`
 [X] Controlar todas las salidas de MSC3, no solo "WIN" y "GAME OVER", sino la que lleva al final directamente.
-[ ] Llamar a `draw_decorations` desde msc.h
+[X] Llamar a `draw_decorations` desde msc.h

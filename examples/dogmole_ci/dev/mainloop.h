@@ -195,16 +195,7 @@ void main (void) {
 				prepare_level (level);			
 				blackout_area ();
 
-				level_str [7] = 49 + level;
-				_x = 12; _y = 12; _t = 71; _gp_gen = level_str; print_str ();
-				sp_UpdateNow ();
-				#ifdef MODE_128K
-					wyz_play_sound (3);
-				#else			
-					beep_fx (1);
-				#endif
-
-				espera_activa (100);
+				#include "my/level_screen.h"
 		#endif
 					
 		#ifndef DIRECT_TO_PLAY

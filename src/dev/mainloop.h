@@ -195,16 +195,7 @@ void main (void) {
 				prepare_level (level);			
 				blackout_area ();
 
-				level_str [7] = 49 + level;
-				_x = 12; _y = 12; _t = 71; _gp_gen = level_str; print_str ();
-				sp_UpdateNow ();
-				#ifdef MODE_128K
-					wyz_play_sound (3);
-				#else			
-					beep_fx (1);
-				#endif
-
-				espera_activa (100);
+				#include "my/level_screen.h"
 		#endif
 					
 		#ifndef DIRECT_TO_PLAY
@@ -404,14 +395,14 @@ void main (void) {
 						run_fire_script ();
 					}	
 				}
-			#endif			
+			#endif
 
 			// Render
 			if (o_pant == n_pant) {
-			#include "mainloop/update_sprites.h"
+				#include "mainloop/update_sprites.h"
 
-			sp_UpdateNow();
-				}	
+				sp_UpdateNow();
+			}
 
 			#ifdef PLAYER_FLICKERS
 				// Flickering
@@ -509,8 +500,8 @@ void main (void) {
 					)
 				#endif
 			) {
-					success = 1;
-					playing = 0;					
+				success = 1;
+				playing = 0;
 			}
 			
 			// Game over condition
