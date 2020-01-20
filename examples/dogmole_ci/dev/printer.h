@@ -646,7 +646,7 @@ void print_number2 (void) {
 
 #ifndef DEACTIVATE_OBJECTS
 	void draw_objs () {
-		#if defined (ONLY_ONE_OBJECT) && defined (ACTIVATE_SCRIPTING)
+		#if defined (ONLY_ONE_OBJECT)
 			#if OBJECTS_ICON_X != 99
 				if (p_objs) {
 					// Make tile 17 flash

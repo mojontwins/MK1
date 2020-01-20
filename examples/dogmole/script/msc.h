@@ -55,21 +55,14 @@ void readxy (void) {
     sc_y = read_vbyte ();
 }
 
-#if !(defined (PHANTOMAS_ENGINE) || defined (HANNA_ENGINE))
 void stop_player (void) {
     p_vx = p_vy = 0;
 }
-#endif
 
 void reloc_player (void) {
-#if defined (PHANTOMAS_ENGINE) || defined (HANNA_ENGINE)
-    p_x = read_vbyte () << 4;
-    p_y = read_vbyte () << 4;
-#else
     p_x = read_vbyte () << (4+FIXBITS);
     p_y = read_vbyte () << (4+FIXBITS);
     stop_player ();
-#endif
 }
 
 void read_two_bytes_D_E (void) {
@@ -173,22 +166,14 @@ void run_script (unsigned char whichs) {
                     // Opcode: 21 x1 x2
                     sc_x = read_byte ();
                     sc_y = read_byte ();
-#if defined (PHANTOMAS_ENGINE) || defined (HANNA_ENGINE)
-                    sc_terminado = (!(p_x >= sc_x && p_x <= sc_y));
-#else
                     sc_terminado = (!((p_x >> FIXBITS) >= sc_x && (p_x >> FIXBITS) <= sc_y));
-#endif
                     break;
                 case 0x22:
                     // IF PLAYER_IN_Y y1, y2
                     // Opcode: 22 y1 y2
                     sc_x = read_byte ();
                     sc_y = read_byte ();
-#if defined (PHANTOMAS_ENGINE) || defined (HANNA_ENGINE)
-                    sc_terminado = (!(p_y >= sc_x && p_y <= sc_y));
-#else
                     sc_terminado = (!((p_y >> FIXBITS) >= sc_x && (p_y >> FIXBITS) <= sc_y));
-#endif
                     break;
                 case 0x31:
                     // IF ENEMIES_KILLED_EQUALS sc_n
@@ -265,6 +250,13 @@ void run_script (unsigned char whichs) {
                         fzy2 = read_byte ();
                         f_zone_ac = 1;
                         break;
+                    case 0x6D:
+                        // WARP_TO sc_n
+                        // Opcode: 6D sc_n
+                        n_pant = read_vbyte ();
+                        o_pant = 99;
+                        reloc_player ();
+                        return;
                     case 0xE0:
                         // SOUND sc_n
                         // Opcode: E0 sc_n
@@ -285,10 +277,12 @@ void run_script (unsigned char whichs) {
                         return;
                     case 0xF4:
                         // DECORATIONS
-                        while (0xff != (sc_x = read_byte ())) {
-                            sc_n = read_byte ();
-                            _x = sc_x >> 4; _y = sc_x & 15; _n = behs [sc_n]; _t = sc_n; update_tile ();
-                        }
+                        #asm
+                               ld  hl, (_script)
+                               call _draw_decorations_loop
+                               inc hl
+                               ld  (_script), hl
+                        #endasm
                         break;
                     case 0xFF:
                         sc_terminado = 1;

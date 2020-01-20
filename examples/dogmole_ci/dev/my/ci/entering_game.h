@@ -5,5 +5,3 @@
 
 flags [1] = 0;
 flags [3] = 0;
-
-p_killed=18;n_pant=4;
