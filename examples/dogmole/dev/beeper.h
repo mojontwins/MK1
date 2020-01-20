@@ -11,7 +11,7 @@
 
 .playBasic
 	ld a,0
-.play
+.sound_play
 	ld hl,sfxData	;address of sound effects data
 
 	;di
@@ -257,3 +257,15 @@
 	defb 0
 #endasm
 
+void beep_fx (unsigned char n) {
+	// Cargar en A el valor de n
+	asm_int = n;
+	#asm
+		push ix
+		push iy
+		ld a, (_asm_int)
+		call sound_play
+		pop ix
+		pop iy
+	#endasm
+}

@@ -92,6 +92,11 @@ While Not Eof (fIn)
 		linea = whiteSpace & trimmed
 	End If
 
+	If lCase (trimmed) = "play:" Then
+		trimmed = ".sound_play"
+		linea = whiteSpace & trimmed
+	End If
+
 	If Instr (lCase (trimmed), "equ") Then
 		trimmed = ";" & trimmed 
 		linea = whiteSpace & trimmed
