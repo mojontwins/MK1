@@ -1,20 +1,16 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
-
-#asm
-	;org 60000
+	org 60000
 
 ;BeepFX player by Shiru
 ;You are free to do whatever you want with this code
 
 
 
-.playBasic
+playBasic:
 	ld a,0
-.play
+play:
 	ld hl,sfxData	;address of sound effects data
 
-	;di
+	di
 	push ix
 	push iy
 
@@ -38,7 +34,7 @@
 	ld (sfxRoutineSampleBorder+1),a
 
 
-.readData
+readData:
 	ld a,(ix+0)		;read block type
 	ld c,(ix+1)		;read duration 1
 	ld b,(ix+2)
@@ -55,28 +51,28 @@
 	jr z,sfxRoutineSample
 	pop iy
 	pop ix
-	;ei
+	ei
 	ret
 
 	
 
 ;play sample
 
-.sfxRoutineSample
+sfxRoutineSample:
 	ex de,hl
-.sfxRS0
+sfxRS0:
 	ld e,8
 	ld d,(hl)
 	inc hl
-.sfxRS1
+sfxRS1:
 	ld a,(ix+5)
-.sfxRS2
+sfxRS2:
 	dec a
 	jr nz,sfxRS2
 	rl d
 	sbc a,a
 	and 16
-.sfxRoutineSampleBorder
+sfxRoutineSampleBorder:
 	or 0
 	out (254),a
 	dec e
@@ -88,7 +84,7 @@
 
 	ld c,6
 	
-.nextData
+nextData:
 	add ix,bc		;skip to the next block
 	jr readData
 
@@ -96,25 +92,25 @@
 
 ;generate tone with many parameters
 
-.sfxRoutineTone
+sfxRoutineTone:
 	ld e,(ix+5)		;freq
 	ld d,(ix+6)
 	ld a,(ix+9)		;duty
 	ld (sfxRoutineToneDuty+1),a
 	ld hl,0
 
-.sfxRT0
+sfxRT0:
 	push bc
 	push iy
 	pop bc
-.sfxRT1
+sfxRT1:
 	add hl,de
 	ld a,h
-.sfxRoutineToneDuty
+sfxRoutineToneDuty:
 	cp 0
 	sbc a,a
 	and 16
-.sfxRoutineToneBorder
+sfxRoutineToneBorder:
 	or 0
 	out (254),a
 
@@ -146,20 +142,20 @@
 
 ;generate noise with two parameters
 
-.sfxRoutineNoise
+sfxRoutineNoise:
 	ld e,(ix+5)		;pitch
 
 	ld d,1
 	ld h,d
 	ld l,d
-.sfxRN0
+sfxRN0:
 	push bc
 	push iy
 	pop bc
-.sfxRN1
+sfxRN1:
 	ld a,(hl)
 	and 16
-.sfxRoutineNoiseBorder
+sfxRoutineNoiseBorder:
 	or 0
 	out (254),a
 	dec d
@@ -169,7 +165,7 @@
 	ld a,h
 	and 31
 	ld h,a
-.sfxRN2
+sfxRN2:
 	dec bc
 	ld a,b
 	or c
@@ -189,9 +185,9 @@
 	jr nextData
 
 
-.sfxData
+sfxData:
 
-.SoundEffectsData
+SoundEffectsData:
 	defw SoundEffect0Data
 	defw SoundEffect1Data
 	defw SoundEffect2Data
@@ -203,27 +199,27 @@
 	defw SoundEffect8Data
 	defw SoundEffect9Data
 
-.SoundEffect0Data
+SoundEffect0Data:
 	defb 2 ;noise
 	defw 8,200,20
 	defb 2 ;noise
 	defw 4,2000,5220
 	defb 0
-.SoundEffect1Data
+SoundEffect1Data:
 	defb 2 ;noise
 	defw 1,1000,10
 	defb 2 ;noise
 	defw 1,1000,1
 	defb 0
-.SoundEffect2Data
+SoundEffect2Data:
 	defb 1 ;tone
 	defw 50,100,200,65531,128
 	defb 0
-.SoundEffect3Data
+SoundEffect3Data:
 	defb 1 ;tone
 	defw 100,20,500,2,128
 	defb 0
-.SoundEffect4Data
+SoundEffect4Data:
 	defb 2 ;noise
 	defw 1,1000,20
 	defb 1 ;pause
@@ -231,15 +227,15 @@
 	defb 2 ;noise
 	defw 1,1000,1
 	defb 0
-.SoundEffect5Data
+SoundEffect5Data:
 	defb 1 ;tone
 	defw 50,200,500,65516,128
 	defb 0
-.SoundEffect6Data
+SoundEffect6Data:
 	defb 2 ;noise
 	defw 20,50,257
 	defb 0
-.SoundEffect7Data
+SoundEffect7Data:
 	defb 1 ;tone
 	defw 1,1000,2000,0,64
 	defb 1 ;pause
@@ -247,13 +243,11 @@
 	defb 1 ;tone
 	defw 1,1000,1500,0,64
 	defb 0
-.SoundEffect8Data
+SoundEffect8Data:
 	defb 2 ;noise
 	defw 2,2000,32776
 	defb 0
-.SoundEffect9Data
+SoundEffect9Data:
 	defb 1 ;tone
 	defw 4,1000,1000,400,128
 	defb 0
-#endasm
-

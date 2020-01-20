@@ -165,9 +165,9 @@ While Not Eof (fIn)
 		p = Instr (lcase (linea), "org")
 		If p Then 
 			If (Len (linea) = p + 2 Or _
-			Instr (" " & Chr (9) & ";", Mid (linea, p + 3, 1))) _
+			Instr (" " & Chr (9) & ";", Mid (linea, p + 3, 1)) > 0) _
 			And (p = 1 Or _
-			Instr (" " & Chr (9), Mid (linea, p - 1, 1))) _
+			Instr (" " & Chr (9), Mid (linea, p - 1, 1)) > 0) _
 			Then
 				If p > 1 Then prefix = Left (linea, p - 1) Else prefix = ""
 				If p < Len (linea) - 2 Then sufix = Right (linea, Len (linea) - p - 2) Else sufix = ""
