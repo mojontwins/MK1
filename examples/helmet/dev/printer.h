@@ -3,7 +3,7 @@
 
 // Printing functions
 
-void attr (char x, char y) {
+unsigned char attr (char x, char y) {
 	// x + 15 * y = x + (16 - 1) * y = x + 16 * y - y = x + (y << 4) - y.
 #ifdef PLAYER_AUTO_CHANGE_SCREEN
 	if (x < 0 || y < 0 || x > 14 || y > 9) return 0;
@@ -13,7 +13,7 @@ void attr (char x, char y) {
 	return map_attr [x + (y << 4) - y];	
 }
 
-void qtile (unsigned char x, unsigned char y) {
+unsigned char qtile (unsigned char x, unsigned char y) {
 	// x + 15 * y = x + (16 - 1) * y = x + 16 * y - y = x + (y << 4) - y.
 	return map_buff [x + (y << 4) - y];	
 }

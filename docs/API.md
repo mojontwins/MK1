@@ -149,3 +149,170 @@ Si el hotspot de la pantalla actual está activo (no se ha recogido y es distint
 * `ptx1`, `pty1`, `ptx2`, `pty2` se utilizan para definir el *bounding box* para la colisión del jugador con el escenario.
 
 ## Funciones
+
+Esta referencia no cubre todas y cada una de las funciones del motor, ya que hay mucho de tramolla interna que poco uso va a darte a la hora de escribir código custom en los puntos de inyección de código. Estas son, pues, las **funciones interesantes**, divididas en módulos.
+
+Puedes ver una lista de todas las funciones de **MTE MK1** en el archivo `dev/prototypes.h`.
+
+Hay muchas funciones que no reciben parámetros pero sí *pseudoparámetros* en forma de valores a variables globales generales. Estos suelen ser las variables `_x`, `_y`, `_n`, `_t`, y `_gp_gen`.
+
+### Printer
+
+#### `void draw_coloured_tile (void)`
+
+Dibuja un tile del tileset **sin invalidarlo** en cualquier punto de la pantalla (incluso fuera del área de juego o *viewport*). La función espera estos *pseudoparámetros*:
+
+* `_x`, `_y`: coordenadas de **caracter** (x = 0-30; y = 0-22) donde imprimir el tile.
+* `_t`: Número de tile (0-47).
+
+Para que el tile se actualizado en la próxima llamada a `sp_UpdateNow` o `sp_UpdateNowEx` habrá que llamar a la siguiente función, `invalidate_tile`, sobre las mismas coordenadas.
+
+#### `void invalidate_tile (void)`
+
+Invalida un área del buffer de 2x2 caracteres. La función espera estos *pseudoparámetros*:
+
+* `_x`, `_y`: coordenadas de **caracter** (x = 0-30; y = 0-22) donde imprimir el tile.
+
+#### `void invalidate_viewport (void)`
+
+Invalida todo el área de juego (30x20 carácteres a partir de (`VIEWPORT_X`, `VIEWPORT_Y`)). Los cambios serán visibles en la próxima llamada a `sp_UpdateNow` o `sp_UpdateNowEx`.
+
+#### `draw_coloured_tile_gamearea (void)`
+
+Dibuja un tile del tileset en la rejilla del área de juego **sin invalidarlo**. Generalmente no llamaremos a esta función directamente. La función espera estos *pseudoparámetros*:
+
+* `_x`, `_y`: coordenadas de **rejilla de tile** (x = 0-14; y = 0-9) donde imprimir el tile.
+* `_t`: Número de tile (0-47).
+
+#### `draw_invalidate_coloured_tile_gamearea (void)`
+
+Dibuja un tile del tileset en la rejilla del área de juego y lo invalida (internamente hace una llamada a `draw_coloured_tile_gamearea` y otra a `invalidate_tile`). La función espera estos *pseudoparámetros*:
+
+* `_x`, `_y`: coordenadas de **rejilla de tile** (x = 0-14; y = 0-9) donde imprimir el tile.
+* `_t`: Número de tile (0-47).
+
+#### `update_tile (void)`
+
+Dibuja un tile del tileset en la rejilla del área de juego, lo invalida, y actualiza los buffers `map_buff` y `map_attr`, haciendo el tile interactuable (internamente hace una llamada a `draw_invalidate_coloured_tile_gamearea` y posteriormente modifica los buffers). La función espera estos *pseudoparámetros*:
+
+* `_x`, `_y`: coordenadas de **rejilla de tile** (x = 0-14; y = 0-9) donde imprimir el tile.
+* `_t`: Número de tile (0-47).
+* `_n`: Valor para beh, que puede ser `behs [_t]` o cualquier otro valor.
+
+#### `void print_number2 (void)`
+
+Imprime un número decimal de dos cifras en el color `HUD_INK` (definido en `my/config.h`). Internamente se utiliza para los marcadores. La función espera estos *pseudoparámetros*:
+
+* `_x`, `_y`: coordenadas de **caracter** (x = 0-30; y = 0-22) donde imprimir el valor.
+* `_t`: Valor (0-99).
+
+#### `void print_str (void)`
+
+Imprime el contenido de una cadena o cualquier buffer terminado en 0 en pantalla. La función espera estos *pseudoparámetros*:
+
+* `_x`, `_y`: coordenadas de **caracter** (x = 0-30; y = 0-22) donde imprimir la cadena.
+* `_t`: atributo (color).
+* `_gp_gen`: debe apuntar al inicio de la cadena o del buffer terminado en 0.
+
+Recordemos que podemos hacer algo así en C y que z88dk el quisquilloso se lo come:
+
+```c
+	_x = 2; _y = 2; _t = 6;
+	_gp_gen = "OLA K ASE";
+	print_str ();
+```
+
+#### `void blackout_area (void)`
+
+Pinta de negro el área de juego.
+
+#### `void clear_sprites (void)`
+
+Saca los sprites de la pantalla. El resultado será visible en el próximo `sp_UpdateNow ()`.
+
+### Contenido de los buffers y colisión
+
+#### `unsigned char attr (char x, char y)`
+
+Devuelve el comportamiento del tile situado en las coordenadas (`x`, `y`) de la rejilla de la pantalla actual. Equivale a `map_attr [COORDS (x,y)]`.
+
+#### `unsigned char qtile (unsigned char x, unsigned char y)`
+
+Devuelve el número del tile situado en las coordenadas (`x`, `y`) de la rejilla de la pantalla actual. Equivale a `map_buff [COORDS (x,y)]`.
+
+#### `unsigned char collide (void)`
+
+Sirve para saber si el player colisiona con un ente de 16x16 pixels situado en las coordenadas (`cx2`, `cy2`). Si se define `SMALL_COLLISION` la caja de colisión es de 8x8. Si no, es de 13x13. Devuelve `1` si hay colisión.
+
+#### `unsigned char cm_two_points (void)`
+
+Se emplea para hacer colisiones por caja cuando un objeto avanza en cierta dirección. Devuelve los comportamientos de los tiles que tocan los puntos (`cx1`, `cy1`) y (`cx2`, `cy2`) en las variables `at1` y `at2`, respectivamente.
+
+### Enemigos
+
+#### `void enems_draw_current (void)`
+
+Actualiza el sprite del enemigo `enit` a la posición `_en_x`, `_en_y` y cambia su gráfico si `en_an_current_frame` ha cambiado.
+
+#### `void enems_kill (void)`
+
+Mata al enemigo `enit` (levanta el bit 4 de `_en_t`). Nótese que si se llama desde fuera el bucle principal de enemigos habrá que dar un valor correcto a `_en_t` antes de llamar y actualizar el array `malotes` después:
+
+```c 
+	_en_t = malotes [enoffs + enit].t;
+	enems_kill ();
+	malotes [enoffs + enit].t = _en_t;
+```
+
+### Sonido (48K)
+
+#### `void beep_fx (unsigned char n)`
+
+Toca el efecto de sonido `n` (0-9). Esta es la tabla de sonidos:
+
+|#|Cosa
+|---|---
+|0|Enemigo / tile destruido
+|1|Enemigo / tile golpeado
+|2|Empujar bloque
+|3|Salto
+|4|Jugador golpeado
+|5|Enemigo pisado
+|6|Disparo
+|7|Coger llave / Recarga de tiempo
+|8|Abrir cerrojo / Coger refill
+|9|Coger objeto / Munición
+
+### Sonido (128K)
+
+#### `void wyz_play_sound (unsigned char fx_number)`
+
+#### `void wyz_play_music (unsigned char song_number)`
+
+#### `void wyz_stop_sound (void)`
+
+### Miscelanea
+
+#### `unsigned char rand (void)`
+
+Devuelve un número pseudo-aleatorio entre 0 y 255: `rda = rand ();`.
+
+#### `unsigned int abs (int n)`
+
+Devuelve el valor absoluto de un número.
+
+#### `void step (void)`
+
+Hace un sonidito minimal de "paso".
+
+#### `void cortina (void)`
+
+Efecto de borrado de pantalla bonito.
+
+## Bajo nivel y splib2
+
+#### Imprimir un caracter
+
+#### Leer los controles
+
+
