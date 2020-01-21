@@ -84,3 +84,6 @@ Abrimos el `config.h` original y modificamos `my/config.h` con los valores que a
 
 ### Compilar y probar.
 
+## Segundo hito: Multinivel
+
+Ahora es cuando nos ponemos a generar la versión multinivel de nuestro güego. Lo primero que haremos será hacernos un archivo `build_assets.bat` en `dev/` que se encargue de construirnos todas las cosas. Generaremos un montón de binarios que colocaremos en `bin/` y que posteriormente veremos como incorporar en nuestro juego. Luego tendremos que modificar también `compile.bat` para quitar la generación de los archivos de mapa/cerrojos, enemigos/hotspots y para modificar la generación del tileset para que únicamente incluya la fuente.

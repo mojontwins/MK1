@@ -178,15 +178,16 @@ Sin embargo, por tema del saber, que no ocupa lugar, vamos a explicar como funci
 
 ```
     $ src\utils\ts2bin.exe
-   ts2bin v0.4 20200119 ~ Usage:
+	ts2bin v0.4 20200119 ~ Usage:
 
-	$ ts2bin font.png/nofont work.png/notiles ts.bin defaultink
+	$ ts2bin font.png/nofont work.png|notiles|blank ts.bin defaultink
 
 	where:
 	   * font.png is a 256x16 file with 64 chars ascii 32-95
 	     (use 'nofont' if you don't want to include a font & gen. 192 tiles)
 	   * work.png is a 256x48 file with your 16x16 tiles
 	     (use 'notiles' if you don't want to include a tileset & gen. 64 tiles)
+	     (use 'blank' if you want to generate a 100% blank placeholder tileset)
 	   * ts.bin is the output, 2304 bytes bin file.
 	   * defaultink: a number 0-7. Use this colour as 2nd colour if there's only
 	     one colour in a 8x8 cell
@@ -194,7 +195,7 @@ Sin embargo, por tema del saber, que no ocupa lugar, vamos a explicar como funci
 
 El primer parámetro es el nombre de archivo de la fuente (incluyendo su ubicación si es necesaria), o la palabra `nofont` si sólo quieres convertir el tileset (cosa que viene bien para hacer otras cosas que no son un juego de la churrera normal). 
 
-El segundo parámetro es el nombre del archivo con el tileset (incluyendo su ubicación si es necesaria), o la palabra `notiles` si sólo quieres convertir la fuente (bla bla bla, no con la churrera en situaciones normales).
+El segundo parámetro es el nombre del archivo con el tileset (incluyendo su ubicación si es necesaria), o la palabra `notiles` si sólo quieres convertir la fuente (bla bla bla, no con la churrera en situaciones normales), o `blank` si quieres generar el binario completo sólo con la fuente y con los tiles en negro, que es lo que llamamos un "placeholder para multi nivel" y que ya entenderás cuando veamos los multinivel.
 
 El tercer parámetro es el nombre del archivo que quieres generar (incluyendo su ubicación si es necesaria). En el caso de la churrera, el archivo resultante ocupará 2304 y contendrá todos los patrones (fuente y tileset) y los colores que se usan en el tileset.
 
