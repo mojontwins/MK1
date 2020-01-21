@@ -15,6 +15,7 @@
 #endasm
 
 #include "my/config.h"
+#include "prototypes.h"
 
 #ifdef MODE_128K
 	// Versión para 128K
@@ -57,11 +58,11 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 	#ifdef COMPRESSED_LEVELS
 		#include "levels128.h"
 	#else
-		#include "mapa.h"
-		#include "tileset.h"
-		#include "sprites.h"
-		#include "extrasprites.h"
-		#include "enems.h"
+		#include "assets/mapa.h"
+		#include "assets/tileset.h"
+		#include "assets/sprites.h"
+		#include "assets/extrasprites.h"
+		#include "assets/enems.h"
 	#endif
 
 #else
@@ -69,15 +70,15 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 	#ifdef COMPRESSED_LEVELS
 		#include "levels.h"
 	#else
-		#include "mapa.h"
+		#include "assets/mapa.h"
 	#endif
 
-	#include "tileset.h"
-	#include "sprites.h"
-	#include "extrasprites.h"
+	#include "assets/tileset.h"
+	#include "assets/sprites.h"
+	#include "assets/extrasprites.h"
 	
 	#ifndef COMPRESSED_LEVELS
-		#include "enems.h"
+		#include "assets/enems.h"
 	#endif
 
 #endif

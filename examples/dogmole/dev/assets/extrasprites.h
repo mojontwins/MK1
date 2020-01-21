@@ -9,19 +9,21 @@
 // Frames extra por si se pueden eliminar los enemigos:
 
 #if defined(PLAYER_CAN_FIRE) || defined(PLAYER_STEPS_ON_ENEMIES) || defined(ENABLE_PURSUERS) || defined (MODE_128K)
-extern unsigned char sprite_17_a []; 
+	extern unsigned char sprite_17_a []; 
 #endif
+
 extern unsigned char sprite_18_a []; 
+
 #if defined(PLAYER_CAN_FIRE) || defined (MODE_128K)
-extern unsigned char sprite_19_a [];
-extern unsigned char sprite_19_b [];
+	extern unsigned char sprite_19_a [];
+	extern unsigned char sprite_19_b [];
 #endif
 
 #if defined(PLAYER_CAN_FIRE) || defined(PLAYER_STEPS_ON_ENEMIES) || defined(ENABLE_PURSUERS) || defined (MODE_128K)
-#asm
-    ._sprite_17_a
-        BINARY "sprites_extra.bin"
-#endasm
+	#asm
+	    ._sprite_17_a
+	        BINARY "sprites_extra.bin"
+	#endasm
 #endif
 
 #asm
@@ -51,8 +53,8 @@ extern unsigned char sprite_19_b [];
 #endasm
 
 #if defined(PLAYER_CAN_FIRE) || defined (MODE_128K)
-#asm	              	
-	._sprite_19_a
-		BINARY "sprites_bullet.bin"
-#endasm
+	#asm	              	
+		._sprite_19_a
+			BINARY "sprites_bullet.bin"
+	#endasm
 #endif

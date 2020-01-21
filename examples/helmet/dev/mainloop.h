@@ -4,73 +4,6 @@
 // mainloop.h
 // Churrera copyleft 2011 by The Mojon Twins.
 
-void clear_sprites (void) {
-	#asm
-			ld  ix, (_sp_player)
-			ld  iy, vpClipStruct
-			ld  bc, 0
-			ld  hl, 0xdede
-			ld  de, 0
-			call SPMoveSprAbs
-	
-			xor a
-		.hide_sprites_enems_loop
-			ld  (_gpit), a
-
-			sla a
-			ld  c, a
-			ld  b, 0
-			ld  hl, _sp_moviles
-			add hl, bc
-			ld  e, (hl)
-			inc hl
-			ld  d, (hl)
-			push de
-			pop ix
-
-			ld  iy, vpClipStruct
-			ld  bc, 0
-			ld  hl, 0xfefe	// -2, -2
-			ld  de, 0
-
-			call SPMoveSprAbs
-
-			ld  a, (_gpit)
-			inc a
-			cp  3
-			jr  nz, hide_sprites_enems_loop
-
-		#ifdef PLAYER_CAN_FIRE
-				xor a
-			.hide_sprites_bullets_loop
-				ld  (_gpit), a
-
-				sla a
-				ld  c, a
-				ld  b, 0
-				ld  hl, _sp_bullets
-				add hl, bc
-				ld  e, (hl)
-				inc hl
-				ld  d, (hl)
-				push de
-				pop ix
-
-				ld  iy, vpClipStruct
-				ld  bc, 0
-				ld  hl, 0xfefe	// -2, -2
-				ld  de, 0
-
-				call SPMoveSprAbs
-
-				ld  a, (_gpit)
-				inc a
-				cp  MAX_BULLETS
-				jr  nz, hide_sprites_bullets_loop
-		#endif
-	#endasm
-}
-
 void main (void) {
 
 	// Install ISR
@@ -308,19 +241,9 @@ void main (void) {
 			}
 
 			#ifdef TIMER_ENABLE
-				// Timer
-				if (ctimer.on) {
-					ctimer.count ++;
-					if (ctimer.count == ctimer.frames) {
-						ctimer.count = 0;
-						ctimer.t --;
-						if (ctimer.t == 0) ctimer.zero = 1;
-					}
-				}
-
 				#if defined(TIMER_SCRIPT_0) && defined(ACTIVATE_SCRIPTING)
-					if (ctimer.zero) {
-						ctimer.zero = 0;
+					if (timer_zero) {
+						timer_zero = 0;
 						#ifdef SHOW_TIMER_OVER
 							clear_sprites ();
 							time_over ();
@@ -330,16 +253,16 @@ void main (void) {
 				#endif
 
 				#ifdef TIMER_KILL_0
-					if (ctimer.zero) {
+					if (timer_zero) {
 						#ifdef SHOW_TIMER_OVER
 							#ifndef TIMER_SCRIPT_0
 								clear_sprites ();
 								time_over ();
 							#endif
 						#endif				
-						ctimer.zero = 0;
+						timer_zero = 0;
 						#ifdef TIMER_AUTO_RESET 			
-							ctimer.t = TIMER_INITIAL;
+							timer_t = TIMER_INITIAL;
 						#endif
 						
 						#ifdef MODE_128K
@@ -364,6 +287,16 @@ void main (void) {
 						#endif
 					}
 				#endif
+
+				// Timer
+				if (timer_on) {
+					timer_count ++;
+					if (timer_count == timer_frames) {
+						timer_count = 0;
+						timer_t --;
+						if (timer_t == 0) timer_zero = 1;
+					}
+				}
 			#endif
 
 			#include "mainloop/hud.h"
@@ -510,7 +443,7 @@ void main (void) {
 					|| (script_result == 2)
 				#endif
 				#if defined(TIMER_ENABLE) && defined(TIMER_GAMEOVER_0)
-					|| ctimer.zero
+					|| timer_zero
 				#endif
 			) {
 				playing = 0;				
@@ -550,7 +483,7 @@ void main (void) {
 					//wyz_play_music (8);
 				#endif
 				#if defined(TIMER_ENABLE) && defined(TIMER_GAMEOVER_0) && defined(SHOW_TIMER_OVER)
-					if (ctimer.zero) time_over (); else game_over ();
+					if (timer_zero) time_over (); else game_over ();
 				#else
 					game_over ();
 				#endif

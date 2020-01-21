@@ -117,8 +117,8 @@ extern unsigned char tileset [0];
 #asm
 	._tileset BINARY "basicts.bin"
 #endasm
-#include "sprites-empty.h"
-#include "extrasprites.h"
+#include "assets/sprites-empty.h"
+#include "assets/extrasprites.h"
 extern MALOTE malotes [0];
 #asm
 	._malotes defs MAP_W * MAP_H * 3 * 12

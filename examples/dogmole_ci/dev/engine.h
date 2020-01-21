@@ -95,78 +95,7 @@ const unsigned char *enem_frames [] = {
 	#endif
 #endif
 
-void game_ending (void) {
-	sp_UpdateNow();
-	blackout ();
-	#ifdef MODE_128K
-		// Resource 2 = ending
-		get_resource (2, 16384);
-	#else
-		#asm
-			ld hl, _s_ending
-			ld de, 16384
-			call depack
-		#endasm
-	#endif
-
-	#ifdef MODE_128K
-	#else
-		gpit = 4; do {
-			beep_fx (7);
-			beep_fx (2);
-		} while (-- gpit);
-		beep_fx (9);
-	#endif
-	
-	espera_activa (500);
-}
-
-void game_over (void) {
-	_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
-	_x = 10; _y = 12; _t = 79; _gp_gen = " GAME OVER! "; print_str ();
-	_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
-	sp_UpdateNow ();
-
-	#ifdef MODE_128K
-	#else
-		gpit = 4; do {
-			beep_fx (7);
-			beep_fx (2);
-		} while (-- gpit);
-		beep_fx (9);
-	#endif
-
-	espera_activa (500);
-}
-
-#if defined(TIMER_ENABLE) && defined(SHOW_TIMER_OVER)
-	void time_over (void) {
-		_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
-		_x = 10; _y = 12; _t = 79; _gp_gen = " TIME'S UP! "; print_str ();
-		_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
-		sp_UpdateNow ();
-			
-		#ifdef MODE_128K
-		#else
-			gpit = 4; do {
-				beep_fx (1);
-				beep_fx (2);
-			} while (-- gpit);
-			beep_fx (0);
-		#endif
-		
-		espera_activa (250);
-	}
-#endif
-
-#ifdef PAUSE_ABORT
-	void pause_screen (void) {
-		_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
-		_x = 10; _y = 12; _t = 79; _gp_gen = "   PAUSED   "; print_str ();
-		_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
-		sp_UpdateNow ();
-	}
-#endif
+#include "my/fixed_screens.h"
 
 signed int addsign (signed int n, signed int value) {
 	if (n >= 0) return value; else return -value;
@@ -231,8 +160,10 @@ void process_tile (void) {
 			#endif		
 			{ 
 				if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 < 15 && y1 < 10) {
+					rda = map_buff [COORDS(x1,y1)];
+					
 					#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
-						flags [MOVED_TILE_FLAG] = map_buff [COORDS(x1,y1)];
+						flags [MOVED_TILE_FLAG] = rda; 
 						flags [MOVED_X_FLAG] = x1;
 						flags [MOVED_Y_FLAG] = y1;
 					#endif			
@@ -335,7 +266,21 @@ void draw_scr_background (void) {
 			
 		_x += 2; if (_x == VIEWPORT_X + 30) { _x = VIEWPORT_X; _y += 2; }
 	}
-	
+}
+
+void draw_scr (void) {
+	is_rendering = 1;
+
+	#ifdef ENABLE_TILANIMS
+		max_tilanims = 0;
+	#endif
+
+	#ifdef ENABLE_FIRE_ZONE
+		f_zone_ac = 0;
+	#endif	
+
+	draw_scr_background ();
+
 	// Object setup
 
 	hotspot_x = hotspot_y = 240;
@@ -363,21 +308,7 @@ void draw_scr_background (void) {
 			}
 		}
 	#endif
-}
 
-void draw_scr (void) {
-	is_rendering = 1;
-
-	#ifdef ENABLE_TILANIMS
-		max_tilanims = 0;
-	#endif
-
-	#ifdef ENABLE_FIRE_ZONE
-		f_zone_ac = 0;
-	#endif	
-
-	draw_scr_background ();
-	
 	enems_load ();
 	
 	#ifdef ACTIVATE_SCRIPTING

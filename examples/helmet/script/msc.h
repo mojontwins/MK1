@@ -178,3 +178,95 @@ void run_script (unsigned char whichs) {
                 case 0x41:
                      // IF OBJECT_COUNT = sc_n
                      // Opcode: 41 sc_n
+                     sc_terminado = (p_objs != read_vbyte ());
+                     break;
+                case 0xF0:
+                     // IF TRUE
+                     // Opcode: F0
+                     break;
+                case 0xFF:
+                    // THEN
+                    // Opcode: FF
+                    sc_terminado = 1;
+                    sc_continuar = 1;
+                    break;
+            }
+        }
+        if (sc_continuar) {
+            sc_terminado = 0;
+            while (!sc_terminado) {
+                switch (read_byte ()) {
+                    case 0x01:
+                        // SET FLAG sc_x = sc_n
+                        // Opcode: 01 sc_x sc_n
+                        #asm
+                                call _readxy
+                                ld  de, (_sc_x)
+                                ld  d, 0
+                                ld  hl, _flags
+                                add hl, de
+                                ld  a, (_sc_y)
+                                ld  (hl), a
+                        #endasm
+                        break;
+                    case 0x20:
+                        // SET TILE (sc_x, sc_y) = sc_n
+                        // Opcode: 20 sc_x sc_y sc_n
+                        readxy ();
+                        sc_n = read_vbyte ();
+                        _x = sc_x; _y = sc_y; _n = behs [sc_n]; _t = sc_n; update_tile ();
+                        break;
+                    case 0x51:
+                        // SET_FIRE_ZONE x1, y1, x2, y2
+                        // Opcode: 51 x1 y1 x2 y2
+                        fzx1 = read_byte ();
+                        fzy1 = read_byte ();
+                        fzx2 = read_byte ();
+                        fzy2 = read_byte ();
+                        f_zone_ac = 1;
+                        break;
+                    case 0xE0:
+                        // SOUND sc_n
+                        // Opcode: E0 sc_n
+#ifdef MODE_128K
+                        _AY_PL_SND (read_vbyte ());
+#else
+                        beep_fx (read_vbyte ());
+#endif
+                        break;
+                    case 0xE1:
+                        // SHOW
+                        // Opcode: E1
+                        sp_UpdateNow ();
+                        break;
+                    case 0xE3:
+                        sc_x = 0;
+                        while (1) {
+                           sc_n = read_byte ();
+                           if (sc_n == 0xEE) break;
+                           sp_PrintAtInv (LINE_OF_TEXT, LINE_OF_TEXT_X + sc_x, LINE_OF_TEXT_ATTR, sc_n);
+                           sc_x ++;
+                        }
+                        break;
+                    case 0xF1:
+                        // WIN
+                        script_result = 1;
+                        return;
+                    case 0xF4:
+                        // DECORATIONS
+                        #asm
+                               ld  hl, (_script)
+                               call _draw_decorations_loop
+                               inc hl
+                               ld  (_script), hl
+                        #endasm
+                        break;
+                    case 0xFF:
+                        sc_terminado = 1;
+                        break;
+                }
+            }
+        }
+        script = next_script;
+    }
+}

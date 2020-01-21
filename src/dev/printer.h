@@ -785,3 +785,70 @@ void print_str (void) {
 		#endasm
 	}
 #endif
+
+void clear_sprites (void) {
+	#asm
+			ld  ix, (_sp_player)
+			ld  iy, vpClipStruct
+			ld  bc, 0
+			ld  hl, 0xdede
+			ld  de, 0
+			call SPMoveSprAbs
+	
+			xor a
+		.hide_sprites_enems_loop
+			ld  (_gpit), a
+
+			sla a
+			ld  c, a
+			ld  b, 0
+			ld  hl, _sp_moviles
+			add hl, bc
+			ld  e, (hl)
+			inc hl
+			ld  d, (hl)
+			push de
+			pop ix
+
+			ld  iy, vpClipStruct
+			ld  bc, 0
+			ld  hl, 0xfefe	// -2, -2
+			ld  de, 0
+
+			call SPMoveSprAbs
+
+			ld  a, (_gpit)
+			inc a
+			cp  3
+			jr  nz, hide_sprites_enems_loop
+
+		#ifdef PLAYER_CAN_FIRE
+				xor a
+			.hide_sprites_bullets_loop
+				ld  (_gpit), a
+
+				sla a
+				ld  c, a
+				ld  b, 0
+				ld  hl, _sp_bullets
+				add hl, bc
+				ld  e, (hl)
+				inc hl
+				ld  d, (hl)
+				push de
+				pop ix
+
+				ld  iy, vpClipStruct
+				ld  bc, 0
+				ld  hl, 0xfefe	// -2, -2
+				ld  de, 0
+
+				call SPMoveSprAbs
+
+				ld  a, (_gpit)
+				inc a
+				cp  MAX_BULLETS
+				jr  nz, hide_sprites_bullets_loop
+		#endif
+	#endasm
+}

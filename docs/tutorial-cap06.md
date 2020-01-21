@@ -228,10 +228,10 @@ Esto antes era una tarea manual. Ahora es algo de lo que se encarga automaticame
     .ene file created with colocador.exe for MK1 -> 2 bytes.
 ```
 
-Para **MTE MK1** sólo utilizaremos el parámetro de entrada, que deberá apuntar a nuestro archivo `.ene`, conteniendo la ruta si es necesario, nuestro archivo de salida, que para **MTE MK1** **debe** ser `enems.h`, y listo. De hecho, si editas una vez más `compile.bat` encontrarás la linea de conversión tal que así:
+Para **MTE MK1** sólo utilizaremos el parámetro de entrada, que deberá apuntar a nuestro archivo `.ene`, conteniendo la ruta si es necesario, nuestro archivo de salida, que para **MTE MK1** **debe** ser `assets/enems.h`, y listo. De hecho, si editas una vez más `compile.bat` encontrarás la linea de conversión tal que así:
 
 ```
-    ..\utils\ene2h.exe ..\enems\enems.ene enems.h
+    ..\utils\ene2h.exe ..\enems\enems.ene assets\enems.h
 ```
 
 ## ¡Y hemos terminado!
