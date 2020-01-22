@@ -73,8 +73,8 @@ int limit (int val, int min, int max);
 void blackout (void);
 
 // printer.h
-void attr (char x, char y);
-void qtile (unsigned char x, unsigned char y);
+unsigned char attr (char x, char y);
+unsigned char qtile (unsigned char x, unsigned char y);
 void draw_coloured_tile (void);
 void invalidate_tile (void);
 void invalidate_viewport (void);
