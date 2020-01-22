@@ -17,7 +17,7 @@ void player_init (void) {
 	p_saltando = 0;
 	p_frame = 0;
 	p_subframe = 0;
-	#ifdef PLAYER_MOGGY_STYLE
+	#ifdef PLAYER_GENITAL
 		p_facing = FACING_DOWN;
 		p_facing_v = p_facing_h = 0xff;
 	#else
@@ -160,7 +160,7 @@ unsigned char player_move (void) {
 	//  MOVEMENT IN THE VERTICAL AXIS
 	// ***************************************************************************
 
-	#if !defined PLAYER_MOGGY_STYLE || defined VENG_SELECTOR
+	#if !defined PLAYER_GENITAL || defined VENG_SELECTOR
 
 		#if defined VENG_SELECTOR && defined PLAYER_VKEYS
 			if (veng_selector != VENG_KEYS)
@@ -218,7 +218,7 @@ unsigned char player_move (void) {
 		}	
 	#endif
 
-	#if defined PLAYER_MOGGY_STYLE || (defined VENG_SELECTOR && defined PLAYER_VKEYS)
+	#if defined PLAYER_GENITAL || (defined VENG_SELECTOR && defined PLAYER_VKEYS)
 
 		#if defined (VENG_SELECTOR)
 			if (veng_selector == VENG_KEYS )
@@ -265,7 +265,7 @@ unsigned char player_move (void) {
 
 	p_y += p_vy;
 	
-	#if !defined (PLAYER_MOGGY_STYLE)
+	#if !defined (PLAYER_GENITAL)
 		if (p_gotten) p_y += ptgmy;
 	#endif
 
@@ -282,7 +282,7 @@ unsigned char player_move (void) {
 
 	hit_v = 0;
 	cx1 = ptx1; cx2 = ptx2;
-	#if defined (PLAYER_MOGGY_STYLE)
+	#if defined (PLAYER_GENITAL)
 		if (p_vy < 0)
 	#else	
 		if (p_vy + ptgmy < 0) 
@@ -314,7 +314,7 @@ unsigned char player_move (void) {
 		}
 	}
 	
-	#if defined (PLAYER_MOGGY_STYLE)
+	#if defined (PLAYER_GENITAL)
 		if (p_vy > 0)
 	#else	
 		if (p_vy + ptgmy > 0)
@@ -323,7 +323,7 @@ unsigned char player_move (void) {
 		cy1 = cy2 = pty2;
 		cm_two_points ();
 
-		#ifdef PLAYER_MOGGY_STYLE
+		#ifdef PLAYER_GENITAL
 			if ((at1 & 8) || (at2 & 8))
 		#else
 			// Greed Optimization tip! Remove this line and uncomment the next one:
@@ -359,7 +359,7 @@ unsigned char player_move (void) {
 	gpxx = gpx >> 4;
 	gpyy = gpy >> 4;
 
-	#ifndef PLAYER_MOGGY_STYLE
+	#ifndef PLAYER_GENITAL
 		cy1 = cy2 = (gpy + 16) >> 4;
 		cx1 = ptx1; cx2 = ptx2;
 		cm_two_points ();
@@ -434,7 +434,7 @@ unsigned char player_move (void) {
 	// ***************************************************************************
 
 	if ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {
-		#ifdef PLAYER_MOGGY_STYLE		
+		#ifdef PLAYER_GENITAL		
 			p_facing_h = 0xff;
 		#endif
 		if (p_vx > 0) {
@@ -447,11 +447,11 @@ unsigned char player_move (void) {
 	}
 
 	if ((pad0 & sp_LEFT) == 0) {
-		#ifdef PLAYER_MOGGY_STYLE
+		#ifdef PLAYER_GENITAL
 			p_facing_h = FACING_LEFT;
 		#endif
 		if (p_vx > -PLAYER_MAX_VX) {
-			#ifndef PLAYER_MOGGY_STYLE			
+			#ifndef PLAYER_GENITAL			
 				p_facing = 0;
 			#endif
 			p_vx -= PLAYER_AX;
@@ -459,19 +459,19 @@ unsigned char player_move (void) {
 	}
 
 	if ((pad0 & sp_RIGHT) == 0) {
-		#ifdef PLAYER_MOGGY_STYLE	
+		#ifdef PLAYER_GENITAL	
 			p_facing_h = FACING_RIGHT;
 		#endif
 		if (p_vx < PLAYER_MAX_VX) {
 			p_vx += PLAYER_AX;
-			#ifndef PLAYER_MOGGY_STYLE						
+			#ifndef PLAYER_GENITAL						
 				p_facing = 1;
 			#endif
 		}
 	}
 
 	p_x = p_x + p_vx;
-	#ifndef PLAYER_MOGGY_STYLE
+	#ifndef PLAYER_GENITAL
 		p_x += ptgmx;
 	#endif
 	
@@ -489,7 +489,7 @@ unsigned char player_move (void) {
 	hit_h = 0;
 	cy1 = pty1; cy2 = pty2;
 
-	#if defined (PLAYER_MOGGY_STYLE)
+	#if defined (PLAYER_GENITAL)
 		if (p_vx < 0)
 	#else	
 		if (p_vx + ptgmx < 0)
@@ -519,7 +519,7 @@ unsigned char player_move (void) {
 		#endif
 	}
 
-	#if defined (PLAYER_MOGGY_STYLE)
+	#if defined (PLAYER_GENITAL)
 		if (p_vx > 0)
 	#else	
 		if (p_vx + ptgmx > 0)
@@ -551,7 +551,7 @@ unsigned char player_move (void) {
 
 	// Priority to decide facing
 
-	#ifdef PLAYER_MOGGY_STYLE
+	#ifdef PLAYER_GENITAL
 		#ifdef TOP_OVER_SIDE
 			if (p_facing_v != 0xff) {
 				p_facing = p_facing_v;
@@ -571,7 +571,7 @@ unsigned char player_move (void) {
 	cy1 = p_ty = (gpy + 8) >> 4;	
 
 	#if defined (PLAYER_PUSH_BOXES) || !defined (DEACTIVATE_KEYS)
-		#ifdef PLAYER_MOGGY_STYLE
+		#ifdef PLAYER_GENITAL
 			if (wall_v == WTOP) {
 				// interact up			
 				#if defined (BOUNDING_BOX_8_BOTTOM)
@@ -685,7 +685,7 @@ unsigned char player_move (void) {
 
 	#ifdef PLAYER_CUSTOM_ANIMATION
 		#include "my/custom_animation.h"
-	#elif defined PLAYER_MOGGY_STYLE
+	#elif defined PLAYER_GENITAL
 		if (p_vx || p_vy) {
 			++ p_subframe;
 			if (p_subframe == 4) {

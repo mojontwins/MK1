@@ -41,7 +41,7 @@
 #define PLAYER_MIN_KILLABLE 0
 #endif
 
-#if defined PLAYER_MOGGY_STYLE || defined PLAYER_CUSTOM_ANIMATION
+#if defined PLAYER_GENITAL || defined PLAYER_CUSTOM_ANIMATION
 	// right: 0 + frame
 	// left: 2 + frame
 	// up: 4 + frame

@@ -54,7 +54,7 @@ void bullets_fire (void) {
 	for (b_it = 0; b_it < MAX_BULLETS; ++ b_it) {
 		if (bullets_estado [b_it] == 0) {
 			_b_estado = 1;
-			#ifdef PLAYER_MOGGY_STYLE
+			#ifdef PLAYER_GENITAL
 				switch (p_facing) {
 					case FACING_LEFT:
 						_b_x = gpx - 4;
@@ -174,7 +174,7 @@ void bullets_move (void) {
 					_b_estado = 0;
 				}
 			} 
-			#if defined(PLAYER_MOGGY_STYLE) || defined(CAN_FIRE_UP)
+			#if defined(PLAYER_GENITAL) || defined(CAN_FIRE_UP)
 				if (_b_my) {
 					_b_y += _b_my;
 					if (_b_y > 160) {

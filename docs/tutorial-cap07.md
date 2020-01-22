@@ -510,11 +510,11 @@ No usaremos nada de esto en **Dogmole**, por lo que todo se queda comentado.
 ## Directivas relacionadas con la vista genital
 
 ```c
-    //#define PLAYER_MOGGY_STYLE                // Enable top view.
+    //#define PLAYER_GENITAL                // Enable top view.
     //#define TOP_OVER_SIDE                     // UP/DOWN has priority over LEFT/RIGHT
 ```
 
-Si activamos `PLAYER_MOGGY_STYLE`, el güego será de vista genital. Si no está activada, el güego será de vista lateral. Para **Dogmole** la dejamos desactivada, por tanto.
+Si activamos `PLAYER_GENITAL`, el güego será de vista genital. Si no está activada, el güego será de vista lateral. Para **Dogmole** la dejamos desactivada, por tanto.
 
 La siguiente, `TOP_OVER_SIDE`, define el comportamiento de las diagonales. Esto tiene utilidad sobre todo si tu güego tiene, además, disparos. Si se define `TOP_OVER_SIDE`, al desplazarse en diagonal el muñeco mirará hacia arriba o hacia abajo y, por tanto, disparará en dicha dirección. Si no se define, el muñeco mirará y disparará hacia la izquierda o hacia la derecha. Depende del tipo de juego o de la configuración del mapa te interesará más una u otra opción. No, no se puede disparar en diagonal.
 

@@ -286,7 +286,7 @@ void enems_move (void) {
 			}
 		#endif
 
-		#ifndef PLAYER_MOGGY_STYLE
+		#ifndef PLAYER_GENITAL
 			#if defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_8_BOTTOM)
 				pregotten = (gpx + 12 >= _en_x && gpx <= _en_x + 12);
 			#else
@@ -330,7 +330,7 @@ void enems_move (void) {
 			
 			// Collide with player
 			
-			#ifndef PLAYER_MOGGY_STYLE
+			#ifndef PLAYER_GENITAL
 				// Platforms
 				if (_en_t == 4) {
 					if (pregotten) {
@@ -414,7 +414,7 @@ void enems_move (void) {
 								} else
 							#endif
 							
-							#ifndef PLAYER_MOGGY_STYLE	
+							#ifndef PLAYER_GENITAL	
 								{
 									p_vx = addsign (_en_mx, PLAYER_MAX_VX);
 									p_vy = addsign (_en_my, PLAYER_MAX_VX);
@@ -458,7 +458,7 @@ void enems_move (void) {
 								_en_y = _en_cy;
 								en_an_next_frame [enit] = sprite_17_a;								
 								bullets_estado [gpjt] = 0;
-								#ifndef PLAYER_MOGGY_STYLE							
+								#ifndef PLAYER_GENITAL							
 									if (_en_t != 4) _en_life --;
 								#else
 									_en_life --;
