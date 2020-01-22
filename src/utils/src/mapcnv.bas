@@ -2,27 +2,28 @@
 ' Cutrecode by na_th_an
 
 ' Estos programas son tela de optimizables, pero me da igual porque tengo un dual core.
-' ¡OLE!
+' ­OLE!
 
 Sub WarningMessage ()
 End Sub
 
 sub usage () 
 	Print "** USO **"
-	Print "   MapCnv archivo.map ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]"
+	Print "   MapCnv archivo.map archivo.h ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]"
 	Print
 	Print "   - archivo.map : Archivo de entrada exportado con mappy en formato raw."
+	Print "   - archivo.h : Archivo de salida"
 	Print "   - ancho_mapa : Ancho del mapa en pantallas."
 	Print "   - alto_mapa : Alto del mapa en pantallas."
 	Print "   - ancho_pantalla : Ancho de la pantalla en tiles."
 	Print "   - alto_pantalla : Alto de la pantalla en tiles."
-	Print "   - tile_cerrojo : Nº del tile que representa el cerrojo."
-	Print "   - packed : Escribe esta opción para mapas de la churrera de 16 tiles."
-	Print "   - fixmappy : Escribe esta opción para arreglar lo del tile 0 no negro"
+	Print "   - tile_cerrojo : N§ del tile que representa el cerrojo."
+	Print "   - packed : Escribe esta opci¢n para mapas de la churrera de 16 tiles."
+	Print "   - fixmappy : Escribe esta opci¢n para arreglar lo del tile 0 no negro"
 	Print
-	Print "Por ejemplo, para un mapa de 6x5 pantallas para la churrera:"
+	Print "Por ejemplo, para un mapa de 6x5 pantallas para MTE MK1:"
 	Print
-	Print "   MapCnv mapa.map 6 5 15 10 15 packed"
+	Print "   MapCnv mapa.map mapa.h 6 5 15 10 15 packed"
 end sub
 
 Function inCommand (spec As String) As Integer
@@ -55,21 +56,22 @@ Dim As MyBolt Bolts (100)
 WarningMessage ()
 
 if 	Command (1) = "" Or _
-	Val (Command (2)) <= 0 Or _
+	Command (2) = "" Or _
 	Val (Command (3)) <= 0 Or _
 	Val (Command (4)) <= 0 Or _
 	Val (Command (5)) <= 0 Or _
-	Val (Command (6)) <= 0 Then
+	Val (Command (6)) <= 0 Or _
+	Val (Command (7)) <= 0 Then
 	
 	usage ()
 	end
 End If
 
-map_w = Val (Command (2))
-map_h = Val (Command (3))
-scr_w = Val (Command (4))
-scr_h = Val (Command (5))
-bolt = Val (Command (6))
+map_w = Val (Command (3))
+map_h = Val (Command (4))
+scr_w = Val (Command (5))
+scr_h = Val (Command (6))
+bolt = Val (Command (7))
 
 If InCommand ("packed") then
 	packed = 1
@@ -102,7 +104,7 @@ close f
 
 ' Construimos el nuevo mapa mientras rellenamos el array de cerrojos
 
-open "mapa.h" for output as #f
+open Command (2) for output as #f
 
 print #f, "// Mapa.h "
 print #f, "// Generado por MapCnv de la churrera"
@@ -181,9 +183,9 @@ print #f, " "
 close f
 
 if packed = 0 then 
-	Print "Se escribió mapa.h con " + trim(str(map_h*map_w)) + " pantallas (" + trim(str(map_h*map_w*scr_h*scr_w)) + " bytes)."
+	Print "Se escribi¢ mapa.h con " + trim(str(map_h*map_w)) + " pantallas (" + trim(str(map_h*map_w*scr_h*scr_w)) + " bytes)."
 else
-	Print "Se escribió mapa.h con " + trim(str(map_h*map_w)) + " pantallas empaquetadas (" + trim(str(map_h*map_w*scr_h*scr_w / 2)) + " bytes)."
+	Print "Se escribi¢ mapa.h con " + trim(str(map_h*map_w)) + " pantallas empaquetadas (" + trim(str(map_h*map_w*scr_h*scr_w / 2)) + " bytes)."
 end if
 Print "Se encontraron " + trim(str(i)) + " cerrojos."
 print " "

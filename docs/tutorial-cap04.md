@@ -146,7 +146,7 @@ Sin embargo, para seguir con la tradición, veamos como funciona el conversor, q
 	Convierte un Spriteset de 16 sprites
 ```
 
-Este es mucho más sencillo. Toma dos parámetros obligatorios: el archivo de entrada (nuestro `sprites.png`), un archivo de salida, que para **MTE MK1** debe ser `sprites.h` en `/dev`, y el parámetro `nomask`, que es optativo, y que generará los sprites sin máscara (algo que solo hemos usado en Zombie Calavera y que por ahora dejaremos "ahí").
+Este es mucho más sencillo. Toma dos parámetros obligatorios: el archivo de entrada (nuestro `sprites.png`), un archivo de salida, que para **MTE MK1** debe ser `sprites.h` en `/dev/assets`, y el parámetro `nomask`, que es optativo, y que generará los sprites sin máscara (algo que solo hemos usado en Zombie Calavera y que por ahora dejaremos "ahí").
 
 Si abres `/dev/compile.bat` verás que el valor de los parámetros son, precisamente, los que hemos mencionado arriba.
 

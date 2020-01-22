@@ -98,13 +98,14 @@ End Function
 Sub usage
 	Print "Usage: "
 	Print 
-	Print "$ ts2bin font.png/nofont work.png/notiles ts.bin defaultink"
+	Print "$ ts2bin font.png/nofont work.png|notiles|blank ts.bin defaultink"
 	Print
 	Print "where:"
 	Print "   * font.png is a 256x16 file with 64 chars ascii 32-95"
 	Print "     (use 'nofont' if you don't want to include a font & gen. 192 tiles)"
 	Print "   * work.png is a 256x48 file with your 16x16 tiles"
 	Print "     (use 'notiles' if you don't want to include a tileset & gen. 64 tiles)"
+	Print "     (use 'blank' if you want to generate a 100% blank placeholder tileset)"
 	Print "   * ts.bin is the output, 2304 bytes bin file."
 	Print "   * defaultink: a number 0-7. Use this colour as 2nd colour if there's only"
 	Print "     one colour in a 8x8 cell"
@@ -161,8 +162,12 @@ Else
 End If
 
 If command (2) <> "notiles" then
-	printf ("reading metatiles ~ ")
-	img = png_load (Command (2))	
+	If command (2) = "blank" then
+		img = ImageCreate (256, 48, 0, 32)
+	Else
+		printf ("reading metatiles ~ ")
+		img = png_load (Command (2))	
+	End If
 	x = 0: y = 0: idx = 64
 	For i = 0 to 47
 		getUDGIntoCharset img, x, y, tileset (), idx: idx = idx + 1

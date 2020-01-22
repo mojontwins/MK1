@@ -21,7 +21,7 @@ void mem_save (void) {
 	sg_pool [MAX_FLAGS + 3] = p_ammo;
 #endif
 #ifdef TIMER_ENABLE
-	sg_pool [MAX_FLAGS + 4] = ctimer.t;
+	sg_pool [MAX_FLAGS + 4] = timer_t;
 #endif
 #ifdef COMPRESSED_LEVELS
 	sg_level = level;
@@ -39,7 +39,7 @@ void mem_load (void) {
 	p_ammo = sg_pool [MAX_FLAGS + 3];
 #endif
 #ifdef TIMER_ENABLE
-	ctimer.t = sg_pool [MAX_FLAGS + 4];
+	timer_t = sg_pool [MAX_FLAGS + 4];
 #endif
 }
 

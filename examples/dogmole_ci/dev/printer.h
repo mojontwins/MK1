@@ -3,7 +3,7 @@
 
 // Printing functions
 
-void attr (char x, char y) {
+unsigned char attr (char x, char y) {
 	// x + 15 * y = x + (16 - 1) * y = x + 16 * y - y = x + (y << 4) - y.
 #ifdef PLAYER_AUTO_CHANGE_SCREEN
 	if (x < 0 || y < 0 || x > 14 || y > 9) return 0;
@@ -13,7 +13,7 @@ void attr (char x, char y) {
 	return map_attr [x + (y << 4) - y];	
 }
 
-void qtile (unsigned char x, unsigned char y) {
+unsigned char qtile (unsigned char x, unsigned char y) {
 	// x + 15 * y = x + (16 - 1) * y = x + 16 * y - y = x + (y << 4) - y.
 	return map_buff [x + (y << 4) - y];	
 }
@@ -646,7 +646,7 @@ void print_number2 (void) {
 
 #ifndef DEACTIVATE_OBJECTS
 	void draw_objs () {
-		#if defined (ONLY_ONE_OBJECT)
+		#if defined (ONLY_ONE_OBJECT) && defined (ACTIVATE_SCRIPTING)
 			#if OBJECTS_ICON_X != 99
 				if (p_objs) {
 					// Make tile 17 flash
@@ -785,3 +785,70 @@ void print_str (void) {
 		#endasm
 	}
 #endif
+
+void clear_sprites (void) {
+	#asm
+			ld  ix, (_sp_player)
+			ld  iy, vpClipStruct
+			ld  bc, 0
+			ld  hl, 0xdede
+			ld  de, 0
+			call SPMoveSprAbs
+	
+			xor a
+		.hide_sprites_enems_loop
+			ld  (_gpit), a
+
+			sla a
+			ld  c, a
+			ld  b, 0
+			ld  hl, _sp_moviles
+			add hl, bc
+			ld  e, (hl)
+			inc hl
+			ld  d, (hl)
+			push de
+			pop ix
+
+			ld  iy, vpClipStruct
+			ld  bc, 0
+			ld  hl, 0xfefe	// -2, -2
+			ld  de, 0
+
+			call SPMoveSprAbs
+
+			ld  a, (_gpit)
+			inc a
+			cp  3
+			jr  nz, hide_sprites_enems_loop
+
+		#ifdef PLAYER_CAN_FIRE
+				xor a
+			.hide_sprites_bullets_loop
+				ld  (_gpit), a
+
+				sla a
+				ld  c, a
+				ld  b, 0
+				ld  hl, _sp_bullets
+				add hl, bc
+				ld  e, (hl)
+				inc hl
+				ld  d, (hl)
+				push de
+				pop ix
+
+				ld  iy, vpClipStruct
+				ld  bc, 0
+				ld  hl, 0xfefe	// -2, -2
+				ld  de, 0
+
+				call SPMoveSprAbs
+
+				ld  a, (_gpit)
+				inc a
+				cp  MAX_BULLETS
+				jr  nz, hide_sprites_bullets_loop
+		#endif
+	#endasm
+}

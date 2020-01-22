@@ -41,8 +41,8 @@
 	#endif
 
 	#if defined TIMER_ENABLE && TIMER_X != 99
-		if (ctimer.t != timer_old) {
-			print_number2 (TIMER_X, TIMER_Y, ctimer.t);
-			timer_old = ctimer.t;
+		if (timer_t != timer_old) {
+			print_number2 (TIMER_X, TIMER_Y, timer_t);
+			timer_old = timer_t;
 		}
 	#endif

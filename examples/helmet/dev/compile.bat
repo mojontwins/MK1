@@ -11,16 +11,16 @@ copy scripts.bin ..\dev\ > nul
 cd ..\dev
 
 echo Convirtiendo mapa
-..\..\..\src\utils\mapcnv.exe ..\map\mapa0.map 1 24 15 10 15 packed > nul
+..\..\..\src\utils\mapcnv.exe ..\map\mapa0.map assets\mapa.h 1 24 15 10 15 packed > nul
 cd ..\dev
 
 echo Convirtiendo enemigos/hotspots
-..\..\..\src\utils\ene2h.exe ..\enems\enems0.ene enems.h
+..\..\..\src\utils\ene2h.exe ..\enems\enems0.ene assets\enems.h
 
 echo Importando GFX
 ..\..\..\src\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work0.png tileset.bin 7 >nul
 
-..\..\..\src\utils\sprcnv.exe ..\gfx\sprites.png sprites.h > nul
+..\..\..\src\utils\sprcnv.exe ..\gfx\sprites.png assets\sprites.h > nul
 
 ..\..\..\src\utils\sprcnvbin.exe ..\gfx\sprites_extra.png sprites_extra.bin 1 > nul
 ..\..\..\src\utils\sprcnvbin8.exe ..\gfx\sprites_bullet.png sprites_bullet.bin 1 > nul

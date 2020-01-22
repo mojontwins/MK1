@@ -1,292 +1,271 @@
 // MTE MK1 (la Churrera) v5.0
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
-// Beeper.h
-// Rutinas de sonido para beeper por Shiru
-// I removed di's and ei's, not needed here.
-// Copyleft 2010 The Mojon Twins
-
 #asm
-	.playsfx
-		;di
-		ld l,a
-		ld h,0
-		add hl,hl
-		ld de,proclist
-		add hl,de
-		ld a,(hl)
-		inc hl
-		ld h,(hl)
-		ld l,a
-		ld de,0
-		jp (hl)
+	;org 60000
+
+;BeepFX player by Shiru
+;You are free to do whatever you want with this code
+
+
+
+.playBasic
+	ld a,0
+.sound_play
+	ld hl,sfxData	;address of sound effects data
+
+	;di
+	push ix
+	push iy
+
+	ld b,0
+	ld c,a
+	add hl,bc
+	add hl,bc
+	ld e,(hl)
+	inc hl
+	ld d,(hl)
+	push de
+	pop ix			;put it into ix
+
+	ld a,(23624)	;get border color from BASIC vars to keep it unchanged
+	rra
+	rra
+	rra
+	and 7
+	ld (sfxRoutineToneBorder  +1),a
+	ld (sfxRoutineNoiseBorder +1),a
+	ld (sfxRoutineSampleBorder+1),a
+
+
+.readData
+	ld a,(ix+0)		;read block type
+	ld c,(ix+1)		;read duration 1
+	ld b,(ix+2)
+	ld e,(ix+3)		;read duration 2
+	ld d,(ix+4)
+	push de
+	pop iy
+
+	dec a
+	jr z,sfxRoutineTone
+	dec a
+	jr z,sfxRoutineNoise
+	dec a
+	jr z,sfxRoutineSample
+	pop iy
+	pop ix
+	;ei
+	ret
+
 	
-	.sound1	;enemy destroyed
-		ex de,hl
-		ld bc,500
-	.sound1l0
-		ld a,(hl)
-		and 16
-		out ($FE),a
-		ld e,a
-		inc a
-		sla a
-		sla a
-	.sound1l1
-		dec a
-		jr nz,sound1l1
-		out ($FE),a
-		ld a,e
-		inc a
-		add a,a
-		add a,a
-		add a,a
-	.sound1l2
-		dec a
-		jr nz,sound1l2
-		ld a,b
-		inc hl
-		dec bc
-		ld a,b
-		or c
-		jr nz,sound1l0
-		;ei
-		ret
+
+;play sample
+
+.sfxRoutineSample
+	ex de,hl
+.sfxRS0
+	ld e,8
+	ld d,(hl)
+	inc hl
+.sfxRS1
+	ld a,(ix+5)
+.sfxRS2
+	dec a
+	jr nz,sfxRS2
+	rl d
+	sbc a,a
+	and 16
+.sfxRoutineSampleBorder
+	or 0
+	out (254),a
+	dec e
+	jr nz,sfxRS1
+	dec bc
+	ld a,b
+	or c
+	jr nz,sfxRS0
+
+	ld c,6
 	
-	.sound2	;enemy hit
-		ex de,hl
-		ld bc,40*256+100
-	.sound2l0
-		ld a,(hl)
-		and 16
-		out ($FE),a
-		inc hl
-		ld a,c
-	.sound2l1
-		dec a
-		jr nz,sound2l1
-		out ($FE),a
-		ld a,c
-	.sound2l2
-		dec a
-		jr nz,sound2l2
-		djnz sound2l0
-		;ei
-		ret
-	
-	.sound3	;something
-		ex de,hl
-		ld b,100
-		ld de,$1020
-	.sound3l0
-		ld a,(hl)
-		and d
-		out ($FE),a
-		inc hl
-		ld a,e
-	.sound3l0a
-		dec a
-		jr nz,sound3l0a
-		djnz sound3l0
-		ld b,250
-	.sound3l1
-		ld a,(hl)
-		and d
-		out ($FE),a
-		inc hl
-		ld a,2
-	.sound3l2
-		dec a
-		jr nz,sound3l2
-		xor a
-		out ($FE),a
-		ld a,e
-	.sound3l3
-		dec a
-		jr nz,sound3l3
-		djnz sound3l1
-		;ei
-		ret
-	
-	.sound4	;jump
-		ld bc,20*256+250
-	.sound4l0
-		ld a,16
-		out ($FE),a
-		ld a,4
-	.sound4l1
-		dec a
-		jr nz,sound4l1
-		out ($FE),a
-		ld a,c
-	.sound4l2
-		dec a
-		jr nz,sound4l2
-		dec c
-		dec c
-		djnz sound4l0
-		;ei
-		ret
-	
-	.sound5	;player hit
-		ex de,hl
-		ld bc,100*256+16
-	.sound5l0
-		ld a,(hl)
-		and c
-		out ($FE),a
-		inc hl
-		ld a,110
-		sub b
-		ld e,a
-		and c
-		out ($FE),a
-	.sound5l1
-		dec e
-		jr nz,sound5l1
-		djnz sound5l0
-		;ei
-		ret
-	
-	.sound6	;enemy destroyed 2
-		ex de,hl
-		ld bc,20*256+16
-	.sound6l0
-		ld a,(hl)
-		inc hl
-		and c
-		out ($FE),a
-		xor a
-	.sound6l0a
-		dec a
-		jr nz,sound6l0a
-		djnz sound6l0
-	.sound6l1
-		ld a,(hl)
-		inc hl
-		and c
-		out ($FE),a
-	.sound6l2
-		dec a
-		jr nz,sound6l2
-		djnz sound6l1
-		;ei
-		ret
-		
-	.sound7	;shot
-		ex de,hl
-		ld bc,100*256
-	.sound7l0
-		ld a,(hl)
-		inc hl
-		or c
-		and 16
-		out ($FE),a
-		ld a,(hl)
-		srl a
-		srl a
-	.sound7l1
-		dec a
-		jr nz,sound7l1
-		ld a,c
-		add a,4
-		ld c,a
-		djnz sound7l0
-		;ei
-		ret
-	
-	.sound8	;take item
-		ld a,200
-		jr soundItem
-	.sound9
-		ld a,175
-		jr soundItem
-	.sound10
-		ld a,100
-	.soundItem
-		ld (frq),a
-		ld b,4
-		ld d,128
-	.sound8l2
-		push bc
-	;.frq=$+1
-	;	ld bc,2*256+200
-		defb #01	;ld bc
-	.frq
-		defb 200	;+200
-		defb 2	;2*256
-	.sound8l0
-		push bc
-		ld b,50
-	.sound8l1
-		xor 16
-		and 16
-		out ($FE),a
-		ld e,a
-		ld a,d
-	.sound8l2b
-		dec a
-		jr nz,sound8l2b
-		out ($FE),a
-		ld a,129
-		sub d
-	.sound8l3
-		dec a
-		jr nz,sound8l3
-		ld a,e
-		ld e,c
-	.sound8l4
-		dec e
-		jr nz,sound8l4
-		djnz sound8l1
-		pop bc
-		ld a,c
-		sub 16
-		ld c,a
-		djnz sound8l0
-		pop bc
-		srl d
-		srl d
-		djnz sound8l2
-		;ei
-		ret
-	
-	.proclist
-		defw sound1
-		defw sound2
-		defw sound3
-		defw sound4
-		defw sound5
-		defw sound6
-		defw sound7
-		defw sound8
-		defw sound9
-		defw sound10
+.nextData
+	add ix,bc		;skip to the next block
+	jr readData
+
+
+
+;generate tone with many parameters
+
+.sfxRoutineTone
+	ld e,(ix+5)		;freq
+	ld d,(ix+6)
+	ld a,(ix+9)		;duty
+	ld (sfxRoutineToneDuty+1),a
+	ld hl,0
+
+.sfxRT0
+	push bc
+	push iy
+	pop bc
+.sfxRT1
+	add hl,de
+	ld a,h
+.sfxRoutineToneDuty
+	cp 0
+	sbc a,a
+	and 16
+.sfxRoutineToneBorder
+	or 0
+	out (254),a
+
+	dec bc
+	ld a,b
+	or c
+	jr nz,sfxRT1
+
+	ld a,(sfxRoutineToneDuty+1)	 ;duty change
+	add a,(ix+10)
+	ld (sfxRoutineToneDuty+1),a
+
+	ld c,(ix+7)		;slide
+	ld b,(ix+8)
+	ex de,hl
+	add hl,bc
+	ex de,hl
+
+	pop bc
+	dec bc
+	ld a,b
+	or c
+	jr nz,sfxRT0
+
+	ld c,11
+	jr nextData
+
+
+
+;generate noise with two parameters
+
+.sfxRoutineNoise
+	ld e,(ix+5)		;pitch
+
+	ld d,1
+	ld h,d
+	ld l,d
+.sfxRN0
+	push bc
+	push iy
+	pop bc
+.sfxRN1
+	ld a,(hl)
+	and 16
+.sfxRoutineNoiseBorder
+	or 0
+	out (254),a
+	dec d
+	jr nz,sfxRN2
+	ld d,e
+	inc hl
+	ld a,h
+	and 31
+	ld h,a
+.sfxRN2
+	dec bc
+	ld a,b
+	or c
+	jr nz,sfxRN1
+
+	ld a,e
+	add a,(ix+6)	;slide
+	ld e,a
+
+	pop bc
+	dec bc
+	ld a,b
+	or c
+	jr nz,sfxRN0
+
+	ld c,7
+	jr nextData
+
+
+.sfxData
+
+.SoundEffectsData
+	defw SoundEffect0Data
+	defw SoundEffect1Data
+	defw SoundEffect2Data
+	defw SoundEffect3Data
+	defw SoundEffect4Data
+	defw SoundEffect5Data
+	defw SoundEffect6Data
+	defw SoundEffect7Data
+	defw SoundEffect8Data
+	defw SoundEffect9Data
+
+.SoundEffect0Data
+	defb 2 ;noise
+	defw 8,200,20
+	defb 2 ;noise
+	defw 4,2000,5220
+	defb 0
+.SoundEffect1Data
+	defb 2 ;noise
+	defw 1,1000,10
+	defb 2 ;noise
+	defw 1,1000,1
+	defb 0
+.SoundEffect2Data
+	defb 1 ;tone
+	defw 50,100,200,65531,128
+	defb 0
+.SoundEffect3Data
+	defb 1 ;tone
+	defw 100,20,500,2,128
+	defb 0
+.SoundEffect4Data
+	defb 2 ;noise
+	defw 1,1000,20
+	defb 1 ;pause
+	defw 1,1000,0,0,0
+	defb 2 ;noise
+	defw 1,1000,1
+	defb 0
+.SoundEffect5Data
+	defb 1 ;tone
+	defw 50,200,500,65516,128
+	defb 0
+.SoundEffect6Data
+	defb 2 ;noise
+	defw 20,50,257
+	defb 0
+.SoundEffect7Data
+	defb 1 ;tone
+	defw 1,1000,2000,0,64
+	defb 1 ;pause
+	defw 1,1000,0,0,0
+	defb 1 ;tone
+	defw 1,1000,1500,0,64
+	defb 0
+.SoundEffect8Data
+	defb 2 ;noise
+	defw 2,2000,32776
+	defb 0
+.SoundEffect9Data
+	defb 1 ;tone
+	defw 4,1000,1000,400,128
+	defb 0
 #endasm
-
-/*
-	TABLA DE SONIDOS
-
-	n	Sonido
-	----------
-	0	Enemy destroyed
-	1	Enemy hit
-	2	Something
-	3	Jump
-	4	Player hit
-	5	Enemy destroyed 2
-	6	Shot
-	7	Item #1		(item)
-	8	Item #2		(key)
-	9	Item #3		(life)
-	
-*/
 
 void beep_fx (unsigned char n) {
 	// Cargar en A el valor de n
 	asm_int = n;
 	#asm
+		push ix
+		push iy
 		ld a, (_asm_int)
-		call playsfx
+		call sound_play
+		pop ix
+		pop iy
 	#endasm
 }

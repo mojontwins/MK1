@@ -39,20 +39,20 @@ void player_init (void) {
 			p_ammo = MAX_AMMO;
 		#endif
 	#endif	
-	pant_final = SCR_FIN;
+
 	#ifdef TIMER_ENABLE
-		ctimer.count = 0;
-		ctimer.zero = 0;
+		timer_count = 0;
+		timer_zero = 0;
 		#ifdef TIMER_LAPSE
-			ctimer.frames = TIMER_LAPSE;
+			timer_frames = TIMER_LAPSE;
 		#endif
 		#ifdef TIMER_INITIAL
-			ctimer.t = TIMER_INITIAL;
+			timer_t = TIMER_INITIAL;
 		#endif
 		#ifdef TIMER_START
-			ctimer.on = 1;
+			timer_on = 1;
 		#else
-			ctimer.on = 0;
+			timer_on = 0;
 		#endif
 	#endif
 }

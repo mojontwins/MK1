@@ -116,10 +116,10 @@ void hotspots_do (void) {
 
 				#ifdef TIMER_ENABLE
 					case 5:
-						if (99 - ctimer.t > TIMER_REFILL)
-							ctimer.t += TIMER_REFILL;
+						if (99 - timer_t > TIMER_REFILL)
+							timer_t += TIMER_REFILL;
 						else
-							ctimer.t = 99;
+							timer_t = 99;
 						#ifdef MODE_128K
 							wyz_play_sound (3);
 						#else

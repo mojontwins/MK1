@@ -456,7 +456,7 @@ void enems_move (void) {
 								#endif
 								_en_x = _en_cx;
 								_en_y = _en_cy;
-								en_an_next_frame [enit] = sprite_17_a;								
+								en_an_next_frame [enit] = sprite_17_a;
 								bullets_estado [gpjt] = 0;
 								#ifndef PLAYER_GENITAL							
 									if (_en_t != 4) _en_life --;
@@ -473,7 +473,7 @@ void enems_move (void) {
 										#endasm
 										wyz_play_sound (6);
 									#else															
-										beep_fx (0);
+										beep_fx (5);
 									#endif
 									en_an_next_frame [enit] = sprite_18_a;
 									

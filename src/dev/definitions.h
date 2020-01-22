@@ -50,25 +50,35 @@ unsigned int asm_int_2;
 unsigned int seed;
 unsigned char half_life;
 
-#define EST_NORMAL 		0
-#define EST_PARP 		2
-#define EST_MUR 		4
-#define sgni(n)			(n < 0 ? -1 : 1)
-#define saturate(n)		(n < 0 ? 0 : n)
-#define WTOP 1
-#define WBOTTOM 2
-#define WLEFT 3
-#define WRIGHT 4
-#define COORDS(x,y)		((x)+(y<<4)-(y))
+#define EST_NORMAL 			0
+#define EST_PARP 			2
+#define EST_MUR 			4
+#define sgni(n)				(n < 0 ? -1 : 1)
+#define saturate(n)			(n < 0 ? 0 : n)
+#define WTOP 				1
+#define WBOTTOM 			2
+#define WLEFT 				3
+#define WRIGHT 				4
+#define COORDS(x,y)			((x)+(y<<4)-(y))
 
 // Vertical engine selector 
 // for advanced masters of the universe
 // with a picha or toto very gordo
 
-#define VENG_KEYS		1
-#define VENG_JUMP 		2
-#define VENG_BOOTEE		3
-#define VENG_JETPAC 	4
+#define VENG_KEYS			1
+#define VENG_JUMP 			2
+#define VENG_BOOTEE			3
+#define VENG_JETPAC 		4
+
+#define TYPE_6_IDLE 		0
+#define TYPE_6_PURSUING		1
+#define TYPE_6_RETREATING	2
+#define GENERAL_DYING 		4
+
+#define FACING_RIGHT 		0
+#define FACING_LEFT			2
+#define FACING_UP 			4
+#define FACING_DOWN 		6
 
 #ifdef VENG_SELECTOR 
 	unsigned char veng_selector;
@@ -93,11 +103,6 @@ unsigned char p_killme;
 unsigned char p_tx, p_ty;
 signed int ptgmx, ptgmy;
 
-#define FACING_RIGHT 0
-#define FACING_LEFT 2
-#define FACING_UP 4
-#define FACING_DOWN 6
-
 const unsigned char *spacer = "            ";
 
 unsigned char enit;
@@ -113,6 +118,7 @@ unsigned char en_an_state [3];
 	int en_an_y [3];
 	int en_an_vx [3];
 	int en_an_vy [3];
+	int _en_an_x, _en_an_y, _en_an_vx, _en_an_vy;
 #endif
 
 #ifdef ENABLE_PURSUERS
@@ -126,17 +132,13 @@ unsigned char _en_x1, _en_y1, _en_x2, _en_y2;
 signed char _en_mx, _en_my;
 signed char _en_t;
 signed char _en_life;
-int _en_an_x, _en_an_y, _en_an_vx, _en_an_vy;
+
 unsigned char *_baddies_pointer;
 
 #if defined PLAYER_CAN_FIRE || defined ENABLE_PURSUERS
 	unsigned char _en_cx, _en_cy;
 #endif
 
-#define TYPE_6_IDLE 		0
-#define TYPE_6_PURSUING		1
-#define TYPE_6_RETREATING	2
-#define GENERAL_DYING 		4
 
 #ifdef PLAYER_CAN_FIRE
 	unsigned char bullets_x [MAX_BULLETS];
@@ -157,14 +159,16 @@ unsigned char *_baddies_pointer;
 // sobre qué tipo de tile hay en cada casilla
 unsigned char map_attr [150];
 unsigned char map_buff [150] @ FREEPOOL;
+// Breakable walls/etc
+#ifdef BREAKABLE_WALLS
+	unsigned char brk_buff [150] @ 23297;
+#endif
 
 // posición del objeto (hotspot). Para no objeto,
 // se colocan a 240,240, que está siempre fuera de pantalla.
 unsigned char hotspot_x;
 unsigned char hotspot_y;
 unsigned char orig_tile;	// Tile que había originalmente bajo el objeto
-
-unsigned char pant_final;
 
 // Flags para scripting
 #ifndef MAX_FLAGS
@@ -179,26 +183,18 @@ unsigned char is_rendering;
 unsigned char level = 0;
 unsigned char maincounter;
 
-// Breakable walls/etc
-#ifdef BREAKABLE_WALLS
-unsigned char *brk_buff = 23296;
-#endif
-
 // Fire zone
 #ifdef ENABLE_FIRE_ZONE
-unsigned char fzx1, fzy1, fzx2, fzy2, f_zone_ac;
+	unsigned char fzx1, fzy1, fzx2, fzy2, f_zone_ac;
 #endif
 
 // Timer
 #ifdef TIMER_ENABLE
-typedef struct {
-	unsigned char on;
-	unsigned char t;
-	unsigned char frames;
-	unsigned char count;
-	unsigned char zero;
-} CTIMER;
-CTIMER ctimer;
+	unsigned char timer_on;
+	unsigned char timer_t;
+	unsigned char timer_frames;
+	unsigned char timer_count;
+	unsigned char timer_zero;
 #endif
 
 #if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
@@ -265,20 +261,5 @@ unsigned char cx1, cy1, cx2, cy2, at1, at2;
 unsigned char x0, y0, x1, y1;
 unsigned char ptx1, pty1, ptx2, pty2;
 unsigned char *_gp_gen;
-
-// Some declarations
-
-void draw_scr_background (void);
-void draw_scr (void);
-void espera_activa (int espera);
-void draw_scr (void);
-void blackout_area (void);
-void get_resource (unsigned char res, unsigned int dest);
-void espera_activa (int espera);
-unsigned char rand (void);
-void clear_sprites (void);
-void draw_coloured_tile (void);
-void draw_coloured_tile_gamearea (void);
-void enems_load (void);
 
 #include "my/ci/extra_vars.h"

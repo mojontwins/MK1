@@ -99,39 +99,41 @@ Para esto se usa otra de las utilidades de **MTE MK1**: `mapcnv`. Esta utilidad 
 La llamada a `mapcnv` está también incluida en `dev/compile.bat` pero tendremos que tunearla para adecuarla a nuestro juego, por lo que conviene saberse bien los parámetros que espera. Al igual que `ts2bin`, `mapcnv` te los chiva si lo ejecutas desde la ventana de linea de comandos sin especificar parámetros:
 
 ```
-$ mapcnv
+$ ..\utils\mapcnv.exe
 ** USO **
-   MapCnv archivo.map ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]
+   MapCnv archivo.map archivo.h ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]
 
    - archivo.map : Archivo de entrada exportado con mappy en formato raw.
+   - archivo.h : Archivo de salida
    - ancho_mapa : Ancho del mapa en pantallas.
    - alto_mapa : Alto del mapa en pantallas.
    - ancho_pantalla : Ancho de la pantalla en tiles.
    - alto_pantalla : Alto de la pantalla en tiles.
-   - tile_cerrojo : N║ del tile que representa el cerrojo.
-   - packed : Escribe esta opci¾n para mapas de la churrera de 16 tiles.
-   - fixmappy : Escribe esta opci¾n para arreglar lo del tile 0 no negro
+   - tile_cerrojo : Nº del tile que representa el cerrojo.
+   - packed : Escribe esta opción para mapas de la churrera de 16 tiles.
+   - fixmappy : Escribe esta opción para arreglar lo del tile 0 no negro
 
-Por ejemplo, para un mapa de 6x5 pantallas para la churrera:
+Por ejemplo, para un mapa de 6x5 pantallas para MTE MK1:
 
-   MapCnv mapa.map 6 5 15 10 15 packed
+   MapCnv mapa.map mapa.h 6 5 15 10 15 packed
 ```
 
 Expliquémoslos uno a uno:
 
 1. `archivo.map` es el archivo de entrada con nuestro mapa recién exportado de **Mappy**.
-2. `ancho_mapa` es el ancho del mapa en pantallas. En el caso de **Dogmole**, 8.
-3. `alto_mapa` es el alto del mapa en pantallas. En el caso de **Dogmole**, 3.
-4. `ancho_pant` es el ancho de cada pantalla en tiles. Para **MTE MK1**, siempre es 15.
-5. `alto_pant` es el alto de cada pantalla en tiles. Para **MTE MK1**, siempre es 10.
-6. `tile_cerrojo` es el número de tile que hace de cerrojo. Para **MTE MK1** siempre ha de ser el tile número 15. Si tu juego no usa cerrojos, pon aquí un valor fuera de rango como 99. Por ejemplo, **Zombie Calavera** no usa cerrojos, así que pusimos aquí un 99 al convertir su mapa. Nosotros sí tenemos cerrojos en Dogmole, así que pondremos un 15.
-7. `packed` se pone, tal cual, si nuestro tileset es de 16 tiles. Si usamos un tileset de 48 tiles, simplemente no ponemos nada. Si hacemos esto, habrá que configurar igualmente el motor activando `UNPACKED_MAP`, aunque eso ya lo veremos en el capítulo 7.
-8. `fixmappy` lo pondremos si nuestro tileset no tiene un primer tile todo a negro y pasamos de hacer un tileset especial, dejando que mappy lo insertase. Así `mapcnv` lo tiene en cuenta y hace sus fullerias.
+2. `archivo.h` es el nombre de archivo para la salida.
+3. `ancho_mapa` es el ancho del mapa en pantallas. En el caso de **Dogmole**, 8.
+4. `alto_mapa` es el alto del mapa en pantallas. En el caso de **Dogmole**, 3.
+5. `ancho_pant` es el ancho de cada pantalla en tiles. Para **MTE MK1**, siempre es 15.
+6. `alto_pant` es el alto de cada pantalla en tiles. Para **MTE MK1**, siempre es 10.
+7. `tile_cerrojo` es el número de tile que hace de cerrojo. Para **MTE MK1** siempre ha de ser el tile número 15. Si tu juego no usa cerrojos, pon aquí un valor fuera de rango como 99. Por ejemplo, **Zombie Calavera** no usa cerrojos, así que pusimos aquí un 99 al convertir su mapa. Nosotros sí tenemos cerrojos en Dogmole, así que pondremos un 15.
+8. `packed` se pone, tal cual, si nuestro tileset es de 16 tiles. Si usamos un tileset de 48 tiles, simplemente no ponemos nada. Si hacemos esto, habrá que configurar igualmente el motor activando `UNPACKED_MAP`, aunque eso ya lo veremos en el capítulo 7.
+9. `fixmappy` lo pondremos si nuestro tileset no tiene un primer tile todo a negro y pasamos de hacer un tileset especial, dejando que mappy lo insertase. Así `mapcnv` lo tiene en cuenta y hace sus fullerias.
 
 Por tanto, para convertir el mapa de **Dogmole**, tendremos que ejecutar `mapcnv` así:
 
 ```
-	..\utils\mapcnv.exe mapa.map 8 3 15 10 15 packed
+	..\utils\mapcnv.exe ..\map\mapa.map assets\mapa.h 8 3 15 10 15 packed > nul
 ```
 
 Es el momento de editar `dev/compile.bat`, ubicar la llamada a `mapcnv`, y modificar los valores del proyecto por defecto por los nuestros.
@@ -139,7 +141,7 @@ Es el momento de editar `dev/compile.bat`, ubicar la llamada a `mapcnv`, y modif
 Aunque no es necesario, podemos verlo en acción ejecutando esa linea desde dentro del directorio `dev/` de nuestro proyecto. Con esto, tras un misterioso y mágico proceso, obtendremos un archivo `mapa.h` listo para que el motor lo use.
 
 ```
-	$ ..\utils\mapcnv mapa.map 8 3 15 10 15 packed
+	$ ..\utils\mapcnv.exe ..\map\mapa.map assets\mapa.h 8 3 15 10 15 packed
 	Se escribió mapa.h con 24 pantallas empaquetadas (1800 bytes).
 	Se encontraron 0 cerrojos.
 ```
