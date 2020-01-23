@@ -17,4 +17,6 @@ Las cabecera será un tipo de datos compatible con el de los level bundles que r
 
 Los datos "de engine" de los niveles se colocarán en un `assets/levels.h` que se encargará de meter lo que vaya necesitando. Los arrays con los levelsets se pondrán en `my/levelset.h`.
 
+~~ 
 
+Necesito hacer enemigos disparadores. Pero en plan hiper sencillo. Voy a hacer unos *orthogonal cocos*. Si un enemigo tiene levantado el bit 5 (& 0x20) disparará su coco en la direccion que digan los bits 6 y 7 según se cumpla `(rand () & COCO_FREQ) == 1`. Tengo que hacerlo en modo super ahorro así que les meteré candela en ensamble directamente.

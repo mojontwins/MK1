@@ -199,6 +199,10 @@ Dibuja un tile del tileset en la rejilla del área de juego, lo invalida, y actu
 * `_t`: Número de tile (0-47).
 * `_n`: Valor para beh, que puede ser `behs [_t]` o cualquier otro valor.
 
+#### `void draw_decorations (void)`
+
+Sirve para pintar ristras de tiles (decoraciones). s. `draw_decorations` espera que `_gp_gen` apunte a una colección de decoraciones terminada en `0xff`. Podemos crear arrays con decoraciones en `my/ci/extra_vars.h`.
+
 #### `void print_number2 (void)`
 
 Imprime un número decimal de dos cifras en el color `HUD_INK` (definido en `my/config.h`). Internamente se utiliza para los marcadores. La función espera estos *pseudoparámetros*:
@@ -311,8 +315,23 @@ Efecto de borrado de pantalla bonito.
 
 ## Bajo nivel y splib2
 
-#### Imprimir un caracter
+### Imprimir un caracter
 
-#### Leer los controles
+### Leer los controles
 
+## Cómo hacer...
 
+### Ganar o perder
+
+Para hacer que el nivel termine satisfactoriamente habrá que...
+
+```c
+	success = 1;
+	playing = 0;
+```
+
+Para producir un *game over* inmediato, simplemente:
+
+```c 
+	success = playing = 0;
+```

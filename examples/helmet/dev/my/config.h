@@ -117,13 +117,13 @@
 // Scripting
 // ---------
 
-#define ACTIVATE_SCRIPTING					// Activates msc scripting and flag related stuff.
-#define MAX_FLAGS 					32
+//#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
+#define MAX_FLAGS 					2
 //#define SCRIPTING_DOWN					// Use DOWN as the action key.
-#define SCRIPTING_KEY_M						// Use M as the action key instead.
+//#define SCRIPTING_KEY_M					// Use M as the action key instead.
 //#define SCRIPTING_KEY_FIRE				// User FIRE as the action key instead.
 //#define ENABLE_EXTERN_CODE				// Enables custom code to be run from the script using EXTERN n
-#define ENABLE_FIRE_ZONE					// Allows to define a zone which auto-triggers "FIRE"
+//#define ENABLE_FIRE_ZONE					// Allows to define a zone which auto-triggers "FIRE"
 
 // Timer
 // -----
@@ -237,9 +237,9 @@
 
 // Text
 
-#define LINE_OF_TEXT				0		// If defined, scripts can show text @ Y = #
-#define LINE_OF_TEXT_X				1		// X coordinate.
-#define LINE_OF_TEXT_ATTR 			71		// Attribute
+//#define LINE_OF_TEXT				0		// If defined, scripts can show text @ Y = #
+//#define LINE_OF_TEXT_X			1		// X coordinate.
+//#define LINE_OF_TEXT_ATTR 		71		// Attribute
 
 // Graphic FX, uncomment which applies...
 

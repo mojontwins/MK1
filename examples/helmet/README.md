@@ -84,6 +84,36 @@ Abrimos el `config.h` original y modificamos `my/config.h` con los valores que a
 
 ### Compilar y probar.
 
-## Segundo hito: Multinivel
+## Segundo hito: pasar a CIP
+
+Necesito liberar todo el espacio que pueda, por lo que voy a pasar la lógica del juego de scripting a CIP.
+
+El primer paso será comentar `ACTIVATE_SCRIPTING` en `my/config.h`. Luego habrá que ir siguiendo el script para ir replicando la funcionalidad en código C.
+
+### `ENTERING_GAME`
+
+Tenemos que empezar poniendo el flag 1 a 0. También pondremos el 2, que es el que controla la venta de la moto seminueva. Añadimos este código en `my/ci/entering_game.h`.
+
+### `ENTERING ANY`
+
+En esta sección se imprimen mensajes diciendo lo que hay que hacer, dependiendo del valor del flag 1. Añadimos código para esto en `my/ci/entering_screen.h`.
+
+### `ENTERING SCREEN n`
+
+En el mismo archivo rellenamos la funcionalidad de las secciones `ENTERING SCREEN n`.  En primer lugar, pintar las decoraciones (ordenador, bombas, moto). Creamos los arrays para estas decoraciones en `my/ci/extra_vars.h`. 
+
+Finalmente haremos la comprobación de que hemos llegado al principio con la misión cumplida.
+
+### PRESS-FIRE AT SCREEN n
+
+Tendremos que detectar que el jugador se acerca al ordenador para poner las bombas. Lo haré a lo fácil: cuando `gpy` entre en el tile 5 (sea menor que 96) lanzaré la animación. Todo esto en `my/ci/extra_routines.h`.
+
+Para la animación voy a hacer las cosas de forma inteligente: voy a emplear el array que tengo con las decos para las bombas y lo voy a recorrer haciendo la animación. Así me ahorro un porrón de código repe.
+
+### Comparamos
+
+Con esto hemos pasado de 31723 bytes a 30668, lo cual nos da más de 1Kb extra. En total 61440 - 24000 - 30668 = 6772 bytes para lo que nos queda por meter.
+
+## Tercer hito: Multinivel
 
 Ahora es cuando nos ponemos a generar la versión multinivel de nuestro güego. Lo primero que haremos será hacernos un archivo `build_assets.bat` en `dev/` que se encargue de construirnos todas las cosas. Generaremos un montón de binarios que colocaremos en `bin/` y que posteriormente veremos como incorporar en nuestro juego. Luego tendremos que modificar también `compile.bat` para quitar la generación de los archivos de mapa/cerrojos, enemigos/hotspots y para modificar la generación del tileset para que únicamente incluya la fuente.
