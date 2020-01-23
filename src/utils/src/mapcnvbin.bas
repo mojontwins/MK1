@@ -9,20 +9,23 @@ End Sub
 
 sub usage () 
 	Print "** USO **"
-	Print "   MapCnvBin archivo.map ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]"
+	Print "   MapCnvBin archivo.map archivo.bin ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]"
 	Print
 	Print "   - archivo.map : Archivo de entrada exportado con mappy en formato raw."
+	Print "   - archivo.bin : Archivo de salida"
 	Print "   - ancho_mapa : Ancho del mapa en pantallas."
 	Print "   - alto_mapa : Alto del mapa en pantallas."
 	Print "   - ancho_pantalla : Ancho de la pantalla en tiles."
 	Print "   - alto_pantalla : Alto de la pantalla en tiles."
-	Print "   - tile_cerrojo : Nº del tile que representa el cerrojo."
-	Print "   - packed : Escribe esta opción para mapas de la churrera de 16 tiles."
-	Print "   - fixmappy : Escribe esta opción para arreglar lo del tile 0 no negro"
+	Print "   - tile_cerrojo : N§ del tile que representa el cerrojo."
+	Print "   - packed : Escribe esta opci¢n para mapas de la churrera de 16 tiles."
+	Print "   - fixmappy : Escribe esta opci¢n para arreglar lo del tile 0 no negro"
 	Print
-	Print "Por ejemplo, para un mapa de 6x5 pantallas para la churrera:"
+	Print "Por ejemplo, para un mapa de 6x5 pantallas para MTE MK1:"
 	Print
-	Print "   MapCnv mapa.map 6 5 15 10 15 packed"
+	Print "   MapCnvBin mapa.map mapa.bin 6 5 15 10 15 packed"
+	Print
+	Print "Output will contain the map, and then the bolts"
 end sub
 
 Function inCommand (spec As String) As Integer
@@ -55,21 +58,22 @@ Dim As MyBolt Bolts (100)
 WarningMessage ()
 
 if 	Command (1) = "" Or _
-	Val (Command (2)) <= 0 Or _
+	Command (2) = "" Or _
 	Val (Command (3)) <= 0 Or _
 	Val (Command (4)) <= 0 Or _
 	Val (Command (5)) <= 0 Or _
-	Val (Command (6)) <= 0 Then
+	Val (Command (6)) <= 0 Or _
+	Val (Command (7)) <= 0 Then
 	
 	usage ()
 	end
 End If
 
-map_w = Val (Command (2))
-map_h = Val (Command (3))
-scr_w = Val (Command (4))
-scr_h = Val (Command (5))
-bolt = Val (Command (6))
+map_w = Val (Command (3))
+map_h = Val (Command (4))
+scr_w = Val (Command (5))
+scr_h = Val (Command (6))
+bolt = Val (Command (7))
 
 If InCommand ("packed") then
 	packed = 1
@@ -102,7 +106,7 @@ close f
 
 ' Construimos el nuevo mapa mientras rellenamos el array de cerrojos
 
-open "mapa.bin" for binary as #f
+open Command (2) for output as #f
 
 i = 0:b = 0
 
@@ -146,7 +150,7 @@ close #f
 ? b
 
 if i > 0 Then	
-	open "bolts.bin" for binary as #f
+	
 	d = i
 	put #f, , d
 	for j = 0 to i - 1
@@ -160,7 +164,6 @@ if i > 0 Then
 		put #f, , d
 	next j
 end if
-close #f
 
 if packed = 0 then 
 	Print "Se escribió mapa.bin con " + trim(str(map_h*map_w)) + " pantallas (" + trim(str(map_h*map_w*scr_h*scr_w)) + " bytes)."
