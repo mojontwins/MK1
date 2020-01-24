@@ -29,9 +29,9 @@ echo Importando GFX
 ..\..\..\src\utils\png2scr.exe ..\gfx\marco.png ..\gfx\marco.scr > nul
 ..\..\..\src\utils\png2scr.exe ..\gfx\ending.png ..\gfx\ending.scr > nul
 ..\..\..\src\utils\png2scr.exe ..\gfx\loading.png loading.bin > nul
-..\..\..\src\utils\apack.exe ..\gfx\title.scr title.bin > nul
-..\..\..\src\utils\apack.exe ..\gfx\marco.scr marco.bin > nul
-..\..\..\src\utils\apack.exe ..\gfx\ending.scr ending.bin > nul
+..\..\..\src\utils\apultra.exe ..\gfx\title.scr title.bin > nul
+..\..\..\src\utils\apultra.exe ..\gfx\marco.scr marco.bin > nul
+..\..\..\src\utils\apultra.exe ..\gfx\ending.scr ending.bin > nul
 
 echo Compilando guego
 zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul

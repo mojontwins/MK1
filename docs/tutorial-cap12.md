@@ -238,4 +238,4 @@ Me hago cargo de que este capítulo es bastante árido, pero espero que sirva co
 
 Tenemos el scripting para hacer muchas cosas, pero se puede lograr mucho más mediante puntos de inyección de código (por ejemplo, añadir nuevos tipos de enemigos o incluso nuevos motores de movimiento para el jugador). Obviamente, es más complicado usar los puntos de inyección de código, sobre todo si no se conoce bien cómo funciona el motor por dentro.
 
-Otra ventaja de los puntos de inyección de código es que, para juegos con scripts pequeños, generalmente ahorran bastante espacio. Quédate con este dato: [en el momento de elaborar este tutorial] usando scripting, dogmole ocupa 28677 bytes, y usando inyección de código ocupa 27459, ¡que son 1218 bytes menos!
+Otra ventaja de los puntos de inyección de código es que, para juegos con scripts pequeños, generalmente ahorran bastante espacio. Quédate con este dato: [en el momento de elaborar este tutorial] usando scripting, dogmole ocupa 28519 bytes, y usando inyección de código ocupa 27301, ¡que son 1218 bytes menos!
