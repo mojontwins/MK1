@@ -105,6 +105,9 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #ifdef PLAYER_CAN_FIRE
 	#include "engine/bullets.h"
 #endif
+#ifdef ENABLE_SIMPLE_COCOS
+	#include "engine/simple_cocos.h"
+#endif
 #include "engine.h"
 #include "engine/player.h"
 #include "engine/enengine.h"

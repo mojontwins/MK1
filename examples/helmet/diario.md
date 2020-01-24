@@ -25,4 +25,16 @@ Necesito hacer enemigos disparadores. Pero en plan hiper sencillo. Voy a hacer u
 
 No voy a gastar un bit sólo para esto, con todo lo que implica. Vamos a meter otro numerito, el tipo 5, que quedó libre:
 
-XddM0101, con dd la dirección.
+ddXM0101, con dd la dirección.
+
+~~
+
+Los tipos sería, por tanto, si ordenamos dd como arriba, derecha, abajo, izquierda:
+
+|t|bin|khe
+|---|---|---
+|05|**00**00 0101|arriba
+|45|**01**00 0101|derecha
+|85|**10**00 0101|abajo
+|C5|**11**00 0101|izquierda
+

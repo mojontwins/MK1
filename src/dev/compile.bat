@@ -1,6 +1,11 @@
 @echo off
 
+if [%1]==[help] goto :help
+
 set game=lala_beta
+
+if [%1]==[justcompile] goto :compile
+if [%1]==[clean] goto :clean
 
 echo Compilando script
 cd ..\script
@@ -10,9 +15,10 @@ copy msc-config.h ..\dev\my > nul
 copy scripts.bin ..\dev\ > nul
 cd ..\dev
 
+if [%1]==[justscripts] goto :compile
+
 echo Convirtiendo mapa
 ..\utils\mapcnv.exe ..\map\mapa.map assets\mapa.h 6 5 15 10 15 packed > nul
-
 
 echo Convirtiendo enemigos/hotspots
 ..\utils\ene2h.exe ..\enems\enems.ene assets\enems.h
@@ -33,6 +39,9 @@ echo Importando GFX
 ..\utils\apultra.exe ..\gfx\marco.scr marco.bin > nul
 ..\utils\apultra.exe ..\gfx\ending.scr ending.bin > nul
 
+if [%1]==[justassets] goto :end
+
+:compile
 echo Compilando guego
 zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 ..\utils\printsize.exe %game%.bin
@@ -45,6 +54,10 @@ rem cambia LOADER por el nombre que quieres que salga en Program:
 ..\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
 copy /b loader.tap + screen.tap + main.tap %game%.tap > nul
 
+if [%1]==[justcompile] goto :end
+if [%1]==[noclean] goto :end
+
+:clean
 echo Limpiando
 del loader.tap > nul
 del screen.tap > nul
@@ -52,4 +65,10 @@ del main.tap > nul
 del ..\gfx\*.scr > nul
 del *.bin > nul
 
+goto :end 
+
+:help
+echo "compile.bat help|justcompile|clean|justscripts|justassets|noclean"
+
+:end
 echo Hecho!

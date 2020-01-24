@@ -19,4 +19,5 @@
 [X] Controlar todas las salidas de MSC3, no solo "WIN" y "GAME OVER", sino la que lleva al final directamente.
 [X] Llamar a `draw_decorations` desde msc.h
 [ ] Full bootèe engine
-[ ] Sustituir aplib por apultra.
+[X] Sustituir aplib por apultra.
+[ ] Sacar malotes.life del struct?

@@ -2,6 +2,7 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 #define FIXBITS 6	// DON'T touch this
+#define MAX_ENEMS 3
 
 #asm
 	.vpClipStruct defb VIEWPORT_Y, VIEWPORT_Y + 20, VIEWPORT_X, VIEWPORT_X + 30
@@ -35,9 +36,12 @@ unsigned char safe_byte @ 23296;
 // Globales muy globalizadas
 
 struct sp_SS *sp_player;
-struct sp_SS *sp_moviles [3];
+struct sp_SS *sp_moviles [MAX_ENEMS];
 #ifdef PLAYER_CAN_FIRE
 	struct sp_SS *sp_bullets [MAX_BULLETS];
+#endif
+#ifdef ENABLE_ORTHOSHOOTERS
+	struct sp_SS *sp_cocos [MAX_ENEMS];
 #endif
 
 unsigned char enoffs;
@@ -107,24 +111,24 @@ const unsigned char *spacer = "            ";
 
 unsigned char enit;
 
-unsigned char en_an_base_frame [3];
-unsigned char en_an_frame [3];
-unsigned char en_an_count [3];
-unsigned char *en_an_current_frame [3], *en_an_next_frame [3];
-unsigned char en_an_state [3];
+unsigned char en_an_base_frame [MAX_ENEMS];
+unsigned char en_an_frame [MAX_ENEMS];
+unsigned char en_an_count [MAX_ENEMS];
+unsigned char *en_an_current_frame [MAX_ENEMS], *en_an_next_frame [MAX_ENEMS];
+unsigned char en_an_state [MAX_ENEMS];
 
 #if defined (ENABLE_FANTIES)
-	int en_an_x [3];
-	int en_an_y [3];
-	int en_an_vx [3];
-	int en_an_vy [3];
+	int en_an_x [MAX_ENEMS];
+	int en_an_y [MAX_ENEMS];
+	int en_an_vx [MAX_ENEMS];
+	int en_an_vy [MAX_ENEMS];
 	int _en_an_x, _en_an_y, _en_an_vx, _en_an_vy;
 #endif
 
 #ifdef ENABLE_PURSUERS
-	unsigned char en_an_alive [3];
-	unsigned char en_an_dead_row [3];
-	unsigned char en_an_rawv [3];
+	unsigned char en_an_alive [MAX_ENEMS];
+	unsigned char en_an_dead_row [MAX_ENEMS];
+	unsigned char en_an_rawv [MAX_ENEMS];
 #endif
 
 unsigned char _en_x, _en_y;
@@ -139,7 +143,6 @@ unsigned char *_baddies_pointer;
 	unsigned char _en_cx, _en_cy;
 #endif
 
-
 #ifdef PLAYER_CAN_FIRE
 	unsigned char bullets_x [MAX_BULLETS];
 	unsigned char bullets_y [MAX_BULLETS];
@@ -153,6 +156,11 @@ unsigned char *_baddies_pointer;
 	unsigned char _b_estado;
 	unsigned char b_it, _b_x, _b_y;
 	signed char _b_mx, _b_my;
+#endif
+
+#ifdef ENABLE_SIMPLE_COCOS
+	unsigned char cocos_x [MAX_ENEMS], cocos_y [MAX_ENEMS];
+	signed char cocos_mx [MAX_ENEMS], cocos_my [MAX_ENEMS];
 #endif
 
 // atributos de la pantalla: Contiene información
@@ -261,5 +269,11 @@ unsigned char cx1, cy1, cx2, cy2, at1, at2;
 unsigned char x0, y0, x1, y1;
 unsigned char ptx1, pty1, ptx2, pty2;
 unsigned char *_gp_gen;
+
+#if defined ENABLE_SIMPLE_COCOS
+	// UP RIGHT DOWN LEFT
+	const signed char _dx [] = { 0, COCOS_V, 0, -COCOS_V };
+	const signed char _dy [] = { -COCOS_V, 0, COCOS_V, 0 };
+#endif
 
 #include "my/ci/extra_vars.h"
