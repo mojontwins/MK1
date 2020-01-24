@@ -315,9 +315,92 @@ Efecto de borrado de pantalla bonito.
 
 ## Bajo nivel y splib2
 
+Iré apuntando aquí cosas de splib2 que piense que pueden ser interesantes a la hora de escribir tu propio código en los puntos de inyección. Generalmente usarás sólo la API del motor, pero es posible que haya que afinar en un momento dado.
+
+### Descripción muy general de cómo funciona splib2
+
+O al menos la parte gráfica. Y muy a grosso modo.
+
+**splib2** divide la pantalla en celdas de caracter, esto es, en una rejilla de 32x24 celdas. En el totete de **splib2** cada celda tiene asignadas cuatro cosas: un número de carácter o *patrón* de fondo, un atributo para ese *patrón*, un puntero a una lista de sprites que lo pisan (que puede ser nulo), y un bit que indica si es *válido*. Todas las operaciones se hacen sobre estas estructuras de datos. Para mostrar los resultados llamamos a una función que actualiza la pantalla **enviando a la misma únicamente las celdas de la rejilla que hayan sido *invalidadas*** usando precisamente el bit que hemos nombrado antes.
+
+Move un sprite por la pantalla, por ejemplo, invalida celdas: las que pisaba el sprite antes de moverse, y las que pisa después. De esa forma, en la siguiente actualización, se redibujarán todas esas celdas y parecerá que el sprite se ha movido sin borrar el fondo.
+
+A la hora de pintar tiles del motor, para no tener que hacer cálculos para cada patrón del tile, primero se modifican las estructuras y luego se invalida el cuadro de un plumazo. Es más, a la hora de pintar una nueva pantalla se escriben todos los *patrones* y atributos en las estructuras de **splib2** y luego se invalida toda la pantalla de una vez, ganando mucha velocidad. Es por eso por lo que en la lista de funciones has visto muchas en las que se indica que *no se invalida* y hay que llamar a una función de invalidación si se quiere ver los cambios reflejados en pantalla.
+
+**splib2** está escrita en ensamble y es bastante potente, pero para que sea fácil de usar desde un programa C viene con una interfaz C que a veces mete bastante overhead (por ejemplo en `sp_moveSprAbs` y otras funciones que tienen muchos parámetros) por lo que para, ganar ciclos y espacio, pasamos de la interfaz C en **MTE MK1** y usamos directamente las rutinas en ensamble. Esto implica siempre preparar los parámetros a mano y meterlos en registros desde ensamble en linea.
+
 ### Imprimir un caracter
 
+Para imprimir un carácter se empleaba la función `sp_PrintAtInv`, pero se ha tratado de prescindir de la interfaz C de **splib2** para las funciones más llamadas, por lo que para imprimir un carácter o *patrón* tenemos que usar directamente las tripas de *splib2*.
+
+#### Necesitamos invalidar el carácter impreso
+
+Para ello llamaremos a la rutina `spPrintAtInv` que recibe los siguientes parámetros en registros:
+
+|Reg.|Parámetro
+|---|---
+|A|Fila (0..23)
+|C|Columna (0..31)
+|D|Atributo
+|E|Nº de *patrón*
+
+Por ejemplo, para imprimir una A color azul sobre cyan en la posición 7, 8:
+
+```c
+	#asm
+			ld  a, 8
+			ld  c, 7
+			ld  d, 5*8+1
+			ld  e, 33
+
+			call spPrintAtInv
+	#endasm
+```
+
+#### Vamos a imprimir muchos caracteres juntos
+
+En ese caso lo mejor es atacar directamente a las estructuras de datos de **splib2** y luego invalidar. La estructura de datos que contiene caracters, atributos y punteros a listas de sprites es una tabla de 32x24 celdas de 4 bytes cada una. Para imprimir un caracter en la tabla habrá que moverse a la celda correcta y escribir primero el atributo y luego el número de patrón, dejando sin tocar los otros dos bytes.
+
+Para encontrar la posición donde tenemos que escribir dadas unas coordenadas podemos llamar a la rutina `SPCompDListAddr`, que recibe estos parámetros:
+
+|Reg.|Parámetro
+|---|---
+|A|Fila (0..23)
+|C|Columna (0..31)
+
+Que devolverá la dirección de la celda en `HL`. Una vez obtenida, podemos iterar y movernos por el buffer incrementando o decrementando el puntero de forma correcta. Puedes ver las funciones en `printer.h` para ver cómo se usa.
+
+Una vez modificado el buffer no tenemos más que invalidar el rectángulo. Para eso utilizamos la rutina `spInvalidate`, que recibe los siguientes parámetros:
+
+|Reg.|Parámetro
+|---|---
+|B|Fila esquina superior izquierda (0..23)
+|C|Columna esquina superior izquierda (0..31)
+|D|Fila esquina inferior derecha (0..23)
+|E|Columna esquina inferior derecha (0..31)
+|IY|Puntero al rectángulo de clipping
+
+Para `IY` tenemos defnidiso dos rectángulos: uno a toda la pantalla (`fsClipStruct`) y otro sólo para el área de juego (`vpClipStruct`).
+
 ### Leer los controles
+
+En cada frame leemos los controles y los escribimos en la variable `pad0`. Los controles pulsados se pueden evaluar mirando los bits que estén a 0. **splib2** define una serie de constantes para hacer esto más sencillo:
+
+|Constante|Significado
+|---|---
+|`sp_LEFT`|izquierda
+|`sp_RIGHT`|derecha
+|`sp_UP`|arriba
+|`sp_DOWN`|abajo
+|`sp_FIRE`|disparo
+
+Por ejemplo, para comprobar si se está pulsando 'abajo':
+
+```c
+	if ((pad0 & sp_DOWN) == 0) {
+		// Estamos pulsando "abajo"
+	}
+```
 
 ## Cómo hacer...
 
@@ -335,3 +418,7 @@ Para producir un *game over* inmediato, simplemente:
 ```c 
 	success = playing = 0;
 ```
+
+## ¿Algo más?
+
+Si crees que debería aparecer algo que no está dímelo.
