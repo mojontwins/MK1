@@ -79,7 +79,7 @@
 //#define FANTIES_LIFE_GAUGE		10		// Amount of shots needed to kill flying enemies.
 //#define FANTIES_TYPE_HOMING				// Unset for simple fanties.
 
-#define ENABLE_ORTHOSHOOTERS				// If defined, orthoshooters are active
+//#define ENABLE_ORTHOSHOOTERS				// If defined, orthoshooters are active
 #define ORTHOSHOOTERS_FREQ 			(rand()&15)
 #define ORTHOSHOOTERS_BASE_CELL 	99 		// 99 means DONT SHOW!
 
