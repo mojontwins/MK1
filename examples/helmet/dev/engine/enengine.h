@@ -116,7 +116,7 @@ void enems_load (void) {
 	// Movemos y cambiamos a los enemigos según el tipo que tengan
 	enoffs = n_pant * 3;
 	
-	for (enit = 0; enit < 3; ++ enit) {
+	for (enit = 0; enit < MAX_ENEMS; ++ enit) {
 		en_an_frame [enit] = 0;
 		en_an_state [enit] = 0;
 		en_an_count [enit] = 3;
@@ -141,6 +141,15 @@ void enems_load (void) {
 			case 4:
 				en_an_base_frame [enit] = (malotes [enoffsmasi].t - 1) << 1;
 				break;
+
+			#ifdef ENABLE_ORTHOSHOOTERS
+				case 5:
+					en_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;
+					#if ORTHOSHOOTERS_BASE_CELL==99
+						en_an_next_frame [enit] = sprite_18_a;
+					#endif
+					break;
+			#endif
 
 			#ifdef ENABLE_FANTIES
 				case 6:
@@ -191,7 +200,7 @@ void enems_kill (void) {
 void enems_move (void) {
 	tocado = p_gotten = ptgmx = ptgmy = 0;
 
-	for (enit = 0; enit < 3; enit ++) {
+	for (enit = 0; enit < MAX_ENEMS; enit ++) {
 		active = 0;
 		enoffsmasi = enoffs + enit;
 
@@ -300,6 +309,9 @@ void enems_move (void) {
 			case 3:
 			case 4:
 				#include "engine/enem_mods/enem_type_lineal.h"
+				#ifdef ENABLE_ORTHOSHOOTERS
+					#include "engine/enem_mods/enem_type_orthoshooters.h"
+				#endif
 				break;
 
 			#ifdef ENABLE_FANTIES
@@ -321,11 +333,58 @@ void enems_move (void) {
 		
 		if (active) {			
 			// Animate
-			en_an_count [enit] ++; 
-			if (en_an_count [enit] == 4) {
-				en_an_count [enit] = 0;
-				en_an_frame [enit] = !en_an_frame [enit];
-				en_an_next_frame [enit] = enem_frames [en_an_base_frame [enit] + en_an_frame [enit]];
+			if (en_an_base_frame [enit] != 99) {
+				/*
+				en_an_count [enit] ++; 
+				if (en_an_count [enit] == 4) {
+					en_an_count [enit] = 0;
+					en_an_frame [enit] = !en_an_frame [enit];
+					en_an_next_frame [enit] = enem_frames [en_an_base_frame [enit] + en_an_frame [enit]];
+				}
+				*/
+				#asm
+						ld  bc, (_enit)
+						ld  b, 0
+
+						ld  hl, _en_an_count
+						add hl, bc
+						ld  a, (hl)
+						inc a
+						ld  (hl), a
+
+						cp  4
+						jr  nz, _enems_move_update_frame_done
+
+						xor a
+						ld  (hl), a
+
+						ld  hl, _en_an_frame
+						add hl, bc
+						ld  a, (hl)
+						xor 1
+						ld  (hl), a
+						
+						ld  hl, _en_an_base_frame
+						add hl, bc
+						ld  d, (hl)
+						add d 							; A = en_an_base_frame [enit] + en_an_frame [enit]]
+
+						sla c 							; Index 16 bits; it never overflows.
+						ld  hl, _en_an_next_frame
+						add hl, bc
+						ex de, hl 						; DE -> en_an_next_frame [enit]
+
+						sla a
+						ld  c, a
+						ld  b, 0
+
+						ld  hl, _enem_frames
+						add hl, bc 						; HL -> enem_frames [en_an_base_frame [enit] + en_an_frame [enit]]
+
+						ldi
+						ldi 							; Copy 16 bit
+					._enems_move_update_frame_done
+				#endasm
 			}
 			
 			// Collide with player

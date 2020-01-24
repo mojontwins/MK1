@@ -20,3 +20,9 @@ Los datos "de engine" de los niveles se colocarán en un `assets/levels.h` que s
 ~~ 
 
 Necesito hacer enemigos disparadores. Pero en plan hiper sencillo. Voy a hacer unos *orthogonal cocos*. Si un enemigo tiene levantado el bit 5 (& 0x20) disparará su coco en la direccion que digan los bits 6 y 7 según se cumpla `(rand () & COCO_FREQ) == 1`. Tengo que hacerlo en modo super ahorro así que les meteré candela en ensamble directamente.
+
+~~ 
+
+No voy a gastar un bit sólo para esto, con todo lo que implica. Vamos a meter otro numerito, el tipo 5, que quedó libre:
+
+XddM0101, con dd la dirección.
