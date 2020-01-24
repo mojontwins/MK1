@@ -457,7 +457,7 @@ void main (void) {
 			wyz_stop_sound ();
 		#endif
 
-		clear_sprites ();
+		cortina ();
 		sp_UpdateNow ();
 
 		#include "my/ci/after_game_loop.h"
@@ -503,5 +503,7 @@ void main (void) {
 			}
 			cortina ();
 		#endif
+
+		clear_sprites ();
 	}
 }

@@ -148,8 +148,7 @@ void espera_activa (int espera) {
 #endif
 
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
-	
-void process_tile (void) {
+	void process_tile (void) {
 		#ifdef PLAYER_PUSH_BOXES
 			#ifdef FIRE_TO_PUSH
 				#ifdef USE_TWO_BUTTONS
