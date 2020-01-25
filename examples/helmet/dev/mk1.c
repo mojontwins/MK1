@@ -47,41 +47,22 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 
 #ifdef MODE_128K
 	#include "128k.h"
+	#include "librarian.h"
 #endif
 
 #include "aplib.h"
 #include "pantallas.h"
 
-#ifdef MODE_128K
-	#include "librarian.h"
-	
-	#ifdef COMPRESSED_LEVELS
-		#include "levels128.h"
-	#else
-		#include "assets/mapa.h"
-		#include "assets/tileset.h"
-		#include "assets/sprites.h"
-		#include "assets/extrasprites.h"
-		#include "assets/enems.h"
-	#endif
-
+#ifdef COMPRESSED_LEVELS
+	#include "assets/levels.h"
+	#include "my/levelset.h"
 #else
-
-	#ifdef COMPRESSED_LEVELS
-		#include "levels.h"
-	#else
-		#include "assets/mapa.h"
-	#endif
-
+	#include "assets/mapa.h"
 	#include "assets/tileset.h"
+	#include "assets/enems.h"
 	#include "assets/sprites.h"
-	#include "assets/extrasprites.h"
-	
-	#ifndef COMPRESSED_LEVELS
-		#include "assets/enems.h"
-	#endif
-
 #endif
+#include "assets/extrasprites.h"
 
 #ifdef MODE_128K
 	#include "wyzplayer.h"

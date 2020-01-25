@@ -1,4 +1,4 @@
-' Buildlevel v0.4 20191212 [MK2 1.0+]
+' Buildlevel v0.5 20200125 [MTE MK1 5.0+]
 ' Copyleft 2015 by The Mojon Twins
 
 ' Compile with fbc buildlevel.bas cmdlineparser.bas
@@ -50,7 +50,7 @@ Sub usage
 	Print "ENEMIES"
 	Print ""
 	Print "enemsfile      enems.ene file"
-	Print "nohotspots     (without value) If MK2 is configured without hotspots."	
+	Print "nohotspots     (without value) If MTE MK1 is configured without hotspots."	
 	Print ""
 	Print "HEADER STUFF"
 	Print ""
@@ -189,8 +189,8 @@ Dim As Integer nSprites
 
 '' DO 
 
-Print "buildlevel v0.4 20191212"
-Print "Builds a level bundle for MK2 1.0+"
+Print "buildlevel v0.5 20200125"
+Print "Builds a level bundle for MTE MK1 5.0+"
 Print ""
 
 ' Get command line parameters parsed.
@@ -563,58 +563,6 @@ Puts ("")
 
 totalsize = totalsize + byteswritten
 
-'' ***************
-'' ** SPRITESET **
-'' ***************
-
-Puts ("reading spriteset")
-img = png_load (sclpGetValue ("spritesfile"))
-Puts ("    spriteset filename = " & sclpGetValue ("spritesfile"))
-
-Puts ("converting & writing spriteset")
-Puts ("    sprite count = " & nSprites)
-
-x = 0
-y = 0
-byteswritten = 0
-For idx = 0 To 7
-	d = 0: Put #fout, , d
-	d = 255: Put #fout, , d
-	byteswritten = byteswritten + 2
-Next idx
-For idx = 0 To nSprites - 1
-	' First & second columns
-	For xx = 0 To 8 Step 8
-		For yy = 0 To 15
-			d = getBitPattern (img, x + xx, y + yy)
-			Put #fout, , d
-			d = getBitPattern (img, x + xx + 16, y + yy)
-			Put #fout, , d
-			byteswritten = byteswritten + 2
-		Next yy
-		For yy = 0 To 7
-			d = 0
-			Put #fout, , d
-			d = 255
-			Put #fout, , d
-			byteswritten = byteswritten + 2
-		Next yy
-	Next xx	
-	' Third column
-	For yy = 0 to 23
-		d = 0
-		Put #fout, , d
-		d = 255
-		Put #fout, , d
-		byteswritten = byteswritten + 2
-	Next yy
-	x = x + 32: If x = 256 Then x = 0: y = y + 16
-Next idx
-Puts ("    " & byteswritten & " bytes written in " & nSprites & " frames")
-Puts ("")
-
-totalsize = totalsize + byteswritten
-
 '' ********************
 '' ** ENEMS/HOTSPOTS **
 '' ********************
@@ -719,6 +667,58 @@ Open sclpGetValue ("behsfile") For Input as #f
 Close #f
 Puts ("    " & byteswritten & " bytes written.")
 Puts ("")
+totalsize = totalsize + byteswritten
+
+'' ***************
+'' ** SPRITESET **
+'' ***************
+
+Puts ("reading spriteset")
+img = png_load (sclpGetValue ("spritesfile"))
+Puts ("    spriteset filename = " & sclpGetValue ("spritesfile"))
+
+Puts ("converting & writing spriteset")
+Puts ("    sprite count = " & nSprites)
+
+x = 0
+y = 0
+byteswritten = 0
+For idx = 0 To 7
+	d = 0: Put #fout, , d
+	d = 255: Put #fout, , d
+	byteswritten = byteswritten + 2
+Next idx
+For idx = 0 To nSprites - 1
+	' First & second columns
+	For xx = 0 To 8 Step 8
+		For yy = 0 To 15
+			d = getBitPattern (img, x + xx, y + yy)
+			Put #fout, , d
+			d = getBitPattern (img, x + xx + 16, y + yy)
+			Put #fout, , d
+			byteswritten = byteswritten + 2
+		Next yy
+		For yy = 0 To 7
+			d = 0
+			Put #fout, , d
+			d = 255
+			Put #fout, , d
+			byteswritten = byteswritten + 2
+		Next yy
+	Next xx	
+	' Third column
+	For yy = 0 to 23
+		d = 0
+		Put #fout, , d
+		d = 255
+		Put #fout, , d
+		byteswritten = byteswritten + 2
+	Next yy
+	x = x + 32: If x = 256 Then x = 0: y = y + 16
+Next idx
+Puts ("    " & byteswritten & " bytes written in " & nSprites & " frames")
+Puts ("")
+
 totalsize = totalsize + byteswritten
 
 Close #fout
