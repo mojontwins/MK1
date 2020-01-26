@@ -8,15 +8,24 @@ void prepare_level (void) {
 		gpy = level_data->ini_y << 4; p_y = gpy << 6;
 
 		#ifdef ACTIVATE_SCRIPTING
-			main_script_offset = level_data->script_offset;
+			main_script_offset = levels [level]->script_offset;
 		#endif
 	#else
+		unpack ((unsigned int) levels [level].c_map_bolts, (unsigned int) (mapa));
+		unpack ((unsigned int) levels [level].c_tileset, (unsigned int) (tileset));
+		unpack ((unsigned int) levels [level].c_enems_hotspots, (unsigned int) (malotes));
+		unpack ((unsigned int) levels [level].c_behs, (unsigned int) (behs));
 
-		unpack ((unsigned int) levelset [level].leveldata_c, MAP_DATA);
-		unpack ((unsigned int) levelset [level].tileset_c, (unsigned int) (tileset));
-		unpack ((unsigned int) levelset [level].spriteset_c, (unsigned int) (sprite_1_a - 16));
-		n_pant = levelset [level].ini_pant;
-		gpx = level_data->ini_x << 4; p_x = gpx << 6;
-		gpy = level_data->ini_y << 4; p_y = gpy << 6;
+		#ifdef PER_LEVEL_SPRITESET
+			unpack ((unsigned int) levels [level].c_sprites, (unsigned int) (sprites));
+		#endif
+		
+		n_pant = levels [level].scr_ini;
+		gpx = levels [level].ini_x << 4; p_x = gpx << 6;
+		gpy = levels [level].ini_y << 4; p_y = gpy << 6;
+
+		#ifdef ACTIVATE_SCRIPTING
+			main_script_offset = levels [level]->script_offset;
+		#endif
 	#endif
 }

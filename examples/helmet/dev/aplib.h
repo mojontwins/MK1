@@ -156,7 +156,7 @@ unsigned int ram_destination;
 #ifdef COMPRESSED_LEVELS
 	#ifndef MODE_128K
 		void unpack (unsigned int address, unsigned int destination) {
-			ram_address [0] = address; ram_destination [0] = destination;
+			ram_address = address; ram_destination = destination;
 			#asm
 				ld hl, (_ram_address)
 				ld de, (_ram_destination)

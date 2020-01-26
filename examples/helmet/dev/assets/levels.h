@@ -99,6 +99,11 @@ extern unsigned char behs [0];
 	._behs defs 48
 #endasm
 
+extern unsigned char sprites [0];
+#asm
+	._sprites
+#endasm
+
 #if defined MODE_128K || defined PER_LEVEL_SPRITESET
 	#include "assets/sprites-empty.h"
 #else

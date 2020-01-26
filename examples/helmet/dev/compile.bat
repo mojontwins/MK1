@@ -17,14 +17,8 @@ cd ..\dev
 
 if [%1]==[justscripts] goto :compile
 
-echo Convirtiendo mapa
-..\..\..\src\utils\mapcnv.exe ..\map\mapa0.map assets\mapa.h 1 24 15 10 15 packed > nul
-
-echo Convirtiendo enemigos/hotspots
-..\..\..\src\utils\ene2h.exe ..\enems\enems0.ene assets\enems.h
-
 echo Importando GFX
-..\..\..\src\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work0.png tileset.bin 7 >nul
+..\..\..\src\utils\ts2bin.exe ..\gfx\font.png none tileset.bin 7 >nul
 
 ..\..\..\src\utils\sprcnv.exe ..\gfx\sprites.png assets\sprites.h > nul
 
