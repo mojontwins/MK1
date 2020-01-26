@@ -26,7 +26,7 @@ void simple_coco_shoot (void) {
 			add 4
 			ld  (hl), a 				// cocos_y [enit] = _en_x + 4
 
-			ld  a, __en_t
+			ld  a, (__en_t)
 			;and 0xc0
 			srl a
 			srl a
@@ -71,7 +71,7 @@ void simple_coco_update (void) {
 
 				ld  hl, _cocos_x
 				add hl, de
-				lc  c, (hl) 			// C = cocos_x [enit]
+				ld  c, (hl) 			// C = cocos_x [enit]
 
 				ld  hl, _cocos_my
 				add hl, de

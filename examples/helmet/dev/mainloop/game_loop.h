@@ -86,6 +86,12 @@
 
 	o_pant = 0xff;
 	while (playing) {
+		#ifdef DEBUG_KEYS
+			if (sp_KeyPressed (KEY_M)) { ++ p_objs; beep_fx (0); }
+			if (sp_KeyPressed (KEY_H)) { ++ n_pant; beep_fx (0); }
+			if (sp_KeyPressed (KEY_Y)) { -- n_pant; beep_fx (0); }
+		#endif
+
 		pad0 = (joyfunc) (&keys);
 
 		if (o_pant != n_pant) {
@@ -310,8 +316,5 @@
 	#ifdef MODE_128K		
 		wyz_stop_sound ();
 	#endif
-
-	cortina ();
-	sp_UpdateNow ();
 
 	#include "my/ci/after_game_loop.h"

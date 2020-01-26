@@ -129,7 +129,7 @@ void main (void) {
 			#ifdef ENABLE_CHECKPOINTS
 				if (sg_do_load) level = sg_level; else level = 0;
 			#else
-				level = 1;
+				level = 0;
 			#endif
 
 			#ifndef REFILL_ME
@@ -142,8 +142,7 @@ void main (void) {
 		{
 			#ifdef COMPRESSED_LEVELS
 				prepare_level (level);			
-				blackout_area ();
-
+				
 				#include "my/level_screen.h"
 			#endif
 					
@@ -207,7 +206,6 @@ void main (void) {
 			#endif
 		}
 		
-		cortina ();
 		clear_sprites ();
 	}
 }

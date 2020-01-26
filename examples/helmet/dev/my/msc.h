@@ -141,49 +141,6 @@ void run_script (unsigned char whichs) {
         sc_terminado = sc_continuar = 0;
         while (!sc_terminado) {
             switch (read_byte ()) {
-                case 0x10:
-                    // IF FLAG sc_x = sc_n
-                    // Opcode: 10 sc_x sc_n
-                    // readxy ();
-                    // sc_terminado = (flags [sc_x] != sc_y);
-                    #asm
-                            call _read_two_bytes_d_e
-                            // Set sc_terminado if flags [C] != E
-                            ld  b, 0
-                            ld  c, d
-                            ld  hl, _flags
-                            add hl, bc
-                            ld  a, (hl)
-                            cp  e
-                            jr  z, _flag_equal_val_ok
-                            ld  a, 1
-                            ld  (_sc_terminado), a
-                        ._flag_equal_val_ok
-                    #endasm
-                    break;
-                case 0x21:
-                    // IF PLAYER_IN_X x1, x2
-                    // Opcode: 21 x1 x2
-                    sc_x = read_byte ();
-                    sc_y = read_byte ();
-                    sc_terminado = (!((p_x >> FIXBITS) >= sc_x && (p_x >> FIXBITS) <= sc_y));
-                    break;
-                case 0x22:
-                    // IF PLAYER_IN_Y y1, y2
-                    // Opcode: 22 y1 y2
-                    sc_x = read_byte ();
-                    sc_y = read_byte ();
-                    sc_terminado = (!((p_y >> FIXBITS) >= sc_x && (p_y >> FIXBITS) <= sc_y));
-                    break;
-                case 0x41:
-                     // IF OBJECT_COUNT = sc_n
-                     // Opcode: 41 sc_n
-                     sc_terminado = (p_objs != read_vbyte ());
-                     break;
-                case 0xF0:
-                     // IF TRUE
-                     // Opcode: F0
-                     break;
                 case 0xFF:
                     // THEN
                     // Opcode: FF
@@ -196,71 +153,6 @@ void run_script (unsigned char whichs) {
             sc_terminado = 0;
             while (!sc_terminado) {
                 switch (read_byte ()) {
-                    case 0x01:
-                        // SET FLAG sc_x = sc_n
-                        // Opcode: 01 sc_x sc_n
-                        #asm
-                                call _readxy
-                                ld  de, (_sc_x)
-                                ld  d, 0
-                                ld  hl, _flags
-                                add hl, de
-                                ld  a, (_sc_y)
-                                ld  (hl), a
-                        #endasm
-                        break;
-                    case 0x20:
-                        // SET TILE (sc_x, sc_y) = sc_n
-                        // Opcode: 20 sc_x sc_y sc_n
-                        readxy ();
-                        sc_n = read_vbyte ();
-                        _x = sc_x; _y = sc_y; _n = behs [sc_n]; _t = sc_n; update_tile ();
-                        break;
-                    case 0x51:
-                        // SET_FIRE_ZONE x1, y1, x2, y2
-                        // Opcode: 51 x1 y1 x2 y2
-                        fzx1 = read_byte ();
-                        fzy1 = read_byte ();
-                        fzx2 = read_byte ();
-                        fzy2 = read_byte ();
-                        f_zone_ac = 1;
-                        break;
-                    case 0xE0:
-                        // SOUND sc_n
-                        // Opcode: E0 sc_n
-#ifdef MODE_128K
-                        _AY_PL_SND (read_vbyte ());
-#else
-                        beep_fx (read_vbyte ());
-#endif
-                        break;
-                    case 0xE1:
-                        // SHOW
-                        // Opcode: E1
-                        sp_UpdateNow ();
-                        break;
-                    case 0xE3:
-                        sc_x = 0;
-                        while (1) {
-                           sc_n = read_byte ();
-                           if (sc_n == 0xEE) break;
-                           sp_PrintAtInv (LINE_OF_TEXT, LINE_OF_TEXT_X + sc_x, LINE_OF_TEXT_ATTR, sc_n);
-                           sc_x ++;
-                        }
-                        break;
-                    case 0xF1:
-                        // WIN
-                        script_result = 1;
-                        return;
-                    case 0xF4:
-                        // DECORATIONS
-                        #asm
-                               ld  hl, (_script)
-                               call _draw_decorations_loop
-                               inc hl
-                               ld  (_script), hl
-                        #endasm
-                        break;
                     case 0xFF:
                         sc_terminado = 1;
                         break;

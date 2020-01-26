@@ -91,7 +91,7 @@ For i = 1 To mapPants
 
 	d = xy: Put #fOut, , d
 	d = t: Put #fOut, , d
-	d = 0: Put #fOut, , d
+	d = 1: Put #fOut, , d
 Next i
 
 For i = 0 To 255

@@ -20,4 +20,3 @@ extern unsigned char *script;
     ._script defw 0
 #endasm
 
-#define SCRIPT_0 0x0000

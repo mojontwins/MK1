@@ -5,6 +5,10 @@
 // This code is used to display the "new level" screen. You can customize it for your game:
 
 {
+	#ifdef COMPRESSED_LEVELS
+		blackout_area ();
+	#endif
+
 	level_str [7] = 49 + level;
 	_x = 12; _y = 12; _t = 71; _gp_gen = level_str; print_str ();
 	sp_UpdateNow ();

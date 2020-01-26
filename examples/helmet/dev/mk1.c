@@ -2,7 +2,7 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 // mk1.c
-
+#define DEBUG_KEYS
 #include <spritepack.h>
 
 // We are using some stuff from splib2 directly.
@@ -63,14 +63,15 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 
 #ifdef COMPRESSED_LEVELS
 	#include "assets/levels.h"
+	#include "assets/extrasprites.h"
 	#include "my/levelset.h"
 #else
 	#include "assets/mapa.h"
 	#include "assets/tileset.h"
 	#include "assets/enems.h"
 	#include "assets/sprites.h"
+	#include "assets/extrasprites.h"
 #endif
-#include "assets/extrasprites.h"
 
 #ifdef MODE_128K
 	#include "wyzplayer.h"

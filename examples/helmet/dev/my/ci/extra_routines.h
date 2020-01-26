@@ -1,7 +1,7 @@
 // MTE MK1 (la Churrera) v5.0
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
-if (n_pant == 0 && flags [1] == 0 && gpy < 96) {
+if (n_pant == 0 && flags [1] == 0 && gpy < 96 && p_objs == 5) {
 	flags [1] = 1;
 
 	// Animation

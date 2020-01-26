@@ -321,7 +321,7 @@ void enems_move (void) {
 			#endif
 			#ifdef ENABLE_PURSUERS
 				case 7:
-					#include "engine/enem_mods/enem_type_pursuers.h"
+					#include "engine/enem_mods/enem_type_pursuers_asm.h"
 					break;	
 			#endif
 			#include "my/ci/enems_move.h"
