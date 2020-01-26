@@ -3,19 +3,13 @@
 
 // Printing functions
 
-unsigned char attr (char x, char y) {
-	// x + 15 * y = x + (16 - 1) * y = x + 16 * y - y = x + (y << 4) - y.
-#ifdef PLAYER_AUTO_CHANGE_SCREEN
-	if (x < 0 || y < 0 || x > 14 || y > 9) return 0;
-#else
-	if (x < 0 || y < 0) return 8;
-#endif
-	return map_attr [x + (y << 4) - y];	
+unsigned char attr (unsigned char x, unsigned char y) {
+	if (x >= 14 || y >= 10) return 0;
+	return map_attr [x + (y << 4) - y];
 }
 
 unsigned char qtile (unsigned char x, unsigned char y) {
-	// x + 15 * y = x + (16 - 1) * y = x + 16 * y - y = x + (y << 4) - y.
-	return map_buff [x + (y << 4) - y];	
+	return map_buff [x + (y << 4) - y];
 }
 
 void draw_coloured_tile (void) {

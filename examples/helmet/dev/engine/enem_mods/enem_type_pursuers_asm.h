@@ -34,14 +34,15 @@
 		ld  a, 1
 		ld  (hl), a
 
+		// en_an_rawv [enit] = 1 << (rand () % 5);
 		push bc
-		call _rand
+		call _rand		// rand -> L
 		ld  de, 5
 		ex  de, hl
-		call l_div
-		ex	de,hl
-		ld	de,1
-		call l_asl
+		call l_div 		// l_div :: DE / HL -> HL = cociente; DE = resto
+		ex	de, hl 		// HL = resto
+		ld	de, 1
+		call l_asl 		// l_asl :: DE << HL -> HL
 		ld  a, l
 		pop bc
 
@@ -104,11 +105,12 @@
 	._eij_state_still_appearing
 		dec a
 		ld  (hl), a
-		
 		ld  hl, _en_an_next_frame
 		add hl, bc
 		add hl, bc
-		ld  (hl), _sprite_17_a
+		ld  de, _sprite_17_a
+		ex de, hl
+		call l_pint
 		jp  _eij_state_done
 
 	._eij_state_moving
