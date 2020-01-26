@@ -73,28 +73,6 @@ const unsigned char *enem_frames [] = {
 	sprite_13_a, sprite_14_a, sprite_15_a, sprite_16_a
 };
 
-#ifdef COMPRESSED_LEVELS
-	#ifdef MODE_128K
-		void prepare_level (void) {
-			get_resource (levels [level].resource, (unsigned int) (level_data));
-			//unpack_RAMn (levels [level].page, levels [level].address, (unsigned int) (level_data));
-			n_pant = level_data.scr_ini;
-			gpx = level_data->ini_x << 4; p_x = gpx << 6;
-			gpy = level_data->ini_y << 4; p_y = gpy << 6;
-		}
-	#else
-		void prepare_level (void) {
-			unpack ((unsigned int) levelset [level].leveldata_c, MAP_DATA);
-			unpack ((unsigned int) levelset [level].tileset_c, (unsigned int) (tileset));
-			unpack ((unsigned int) levelset [level].spriteset_c, (unsigned int) (sprite_1_a - 16));
-			n_pant = levelset [level].ini_pant;
-			gpx = level_data->ini_x << 4; p_x = gpx << 6;
-			gpy = level_data->ini_y << 4; p_y = gpy << 6;
-			n_bolts = *((unsigned char *) (NBOLTS_PEEK));
-	}
-	#endif
-#endif
-
 #include "my/fixed_screens.h"
 
 signed int addsign (signed int n, signed int value) {

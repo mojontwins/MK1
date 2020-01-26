@@ -89,6 +89,9 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #ifdef ENABLE_SIMPLE_COCOS
 	#include "engine/simple_cocos.h"
 #endif
+#ifdef COMPRESSED_LEVELS
+	#include "engine/c_levels.h"
+#endif
 #include "engine.h"
 #include "engine/player.h"
 #include "engine/enengine.h"
