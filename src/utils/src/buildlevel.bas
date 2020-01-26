@@ -17,6 +17,8 @@
 #define RGBA_B( c ) ( CUInt( c )        And 255 )
 #define RGBA_A( c ) ( CUInt( c ) Shr 24         )
 
+Dim Shared as Integer defaultInk
+
 Sub usage
 	Print "usage"
 	Print ""
@@ -41,6 +43,7 @@ Sub usage
 	Print "fontfile       font.png (256x16) containing 64 8x8 chars, ASCII 32-95."
 	Print "tilesfile      work.png (256x48) containing 48 16x16 tiles."
 	Print "behsfile       behs.txt containing 48 comma-separated values."
+	Print "defaultink     Value to use when PAPER=INK."
 	Print ""
 	Print "SPRITESET"
 	Print ""
@@ -104,10 +107,14 @@ Sub getUDGIntoCharset (img As Any Ptr, x0 As integer, y0 As Integer, tileset () 
 	If c1 And 128 Then b = 64: c1 = c1 And 127
 	If c2 And 128 Then b = 64: c2 = c2 And 127
 	If c1 = c2 Then 
-		If c2 < 4 Then
-			c1 = 7
-		Else 
-			c1 = 0
+		If defaultInk = -1 Then
+			If c2 < 4 Then
+				c1 = 7
+			Else 
+				c1 = 0
+			End If
+		Else
+			c1 = defaultInk
 		End If
 	End If
 	' Darker colour = PAPER (c2)
@@ -218,6 +225,12 @@ For i = LBound (neededParamsArray) To UBound (neededParamsArray)  ' So I can add
 Next i
 
 ' Prepare some stuff...
+
+If sclpGetValue ("defaultink") <> "" Then
+	defaultInk = Val (sclpGetValue ("defaultink"))
+Else
+	defaultInk = -1
+End If
 
 levelBin = Command (1)
 

@@ -6,9 +6,9 @@
 // General text
 
 if (flags [1]) {
-	_gp_gen = " SET 5 BOMBS IN EVIL COMPUTER";
+	_gp_gen = "BOMBS ARE SET! RETURN TO BASE!";
 } else {
-	_gp_gen = "BOMBS ARE SET! RETURN TO BASE!";	
+	_gp_gen = " SET 5 BOMBS IN EVIL COMPUTER";	
 }
 _x = 1; _y = 0; _t = 71;
 print_str ();

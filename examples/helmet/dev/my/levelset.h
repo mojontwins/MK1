@@ -75,7 +75,7 @@ extern unsigned char behs_2 [0];
 // Define your level sequence array here:
 // map_w, map_h, scr_ini, ini_x, ini_y, max_objs, c_map_bots, c_tileset, c_enems_hotspots, c_behs, script
 LEVEL levels [] = {
-	{ 1, 24, 23, 14, 5, 99, map_bolts_0, tileset_0, enems_hotspots_0, behs_0_1 },
-	{ 1, 24, 23, 14, 5, 99, map_bolts_1, tileset_1, enems_hotspots_1, behs_2 },
+	{ 1, 24, 23, 12, 7, 99, map_bolts_0, tileset_0, enems_hotspots_0, behs_0_1 },
+	{ 1, 24, 23, 12, 7, 99, map_bolts_1, tileset_1, enems_hotspots_1, behs_2 },
 	{ 1, 24, 23, 6, 8, 99, map_bolts_2, tileset_2, enems_hotspots_2, behs_0_1 }
 };

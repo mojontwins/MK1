@@ -17,14 +17,22 @@
 #include "my/config.h"
 #include "prototypes.h"
 
+/* splib2 memory map
+61440 - 61696 IM2 vector table
+61697 - 61936 FREEPOOL (240 bytes)
+61937 - 61948 ISR
+61949 - 61951 Free (3 bytes)
+61952 - 65535 Horizontal Rotation Tables
+*/
+
 #ifdef MODE_128K
 	// Versión para 128K
 	#pragma output STACKPTR=23999
 	#define FREEPOOL 61697
 #else
 	// Versión para 48K
-	#pragma output STACKPTR=61952
-	#define FREEPOOL 61440
+	#pragma output STACKPTR=61936
+	#define FREEPOOL 61697
 #endif
 
 // Configure number of blocks and reserve a pool for sprites

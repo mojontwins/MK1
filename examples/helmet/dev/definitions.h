@@ -255,9 +255,6 @@ unsigned char objs_old, keys_old, life_old, killed_old;
 
 unsigned char *gen_pt;
 unsigned char playing;
-#ifdef COMPRESSED_LEVELS
-	unsigned char mlplaying;
-#endif	
 
 unsigned char success;
 #ifdef PLAYER_CHECK_MAP_BOUNDARIES

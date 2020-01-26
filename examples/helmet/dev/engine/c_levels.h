@@ -12,7 +12,7 @@ void prepare_level (void) {
 		#endif
 	#else
 		unpack ((unsigned int) levels [level].c_map_bolts, (unsigned int) (mapa));
-		unpack ((unsigned int) levels [level].c_tileset, (unsigned int) (tileset));
+		unpack ((unsigned int) levels [level].c_tileset, (unsigned int) (tileset + 512));
 		unpack ((unsigned int) levels [level].c_enems_hotspots, (unsigned int) (malotes));
 		unpack ((unsigned int) levels [level].c_behs, (unsigned int) (behs));
 

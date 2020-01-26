@@ -308,9 +308,9 @@
 // You can add the numbers to get combined behaviours
 // Save for 10 (special), but that's obvious, innit?
 #ifndef COMPRESSED_LEVELS
-unsigned char behs [] = {
-	0, 0, 8, 8, 8, 8, 8, 8,17, 8, 8, 8, 8, 8,10,10,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
-	8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0
-};
+	unsigned char behs [] = {
+		0, 0, 8, 8, 8, 8, 8, 8,17, 8, 8, 8, 8, 8,10,10,
+		0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+		8, 8, 8, 8, 8, 8, 8, 8, 8, 8, 0, 0, 0, 0, 0, 0
+	};
 #endif
