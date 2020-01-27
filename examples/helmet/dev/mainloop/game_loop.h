@@ -170,6 +170,11 @@
 		// Move enemies
 		enems_move ();
 
+		#ifdef ENABLE_SIMPLE_COCOS
+			// Move simple cocos
+			simple_coco_update ();
+		#endif
+
 		if (p_killme) player_kill (p_killme);
 
 		#ifdef PLAYER_CAN_FIRE

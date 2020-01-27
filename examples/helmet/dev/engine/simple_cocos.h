@@ -53,11 +53,10 @@ void simple_coco_shoot (void) {
 			add hl, de
 			ld  (hl), c 				// cocos_my [enit] = C = _dy [direction]
 	#endasm
-
 }
 
 void simple_coco_update (void) {
-	for (enit = 0; enit < MAX_ENEMS; ++ enit) if (cocos_y [enit] > 160) {
+	for (enit = 0; enit < MAX_ENEMS; ++ enit) if (cocos_y [enit] < 160) {
 		#asm				
 				// Move coco and copy to simple vars
 
