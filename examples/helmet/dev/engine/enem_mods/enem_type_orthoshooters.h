@@ -3,4 +3,7 @@
 
 	// Include this code after `enem_type_lineal.h` so they move!
 	
-	if (ORTHOSHOOTERS_FREQ == 1) simple_coco_shoot ();
+	if (ORTHOSHOOTERS_FREQ == 1) {
+		rda = en_an_state [enit];
+		simple_coco_shoot ();
+	} 

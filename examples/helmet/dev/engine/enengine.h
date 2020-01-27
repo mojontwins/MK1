@@ -141,7 +141,7 @@ void enems_load (void) {
 			#endif
 		#endif
 
-		switch (malotes [enoffsmasi].t) {
+		switch (malotes [enoffsmasi].t & 0x1f) {
 			case 1:
 			case 2:
 			case 3:
@@ -157,6 +157,7 @@ void enems_load (void) {
 					#else
 						en_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;
 					#endif
+					en_an_state [enit] = malotes [enoffsmasi].t >> 6;
 					break;
 			#endif
 
@@ -187,6 +188,8 @@ void enems_load (void) {
 			default:
 				en_an_next_frame [enit] = sprite_18_a;
 		}
+
+		malotes [enoffsmasi].t &= 0x1f;
 	}
 }
 

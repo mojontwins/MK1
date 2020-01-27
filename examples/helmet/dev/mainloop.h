@@ -129,7 +129,7 @@ void main (void) {
 			#ifdef ENABLE_CHECKPOINTS
 				if (sg_do_load) level = sg_level; else level = 0;
 			#else
-				level = 0;
+				level = 2;
 			#endif
 
 			#ifndef REFILL_ME
