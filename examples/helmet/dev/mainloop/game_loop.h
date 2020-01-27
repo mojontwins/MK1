@@ -212,7 +212,6 @@
 		// Scripting related stuff
 		
 		#ifdef ACTIVATE_SCRIPTING
-
 			// Select object
 			#ifdef MSC_MAXITEMS
 				if (sp_KeyPressed (KEY_Z)) {
@@ -231,19 +230,21 @@
 				}
 			#endif			
 
-			#ifdef SCRIPTING_KEY_M			
-				if (sp_KeyPressed (KEY_M))
+			#ifndef SCRIPTING_KEY_NONE
+				#ifdef SCRIPTING_KEY_M			
+					if (sp_KeyPressed (KEY_M))
+				#endif
+				#ifdef SCRIPTING_DOWN
+					if ((pad0 & sp_DOWN) == 0)
+				#endif
+				#ifdef SCRIPTING_KEY_FIRE
+					if ((pad0 & sp_FIRE) == 0)
+				#endif
+				{
+					// Any scripts to run in this screen?
+					run_fire_script ();
+				}
 			#endif
-			#ifdef SCRIPTING_DOWN
-				if ((pad0 & sp_DOWN) == 0)
-			#endif
-			#ifdef SCRIPTING_KEY_FIRE
-				if ((pad0 & sp_FIRE) == 0)
-			#endif
-			{
-				// Any scripts to run in this screen?
-				run_fire_script ();
-			}
 		#endif
 
 		#ifdef PAUSE_ABORT

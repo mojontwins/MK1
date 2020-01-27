@@ -3,6 +3,13 @@
 
 // enengine.h
 
+#ifdef ENABLE_PURSUERS
+	void enems_pursuers_init (void) {
+		en_an_alive [enit] = 0;
+		en_an_dead_row [enit] = DEATH_COUNT_ADD + (rand () & DEATH_COUNT_AND);
+	}
+#endif
+
 #ifndef COMPRESSED_LEVELS
 	#if defined(PLAYER_STEPS_ON_ENEMIES) || defined (PLAYER_CAN_FIRE)
 		void enems_init (void) {
@@ -143,10 +150,12 @@ void enems_load (void) {
 				break;
 
 			#ifdef ENABLE_ORTHOSHOOTERS
-				case 5:
-					en_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;
+				case 5:					
 					#if ORTHOSHOOTERS_BASE_CELL==99
+						en_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;
 						en_an_next_frame [enit] = sprite_18_a;
+					#else
+						en_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;
 					#endif
 					break;
 			#endif
@@ -169,8 +178,7 @@ void enems_load (void) {
 
 			#ifdef ENABLE_PURSUERS
 				case 7:
-					en_an_alive [enit] = 0;
-					en_an_dead_row [enit] = 0;//DEATH_COUNT_EXPRESSION;
+					enems_pursuers_init ();
 					break;
 			#endif
 
@@ -537,8 +545,7 @@ void enems_move (void) {
 									en_an_next_frame [enit] = sprite_18_a;
 									
 									#ifdef ENABLE_PURSUERS
-										en_an_alive [enit] = 0;
-										en_an_dead_row [enit] = DEATH_COUNT_EXPRESSION;
+										enems_pursuers_init ();
 									#endif
 
 									enems_kill ();					

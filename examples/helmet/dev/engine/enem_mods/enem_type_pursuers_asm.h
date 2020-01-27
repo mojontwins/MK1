@@ -58,8 +58,8 @@
 
 		call _rand
 		ld  a, l
-		and 7
-		add 11
+		and DEATH_COUNT_AND
+		add DEATH_COUNT_ADD
 
 		ld  hl, _en_an_dead_row
 		add hl, bc
