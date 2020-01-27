@@ -37,6 +37,30 @@ Como hemos dicho, los recursos comprimidos se descomprimirán sobre "espacios" e
 
 ## Preparando los assets
 
+Los *assets* o los *recursos* son las *cosas* con las que vamos a construir nuestros niveles. Como hemos mencionado, un *nivel* de **MTE MK1** se corresponde de (voy a resumirte cosas que ya sabes):
+
+1. Un mapa, en formato PACKED (75 bytes por pantalla, 2 tiles por byte, 16 tiles) o UNPACKED (150 bytes por pantalla, 1 tile por byte, 48 tiles).
+
+2. Un set de cerrojos. Cada cerrojo representa eso, un cerrojo. Se almacena en qué pantalla está y en qué coordenadas, y si está abierto o cerrado.
+
+3. Un tileset, o 192 carácteres o "patrones" y los atributos (o colores) con los que se pintan. 
+
+4. Un set de enemigos, con tres por pantalla. Cada enemigo ocupa 10 bytes.
+
+5. Un set de hotspots, uno por pantalla. Cada hotspot ocupa 3 bytes.
+
+6. Un set de comportamientos de tile.
+
+7. Opcionalmente (en 48K, en 128K no es opcional) un spriteset de 16 tiles de 144 bytes más una "cabecera" de 16 bytes (2320 bytes).
+
+Nosotros tendremos que generar nuestro conjunto de recursos, comprimirlos en formato aplib, y luego combinarlos para formar los niveles. El primer paso, por tanto (aparte de, ejem, *hacerlos*) será generar binarios comprimidos de cada uno de ellos, en el formato de **MTE MK1**. 
+
+Personalmente, a mi me gusta crearme un archivo `.bat` aparte de `compile.bat` que se encargue de convertir y comprimir todos los assets. En este archivo llamaremos a los conversores para cada recurso y luego comprimiremos el resultado. Puedes guardarlo todo en `/bin` y así no lo tienes por medio.
+
+Si eres un poco avispado estarás pensando que no paro de hablar de binarios y algunos de los conversores echan archivos .h con los arrays en formato código. Y así es, ¡cinco puntos para Gryffindor, señorita Granger!. Por suerte, hay versiones de esos conversores pensadas para multinivel que escupen binarios. Y en esta sección lo vamos a ver usando la generación de recursos de **Helmet** como ejemplo.
+
+
+
 El levelset
 
 Controlando la condición de final de cada nivel
