@@ -14,17 +14,22 @@ void simple_coco_shoot (void) {
 			ld  de, (_enit)
 			ld  d, 0 					// DE = enit (index)
 
+			ld  hl, _cocos_y
+			add hl, de
+
+			ld  a, (hl)
+			cp  160
+			ret c
+
+			ld  a, (__en_y)
+			add 4
+			ld  (hl), a 				// cocos_y [enit] = _en_x + 4
+
 			ld  hl, _cocos_x
 			add hl, de
 			ld  a, (__en_x)
 			add 4
 			ld  (hl), a 				// cocos_x [enit] = _en_x + 4
-
-			ld  hl, _cocos_y
-			add hl, de
-			ld  a, (__en_y)
-			add 4
-			ld  (hl), a 				// cocos_y [enit] = _en_x + 4
 
 			ld  a, (_rda)				// direction 
 
@@ -48,7 +53,7 @@ void simple_coco_shoot (void) {
 			add hl, de
 			ld  (hl), c 				// cocos_my [enit] = C = _dy [direction]
 	#endasm
-			sp_Border (2);
+
 }
 
 void simple_coco_update (void) {
