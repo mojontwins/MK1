@@ -319,9 +319,14 @@ void enems_move (void) {
 			case 2:
 			case 3:
 			case 4:
+			#ifdef ENABLE_ORTHOSHOOTERS
+				case 5:
+			#endif
 				#include "engine/enem_mods/enem_type_lineal.h"
 				#ifdef ENABLE_ORTHOSHOOTERS
-					#include "engine/enem_mods/enem_type_orthoshooters.h"
+					if (_en_t == 5) {
+						#include "engine/enem_mods/enem_type_orthoshooters.h"
+					}
 				#endif
 				break;
 

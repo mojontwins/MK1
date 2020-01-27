@@ -48,6 +48,7 @@ void simple_coco_shoot (void) {
 			add hl, de
 			ld  (hl), c 				// cocos_my [enit] = C = _dy [direction]
 	#endasm
+			sp_Border (2);
 }
 
 void simple_coco_update (void) {
