@@ -21,6 +21,7 @@
 
 // Definitions
 
+// You can adjust this number if you need the bytes **ONLY** in 48K mode.
 #define MAX_CERROJOS 32
 
 // Types:
