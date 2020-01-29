@@ -1,348 +1,241 @@
-# Capítulo 11: Juegos multinivel (48K)
+# Capítulo 12: Code Injection Points
 
-Este capítulo es muy interesante pero no ponemos paquetito de materiales, ya que ¿qué mejor paquete que el del Sgt Helmet? Entre los ejemplos de **MTE MK1** tienes la nueva versión de uno de los juegos de Mojon Twins que más nos gusta a los Mojon Twins, esta vez con tres fases. Puedes mirar las cosas de las que hablamos aquí en marcha en ese juego.
+Tras este nombre tan rimbombante se esconde una funcionalidad muy sencilla pero que, una vez que nos vayamos empapando hasta el tuétano de **MTE MK1**, puede darnos alas. Se trata de una serie de archivos en los que podemos añadir código C que son incluidos en partes clave del código. De esa forma podremos ampliar la funcionalidad del motor de formas muy interesantes o programar el gameplay igual que hacíamos mediante scripting, pero con mejor kung fu.
 
-Por cierto, este capítulo es denso como su puta madre. Pero así es la vida. Si quieres multinivel tendrás que empaparte muy bien de como funciona el motor. Así que al turrón, chino Cudeiro.
+Hay una buena colección de puntos de inyección de código que están documentados en la [documentación](https://github.com/mojontwins/MK1/blob/master/docs/code_injection.md) (!), así que no nos vamos a parar en describirlos todos. Lo que haremos será tomar nuestro **Dogmole**, desactivar el script, y replicar toda la funcionalidad usando código C usando algunos de estos.
 
-## En qué se basa el multiniveleo
+## Tocando el totete
 
-Básicamente el multinivel en **MTE MK1** (¡y en **MK2**!) se basa un poco en engañar al chamán. Básicamente el motor es como el abuelo y tú vas y le cambias las pastillas de sitio y le pones las verdes en vez de las rojas. 
+Exacto: programar en C usando puntos de inyección de código significa tocarle directamente el totete al motor de **MTE MK1**. Eso significa que tendremos que conocer hasta cierto punto qué tocar y cómo: funciones de la API, variables globales importantes... Todo eso podréis mirarlo en la [documentación](https://github.com/mojontwins/MK1/blob/master/docs/code_injection.md). Sin embargo, aunque todo está ahí, trataremos de ir describiendo como es debido todo lo que usemos a medida que vayamos metiendo cosas.
 
-Para entendernos, **MTE MK1** funcionará (salvo por un par de detalles) como si estuviese ejecutando un juego normal de sólo un nivel como los de la churrera de toda la vida, solo que habrá un agente que se encargará de, antes de que empiece el bucle de juego, de *descomprimir* un nuevo set formado por mapa, cerrojos, tileset, enemigos, hotspots, comportamientos y opcionalmente sprites sobre los actuales, efectivamente *cambiando de fase*.
+## Recordando el diseño de gameplay
 
-Lo que se hace para construir un juego de **MTE MK1** multinivel es configurar una especie de nivel "dummy" o "vacío" para hacer "sitio": un mapa a 0, cerrojos vacíos, un tileset con todos los tiles negros, todas las pantallas sin enemigos ni hotspots, y un montón de comportamientos a cero. Obviamente, a esto no se puede jugar. Pero además cargamos una serie de binarios comprimidos con mapas, tilesets, enemigos... y antes de empezar el juego descomprimimos los que necesitemos sobre los espacios "vacíos" que hemos reservado.
+En el juego hay dos misiones: primero hay que encargarse de eliminar a todos los monjes. Esto abrirá el paso a la Universidad de Miskatonic (eliminando un piedro de la pantalla 2). Una vez abierta, tendremos que ir buscando las cajas y llevándolas al mostrador en la pantalla 0. Cuando estén las 10, terminaremos el juego.
 
-## Activando en `config.h`
+## Empezando
 
-En principio, para activar el multinivel sólo tendremos que tocar un par de cosas en `my/config.h`. Obviamente, luego habrá que tunear por varios sitios, pero lo más básico es configurar esto:
+Para empezar hemos copiado el proyecto en una carpeta nueva (podéis encontrarlo en `examples/dogmole_ci` del repositorio). Seguidamente, editamos `compile.bat` para cambiar el nombre del proyecto a `dogmole_ci` y posteriormente editamos `my/config.h` para comentar `ACTIVATE_SCRIPTING`.
+
+Si recompilamos en este punto deberemos ver claramente que el script ocupa 0 bytes:
+
+```
+	Compilando script
+	Convirtiendo mapa
+	Convirtiendo enemigos/hotspots
+	Importando GFX
+	Compilando guego
+	dogmole_ci.bin: 26713 bytes
+	scripts.bin: 0 bytes
+	Construyendo cinta
+	Limpiando
+	Hecho!
+```
+
+## Inicializando el juego
+
+Vamos a usar los flags para almacenar valores (en concreto los flags 1 y 3, como en el script original). Sin embargo, al haber desactivado el script, no habrá nada que los inicialice al empezar cada partida, así que tendremos que hacerlo nosotros. Para ello usamos `my/ci/entering_game.h` (que equivale a la sección `ENTERING GAME` del script) y ponemos los dos flags que necesitamos a 0:
 
 ```c
-	#define COMPRESSED_LEVELS 					// use levels.h instead of mapa.h and enems.h (!)
-	#define MAX_LEVELS					3		// # of compressed levels
+	// my/ci/entering_game.h
+
+	flags [1] = 0;
+	flags [3] = 0;
 ```
 
-Esto activará los manejes necesarios para el multiniveleo y además indicará que el número de niveles de nuestra secuencia será 3. O sea, que tendremos tres niveles.
+## Decoraciones
 
-## Modificando `compile.bat`
+Necesitamos imprimir decoraciones en cuatro pantallas. En el motor de **MTE MK1** tenemos la función `draw_decorations` que espera que `_gp_gen` apunte a una colección de decoraciones terminada en `0xff` y se encarga precisamente de dibujarlas. Cada decoración es un par de bytes `0xXY` y `0xTT`, el primero con las coordenadas (X, Y) y el segundo con el número de tile.
 
-Como hemos dicho, los recursos comprimidos se descomprimirán sobre "espacios" especiales para cada tipo de datos que maneja el motor. Por lo general, esto implica que no tendremos que generar enemigos o mapas desde `compile.bat`. Lo único que vamos a dejar es la generación de un tileset "vacío" (porque necesitamos la fuente), un spriteset y las pantallas fijas. Del hacer hueco para el resto ya se encarga **MTE MK1** con la configuración que le hemos hecho. Por tanto abrimos en `compile.bat` y:
+Tenemos decoraciones en las pantallas 0, 1, 6 y 18. La forma más sencilla de usar `draw_decorations` es definir arrays con nuestras decoraciones y apuntar `_gp_gen` a ellas.
 
-1. Nos fumamos la conversión del mapa (`mapcnv`) y la importación de los enemigos (`ene2h`).
-
-2. Modificamos la conversión del tileset (`ts2bin`) para que genere uno usando la fuente pero dejando todos los tiles a negro. Para ello empleamos la cadena `none` en lugar de una ruta al un archivo de tileset:
-
-```
-	..\..\..\src\utils\ts2bin.exe ..\gfx\font.png none tileset.bin 7 >nul
-```
-
-3. Si fueramos a cambiar el spriteset en cada fase tendríamos que eliminar también la llamada a `sprcnv`.
-
-## Preparando los assets
-
-Los *assets* o los *recursos* son las *cosas* con las que vamos a construir nuestros niveles. Como hemos mencionado, un *nivel* de **MTE MK1** se corresponde de (voy a resumirte cosas que ya sabes):
-
-1. Un mapa, en formato PACKED (75 bytes por pantalla, 2 tiles por byte, 16 tiles) o UNPACKED (150 bytes por pantalla, 1 tile por byte, 48 tiles).
-
-2. Un set de cerrojos. Cada cerrojo representa eso, un cerrojo. Se almacena en qué pantalla está y en qué coordenadas, y si está abierto o cerrado.
-
-3. Un tileset, o 192 carácteres o "patrones" y los atributos (o colores) con los que se pintan. 
-
-4. Un set de enemigos, con tres por pantalla. Cada enemigo ocupa 10 bytes.
-
-5. Un set de hotspots, uno por pantalla. Cada hotspot ocupa 3 bytes.
-
-6. Un set de comportamientos de tile.
-
-7. Opcionalmente (en 48K, en 128K no es opcional) un spriteset de 16 tiles de 144 bytes más una "cabecera" de 16 bytes (2320 bytes).
-
-Nosotros tendremos que generar nuestro conjunto de recursos, comprimirlos en formato aplib, y luego combinarlos para formar los niveles. El primer paso, por tanto (aparte de, ejem, *hacerlos*) será generar binarios comprimidos de cada uno de ellos, en el formato de **MTE MK1**. 
-
-Personalmente, a mi me gusta crearme un archivo `.bat` aparte de `compile.bat` que se encargue de convertir y comprimir todos los assets. En este archivo llamaremos a los conversores para cada recurso y luego comprimiremos el resultado. Puedes guardarlo todo en `/bin` y así no lo tienes por medio.
-
-Si eres una persona avispada estarás pensando que no paro de hablar de binarios y algunos de los conversores echan archivos .h con los arrays en formato código. Y así es, ¡cinco puntos para Gryffindor, señorita Granger!. Por suerte, hay versiones de esos conversores pensadas para multinivel que escupen binarios. Y en esta sección lo vamos a ver usando la generación de recursos de **Helmet** como ejemplo.
-
-### Tilesets sin fuente
-
-¿Para qué vamos a guardar la fuente varias veces? Si recordáis, cuando hablamos de `ts2bin` mencionamos que se le podía decir que no pillara fuente. Si en vez de la ruta a nuestro archivo `font.png` ponemos `nofont`, el binario generado sólo contendrá los 192 patrones que forman los tiles (desde el 64 al 255) y los atributos, algo así:
-
-```
-	..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work0.png ..\bin\tileset0.bin 6 >nul
-```
-
-En **Helmet** tenemos tres fases y usamos tres tilesets diferentes, por lo que verás tres lineas de `ts2bin` diferentes en `build_assets.bat`. Recuerda que el numerito que se pasa como cuarto parámetro es la tinta por defecto que se debe usar si en un patrón sólo hay un color. Fijáos que en la fase 2, donde el suelo es mayormente cyan, pasamos un "5".
-
-Fíjate también como colocamos la salida de la conversión en `/bin` especificando la ruta relativa desde `/dev` directamente en el tercer parámetro. Si esto de rutas relativas te suena a chino deberías leer [algún tutorial sobre el tema](https://www.abrirllave.com/cmd/rutas-relativas-y-absolutas.php) y reforzar tus conocimientos de la ventana de linea de comandos.
-
-El siguiente paso es comprimirlo todo. Puedes usar `apack` de toda la vida o `apultra`. Apultra es [un nuevo compresor de Emmanuel Marty](https://github.com/emmanuel-marty/apultra) que comprime un poco más que el viejo `apack`. Por contra es bastante más lento, pero si tu PC no es como el mío y pertenece a la actualidad no lo notarás. 
-
-Por convención, la versión comprimida de cada binario se llamará igual que el binario pero con una "c" al final, e igualmente la dejaremos en `/bin`. Personalmente me encargo además de borrar los archivos sin comprimir por el tema del orden y la limpieza. Esta sección, para **Helmet**, queda así:
-
-```
-	echo Making tilesets
-	..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work0.png ..\bin\tileset0.bin 6 >nul
-	..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work1.png ..\bin\tileset1.bin 5 >nul
-	..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work2.png ..\bin\tileset2.bin 6 >nul
-
-	..\..\..\src\utils\apultra.exe ..\bin\tileset0.bin ..\bin\tileset0c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\tileset1.bin ..\bin\tileset1c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\tileset2.bin ..\bin\tileset2c.bin >nul
-
-	del  ..\bin\tileset?.bin > nul
-```
-
-Tomamos nota de los archivos generados: `tileset0c.bin`, `tileset1c.bin` y  `tileset2c.bin`.
-
-### Importando mapas y cerrojos binariamente
-
-El viejo `mapcnv` que venimos usando desde tiempos inmemoriales sacaba un archivo de código con dos arrays, uno para el mapa y otro para los cerrojos, por lo que no nos sirve. Por suerte un día se reprodujo por gemación y en la carpeta apareció su análogo binario, el señor `mapcnvbin`, que toma los mismos parámetros (y nos los chiva igualmente al ejecutar simplemente):
-
-```
-	$ ..\utils\mapcnvbin.exe
-	** USO **
-	   MapCnvBin archivo.map archivo.h ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]
-
-	   - archivo.map : Archivo de entrada exportado con mappy en formato raw.
-	   - archivo.h : Archivo de salida
-	   - ancho_mapa : Ancho del mapa en pantallas.
-	   - alto_mapa : Alto del mapa en pantallas.
-	   - ancho_pantalla : Ancho de la pantalla en tiles.
-	   - alto_pantalla : Alto de la pantalla en tiles.
-	   - tile_cerrojo : Nº del tile que representa el cerrojo.
-	   - packed : Escribe esta opción para mapas de la churrera de 16 tiles.
-	   - fixmappy : Escribe esta opción para arreglar lo del tile 0 no negro
-
-	Por ejemplo, para un mapa de 6x5 pantallas para MTE MK1:
-
-	   MapCnvBin mapa.map mapa.bin 6 5 15 10 15 packed
-
-	Output will contain the map, and then the bolts
-```
-
-`mapcnvbin` genera un binario con la misma información que `mapcnv`: el mapa en el formato indicado y seguidamente los cerrojos. En la llamada añadiremos `packed` si el mapa es de 16 tiles y `fixmappy` si el primer tile del tileset no era negro completamente y Mappy nos hizo la fullería de desplazar todo el tileset:
-
-```
-	..\..\..\src\utils\mapcnvbin.exe ..\map\mapa0.map ..\bin\mapa_bolts0.bin 1 24 15 10 15 packed fixmappy >nul
-```
-
-De nuevo ponemos la salida en `/bin`.
-
-Igual que con los tilesets, el siguiente paso será comprimir los binarios. Seguimos la misma convención para los nombres de los archivos y también limpiamos los archivos originales sin comprimir. En **Helmet**:
-
-```
-	echo Converting maps
-	..\..\..\src\utils\mapcnvbin.exe ..\map\mapa0.map ..\bin\mapa_bolts0.bin 1 24 15 10 15 packed fixmappy >nul
-	..\..\..\src\utils\mapcnvbin.exe ..\map\mapa1.map ..\bin\mapa_bolts1.bin 1 24 15 10 15 packed fixmappy >nul
-	..\..\..\src\utils\mapcnvbin.exe ..\map\mapa2.map ..\bin\mapa_bolts2.bin 1 24 15 10 15 packed fixmappy >nul
-
-	..\..\..\src\utils\apultra.exe ..\bin\mapa_bolts0.bin ..\bin\mapa_bolts0c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\mapa_bolts1.bin ..\bin\mapa_bolts1c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\mapa_bolts2.bin ..\bin\mapa_bolts2c.bin >nul
-
-	del  ..\bin\mapa_bolts?.bin >nul
-```
-
-Tomamos nota de los archivos generados: `mapa_bolts0c.bin`, `mapa_bolts1c.bin` y `mapa_bolts2c.bin`. Como veis, intento que los nombres de archivo sean lo más descriptivos posible.
-
-### Importando los enemigos y hotspots binariamente
-
-De la misma forma que pasaba con los mapas, normalmente usábamos un conversor que generaba un archivo de código C (`ene2h`) que ahora no nos sirve. La utilidad que emplearemos será `ene2bin_mk1`. Ojal, que el formato es diferente al de **MK2** y no nos vale el `ene2bin` de MK2. Si lo ejecutamos sin parámetros vemos qué espera de nosotros:
-
-```
-	$ ..\utils\ene2bin_mk1.exe
-	$ ene2bin_mk1.exe enems.ene enems+hotspots.bin life_gauge [2bytes]
-
-	The 2bytes parameter is for really old .ene files which
-	stored the hotspots 2 bytes each instead of 3 bytes.
-	As a rule of thumb:
-	.ene file created with ponedor.exe -> 3 bytes.
-	.ene file created with colocador.exe for MK1 -> 2 bytes.
-
-```
-
-El funcionamiento es análogo, aunque deberemos fijarnos muy bien en el parámetro `life_gauge`. Para ahorrar código, como este valor va en la estructura y se descomprime cada vez que empezamos el nivel, si va ya puesto en el binario nos ahorramos el código que lo inicializa. En **helmet** este valor es 2. 
-
-Seguidamente comprimimos y borramos y bla bla. Nos queda así:
-
-```
-	echo Converting enems
-	..\..\..\src\utils\ene2bin_mk1.exe ..\enems\enems0.ene ..\bin\enems_hotspots0.bin 2 >nul
-	..\..\..\src\utils\ene2bin_mk1.exe ..\enems\enems1.ene ..\bin\enems_hotspots1.bin 2 >nul
-	..\..\..\src\utils\ene2bin_mk1.exe ..\enems\enems2.ene ..\bin\enems_hotspots2.bin 2 >nul
-
-	..\..\..\src\utils\apultra.exe ..\bin\enems_hotspots0.bin ..\bin\enems_hotspots0c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\enems_hotspots1.bin ..\bin\enems_hotspots1c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\enems_hotspots2.bin ..\bin\enems_hotspots2c.bin >nul
-
-	del  ..\bin\enems_hotspots?.bin
-```
-
-Tomamos nota de los archivos generados: `enems_hotspots0c.bin`, `enems_hotspots1c.bin` y `enems_hotspots2c.bin`. 
-
-### Los comportamientos (behs)
-
-El array `behs` de `my/config.h` ya no se utilizará. En su lugar tendremos un binario de 48 bytes comprimido con los sets de comportamientos. Para generar estos binarios de forma sencilla tenemos `behs2bin`, que toma una lista de 48 valores separada por comas y la convierte en un binario de 48 bytes.
-
-Lo primero por tanto será crear los archivos con las listas de comportamientos. Nosotros en **helmet** usamos dos, ya que los dos primeros tilesets son equivalentes y podemos reaprovechar los comportamientos. 
-
-Así se ve un archivo de texto con comportamientos. Nada muy excitante:
-
-```
-	0,0,8,8,8,8,8,8,17,8,8,8,8,8,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,8,8,8,8,8,8,8,8,0,0,0,0,0,0
-```
-
-Esto equivale a este tileset:
-
-![La primera fase de Helmet](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/11_ts_helmet_0.png)
-
-Nosotros hemos tenido a bien guardarlos en `/gfx` junto a los tilesets que representan, pero tú organízate como mejor veas. Tenemos dos: `behs0_1.txt` para las dos primeras fases (recuerda que los verdaderos programadores empieza a contar por 0) y `behs_2.txt` para la tercera.
-
-`behs2bin` únicamente toma dos parámetros: fichero de entrada con la lista en modo texto, y fichero de salida con los 48 bytes en binario. Y luego se comprimen y se borran los originales y bla bla:
-
-```
-	del  ..\bin\enems_hotspots?.bin
-
-	echo Converting behs
-	..\..\..\src\utils\behs2bin.exe ..\gfx\behs0_1.txt ..\bin\behs0_1.bin >nul
-	..\..\..\src\utils\behs2bin.exe ..\gfx\behs2.txt ..\bin\behs2.bin >nul
-
-	..\..\..\src\utils\apultra.exe ..\bin\behs0_1.bin ..\bin\behs0_1c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\behs2.bin ..\bin\behs2c.bin >nul
-
-	del  ..\bin\behs0_1.bin
-	del  ..\bin\behs2.bin
-```
-
-Toma nota de los últimos archivos generados: `behs0_1c.bin` y `behs2.bin`. Ya lo tenemos todo.
-
-## El levelset
-
-El levelset es un array que contiene información sobre cada nivel de tu juego. Se define en `my/levelset.h` y sus miembros son elementos con esta estructura:
+Para definir nuestras propias variables usamos `my/ci/extra_vars.h`:
 
 ```c
-	// 48K format:
-	typedef struct {
-		unsigned char map_w, map_h;
-		unsigned char scr_ini, ini_x, ini_y;
-		unsigned char max_objs;
-		unsigned char *c_map_bolts;
-		unsigned char *c_tileset;
-		unsigned char *c_enems_hotspots;
-		unsigned char *c_behs;
-		#ifdef PER_LEVEL_SPRITESET
-			unsigned char *c_sprites;
-		#endif
-		#ifdef ACTIVATE_SCRIPTING
-			unsigned int script_offset;
-		#endif
-	} LEVEL;
+	// my/ci/extra_vars.h
+
+	const unsigned char decos_0 [] = { 0x37, 22, 0x47, 23, 0x15, 29, 0x16, 20, 0x17, 21, 0x66, 20, 0x67, 21, 0x77, 28, 0x12, 27, 0x13, 28, 0x22, 29, 0x23, 27, 0x32, 32, 0x33, 33, 0x91, 30, 0x92, 30, 0x93, 31, 0xff };
+	const unsigned char decos_1 [] = { 0x72, 24, 0x82, 25, 0x92, 26, 0x16, 32, 0x17, 33, 0xD6, 32, 0xD7, 33, 0xff };
+	const unsigned char decos_6 [] = { 0xA1, 30, 0XA2, 31, 0XA4, 35, 0xff};
+	const unsigned char decos_18 [] = { 0x48, 34, 0xff };
 ```
 
-(en modo 48K; en modo 128K es más sencillo pero ya lo veremos en otro capítulo, más adelante). El tema está en crear un array que referencie qué recursos necesitamos para cada nivel y algunos valores relevantes. Pero antes necesitamos que los recursos *estén disponibles*.
-
-La forma de hacerlo es crear una referencia externa a ellos y posteriormente incluirlos desde ensamble en linea con la directiva `BINARY`. Super top todo. Soy consciente de que esto se complica, pero puedes tirar de receta.
-
-Básicamente primero se define una referencia externa para poder añadir cosas a nuestro array:
+El momento de presentar las decoraciones es el de entrar la pantalla. El punto de inserción de código `my/ci/entering_screen.h` se ejecuta, igual que la sección `ENTERING GAME`, justo en ese momento, después de dibujarla y prepararlo todo, y antes de enviar los resultados a la memoria de video. Es el momento perfecto para modificar la pantalla sin que se note el cambio, por tanto.
 
 ```c
-	extern unsigned char my_extern_array [0];
+	// my/ci/entering_screen.h
+
+	_gp_gen = 0;
+
+	switch (n_pant) {
+		case 0:
+			_gp_gen = decos_0; break;
+		case 1:
+			_gp_gen = decos_1; break;
+		case 6: 
+			_gp_gen = decos_6; break;
+		case 18:
+			_gp_gen = decos_18; break;
+	}
+
+	if (_gp_gen) draw_decorations ();
 ```
 
-Esto sencillamente le dice al compilador que hay "algo" fuera que se llama `my_extern_array`. (Probablemente haya mejores formas de hacer esto, pero eso es lo que se traga `z88dk` y si no está roto, no lo arregles).
+## Contando monjes
 
-Luego se mete una sección de ensamble en linea y se mete lo que antes hemos referenciado, tal que así:
+El motor se encarga de contar los enemigos que vamos eliminados en la variable `p_killed`. Como los únicos enemigos que pueden matarse son los monjes, en cuanto `p_killed` valga 20 sabremos que hemos eliminado a todos. Para rizar el rizo, el conversor `ene2h` cuenta cada tipo de enemigo de forma que nuestro código será super robusto si comparamos `p_killed` con el número total de enemigos de tipo 3 (que son los monjes). Las constantes `N_ENEMS_TYPE_n` contienen el número exactos de enemigo de tipo n, por lo tanto tendremos que comparar con `N_ENEMS_TYPE_3`.
+
+El sitio perfecto para hacer esta comprobación es el punto de inyección de código `my/ci/on_enems_killed.h`, que se ejecutará cada vez que eliminemos un enemigo. Para funcionar como en el script, levantaremos el flag 3 cuando hayamos eliminado los 20 monjes.
+
+Abriremos `my/ci/on_enems_killed.h` y añadiremos el siguiente trozo de código:
 
 ```c
-	#asm
-		._my_extern_array
-			BINARY "my_extern_binary.bin"
-	#endasm
+	// my/ci/on_enems_killed.h
+
+	if (p_killed == N_ENEMS_TYPE_3) {
+		flags [3] = 1;
+	}
 ```
 
-Ojal como la etiqueta del ensamble equivale al nombre del array externo referenciado arriba, pero con un subrayado delante. Porque cuando se compila el C y se genera ensamble, los identificadores de C se convierten en etiquetas de ensamble con el subrayado delante. Y cosas.
-
-El `BINARY` lo que hace es incluir como datos lo que se encuentre en el archivo cuya ruta recibe como parámetro. Y esto es lo que nos hace el truco.
-
-De esta forma estamos metiendo muy fácilmente los binarios que necesitamos en nuestro código, y será la técnica que emplearemos para meter todos los recursos comprimidos. Los importaremos e incluiremos de esta manera en `my/levelset.h` y posteriormente los referenciaremos en el array del *levelset*. 
-
-Ahora es cuando coges el papel donde habías apuntado todos los binarios que tenías. Yo he creado estas referencias externas para incluirlos todos. Fíjate como se incluye la ruta relativa adónde está el archivo `mk1.c`, o sea, `../bin/`:
+Otra cosa que hacíamos era usar EXTERN para ejecutar el código que mostraba el cartel de que la puerta estaba abierta. Como la función con nuestro código extern no está disponible al haber desactivado el scripting tendremos que añadir el código directamente en el if que acabamos de meter. Queda así:
 
 ```c
-	// In 48K mode, include here your compressed binaries:
+	// my/ci/on_enems_killed.h
 
-	extern unsigned char map_bolts_0 [0];
-	extern unsigned char map_bolts_1 [0];
-	extern unsigned char map_bolts_2 [0];
-	extern unsigned char tileset_0 [0];
-	extern unsigned char tileset_1 [0];
-	extern unsigned char tileset_2 [0];
-	extern unsigned char enems_hotspots_0 [0];
-	extern unsigned char enems_hotspots_1 [0];
-	extern unsigned char enems_hotspots_2 [0];
-	extern unsigned char behs_0_1 [0];
-	extern unsigned char behs_2 [0];
+	if (p_killed == N_ENEMS_TYPE_3) {
+		flags [3] = 1;
 
-	#asm
-		._map_bolts_0
-			BINARY "../bin/mapa_bolts0c.bin"
-		._map_bolts_1
-			BINARY "../bin/mapa_bolts1c.bin"
-		._map_bolts_2
-			BINARY "../bin/mapa_bolts2c.bin"
-		._tileset_0
-			BINARY "../bin/tileset0c.bin"
-		._tileset_1
-			BINARY "../bin/tileset1c.bin"
-		._tileset_2
-			BINARY "../bin/tileset2c.bin"
-		._enems_hotspots_0
-			BINARY "../bin/enems_hotspots0c.bin"
-		._enems_hotspots_1
-			BINARY "../bin/enems_hotspots1c.bin"
-		._enems_hotspots_2
-			BINARY "../bin/enems_hotspots2c.bin"
-		._behs_0_1
-			BINARY "../bin/behs0_1c.bin"
-		._behs_2
-			BINARY "../bin/behs2c.bin"
-	#endasm
+		// Print message
+		_t = 79;
+		_x = 8; _y = 10; _gp_gen = my_spacer;  print_str ();
+		_x = 8; _y = 12;                       print_str ();
+		_x = 8; _y = 11; _gp_gen = my_message; print_str ();
+
+		sp_UpdateNowEx (0);
+
+		// Wait
+		espera_activa (150);
+
+		// Force reenter
+		o_pant = 99;
+	}
 ```
 
-Con esto de arriba tendremos de gratis un puntero al inicio de cada uno de los recursos de los niveles de nuestro juego, así que ya podemos crear el array con el *levelset*. Este array debe llamarse `levels` e incluir toda la información para cada nivel. Vamos a echar un vistazo al de **Helmet** y vamos comentando:
+Este código necesita dos variables con las cadenas que se imprimen, `my_spacer` y `my_message`. Las añadimos a `my/ci/extra_vars.h`:
 
 ```c
-	// Define your level sequence array here:
-	// map_w, map_h, scr_ini, ini_x, ini_y, max_objs, c_map_bolts, c_tileset, c_enems_hotspots, c_behs, script
-	LEVEL levels [] = {
-		{ 1, 24, 23, 12, 7, 99, map_bolts_0, tileset_0, enems_hotspots_0, behs_0_1 },
-		{ 1, 24, 23, 12, 7, 99, map_bolts_1, tileset_1, enems_hotspots_1, behs_0_1 },
-		{ 1, 24, 23, 6, 8, 99, map_bolts_2, tileset_2, enems_hotspots_2, behs_2 }
-	};
+	// my/ci/extra_vars.h
+
+	const unsigned char decos_0 [] = { 0x37, 22, 0x47, 23, 0x15, 29, 0x16, 20, 0x17, 21, 0x66, 20, 0x67, 21, 0x77, 28, 0x12, 27, 0x13, 28, 0x22, 29, 0x23, 27, 0x32, 32, 0x33, 33, 0x91, 30, 0x92, 30, 0x93, 31, 0xff };
+	const unsigned char decos_1 [] = { 0x72, 24, 0x82, 25, 0x92, 26, 0x16, 32, 0x17, 33, 0xD6, 32, 0xD7, 33, 0xff };
+	const unsigned char decos_6 [] = { 0xA1, 30, 0XA2, 31, 0XA4, 35, 0xff};
+	const unsigned char decos_18 [] = { 0x48, 34, 0xff };
+
+	unsigned char *my_spacer =  "                ";
+	unsigned char *my_message = " PUERTA ABIERTA ";
 ```
 
-Como son muchos campos siempre me hago una chuleta en un comentario. Porque uno es listo, pero no tanto. Vamos a verlos en orden (que es el mismo orden con el que se han definido en el `struct` de más arriba):
+En el trozo de código que hemos escrito vemos varias cosas:
 
-1. **Ancho del nivel**, o `map_w` (ver la nota más adelante sobre niveles de diferentes tamaños).
-2. **Alto del nivel**, o `map_h`.
-3. **Pantalla de inicio**, o `scr_ini`.
-4. **Coordenada X de inicio**, o `ini_x`, es coordenadas de tiles.
-5. **Coordenada Y de inicio**, o `ini_y`, es coordenadas de tiles.
-6. **Máximo de objetos para terminar el nivel**, o `max_objs`, o 99 si esto no debe ser tomado en cuenta (ver la siguiente sección).
-7. Puntero al recurso con el **mapa y los cerrojos**, o `c_map_bolts`.
-8. Puntero al recurso con el **tileset** o `c_tileset`.
-9. Puntero al recurso con los **enemigos y hotspots**, o `c_enems_hotspots`.
-10. Puntero al recurso con los **comportamientos**, o `c_behs`.
-11. *Si vamos a usar un spriteset diferente por cada fase* (en **Helmet** no), un puntero al recurso con el **spriteset**, o (c_sprites).
-12. *Si el scripting está activado* (en **Helmet** no), el **offset dentro del script para este nivel**, o `script_offset`. Estos offsets se generan en `my/msc_config.h` al compilar un script multi-nivel, y son historias de `msc3` que aún no hemos visto y que dejaremos para otro momento.
+### Imprimir un string
 
-Con esto tendríamos definido nuestro *levelset*. Pero aún hay que tunear un poquito.
+Para imprimir un string empleamos la función `print_str`. La función, como la mayoría del motor de **MTE MK1**, no recibe ningún parámetro, pero necesita que demos valores a las globales generales `_x` e `_y` con las coordenadas, `_t` con el atributo, y `_gp_gen` apuntando a la cadena.
 
-## Controlando la condición de final de cada nivel
+### Enviar el buffer a la pantalla
 
-Esto puede complicarse hasta niveles estratosféricos dependiendo de como sea tu juego, sobre todo si va a tener variedad. En realidad todas estas historias terminan siendo muy sencillas cuando empiezas a manejarte realmente bien con el motor y los puntos de inyección de código son tus amigos y tus amantes. Voy a intentar dar aquí un porrón de información y luego ya ves tú qué haces con ella.
+La impresión se hace en el buffer de **splib2**. Para que sea visible hay que decirle a la biblioteca que nos lo envíe a la pantalla. Para ello empleamos la función custom que hemos añadido en mojonia a **splib2** `sp_UpdateNowEx` que se encarga de volcar a la pantalla los cuadros de 8x8 (rejilla de caracteres/atributos) que han cambiado. La función recibe un parámetro que puede ser 0 o 1 dependiendo de si queremos que se actualicen los sprites en los cuadros que cambian. 
 
-### Número de objetos
-### Llegar a un sitio concreto
-### Scripting
-### Inyección de código custom
+### Esperar un rato
 
-## Niveles de diferentes tamaños
+La función `espera_activa` del motor de **MTE MK1** espera un tiempo (!) y puede interrumpirse pulsando una tecla.
+
+### Forzar reentrada
+
+Llamaos *reentrada* a recargar completamente la pantalla. En este caso, esto es necesario porque hemos impreso un cartel que ha tapado parte de la misma. El motor de **MTE MK1** llama a `draw_scr`, que se encarga de dibujar e inicializar una nueva pantalla, cada vez que la variable `n_pant` (número de pantalla actual) y `o_pant` (número de pantalla anterior) son diferentes. Una forma fácil de redibujar la pantalla sin cambiar de idem es poner en `o_pant` a un valor no válido, como puede ser 99.
+
+## Quitar el piedro
+
+Usaremos de nuevo `my/ci/entering_screen.h`. Simplemente detectamos que acabamos de entrar en la pantalla 2 usando `n_pant`, consultamos el valor de `flag [3]` y usamos `update_tile` para modificar el tile:
+
+```c
+	// my/ci/entering_screen.h
+
+	_gp_gen = 0;
+
+	switch (n_pant) {
+		case 0:
+			_gp_gen = decos_0; break;
+		case 1:
+			_gp_gen = decos_1; break;
+		case 6: 
+			_gp_gen = decos_6; break;
+		case 18:
+			_gp_gen = decos_18; break;
+	}
+
+	if (_gp_gen) draw_decorations ();
+
+	if (n_pant == 2) {
+		if (flags [3]) {
+			_x = 12; _y = 7; _t = _n = 0; update_tile ();
+		}
+	}
+```
+
+### En qué pantalla estamos:
+
+`n_pant` contiene el número de la pantalla actual.
+
+### Actualizando tiles:
+
+La función `update_tile` del motor de **MTE MK1** sirve para modificar tiles en pantalla. Además de dibujar el tile necesario se encargan de modificar los buffers necesarios para que ese tile sea interactuable, por lo que será la función que haya que llamar para hacer una modificación completa. Si sólo quisiésemos modificar gráficamente la pantalla sin modificar los buffers tendríamos que llamar a `draw_invalidate_coloured_tile_gamearea`.
+
+La función `update_tile` no recibe parámetros, pero espera que las coordenadas donde hay que imprimir el tile estén en las variables globales `_x` e `_y` (en coordenadas de tile), el número de tile en `_t` y el comportamiento deseado en `_n`.
+
+## La interacción con el altar
+
+Para detectar la interacción con el altar utilizaremos la el punto de inserción de código `my/ci/extra_routines.h`, que se ejecuta al final de cada vuelta del bucle principal. Lo primero que haremos será detectar que estamos en la pantalla correcta, la 0, para posteriormente ver que estamos tocando el altar.
+
+En todo momento, `p_tx` y `p_ty` contienen las coordenadas de la casilla de tile que está tocando el centro del sprite del jugador, por lo que vienen estupendamente para lo que tenemos que hacer: detectar que estemos tocando el altar, que ocupa las casillas (3, 7) y (4, 7).
+
+Cuando todo esto se cumpla tendremos que "liberar" el objeto y contar uno más en el flag 1. Recordad que en modo `ONLY_ONE_OBJECT`, `p_objs` vale 1 cuando llevamos un objeto y 0 cuando no. Aprovecharemos también para detectar que hemos recogido 10:
+
+```c
+	// my/ci/extra_routines.h
+
+	if (n_pant == 0) {
+		if (p_objs && p_ty == 7 && (p_tx == 3 || p_tx == 4)) {
+			p_objs = 0; 	// Liberamos el objeto
+			++ flags [1]; 	// Contamos uno más.
+
+			if (flags [1] == 10) {
+				// Terminar el juego "bien"
+				success = 1;
+				playing = 0;
+			}
+		}
+	}
+```
+
+### Detectando dónde está el jugador nivel fácil
+
+Como hemos visto, una forma muy sencilla de ver dónde está el jugador, o, mejor dicho, qué tile está tocando, es mirar `p_tx` y `p_ty`.
+
+### Conteo interno de objetos
+
+El conteo interno de objetos se lleva a cabo en `p_objs`. Si hemos definido `ONLY_ONE_OBJECT`, entonces `p_objs` valdrá 0 al empezar el juego y se pondrá a 1 al coger un objeto... Y entonces ya no podremos coger otro más. Que `p_objs` valga 1 significa que llevamos un objeto. Para "liberar" el objeto tendremos qu eponerlo a 0.
+
+### Conteo custom de objetos
+
+Si definimos `OBJECT_COUNT`, en modo normal, `p_objs` se copia a `flags [OBJECT_COUNT]` siempre que cogemos un objeto, y además el marcador muestra `flags [OBJECT_COUNT]` en lugar de `p_objs`. Sin embargo, en modo `ONLY_ONE_OBJECT` `p_objs` NO se copia en `flags [OBJECT_COUNT]` aunque lo que se muestre en el marcador sea `flags [OBJECT_COUNT]`. Esto es así para que esto sirva para algo: que `p_objs` sirva únicamente como indicador de si *llevamos un objeto o no*, y usemos `flags [OBJECT_COUNT]` por nuestra cuenta para llevar la cuenta real.
+
+### Terminar el juego
+
+Para terminar el juego hay que poner `playing` a 0. El valor de `success` determinará si ganamos el nivel o se muestra **Game Over**.
+
+## Y ya está.
+
+Me hago cargo de que este capítulo es bastante árido, pero espero que sirva como ilustración del uso de los puntos de inyección de código (que, como dije al principio, están [debidamente documentados](https://github.com/mojontwins/MK1/blob/master/docs/code_injection.md)).
+
+Tenemos el scripting para hacer muchas cosas, pero se puede lograr mucho más mediante puntos de inyección de código (por ejemplo, añadir nuevos tipos de enemigos o incluso nuevos motores de movimiento para el jugador). Obviamente, es más complicado usar los puntos de inyección de código, sobre todo si no se conoce bien cómo funciona el motor por dentro.
+
+Otra ventaja de los puntos de inyección de código es que, para juegos con scripts pequeños, generalmente ahorran bastante espacio. Quédate con este dato: [en el momento de elaborar este tutorial] usando scripting, dogmole ocupa 28519 bytes, y usando inyección de código ocupa 27301, ¡que son 1218 bytes menos!

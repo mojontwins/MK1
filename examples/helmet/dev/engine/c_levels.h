@@ -3,9 +3,16 @@ void prepare_level (void) {
 	#ifdef MODE_128K
 		get_resource (levels [level].resource, (unsigned int) (level_data));
 		
-		n_pant = level_data.scr_ini;
-		gpx = level_data->ini_x << 4; p_x = gpx << 6;
-		gpy = level_data->ini_y << 4; p_y = gpy << 6;
+		#ifdef ACTIVATE_SCRIPTING
+			if (script_result != 3)
+		#else
+			if (warp_to_level == 0)
+		#endif
+		{
+			n_pant = level_data.scr_ini;
+			gpx = level_data->ini_x << 4; p_x = gpx << 6;
+			gpy = level_data->ini_y << 4; p_y = gpy << 6;
+		}
 
 		#ifdef ACTIVATE_SCRIPTING
 			main_script_offset = levels [level]->script_offset;
@@ -20,9 +27,16 @@ void prepare_level (void) {
 			unpack ((unsigned int) levels [level].c_sprites, (unsigned int) (sprites));
 		#endif
 		
-		n_pant = levels [level].scr_ini;
-		gpx = levels [level].ini_x << 4; p_x = gpx << 6;
-		gpy = levels [level].ini_y << 4; p_y = gpy << 6;
+		#ifdef ACTIVATE_SCRIPTING
+			if (script_result != 3)
+		#else
+			if (warp_to_level == 0)
+		#endif
+		{
+			n_pant = levels [level].scr_ini;
+			gpx = levels [level].ini_x << 4; p_x = gpx << 6;
+			gpy = levels [level].ini_y << 4; p_y = gpy << 6;
+		}
 
 		#ifdef ACTIVATE_SCRIPTING
 			main_script_offset = levels [level]->script_offset;

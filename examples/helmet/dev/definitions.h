@@ -189,6 +189,9 @@ unsigned char o_pant;
 unsigned char n_pant;
 unsigned char is_rendering;
 unsigned char level = 0;
+#ifndef ACTIVATE_SCRIPTING
+	unsigned char warp_to_level = 0;
+#endif
 unsigned char maincounter;
 
 // Fire zone

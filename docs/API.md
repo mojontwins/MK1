@@ -13,6 +13,7 @@ Estas variables controlan el estado del juego. En qué nivel estamos, en qué pa
 * `pad0` : entrada del joystick / teclado. Consultar la documentación de splib2 para ver cómo leer la información del teclado (contiene el resultado devuelto por `sp_JoyKeyboard`, `sp_joyKempston` o `sp_JoySinclair1`).
 * `flags [MAX_FLAGS]`: Banderas que pueden usarse desde el scripting o desde inyección de código. Son valores que pueden valer de 0 a 127 (en scripting) o de 0 a 255 (en inyección de código).
 * `level`: Número de nivel actual.
+* `warp_to_level`: **Si no está activo el scripting**, podemos poner a 1 esta variable mediante inyección de código, establecer `level`, `n_pant`, `p_x`, `p_y`, `gpx` y `gpy` y poner `playing` a 0 para saltar a cualquier punto de otro nivel.
 * `n_pant`: Número de la pantalla actual.
 * `o_pant`: Copia del número de la pantalla actual. Se utiliza entre otras cosas para detectar el cambio: si `n_pant != o_pant` hay que cambiar de pantalla. Cada vez que se cambia de pantalla se vuelve a hacer `o_pant = n_pant`.
 * `x_pant`, `y_pant` coordenadas de la pantalla dentro del mapa, sólo si `PLAYER_CHECK_MAP_BOUNDARIES`.

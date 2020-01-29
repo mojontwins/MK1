@@ -136,6 +136,12 @@ void main (void) {
 				p_life = PLAYER_LIFE;
 			#endif
 
+			#ifdef ACTIVATE_SCRIPTING
+				script_result = 0;
+			#else
+				warp_to_level = 0;
+			#endif
+
 			while (1) 
 		#endif
 		
@@ -173,9 +179,18 @@ void main (void) {
 					
 					zone_clear ();
 
+					#ifdef ACTIVATE_SCRIPTING
+						if (script_result != 3)
+					#else
+						if (warp_to_level == 0)
+					#endif
 					++ level;
 					
-					if (level == MAX_LEVELS) {
+					if (level >= MAX_LEVELS 
+						#ifdef ACTIVATE_SCRIPTING
+							|| script_result == 4
+						#endif
+					) {
 						game_ending ();
 						break;
 					}
