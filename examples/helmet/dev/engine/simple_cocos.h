@@ -9,6 +9,10 @@
 // Creation is straightforward: enem N shoots coco N from _en_x+4, _en_y+4, so index with enit.
 // Direction is extracted from bits 6, 7 of _en_t and preloaded in rda
 
+void simple_coco_init (void) {
+	for (enit = 0; enit < MAX_ENEMS; ++ enit) cocos_y [enit] = 0xff;
+}
+
 void simple_coco_shoot (void) {
 	#asm
 			ld  de, (_enit)
@@ -58,6 +62,7 @@ void simple_coco_shoot (void) {
 void simple_coco_update (void) {
 	for (enit = 0; enit < MAX_ENEMS; ++ enit) if (cocos_y [enit] < 160) {
 		#asm				
+			._simple_coco_update_do
 				// Move coco and copy to simple vars
 
 				ld  de, (_enit)
@@ -87,8 +92,9 @@ void simple_coco_update (void) {
 				cp  240
 				jr  c, _simple_coco_update_keep_going
 
-				ld  a, 160
+				ld  a, 0xff
 				ld  (_rdy), a 			// This effectively marks the coco for destruction
+				jr  _simple_coco_update_done
 
 			._simple_coco_update_keep_going
 			
@@ -109,6 +115,8 @@ void simple_coco_update (void) {
 				add hl, de
 				ld  a, (_rdx)
 				ld  (hl), a
+
+			._simple_coco_update_done
 		#endasm
 	}
 }

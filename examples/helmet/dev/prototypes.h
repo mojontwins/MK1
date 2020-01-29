@@ -43,6 +43,11 @@ void player_calc_bounding_box (void);
 unsigned char player_move (void);
 void player_kill (unsigned char sound);
 
+// simple_cocos.h
+void simple_coco_init (void);
+void simple_coco_shoot (void);
+void simple_coco_update (void);
+
 // Main
 
 // 128k.h

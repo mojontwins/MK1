@@ -580,6 +580,10 @@ void draw_scr (void) {
 		bullets_init ();
 	#endif
 
+	#ifdef ENABLE_SIMPLE_COCOS
+		simple_coco_init ();
+	#endif
+
 	invalidate_viewport ();
 	is_rendering = 0;
 }
