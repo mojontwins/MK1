@@ -1,4 +1,4 @@
-# Capítulo 11: Juegos multinivel (48K)
+# Capítulo 12: Juegos multinivel (48K)
 
 Este capítulo es muy interesante pero no ponemos paquetito de materiales, ya que ¿qué mejor paquete que el del Sgt Helmet? Entre los ejemplos de **MTE MK1** tienes la nueva versión de uno de los juegos de Mojon Twins que más nos gusta a los Mojon Twins, esta vez con tres fases. Puedes mirar las cosas de las que hablamos aquí en marcha en ese juego.
 

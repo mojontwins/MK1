@@ -1,4 +1,4 @@
-# Capítulo 12: Code Injection Points
+# Capítulo 11: Code Injection Points
 
 Tras este nombre tan rimbombante se esconde una funcionalidad muy sencilla pero que, una vez que nos vayamos empapando hasta el tuétano de **MTE MK1**, puede darnos alas. Se trata de una serie de archivos en los que podemos añadir código C que son incluidos en partes clave del código. De esa forma podremos ampliar la funcionalidad del motor de formas muy interesantes o programar el gameplay igual que hacíamos mediante scripting, pero con mejor kung fu.
 
