@@ -163,7 +163,7 @@ void main (void) {
 					#asm
 						ld hl, _s_marco
 						ld de, 16384
-						-call depack
+						call depack
 					#endasm
 				#endif
 			#endif
