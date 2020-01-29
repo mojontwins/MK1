@@ -68,7 +68,8 @@
 // -----------------
 
 //#define ENABLE_PURSUERS					// If defined, type 7 enemies are active
-//#define DEATH_COUNT_EXPRESSION	20+(rand()&15)
+//#define DEATH_COUNT_AND 			7
+//#define DEATH_COUNT_ADD 			11 		// Frames to wait = ADD + (rand & AND)
 //#define PURSUERS_BASE_CELL		3		// If defined, type 7 enemies are always #
 
 //#define ENABLE_FANTIES					// If defined, Fanties are enabled!
@@ -78,6 +79,15 @@
 //#define FANTIES_A 				16		// Flying enemies acceleration.
 //#define FANTIES_LIFE_GAUGE		10		// Amount of shots needed to kill flying enemies.
 //#define FANTIES_TYPE_HOMING				// Unset for simple fanties.
+
+//#define ENABLE_ORTHOSHOOTERS				// If defined, orthoshooters are active
+//#define ORTHOSHOOTERS_FREQ 		(rand()&15)
+//#define ORTHOSHOOTERS_BASE_CELL 	0 		// 99 means DONT SHOW!
+
+// Cocos
+// -----
+
+//#define COCOS_V 					8		// pixels per frame
 
 // Pushable tile
 // -------------
@@ -122,8 +132,9 @@
 #define SCRIPTING_DOWN						// Use DOWN as the action key.
 //#define SCRIPTING_KEY_M					// Use M as the action key instead.
 //#define SCRIPTING_KEY_FIRE				// User FIRE as the action key instead.
-#define ENABLE_EXTERN_CODE					// Enables custom code to be run from the script using EXTERN n
-#define ENABLE_FIRE_ZONE					// Allows to define a zone which auto-triggers "FIRE"
+//#define SCRIPTING_KEY_NONE 				// No action key. 
+//#define ENABLE_EXTERN_CODE				// Enables custom code to be run from the script using EXTERN n
+//#define ENABLE_FIRE_ZONE					// Allows to define a zone which auto-triggers "FIRE"
 
 // Timer
 // -----

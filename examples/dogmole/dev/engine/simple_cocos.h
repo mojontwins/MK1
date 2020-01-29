@@ -7,12 +7,27 @@
 // This is a shortcut as we don't have to check if the coco exits the screen vertically.
 
 // Creation is straightforward: enem N shoots coco N from _en_x+4, _en_y+4, so index with enit.
-// Direction is extracted from bits 6, 7 of _en_t
+// Direction is extracted from bits 6, 7 of _en_t and preloaded in rda
+
+void simple_coco_init (void) {
+	for (enit = 0; enit < MAX_ENEMS; ++ enit) cocos_y [enit] = 0xff;
+}
 
 void simple_coco_shoot (void) {
 	#asm
 			ld  de, (_enit)
 			ld  d, 0 					// DE = enit (index)
+
+			ld  hl, _cocos_y
+			add hl, de
+
+			ld  a, (hl)
+			cp  160
+			ret c
+
+			ld  a, (__en_y)
+			add 4
+			ld  (hl), a 				// cocos_y [enit] = _en_x + 4
 
 			ld  hl, _cocos_x
 			add hl, de
@@ -20,20 +35,7 @@ void simple_coco_shoot (void) {
 			add 4
 			ld  (hl), a 				// cocos_x [enit] = _en_x + 4
 
-			ld  hl, _cocos_y
-			add hl, de
-			ld  a, (__en_y)
-			add 4
-			ld  (hl), a 				// cocos_y [enit] = _en_x + 4
-
-			ld  a, __en_t
-			;and 0xc0
-			srl a
-			srl a
-			srl a
-			srl a
-			srl a
-			srl a 						// direction = _en_t >> 6 -> direction (0..3)
+			ld  a, (_rda)				// direction 
 
 			ld  e, a
 			ld  d, 0 					// DE = direction
@@ -58,8 +60,9 @@ void simple_coco_shoot (void) {
 }
 
 void simple_coco_update (void) {
-	for (enit = 0; enit < MAX_ENEMS; ++ enit) if (cocos_y [enit] > 160) {
+	for (enit = 0; enit < MAX_ENEMS; ++ enit) if (cocos_y [enit] < 160) {
 		#asm				
+			._simple_coco_update_do
 				// Move coco and copy to simple vars
 
 				ld  de, (_enit)
@@ -71,7 +74,7 @@ void simple_coco_update (void) {
 
 				ld  hl, _cocos_x
 				add hl, de
-				lc  c, (hl) 			// C = cocos_x [enit]
+				ld  c, (hl) 			// C = cocos_x [enit]
 
 				ld  hl, _cocos_my
 				add hl, de
@@ -89,8 +92,9 @@ void simple_coco_update (void) {
 				cp  240
 				jr  c, _simple_coco_update_keep_going
 
-				ld  a, 160
+				ld  a, 0xff
 				ld  (_rdy), a 			// This effectively marks the coco for destruction
+				jr  _simple_coco_update_done
 
 			._simple_coco_update_keep_going
 			
@@ -111,6 +115,8 @@ void simple_coco_update (void) {
 				add hl, de
 				ld  a, (_rdx)
 				ld  (hl), a
+
+			._simple_coco_update_done
 		#endasm
 	}
 }

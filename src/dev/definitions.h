@@ -189,6 +189,9 @@ unsigned char o_pant;
 unsigned char n_pant;
 unsigned char is_rendering;
 unsigned char level = 0;
+#ifndef ACTIVATE_SCRIPTING
+	unsigned char warp_to_level = 0;
+#endif
 unsigned char maincounter;
 
 // Fire zone
@@ -255,9 +258,6 @@ unsigned char objs_old, keys_old, life_old, killed_old;
 
 unsigned char *gen_pt;
 unsigned char playing;
-#ifdef COMPRESSED_LEVELS
-	unsigned char mlplaying;
-#endif	
 
 unsigned char success;
 #ifdef PLAYER_CHECK_MAP_BOUNDARIES

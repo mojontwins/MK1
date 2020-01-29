@@ -140,9 +140,9 @@
 		
 	#ifdef ENABLE_SIMPLE_COCOS
 		for (gpit = 0; gpit < MAX_ENEMS; gpit ++) {
-			if (cocos_y [gpit] < 160) {
+			if (cocos_y [gpit] < 160) { 
 				rdx = cocos_x [gpit]; rdy = cocos_y [gpit];
-				//sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, VIEWPORT_Y + (bullets_y [gpit] >> 3), VIEWPORT_X + (bullets_x [gpit] >> 3), bullets_x [gpit] & 7, bullets_y [gpit] & 7);
+				//sp_MoveSprAbs (sp_cocos [gpit], spritesClip, 0, VIEWPORT_Y + (bullets_y [gpit] >> 3), VIEWPORT_X + (bullets_x [gpit] >> 3), bullets_x [gpit] & 7, bullets_y [gpit] & 7);
 				#asm
 						ld  a, (_gpit)
 						sla a
@@ -184,7 +184,7 @@
 						call SPMoveSprAbs
 				#endasm
 			} else {
-				//sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, -2, -2, 0, 0);
+				//sp_MoveSprAbs (sp_cocos [gpit], spritesClip, 0, -2, -2, 0, 0);
 				#asm
 						ld  a, (_gpit)
 						sla a

@@ -3,6 +3,13 @@
 
 // enengine.h
 
+#ifdef ENABLE_PURSUERS
+	void enems_pursuers_init (void) {
+		en_an_alive [enit] = 0;
+		en_an_dead_row [enit] = DEATH_COUNT_ADD + (rand () & DEATH_COUNT_AND);
+	}
+#endif
+
 #ifndef COMPRESSED_LEVELS
 	#if defined(PLAYER_STEPS_ON_ENEMIES) || defined (PLAYER_CAN_FIRE)
 		void enems_init (void) {
@@ -134,7 +141,7 @@ void enems_load (void) {
 			#endif
 		#endif
 
-		switch (malotes [enoffsmasi].t) {
+		switch (malotes [enoffsmasi].t & 0x1f) {
 			case 1:
 			case 2:
 			case 3:
@@ -143,11 +150,14 @@ void enems_load (void) {
 				break;
 
 			#ifdef ENABLE_ORTHOSHOOTERS
-				case 5:
-					en_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;
+				case 5:					
 					#if ORTHOSHOOTERS_BASE_CELL==99
+						en_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;
 						en_an_next_frame [enit] = sprite_18_a;
+					#else
+						en_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;
 					#endif
+					en_an_state [enit] = malotes [enoffsmasi].t >> 6;
 					break;
 			#endif
 
@@ -169,8 +179,7 @@ void enems_load (void) {
 
 			#ifdef ENABLE_PURSUERS
 				case 7:
-					en_an_alive [enit] = 0;
-					en_an_dead_row [enit] = 0;//DEATH_COUNT_EXPRESSION;
+					enems_pursuers_init ();
 					break;
 			#endif
 
@@ -179,6 +188,8 @@ void enems_load (void) {
 			default:
 				en_an_next_frame [enit] = sprite_18_a;
 		}
+
+		malotes [enoffsmasi].t &= 0x1f;
 	}
 }
 
@@ -308,9 +319,14 @@ void enems_move (void) {
 			case 2:
 			case 3:
 			case 4:
+			#ifdef ENABLE_ORTHOSHOOTERS
+				case 5:
+			#endif
 				#include "engine/enem_mods/enem_type_lineal.h"
 				#ifdef ENABLE_ORTHOSHOOTERS
-					#include "engine/enem_mods/enem_type_orthoshooters.h"
+					if (_en_t == 5) {
+						#include "engine/enem_mods/enem_type_orthoshooters.h"
+					}
 				#endif
 				break;
 
@@ -321,7 +337,7 @@ void enems_move (void) {
 			#endif
 			#ifdef ENABLE_PURSUERS
 				case 7:
-					#include "engine/enem_mods/enem_type_pursuers.h"
+					#include "engine/enem_mods/enem_type_pursuers_asm.h"
 					break;	
 			#endif
 			#include "my/ci/enems_move.h"
@@ -537,8 +553,7 @@ void enems_move (void) {
 									en_an_next_frame [enit] = sprite_18_a;
 									
 									#ifdef ENABLE_PURSUERS
-										en_an_alive [enit] = 0;
-										en_an_dead_row [enit] = DEATH_COUNT_EXPRESSION;
+										enems_pursuers_init ();
 									#endif
 
 									enems_kill ();					

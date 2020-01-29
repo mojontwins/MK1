@@ -441,3 +441,10 @@ Eso terminará el bucle de juego y saltará al nivel 2, pantalla 20, y pondrá a
 
 ## Niveles de diferentes tamaños
 
+Aquí estoy, verborrea loca en Groenlandia, aquí estoy soltando panoja según se me va ocurriendo. Es que son muchas cosas. Quizá algún día venga alguien y ordene esto mejor.
+
+Sí, puedes hacer niveles de diferentes tamaños, de eso te has tenido que dar cuenta porque tienes `map_w` y `map_h` en la estructura `LEVEL`. A lo mejor también te has dado cuenta de la clave de todo esto: como el sistema funciona descomprimiendo un binario comprimido en un espacio en el que hemos hecho sitio, y este sitio se hace obviamente haciendo caso de las variables `MAP_W` y `MAP_H`, entonces ha de cumplirse que el número de pantallas del nivel que más tenga tiene que ser menor o igual que `MAP_W` * `MAP_H`. Si te habías dado cuenta de este detalle, otros diez puntos para Gryffindor, señorita Granger, y una estrellita.
+
+En efecto, aunque la geometría del nivel de igual, tiene que caber en el buffer. Al final la geometría da lo mismo, porque un mapa o un conjunto de enemigos y hotspots no deja de estar ordenados como una tira de pantallas en memoria. 
+
+Por tanto, lo que hay que hacer es ver cuál es tu nivel más grande (el que más pantallas tenga) y hacer que los valores de `MAP_W` y `MAP_H` en `my/config.h` coincidan con sus dimensiones. Con esto ya lo tienes.

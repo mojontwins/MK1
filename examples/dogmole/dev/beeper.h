@@ -14,7 +14,7 @@
 .sound_play
 	ld hl,sfxData	;address of sound effects data
 
-	;di
+		;di
 	push ix
 	push iy
 
@@ -23,7 +23,7 @@
 	add hl,bc
 	add hl,bc
 	ld e,(hl)
-	inc hl
+		inc hl
 	ld d,(hl)
 	push de
 	pop ix			;put it into ix
@@ -61,13 +61,13 @@
 	
 
 ;play sample
-
+	
 .sfxRoutineSample
-	ex de,hl
+		ex de,hl
 .sfxRS0
 	ld e,8
 	ld d,(hl)
-	inc hl
+		inc hl
 .sfxRS1
 	ld a,(ix+5)
 .sfxRS2
@@ -81,11 +81,11 @@
 	out (254),a
 	dec e
 	jr nz,sfxRS1
-	dec bc
-	ld a,b
-	or c
+		dec bc
+		ld a,b
+		or c
 	jr nz,sfxRS0
-
+	
 	ld c,6
 	
 .nextData
@@ -113,32 +113,32 @@
 .sfxRoutineToneDuty
 	cp 0
 	sbc a,a
-	and 16
+		and 16
 .sfxRoutineToneBorder
 	or 0
 	out (254),a
-
+	
 	dec bc
 	ld a,b
 	or c
 	jr nz,sfxRT1
-
+	
 	ld a,(sfxRoutineToneDuty+1)	 ;duty change
 	add a,(ix+10)
 	ld (sfxRoutineToneDuty+1),a
-
+	
 	ld c,(ix+7)		;slide
 	ld b,(ix+8)
-	ex de,hl
+		ex de,hl
 	add hl,bc
-	ex de,hl
-
+		ex de,hl
+		
 	pop bc
 	dec bc
 	ld a,b
-	or c
+		or c
 	jr nz,sfxRT0
-
+	
 	ld c,11
 	jr nextData
 
@@ -153,12 +153,12 @@
 	ld h,d
 	ld l,d
 .sfxRN0
-	push bc
+		push bc
 	push iy
 	pop bc
 .sfxRN1
 	ld a,(hl)
-	and 16
+		and 16
 .sfxRoutineNoiseBorder
 	or 0
 	out (254),a
@@ -175,22 +175,22 @@
 	or c
 	jr nz,sfxRN1
 
-	ld a,e
+		ld a,e
 	add a,(ix+6)	;slide
 	ld e,a
 
-	pop bc
+		pop bc
 	dec bc
 	ld a,b
 	or c
 	jr nz,sfxRN0
-
+	
 	ld c,7
 	jr nextData
 
 
 .sfxData
-
+	
 .SoundEffectsData
 	defw SoundEffect0Data
 	defw SoundEffect1Data

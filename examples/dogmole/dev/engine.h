@@ -73,28 +73,6 @@ const unsigned char *enem_frames [] = {
 	sprite_13_a, sprite_14_a, sprite_15_a, sprite_16_a
 };
 
-#ifdef COMPRESSED_LEVELS
-	#ifdef MODE_128K
-		void prepare_level (void) {
-			get_resource (levels [level].resource, (unsigned int) (level_data));
-			//unpack_RAMn (levels [level].page, levels [level].address, (unsigned int) (level_data));
-			n_pant = level_data.scr_ini;
-			gpx = level_data->ini_x << 4; p_x = gpx << 6;
-			gpy = level_data->ini_y << 4; p_y = gpy << 6;
-		}
-	#else
-		void prepare_level (void) {
-			unpack ((unsigned int) levelset [level].leveldata_c, MAP_DATA);
-			unpack ((unsigned int) levelset [level].tileset_c, (unsigned int) (tileset));
-			unpack ((unsigned int) levelset [level].spriteset_c, (unsigned int) (sprite_1_a - 16));
-			n_pant = levelset [level].ini_pant;
-			gpx = level_data->ini_x << 4; p_x = gpx << 6;
-			gpy = level_data->ini_y << 4; p_y = gpy << 6;
-			n_bolts = *((unsigned char *) (NBOLTS_PEEK));
-	}
-	#endif
-#endif
-
 #include "my/fixed_screens.h"
 
 signed int addsign (signed int n, signed int value) {
@@ -234,11 +212,38 @@ void draw_scr_background (void) {
 	for (gpit = 0; gpit < 150; ++ gpit) {	
 		#ifdef UNPACKED_MAP
 			// Mapa tipo UNPACKED
+			/*
 			_t = *map_pointer ++;
 			map_attr [gpit] = behs [_t];
 			map_buff [gpit] = _t;
+			*/
+			#asm
+					ld  hl, (_map_pointer)
+					ld  a, (hl)
+					ld  (__t), a
+					inc hl
+					ld  (_map_pointer), hl
+
+					ld  b, 0
+					ld  c, a
+					ld  hl, _behs
+					add hl, bc
+					ld  a, (hl)
+
+					ld  bc, (_gpit)
+					ld  b, 0
+					ld  hl, _map_attr
+					add hl, bc
+					ld  (hl), a
+
+					ld  hl, _map_buff
+					add hl, bc
+					ld  a, (__t)
+					ld  (hl), a
+			#endasm
 		#else
 			// Mapa tipo PACKED
+			/*
 			if (!(gpit & 1)) {
 				gpc = *map_pointer ++;
 				_t = gpc >> 4;
@@ -248,14 +253,81 @@ void draw_scr_background (void) {
 			map_attr [gpit] = behs [_t];
 			if (_t == 0 && (rand () & 15) == 1) _t = 19;
 			map_buff [gpit] = _t;
+			*/
+			#asm
+					ld  a, (_gpit)
+					and 1
+					jr  nz, _draw_scr_packed_existing
+				._draw_scr_packed_new
+					ld  hl, (_map_pointer)
+					ld  a, (hl)
+					ld  (_gpc), a
+					inc hl
+					ld  (_map_pointer), hl
+
+					srl a
+					srl a
+					srl a
+					srl a
+					jr  _draw_scr_packed_done
+
+				._draw_scr_packed_existing
+					ld  a, (_gpc)
+					and 15
+
+				._draw_scr_packed_done
+					ld  (__t), a
+					
+					ld  b, 0
+					ld  c, a
+					ld  hl, _behs
+					add hl, bc
+					ld  a, (hl)
+
+					ld  bc, (_gpit)
+					ld  b, 0
+					ld  hl, _map_attr
+					add hl, bc
+					ld  (hl), a
+
+					ld  a, (__t)
+					or  a
+					jr  nz, _draw_scr_packed_noalt
+
+				._draw_scr_packed_alt
+					call _rand
+					ld  a, l
+					and l
+					cp  1
+					jr  z, _draw_scr_packed_alt_subst
+
+					ld  a, (__t)
+					jr  _draw_scr_packed_noalt
+
+				._draw_scr_packed_alt_subst
+					ld  a, 19
+					ld  (__t), a
+
+				._draw_scr_packed_noalt
+					ld  hl, _map_buff
+					add hl, bc
+					
+					ld  (hl), a
+			#endasm
 		#endif	
 
 		#ifdef BREAKABLE_WALLS
-			brk_buff [gpit] = 0;
+			// brk_buff [gpit] = 0;
+			#asm
+					ld  hl, _brk_buff
+					add hl, bc
+					xor a
+					ld  (hl), a
+			#endasm
 		#endif
 
 		draw_coloured_tile ();
-
+		
 		#if defined ENABLE_TILANIMS && defined UNPACKED_MAP
 			// Detect tilanims
 			if (_t >= ENABLE_TILANIMS) {
@@ -263,7 +335,22 @@ void draw_scr_background (void) {
 			}
 		#endif
 			
-		_x += 2; if (_x == VIEWPORT_X + 30) { _x = VIEWPORT_X; _y += 2; }
+		//_x += 2; if (_x == VIEWPORT_X + 30) { _x = VIEWPORT_X; _y += 2; }
+		#asm
+				ld  a, (__x)
+				add 2
+				cp  30 + VIEWPORT_X
+				jr  c, _advance_worm_no_inc_y
+
+				ld  a, (__y)
+				add 2
+				ld  (__y), a
+
+				ld  a, VIEWPORT_X
+
+			._advance_worm_no_inc_y
+				ld  (__x), a
+		#endasm
 	}
 }
 
@@ -282,7 +369,8 @@ void draw_scr (void) {
 
 	// Object setup
 
-	hotspot_x = hotspot_y = 240;
+	/*
+	hotspot_y = 240;
 	rdx = (hotspots [n_pant].xy >> 4);
 	rdy = (hotspots [n_pant].xy & 15);
 
@@ -293,9 +381,105 @@ void draw_scr (void) {
 		_x = rdx; _y = rdy; _t = 16 + (hotspots [n_pant].tipo != 3 ? hotspots [n_pant].tipo : 0);
 		draw_coloured_tile_gamearea ();
 	}
+	*/
+	#asm 
+			ld  a, 240
+			ld  (_hotspot_y), a
+
+			// Hotspots are 3-byte wide structs. No game will have more than 85 screens
+			// in the same map so we can do the math in 8 bits:
+
+			ld  a, (_n_pant)
+			ld  b, a
+			sla a
+			add b
+
+			ld  c, a
+			ld  b, 0
+
+			// BC = Index to the hotspots struct, which happens to be {xy, type, act}
+
+			ld  hl, _hotspots
+			add hl, bc
+
+			// Now HL points to hotspots [n_pant]
+
+			ld  a, (hl) 		// A = hotspots [n_pant].xy
+			ld  b, a
+
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (__x), a
+
+			ld  a, b
+			and 15
+			ld  (__y), a
+
+			inc hl 				// HL->hotspots [n_pant].type
+			ld  b, (hl) 		// B = hotspots [n_pant].type
+			inc hl 				// HL->hotspots [n_pant].act
+			ld  c, (hl) 		// C = hotspots [n_pant].act
+
+			// if (hotspots [n_pant].act && hotspots [n_pant].tipo) 
+
+			xor a
+			or  b
+			jr  z, _hotspots_setup_done  
+			
+			xor a
+			or  c
+			jr  z, _hotspots_setup_done
+
+		._hotspots_setup_do
+			ld  a, (__x)
+			ld  e, a
+			sla a
+			sla a
+			sla a
+			sla a
+			ld  (_hotspot_x), a
+
+			ld  a, (__y)
+			ld  d, a
+			sla a
+			sla a
+			sla a
+			sla a
+			ld  (_hotspot_y), a
+
+			// orig_tile = map_buff [(_y << 4) - _y + _x];
+			// A = (_y << 4), D = _y, E = _x, so
+			sub d
+			add e
+
+			ld  e, a
+			ld  d, 0
+			ld  hl, _map_buff
+			add hl, de
+			ld  a, (hl)
+			ld  (_orig_tile), a
+
+			// _t = 16 + (hotspots [n_pant].tipo != 3 ? hotspots [n_pant].tipo : 0);
+			ld  a, b
+			cp  3
+			jp  nz, _hotspots_setup_set
+
+		._hotspots_setup_set_refill
+			xor a
+		._hotspots_setup_set
+			add 16
+			ld  (__t), a		
+
+			call _draw_coloured_tile_gamearea
+
+		._hotspots_setup_done
+	#endasm
 
 	#if !defined DEACTIVATE_KEYS && MAX_CERROJOS > 0
 		// Open locks
+		/*
 		for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) {
 			if (cerrojos [gpit].np == n_pant && !cerrojos [gpit].st) {
 				_x = cerrojos [gpit].x;
@@ -306,6 +490,77 @@ void draw_scr (void) {
 				_t = 0; draw_coloured_tile_gamearea ();
 			}
 		}
+		*/
+		#asm
+				// CERROJOS structure is 4 bytes wide: { np, x, y, st }
+				ld  hl, _cerrojos
+				ld  b, MAX_CERROJOS
+			._open_locks_loop
+				push bc
+				
+				ld  a, (_n_pant)
+				ld  c, a
+
+				ld  a, (hl)			// A = cerrojos [gpit].np
+				inc hl
+
+				cp  c
+				jr  nz, _open_locks_done
+				
+				ld  a, (hl)
+				inc hl
+
+				ld  d, a 			// D = cerrojos [gpit].x;
+
+				ld  a, (hl)
+				inc hl
+
+				ld  e, a 			// E = cerrojos [gpit].y;
+
+				ld  a, (hl)			// A = cerrojos [gpit].st
+				inc hl
+
+				or  a
+				jr  nz, _open_locks_done				
+				
+			._open_locks_do
+				ld  a, d
+				ld  (__x), a
+				ld  a, e
+				ld  (__y), a
+				
+				sla a
+				sla a
+				sla a
+				sla a
+				sub e
+				add d
+
+				ld  b, 0
+				ld  c, a
+				xor a
+				
+				push hl 			// Save for later.
+				
+				ld  hl, _map_attr
+				add hl, bc
+				ld  (hl), a
+				ld  hl, _map_buff
+				add hl, bc
+				ld  (hl), a
+
+				ld  (__t), a
+
+				call _draw_coloured_tile_gamearea
+
+				pop hl
+
+			._open_locks_done
+				
+				pop bc
+				dec b
+				jr  nz, _open_locks_loop
+		#endasm
 	#endif
 
 	enems_load ();
@@ -323,6 +578,10 @@ void draw_scr (void) {
 
 	#ifdef PLAYER_CAN_FIRE
 		bullets_init ();
+	#endif
+
+	#ifdef ENABLE_SIMPLE_COCOS
+		simple_coco_init ();
 	#endif
 
 	invalidate_viewport ();

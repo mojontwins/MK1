@@ -43,6 +43,11 @@ void player_calc_bounding_box (void);
 unsigned char player_move (void);
 void player_kill (unsigned char sound);
 
+// simple_cocos.h
+void simple_coco_init (void);
+void simple_coco_shoot (void);
+void simple_coco_update (void);
+
 // Main
 
 // 128k.h
@@ -79,7 +84,7 @@ int limit (int val, int min, int max);
 void blackout (void);
 
 // printer.h
-unsigned char attr (char x, char y);
+unsigned char attr (unsigned char x, unsigned char y);
 unsigned char qtile (unsigned char x, unsigned char y);
 void draw_coloured_tile (void);
 void invalidate_tile (void);

@@ -162,7 +162,7 @@
 // Top view:
 // ---------
 
-#define PLAYER_GENITAL					// Enable top view.
+#define PLAYER_GENITAL						// Enable top view.
 #define TOP_OVER_SIDE 						// UP/DOWN has priority over LEFT/RIGHT
 //#define PLAYER_BOUNCE_WITH_WALLS			// Bounce when hitting a wall. Only really useful in MOGGY_STYLE mode
 

@@ -2,7 +2,7 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 // mk1.c
-
+#define DEBUG_KEYS
 #include <spritepack.h>
 
 // We are using some stuff from splib2 directly.
@@ -17,14 +17,22 @@
 #include "my/config.h"
 #include "prototypes.h"
 
+/* splib2 memory map
+61440 - 61696 IM2 vector table
+61697 - 61936 FREEPOOL (240 bytes)
+61937 - 61948 ISR
+61949 - 61951 Free (3 bytes)
+61952 - 65535 Horizontal Rotation Tables
+*/
+
 #ifdef MODE_128K
 	// Versión para 128K
 	#pragma output STACKPTR=23999
 	#define FREEPOOL 61697
 #else
 	// Versión para 48K
-	#pragma output STACKPTR=61952
-	#define FREEPOOL 61440
+	#pragma output STACKPTR=61936
+	#define FREEPOOL 61697
 #endif
 
 // Configure number of blocks and reserve a pool for sprites
@@ -47,40 +55,22 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 
 #ifdef MODE_128K
 	#include "128k.h"
+	#include "librarian.h"
 #endif
 
 #include "aplib.h"
 #include "pantallas.h"
 
-#ifdef MODE_128K
-	#include "librarian.h"
-	
-	#ifdef COMPRESSED_LEVELS
-		#include "levels128.h"
-	#else
-		#include "assets/mapa.h"
-		#include "assets/tileset.h"
-		#include "assets/sprites.h"
-		#include "assets/extrasprites.h"
-		#include "assets/enems.h"
-	#endif
-
+#ifdef COMPRESSED_LEVELS
+	#include "assets/levels.h"
+	#include "assets/extrasprites.h"
+	#include "my/levelset.h"
 #else
-
-	#ifdef COMPRESSED_LEVELS
-		#include "levels.h"
-	#else
-		#include "assets/mapa.h"
-	#endif
-
+	#include "assets/mapa.h"
 	#include "assets/tileset.h"
+	#include "assets/enems.h"
 	#include "assets/sprites.h"
 	#include "assets/extrasprites.h"
-	
-	#ifndef COMPRESSED_LEVELS
-		#include "assets/enems.h"
-	#endif
-
 #endif
 
 #ifdef MODE_128K
@@ -107,6 +97,9 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #endif
 #ifdef ENABLE_SIMPLE_COCOS
 	#include "engine/simple_cocos.h"
+#endif
+#ifdef COMPRESSED_LEVELS
+	#include "engine/c_levels.h"
 #endif
 #include "engine.h"
 #include "engine/player.h"
