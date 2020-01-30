@@ -1,3 +1,5 @@
-# Dogmole Tuppowski and the Mesmerizing Meemaid from Miskatonic
+# Misco Jones en busca de la Vah-Ka Perdida
 
-Port a **MTE MK1 v5** del viejo juego que hicimos con la v3.1 y que sirve además de ilustración para el tutorial, donde se va construyendo poco a poco de los capítulos 1 al 9.
+Port a **MTE MK1 v5** de la ópera prima de **Radastan** con **MTE MK1**.
+
+Puedes ver la ficha del juego y la versión original en la [Web de Radastan](http://www.bytemaniacos.com/?page_id=2887).
