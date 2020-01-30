@@ -82,7 +82,7 @@
 
 #define ENABLE_ORTHOSHOOTERS				// If defined, orthoshooters are active
 #define ORTHOSHOOTERS_FREQ 			(rand()&15)
-#define ORTHOSHOOTERS_BASE_CELL 	0 		// 99 means DONT SHOW!
+#define ORTHOSHOOTERS_BASE_CELL 	3 		// 99 means DONT SHOW!
 
 // Cocos
 // -----

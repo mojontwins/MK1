@@ -2,7 +2,7 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 // mk1.c
-#define DEBUG_KEYS
+//#define DEBUG_KEYS
 #include <spritepack.h>
 
 // We are using some stuff from splib2 directly.
@@ -16,6 +16,10 @@
 
 #include "my/config.h"
 #include "prototypes.h"
+
+// DON'T touch these
+#define FIXBITS 		6	
+#define MAX_ENEMS 		3			
 
 /* splib2 memory map
 61440 - 61696 IM2 vector table
@@ -38,10 +42,20 @@
 // Configure number of blocks and reserve a pool for sprites
 
 #ifdef PLAYER_CAN_FIRE
-	#define NUMBLOCKS (40 + (MAX_BULLETS * 5))
+	#ifdef ENABLE_SIMPLE_COCOS
+		#define MAX_PROJECTILES (MAX_BULLETS + MAX_ENEMS)
+	#else
+		#define MAX_PROJECTILES MAX_BULLETS
+	#endif
 #else
-	#define NUMBLOCKS 40
+	#ifdef ENABLE_SIMPLE_COCOS
+		#define MAX_PROJECTILES MAX_ENEMS
+	#else
+		#define MAX_PROJECTILES 0
+	#endif
 #endif
+
+#define NUMBLOCKS (40 + (MAX_PROJECTILES * 5))
 
 unsigned char AD_FREE [NUMBLOCKS * 15];
 

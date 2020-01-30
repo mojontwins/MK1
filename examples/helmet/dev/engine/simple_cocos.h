@@ -94,7 +94,7 @@ void simple_coco_update (void) {
 
 				ld  a, 0xff
 				ld  (_rdy), a 			// This effectively marks the coco for destruction
-				jr  _simple_coco_update_done
+				jr  _simple_coco_update_continue
 
 			._simple_coco_update_keep_going
 			
@@ -102,6 +102,7 @@ void simple_coco_update (void) {
 
 				// Check collision (BG)	
 
+			._simple_coco_update_continue
 				// And update arrays 
 				ld  de, (_enit)
 				ld  d, 0

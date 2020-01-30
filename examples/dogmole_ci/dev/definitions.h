@@ -1,9 +1,6 @@
 // MTE MK1 (la Churrera) v5.0
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
-#define FIXBITS 6	// DON'T touch this
-#define MAX_ENEMS 3
-
 #asm
 	.vpClipStruct defb VIEWPORT_Y, VIEWPORT_Y + 20, VIEWPORT_X, VIEWPORT_X + 30
 	.fsClipStruct defb 0, 24, 0, 32
