@@ -1,16 +1,14 @@
-                ORG 40000
-BORDER_COL:     EQU  $0
-
+#asm
 ; *****************************************************************************
 ; * Phaser1 Engine, with synthesised drums
 ; *
-; * Original code by Shiru - http://shiru.untergrund.net/
+; * Original code by Shiru - .http//shiru.untergrund.net/
 ; * Modified by Chris Cowley
 ; *
-; * Produced by Beepola v1.08.01
+; * Produced by Beepola v1.05.01
 ; ******************************************************************************
  
-START:
+.musicstart
              LD    HL,MUSICDATA         ;  <- Pointer to Music Data. Change
                                         ;     this to play a different song
              LD   A,(HL)                         ; Get the loop start pointer
@@ -33,10 +31,11 @@ START:
              LD   L,A
              LD   (NOTE_PTR),HL                  ; Set the note offset (within this pattern) to 0
 
-PLAYER:
+.player
              DI
              PUSH IY
-             LD   A,BORDER_COL
+             ;LD   A,BORDER_COL
+             xor a
              LD   H,$00
              LD   L,A
              LD   (CNT_1A),HL
@@ -52,27 +51,27 @@ PLAYER:
 ; ********************************************************************************************************
 ; * NEXT_PATTERN
 ; *
-; * Select the next pattern in sequence (and handle looping if we've reached PATTERN_LOOP_END
+; * Select the next pattern in sequence (and handle looping if weve reached PATTERN_LOOP_END
 ; * Execution falls through to PLAYNOTE to play the first note from our next pattern
 ; ********************************************************************************************************
-NEXT_PATTERN:
+.next_pattern
                           LD   A,(PATTERN_PTR)
                           INC  A
                           INC  A
                           DEFB $FE                           ; CP n
-PATTERN_LOOP_END:         DEFB 0
+.pattern_loop_end         DEFB 0
                           JR   NZ,NO_PATTERN_LOOP
                           ; Handle Pattern Looping at and of song
                           DEFB $3E                           ; LD A,n
-PATTERN_LOOP_BEGIN:       DEFB 0
-NO_PATTERN_LOOP:          LD   (PATTERN_PTR),A
+.pattern_loop_begin       DEFB 0
+.no_pattern_loop          LD   (PATTERN_PTR),A
                           LD   HL,$0000
                           LD   (NOTE_PTR),HL   ; Start of pattern (NOTE_PTR = 0)
 
-MAIN_LOOP:
+.main_loop
              LD   IYL,0                        ; Set channel = 0
 
-READ_LOOP:
+.read_loop
              LD   HL,(PATTERN_ADDR)
              LD   A,(PATTERN_PTR)
              LD   E,A
@@ -111,16 +110,16 @@ READ_LOOP:
              EX   DE,HL
 
              DEFB $DD,$21                      ; LD IX,nn
-CURRENT_INST:
+.current_inst
              DEFW $0000
 
              LD   A,(IX+$00)
              OR   A
              JR   Z,L809B                      ; Original code jumps into byte 2 of the DJNZ (invalid opcode FD)
              LD   B,A
-L8098:       ADD  HL,HL
+.l8098       ADD  HL,HL
              DJNZ L8098
-L809B:       LD   E,(IX+$01)
+.l809b       LD   E,(IX+$01)
              LD   D,(IX+$02)
              ADD  HL,DE
              LD   (DIV_1B),HL
@@ -137,7 +136,7 @@ L809B:       LD   E,(IX+$01)
              LD   (CNT_1B),HL
              JR   READ_LOOP
 
-SET_NOTE2:
+.set_note2
              LD   (DIV_2),DE
              LD   A,IYH
              LD   HL,OUT_2
@@ -146,7 +145,7 @@ SET_NOTE2:
              LD   (CNT_2),HL
              JP   READ_LOOP
 
-SET_STOP:
+.set_stop
              LD   HL,$0000
              LD   A,IYL
              OR   A
@@ -158,14 +157,14 @@ SET_STOP:
              RES  4,(HL)
              LD   IYL,1
              JP   READ_LOOP
-SET_STOP2:
+.set_stop2
              ; Stop channel 2 note
              LD   (DIV_2),HL
              LD   HL,OUT_2
              RES  4,(HL)
              JP   READ_LOOP
 
-OTHER:       CP   $3C
+.other       CP   $3C
              JR   Z,SET_STOP                   ; Stop note
              CP   $3E
              JR   Z,SKIP_CH1                   ; No changes to channel 1
@@ -178,50 +177,50 @@ OTHER:       CP   $3C
              LD   (NOTE_PTR),DE                ; Increment the note pointer
 
              DEFB $01                          ; LD BC,nn
-INSTRUM_TBL:
+.instrum_tbl
              DEFW $0000
 
              ADD  HL,BC
              LD   (CURRENT_INST),HL
              JP   READ_LOOP
 
-SKIP_CH1:
+.skip_ch1
              LD   IYL,$01
              JP   READ_LOOP
 
-EXIT_PLAYER:
+.exit_player
              LD   HL,$2758
              EXX
              POP  IY
              EI
              RET
 
-RENDER:
+.render
              AND  $7F                          ; L813A
              CP   $76
              JP   NC,DRUMS
              LD   D,A
              EXX
              DEFB $21                          ; LD HL,nn
-CNT_1A:      DEFW $0000
+.cnt_1a      DEFW $0000
              DEFB $DD,$21                      ; LD IX,nn
-CNT_1B:      DEFW $0000
+.cnt_1b      DEFW $0000
              DEFB $01                          ; LD BC,nn
-DIV_1A:      DEFW $0000
+.div_1a      DEFW $0000
              DEFB $11                          ; LD DE,nn
-DIV_1B:      DEFW $0000
+.div_1b      DEFW $0000
              DEFB $3E                          ; LD A,n
-OUT_1:       DEFB $0
+.out_1       DEFB $0
              EXX
-             EX   AF,AF'
+             EX   AF,AF ; beware!
              DEFB $21                          ; LD HL,nn
-CNT_2:       DEFW $0000
+.cnt_2       DEFW $0000
              DEFB $01                          ; LD BC,nn
-DIV_2:       DEFW $0000
+.div_2       DEFW $0000
              DEFB $3E                          ; LD A,n
-OUT_2:       DEFB $00
+.out_2       DEFB $00
 
-PLAY_NOTE:
+.play_note
              ; Read keyboard
              LD   E,A
              XOR  A
@@ -229,122 +228,122 @@ PLAY_NOTE:
              OR   $E0
              INC  A
 
-PLAYER_WAIT_KEY:
+.player_wait_key
              JR   NZ,EXIT_PLAYER
              LD   A,E
              LD   E,0
 
-L8168:       EXX
-             EX   AF,AF'
+.l8168       EXX
+             EX   AF,AF ; beware!
              ADD  HL,BC
              OUT  ($FE),A
              JR   C,L8171
              JR   L8173
-L8171:       XOR  $10
-L8173:       ADD  IX,DE
+.l8171       XOR  $10
+.l8173       ADD  IX,DE
              JR   C,L8179
              JR   L817B
-L8179:       XOR  $10
-L817B:       EX   AF,AF'
+.l8179       XOR  $10
+.l817b       EX   AF,AF ; beware!
              OUT  ($FE),A
              EXX
              ADD  HL,BC
              JR   C,L8184
              JR   L8186
-L8184:       XOR  $10
-L8186:       NOP
+.l8184       XOR  $10
+.l8186       NOP
              JP   L818A
 
-L818A:       EXX
-             EX   AF,AF'
+.l818a       EXX
+             EX   AF,AF ; beware!
              ADD  HL,BC
              OUT  ($FE),A
              JR   C,L8193
              JR   L8195
-L8193:       XOR  $10
-L8195:       ADD  IX,DE
+.l8193       XOR  $10
+.l8195       ADD  IX,DE
              JR   C,L819B
              JR   L819D
-L819B:       XOR  $10
-L819D:       EX   AF,AF'
+.l819b       XOR  $10
+.l819d       EX   AF,AF ; beware!
              OUT  ($FE),A
              EXX
              ADD  HL,BC
              JR   C,L81A6
              JR   L81A8
-L81A6:       XOR  $10
-L81A8:       NOP
+.l81a6       XOR  $10
+.l81a8       NOP
              JP   L81AC
 
-L81AC:       EXX
-             EX   AF,AF'
+.l81ac       EXX
+             EX   AF,AF ; beware!
              ADD  HL,BC
              OUT  ($FE),A
              JR   C,L81B5
              JR   L81B7
-L81B5:       XOR  $10
-L81B7:       ADD  IX,DE
+.l81b5       XOR  $10
+.l81b7       ADD  IX,DE
              JR   C,L81BD
              JR   L81BF
-L81BD:       XOR  $10
-L81BF:       EX   AF,AF'
+.l81bd       XOR  $10
+.l81bf       EX   AF,AF ; beware!
              OUT  ($FE),A
              EXX
              ADD  HL,BC
              JR   C,L81C8
              JR   L81CA
-L81C8:       XOR  $10
-L81CA:       NOP
+.l81c8       XOR  $10
+.l81ca       NOP
              JP   L81CE
 
-L81CE:       EXX
-             EX   AF,AF'
+.l81ce       EXX
+             EX   AF,AF ; beware!
              ADD  HL,BC
              OUT  ($FE),A
              JR   C,L81D7
              JR   L81D9
-L81D7:       XOR  $10
-L81D9:       ADD  IX,DE
+.l81d7       XOR  $10
+.l81d9       ADD  IX,DE
              JR   C,L81DF
              JR   L81E1
-L81DF:       XOR  $10
-L81E1:       EX   AF,AF'
+.l81df       XOR  $10
+.l81e1       EX   AF,AF ; beware!
              OUT  ($FE),A
              EXX
              ADD  HL,BC
              JR   C,L81EA
              JR   L81EC
-L81EA:       XOR  $10
+.l81ea       XOR  $10
 
-L81EC:       DEC  E
+.l81ec       DEC  E
              JP   NZ,L8168
 
              EXX
-             EX   AF,AF'
+             EX   AF,AF ; beware!
              ADD  HL,BC
              OUT  ($FE),A
              JR   C,L81F9
              JR   L81FB
-L81F9:       XOR  $10
-L81FB:       ADD  IX,DE
+.l81f9       XOR  $10
+.l81fb       ADD  IX,DE
              JR   C,L8201
              JR   L8203
-L8201:       XOR  $10
-L8203:       EX   AF,AF'
+.l8201       XOR  $10
+.l8203       EX   AF,AF ; beware!
              OUT  ($FE),A
              EXX
              ADD  HL,BC
              JR   C,L820C
              JR   L820E
-L820C:       XOR  $10
+.l820c       XOR  $10
 
-L820E:       DEC  D
+.l820e       DEC  D
              JP   NZ,PLAY_NOTE
 
              LD   (CNT_2),HL
              LD   (OUT_2),A
              EXX
-             EX   AF,AF'
+             EX   AF,AF ; beware!
              LD   (CNT_1A),HL
              LD   (CNT_1B),IX
              LD   (OUT_1),A
@@ -353,7 +352,7 @@ L820E:       DEC  D
 ; ************************************************************
 ; * DRUMS - Synthesised
 ; ************************************************************
-DRUMS:
+.drums
              ADD  A,A                          ; On entry A=$75+Drum number (i.e. $76 to $7E)
              LD   B,0
              LD   C,A
@@ -365,56 +364,58 @@ DRUMS:
              EX   DE,HL
              JP   (HL)
 
-DRUM_TONE1:  LD   L,16
+.drum_tone1  LD   L,16
              JR   DRUM_TONE
-DRUM_TONE2:  LD   L,12
+.drum_tone2  LD   L,12
              JR   DRUM_TONE
-DRUM_TONE3:  LD   L,8
+.drum_tone3  LD   L,8
              JR   DRUM_TONE
-DRUM_TONE4:  LD   L,6
+.drum_tone4  LD   L,6
              JR   DRUM_TONE
-DRUM_TONE5:  LD   L,4
+.drum_tone5  LD   L,4
              JR   DRUM_TONE
-DRUM_TONE6:  LD   L,2
-DRUM_TONE:
+.drum_tone6  LD   L,2
+.drum_tone
              LD   DE,3700
              LD   BC,$0101
-             LD   A,BORDER_COL
-DT_LOOP0:    OUT  ($FE),A
+             //LD   A,BORDER_COL
+             xor a
+.dt_loop0    OUT  ($FE),A
              DEC  B
              JR   NZ,DT_LOOP1
              XOR  16
              LD   B,C
-             EX   AF,AF'
+             EX   AF,AF ; beware!
              LD   A,C
              ADD  A,L
              LD   C,A
-             EX   AF,AF'
-DT_LOOP1:    DEC  E
+             EX   AF,AF ; beware!
+.dt_loop1    DEC  E
              JR   NZ,DT_LOOP0
              DEC  D
              JR   NZ,DT_LOOP0
              JP   MAIN_LOOP
 
-DRUM_NOISE1: LD   DE,2480
+.drum_noise1 LD   DE,2480
              LD   IXL,1
              JR   DRUM_NOISE
-DRUM_NOISE2: LD   DE,1070
+.drum_noise2 LD   DE,1070
              LD   IXL,10
              JR   DRUM_NOISE
-DRUM_NOISE3: LD   DE,365
+.drum_noise3 LD   DE,365
              LD   IXL,101
-DRUM_NOISE:
+.drum_noise
              LD   H,D
              LD   L,E
-             LD   A,BORDER_COL
+             //LD   A,BORDER_COL
+             xor a
              LD   C,A
-DN_LOOP0:    LD   A,(HL)
+.dn_loop0    LD   A,(HL)
              AND  16
              OR   C
              OUT  ($FE),A
              LD   B,IXL
-DN_LOOP1:    DJNZ DN_LOOP1
+.dn_loop1    DJNZ DN_LOOP1
              INC  HL
              DEC  E
              JR   NZ,DN_LOOP0
@@ -422,14 +423,14 @@ DN_LOOP1:    DJNZ DN_LOOP1
              JR   NZ,DN_LOOP0
              JP   MAIN_LOOP
 
-PATTERN_ADDR:   DEFW  $0000
-PATTERN_PTR:    DEFB  0
-NOTE_PTR:       DEFW  $0000
+.pattern_addr   DEFW  $0000
+.pattern_ptr    DEFB  0
+.note_ptr       DEFW  $0000
 
 ; **************************************************************
 ; * Frequency Table
 ; **************************************************************
-FREQ_TABLE:
+.freq_table
              DEFW 178,189,200,212,225,238,252,267,283,300,318,337
              DEFW 357,378,401,425,450,477,505,535,567,601,637,675
              DEFW 715,757,802,850,901,954,1011,1071,1135,1202,1274,1350
@@ -439,375 +440,216 @@ FREQ_TABLE:
 ; *****************************************************************
 ; * Synth Drum Lookup Table
 ; *****************************************************************
-DRUM_TABLE:
+.drum_table
              DEFW DRUM_TONE1,DRUM_TONE2,DRUM_TONE3,DRUM_TONE4,DRUM_TONE5,DRUM_TONE6
              DEFW DRUM_NOISE1,DRUM_NOISE2,DRUM_NOISE3
 
 
-MUSICDATA:
+.musicdata
              DEFB 0  ; Pattern loop begin * 2
-             DEFB 4  ; Song length * 2
-             DEFW 8         ; Offset to start of song (length of instrument table)
+             DEFB 6  ; Song length * 2
+             DEFW 4         ; Offset to start of song (length of instrument table)
              DEFB 1      ; Multiple
-             DEFW 14      ; Detune
-             DEFB 0      ; Phase
-             DEFB 0      ; Multiple
-             DEFW 5      ; Detune
+             DEFW 0      ; Detune
              DEFB 0      ; Phase
 
-PATTERNDATA:        DEFW      PAT0
+.patterndata        DEFW      PAT0
+                    DEFW      PAT1
                     DEFW      PAT1
 
 ; *** Pattern data - $00 marks the end of a pattern ***
-PAT0:
+.pat0
+         DEFB $BD,0
+         DEFB 157
+         DEFB 145
+     DEFB 3
          DEFB 188
-         DEFB 152
-         DEFB 118
-     DEFB 5
-         DEFB 190
-         DEFB 152
-         DEFB 118
-     DEFB 2
-         DEFB 254
+         DEFB 188
+     DEFB 9
+         DEFB 157
+         DEFB 145
      DEFB 3
-         DEFB $BD,2
-         DEFB 168
-         DEFB 152
-         DEFB 125
-     DEFB 5
-         DEFB 190
-         DEFB 152
-         DEFB 118
-     DEFB 5
-         DEFB 166
-         DEFB 152
-     DEFB 6
-         DEFB 190
-         DEFB 152
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 164
-         DEFB 152
-         DEFB 125
-     DEFB 5
-         DEFB 190
-         DEFB 152
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 163
-         DEFB 154
-         DEFB 118
-     DEFB 5
-         DEFB 161
-         DEFB 154
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 163
-         DEFB 154
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 164
-         DEFB 154
+         DEFB 188
+         DEFB 188
+     DEFB 9
+         DEFB 157
+         DEFB 145
      DEFB 3
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 154
-     DEFB 6
-         DEFB 190
-         DEFB 154
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 154
-         DEFB 125
-     DEFB 5
-         DEFB 190
-         DEFB 154
-         DEFB 125
-     DEFB 5
-         DEFB 190
-         DEFB 156
-         DEFB 118
-     DEFB 5
-         DEFB 190
-         DEFB 156
-         DEFB 118
-     DEFB 5
-         DEFB 168
-         DEFB 156
-         DEFB 125
-     DEFB 5
-         DEFB 190
-         DEFB 156
-         DEFB 118
-     DEFB 5
-         DEFB 166
-         DEFB 156
-         DEFB 118
-     DEFB 5
-         DEFB 190
-         DEFB 156
-         DEFB 118
-     DEFB 5
-         DEFB 164
-         DEFB 156
-         DEFB 125
-     DEFB 5
-         DEFB 190
-         DEFB 156
-         DEFB 118
-     DEFB 5
-         DEFB 168
+         DEFB 188
+         DEFB 188
+     DEFB 9
          DEFB 157
-         DEFB 118
-     DEFB 5
-         DEFB 190
-         DEFB 157
-         DEFB 118
-     DEFB 5
-         DEFB 166
-         DEFB 157
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 157
+         DEFB 145
      DEFB 3
-         DEFB 190
-         DEFB 125
-     DEFB 2
-         DEFB 169
-         DEFB 157
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 157
+         DEFB 188
+         DEFB 188
      DEFB 3
-         DEFB 190
-         DEFB 125
-     DEFB 2
-         DEFB 168
-         DEFB 157
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 122
-     DEFB 2
-         DEFB 190
-         DEFB 157
-         DEFB 123
-     DEFB 2
-         DEFB 190
-         DEFB 124
-     DEFB 2
-         DEFB $00
-PAT1:
-         DEFB $BD,2
-         DEFB 168
-         DEFB 152
-         DEFB 118
-     DEFB 5
-         DEFB 166
-         DEFB 140
-         DEFB 118
-     DEFB 2
-         DEFB 166
+         DEFB 159
+         DEFB 147
      DEFB 3
-         DEFB 169
-         DEFB 152
-         DEFB 125
-     DEFB 5
-         DEFB 169
-         DEFB 140
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 154
-         DEFB 118
-     DEFB 5
-         DEFB 168
-         DEFB 142
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 166
-         DEFB 154
-         DEFB 125
-     DEFB 5
-         DEFB 169
-         DEFB 142
-         DEFB 118
-     DEFB 2
-         DEFB 169
-         DEFB 118
-     DEFB 2
-         DEFB 169
+         DEFB 188
+         DEFB 188
+     DEFB 3
          DEFB 156
-         DEFB 118
-     DEFB 5
-         DEFB 168
          DEFB 144
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 166
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 9
          DEFB 156
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 169
          DEFB 144
-         DEFB 118
-     DEFB 5
-         DEFB 190
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 9
+         DEFB 156
+         DEFB 144
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 9
+         DEFB 156
+         DEFB 144
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 3
+         DEFB 159
+         DEFB 147
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 3
          DEFB 157
-         DEFB 118
-     DEFB 5
-         DEFB 168
-         DEFB 156
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 166
-         DEFB 154
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 125
-     DEFB 2
-         DEFB 171
-         DEFB 156
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 122
-     DEFB 2
-         DEFB 190
-         DEFB 123
-     DEFB 2
-         DEFB 169
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 122
-     DEFB 2
-         DEFB 190
-         DEFB 123
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 122
-     DEFB 2
-         DEFB 168
-         DEFB 123
-     DEFB 2
-         DEFB 190
-         DEFB 124
-     DEFB 2
-         DEFB 190
-         DEFB 125
-     DEFB 5
-         DEFB 166
-         DEFB 154
-         DEFB 125
-     DEFB 5
-         DEFB 168
-         DEFB 156
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 125
-     DEFB 2
-         DEFB 169
+         DEFB 145
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 9
          DEFB 157
-     DEFB 6
-         DEFB 190
+         DEFB 145
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 9
          DEFB 157
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 168
+         DEFB 145
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 9
+         DEFB 157
+         DEFB 145
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 3
+         DEFB 159
+         DEFB 147
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 3
          DEFB 156
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 122
-     DEFB 2
-         DEFB 190
+         DEFB 144
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 9
          DEFB 156
-         DEFB 123
-     DEFB 2
-         DEFB 190
-         DEFB 118
-     DEFB 2
-         DEFB 164
-         DEFB 152
-         DEFB 118
-     DEFB 2
-         DEFB 190
-         DEFB 124
-     DEFB 2
-         DEFB 190
-         DEFB 152
-         DEFB 125
-     DEFB 2
-         DEFB 190
-         DEFB 122
-     DEFB 2
-         DEFB 166
-         DEFB 154
-         DEFB 123
-     DEFB 2
-         DEFB 190
-         DEFB 124
-     DEFB 2
+         DEFB 144
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 3
+         DEFB 159
+         DEFB 147
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 3
+         DEFB 157
+         DEFB 145
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 9
+         DEFB 157
+         DEFB 145
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 9
          DEFB $00
+.pat1
+         DEFB 145
+         DEFB 180
+     DEFB 3
+         DEFB 188
+         DEFB 180
+     DEFB 3
+         DEFB 190
+         DEFB 188
+     DEFB 6
+         DEFB 145
+         DEFB 180
+     DEFB 3
+         DEFB 188
+         DEFB 180
+     DEFB 3
+         DEFB 190
+         DEFB 188
+     DEFB 6
+         DEFB 145
+         DEFB 180
+     DEFB 3
+         DEFB 147
+         DEFB 181
+     DEFB 3
+         DEFB 144
+         DEFB 178
+     DEFB 3
+         DEFB 190
+         DEFB 178
+     DEFB 3
+         DEFB 188
+     DEFB 3
+         DEFB 190
+         DEFB 188
+     DEFB 6
+         DEFB 144
+         DEFB 178
+     DEFB 3
+         DEFB 188
+         DEFB 178
+     DEFB 3
+         DEFB 190
+         DEFB 188
+     DEFB 6
+         DEFB 144
+         DEFB 178
+     DEFB 3
+         DEFB 188
+         DEFB 178
+     DEFB 3
+         DEFB 190
+         DEFB 188
+     DEFB 6
+         DEFB 144
+         DEFB 178
+     DEFB 3
+         DEFB 145
+         DEFB 180
+     DEFB 3
+         DEFB 147
+         DEFB 181
+     DEFB 3
+         DEFB 145
+         DEFB 180
+     DEFB 3
+         DEFB 188
+         DEFB 188
+     DEFB 9
+         DEFB $00
+
+#endasm
