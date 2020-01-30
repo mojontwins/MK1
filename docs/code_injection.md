@@ -80,6 +80,15 @@ Junto con `enems_init.h`, sirve para añadir nuevos tipos de enemigos. El códig
 
 En este punto, `enit` es el número de enemigo, `enoffsmasi` su índice general dentro del array `malotes`,  y sus valores estáran copiados en `_en_x`, `_en_y`, `_en_mx`, `_en_my`, `_en_x1`, `_en_y1`, `_en_x2`, `_en_y2`, `_en_t` y `_en_life`. Para que el enemigo sea interactuable (se pueda matar o colisionar) habrá que poner `active` a 1.
 
+### `enems_extra_mods.h`
+
+Se incluye al final del bucle que carga los enemigos, tras haberles puesto todos los valores necesarios para su inicialización, y te permite modificar lo que necesites. Por ejemplo puedes hacer que los enemigos reinicien su posición inicial al entrar en cada pantalla añadiendo este código:
+
+```c
+	malotes [enoffsmasi].x = malotes [enoffsmasi].x1;
+	malotes [enoffsmasi].y = malotes [enoffsmasi].x2;
+```
+
 ### `on_enems_killed.h`
 
 Se ejecuta cada vez que el jugador elimina un enemigo, al igual que la sección `PLAYER_KILLS_ENEMY` del script. En este punto, `enit` es el número de enemigo, `enoffsmasi` su índice general dentro del array `malotes`, etc.

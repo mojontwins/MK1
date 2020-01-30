@@ -190,6 +190,8 @@ void enems_load (void) {
 		}
 
 		malotes [enoffsmasi].t &= 0x1f;
+
+		#include "my/ci/enems_extra_mods.h"
 	}
 }
 
