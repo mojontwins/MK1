@@ -307,6 +307,7 @@
 // 8 = Full obstacle (blocks player from all directions)
 // 10 = special obstacle (pushing blocks OR locks!)
 // 16 = Breakable (#ifdef BREAKABLE_WALLS)
+// 128 = C.I. launcher tile, launches my/ci/on_special_tile.h on touch
 // You can add the numbers to get combined behaviours
 // Save for 10 (special), but that's obvious, innit?
 #ifndef COMPRESSED_LEVELS

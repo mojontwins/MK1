@@ -568,7 +568,14 @@ unsigned char player_move (void) {
 	#endif
 
 	cx1 = p_tx = (gpx + 8) >> 4;
-	cy1 = p_ty = (gpy + 8) >> 4;	
+	cy1 = p_ty = (gpy + 8) >> 4;
+
+	rdb = attr (cx1, cy1);
+
+	// Special tiles
+	if (rdb & 128) {
+		#include "my/ci/on_special_tile.h"
+	}
 
 	#if defined (PLAYER_PUSH_BOXES) || !defined (DEACTIVATE_KEYS)
 		#ifdef PLAYER_GENITAL
@@ -582,7 +589,7 @@ unsigned char player_move (void) {
 					cy1 = gpy >> 3;		
 				#endif
 
-				if (attr (cx1, cy1) == 10) {
+				if (rdb == 10) {
 					x0 = x1 = cx1; y0 = cy1; y1 = cy1 - 1;
 					process_tile ();
 				}
@@ -597,7 +604,7 @@ unsigned char player_move (void) {
 					cy1 = (gpy + 16) >> 3;				
 				#endif		
 			
-				if (attr (cx1, cy1) == 10) {
+				if (rdb == 10) {
 					x0 = x1 = cx1; y0 = cy1; y1 = cy1 + 1;
 					process_tile ();
 				}
@@ -612,7 +619,7 @@ unsigned char player_move (void) {
 				cx1 = gpx >> 4;		
 			#endif		
 
-			if (attr (cx1, cy1) == 10) {
+			if (rdb == 10) {
 				y0 = y1 = cy1; x0 = cx1; x1 = cx1 - 1;
 				process_tile ();
 			}
@@ -623,7 +630,7 @@ unsigned char player_move (void) {
 			#else
 				cx1 = (gpx + 16) >> 4;		
 			#endif		
-			if (attr (cx1, cy1) == 10) {
+			if (rdb == 10) {
 				y0 = y1 = cy1; x0 = cx1; x1 = cx1 + 1;
 				process_tile ();
 			}

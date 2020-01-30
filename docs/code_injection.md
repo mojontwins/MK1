@@ -99,6 +99,12 @@ Se ejecuta cada vez que el jugador elimina un enemigo, al igual que la sección 
 
 Sirve para añadir un manejador custom para el eje vertical de movimiento del jugador. Esto tiene bastantes implicaciones y formas de usar. Se explicará en un tutorial próximamente.
 
+### `on_special_tile.h`
+
+Se ejecuta cuando el jugador toca un tile cuyo comportamiento tiene el bit 7 levantado (cumple & 128). Cuando esto ocurre, `p_tx` y `p_ty`, que contienen el tile que toca el centro del sprite del jugador, indican precisamente las coordenadas de dicho tile.
+
+Si tienes varios, puedes saber cuál es llamando a `qtile (p_tx, p_ty)` o consultando el valor de `map_buff [COORDS(p_tx, p_ty)]`. Puede servir parar mil cosas, por ejemplo para implementar teletransportadores.
+
 ## Miscelánea
 
 ### `on_tile_pushed.h`
