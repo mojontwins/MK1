@@ -18,7 +18,7 @@ cd ..\dev
 if [%1]==[justscripts] goto :compile
 
 echo Importando GFX
-..\..\..\src\utils\ts2bin.exe ..\gfx\font.png none tileset.bin 7 >nul
+..\..\..\src\utils\ts2bin.exe ..\gfx\font.png notiles font.bin 7 >nul
 
 ..\..\..\src\utils\sprcnv.exe ..\gfx\sprites.png assets\sprites.h > nul
 

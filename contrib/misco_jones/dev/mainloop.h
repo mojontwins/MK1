@@ -32,11 +32,18 @@ void main (void) {
 	sp_AddMemory(0, NUMBLOCKS, 14, AD_FREE);
 	
 	// Load tileset
-	gen_pt = tileset;
+	#ifdef COMPRESSED_LEVELS
+		gen_pt = font;
+	#else
+		gen_pt = tileset;
+	#endif
 	gpit = 0; do {
 		sp_TileArray (gpit, gen_pt);
 		gen_pt += 8;
 		gpit ++;
+		#ifdef COMPRESSED_LEVELS
+			if (gpit == 64) gen_pt = tileset;
+		#endif
 	} while (gpit);
 
 	// Sprite creation

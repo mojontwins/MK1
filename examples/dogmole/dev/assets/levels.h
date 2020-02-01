@@ -59,6 +59,11 @@ typedef struct {
 
 // This space will be overwritten by level data
 
+extern unsigned char font [0];
+#asm
+	._font BINARY "font.bin"
+#endasm
+
 extern LEVELHEADER level_data [0];
 #asm
 	._level_data defs 16
@@ -82,7 +87,7 @@ extern CERROJOS cerrojos [0];
 
 extern unsigned char tileset [0];
 #asm
-	._tileset BINARY "tileset.bin"
+	._tileset defs 1792 ; 192 * 8 + 256
 #endasm
 
 extern MALOTE malotes [0];

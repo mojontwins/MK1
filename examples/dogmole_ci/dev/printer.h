@@ -12,6 +12,12 @@ unsigned char qtile (unsigned char x, unsigned char y) {
 	return map_buff [x + (y << 4) - y];
 }
 
+#ifdef COMPRESSED_LEVELS
+	#define ATTR_OFFSET 1536
+#else
+	#define ATTR_OFFSET 2048
+#endif
+
 void draw_coloured_tile (void) {
 	#if defined (USE_AUTO_TILE_SHADOWS) || defined (USE_AUTO_SHADOWS)		
 		#asm
@@ -38,7 +44,7 @@ void draw_coloured_tile (void) {
 				add 64
 				ld  (__ta), a
 
-				ld  hl, _tileset + 2048
+				ld  hl, _tileset + ATTR_OFFSET
 				ld  b, 0
 				ld  c, a
 				add hl, bc
@@ -56,13 +62,13 @@ void draw_coloured_tile (void) {
 			
 			if (_t == 19) {
 				#asm
-					ld  hl, _tileset + 2048 + 192
+					ld  hl, _tileset + ATTR_OFFSET + 192
 					ld  (_gen_pt_alt), hl
 				#endasm
 				t_alt = 192;
 			} else {
 				#asm
-					ld  hl, _tileset + 2048 + 128
+					ld  hl, _tileset + ATTR_OFFSET + 128
 					ld  de, (__ta)
 					ld  d, 0
 					add hl, de
@@ -71,7 +77,7 @@ void draw_coloured_tile (void) {
 				t_alt = 128 + _ta;
 			}
 			
-			gen_pt_alt = tileset + 2048 + t_alt;
+			gen_pt_alt = tileset + ATTR_OFFSET + t_alt;
 
 			// cx1 = xx - 1; cy1 = yy ? yy - 1 : 0; a1 = (nocast && (attr () & 8));
 			#asm
@@ -379,7 +385,7 @@ void draw_coloured_tile (void) {
 		#asm
 			/*
 			_t = 64 + (_t << 2);
-			gen_pt = tileset + 2048 + _t;
+			gen_pt = tileset + ATTR_OFFSET + _t;
 			sp_PrintAtInv (_y, _x, *gen_pt ++, _t ++);
 			sp_PrintAtInv (_y, _x + 1, *gen_pt ++, _t ++);
 			sp_PrintAtInv (_y + 1, _x, *gen_pt ++, _t ++);
@@ -401,7 +407,7 @@ void draw_coloured_tile (void) {
 				sla a 				// A = _t * 4
 				add 64 				// A = _t * 4 + 64
 				
-				ld  hl, _tileset + 2048
+				ld  hl, _tileset + ATTR_OFFSET
 				ld  b, 0
 				ld  c, a
 				add hl, bc 			// HL = tileset + _taux
