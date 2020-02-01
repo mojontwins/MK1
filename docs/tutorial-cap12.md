@@ -17,8 +17,8 @@ Lo que se hace para construir un juego de **MTE MK1** multinivel es configurar u
 En principio, para activar el multinivel sólo tendremos que tocar un par de cosas en `my/config.h`. Obviamente, luego habrá que tunear por varios sitios, pero lo más básico es configurar esto:
 
 ```c
-	#define COMPRESSED_LEVELS 					// use levels.h instead of mapa.h and enems.h (!)
-	#define MAX_LEVELS					3		// # of compressed levels
+    #define COMPRESSED_LEVELS                   // use levels.h instead of mapa.h and enems.h (!)
+    #define MAX_LEVELS                  3       // # of compressed levels
 ```
 
 Esto activará los manejes necesarios para el multiniveleo y además indicará que el número de niveles de nuestra secuencia será 3. O sea, que tendremos tres niveles.
@@ -32,7 +32,7 @@ Como hemos dicho, los recursos comprimidos se descomprimirán sobre "espacios" e
 2. Modificamos la conversión del tileset (`ts2bin`) para que genere uno usando la fuente pero dejando todos los tiles a negro. Para ello empleamos la cadena `none` en lugar de una ruta al un archivo de tileset:
 
 ```
-	..\..\..\src\utils\ts2bin.exe ..\gfx\font.png none tileset.bin 7 >nul
+    ..\..\..\src\utils\ts2bin.exe ..\gfx\font.png none tileset.bin 7 >nul
 ```
 
 3. Si fueramos a cambiar el spriteset en cada fase tendríamos que eliminar también la llamada a `sprcnv`.
@@ -66,7 +66,7 @@ Si eres una persona avispada estarás pensando que no paro de hablar de binarios
 ¿Para qué vamos a guardar la fuente varias veces? Si recordáis, cuando hablamos de `ts2bin` mencionamos que se le podía decir que no pillara fuente. Si en vez de la ruta a nuestro archivo `font.png` ponemos `nofont`, el binario generado sólo contendrá los 192 patrones que forman los tiles (desde el 64 al 255) y los atributos, algo así:
 
 ```
-	..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work0.png ..\bin\tileset0.bin 6 >nul
+    ..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work0.png ..\bin\tileset0.bin 6 >nul
 ```
 
 En **Helmet** tenemos tres fases y usamos tres tilesets diferentes, por lo que verás tres lineas de `ts2bin` diferentes en `build_assets.bat`. Recuerda que el numerito que se pasa como cuarto parámetro es la tinta por defecto que se debe usar si en un patrón sólo hay un color. Fijáos que en la fase 2, donde el suelo es mayormente cyan, pasamos un "5".
@@ -78,16 +78,16 @@ El siguiente paso es comprimirlo todo. Puedes usar `apack` de toda la vida o `ap
 Por convención, la versión comprimida de cada binario se llamará igual que el binario pero con una "c" al final, e igualmente la dejaremos en `/bin`. Personalmente me encargo además de borrar los archivos sin comprimir por el tema del orden y la limpieza. Esta sección, para **Helmet**, queda así:
 
 ```
-	echo Making tilesets
-	..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work0.png ..\bin\tileset0.bin 6 >nul
-	..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work1.png ..\bin\tileset1.bin 5 >nul
-	..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work2.png ..\bin\tileset2.bin 6 >nul
+    echo Making tilesets
+    ..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work0.png ..\bin\tileset0.bin 6 >nul
+    ..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work1.png ..\bin\tileset1.bin 5 >nul
+    ..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work2.png ..\bin\tileset2.bin 6 >nul
 
-	..\..\..\src\utils\apultra.exe ..\bin\tileset0.bin ..\bin\tileset0c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\tileset1.bin ..\bin\tileset1c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\tileset2.bin ..\bin\tileset2c.bin >nul
+    ..\..\..\src\utils\apultra.exe ..\bin\tileset0.bin ..\bin\tileset0c.bin >nul
+    ..\..\..\src\utils\apultra.exe ..\bin\tileset1.bin ..\bin\tileset1c.bin >nul
+    ..\..\..\src\utils\apultra.exe ..\bin\tileset2.bin ..\bin\tileset2c.bin >nul
 
-	del  ..\bin\tileset?.bin > nul
+    del  ..\bin\tileset?.bin > nul
 ```
 
 Tomamos nota de los archivos generados: `tileset0c.bin`, `tileset1c.bin` y  `tileset2c.bin`.
@@ -97,31 +97,31 @@ Tomamos nota de los archivos generados: `tileset0c.bin`, `tileset1c.bin` y  `til
 El viejo `mapcnv` que venimos usando desde tiempos inmemoriales sacaba un archivo de código con dos arrays, uno para el mapa y otro para los cerrojos, por lo que no nos sirve. Por suerte un día se reprodujo por gemación y en la carpeta apareció su análogo binario, el señor `mapcnvbin`, que toma los mismos parámetros (y nos los chiva igualmente al ejecutar simplemente):
 
 ```
-	$ ..\utils\mapcnvbin.exe
-	** USO **
-	   MapCnvBin archivo.map archivo.h ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]
+    $ ..\utils\mapcnvbin.exe
+    ** USO **
+       MapCnvBin archivo.map archivo.h ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]
 
-	   - archivo.map : Archivo de entrada exportado con mappy en formato raw.
-	   - archivo.h : Archivo de salida
-	   - ancho_mapa : Ancho del mapa en pantallas.
-	   - alto_mapa : Alto del mapa en pantallas.
-	   - ancho_pantalla : Ancho de la pantalla en tiles.
-	   - alto_pantalla : Alto de la pantalla en tiles.
-	   - tile_cerrojo : Nº del tile que representa el cerrojo.
-	   - packed : Escribe esta opción para mapas de la churrera de 16 tiles.
-	   - fixmappy : Escribe esta opción para arreglar lo del tile 0 no negro
+       - archivo.map : Archivo de entrada exportado con mappy en formato raw.
+       - archivo.h : Archivo de salida
+       - ancho_mapa : Ancho del mapa en pantallas.
+       - alto_mapa : Alto del mapa en pantallas.
+       - ancho_pantalla : Ancho de la pantalla en tiles.
+       - alto_pantalla : Alto de la pantalla en tiles.
+       - tile_cerrojo : Nº del tile que representa el cerrojo.
+       - packed : Escribe esta opción para mapas de la churrera de 16 tiles.
+       - fixmappy : Escribe esta opción para arreglar lo del tile 0 no negro
 
-	Por ejemplo, para un mapa de 6x5 pantallas para MTE MK1:
+    Por ejemplo, para un mapa de 6x5 pantallas para MTE MK1:
 
-	   MapCnvBin mapa.map mapa.bin 6 5 15 10 15 packed
+       MapCnvBin mapa.map mapa.bin 6 5 15 10 15 packed
 
-	Output will contain the map, and then the bolts
+    Output will contain the map, and then the bolts
 ```
 
 `mapcnvbin` genera un binario con la misma información que `mapcnv`: el mapa en el formato indicado y seguidamente los cerrojos. En la llamada añadiremos `packed` si el mapa es de 16 tiles y `fixmappy` si el primer tile del tileset no era negro completamente y Mappy nos hizo la fullería de desplazar todo el tileset:
 
 ```
-	..\..\..\src\utils\mapcnvbin.exe ..\map\mapa0.map ..\bin\mapa_bolts0.bin 1 24 15 10 15 packed fixmappy >nul
+    ..\..\..\src\utils\mapcnvbin.exe ..\map\mapa0.map ..\bin\mapa_bolts0.bin 1 24 15 10 15 packed fixmappy >nul
 ```
 
 De nuevo ponemos la salida en `/bin`.
@@ -129,16 +129,16 @@ De nuevo ponemos la salida en `/bin`.
 Igual que con los tilesets, el siguiente paso será comprimir los binarios. Seguimos la misma convención para los nombres de los archivos y también limpiamos los archivos originales sin comprimir. En **Helmet**:
 
 ```
-	echo Converting maps
-	..\..\..\src\utils\mapcnvbin.exe ..\map\mapa0.map ..\bin\mapa_bolts0.bin 1 24 15 10 15 packed fixmappy >nul
-	..\..\..\src\utils\mapcnvbin.exe ..\map\mapa1.map ..\bin\mapa_bolts1.bin 1 24 15 10 15 packed fixmappy >nul
-	..\..\..\src\utils\mapcnvbin.exe ..\map\mapa2.map ..\bin\mapa_bolts2.bin 1 24 15 10 15 packed fixmappy >nul
+    echo Converting maps
+    ..\..\..\src\utils\mapcnvbin.exe ..\map\mapa0.map ..\bin\mapa_bolts0.bin 1 24 15 10 15 packed fixmappy >nul
+    ..\..\..\src\utils\mapcnvbin.exe ..\map\mapa1.map ..\bin\mapa_bolts1.bin 1 24 15 10 15 packed fixmappy >nul
+    ..\..\..\src\utils\mapcnvbin.exe ..\map\mapa2.map ..\bin\mapa_bolts2.bin 1 24 15 10 15 packed fixmappy >nul
 
-	..\..\..\src\utils\apultra.exe ..\bin\mapa_bolts0.bin ..\bin\mapa_bolts0c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\mapa_bolts1.bin ..\bin\mapa_bolts1c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\mapa_bolts2.bin ..\bin\mapa_bolts2c.bin >nul
+    ..\..\..\src\utils\apultra.exe ..\bin\mapa_bolts0.bin ..\bin\mapa_bolts0c.bin >nul
+    ..\..\..\src\utils\apultra.exe ..\bin\mapa_bolts1.bin ..\bin\mapa_bolts1c.bin >nul
+    ..\..\..\src\utils\apultra.exe ..\bin\mapa_bolts2.bin ..\bin\mapa_bolts2c.bin >nul
 
-	del  ..\bin\mapa_bolts?.bin >nul
+    del  ..\bin\mapa_bolts?.bin >nul
 ```
 
 Tomamos nota de los archivos generados: `mapa_bolts0c.bin`, `mapa_bolts1c.bin` y `mapa_bolts2c.bin`. Como veis, intento que los nombres de archivo sean lo más descriptivos posible.
@@ -148,14 +148,14 @@ Tomamos nota de los archivos generados: `mapa_bolts0c.bin`, `mapa_bolts1c.bin` y
 De la misma forma que pasaba con los mapas, normalmente usábamos un conversor que generaba un archivo de código C (`ene2h`) que ahora no nos sirve. La utilidad que emplearemos será `ene2bin_mk1`. Ojal, que el formato es diferente al de **MK2** y no nos vale el `ene2bin` de MK2. Si lo ejecutamos sin parámetros vemos qué espera de nosotros:
 
 ```
-	$ ..\utils\ene2bin_mk1.exe
-	$ ene2bin_mk1.exe enems.ene enems+hotspots.bin life_gauge [2bytes]
+    $ ..\utils\ene2bin_mk1.exe
+    $ ene2bin_mk1.exe enems.ene enems+hotspots.bin life_gauge [2bytes]
 
-	The 2bytes parameter is for really old .ene files which
-	stored the hotspots 2 bytes each instead of 3 bytes.
-	As a rule of thumb:
-	.ene file created with ponedor.exe -> 3 bytes.
-	.ene file created with colocador.exe for MK1 -> 2 bytes.
+    The 2bytes parameter is for really old .ene files which
+    stored the hotspots 2 bytes each instead of 3 bytes.
+    As a rule of thumb:
+    .ene file created with ponedor.exe -> 3 bytes.
+    .ene file created with colocador.exe for MK1 -> 2 bytes.
 
 ```
 
@@ -164,16 +164,16 @@ El funcionamiento es análogo, aunque deberemos fijarnos muy bien en el parámet
 Seguidamente comprimimos y borramos y bla bla. Nos queda así:
 
 ```
-	echo Converting enems
-	..\..\..\src\utils\ene2bin_mk1.exe ..\enems\enems0.ene ..\bin\enems_hotspots0.bin 2 >nul
-	..\..\..\src\utils\ene2bin_mk1.exe ..\enems\enems1.ene ..\bin\enems_hotspots1.bin 2 >nul
-	..\..\..\src\utils\ene2bin_mk1.exe ..\enems\enems2.ene ..\bin\enems_hotspots2.bin 2 >nul
+    echo Converting enems
+    ..\..\..\src\utils\ene2bin_mk1.exe ..\enems\enems0.ene ..\bin\enems_hotspots0.bin 2 >nul
+    ..\..\..\src\utils\ene2bin_mk1.exe ..\enems\enems1.ene ..\bin\enems_hotspots1.bin 2 >nul
+    ..\..\..\src\utils\ene2bin_mk1.exe ..\enems\enems2.ene ..\bin\enems_hotspots2.bin 2 >nul
 
-	..\..\..\src\utils\apultra.exe ..\bin\enems_hotspots0.bin ..\bin\enems_hotspots0c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\enems_hotspots1.bin ..\bin\enems_hotspots1c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\enems_hotspots2.bin ..\bin\enems_hotspots2c.bin >nul
+    ..\..\..\src\utils\apultra.exe ..\bin\enems_hotspots0.bin ..\bin\enems_hotspots0c.bin >nul
+    ..\..\..\src\utils\apultra.exe ..\bin\enems_hotspots1.bin ..\bin\enems_hotspots1c.bin >nul
+    ..\..\..\src\utils\apultra.exe ..\bin\enems_hotspots2.bin ..\bin\enems_hotspots2c.bin >nul
 
-	del  ..\bin\enems_hotspots?.bin
+    del  ..\bin\enems_hotspots?.bin
 ```
 
 Tomamos nota de los archivos generados: `enems_hotspots0c.bin`, `enems_hotspots1c.bin` y `enems_hotspots2c.bin`. 
@@ -187,7 +187,7 @@ Lo primero por tanto será crear los archivos con las listas de comportamientos.
 Así se ve un archivo de texto con comportamientos. Nada muy excitante:
 
 ```
-	0,0,8,8,8,8,8,8,17,8,8,8,8,8,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,8,8,8,8,8,8,8,8,0,0,0,0,0,0
+    0,0,8,8,8,8,8,8,17,8,8,8,8,8,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,8,8,8,8,8,8,8,8,0,0,0,0,0,0
 ```
 
 Esto equivale a este tileset:
@@ -199,17 +199,17 @@ Nosotros hemos tenido a bien guardarlos en `/gfx` junto a los tilesets que repre
 `behs2bin` únicamente toma dos parámetros: fichero de entrada con la lista en modo texto, y fichero de salida con los 48 bytes en binario. Y luego se comprimen y se borran los originales y bla bla:
 
 ```
-	del  ..\bin\enems_hotspots?.bin
+    del  ..\bin\enems_hotspots?.bin
 
-	echo Converting behs
-	..\..\..\src\utils\behs2bin.exe ..\gfx\behs0_1.txt ..\bin\behs0_1.bin >nul
-	..\..\..\src\utils\behs2bin.exe ..\gfx\behs2.txt ..\bin\behs2.bin >nul
+    echo Converting behs
+    ..\..\..\src\utils\behs2bin.exe ..\gfx\behs0_1.txt ..\bin\behs0_1.bin >nul
+    ..\..\..\src\utils\behs2bin.exe ..\gfx\behs2.txt ..\bin\behs2.bin >nul
 
-	..\..\..\src\utils\apultra.exe ..\bin\behs0_1.bin ..\bin\behs0_1c.bin >nul
-	..\..\..\src\utils\apultra.exe ..\bin\behs2.bin ..\bin\behs2c.bin >nul
+    ..\..\..\src\utils\apultra.exe ..\bin\behs0_1.bin ..\bin\behs0_1c.bin >nul
+    ..\..\..\src\utils\apultra.exe ..\bin\behs2.bin ..\bin\behs2c.bin >nul
 
-	del  ..\bin\behs0_1.bin
-	del  ..\bin\behs2.bin
+    del  ..\bin\behs0_1.bin
+    del  ..\bin\behs2.bin
 ```
 
 Toma nota de los últimos archivos generados: `behs0_1c.bin` y `behs2.bin`. Ya lo tenemos todo.
@@ -219,22 +219,22 @@ Toma nota de los últimos archivos generados: `behs0_1c.bin` y `behs2.bin`. Ya l
 El levelset es un array que contiene información sobre cada nivel de tu juego. Se define en `my/levelset.h` y sus miembros son elementos con esta estructura:
 
 ```c
-	// 48K format:
-	typedef struct {
-		unsigned char map_w, map_h;
-		unsigned char scr_ini, ini_x, ini_y;
-		unsigned char max_objs;
-		unsigned char *c_map_bolts;
-		unsigned char *c_tileset;
-		unsigned char *c_enems_hotspots;
-		unsigned char *c_behs;
-		#ifdef PER_LEVEL_SPRITESET
-			unsigned char *c_sprites;
-		#endif
-		#ifdef ACTIVATE_SCRIPTING
-			unsigned int script_offset;
-		#endif
-	} LEVEL;
+    // 48K format:
+    typedef struct {
+        unsigned char map_w, map_h;
+        unsigned char scr_ini, ini_x, ini_y;
+        unsigned char max_objs;
+        unsigned char *c_map_bolts;
+        unsigned char *c_tileset;
+        unsigned char *c_enems_hotspots;
+        unsigned char *c_behs;
+        #ifdef PER_LEVEL_SPRITESET
+            unsigned char *c_sprites;
+        #endif
+        #ifdef ACTIVATE_SCRIPTING
+            unsigned int script_offset;
+        #endif
+    } LEVEL;
 ```
 
 (en modo 48K; en modo 128K es más sencillo pero ya lo veremos en otro capítulo, más adelante). El tema está en crear un array que referencie qué recursos necesitamos para cada nivel y algunos valores relevantes. Pero antes necesitamos que los recursos *estén disponibles*.
@@ -244,7 +244,7 @@ La forma de hacerlo es crear una referencia externa a ellos y posteriormente inc
 Básicamente primero se define una referencia externa para poder añadir cosas a nuestro array:
 
 ```c
-	extern unsigned char my_extern_array [0];
+    extern unsigned char my_extern_array [0];
 ```
 
 Esto sencillamente le dice al compilador que hay "algo" fuera que se llama `my_extern_array`. (Probablemente haya mejores formas de hacer esto, pero eso es lo que se traga `z88dk` y si no está roto, no lo arregles).
@@ -252,10 +252,10 @@ Esto sencillamente le dice al compilador que hay "algo" fuera que se llama `my_e
 Luego se mete una sección de ensamble en linea y se mete lo que antes hemos referenciado, tal que así:
 
 ```c
-	#asm
-		._my_extern_array
-			BINARY "my_extern_binary.bin"
-	#endasm
+    #asm
+        ._my_extern_array
+            BINARY "my_extern_binary.bin"
+    #endasm
 ```
 
 Ojal como la etiqueta del ensamble equivale al nombre del array externo referenciado arriba, pero con un subrayado delante. Porque cuando se compila el C y se genera ensamble, los identificadores de C se convierten en etiquetas de ensamble con el subrayado delante. Y cosas.
@@ -267,56 +267,56 @@ De esta forma estamos metiendo muy fácilmente los binarios que necesitamos en n
 Ahora es cuando coges el papel donde habías apuntado todos los binarios que tenías. Yo he creado estas referencias externas para incluirlos todos. Fíjate como se incluye la ruta relativa adónde está el archivo `mk1.c`, o sea, `../bin/`:
 
 ```c
-	// In 48K mode, include here your compressed binaries:
+    // In 48K mode, include here your compressed binaries:
 
-	extern unsigned char map_bolts_0 [0];
-	extern unsigned char map_bolts_1 [0];
-	extern unsigned char map_bolts_2 [0];
-	extern unsigned char tileset_0 [0];
-	extern unsigned char tileset_1 [0];
-	extern unsigned char tileset_2 [0];
-	extern unsigned char enems_hotspots_0 [0];
-	extern unsigned char enems_hotspots_1 [0];
-	extern unsigned char enems_hotspots_2 [0];
-	extern unsigned char behs_0_1 [0];
-	extern unsigned char behs_2 [0];
+    extern unsigned char map_bolts_0 [0];
+    extern unsigned char map_bolts_1 [0];
+    extern unsigned char map_bolts_2 [0];
+    extern unsigned char tileset_0 [0];
+    extern unsigned char tileset_1 [0];
+    extern unsigned char tileset_2 [0];
+    extern unsigned char enems_hotspots_0 [0];
+    extern unsigned char enems_hotspots_1 [0];
+    extern unsigned char enems_hotspots_2 [0];
+    extern unsigned char behs_0_1 [0];
+    extern unsigned char behs_2 [0];
 
-	#asm
-		._map_bolts_0
-			BINARY "../bin/mapa_bolts0c.bin"
-		._map_bolts_1
-			BINARY "../bin/mapa_bolts1c.bin"
-		._map_bolts_2
-			BINARY "../bin/mapa_bolts2c.bin"
-		._tileset_0
-			BINARY "../bin/tileset0c.bin"
-		._tileset_1
-			BINARY "../bin/tileset1c.bin"
-		._tileset_2
-			BINARY "../bin/tileset2c.bin"
-		._enems_hotspots_0
-			BINARY "../bin/enems_hotspots0c.bin"
-		._enems_hotspots_1
-			BINARY "../bin/enems_hotspots1c.bin"
-		._enems_hotspots_2
-			BINARY "../bin/enems_hotspots2c.bin"
-		._behs_0_1
-			BINARY "../bin/behs0_1c.bin"
-		._behs_2
-			BINARY "../bin/behs2c.bin"
-	#endasm
+    #asm
+        ._map_bolts_0
+            BINARY "../bin/mapa_bolts0c.bin"
+        ._map_bolts_1
+            BINARY "../bin/mapa_bolts1c.bin"
+        ._map_bolts_2
+            BINARY "../bin/mapa_bolts2c.bin"
+        ._tileset_0
+            BINARY "../bin/tileset0c.bin"
+        ._tileset_1
+            BINARY "../bin/tileset1c.bin"
+        ._tileset_2
+            BINARY "../bin/tileset2c.bin"
+        ._enems_hotspots_0
+            BINARY "../bin/enems_hotspots0c.bin"
+        ._enems_hotspots_1
+            BINARY "../bin/enems_hotspots1c.bin"
+        ._enems_hotspots_2
+            BINARY "../bin/enems_hotspots2c.bin"
+        ._behs_0_1
+            BINARY "../bin/behs0_1c.bin"
+        ._behs_2
+            BINARY "../bin/behs2c.bin"
+    #endasm
 ```
 
 Con esto de arriba tendremos de gratis un puntero al inicio de cada uno de los recursos de los niveles de nuestro juego, así que ya podemos crear el array con el *levelset*. Este array debe llamarse `levels` e incluir toda la información para cada nivel. Vamos a echar un vistazo al de **Helmet** y vamos comentando:
 
 ```c
-	// Define your level sequence array here:
-	// map_w, map_h, scr_ini, ini_x, ini_y, max_objs, c_map_bolts, c_tileset, c_enems_hotspots, c_behs, script
-	LEVEL levels [] = {
-		{ 1, 24, 23, 12, 7, 99, map_bolts_0, tileset_0, enems_hotspots_0, behs_0_1 },
-		{ 1, 24, 23, 12, 7, 99, map_bolts_1, tileset_1, enems_hotspots_1, behs_0_1 },
-		{ 1, 24, 23, 6, 8, 99, map_bolts_2, tileset_2, enems_hotspots_2, behs_2 }
-	};
+    // Define your level sequence array here:
+    // map_w, map_h, scr_ini, ini_x, ini_y, max_objs, c_map_bolts, c_tileset, c_enems_hotspots, c_behs, script
+    LEVEL levels [] = {
+        { 1, 24, 23, 12, 7, 99, map_bolts_0, tileset_0, enems_hotspots_0, behs_0_1 },
+        { 1, 24, 23, 12, 7, 99, map_bolts_1, tileset_1, enems_hotspots_1, behs_0_1 },
+        { 1, 24, 23, 6, 8, 99, map_bolts_2, tileset_2, enems_hotspots_2, behs_2 }
+    };
 ```
 
 Como son muchos campos siempre me hago una chuleta en un comentario. Porque uno es listo, pero no tanto. Vamos a verlos en orden (que es el mismo orden con el que se han definido en el `struct` de más arriba):
@@ -347,9 +347,9 @@ De fábrica, **MTE MK1** terminará la fase actual si `p_objs` vale `PLAYER_NUM_
 Para lograrlo, *engañaremos al chamán* (TM). Este es el código C que hace la comprobación de que tenemos todos los objetos (en `mainloop/game_loop.h`):
 
 ```c
-	#if PLAYER_NUM_OBJETOS != 99
-		|| p_objs == PLAYER_NUM_OBJETOS
-	#endif
+    #if PLAYER_NUM_OBJETOS != 99
+        || p_objs == PLAYER_NUM_OBJETOS
+    #endif
 ```
 
 Los `#define` sirven para que el preprocesador de C haga sustituciones textuales, por lo que si queremos que el número sea diferente para cada fase no tendremos más que definir `PLAYER_NUM_OBJETOS` para que no sea un literal numérico, sino el acceso a una variable.
@@ -357,7 +357,7 @@ Los `#define` sirven para que el preprocesador de C haga sustituciones textuales
 En nuestro *levelset* tenemos información sobre el número de objetos de la fase: el miembro `num_objs` de la estructura `LEVEL`. En **MTE MK1** el nivel actual se almacena en la variable `level`, por lo que el número de objetos definido para el nivel actual es `levels [level].num_objs`. Por tanto, si nos vamos a `my/config.h` y definimos así `PLAYER_NUM_OBJS` lo tenemos:
 
 ```c
-	#define PLAYER_NUM_OBJETOS			levels [level].num_objs
+    #define PLAYER_NUM_OBJETOS          levels [level].num_objs
 ```
 
 ### Llegar a un sitio concreto
@@ -365,13 +365,13 @@ En nuestro *levelset* tenemos información sobre el número de objetos de la fas
 Aquí estamos en una situación igual. *Engañaremos al Chamán* (TM) de igual manera. Este es el código que comprueba que hemos llegado al sitio concreto:
 
 ```c
-	#if SCR_FIN != 99
-		|| (n_pant == SCR_FIN
-		#if PLAYER_FIN_X != 99 && PLAYER_FIN_Y != 99
-			&& ((gpx + 8) >> 4) == PLAYER_FIN_X && ((gpy + 8) >> 4) == PLAYER_FIN_Y
-		#endif
-		)
-	#endif
+    #if SCR_FIN != 99
+        || (n_pant == SCR_FIN
+        #if PLAYER_FIN_X != 99 && PLAYER_FIN_Y != 99
+            && ((gpx + 8) >> 4) == PLAYER_FIN_X && ((gpy + 8) >> 4) == PLAYER_FIN_Y
+        #endif
+        )
+    #endif
 ```
 
 Como se ve, si sólo queremos que se detecte que llegamos a la pantalla final, `SCR_FIN` debe ser diferente de 99 pero `PLAYER_FIN_X` y `PLAYER_FIN_Y` deben ser 99; si todas son distintas de 99 se comprobará también la posición.
@@ -381,18 +381,18 @@ Como esto lo hemos usado muy poco no tuve a bien meterlo en la estructura `LEVEL
 En primer lugar creamos tres arrays con los valores para cada fase de nuestro juego en `my/ci/extra_vars.h`. Vamos a poner que tenemos tres fases en nuestro juego ficticio que deben acabarse en las pantallas 5, 17 y 12, y coordenadas (7,8), (10,6) y (1,1), respectivamente.
 
 ```c
-	// my/ci/extra_vars.h
-	unsigned char scr_fin [MAX_LEVELS]      = { 5, 17, 12 };
-	unsigned char player_fin_x [MAX_LEVELS] = { 7, 10,  1 };
-	unsigned char player_fin_y [MAX_LEVELS] = { 8,  6,  1 };
+    // my/ci/extra_vars.h
+    unsigned char scr_fin [MAX_LEVELS]      = { 5, 17, 12 };
+    unsigned char player_fin_x [MAX_LEVELS] = { 7, 10,  1 };
+    unsigned char player_fin_y [MAX_LEVELS] = { 8,  6,  1 };
 ```
 
 Y con esto, no tenemos más que hacer las definiciones en base a estos arrays y la variable `level` en `my/config.h`.
 
 ```c
-	#define SCR_FIN 					scr_fin [level]
-	#define PLAYER_FIN_X				player_fin_x [level]
-	#define PLAYER_FIN_Y				player_fin_y [level]
+    #define SCR_FIN                     scr_fin [level]
+    #define PLAYER_FIN_X                player_fin_x [level]
+    #define PLAYER_FIN_Y                player_fin_y [level]
 ```
 
 ### Scripting
@@ -400,13 +400,13 @@ Y con esto, no tenemos más que hacer las definiciones en base a estos arrays y 
 Terminar el nivel mediante scripting es muy sencillo. Al igual que para juegos de un solo nivel, si definimos `MAX_OBJECTS` y `SCR_FIN` a 99 y activamos el scripting, la única forma de terminar la fase será ejecutando
 
 ```
-	WIN GAME
+    WIN GAME
 ```
 
 desde el script. Además, en multilevel tenemos otra:
 
 ```
-	GAME ENDING
+    GAME ENDING
 ```
 
 Que se salta todas las fases que quedan y muestra directamente el final del güego.
@@ -422,7 +422,7 @@ Para interrumpir el bucle del juego hay que poner la variable `playing` a 0. Ent
 2. Si queremos mostrar el final del juego directamente, lo mejor es poner `success` a 1 y establecer `level` a un valor fuera de rango, mayor que `MAX_LEVELS`. Por convención usaremos `0xff`. Hacer esto hace que se interrumpa el bucle de juego y se muestre el final:
 
 ```c
-	success = 1; level = 0xff;
+    success = 1; level = 0xff;
 ```
 
 3. Si tenemos el scripting activado podemos lograr lo mismo poniendo `script_result` a 4.
@@ -430,11 +430,11 @@ Para interrumpir el bucle del juego hay que poner la variable `playing` a 0. Ent
 4. Si tenemos el scripting desactivado y ponemos `warp_to_level` a 1, o si lo tenemos activado y ponemos `script_result` a 3, se volverá a ejecutar el bucle de juego sin modificar `level`, `n_pant`, `p_x`, `gpx`, `p_y` ni `gpy`, por lo que podemos usar para saltar de un nivel a un punto concreto de otro:
 
 ```c
-	level = 2;
-	n_pant = 20;
-	gpx = 5 << 4; p_x = gpx << FIXBITS;
-	gpy = 7 << 4; p_y = gpy << FIXBITS;
-	warp_to_level = success = 1;
+    level = 2;
+    n_pant = 20;
+    gpx = 5 << 4; p_x = gpx << FIXBITS;
+    gpy = 7 << 4; p_y = gpy << FIXBITS;
+    warp_to_level = success = 1;
 ```
 
 Eso terminará el bucle de juego y saltará al nivel 2, pantalla 20, y pondrá al jugador en las coordenadas (de tile) (5, 7).

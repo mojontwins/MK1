@@ -19,16 +19,16 @@ Para empezar hemos copiado el proyecto en una carpeta nueva (podéis encontrarlo
 Si recompilamos en este punto deberemos ver claramente que el script ocupa 0 bytes:
 
 ```
-	Compilando script
-	Convirtiendo mapa
-	Convirtiendo enemigos/hotspots
-	Importando GFX
-	Compilando guego
-	dogmole_ci.bin: 26713 bytes
-	scripts.bin: 0 bytes
-	Construyendo cinta
-	Limpiando
-	Hecho!
+    Compilando script
+    Convirtiendo mapa
+    Convirtiendo enemigos/hotspots
+    Importando GFX
+    Compilando guego
+    dogmole_ci.bin: 26713 bytes
+    scripts.bin: 0 bytes
+    Construyendo cinta
+    Limpiando
+    Hecho!
 ```
 
 ## Inicializando el juego
@@ -36,10 +36,10 @@ Si recompilamos en este punto deberemos ver claramente que el script ocupa 0 byt
 Vamos a usar los flags para almacenar valores (en concreto los flags 1 y 3, como en el script original). Sin embargo, al haber desactivado el script, no habrá nada que los inicialice al empezar cada partida, así que tendremos que hacerlo nosotros. Para ello usamos `my/ci/entering_game.h` (que equivale a la sección `ENTERING GAME` del script) y ponemos los dos flags que necesitamos a 0:
 
 ```c
-	// my/ci/entering_game.h
+    // my/ci/entering_game.h
 
-	flags [1] = 0;
-	flags [3] = 0;
+    flags [1] = 0;
+    flags [3] = 0;
 ```
 
 ## Decoraciones
@@ -51,33 +51,33 @@ Tenemos decoraciones en las pantallas 0, 1, 6 y 18. La forma más sencilla de us
 Para definir nuestras propias variables usamos `my/ci/extra_vars.h`:
 
 ```c
-	// my/ci/extra_vars.h
+    // my/ci/extra_vars.h
 
-	const unsigned char decos_0 [] = { 0x37, 22, 0x47, 23, 0x15, 29, 0x16, 20, 0x17, 21, 0x66, 20, 0x67, 21, 0x77, 28, 0x12, 27, 0x13, 28, 0x22, 29, 0x23, 27, 0x32, 32, 0x33, 33, 0x91, 30, 0x92, 30, 0x93, 31, 0xff };
-	const unsigned char decos_1 [] = { 0x72, 24, 0x82, 25, 0x92, 26, 0x16, 32, 0x17, 33, 0xD6, 32, 0xD7, 33, 0xff };
-	const unsigned char decos_6 [] = { 0xA1, 30, 0XA2, 31, 0XA4, 35, 0xff};
-	const unsigned char decos_18 [] = { 0x48, 34, 0xff };
+    const unsigned char decos_0 [] = { 0x37, 22, 0x47, 23, 0x15, 29, 0x16, 20, 0x17, 21, 0x66, 20, 0x67, 21, 0x77, 28, 0x12, 27, 0x13, 28, 0x22, 29, 0x23, 27, 0x32, 32, 0x33, 33, 0x91, 30, 0x92, 30, 0x93, 31, 0xff };
+    const unsigned char decos_1 [] = { 0x72, 24, 0x82, 25, 0x92, 26, 0x16, 32, 0x17, 33, 0xD6, 32, 0xD7, 33, 0xff };
+    const unsigned char decos_6 [] = { 0xA1, 30, 0XA2, 31, 0XA4, 35, 0xff};
+    const unsigned char decos_18 [] = { 0x48, 34, 0xff };
 ```
 
 El momento de presentar las decoraciones es el de entrar la pantalla. El punto de inserción de código `my/ci/entering_screen.h` se ejecuta, igual que la sección `ENTERING GAME`, justo en ese momento, después de dibujarla y prepararlo todo, y antes de enviar los resultados a la memoria de video. Es el momento perfecto para modificar la pantalla sin que se note el cambio, por tanto.
 
 ```c
-	// my/ci/entering_screen.h
+    // my/ci/entering_screen.h
 
-	_gp_gen = 0;
+    _gp_gen = 0;
 
-	switch (n_pant) {
-		case 0:
-			_gp_gen = decos_0; break;
-		case 1:
-			_gp_gen = decos_1; break;
-		case 6: 
-			_gp_gen = decos_6; break;
-		case 18:
-			_gp_gen = decos_18; break;
-	}
+    switch (n_pant) {
+        case 0:
+            _gp_gen = decos_0; break;
+        case 1:
+            _gp_gen = decos_1; break;
+        case 6: 
+            _gp_gen = decos_6; break;
+        case 18:
+            _gp_gen = decos_18; break;
+    }
 
-	if (_gp_gen) draw_decorations ();
+    if (_gp_gen) draw_decorations ();
 ```
 
 ## Contando monjes
@@ -89,49 +89,49 @@ El sitio perfecto para hacer esta comprobación es el punto de inyección de có
 Abriremos `my/ci/on_enems_killed.h` y añadiremos el siguiente trozo de código:
 
 ```c
-	// my/ci/on_enems_killed.h
+    // my/ci/on_enems_killed.h
 
-	if (p_killed == N_ENEMS_TYPE_3) {
-		flags [3] = 1;
-	}
+    if (p_killed == N_ENEMS_TYPE_3) {
+        flags [3] = 1;
+    }
 ```
 
 Otra cosa que hacíamos era usar EXTERN para ejecutar el código que mostraba el cartel de que la puerta estaba abierta. Como la función con nuestro código extern no está disponible al haber desactivado el scripting tendremos que añadir el código directamente en el if que acabamos de meter. Queda así:
 
 ```c
-	// my/ci/on_enems_killed.h
+    // my/ci/on_enems_killed.h
 
-	if (p_killed == N_ENEMS_TYPE_3) {
-		flags [3] = 1;
+    if (p_killed == N_ENEMS_TYPE_3) {
+        flags [3] = 1;
 
-		// Print message
-		_t = 79;
-		_x = 8; _y = 10; _gp_gen = my_spacer;  print_str ();
-		_x = 8; _y = 12;                       print_str ();
-		_x = 8; _y = 11; _gp_gen = my_message; print_str ();
+        // Print message
+        _t = 79;
+        _x = 8; _y = 10; _gp_gen = my_spacer;  print_str ();
+        _x = 8; _y = 12;                       print_str ();
+        _x = 8; _y = 11; _gp_gen = my_message; print_str ();
 
-		sp_UpdateNowEx (0);
+        sp_UpdateNowEx (0);
 
-		// Wait
-		espera_activa (150);
+        // Wait
+        espera_activa (150);
 
-		// Force reenter
-		o_pant = 99;
-	}
+        // Force reenter
+        o_pant = 99;
+    }
 ```
 
 Este código necesita dos variables con las cadenas que se imprimen, `my_spacer` y `my_message`. Las añadimos a `my/ci/extra_vars.h`:
 
 ```c
-	// my/ci/extra_vars.h
+    // my/ci/extra_vars.h
 
-	const unsigned char decos_0 [] = { 0x37, 22, 0x47, 23, 0x15, 29, 0x16, 20, 0x17, 21, 0x66, 20, 0x67, 21, 0x77, 28, 0x12, 27, 0x13, 28, 0x22, 29, 0x23, 27, 0x32, 32, 0x33, 33, 0x91, 30, 0x92, 30, 0x93, 31, 0xff };
-	const unsigned char decos_1 [] = { 0x72, 24, 0x82, 25, 0x92, 26, 0x16, 32, 0x17, 33, 0xD6, 32, 0xD7, 33, 0xff };
-	const unsigned char decos_6 [] = { 0xA1, 30, 0XA2, 31, 0XA4, 35, 0xff};
-	const unsigned char decos_18 [] = { 0x48, 34, 0xff };
+    const unsigned char decos_0 [] = { 0x37, 22, 0x47, 23, 0x15, 29, 0x16, 20, 0x17, 21, 0x66, 20, 0x67, 21, 0x77, 28, 0x12, 27, 0x13, 28, 0x22, 29, 0x23, 27, 0x32, 32, 0x33, 33, 0x91, 30, 0x92, 30, 0x93, 31, 0xff };
+    const unsigned char decos_1 [] = { 0x72, 24, 0x82, 25, 0x92, 26, 0x16, 32, 0x17, 33, 0xD6, 32, 0xD7, 33, 0xff };
+    const unsigned char decos_6 [] = { 0xA1, 30, 0XA2, 31, 0XA4, 35, 0xff};
+    const unsigned char decos_18 [] = { 0x48, 34, 0xff };
 
-	unsigned char *my_spacer =  "                ";
-	unsigned char *my_message = " PUERTA ABIERTA ";
+    unsigned char *my_spacer =  "                ";
+    unsigned char *my_message = " PUERTA ABIERTA ";
 ```
 
 En el trozo de código que hemos escrito vemos varias cosas:
@@ -157,28 +157,28 @@ Llamaos *reentrada* a recargar completamente la pantalla. En este caso, esto es 
 Usaremos de nuevo `my/ci/entering_screen.h`. Simplemente detectamos que acabamos de entrar en la pantalla 2 usando `n_pant`, consultamos el valor de `flag [3]` y usamos `update_tile` para modificar el tile:
 
 ```c
-	// my/ci/entering_screen.h
+    // my/ci/entering_screen.h
 
-	_gp_gen = 0;
+    _gp_gen = 0;
 
-	switch (n_pant) {
-		case 0:
-			_gp_gen = decos_0; break;
-		case 1:
-			_gp_gen = decos_1; break;
-		case 6: 
-			_gp_gen = decos_6; break;
-		case 18:
-			_gp_gen = decos_18; break;
-	}
+    switch (n_pant) {
+        case 0:
+            _gp_gen = decos_0; break;
+        case 1:
+            _gp_gen = decos_1; break;
+        case 6: 
+            _gp_gen = decos_6; break;
+        case 18:
+            _gp_gen = decos_18; break;
+    }
 
-	if (_gp_gen) draw_decorations ();
+    if (_gp_gen) draw_decorations ();
 
-	if (n_pant == 2) {
-		if (flags [3]) {
-			_x = 12; _y = 7; _t = _n = 0; update_tile ();
-		}
-	}
+    if (n_pant == 2) {
+        if (flags [3]) {
+            _x = 12; _y = 7; _t = _n = 0; update_tile ();
+        }
+    }
 ```
 
 ### En qué pantalla estamos:
@@ -200,20 +200,20 @@ En todo momento, `p_tx` y `p_ty` contienen las coordenadas de la casilla de tile
 Cuando todo esto se cumpla tendremos que "liberar" el objeto y contar uno más en el flag 1. Recordad que en modo `ONLY_ONE_OBJECT`, `p_objs` vale 1 cuando llevamos un objeto y 0 cuando no. Aprovecharemos también para detectar que hemos recogido 10:
 
 ```c
-	// my/ci/extra_routines.h
+    // my/ci/extra_routines.h
 
-	if (n_pant == 0) {
-		if (p_objs && p_ty == 7 && (p_tx == 3 || p_tx == 4)) {
-			p_objs = 0; 	// Liberamos el objeto
-			++ flags [1]; 	// Contamos uno más.
+    if (n_pant == 0) {
+        if (p_objs && p_ty == 7 && (p_tx == 3 || p_tx == 4)) {
+            p_objs = 0;     // Liberamos el objeto
+            ++ flags [1];   // Contamos uno más.
 
-			if (flags [1] == 10) {
-				// Terminar el juego "bien"
-				success = 1;
-				playing = 0;
-			}
-		}
-	}
+            if (flags [1] == 10) {
+                // Terminar el juego "bien"
+                success = 1;
+                playing = 0;
+            }
+        }
+    }
 ```
 
 ### Detectando dónde está el jugador nivel fácil

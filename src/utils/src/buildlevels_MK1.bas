@@ -31,12 +31,13 @@ Sub usage
 	Print ""
 	Print "MAP DATA"
 	Print ""
-	Print "mapfile        EspecIfies the .map file. packed/unpacked autodetected."
+	Print "mapsize        Needed if game contains differently sized levels: MAP_W*MAP:H"
+	Print "mapfile        Especifies the .map file. packed/unpacked autodetected."
 	Print "map_w          Map width in screens."
 	Print "map_h          Map height in screens."
 	Print "decorations    Output filename for decorations. This makes your map packed."
 	Print "lock           Tile # for locks. (optional)"
-	Print "attrsfile      map_w*map_h comma separated attrs. for screens (optional)"
+	'Print "attrsfile      map_w*map_h comma separated attrs. for screens (optional)"
 	Print ""
 	Print "TILESET/CHARSET DATA"
 	Print ""
@@ -53,7 +54,7 @@ Sub usage
 	Print "ENEMIES"
 	Print ""
 	Print "enemsfile      enems.ene file"
-	Print "nohotspots     (without value) If MTE MK1 is configured without hotspots."	
+	'Print "nohotspots     (without value) If MTE MK1 is configured without hotspots."	
 	Print ""
 	Print "HEADER STUFF"
 	Print ""
@@ -192,7 +193,8 @@ Dim as uByte x_pant, y_pant
 Dim As Integer somethingOn (255)	
 Dim As Integer doForce, fExtra, forceDone, n_pant,  doYawn, decoCtr
 Dim As Integer nSprites
-
+Dim As Integer mapSize, fillScreens
+Dim As String padStr
 
 '' DO 
 
@@ -275,6 +277,15 @@ If sclpGetValue ("nsprites") <> "" Then
 	End If
 Else
 	nSprites = 16
+End If
+
+If sclpGetValue ("mapsize") <> "" Then
+	mapSize = Val (sclpGetValue ("mapsize"))
+	If mapSize < map_w * map_h Then Puts ("Mapsize must be bigger or equal to map_w * map_h"): errors = -1
+	fillScreens = mapSize - (map_w * map_h)	
+Else
+	mapSize = map_w * map_h
+	fillScreens = 0
 End If
 
 If errors Then
@@ -475,7 +486,19 @@ If doForce Then
 	wholeme = wholeme & " };"
 	Print #fExtra, wholeme
 End If
+
+If fillScreens Then
+	Puts ("    Filling with " & fillScreens & " empty screens")
+	If is_packed Then j = 75 Else j = 150
+	padStr = String (j, 0)
+	For i = 1 to fillScreens
+		Put #fOut, , padStr
+		byteswritten = byteswritten + j
+	Next i
+End If
+
 Puts ("    " & byteswritten & " bytes written.")
+
 If doForce Then
 	Puts ("    Out of range tiles written to " & sclpGetValue ("decorations"))
 	Puts ("    " & decoCtr & " decorations written.")
@@ -556,7 +579,7 @@ End If
 Puts ("    tileset filename = " & sclpGetValue ("tilesfile"))
 x = 0
 y = 0
-For idx = 0 to (((xx\16)*(yy\16)) - 1)
+For idx = 0 to 47 '(((xx\16)*(yy\16)) - 1)
 	getUDGIntoCharset img, x, y, tileset (), idx * 4 + 64
 	getUDGIntoCharset img, x + 8, y, tileset (), idx * 4 + 65
 	getUDGIntoCharset img, x, y + 8, tileset (), idx * 4 + 66
@@ -626,6 +649,17 @@ For idx = 1 To max
 	byteswritten = byteswritten + 10
 Next idx
 Puts ("    written " & max & " enemies")
+
+If fillScreens Then
+	Puts ("    Filling with " & fillScreens & " empty screens")
+	j = 30
+	padStr = String (j, 0)
+	For i = 1 to fillScreens
+		Put #fOut, , padStr
+		byteswritten = byteswritten + j
+	Next i
+End If
+
 Puts ("    " & byteswritten & " bytes written.")
 totalsize = totalsize + byteswritten
 byteswritten = 0
@@ -652,6 +686,17 @@ Else
 		byteswritten = byteswritten + 3
 	Next idx
 	Close #f
+
+	If fillScreens Then
+		Puts ("    Filling with " & fillScreens & " empty screens")
+		j = 3
+		padStr = String (j, 0)
+		For i = 1 to fillScreens
+			Put #fOut, , padStr
+			byteswritten = byteswritten + j
+		Next i
+	End If
+
 	Puts ("    " & byteswritten & " bytes written.")
 	Puts ("")
 	
