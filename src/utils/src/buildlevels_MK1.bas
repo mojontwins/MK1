@@ -38,10 +38,10 @@ Sub usage
 	Print "decorations    Output filename for decorations. This makes your map packed."
 	Print "lock           Tile # for locks. (optional)"
 	'Print "attrsfile      map_w*map_h comma separated attrs. for screens (optional)"
+	Print "fixmappy       Fixes mappy's 'no first black tile' behaviour"
 	Print ""
 	Print "TILESET/CHARSET DATA"
 	Print ""
-	Print "fontfile       font.png (256x16) containing 64 8x8 chars, ASCII 32-95."
 	Print "tilesfile      work.png (256x48) containing 48 16x16 tiles."
 	Print "behsfile       behs.txt containing 48 comma-separated values."
 	Print "defaultink     Value to use when PAPER=INK."
@@ -171,8 +171,8 @@ End Type
 
 '' My vars
 
-Dim As String neededParamsArray (1 To 12) => { _
-	"mapfile", "map_w", "map_h", "fontfile", "tilesfile", "behsfile", _
+Dim As String neededParamsArray (1 To 11) => { _
+	"mapfile", "map_w", "map_h", "tilesfile", "behsfile", _
 	"spritesfile", "enemsfile", "scr_ini", "ini_x", "ini_y", "enems_life" _
 }
 Dim As Integer errors
@@ -193,7 +193,7 @@ Dim as uByte x_pant, y_pant
 Dim As Integer somethingOn (255)	
 Dim As Integer doForce, fExtra, forceDone, n_pant,  doYawn, decoCtr
 Dim As Integer nSprites
-Dim As Integer mapSize, fillScreens
+Dim As Integer mapSize, fillScreens, fixMappy
 Dim As String padStr
 
 '' DO 
@@ -263,7 +263,7 @@ If Not FileExists (sclpGetValue ("mapfile")) Then Puts ("map file specified does
 If sclpGetValue ("attrsfile") <> "" Then 
 	If Not FileExists (sclpGetValue ("mapfile")) Then Puts ("map attributes file specified does not exist"): errors = -1
 End If
-If Not FileExists (sclpGetValue ("fontfile")) Then Puts ("font file specified does not exist"): errors = -1
+'If Not FileExists (sclpGetValue ("fontfile")) Then Puts ("font file specified does not exist"): errors = -1
 If Not FileExists (sclpGetValue ("tilesfile")) Then Puts ("tileset file specified does not exist"): errors = -1
 If Not FileExists (sclpGetValue ("spritesfile")) Then Puts ("spriteset file specified does not exist"): errors = -1
 If Not FileExists (sclpGetValue ("enemsfile")) Then Puts ("enems file specified does not exist"): errors = -1
@@ -287,6 +287,8 @@ Else
 	mapSize = map_w * map_h
 	fillScreens = 0
 End If
+
+fixMappy = (sclpGetValue ("fixmappy") <> "")
 
 If errors Then
 	Print
@@ -360,6 +362,7 @@ decoCtr = 0
 For y = 0 To (10 * map_h) - 1
 	For x = 0 To (15 * map_w) - 1
 		Get #f, , d
+		If fixmappy Then d = d - 1
 		map_data (y, x) = d
 		' Autodetect unpacked:
 		If d > 15 Then
@@ -558,19 +561,22 @@ Puts ("")
 
 idx = 0
 
-Puts ("reading font")
-img = png_load (sclpGetValue ("fontfile"))
-Puts ("    font filename = " & sclpGetValue ("fontfile"))
-byteswritten = 0
-idx = 0
-For y = 0 To 1
-	For x = 0 To 31
-		getUDGIntoCharset img, x * 8, y * 8, tileset (), idx
-		idx = idx + 1	
-		byteswritten = byteswritten + 9
-	Next x
-Next y
-Puts ("    converted 64 chars")
+'Puts ("reading font")
+'img = png_load (sclpGetValue ("fontfile"))
+'Puts ("    font filename = " & sclpGetValue ("fontfile"))
+'byteswritten = 0
+'idx = 0
+'For y = 0 To 1
+'	For x = 0 To 31
+'		getUDGIntoCharset img, x * 8, y * 8, tileset (), idx
+'		idx = idx + 1	
+'		byteswritten = byteswritten + 9
+'	Next x
+'Next y
+'Puts ("    converted 64 chars")
+byteswritten = 512 + 64
+for idx = 0 To 2303: tileset (idx) = 0: Next idx
+
 Puts ("reading 16x16 tiles")
 img = png_load (sclpGetValue ("tilesfile"))
 If ImageInfo (img, xx, yy, , , , ) Then
@@ -587,17 +593,18 @@ For idx = 0 to 47 '(((xx\16)*(yy\16)) - 1)
 	x = x + 16: If x = xx Then x = 0: y = y + 16
 	byteswritten = byteswritten + 36
 Next idx
-Puts ("    converted " & (((xx\16)*(yy\16))*4) & " chars")
+'Puts ("    converted " & (((xx\16)*(yy\16))*4) & " chars")
+Puts ("    converted " & (48*4) & " chars")
 Puts ("writing tileset")
 
-For idx = 0 To byteswritten - 1
+For idx = 512 To byteswritten - 1
 	d = tileset (idx)
 	put #fout, , d
 Next idx
-Puts ("    " & byteswritten & " bytes written")
+Puts ("    " & (byteswritten - 512) & " bytes written")
 Puts ("")
 
-totalsize = totalsize + byteswritten
+totalsize = totalsize + (byteswritten - 512)
 
 '' ********************
 '' ** ENEMS/HOTSPOTS **

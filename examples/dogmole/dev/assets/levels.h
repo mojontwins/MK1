@@ -80,10 +80,12 @@ extern unsigned char mapa [0];
 	#endasm
 #endif
 
-extern CERROJOS cerrojos [0];
-#asm
-	._cerrojos defs 128	; 32 * 4
-#endasm
+#ifndef DEACTIVATE_KEYS
+	extern CERROJOS cerrojos [0];
+	#asm
+		._cerrojos defs 128	; 32 * 4
+	#endasm
+#endif
 
 extern unsigned char tileset [0];
 #asm
