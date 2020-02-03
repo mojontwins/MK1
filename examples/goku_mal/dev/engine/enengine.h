@@ -433,8 +433,10 @@ void enems_move (void) {
 
 					}
 				} else
-			#endif			
+			#endif
 			{
+				#include "custom_enems_player_collision.h"
+			
 				cx2 = _en_x; cy2 = _en_y;
 				if (!tocado && collide () && p_estado == EST_NORMAL) {
 					#ifdef PLAYER_STEPS_ON_ENEMIES
@@ -514,6 +516,7 @@ void enems_move (void) {
 					}
 				}
 			}
+			player_enem_collision_done:
 			
 			#ifdef PLAYER_CAN_FIRE
 				// Collide with bullets

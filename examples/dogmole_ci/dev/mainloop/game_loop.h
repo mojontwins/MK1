@@ -57,7 +57,7 @@
 	#endif
 
 	#ifdef PLAYER_CHECK_MAP_BOUNDARIES		
-		#ifdef MODE_128K
+		#ifdef COMPRESSED_LEVELS
 			x_pant = n_pant % level_data->map_w;
 			y_pant = n_pant / level_data->map_w;
 		#else

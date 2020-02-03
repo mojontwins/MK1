@@ -718,13 +718,7 @@ void print_number2 (void) {
 			#if OBJECTS_X != 99
 				_x = OBJECTS_X; _y = OBJECTS_Y; 
 				#ifdef REVERSE_OBJECTS_COUNT
-					_t = 
-						#ifdef COMPRESSED_LEVELS
-							level_data->max_objs
-						#else						
-							PLAYER_NUM_OBJETOS
-						#endif
-						- p_objs;
+					_t = PLAYER_NUM_OBJETOS - p_objs;
 				#else
 					_t = p_objs; 
 				#endif

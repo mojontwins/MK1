@@ -26,6 +26,9 @@ void prepare_level (void) {
 		#ifdef PER_LEVEL_SPRITESET
 			unpack ((unsigned int) levels [level].c_sprites, (unsigned int) (sprites));
 		#endif
+
+		level_data->map_w = levels.map_w;
+		level_data->map_h = levels.map_h;
 		
 		#ifdef ACTIVATE_SCRIPTING
 			if (script_result != 3)

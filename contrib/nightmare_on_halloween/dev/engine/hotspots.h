@@ -56,16 +56,9 @@ void hotspots_do (void) {
 							#endif
 
 							#ifdef GET_X_MORE
-								if (
-									#ifdef COMPRESSED_LEVELS
-										level_data->max_objs
-									#else						
-										PLAYER_MAX_OBJECTS
-									#endif 
-									> p_objs
-								) {
+								if (PLAYER_MAX_OBJECTS > p_objs) {
 									_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
-									getxmore [5] = '0' + level_data.max_objs - p_objs;
+									getxmore [5] = '0' + PLAYER_MAX_OBJECTS - p_objs;
 									_x = 10; _y = 12; _t = 79; _gp_gen = getxmore; print_str ();
 									_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
 									sp_UpdateNow ();

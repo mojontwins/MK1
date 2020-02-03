@@ -132,12 +132,6 @@ La tercera directiva se refiere a las colisiones **contra los enemigos**. Si act
 ### Directivas generales
 
 ```c
-    #define PLAYER_AUTO_CHANGE_SCREEN           // Player changes screen automaticly (no need to press direction)
-```
-
-Si definimos esto, el jugador cambiará de pantalla cuando salga por el borde. Si no se define, habrá que estar pulsando la dirección concreta para que esto ocurra. Normalmente se deja activada, para que si el jugador se mueve sólo por inercia también cambie de pantalla. No se nos ocurre una situación en la que esto no sea deseable, pero de todos modos ahí está la opción de desactivarlo.
-
-```c
     //#define PLAYER_CHECK_MAP_BOUNDARIES       // If defined, you can't exit the map.
 ```
 

@@ -46,7 +46,6 @@
 // General directives:
 // -------------------
 
-#define PLAYER_AUTO_CHANGE_SCREEN			// Player changes screen automaticly (no need to press direction)
 //#define PLAYER_CHECK_MAP_BOUNDARIES		// If defined, you can't exit the map.
 //#define DIRECT_TO_PLAY					// If defined, title screen is also the game frame.
 //#define DEACTIVATE_KEYS 					// If defined, keys are not present.
