@@ -371,12 +371,99 @@ Con todo en su sitio, sólo tendremos que llamar al ensamblador `pasmo`, incluid
 
 ¡Y ya lo tenemos todo! Es el momento de irse a `dev/` y ejecutar `build_assets.bat` y ver como se obtienen los diferentes `RAM?.bin` en `bin/`.
 
-## Configurando el motor
-
-### Configuración
-
-### El lelvelset
-
 ## Modificando `compile.bat`
 
-## Controlando la condición de final de cada nivel, versión 128K
+El siguiente paso es modificar `compile.bat` para quitar toda la importación de tiestos de un juego normal mononivel y posteriormente construir una cinta de 128K.
+
+Nos fumaremos completamente las secciones donde se convierten mapas, enemigos, sprites y pantallas fijas (menos la pantalla de carga), pero tendremos que dejar la generación de los sprites extra y la importación de la fuente. La importación de tiestos en `compile.bat` se queda, pues, en la mínima expresión:
+
+```
+    echo Importando GFX
+    ..\..\..\src\utils\ts2bin.exe ..\gfx\font.png notiles font.bin 7 >nul
+
+    ..\..\..\src\utils\sprcnvbin.exe ..\gfx\sprites_extra.png sprites_extra.bin 1 > nul
+    ..\..\..\src\utils\sprcnvbin8.exe ..\gfx\sprites_bullet.png sprites_bullet.bin 1 > nul
+
+    if [%1]==[justassets] goto :end
+```
+
+### Generando la cinta de 128K
+
+La carga de un juego de 128K, desde BASIC, se basa en ir cargando primero cada RAM en `$8000` y luego ejecutando una pequeña rutina en ASM que pagina la RAM correcta y posteriormente copia el bloque a `$C000`, para finalmente volver a poner la configuración de páginas como estaba para seguir cargando el siguiente bloque. Finalmente se carga el bloque principal y se ejecuta.
+
+Así era y ha sido siempre hasta que haciendo **Ninjajar!** nos vimos en la tesitura de que estábamos llenando también RAM7 completamente y descubrimos de mala manera que el 128 BASIC corrompe RAM7. Por eso, haciendo uso de la infinita sabiduría de **Antonio Villena**, construimos un sencillo cargador en ensamble.
+
+El cargador de marras es `dev/loader/loaderzx.asm-orig`. Este archivo tendrá que ser preprocesado para sustituir unas constantes que tiene por la longitud real de los diferentes archivos que tiene que cargar y posteriormente compilado por pasmo, pero lo primero que tendremos que hacer es adaptar el archivo a nuestro proyecto, ya que de fábrica viene preparado para cargar RAM1, RAM3, RAM4, RAM6 y RAM7.
+
+En Goku Mal no tenemos RAM7, así que tendremos que editar el archivo y quitar el bloque que carga esta ram, o sea, eliminar todo esto (linea 68 a la 79):
+
+```asm
+    ; RAM7
+        ld  a, $17      ; ROM 1, RAM 7
+        ld  bc, $7ffd
+        out (C), a
+
+        scf
+        ld  a, $ff
+        ld  ix, $C000
+        ld  de, %%%ram7_length%%%
+        call $0556
+        di
+```
+
+Hecho esto nos tendremos que ir a `compile.bat` y sustituir toda la parte de generación de la cinta de 48K, o sea, esto:
+
+```
+    echo Construyendo cinta
+    rem cambia LOADER por el nombre que quieres que salga en Program:
+    ..\..\..\src\utils\bas2tap -a10 -sDOGMOLE loader\loader.bas loader.tap > nul
+    ..\..\..\src\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
+    ..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
+    copy /b loader.tap + screen.tap + main.tap %game%.tap > nul
+```
+
+Por esto otro:
+
+```
+    echo Construyendo cinta
+    ..\..\..\src\utils\imanol.exe ^
+        in=loader\loaderzx.asm-orig ^
+        out=loader\loader.asm ^
+        ram1_length=?..\bin\RAM1.bin ^
+        ram3_length=?..\bin\RAM3.bin ^
+        ram4_length=?..\bin\RAM4.bin ^
+        ram6_length=?..\bin\RAM6.bin ^
+        mb_length=?%game%.bin  > nul
+
+    ..\..\..\src\utils\pasmo.exe loader\loader.asm ..\bin\loader.bin loader.txt
+
+    ..\..\..\src\utils\GenTape.exe %game%.tap ^
+        basic 'GOKU_MAL' 10 ..\bin\loader.bin ^
+        data                loading.bin ^
+        data                ..\bin\RAM1.bin ^
+        data                ..\bin\RAM3.bin ^
+        data                ..\bin\RAM4.bin ^
+        data                ..\bin\RAM6.bin ^
+        data                %game%.bin
+```
+
+Atención que aquí hay un poco de magias. Empezamos ejecutando `imanol.exe`, que es un programa sencillo para hacer sustituciones textuales por cosas calculadas, como la longitud de un archivo. Aquí simplemente estamos preprocesando `loaderzx.asm-orig` para generar un `loader.asm` con las longitudes correctas de cada bloque.
+
+En la siguiente linea llamamos a pasmo para que lo ensamble y genere un `../bin/loader.bin`.
+
+Por último usamos GenTape del mismo **Antonio Villena** para construir la cinta con todos los bloques necesarios. Fíjate com va primero la pantalla de carga seguida de los cuatro bloques para las RAMs extra que usamos (RAM1, RAM3, RAM4 y RAM6) y finalmente el binario principal. Si tu juego tiene un número de RAMs diferentes tendrás que ajustar esto también.
+
+## Configurando el motor
+
+Vamos a ver qué manejes tendríamos que hacer en `config.h` para activar el modo 128K multi nivel y un par de engaños al chamán.
+
+### Configuración del modo 128K multinivel
+
+### Controlando la condición de final de cada nivel, versión 128K
+
+### Otras cosas de Goku Mal
+
+## El lelvelset
+
+
+

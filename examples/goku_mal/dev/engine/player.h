@@ -735,7 +735,7 @@ void player_kill (unsigned char sound) {
 	if (p_life == 0) return;
 	-- p_life;
 
-	#ifdef MODO_128K
+	#ifdef MODE_128K
 		wyz_play_sound (sound);
 	#else
 		beep_fx (sound);

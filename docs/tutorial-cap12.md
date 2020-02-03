@@ -29,10 +29,10 @@ Como hemos dicho, los recursos comprimidos se descomprimirán sobre "espacios" e
 
 1. Nos fumamos la conversión del mapa (`mapcnv`) y la importación de los enemigos (`ene2h`).
 
-2. Modificamos la conversión del tileset (`ts2bin`) para que genere uno usando la fuente pero dejando todos los tiles a negro. Para ello empleamos la cadena `none` en lugar de una ruta al un archivo de tileset:
+2. Modificamos la conversión del tileset (`ts2bin`) para que genere uno usando sólo la fuente, sin incluir tiles. Para ello empleamos la cadena `notiles` en lugar de una ruta al un archivo de tileset:
 
 ```
-    ..\..\..\src\utils\ts2bin.exe ..\gfx\font.png none tileset.bin 7 >nul
+    ..\..\..\src\utils\ts2bin.exe ..\gfx\font.png notiles font.bin 7 >nul
 ```
 
 3. Si fueramos a cambiar el spriteset en cada fase tendríamos que eliminar también la llamada a `sprcnv`.

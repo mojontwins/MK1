@@ -12,7 +12,9 @@
 	typedef struct {
 		unsigned char resource_id;
 		unsigned char music_id;
-		unsigned int script_offset;
+		#ifdef ACTIVATE_SCRIPTING
+			unsigned int script_offset;
+		#endif
 	} LEVEL;
 #else
 	// 48K format:
@@ -33,17 +35,8 @@
 	} LEVEL;
 #endif
 
-// In 48K mode, include here your compressed binaries:
-
-extern unsigned char my_binary [0];
-
-#asm
-	._my_binary
-		BINARY "../bin/my_binary.bin"	
-#endasm
-
 // Define your level sequence array here:
-// map_w, map_h, scr_ini, ini_x, ini_y, max_objs, c_map_bolts, c_tileset, c_enems_hotspots, c_behs, script
+// Resource_id, music_id, script_offset
 LEVEL levels [] = {
-	
+	{ LEVEL0C_BIN, 0 }
 };

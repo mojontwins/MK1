@@ -2,7 +2,7 @@
 
 if [%1]==[help] goto :help
 
-set game=goku_mal
+set game=128k
 
 if [%1]==[justcompile] goto :compile
 if [%1]==[clean] goto :clean
@@ -18,7 +18,7 @@ cd ..\dev
 if [%1]==[justscripts] goto :compile
 
 echo Importando GFX
-..\..\..\src\utils\ts2bin.exe ..\gfx\font.png notiles font.bin 7 >nul
+..\..\..\src\utils\ts2bin.exe ..\gfx\font.png notiles tileset.bin 7 >nul
 
 ..\..\..\src\utils\sprcnvbin.exe ..\gfx\sprites_extra.png sprites_extra.bin 1 > nul
 ..\..\..\src\utils\sprcnvbin8.exe ..\gfx\sprites_bullet.png sprites_bullet.bin 1 > nul
@@ -41,24 +41,30 @@ echo Construyendo cinta
     ram3_length=?..\bin\RAM3.bin ^
     ram4_length=?..\bin\RAM4.bin ^
     ram6_length=?..\bin\RAM6.bin ^
-    mb_length=?%game%.bin  > nul
+    ram7_length=?..\bin\RAM7.bin ^
+    mb_length=?..\bin\%game%.bin  > nul
 
 ..\..\..\src\utils\pasmo.exe loader\loader.asm ..\bin\loader.bin loader.txt
 
 ..\..\..\src\utils\GenTape.exe %game%.tap ^
-    basic 'GOKU_MAL' 10 ..\bin\loader.bin ^
+    basic 'GOKU MAL' 10 ..\bin\loader.bin ^
     data                loading.bin ^
     data                ..\bin\RAM1.bin ^
     data                ..\bin\RAM3.bin ^
     data                ..\bin\RAM4.bin ^
     data                ..\bin\RAM6.bin ^
-    data                %game%.bin
+    data                ..\bin\RAM7.bin ^
+    data                ..\bin\%game%.bin
 
 if [%1]==[justcompile] goto :end
 if [%1]==[noclean] goto :end
 
 :clean
 echo Limpiando
+del loader.tap > nul
+del screen.tap > nul
+del main.tap > nul
+del ..\gfx\*.scr > nul
 del *.bin > nul
 
 goto :end 

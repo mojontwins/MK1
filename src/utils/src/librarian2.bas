@@ -216,7 +216,7 @@ Print #fOut, ""
 Print #fOut, "RESOURCE resources [] = {"
 
 For i = 0 To indexIdx - 1
-	Print #fOut, "    " & index (i).ram & ", 0x" & Hex (index (i).address);
+	Print #fOut, "    { " & index (i).ram & ", 0x" & Hex (&HC000 + index (i).address, 4) & " }";
 	If i < indexIdx - 1 then Print #fOut, "," Else Print #fOut, ""
 Next i
 

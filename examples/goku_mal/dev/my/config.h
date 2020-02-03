@@ -7,7 +7,7 @@
 // I. General configuration
 // ============================================================================
 
-//#define MODE_128K 						// Read the docs!
+#define MODE_128K 							// Read the docs!
 //#define VENG_SELECTOR 					// Very advanced!
 
 // In this section we define map dimensions, initial and authomatic ending conditions, etc.
@@ -23,9 +23,9 @@
 #define PLAYER_NUM_OBJETOS			5		// Objects to get to finish game
 #define PLAYER_LIFE 				5		// Max and starting life gauge.
 #define PLAYER_REFILL				1		// Life recharge
-//#define COMPRESSED_LEVELS 				// use levels.h instead of mapa.h and enems.h (!)
-//#define MAX_LEVELS				2		// # of compressed levels
-//#define REFILL_ME 						// If defined, refill player on each level
+#define COMPRESSED_LEVELS 					// use levels.h instead of mapa.h and enems.h (!)
+#define MAX_LEVELS					5		// # of compressed levels
+#define REFILL_ME 							// If defined, refill player on each level
 
 // ============================================================================
 // II. Engine type

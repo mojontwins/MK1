@@ -435,7 +435,7 @@ void enems_move (void) {
 				} else
 			#endif
 			{
-				#include "custom_enems_player_collision.h"
+				#include "my/ci/custom_enems_player_collision.h"
 			
 				cx2 = _en_x; cy2 = _en_y;
 				if (!tocado && collide () && p_estado == EST_NORMAL) {

@@ -69,7 +69,7 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 
 #ifdef MODE_128K
 	#include "128k.h"
-	#include "librarian.h"
+	#include "assets/librarian.h"
 #endif
 
 #include "aplib.h"
