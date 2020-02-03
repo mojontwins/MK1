@@ -4,6 +4,8 @@
 // This code is used to display the "new level" screen. You can customize it for your game:
 
 {
+	blackout_area ();
+	
 	level_str [7] = 49 + level;
 	_x = 12; _y = 12; _t = 71; _gp_gen = level_str; print_str ();
 	sp_UpdateNow ();
