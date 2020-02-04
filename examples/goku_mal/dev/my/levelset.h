@@ -38,5 +38,9 @@
 // Define your level sequence array here:
 // Resource_id, music_id, script_offset
 LEVEL levels [] = {
-	{ LEVEL0C_BIN, 0 }
+	{ LEVEL0C_BIN, 3 },
+	{ LEVEL1C_BIN, 4 },
+	{ LEVEL2C_BIN, 5 },
+	{ LEVEL3C_BIN, 7 },
+	{ LEVEL4C_BIN, 3 }
 };

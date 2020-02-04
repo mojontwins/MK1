@@ -63,7 +63,7 @@ Este juego no tiene scripting, así que por último tenemos la banda sonora y OG
 
 ### Importación: pantallas fijas
 
-Empezaremos a construir nuestro script encargado de crear los binarios con las pantallas fijas:
+Empezaremos a construir nuestro script encargado de crear los binarios con las pantallas fijas. Atención y muy importante: **Para que MTE MK1 funcione en modo 128K, las pantallas fijas básicas title, marco y ending deben llamarse `title.bin`, `marco.bin` y `ending.bin`**
 
 ```bat
     @echo off
@@ -71,53 +71,39 @@ Empezaremos a construir nuestro script encargado de crear los binarios con las p
     if [%1]==[skipscr] goto skipscr
 
     echo Converting Fixed Screens
-    ..\..\..\src\utils\png2scr ..\gfx\title.png ..\bin\title.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\marco.png ..\bin\marco.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\ending.png ..\bin\ending.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\logo.png ..\bin\logo.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\dedicado.png ..\bin\dedicado.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\controls.png ..\bin\controls.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\intro1.png ..\bin\intro1.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\intro2.png ..\bin\intro2.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\intro3.png ..\bin\intro3.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\intro4.png ..\bin\intro4.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\intro5.png ..\bin\intro5.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\intro6.png ..\bin\intro6.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\intro7.png ..\bin\intro7.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\zoneA.png ..\bin\zoneA.bin > nul
-    ..\..\..\src\utils\png2scr ..\gfx\zoneB.png ..\bin\zoneB.bin > nul
+    ..\..\..\src\utils\png2scr ..\gfx\title.png ..\bin\title.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\marco.png ..\bin\marco.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\ending.png ..\bin\ending.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\logo.png ..\bin\logo.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\dedicado.png ..\bin\dedicado.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\controls.png ..\bin\controls.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\intro1.png ..\bin\intro1.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\intro2.png ..\bin\intro2.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\intro3.png ..\bin\intro3.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\intro4.png ..\bin\intro4.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\intro5.png ..\bin\intro5.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\intro6.png ..\bin\intro6.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\intro7.png ..\bin\intro7.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\zoneA.png ..\bin\zoneA.scr > nul
+    ..\..\..\src\utils\png2scr ..\gfx\zoneB.png ..\bin\zoneB.scr > nul
 
-    ..\..\..\src\utils\apultra ..\bin\title.bin ..\bin\titlec.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\marco.bin ..\bin\marcoc.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\ending.bin ..\bin\endingc.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\logo.bin ..\bin\logoc.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\dedicado.bin ..\bin\dedicadoc.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\controls.bin ..\bin\controlsc.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\intro1.bin ..\bin\intro1c.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\intro2.bin ..\bin\intro2c.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\intro3.bin ..\bin\intro3c.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\intro4.bin ..\bin\intro4c.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\intro5.bin ..\bin\intro5c.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\intro6.bin ..\bin\intro6c.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\intro7.bin ..\bin\intro7c.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\zoneA.bin ..\bin\zoneAc.bin > nul
-    ..\..\..\src\utils\apultra ..\bin\zoneB.bin ..\bin\zoneBc.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\title.scr ..\bin\title.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\marco.scr ..\bin\marco.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\ending.scr ..\bin\ending.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\logo.scr ..\bin\logo.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\dedicado.scr ..\bin\dedicado.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\controls.scr ..\bin\controls.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\intro1.scr ..\bin\intro1.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\intro2.scr ..\bin\intro2.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\intro3.scr ..\bin\intro3.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\intro4.scr ..\bin\intro4.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\intro5.scr ..\bin\intro5.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\intro6.scr ..\bin\intro6.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\intro7.scr ..\bin\intro7.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\zoneA.scr ..\bin\zoneA.bin > nul
+    ..\..\..\src\utils\apultra ..\bin\zoneB.scr ..\bin\zoneB.bin > nul
 
-    del ..\bin\title.bin > nul
-    del ..\bin\marco.bin > nul
-    del ..\bin\ending.bin > nul
-    del ..\bin\logo.bin > nul
-    del ..\bin\dedicado.bin > nul
-    del ..\bin\controls.bin > nul
-    del ..\bin\intro1.bin > nul
-    del ..\bin\intro2.bin > nul
-    del ..\bin\intro3.bin > nul
-    del ..\bin\intro4.bin > nul
-    del ..\bin\intro5.bin > nul
-    del ..\bin\intro6.bin > nul
-    del ..\bin\intro7.bin > nul
-    del ..\bin\zoneA.bin > nul
-    del ..\bin\zoneB.bin > nul
+    del ..\bin\*.scr > nul
 
     :skipscr
 ```
@@ -186,7 +172,7 @@ Vamos por partes:
 
 2. `mapsize` (opcional): indica el número total de pantallas que hay en el espacio de memoria reservado para el nivel, esto es, el resultado de multiplicar `MAP_W * MAP_H`. Esto es para juegos en los que tengas niveles de tamaños diferentes (mira el capítulo anterior para refrescar estos conceptos). Es opcional porque si todos tus niveles tienen el mismo número de pantallas te basta con especificar los siguientes parámetros:
 
-3. `map_w` y `map_h` (obligatorios): especifican el ancho y alto en pantallas del nivel. Recuerda que `map_w * map_h` debe ser menor que el resultado de `MAP_W * MAP_H` (las constantes de `my/config.h`) y por tanto menor o igual que `mapsize` si lo has especificado.
+3. `map_w` y `map_h` (obligatorios): especifican el ancho y alto en pantallas del nivel. Recuerda que `map_w * map_h` debe ser menor que el resultado de `MAP_W * MAP_H` (las macros de `my/config.h`) y por tanto menor o igual que `mapsize` si lo has especificado.
 
 4. `mapfile` (obligatorio) es una ruta al archivo con el mapa en formato `.MAP`.
 
@@ -290,7 +276,7 @@ Para meter todos estos tiestos en la RAM extra usaremos **The Librarian** en su 
 
 Aunque no es necesario por ahora para este juego, **The Librarian** además acepta precargar binarios al principio de una o varias RAMs, y empezará a acomodar el resto de tus binarios detrás. Esto sirve por ejemplo para colocar el script de tu juego en RAM extra, por ejemplo en RAM6. En un caso así, se renombraría `scripts.bin` como `preload6.bin` y **The Librarian** lo colocaría automáticamente al principio de RAM6 y acomodaría el resto de los binarios en las otras RAMs y tras los scripts en RAM6. Así le podríamos decir al motor que los scripts están al principio de RAM6 y todo funcionaría. Pero como **Goku Mal** no tiene scripting, pues no necesitareos esta característica.
 
-Finalmente, lo otro que hace **The Librarian** es generar una estructura con información sobre dónde encontrar cada binario y constantes para identificarlos, que necesitaremos más adelante cuando estemos construyendo nuestro *levelset*.
+Finalmente, lo otro que hace **The Librarian** es generar una estructura con información sobre dónde encontrar cada binario y macros para identificarlos, que necesitaremos más adelante cuando estemos construyendo nuestro *levelset*.
 
 Antes de que te abrumes demasiado vamos a verlo en acción. **The Librarian** usa unos cuantos parámetros que nos chivará, como es costumbre, si lo ejecutamos a pelo:
 
@@ -322,27 +308,27 @@ Por lo tanto, lo siguiente será añadir una nueva linea a nuestro `build_assets
 
 ```
     echo Running The Librarian
-    ..\..\..\src\utils\librarian2.exe list=..\bin\list.txt index=assets\librarian.h bins_prefix=..\bin\ rams_prefix=..\bin\
+    ..\..\..\src\utils\librarian2.exe list=..\bin\list.txt index=assets\librarian.h bins_prefix=..\bin\ rams_prefix=..\bin\ > nul
 ```
 
 Y crear un archivo `list.txt` en `bin/` con la lista de todos los binarios, uno por linea, o sea:
 
 ```
-    titlec.bin
-    marcoc.bin
-    endingc.bin
-    dedicadoc.bin
-    controlsc.bin
-    logoc.bin
-    zoneAc.bin
-    zoneBc.bin
-    intro1c.bin
-    intro2c.bin
-    intro3c.bin
-    intro4c.bin
-    intro5c.bin
-    intro6c.bin
-    intro7c.bin
+    title.bin
+    marco.bin
+    ending.bin
+    dedicado.bin
+    controls.bin
+    logo.bin
+    zoneA.bin
+    zoneB.bin
+    intro1.bin
+    intro2.bin
+    intro3.bin
+    intro4.bin
+    intro5.bin
+    intro6.bin
+    intro7.bin
     level_screen_tsc.bin
     level0c.bin
     level1c.bin
@@ -369,7 +355,31 @@ Con todo en su sitio, sólo tendremos que llamar al ensamblador `pasmo`, incluid
     ..\..\..\src\utils\pasmo ..\mus\WYZproPlay47aZX.ASM ..\bin\RAM1.bin
 ```
 
-¡Y ya lo tenemos todo! Es el momento de irse a `dev/` y ejecutar `build_assets.bat` y ver como se obtienen los diferentes `RAM?.bin` en `bin/`.
+Finalmente me gusta chivar lo que ocupa cada archivo:
+
+```
+    echo DONE
+    ..\..\..\src\utils\printsize ..\bin\RAM1.bin
+    ..\..\..\src\utils\printsize ..\bin\RAM3.bin
+    ..\..\..\src\utils\printsize ..\bin\RAM4.bin
+    ..\..\..\src\utils\printsize ..\bin\RAM6.bin
+```
+
+¡Y ya lo tenemos todo! Es el momento de irse a `dev/` y ejecutar `build_assets.bat` y ver como se obtienen los diferentes `RAM?.bin` en `bin/`. El resultado de la ejecución debería ser algo parecido a esto:
+
+```
+    $ build_assets.bat
+    Converting Fixed Screens
+    Converting levels
+    Converting more stuff
+    Running The Librarian
+    Making music
+    DONE
+    ..\bin\RAM1.bin: 14729 bytes
+    ..\bin\RAM3.bin: 16136 bytes
+    ..\bin\RAM4.bin: 16348 bytes
+    ..\bin\RAM6.bin: 2640 bytes
+```
 
 ## Modificando `compile.bat`
 
@@ -393,7 +403,7 @@ La carga de un juego de 128K, desde BASIC, se basa en ir cargando primero cada R
 
 Así era y ha sido siempre hasta que haciendo **Ninjajar!** nos vimos en la tesitura de que estábamos llenando también RAM7 completamente y descubrimos de mala manera que el 128 BASIC corrompe RAM7. Por eso, haciendo uso de la infinita sabiduría de **Antonio Villena**, construimos un sencillo cargador en ensamble.
 
-El cargador de marras es `dev/loader/loaderzx.asm-orig`. Este archivo tendrá que ser preprocesado para sustituir unas constantes que tiene por la longitud real de los diferentes archivos que tiene que cargar y posteriormente compilado por pasmo, pero lo primero que tendremos que hacer es adaptar el archivo a nuestro proyecto, ya que de fábrica viene preparado para cargar RAM1, RAM3, RAM4, RAM6 y RAM7.
+El cargador de marras es `dev/loader/loaderzx.asm-orig`. Este archivo tendrá que ser preprocesado para sustituir unas macros que tiene por la longitud real de los diferentes archivos que tiene que cargar y posteriormente compilado por pasmo, pero lo primero que tendremos que hacer es adaptar el archivo a nuestro proyecto, ya que de fábrica viene preparado para cargar RAM1, RAM3, RAM4, RAM6 y RAM7.
 
 En Goku Mal no tenemos RAM7, así que tendremos que editar el archivo y quitar el bloque que carga esta ram, o sea, eliminar todo esto (linea 68 a la 79):
 
@@ -453,17 +463,304 @@ En la siguiente linea llamamos a pasmo para que lo ensamble y genere un `../bin/
 
 Por último usamos GenTape del mismo **Antonio Villena** para construir la cinta con todos los bloques necesarios. Fíjate com va primero la pantalla de carga seguida de los cuatro bloques para las RAMs extra que usamos (RAM1, RAM3, RAM4 y RAM6) y finalmente el binario principal. Si tu juego tiene un número de RAMs diferentes tendrás que ajustar esto también.
 
+## Qué ha hecho The Librarian
+
+The Librarian ha hecho algo genial: nos ha creado un archivo `assets/librarian.h` que contiene información sobre la ubicación de cada uno de nuestros tiestos, y además ha creado una macro para cada tiesto para que los podamos referenciar cómodamente en el *levelset* o donde necesitemos. Si abres el archivo verás primero la estructura `resources` con la página y el offset de cada uno de nuestros recursos:
+
+```c
+    RESOURCE resources [] = {
+        { 3, 0xC000 },
+        { 3, 0xC9D7 },
+        { 3, 0xD357 },
+        { 3, 0xDBE8 },
+        { 3, 0xE470 },
+        { 3, 0xECE9 },
+        [...]
+    };
+```
+
+Y luego una ristra de macros:
+
+```c
+    #define LEVEL0C_BIN                     0
+    #define LEVEL4C_BIN                     1
+    #define LEVEL2C_BIN                     2
+    #define LEVEL1C_BIN                     3
+    #define ZONEA_BIN                       4
+    #define LEVEL3C_BIN                     5
+    #define ZONEB_BIN                       6
+    #define INTRO7_BIN                      7
+    #define INTRO5_BIN                      8
+    #define INTRO6_BIN                      9
+    #define INTRO2_BIN                      10
+    #define INTRO4_BIN                      11
+    #define INTRO3_BIN                      12
+    #define ENDING_BIN                      13
+    #define INTRO1_BIN                      14
+    #define DEDICADO_BIN                    15
+    #define TITLE_BIN                       16
+    #define LOGO_BIN                        17
+    #define CONTROLS_BIN                    18
+    #define LEVEL_SCREEN_TSC_BIN            19
+    #define MARCO_BIN                       20
+```
+
+Cuando se activa el modo 128K (como veremos más adelante), está disponible la función `get_resource`, que sirve para descomprimir un recurso situado en RAM extra en la dirección de memoria `destination`. `n` es el número de recurso y, obviamente, podemos usar estas macros que crea **The Librarian**.
+
+Si te fijas, las macros equivalen al nombre de archivo origen, en mayúsculas, y con `.` sustituido por `_`. Así nuestro `title.bin` puede referenciarse con la macro `TITLE_BIN`.
+
+## El levelset
+
+Es el momento de crear nuestro *levelset*. En modo 128K, como usamos *level bundles*, el *levelset* será mucho más sencillo. Al igual que en modo 48K, se configura en el archivo `my/levelset.h`. En modo 128K la estructura que describe un nivel es mucho más sencilla ya que la mayoría de los parámetros forman parte de la cabecera del *level bundle*:
+
+```c
+    // 128K format:
+    typedef struct {
+        unsigned char resource_id;
+        unsigned char music_id;
+        #ifdef ACTIVATE_SCRIPTING
+            unsigned int script_offset;
+        #endif
+    } LEVEL;
+```
+
+Para cada nivel, por tanto, sólo tendremos que referenciar el recurso con el *level bundle* correspondiente al nivel, el número de la música de fondo en la OGT y, si tenemos activado el scripting, un offset al inicio del script correspondiente al nivel, cosa que, como ya hemos mencionado varias veces en este capítulo, dejaremos para otra ocasión.
+
+Como en modo 48K, el *levelset* se define en el array `levels`. Como no tenemos scripting en **Goku Mal**, nuestro *levelset* es tal que así:
+
+```c
+    // Define your level sequence array here:
+    // Resource_id, music_id, script_offset
+    LEVEL levels [] = {
+        { LEVEL0C_BIN, 3 },
+        { LEVEL1C_BIN, 4 },
+        { LEVEL2C_BIN, 5 },
+        { LEVEL3C_BIN, 7 },
+        { LEVEL4C_BIN, 3 },
+    };
+```
+
+Los números 3, 4, 5, 7, 3 referencian músicas de la OGT que, como hemos dicho también, ya explicaremos como montar.
+
+## La estructura level_data
+
+Cuando se descomprime un *level bundle*, los primeros 16 bytes del binario corresponden con una cabecera que está accesible al motor mediante la estructura `level_data`, que vemos en el cuadro siguiente. La mayoría del espacio está desocupado, en provisión de ampliaciones futuras.
+
+```c
+    typedef struct {
+        unsigned char map_w, map_h;
+        unsigned char scr_ini, ini_x, ini_y;
+        unsigned char max_objs;
+        unsigned char enems_life;
+        unsigned char d01;  // Reserved
+        unsigned char d02;
+        unsigned char d03;
+        unsigned char d04;
+        unsigned char d05;
+        unsigned char d06;
+        unsigned char d07;
+        unsigned char d08;
+        unsigned char d09;
+    } LEVELHEADER;
+
+    [...]
+
+    extern LEVELHEADER level_data [0];
+    #asm
+        ._level_data defs 16
+    #endasm
+```
+
+Accediendo a los datos en `level_data` podremos leer las dimensiones del nivel actual o donde vamos a empezar, el número máximo de objetos o la vida de los enemigos. Como `level_data` es un puntero a una estructura `extern`, tendremos que usar `->` para acceder a los valores de sus campos, por ejemplo:
+
+```c
+    rda = level_data->max_objs;
+```
+
 ## Configurando el motor
 
-Vamos a ver qué manejes tendríamos que hacer en `config.h` para activar el modo 128K multi nivel y un par de engaños al chamán.
+Vamos a ver qué manejes tendríamos que hacer en `config.h` para activar el modo 128K multinivel y un par de engaños al chamán, además de dejar todo el motor listo para **Goku Mal** activando algunas cosas chulas que no hemos visto en el tutorial.
+
+Primero vamos a montar el mínimo funcional: las fases se ejecutarán y se podrán terminar. Luego, con todo eso funcionando, veremos las personalizaciones: las *splash screens*, las *cutscenes* y los flujos de sinergia orientados a *startup* y *coaching*.
 
 ### Configuración del modo 128K multinivel
 
-### Controlando la condición de final de cada nivel, versión 128K
+La primera es fácil. Tendremos que tocar tres directivas:
 
-### Otras cosas de Goku Mal
+```c 
+    #define MODE_128K                           // Read the docs!
+    [...]
+    #define COMPRESSED_LEVELS                   // use levels.h instead of mapa.h and enems.h (!)
+    #define MAX_LEVELS                  5       // # of compressed levels
+```
 
-## El lelvelset
+Con esto tenemos el motor configurado en modo 128K y esperando un levelset en la memoria extra. Además estamos diciéndole al manejador principal que hay cinco niveles. 
 
+### La configuración de Goku Mal
 
+Para no hacer este capítulo enorme, vamos a poner sólo lo que activamos y configuramos, entendiendo que todo lo demás va comentado y desactivado.
 
+```c
+    #define MAP_W                       5       //
+    #define MAP_H                       5       // Map dimensions in screens
+    #define SCR_INICIO                  99      // Initial screen
+    #define PLAYER_INI_X                99      //
+    #define PLAYER_INI_Y                99      // Initial tile coordinates
+    //#define SCR_FIN                   99      // Last screen. 99 = deactivated.
+    //#define PLAYER_FIN_X              99      //
+    //#define PLAYER_FIN_Y              99      // Player tile coordinates to finish game
+    #define PLAYER_NUM_OBJETOS          level_lata->max_objs    // Objects to get to finish game
+    #define PLAYER_LIFE                 6       // Max and starting life gauge.
+    #define PLAYER_REFILL               1       // Life recharge
+    #define COMPRESSED_LEVELS                   // use levels.h instead of mapa.h and enems.h (!)
+    #define MAX_LEVELS                  5       // # of compressed levels
+    #define REFILL_ME                           // If defined, refill player on each level
+```
+
+En la configuración principal lo único reseñable es `PLAYER_NUM_OBJETOS`. En modo 128K, el array del *levelset* `levels` es la mínima expresión, como hemos visto, ya que la información de cada nivel va en la cabecera del *level bundle*. Por tanto, para hacer que el número de objetos que hay que conseguir en cada fase coincida con el que hemos configurado al crear los bundles, habrá que *apuntar* `PLAYER_NUM_OBJETOS` al campo `max_objs` de la estructura `level_data`.
+
+```c
+    #define BOUNDING_BOX_8_BOTTOM               // 8x8 aligned to bottom center in 16x16
+    #define SMALL_COLLISION                     // 8x8 centered collision instead of 12x12
+```
+
+En el apartado de colisiones, usamos las *benévolas*, lo que hará que el gameplay de este juego, que es un *shooter*, sea mucho más mejor y menos peor.
+
+```c
+    #define PLAYER_CHECK_MAP_BOUNDARIES         // If defined, you can't exit the map.
+    #define DEACTIVATE_KEYS                     // If defined, keys are not present.
+    #define FULL_BOUNCE                         // If defined, evil tile bounces equal MAX_VX, otherwise v/2
+    #define PLAYER_FLICKERS                     // If defined, collisions make player flicker instead.
+```
+
+En el apartado de configuraciones generales configuramos para que se compruebe que no nos salimos del mapa (porque los niveles no tienen "paredes" externas para que haya más espacio para moverse), quitamos las llaves, ponemos rebote completo para con los pinchos y decimos que el jugador parpadée un rato cuando le alcancen.
+
+```c
+    #define ENABLE_FANTIES                      // If defined, Fanties are enabled!
+    #define FANTIES_BASE_CELL           2       // Base sprite cell (0, 1, 2 or 3)
+    #define FANTIES_SIGHT_DISTANCE      104     // Used in our type 6 enemies.
+    #define FANTIES_MAX_V               256     // Flying enemies max speed (also for custom type 6 if you want)
+    #define FANTIES_A                   16      // Flying enemies acceleration.
+    #define FANTIES_LIFE_GAUGE          5       // Amount of shots needed to kill flying enemies.
+    #define FANTIES_TYPE_HOMING                 // Unset for simple fanties.
+```
+
+En este juego necesitamos *fanties* de tipo *homing*. De hecho, fueron introducidos en el motor justo en este juego. Los configuramos para que usen siempre el gráfico 2 y les ponemos los valores que se ven. Habrá que soltarles 5 hostias para matarlos.
+
+```c
+    #define PLAYER_CAN_FIRE                     // If defined, shooting engine is enabled.
+    #define PLAYER_BULLET_SPEED         8       // Pixels/frame. 
+    #define MAX_BULLETS                 4       // Max number of bullets on screen. Be careful!.
+    #define PLAYER_BULLET_Y_OFFSET      6       // vertical offset from the player's top.
+    #define PLAYER_BULLET_X_OFFSET      0       // vertical offset from the player's left/right.
+    #define ENEMIES_LIFE_GAUGE          leveldata->enems_life   // Amount of shots needed to kill enemies.
+    #define RESPAWN_ON_ENTER                    // Enemies respawn when entering screen
+    #define CAN_FIRE_UP                         // If defined, player can fire upwards and diagonal.
+```
+
+Aquí vemos otra fullería para adaptar un valor aparentemente fijo a algo variable usando el podewr de las macros en C: Si configuramos `ENEMIES_LIFE_GAUGE` como se ve, lograremos que el valor de vida con el que se reactiva a los enemigos a entrar en una pantalla (hemos activado `RESPAWN_ON_ENTER`) coincida con el que se define en la cabecera de cada nivel.
+
+Ojal también al `CAN_FIRE_UP`, que permitirá que disparemos en diagonal.
+
+```c
+    #define TIMER_ENABLE                        // Enable timer
+    #define TIMER_INITIAL               99      // For unscripted games, initial value.
+    #define TIMER_REFILL                50      // Timer refill, using tile 21 (hotspot #5)
+    #define TIMER_LAPSE                 40      // # of frames between decrements
+    #define TIMER_START                         // If defined, start timer from the beginning
+    #define TIMER_GAMEOVER_0                    // If defined, timer = 0 causes "game over"
+    #define SHOW_TIMER_OVER                     // If defined, "TIME OVER" shows when time is up.
+```
+
+En esta sección configuramos el *timer*. Tendrá un valor inicial de 99, empezará con el nivel, se recargará con 50 unidades y cuando se acabe se mostrará "TIME'S UP!" y se acabará el juego.
+
+```c
+    #define PLAYER_HAS_JUMP                     // If defined, player is able to jump.
+```
+
+Obviamente.
+
+```c
+    #define USE_TWO_BUTTONS                 // Alternate keyboard scheme for two-buttons games
+```
+
+Este juego usa dos botones de acción: uno para saltar y otro para disparar. Como ya he comentado, por eso nos pusieron a parir los unsolobotoners, los OPQArs y los QAOPers. Unos porque no querían cambiar las teclas que usaban siempre y otros, con más razón, porque jugar con joystick era muy raro. 
+
+No hay solución buena a jugar con joystick, pero al menos la que implementa **MTE MK1** v5 es mejor que nada: cuando selecciónas joystick en un juego con `USE_TWO_BUTTONS` se remapean los controles y *arriba* significa a la vez *arriba* y *botón de salto*. No será tan controlable como teniendo dos botones, pero al menos se podrá jugar.
+
+```c
+    #define VIEWPORT_X                  1       //
+    #define VIEWPORT_Y                  2       // Viewport character coordinates
+    #define LIFE_X                      3       //
+    #define LIFE_Y                      0       // Life gauge counter character coordinates
+    #define OBJECTS_X                   99      //
+    #define OBJECTS_Y                   99      // Objects counter character coordinates
+    #define OBJECTS_ICON_X              99      // 
+    #define OBJECTS_ICON_Y              99      // Objects icon character coordinates (use with ONLY_ONE_OBJECT)
+    #define KEYS_X                      99      //
+    #define KEYS_Y                      99      // Keys counter character coordinates
+    #define KILLED_X                    99      //
+    #define KILLED_Y                    99      // Kills counter character coordinates
+    #define AMMO_X                      99      // 
+    #define AMMO_Y                      99      // Ammo counter character coordinates
+    #define TIMER_X                     29      //
+    #define TIMER_Y                     0       // Timer counter coordinates
+```
+
+Sobre la colocación de los elementos no diremos nada, que la tenemos muy vista.
+
+```c
+    #define USE_AUTO_TILE_SHADOWS               // Automatic shadows using specially defined tiles 32-47.
+    #define MASKED_BULLETS                      // If needed
+    #define PAUSE_ABORT                         // Add h=PAUSE, y=ABORT
+    #define GET_X_MORE                          // Shows "get X more" when getting an object
+    #define HUD_INK                     7       // Use this attribute for digits in the hud
+```
+
+Este juego usa sombreado por tiles extra, como habrás podido descubrir si has mirado los tilesets. Queremos máscaras para que las balas se vean bien, necesitamos una pantalla de pausa, y que se muestre `GET x MORE` cuando cojamos objetos.
+
+```c
+    #define PLAYER_MAX_VY_CAYENDO       512     // Max falling speed
+    #define PLAYER_G                    48      // Gravity acceleration
+
+    #define PLAYER_VY_INICIAL_SALTO     96      // Initial junp velocity
+    #define PLAYER_MAX_VY_SALTANDO      360     // Max jump velocity
+    #define PLAYER_INCR_SALTO           64      // acceleration while JUMP is pressed
+
+    #define PLAYER_INCR_JETPAC          32      // Vertical jetpac gauge
+    #define PLAYER_MAX_VY_JETPAC        256     // Max vertical jetpac speed
+
+    // IV.2. Horizontal (side view) or general (top view) movement.
+
+    #define PLAYER_MAX_VX               192     // Max velocity
+    #define PLAYER_AX                   48      // Acceleration
+    #define PLAYER_RX                   32      // Friction
+```
+
+Las constantes que definen el movimiento permiten saltos muy altos, resbalones, y no demasiada velocidad horizontal.
+
+¡Y configuración lista!
+
+## Valores importantes diferentes en cada nivel
+
+Antes hemos visto la fullería que hemos hecho con `PLAYER_NUM_OBJETOS` para poder controlar el final de cada fase con un número diferente de objetos, que era parecida a la que describimos para el modo 48K en el capítulo anterior, pero levemente diferente. Aprovechamos para resumir aquí cómo se implementarían otros casos en los que querramos tener valores diferentes para cosas importantes en cada nivel.
+
+### Número de objetos
+
+Como ya hemos visto, se trata de configurar `PLAYER_NUM_OBJETOS` al valor de la cabecera `level_data->max_objs`:
+
+```c
+    #define PLAYER_NUM_OBJETOS          level_lata->max_objs
+```
+
+### Llegar a un sitio concreto
+
+Se hace exactamente igual que en modo 48K: creando arrays en `my/ci/extra_vars.h` y configurando `SCR_FIN` y opcionalmente también `PLAYER_FIN_X` y `PLAYER_FIN_Y` para que apunten a esos arrays usando la variable `level`. 
+
+### Vida de los malos
+
+Para que el número de disparos que haya que meterles a los enemigos normales sea diferente para cada fase habrá que hacer que la macro `ENEMIES_LIFE_GAUGE` resuelva al valor correcto de la cabecera:
+
+```c
+    #define ENEMIES_LIFE_GAUGE          leveldata->enems_life
+```

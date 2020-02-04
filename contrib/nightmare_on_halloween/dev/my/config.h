@@ -204,7 +204,7 @@
 		0x04fd, // .right
 		0x01fd, // .left
 		0x02fd, // .down
-		0x02f7	// .up
+		0x02fb	// .up
 	};
 	
 	int key_jump = 0x087f;

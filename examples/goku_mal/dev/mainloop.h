@@ -106,8 +106,7 @@ void main (void) {
 		sp_UpdateNow();
 		blackout ();
 		#ifdef MODE_128K
-			// Resource 0 = title.bin
-			get_resource (0, 16384);
+			get_resource (TITLE_BIN, 16384);
 		#else		
 			#asm
 				ld hl, _s_title
@@ -165,7 +164,7 @@ void main (void) {
 				sp_UpdateNow();
 				#ifdef MODE_128K
 					// Resource 1 = marco.bin
-					get_resource (1, 16384);
+					get_resource (MARCO_BIN, 16384);
 				#else		
 					#asm
 						ld hl, _s_marco

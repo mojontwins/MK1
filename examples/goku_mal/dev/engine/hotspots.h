@@ -55,10 +55,10 @@ void hotspots_do (void) {
 								beep_fx (9);
 							#endif
 
-							#ifdef GET_X_MORE
-								if (PLAYER_MAX_OBJECTS > p_objs) {
+							#if defined GET_X_MORE && defined PLAYER_NUM_OBJETOS
+								if (PLAYER_NUM_OBJETOS > p_objs) {
 									_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
-									getxmore [5] = '0' + PLAYER_MAX_OBJECTS - p_objs;
+									getxmore [5] = '0' + PLAYER_NUM_OBJETOS - p_objs;
 									_x = 10; _y = 12; _t = 79; _gp_gen = getxmore; print_str ();
 									_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
 									sp_UpdateNow ();

@@ -314,6 +314,16 @@ Hace un sonidito minimal de "paso".
 
 Efecto de borrado de pantalla bonito.
 
+### Compresión
+
+#### `void get_resource (unsigned char n, unsigned int destination);`
+
+Está disponible en modo `128K` y sirve para descomprimir un recurso situado en RAM extra en la dirección de memoria `destination`. `n` es el número de recurso y, obviamente, podemos usar las constantes que crea **The Librarian**.
+
+#### `void unpack (unsigned int from, unsigned int to);`
+
+Está disponible en modo `48K` cuando se activa `COMPRESSED_LEVELS`. Sirve para descomprimir desde la dirección `from` a la dirección `to`. Pueden usarse punteros si les haces un cast a `(unsigned int)`.
+
 ## Bajo nivel y splib2
 
 Iré apuntando aquí cosas de splib2 que piense que pueden ser interesantes a la hora de escribir tu propio código en los puntos de inyección. Generalmente usarás sólo la API del motor, pero es posible que haya que afinar en un momento dado.

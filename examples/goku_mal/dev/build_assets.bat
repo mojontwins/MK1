@@ -3,53 +3,39 @@
 if [%1]==[skipscr] goto skipscr
 
 echo Converting Fixed Screens
-..\..\..\src\utils\png2scr ..\gfx\title.png ..\bin\title.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\marco.png ..\bin\marco.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\ending.png ..\bin\ending.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\logo.png ..\bin\logo.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\dedicado.png ..\bin\dedicado.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\controls.png ..\bin\controls.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\intro1.png ..\bin\intro1.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\intro2.png ..\bin\intro2.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\intro3.png ..\bin\intro3.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\intro4.png ..\bin\intro4.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\intro5.png ..\bin\intro5.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\intro6.png ..\bin\intro6.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\intro7.png ..\bin\intro7.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\zoneA.png ..\bin\zoneA.bin > nul
-..\..\..\src\utils\png2scr ..\gfx\zoneB.png ..\bin\zoneB.bin > nul
+..\..\..\src\utils\png2scr ..\gfx\title.png ..\bin\title.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\marco.png ..\bin\marco.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\ending.png ..\bin\ending.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\logo.png ..\bin\logo.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\dedicado.png ..\bin\dedicado.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\controls.png ..\bin\controls.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\intro1.png ..\bin\intro1.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\intro2.png ..\bin\intro2.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\intro3.png ..\bin\intro3.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\intro4.png ..\bin\intro4.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\intro5.png ..\bin\intro5.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\intro6.png ..\bin\intro6.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\intro7.png ..\bin\intro7.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\zoneA.png ..\bin\zoneA.scr > nul
+..\..\..\src\utils\png2scr ..\gfx\zoneB.png ..\bin\zoneB.scr > nul
 
-..\..\..\src\utils\apultra ..\bin\title.bin ..\bin\titlec.bin > nul
-..\..\..\src\utils\apultra ..\bin\marco.bin ..\bin\marcoc.bin > nul
-..\..\..\src\utils\apultra ..\bin\ending.bin ..\bin\endingc.bin > nul
-..\..\..\src\utils\apultra ..\bin\logo.bin ..\bin\logoc.bin > nul
-..\..\..\src\utils\apultra ..\bin\dedicado.bin ..\bin\dedicadoc.bin > nul
-..\..\..\src\utils\apultra ..\bin\controls.bin ..\bin\controlsc.bin > nul
-..\..\..\src\utils\apultra ..\bin\intro1.bin ..\bin\intro1c.bin > nul
-..\..\..\src\utils\apultra ..\bin\intro2.bin ..\bin\intro2c.bin > nul
-..\..\..\src\utils\apultra ..\bin\intro3.bin ..\bin\intro3c.bin > nul
-..\..\..\src\utils\apultra ..\bin\intro4.bin ..\bin\intro4c.bin > nul
-..\..\..\src\utils\apultra ..\bin\intro5.bin ..\bin\intro5c.bin > nul
-..\..\..\src\utils\apultra ..\bin\intro6.bin ..\bin\intro6c.bin > nul
-..\..\..\src\utils\apultra ..\bin\intro7.bin ..\bin\intro7c.bin > nul
-..\..\..\src\utils\apultra ..\bin\zoneA.bin ..\bin\zoneAc.bin > nul
-..\..\..\src\utils\apultra ..\bin\zoneB.bin ..\bin\zoneBc.bin > nul
+..\..\..\src\utils\apultra ..\bin\title.scr ..\bin\title.bin > nul
+..\..\..\src\utils\apultra ..\bin\marco.scr ..\bin\marco.bin > nul
+..\..\..\src\utils\apultra ..\bin\ending.scr ..\bin\ending.bin > nul
+..\..\..\src\utils\apultra ..\bin\logo.scr ..\bin\logo.bin > nul
+..\..\..\src\utils\apultra ..\bin\dedicado.scr ..\bin\dedicado.bin > nul
+..\..\..\src\utils\apultra ..\bin\controls.scr ..\bin\controls.bin > nul
+..\..\..\src\utils\apultra ..\bin\intro1.scr ..\bin\intro1.bin > nul
+..\..\..\src\utils\apultra ..\bin\intro2.scr ..\bin\intro2.bin > nul
+..\..\..\src\utils\apultra ..\bin\intro3.scr ..\bin\intro3.bin > nul
+..\..\..\src\utils\apultra ..\bin\intro4.scr ..\bin\intro4.bin > nul
+..\..\..\src\utils\apultra ..\bin\intro5.scr ..\bin\intro5.bin > nul
+..\..\..\src\utils\apultra ..\bin\intro6.scr ..\bin\intro6.bin > nul
+..\..\..\src\utils\apultra ..\bin\intro7.scr ..\bin\intro7.bin > nul
+..\..\..\src\utils\apultra ..\bin\zoneA.scr ..\bin\zoneA.bin > nul
+..\..\..\src\utils\apultra ..\bin\zoneB.scr ..\bin\zoneB.bin > nul
 
-del ..\bin\title.bin > nul
-del ..\bin\marco.bin > nul
-del ..\bin\ending.bin > nul
-del ..\bin\logo.bin > nul
-del ..\bin\dedicado.bin > nul
-del ..\bin\controls.bin > nul
-del ..\bin\intro1.bin > nul
-del ..\bin\intro2.bin > nul
-del ..\bin\intro3.bin > nul
-del ..\bin\intro4.bin > nul
-del ..\bin\intro5.bin > nul
-del ..\bin\intro6.bin > nul
-del ..\bin\intro7.bin > nul
-del ..\bin\zoneA.bin > nul
-del ..\bin\zoneB.bin > nul
+del ..\bin\*.scr > nul
 
 :skipscr
 
@@ -75,11 +61,11 @@ echo Converting more stuff
 del ..\bin\level_screen_ts.bin > nul 
 
 echo Running The Librarian
-..\..\..\src\utils\librarian2.exe list=..\bin\list.txt index=assets\librarian.h bins_prefix=..\bin\ rams_prefix=..\bin\
+..\..\..\src\utils\librarian2.exe list=..\bin\list.txt index=assets\librarian.h bins_prefix=..\bin\ rams_prefix=..\bin\ > nul
 
 echo Making music
 cd ..\mus
-..\..\..\src\utils\pasmo ..\mus\WYZproPlay47aZX.ASM ..\bin\RAM1.bin
+..\..\..\src\utils\pasmo ..\mus\WYZproPlay47aZX.ASM ..\bin\RAM1.bin > nul
 cd ..\dev
 
 echo DONE

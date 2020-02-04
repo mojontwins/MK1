@@ -70,20 +70,20 @@ Aquí definimos la posición del personaje principal cuando se empieza una nueva
 ### Posición de fin
 
 ```c
-    #define SCR_FIN                     99      // Last screen. 99 = deactivated.
-    #define PLAYER_FIN_X                99      //
-    #define PLAYER_FIN_Y                99      // Player tile coordinates to finish game
+    //#define SCR_FIN                   99      // Last screen. 99 = deactivated.
+    //#define PLAYER_FIN_X              99      //
+    //#define PLAYER_FIN_Y              99      // Player tile coordinates to finish game
 ```
 
-Aquí definimos la posición final a la que debemos llegar para terminar el güego. Puede interesarnos hacer un güego en el que sencillamente tengamos que llegar a un sitio en concreto para terminarlo. En ese caso rellenaríamos estos valores. Como en el güego que nos ocupa esto no lo vamos a usar, ponemos 99 para que sea ignorado.
+Aquí definimos la posición final a la que debemos llegar para terminar el güego. Puede interesarnos hacer un güego en el que sencillamente tengamos que llegar a un sitio en concreto para terminarlo. En ese caso rellenaríamos estos valores y **descomentaríamos las macros**. Como en el güego que nos ocupa esto no lo vamos a usar, las comentamos para que se ignore.
 
 ### Número de objetos
 
 ```c
-    #define PLAYER_NUM_OBJETOS          99      // Objects to get to finish game
+    //#define PLAYER_NUM_OBJETOS        99      // Objects to get to finish game
 ```
 
-Este parámetro define el número de objetos que tenemos que reunir para terminar el güego. En güegos sencillos como **Lala Prologue**, el conteo de objetos y la comprobación de que lo tenemos todos es automática y emplea este valor: en cuanto el jugador tenga ese número de objetos se mostrará la pantalla del final. En nuestro caso, no: nosotros vamos a usar scripting para manejar los objetos y las comprobaciones de que hemos hecho todo lo que teníamos que hacer para ganar la partida, así que no vamos a necesitar para nada esto. Por tanto, pondremos 99 para que el motor ignore el conteo de objetos automático. Si estás haciendo un güego por tu cuenta en el que simplemente hay que recoger todos los objetos, como en tantos que hemos lanzado, coloca aquí el número máximo de objetos necesarios.
+Este parámetro define el número de objetos que tenemos que reunir para terminar el güego. En güegos sencillos como **Lala Prologue**, el conteo de objetos y la comprobación de que lo tenemos todos es automática y emplea este valor: en cuanto el jugador tenga ese número de objetos se mostrará la pantalla del final. En nuestro caso, no: nosotros vamos a usar scripting para manejar los objetos y las comprobaciones de que hemos hecho todo lo que teníamos que hacer para ganar la partida, así que no vamos a necesitar para nada esto. Por tanto, **la dejaremos comentada** para que el motor ignore el conteo de objetos automático. Si estás haciendo un güego por tu cuenta en el que simplemente hay que recoger todos los objetos, como en tantos que hemos lanzado, coloca aquí el número máximo de objetos necesarios.
 
 ### Vida inicial y valor de recarga
 
@@ -581,7 +581,7 @@ Las teclas que se usarán en el juego pueden definirse fácilmente para cualquie
             0x04fd, // .right
             0x01fd, // .left
             0x02fd, // .down
-            0x02f7  // .up
+            0x02fb  // .up
         };
         
         int key_jump = 0x087f;

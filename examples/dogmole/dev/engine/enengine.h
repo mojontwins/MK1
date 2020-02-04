@@ -129,19 +129,21 @@ void enems_load (void) {
 		en_an_count [enit] = 3;
 		enoffsmasi = enoffs + enit;
 
+		rdt = malotes [enoffsmasi].t & 0x1f;
+
 		#ifdef RESPAWN_ON_ENTER
 			// Back to life!
 			malotes [enoffsmasi].t &= 0xEF;		
 			#ifdef PLAYER_CAN_FIRE
-				#if defined (COMPRESSED_LEVELS) && defined (MODE_128K)
-					malotes [enoffsmasi].life = level_data.enems_life;
-				#else
-					malotes [enoffsmasi].life = ENEMIES_LIFE_GAUGE;
+				#if defined ENABLE_FANTIES && defined FANTIES_LIFE_GAUGE
+					if (rdt == 6) malotes [enoffsmasi].life = FANTIES_LIFE_GAUGE;
+					else
 				#endif
+				malotes [enoffsmasi].life = ENEMIES_LIFE_GAUGE;				
 			#endif
 		#endif
 
-		switch (malotes [enoffsmasi].t & 0x1f) {
+		switch (rdt) {
 			case 1:
 			case 2:
 			case 3:

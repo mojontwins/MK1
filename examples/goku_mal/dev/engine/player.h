@@ -375,8 +375,8 @@ unsigned char player_move (void) {
 		{
 			#if defined (PLAYER_CAN_FIRE) && !defined (USE_TWO_BUTTONS)
 				rda = (pad0 & sp_UP) == 0;
-			#elif defined (PLAYER_CAN_FIRE) && defined (USE_TWO_BUTTONS)
-				rda = sp_KeyPressed (key_jump);
+			#elif defined (PLAYER_CAN_FIRE) && defined (USE_TWO_BUTTONS)				
+				rda = isJoy ? ((pad0 & sp_UP) == 0) : (sp_KeyPressed (key_jump));
 			#else
 				rda = (pad0 & sp_FIRE) == 0;
 			#endif
@@ -639,11 +639,7 @@ unsigned char player_move (void) {
 
 	#ifdef PLAYER_CAN_FIRE
 		// Disparos
-		#ifdef USE_TWO_BUTTONS
-			if (((pad0 & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) && p_disparando == 0) {			
-		#else
-			if ((pad0 & sp_FIRE) == 0 && p_disparando == 0) {			
-		#endif
+		if ((pad0 & sp_FIRE) == 0 && p_disparando == 0) {			
 			p_disparando = 1;
 			#ifdef FIRE_TO_PUSH	
 				if (pushed_any == 0)

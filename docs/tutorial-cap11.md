@@ -82,7 +82,7 @@ El momento de presentar las decoraciones es el de entrar la pantalla. El punto d
 
 ## Contando monjes
 
-El motor se encarga de contar los enemigos que vamos eliminados en la variable `p_killed`. Como los únicos enemigos que pueden matarse son los monjes, en cuanto `p_killed` valga 20 sabremos que hemos eliminado a todos. Para rizar el rizo, el conversor `ene2h` cuenta cada tipo de enemigo de forma que nuestro código será super robusto si comparamos `p_killed` con el número total de enemigos de tipo 3 (que son los monjes). Las constantes `N_ENEMS_TYPE_n` contienen el número exactos de enemigo de tipo n, por lo tanto tendremos que comparar con `N_ENEMS_TYPE_3`.
+El motor se encarga de contar los enemigos que vamos eliminados en la variable `p_killed`. Como los únicos enemigos que pueden matarse son los monjes, en cuanto `p_killed` valga 20 sabremos que hemos eliminado a todos. Para rizar el rizo, el conversor `ene2h` cuenta cada tipo de enemigo de forma que nuestro código será super robusto si comparamos `p_killed` con el número total de enemigos de tipo 3 (que son los monjes). Las macros `N_ENEMS_TYPE_n` contienen el número exactos de enemigo de tipo n, por lo tanto tendremos que comparar con `N_ENEMS_TYPE_3`.
 
 El sitio perfecto para hacer esta comprobación es el punto de inyección de código `my/ci/on_enems_killed.h`, que se ejecutará cada vez que eliminemos un enemigo. Para funcionar como en el script, levantaremos el flag 3 cuando hayamos eliminado los 20 monjes.
 

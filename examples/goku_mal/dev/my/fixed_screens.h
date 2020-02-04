@@ -16,7 +16,7 @@ void game_ending (void) {
 	blackout ();
 	#ifdef MODE_128K
 		// Resource 2 = ending
-		get_resource (2, 16384);
+		get_resource (ENDING_BIN, 16384);
 	#else
 		#asm
 			ld hl, _s_ending

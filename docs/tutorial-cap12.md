@@ -326,7 +326,7 @@ Como son muchos campos siempre me hago una chuleta en un comentario. Porque uno 
 3. **Pantalla de inicio**, o `scr_ini`.
 4. **Coordenada X de inicio**, o `ini_x`, es coordenadas de tiles.
 5. **Coordenada Y de inicio**, o `ini_y`, es coordenadas de tiles.
-6. **Máximo de objetos para terminar el nivel**, o `max_objs`, o 99 si esto no debe ser tomado en cuenta (ver la siguiente sección).
+6. **Máximo de objetos para terminar el nivel**, o `max_objs`, o 99 si esto no debe ser tomado en cuenta, ya que 99, en este contexto, es un valor fuera de rango (ver la siguiente sección).
 7. Puntero al recurso con el **mapa y los cerrojos**, o `c_map_bolts`.
 8. Puntero al recurso con el **tileset** o `c_tileset`.
 9. Puntero al recurso con los **enemigos y hotspots**, o `c_enems_hotspots`.
@@ -342,12 +342,12 @@ Esto puede complicarse hasta niveles estratosféricos dependiendo de como sea tu
 
 ### Número de objetos
 
-De fábrica, **MTE MK1** terminará la fase actual si `p_objs` vale `PLAYER_NUM_OBJETOS` y `PLAYER_NUM_OBJETOS` fue definida con un valor distinto a 99 (si es 99 el código de la comprobación no se incluye). Esto va muy bien si ponemos el mismo número de objetos para coleccionar en todas las fases pero ¿y si queremos poner un número diferente en cada fase?
+De fábrica, **MTE MK1** terminará la fase actual si `p_objs` vale `PLAYER_NUM_OBJETOS` y `PLAYER_NUM_OBJETOS` fue definida (si no se define, el código de la comprobación no se incluye). Esto va muy bien si ponemos el mismo número de objetos para coleccionar en todas las fases pero ¿y si queremos poner un número diferente en cada fase?
 
 Para lograrlo, *engañaremos al chamán* (TM). Este es el código C que hace la comprobación de que tenemos todos los objetos (en `mainloop/game_loop.h`):
 
 ```c
-    #if PLAYER_NUM_OBJETOS != 99
+    #ifdef PLAYER_NUM_OBJETOS
         || p_objs == PLAYER_NUM_OBJETOS
     #endif
 ```
@@ -357,7 +357,7 @@ Los `#define` sirven para que el preprocesador de C haga sustituciones textuales
 En nuestro *levelset* tenemos información sobre el número de objetos de la fase: el miembro `num_objs` de la estructura `LEVEL`. En **MTE MK1** el nivel actual se almacena en la variable `level`, por lo que el número de objetos definido para el nivel actual es `levels [level].num_objs`. Por tanto, si nos vamos a `my/config.h` y definimos así `PLAYER_NUM_OBJS` lo tenemos:
 
 ```c
-    #define PLAYER_NUM_OBJETOS          levels [level].num_objs
+    #define PLAYER_NUM_OBJETOS          (levels [level].num_objs)
 ```
 
 ### Llegar a un sitio concreto
@@ -365,16 +365,16 @@ En nuestro *levelset* tenemos información sobre el número de objetos de la fas
 Aquí estamos en una situación igual. *Engañaremos al Chamán* (TM) de igual manera. Este es el código que comprueba que hemos llegado al sitio concreto:
 
 ```c
-    #if SCR_FIN != 99
+    #ifdef SCR_FIN
         || (n_pant == SCR_FIN
-        #if PLAYER_FIN_X != 99 && PLAYER_FIN_Y != 99
+        #if defined PLAYER_FIN_X && defined PLAYER_FIN_Y
             && ((gpx + 8) >> 4) == PLAYER_FIN_X && ((gpy + 8) >> 4) == PLAYER_FIN_Y
         #endif
         )
     #endif
 ```
 
-Como se ve, si sólo queremos que se detecte que llegamos a la pantalla final, `SCR_FIN` debe ser diferente de 99 pero `PLAYER_FIN_X` y `PLAYER_FIN_Y` deben ser 99; si todas son distintas de 99 se comprobará también la posición.
+Como se ve, si sólo queremos que se detecte que llegamos a la pantalla final, `SCR_FIN` debe estar definida pero `PLAYER_FIN_X` y `PLAYER_FIN_Y` no; si todas están definidas se comprobará también la posición.
 
 Como esto lo hemos usado muy poco no tuve a bien meterlo en la estructura `LEVEL`, pero podemos controlarlo nosotros igualmente con un poco de inyección de código (ver el [capítulo 11](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap11.md)). Veamos el caso en que queramos comprobar las tres cosas.
 
@@ -397,7 +397,7 @@ Y con esto, no tenemos más que hacer las definiciones en base a estos arrays y 
 
 ### Scripting
 
-Terminar el nivel mediante scripting es muy sencillo. Al igual que para juegos de un solo nivel, si definimos `MAX_OBJECTS` y `SCR_FIN` a 99 y activamos el scripting, la única forma de terminar la fase será ejecutando
+Terminar el nivel mediante scripting es muy sencillo. Al igual que para juegos de un solo nivel, si comentamos la definición de las macros `MAX_OBJECTS` y `SCR_FIN` y activamos el scripting, la única forma de terminar la fase será ejecutando
 
 ```
     WIN GAME
