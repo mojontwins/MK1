@@ -108,7 +108,7 @@ Empezaremos a construir nuestro script encargado de crear los binarios con las p
     :skipscr
 ```
 
-Como normalmente en un desarrollo de este tipo las pantallas fijas son lo que menos va a evolucionar y además tardan un ratillo en comprimirse, añadimos un poco de magia batch. Cuando ejecutemos `build_assets.bat` con el parámetro `skipscr` la ejecución se saltará la conversión de las imagenes, lo que vendrá bien cuando tengamos que regenerar una y otra vez los mapas o la colocación de enemigos (repito, en un desarrollo normal en el que vas construyendo y depurando el juego poco a poco. Aquí ya lo tengo todo hecho).
+Como normalmente en un desarrollo de este tipo las pantallas fijas son lo que menos va a evolucionar y además tardan un ratillo en comprimirse, añadimos un poco de magia batch. Cuando ejecutemos `build_assets.bat` con el parámetro `skipscr` la ejecución se saltará la conversión de las imagenes, lo que vendrá bien cuando tengamos que regenerar una y otra vez los mapas o la colocación de enemigos (repito, en un desarrollo normal en el que vas construyendo y depurando el juego poco a poco. Aquí ya lo tengo todo hecho). 
 
 ### Importación: Level bundles
 
@@ -750,7 +750,7 @@ Antes hemos visto la fullería que hemos hecho con `PLAYER_NUM_OBJETOS` para pod
 Como ya hemos visto, se trata de configurar `PLAYER_NUM_OBJETOS` al valor de la cabecera `level_data->max_objs`:
 
 ```c
-    #define PLAYER_NUM_OBJETOS          level_lata->max_objs
+    #define PLAYER_NUM_OBJETOS          (level_lata->max_objs)
 ```
 
 ### Llegar a un sitio concreto
@@ -762,5 +762,49 @@ Se hace exactamente igual que en modo 48K: creando arrays en `my/ci/extra_vars.h
 Para que el número de disparos que haya que meterles a los enemigos normales sea diferente para cada fase habrá que hacer que la macro `ENEMIES_LIFE_GAUGE` resuelva al valor correcto de la cabecera:
 
 ```c
-    #define ENEMIES_LIFE_GAUGE          leveldata->enems_life
+    #define ENEMIES_LIFE_GAUGE          (leveldata->enems_life)
 ```
+
+## Primera compilación
+
+Llegados a este punto nos gusta generar y compilar todo por primera vez para ver que todo está en su sitio. Con el juego en este estado podrás jugar a todas las fases en orden:
+
+```
+    na_th_an@MOJONIA Z:\MK1\examples\goku_mal\dev
+    $ build_assets.bat
+    Converting Fixed Screens
+    Converting levels
+    Converting more stuff
+    Running The Librarian
+    Making music
+    DONE
+    ..\bin\RAM1.bin: 14729 bytes
+    ..\bin\RAM3.bin: 16136 bytes
+    ..\bin\RAM4.bin: 16348 bytes
+    ..\bin\RAM6.bin: 2640 bytes
+
+    na_th_an@MOJONIA Z:\MK1\examples\goku_mal\dev
+    $ compile.bat
+    Compilando script
+    Importando GFX
+    Compilando guego
+    goku_mal.bin: 26873 bytes
+    scripts.bin: 0 bytes
+    Construyendo cinta
+
+    File goku_mal.tap generated successfully
+    Limpiando
+    Hecho!
+```
+
+## Añadidos
+
+Ahora vamos a poner las cosas especiales que hacen tu juego más pulido y molón. Usaremos inyección de código para todo.
+
+### *Splash screens*
+
+### Las cutscenes
+
+### Las pantallas de "nuevo nivel"
+
+## Fin!

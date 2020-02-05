@@ -42,7 +42,7 @@ void prepare_level (void) {
 		}
 
 		#ifdef ACTIVATE_SCRIPTING
-			main_script_offset = levels [level]->script_offset;
+			main_script_offset = levels [level].script_offset;
 		#endif
 	#endif
 }
