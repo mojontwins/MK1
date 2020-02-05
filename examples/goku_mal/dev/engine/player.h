@@ -387,7 +387,7 @@ unsigned char player_move (void) {
 						p_saltando = 1;
 						p_cont_salto = 0;
 						#ifdef MODE_128K
-							wyz_play_sound (2);
+							wyz_play_sound (SFX_JUMP);
 						#else
 							beep_fx (3);
 						#endif
@@ -413,7 +413,7 @@ unsigned char player_move (void) {
 				p_saltando = 1;
 				p_cont_salto = 0;
 				#ifdef MODE_128K
-					wyz_play_sound (2);
+					wyz_play_sound (SFX_JUMP);
 				#else				
 					beep_fx (3);
 				#endif
@@ -676,7 +676,7 @@ unsigned char player_move (void) {
 				{
 			#endif		
 				#ifdef MODE_128K
-					p_killme = 8;
+					p_killme = SFX_SPIKES;
 				#else		
 					p_killme = 4;
 				#endif

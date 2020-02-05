@@ -69,8 +69,11 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 
 #ifdef MODE_128K
 	#include "128k.h"
+	#include "assets/ay_fx_numbers.h"
 	#include "assets/librarian.h"
 #endif
+
+#include "my/ci/extra_vars.h"
 
 #include "aplib.h"
 #include "pantallas.h"
@@ -94,6 +97,7 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #endif
 
 #include "printer.h"
+#include "my/ci/extra_functions.h"
 
 #ifdef ACTIVATE_SCRIPTING
 	#ifdef ENABLE_EXTERN_CODE

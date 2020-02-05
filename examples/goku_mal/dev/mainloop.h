@@ -102,29 +102,12 @@ void main (void) {
 			main_script_offset = (int) (main_script);
 		#endif
 
-		// Here the title screen
-		sp_UpdateNow();
-		blackout ();
-		#ifdef MODE_128K
-			get_resource (TITLE_BIN, 16384);
-		#else		
-			#asm
-				ld hl, _s_title
-				ld de, 16384
-				call depack
-			#endasm
-		#endif
-		
-		#ifdef MODE_128K
-			//wyz_play_music (0);
-		#endif
-		
-		select_joyfunc ();
-		
-		#ifdef MODE_128K
-			//wyz_stop_sound ();
-		#endif
+		level = 0;
 
+		// Here the title screen
+		
+		#include "my/title_screen.h"
+		
 		#ifdef ENABLE_CHECKPOINTS
 			sg_submenu ();
 		#endif
@@ -134,8 +117,6 @@ void main (void) {
 		#ifdef COMPRESSED_LEVELS
 			#ifdef ENABLE_CHECKPOINTS
 				if (sg_do_load) level = sg_level; else level = 0;
-			#else
-				level = 0;
 			#endif
 
 			#ifndef REFILL_ME

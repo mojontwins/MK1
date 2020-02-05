@@ -449,7 +449,7 @@ void enems_move (void) {
 						#endif				
 						{
 							#ifdef MODE_128K
-								wyz_play_sound (6);										
+								wyz_play_sound (SFX_KILL_ENEMY_STEP);										
 								en_an_state [enit] = GENERAL_DYING;
 								en_an_count [enit] = 12;
 								en_an_next_frame [enit] = sprite_17_a;
@@ -471,7 +471,7 @@ void enems_move (void) {
 						#if defined(SLOW_DRAIN) && defined(PLAYER_BOUNCES)
 							if (!lasttimehit || ((maincounter & 3) == 0)) {
 								#ifdef MODE_128K
-									p_killme = 7;
+									p_killme = SFX_ENEMY_HIT;
 								#else							
 									p_killme = 4;
 								#endif
@@ -479,7 +479,7 @@ void enems_move (void) {
 						#else
 						
 							#ifdef MODE_128K
-								p_killme = 7;
+								p_killme = SFX_ENEMY_HIT;
 							#else							
 								p_killme = 4;
 							#endif
@@ -551,7 +551,7 @@ void enems_move (void) {
 										#asm
 											halt
 										#endasm
-										wyz_play_sound (6);
+										wyz_play_sound (SFX_KILL_ENEMY_SHOOT);
 									#else															
 										beep_fx (5);
 									#endif
@@ -565,7 +565,7 @@ void enems_move (void) {
 								}
 
 								#ifdef MODE_128K
-									wyz_play_sound (7);
+									wyz_play_sound (SFX_HIT_ENEMY);
 								#else
 									beep_fx (1);
 								#endif

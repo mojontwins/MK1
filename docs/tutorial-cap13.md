@@ -803,7 +803,193 @@ Ahora vamos a poner las cosas especiales que hacen tu juego más pulido y molón
 
 ### *Splash screens*
 
+Las splash screens son una serie de pantallas que se muestran nada más cargar el juego. Como todo el resto de los tiestos se sacan con `get_resource`. Llamaremos también a `espera_activa` para esperar unos 10 segundos entre cada pantalla (interrumpibles pulsando una tecla). 
+
+Si abrimos `assets/librarian.h` veremos que las macros que representan los recursos que necesitamos para `get_resource` son estos, que habrá que descomprimir directamente sobre la pantalla (dirección 16384):
+
+```c
+    #define LOGO_BIN                        17
+    #define CONTROLS_BIN                    18
+    #define DEDICADO_BIN                    15
+```
+
+El punto de inyección de código que necesitamos tocar es `my/ci/after_load.h`. Para ahorrar cortapegas vamos a crear un array en `my/ci/extra_vars.h` con la secuencia de recursos:
+
+```c
+    // extra_vars.h
+    const unsigned char splash_screens [] = { LOGO_BIN, CONTROLS_BIN, DEDICADO_BIN };
+```
+
+
+```c
+    // after_load.h
+
+    sp_UpdateNow ();    // Clear buffer
+
+    for (gpit = 0; gpit < 3; ++ gpit) {
+        get_resource (splash_screens [gpit], 16384);
+        espera_activa (500);
+        wyz_play_sound (SFX_START);
+        cortina ();
+        blackout ();
+    }
+```
+
+### Selección de idioma
+
+La selección de idioma sirve para mostrar el texto de las cutscenes en español o inglés. Lo primero que necesitamos es, por tanto, un sitio donde almacenar la selección. Crearemos una variable `lang` en `my/ci/extra_vars.h`:
+
+```c
+    // extra_vars.h
+    unsigned char lang = 99;
+```
+
+El código para seleccionar el idioma lo colocaremos también en `my/ci/after_load.h` justo detrás de las *splash screens*:
+
+```c
+    // after_load.h
+
+    _x = 11; _y = 11; _t = 71; _gp_gen = "1. ENGLISH"; print_str ();
+    _x = 11; _y = 12; _t = 71; _gp_gen = "2. SPANISH"; print_str ();
+    sp_UpdateNow ();
+
+    while (lang == 99) {
+        gpjt = sp_GetKey ();
+        if (gpjt == '1' || gpjt == '2') lang = gpjt - '1';
+    }
+    cortina ();
+```
+
+Este código hará que lang valga 0 para inglés o 1 para español.
+
+### El menú y los passwords
+
+El juego es capaz de saltar a la fase que sea usando una serie de passwords textuales que no almacenan nada (el caso más sencillo). Vamos a modificar la pantalla de título por defecto para mostrar la opción de jugar o meter un password tras elegir el control. La pantalla de título se puede modificar fácilmente porque está en `my/title_screen.h`. Añadiremos nuestro código tras el que ya existe, que nos vale. Queda así:
+
+```c
+    {
+        #ifdef MODE_128K
+            get_resource (TITLE_BIN, 16384);
+        #else       
+            #asm
+                ld hl, _s_title
+                ld de, 16384
+                call depack
+            #endasm
+        #endif
+
+        wyz_play_music (0);
+
+        select_joyfunc ();
+
+        _x = 11; _y = 16; _t = 7; _gp_gen = lang ? "-= MENU =-" : "-=SELECT=-";
+        print_str ();
+
+        _x = 11; _y = 17;         _gp_gen = lang ? "1 JUGAR   " : "1 PLAY    ";
+        print_str ();   
+
+        _x = 11; _y = 18;         _gp_gen =        "2 PASSWORD";
+        print_str ();
+
+        sp_UpdateNow ();
+        level = 99; while (level == 99) {
+            gpjt = sp_GetKey (); 
+            switch (gpjt) {
+                case '1': level = 0; 
+                case '2': level = check_password ();
+            }
+        }
+
+        wyz_stop_sound ();
+        wyz_play_sound (SFX_START);
+    }
+```
+
+Imprimimos unas cosas y luego esperamos que el usuarios pulse 1 o 2. En el caso que pulse 1, se pone `level` a 0 y empezamos. Si pulsa 2, `level` valdrá el resultado de `check_password`, que es una función que tendremos que implementar. ¿Dónde? Pues en el sitio de implementar funciones, que es `my/ci/extra_functions.h`.
+
+La función es muy tonta pero la puedes aprovechar para tus propios passwords con alguna que otra modificación:
+
+```c 
+    // extra_functions.h
+        
+    #define PASSWORD_LENGTH 6
+    #define MENU_Y          16
+    #define MENU_X          11
+    extern unsigned char passwords [0];
+    #asm
+        ._passwords
+            defm "TETICA"
+            defm "PICHON"
+            defm "CULETE"
+            defm "BUTACA"
+    #endasm
+
+    unsigned char *password = "****** ";
+
+    unsigned char check_password (void) {
+        wyz_play_sound (SFX_START);
+
+        _x = MENU_X; _y = MENU_Y    ; _t = 7; _gp_gen = " PASSWORD "; print_str ();
+        _x = MENU_X; _y = MENU_Y + 1;       ; _gp_gen = "          "; print_str ();
+        _x = MENU_X; _y = MENU_Y + 2;       ;                     print_str ();
+
+        for (gpit = 0; gpit < PASSWORD_LENGTH; ++ gpit) password [gpit] = '.';
+        password [PASSWORD_LENGTH] = ' ';
+
+        gpit = 0;
+        sp_WaitForNoKey ();
+        _y = MENU_Y + 2; _t = 71; _gp_gen = password;
+        while (1) {
+            password [gpit] = '*';
+            _x = 16 - PASSWORD_LENGTH / 2; print_str ();
+            sp_UpdateNow ();
+            
+            do {
+                gpjt = sp_GetKey ();
+            } while (gpjt == 0);
+
+            if (gpjt == 12 && gpit > 0) {
+                password [gpit] = gpit == PASSWORD_LENGTH ? ' ' : '.';
+                -- gpit;
+            } else if (gpjt == 13) break;
+            else if (gpjt > 'Z') gpjt -=32;
+
+            if (gpjt >= 'A' && gpjt <= 'Z' && gpit < PASSWORD_LENGTH) {
+                password [gpit] = gpjt; ++gpit;
+            }
+
+            wyz_play_sound (1);
+            sp_WaitForNoKey ();
+        }
+
+        sp_WaitForNoKey ();
+
+        // Check password
+        _gp_gen = passwords;
+
+        for (gpit = 0; gpit < MAX_LEVELS - 1; ++ gpit) {
+            rda = 1; for (gpjt = 0; gpjt < PASSWORD_LENGTH; ++ gpjt) {
+                if (password [gpjt] != *_gp_gen ++) rda = 0;
+            }
+
+            if (rda) return (1 + gpit);
+        }
+
+        return 0;
+    }
+```
+
+Con esto y tal y como llevamos la cosa, si compilas tendrás el sistema de passwords totalmente funcional y podrás jugar a la fase que quieras poniendo el password correspondiente. Pero aún quedan más cosas que añadir.
+
 ### Las cutscenes
+
+El sistema de cutscenes que implementaremos en una función `do_cutscene` es muy sencillo. Para cada idioma tendremos 7 cadenas de texto, una por cada imagen.  La función recibirá dos números del 1 al 7, y mostrará las imagenes y cadenas de texto entre ambos números, ambos inclusive.
+
+Hay tres puntos en los que hay que montar cutscenes: el primero es al empezar un juego nuevo; se mostrarán las cadenas 0 a 3. El segundo es antes de empezar la cuarta fase (`level == 3`); mostraremos la cadena 4. Y el tercero será al terminar la quinta fase; mostraremos las cadenas 5 y 6.
+
+Montados todo este sistema en `my/ci/extra_routines.h` igualmente, a continuación del código que ya habíamos introducido. Puedes verlo en la carpeta del juego.
+
+Lo que sí vamos a ver aquí son los *enganches*, o sea, las llamadas a `do_cutscene`, que habrá que pincharlas en dos puntos diferentes.
 
 ### Las pantallas de "nuevo nivel"
 

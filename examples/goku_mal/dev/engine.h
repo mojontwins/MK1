@@ -147,7 +147,7 @@ void espera_activa (int espera) {
 					
 					// Sonido
 					#ifdef MODE_128K
-						wyz_play_sound (3);
+						wyz_play_sound (SFX_PUSH_BOX);
 					#else			
 						beep_fx (2);	
 					#endif
@@ -181,7 +181,7 @@ void espera_activa (int espera) {
 				-- p_keys;
 		
 				#ifdef MODE_128K
-					wyz_play_sound (3);
+					wyz_play_sound (SFX_OPEN_LOCK);
 				#else
 					beep_fx (8);
 				#endif
@@ -607,7 +607,7 @@ void select_joyfunc (void) {
 	}
 
 	#ifdef MODE_128K
-		wyz_play_sound (0);
+		wyz_play_sound (SFX_START);
 		sp_WaitForNoKey ();
 	#else
 		#asm

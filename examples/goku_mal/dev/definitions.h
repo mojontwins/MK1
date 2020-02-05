@@ -188,7 +188,7 @@ unsigned char flags[MAX_FLAGS];
 unsigned char o_pant;
 unsigned char n_pant;
 unsigned char is_rendering;
-unsigned char level = 0;
+unsigned char level, slevel;
 #ifndef ACTIVATE_SCRIPTING
 	unsigned char warp_to_level = 0;
 #endif
@@ -287,5 +287,3 @@ unsigned char *_gp_gen;
 	const signed char _dx [] = { 0, COCOS_V, 0, -COCOS_V };
 	const signed char _dy [] = { -COCOS_V, 0, COCOS_V, 0 };
 #endif
-
-#include "my/ci/extra_vars.h"
