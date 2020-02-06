@@ -375,8 +375,8 @@ unsigned char player_move (void) {
 		{
 			#if defined (PLAYER_CAN_FIRE) && !defined (USE_TWO_BUTTONS)
 				rda = (pad0 & sp_UP) == 0;
-			#elif defined (PLAYER_CAN_FIRE) && defined (USE_TWO_BUTTONS)
-				rda = sp_KeyPressed (key_jump);
+			#elif defined (PLAYER_CAN_FIRE) && defined (USE_TWO_BUTTONS)				
+				rda = isJoy ? ((pad0 & sp_UP) == 0) : (sp_KeyPressed (key_jump));
 			#else
 				rda = (pad0 & sp_FIRE) == 0;
 			#endif
@@ -387,7 +387,7 @@ unsigned char player_move (void) {
 						p_saltando = 1;
 						p_cont_salto = 0;
 						#ifdef MODE_128K
-							wyz_play_sound (2);
+							wyz_play_sound (SFX_JUMP);
 						#else
 							beep_fx (3);
 						#endif
@@ -413,7 +413,7 @@ unsigned char player_move (void) {
 				p_saltando = 1;
 				p_cont_salto = 0;
 				#ifdef MODE_128K
-					wyz_play_sound (2);
+					wyz_play_sound (SFX_JUMP);
 				#else				
 					beep_fx (3);
 				#endif
@@ -589,7 +589,7 @@ unsigned char player_move (void) {
 					cy1 = gpy >> 3;		
 				#endif
 
-				if (rdb == 10) {
+				if (attr (cx1, cy1) == 10) {
 					x0 = x1 = cx1; y0 = cy1; y1 = cy1 - 1;
 					process_tile ();
 				}
@@ -604,7 +604,7 @@ unsigned char player_move (void) {
 					cy1 = (gpy + 16) >> 3;				
 				#endif		
 			
-				if (rdb == 10) {
+				if (attr (cx1, cy1) == 10) {
 					x0 = x1 = cx1; y0 = cy1; y1 = cy1 + 1;
 					process_tile ();
 				}
@@ -619,7 +619,7 @@ unsigned char player_move (void) {
 				cx1 = gpx >> 4;		
 			#endif		
 
-			if (rdb == 10) {
+			if (attr (cx1, cy1) == 10) {
 				y0 = y1 = cy1; x0 = cx1; x1 = cx1 - 1;
 				process_tile ();
 			}
@@ -630,7 +630,7 @@ unsigned char player_move (void) {
 			#else
 				cx1 = (gpx + 16) >> 4;		
 			#endif		
-			if (rdb == 10) {
+			if (attr (cx1, cy1) == 10) {
 				y0 = y1 = cy1; x0 = cx1; x1 = cx1 + 1;
 				process_tile ();
 			}
@@ -639,11 +639,7 @@ unsigned char player_move (void) {
 
 	#ifdef PLAYER_CAN_FIRE
 		// Disparos
-		#ifdef USE_TWO_BUTTONS
-			if (((pad0 & sp_FIRE) == 0 || sp_KeyPressed (key_fire)) && p_disparando == 0) {			
-		#else
-			if ((pad0 & sp_FIRE) == 0 && p_disparando == 0) {			
-		#endif
+		if ((pad0 & sp_FIRE) == 0 && p_disparando == 0) {			
 			p_disparando = 1;
 			#ifdef FIRE_TO_PUSH	
 				if (pushed_any == 0)
@@ -680,7 +676,7 @@ unsigned char player_move (void) {
 				{
 			#endif		
 				#ifdef MODE_128K
-					p_killme = 8;
+					p_killme = SFX_SPIKES;
 				#else		
 					p_killme = 4;
 				#endif
@@ -735,7 +731,7 @@ void player_kill (unsigned char sound) {
 	if (p_life == 0) return;
 	-- p_life;
 
-	#ifdef MODO_128K
+	#ifdef MODE_128K
 		wyz_play_sound (sound);
 	#else
 		beep_fx (sound);

@@ -131,11 +131,10 @@ unsigned int ram_destination;
 #endasm
 
 #ifdef MODE_128K
-	void unpack_RAMn (unsigned char n, unsigned int address, unsigned int destination) {
-		ram_address [0] = address;
-		ram_page [0] = n;
-		ram_destination [0] = destination;
-
+	void get_resource (unsigned char n, unsigned int destination) {
+		ram_page = resources [n].ramPage; 
+		ram_address = resources [n].ramOffset;
+		ram_destination = destination;
 		#asm	
 			di
 			ld a, (_ram_page)
@@ -151,10 +150,8 @@ unsigned int ram_destination;
 			ei
 		#endasm
 	}
-#endif
-
-#ifdef COMPRESSED_LEVELS
-	#ifndef MODE_128K
+#else
+	#ifdef COMPRESSED_LEVELS	
 		void unpack (unsigned int address, unsigned int destination) {
 			ram_address = address; ram_destination = destination;
 			#asm

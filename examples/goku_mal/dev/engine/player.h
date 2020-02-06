@@ -589,7 +589,7 @@ unsigned char player_move (void) {
 					cy1 = gpy >> 3;		
 				#endif
 
-				if (rdb == 10) {
+				if (attr (cx1, cy1) == 10) {
 					x0 = x1 = cx1; y0 = cy1; y1 = cy1 - 1;
 					process_tile ();
 				}
@@ -604,7 +604,7 @@ unsigned char player_move (void) {
 					cy1 = (gpy + 16) >> 3;				
 				#endif		
 			
-				if (rdb == 10) {
+				if (attr (cx1, cy1) == 10) {
 					x0 = x1 = cx1; y0 = cy1; y1 = cy1 + 1;
 					process_tile ();
 				}
@@ -619,7 +619,7 @@ unsigned char player_move (void) {
 				cx1 = gpx >> 4;		
 			#endif		
 
-			if (rdb == 10) {
+			if (attr (cx1, cy1) == 10) {
 				y0 = y1 = cy1; x0 = cx1; x1 = cx1 - 1;
 				process_tile ();
 			}
@@ -630,7 +630,7 @@ unsigned char player_move (void) {
 			#else
 				cx1 = (gpx + 16) >> 4;		
 			#endif		
-			if (rdb == 10) {
+			if (attr (cx1, cy1) == 10) {
 				y0 = y1 = cy1; x0 = cx1; x1 = cx1 + 1;
 				process_tile ();
 			}

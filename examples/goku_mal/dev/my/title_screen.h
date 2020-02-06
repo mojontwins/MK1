@@ -6,6 +6,7 @@
 {
 	#ifdef MODE_128K
 		get_resource (TITLE_BIN, 16384);
+		wyz_play_music (0);
 	#else		
 		#asm
 			ld hl, _s_title
@@ -13,8 +14,6 @@
 			call depack
 		#endasm
 	#endif
-
-	wyz_play_music (0);
 
 	select_joyfunc ();
 
@@ -31,7 +30,7 @@
 	level = 99; while (level == 99) {
 		gpjt = sp_GetKey (); 
 		switch (gpjt) {
-			case '1': level = 0; 
+			case '1': level = 0; break;
 			case '2': level = check_password ();
 		}
 	}

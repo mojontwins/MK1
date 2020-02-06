@@ -129,11 +129,7 @@ void espera_activa (int espera) {
 	void process_tile (void) {
 		#ifdef PLAYER_PUSH_BOXES
 			#ifdef FIRE_TO_PUSH
-				#ifdef USE_TWO_BUTTONS
-					if ((pad0 & sp_FIRE) == 0 || sp_KeyPressed (key_fire))
-				#else
-					if ((pad0 & sp_FIRE) == 0)
-				#endif
+				if ((pad0 & sp_FIRE) == 0)				
 			#endif		
 			{ 
 				if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 < 15 && y1 < 10) {
@@ -151,7 +147,7 @@ void espera_activa (int espera) {
 					
 					// Sonido
 					#ifdef MODE_128K
-						wyz_play_sound (3);
+						wyz_play_sound (SFX_PUSH_BOX);
 					#else			
 						beep_fx (2);	
 					#endif
@@ -185,7 +181,7 @@ void espera_activa (int espera) {
 				-- p_keys;
 		
 				#ifdef MODE_128K
-					wyz_play_sound (3);
+					wyz_play_sound (SFX_OPEN_LOCK);
 				#else
 					beep_fx (8);
 				#endif
@@ -601,12 +597,17 @@ void select_joyfunc (void) {
 		gpjt = sp_GetKey ();
 		if (gpjt >= '1' && gpjt <= '3') {
 			joyfunc = joyfuncs [gpjt - '1'];
+
+			#ifdef USE_TWO_BUTTONS
+				isJoy = gpjt > '1';
+			#endif
+
 			break;
 		}			
 	}
 
 	#ifdef MODE_128K
-		wyz_play_sound (0);
+		wyz_play_sound (SFX_START);
 		sp_WaitForNoKey ();
 	#else
 		#asm

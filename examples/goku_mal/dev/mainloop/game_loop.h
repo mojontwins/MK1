@@ -31,6 +31,15 @@
 	#ifdef ACTIVATE_SCRIPTING		
 		script_result = 0;
 	#endif
+	
+	#ifdef MODE_128K
+			// Play music
+		#ifdef COMPRESSED_LEVELS		
+			wyz_play_music (levels [level].music_id);
+		#else
+			wyz_play_music (1);
+		#endif		
+	#endif
 
 	#ifdef ACTIVATE_SCRIPTING
 		// Entering game
@@ -70,15 +79,6 @@
 			mem_load ();
 		}
 	#endif		
-
-	#ifdef MODE_128K
-			// Play music
-		#ifdef COMPRESSED_LEVELS		
-			//wyz_play_music (levels [level].music_id);
-		#else
-			//wyz_play_music (1);
-		#endif		
-	#endif
 
 	#ifdef MSC_MAXITEMS
 		display_items ();

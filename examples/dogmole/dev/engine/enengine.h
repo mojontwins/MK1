@@ -129,21 +129,19 @@ void enems_load (void) {
 		en_an_count [enit] = 3;
 		enoffsmasi = enoffs + enit;
 
-		rdt = malotes [enoffsmasi].t & 0x1f;
-
 		#ifdef RESPAWN_ON_ENTER
 			// Back to life!
 			malotes [enoffsmasi].t &= 0xEF;		
 			#ifdef PLAYER_CAN_FIRE
-				#if defined ENABLE_FANTIES && defined FANTIES_LIFE_GAUGE
-					if (rdt == 6) malotes [enoffsmasi].life = FANTIES_LIFE_GAUGE;
-					else
+				#if defined (COMPRESSED_LEVELS) && defined (MODE_128K)
+					malotes [enoffsmasi].life = level_data.enems_life;
+				#else
+					malotes [enoffsmasi].life = ENEMIES_LIFE_GAUGE;
 				#endif
-				malotes [enoffsmasi].life = ENEMIES_LIFE_GAUGE;				
 			#endif
 		#endif
 
-		switch (rdt) {
+		switch (malotes [enoffsmasi].t & 0x1f) {
 			case 1:
 			case 2:
 			case 3:
@@ -451,7 +449,7 @@ void enems_move (void) {
 						#endif				
 						{
 							#ifdef MODE_128K
-								wyz_play_sound (6);										
+								wyz_play_sound (SFX_KILL_ENEMY_STEP);										
 								en_an_state [enit] = GENERAL_DYING;
 								en_an_count [enit] = 12;
 								en_an_next_frame [enit] = sprite_17_a;
@@ -473,7 +471,7 @@ void enems_move (void) {
 						#if defined(SLOW_DRAIN) && defined(PLAYER_BOUNCES)
 							if (!lasttimehit || ((maincounter & 3) == 0)) {
 								#ifdef MODE_128K
-									p_killme = 7;
+									p_killme = SFX_ENEMY_HIT;
 								#else							
 									p_killme = 4;
 								#endif
@@ -481,7 +479,7 @@ void enems_move (void) {
 						#else
 						
 							#ifdef MODE_128K
-								p_killme = 7;
+								p_killme = SFX_ENEMY_HIT;
 							#else							
 								p_killme = 4;
 							#endif
@@ -541,23 +539,22 @@ void enems_move (void) {
 								en_an_next_frame [enit] = sprite_17_a;
 								bullets_estado [gpjt] = 0;
 								#ifndef PLAYER_GENITAL							
-									if (_en_t != 4) _en_life --;
+									if (_en_t != 4) -- _en_life;
 								#else
-									_en_life --;
+									-- _en_life;
 								#endif
 								
 								if (_en_life == 0) {
 									enems_draw_current ();
 									sp_UpdateNow ();
 									#ifdef MODE_128K
-										#asm
-											halt
-										#endasm
-										wyz_play_sound (6);
+										en_an_state [enit] = GENERAL_DYING;
+										en_an_count [enit] = 12;
+										wyz_play_sound (SFX_KILL_ENEMY_SHOOT);
 									#else															
 										beep_fx (5);
-									#endif
-									en_an_next_frame [enit] = sprite_18_a;
+										en_an_next_frame [enit] = sprite_18_a;
+									#endif	
 									
 									#ifdef ENABLE_PURSUERS
 										enems_pursuers_init ();
@@ -567,7 +564,7 @@ void enems_move (void) {
 								}
 
 								#ifdef MODE_128K
-									wyz_play_sound (7);
+									wyz_play_sound (SFX_HIT_ENEMY);
 								#else
 									beep_fx (1);
 								#endif

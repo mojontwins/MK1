@@ -31,6 +31,15 @@
 	#ifdef ACTIVATE_SCRIPTING		
 		script_result = 0;
 	#endif
+	
+	#ifdef MODE_128K
+			// Play music
+		#ifdef COMPRESSED_LEVELS		
+			wyz_play_music (levels [level].music_id);
+		#else
+			wyz_play_music (1);
+		#endif		
+	#endif
 
 	#ifdef ACTIVATE_SCRIPTING
 		// Entering game
@@ -70,15 +79,6 @@
 			mem_load ();
 		}
 	#endif		
-
-	#ifdef MODE_128K
-			// Play music
-		#ifdef COMPRESSED_LEVELS		
-			//wyz_play_music (levels [level].music_id);
-		#else
-			//wyz_play_music (1);
-		#endif		
-	#endif
 
 	#ifdef MSC_MAXITEMS
 		display_items ();
@@ -288,12 +288,12 @@
 			#ifdef ACTIVATE_SCRIPTING
 				|| script_result == 1 || script_result > 2
 			#endif
-			#if PLAYER_NUM_OBJETOS != 99
+			#ifdef PLAYER_NUM_OBJETOS
 				|| p_objs == PLAYER_NUM_OBJETOS
 			#endif
-			#if SCR_FIN != 99
+			#ifdef SCR_FIN
 				|| (n_pant == SCR_FIN
-				#if PLAYER_FIN_X != 99 && PLAYER_FIN_Y != 99
+				#if defined PLAYER_FIN_X && defined PLAYER_FIN_Y				
 					&& ((gpx + 8) >> 4) == PLAYER_FIN_X && ((gpy + 8) >> 4) == PLAYER_FIN_Y
 				#endif
 				)

@@ -54,7 +54,7 @@ void simple_coco_update (void);
 void SetRAMBank(void);
 
 // aplib.h
-void unpack_RAMn (unsigned char n, unsigned int address, unsigned int destination);
+void get_resource (unsigned char n, unsigned int destination);
 void unpack (unsigned int address, unsigned int destination);
 
 // beeper.h

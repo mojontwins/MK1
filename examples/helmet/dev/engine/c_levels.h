@@ -1,7 +1,7 @@
 
 void prepare_level (void) {
 	#ifdef MODE_128K
-		get_resource (levels [level].resource, (unsigned int) (level_data));
+		get_resource (levels [level].resource_id, (unsigned int) (level_data));
 		
 		#ifdef ACTIVATE_SCRIPTING
 			if (script_result != 3)
@@ -42,7 +42,7 @@ void prepare_level (void) {
 		}
 
 		#ifdef ACTIVATE_SCRIPTING
-			main_script_offset = levels [level]->script_offset;
+			main_script_offset = levels [level].script_offset;
 		#endif
 	#endif
 }

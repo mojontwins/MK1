@@ -539,23 +539,22 @@ void enems_move (void) {
 								en_an_next_frame [enit] = sprite_17_a;
 								bullets_estado [gpjt] = 0;
 								#ifndef PLAYER_GENITAL							
-									if (_en_t != 4) _en_life --;
+									if (_en_t != 4) -- _en_life;
 								#else
-									_en_life --;
+									-- _en_life;
 								#endif
 								
 								if (_en_life == 0) {
 									enems_draw_current ();
 									sp_UpdateNow ();
 									#ifdef MODE_128K
-										#asm
-											halt
-										#endasm
+										en_an_state [enit] = GENERAL_DYING;
+										en_an_count [enit] = 12;
 										wyz_play_sound (SFX_KILL_ENEMY_SHOOT);
 									#else															
 										beep_fx (5);
-									#endif
-									en_an_next_frame [enit] = sprite_18_a;
+										en_an_next_frame [enit] = sprite_18_a;
+									#endif	
 									
 									#ifdef ENABLE_PURSUERS
 										enems_pursuers_init ();

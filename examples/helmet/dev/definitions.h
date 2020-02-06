@@ -13,6 +13,9 @@ const void *joyfuncs [] = {
 };
 
 unsigned char pad0;
+#ifdef USE_TWO_BUTTONS
+	unsigned char isJoy;
+#endif
 
 #define KEY_M 0x047f
 #define KEY_H 0x10bf
@@ -185,7 +188,7 @@ unsigned char flags[MAX_FLAGS];
 unsigned char o_pant;
 unsigned char n_pant;
 unsigned char is_rendering;
-unsigned char level = 0;
+unsigned char level, slevel;
 #ifndef ACTIVATE_SCRIPTING
 	unsigned char warp_to_level = 0;
 #endif
@@ -241,7 +244,7 @@ unsigned char objs_old, keys_old, life_old, killed_old;
 	unsigned char ammo_old;
 #endif
 
-#if defined(TIMER_ENABLE) && defined(PLAYER_SHOW_TIMER)
+#if defined TIMER_ENABLE && TIMER_X != 99
 	unsigned char timer_old;
 #endif
 
@@ -267,10 +270,20 @@ unsigned char x0, y0, x1, y1;
 unsigned char ptx1, pty1, ptx2, pty2;
 unsigned char *_gp_gen;
 
+#if defined USE_AUTO_TILE_SHADOWS || defined USE_AUTO_SHADOWS
+	unsigned char c1, c2, c3, c4;
+	unsigned char t1, t2, t3, t4;
+	unsigned char nocast, _ta;
+	unsigned char xx, yy;
+#endif
+#ifdef USE_AUTO_TILE_SHADOWS
+	unsigned a1, a2, a3;
+	unsigned char *gen_pt_alt;
+	unsigned char t_alt;
+#endif
+
 #if defined ENABLE_SIMPLE_COCOS
 	// UP RIGHT DOWN LEFT
 	const signed char _dx [] = { 0, COCOS_V, 0, -COCOS_V };
 	const signed char _dy [] = { -COCOS_V, 0, COCOS_V, 0 };
 #endif
-
-#include "my/ci/extra_vars.h"

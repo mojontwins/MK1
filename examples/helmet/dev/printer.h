@@ -34,7 +34,7 @@ void draw_coloured_tile (void) {
 		#endasm
 
 		// Nocast for tiles which never get shadowed
-		cx1 = xx; cy1 = yy; nocast = !((attr () & 8) || (_t >= 16 && _t != 19));
+		nocast = !((attr (xx, yy) & 8) || (_t >= 16 && _t != 19));		
 
 		// Precalc 
 		#asm
@@ -717,7 +717,7 @@ void print_number2 (void) {
 		#else
 			#if OBJECTS_X != 99
 				_x = OBJECTS_X; _y = OBJECTS_Y; 
-				#ifdef REVERSE_OBJECTS_COUNT
+				#if defined REVERSE_OBJECTS_COUNT && defined PLAYER_NUM_OBJETOS
 					_t = PLAYER_NUM_OBJETOS - p_objs;
 				#else
 					_t = p_objs; 

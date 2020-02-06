@@ -65,8 +65,8 @@
 		add hl, bc
 		ld  (hl), a
 
-		#if defined(PLAYER_STEPS_ON_ENEMIES) || defined(PLAYER_CAN_FIRE)
-			ld  a, 1
+		#if defined(PLAYER_CAN_FIRE)
+			ld  a, ENEMIES_LIFE_GAUGE
 			ld  (__en_life), a
 		#endif
 		jp  _eij_state_done

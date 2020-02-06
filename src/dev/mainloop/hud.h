@@ -42,7 +42,7 @@
 
 	#if defined TIMER_ENABLE && TIMER_X != 99
 		if (timer_t != timer_old) {
-			print_number2 (TIMER_X, TIMER_Y, timer_t);
+			_x = TIMER_X; _y = TIMER_Y; _t = timer_t; print_number2 ();
 			timer_old = timer_t;
 		}
 	#endif

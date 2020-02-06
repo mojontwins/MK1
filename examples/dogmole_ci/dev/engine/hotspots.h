@@ -29,13 +29,13 @@ void hotspots_do (void) {
 							if (p_objs == 0) {
 								p_objs ++;
 								#ifdef MODE_128K
-									wyz_play_sound (3);
+									wyz_play_sound (SFX_ONE_OBJECT_GET);
 								#else
 									beep_fx (9);
 								#endif
 							} else {
 								#ifdef MODE_128K
-									wyz_play_sound (5);
+									wyz_play_sound (SFX_ONE_OBJECT_WRONG);
 								#else
 									beep_fx (4);
 								#endif
@@ -50,15 +50,15 @@ void hotspots_do (void) {
 							#endif
 
 							#ifdef MODE_128K
-								wyz_play_sound (5);
+								wyz_play_sound (SFX_OBJECT_GET);
 							#else
 								beep_fx (9);
 							#endif
 
-							#ifdef GET_X_MORE
-								if (PLAYER_MAX_OBJECTS > p_objs) {
+							#if defined GET_X_MORE && defined PLAYER_NUM_OBJETOS
+								if (PLAYER_NUM_OBJETOS > p_objs) {
 									_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
-									getxmore [5] = '0' + PLAYER_MAX_OBJECTS - p_objs;
+									getxmore [5] = '0' + PLAYER_NUM_OBJETOS - p_objs;
 									_x = 10; _y = 12; _t = 79; _gp_gen = getxmore; print_str ();
 									_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
 									sp_UpdateNow ();
@@ -75,7 +75,7 @@ void hotspots_do (void) {
 					case 2:
 						p_keys ++;
 						#ifdef MODE_128K
-							wyz_play_sound (3);
+							wyz_play_sound (SFX_KEY_GET);
 						#else
 							beep_fx (7);
 						#endif
@@ -87,7 +87,7 @@ void hotspots_do (void) {
 					if (p_life > PLAYER_LIFE)
 						p_life = PLAYER_LIFE;
 					#ifdef MODE_128K
-						wyz_play_sound (5);
+						wyz_play_sound (SFX_REFILL_GET);
 					#else	
 						beep_fx (8);
 					#endif
@@ -100,7 +100,7 @@ void hotspots_do (void) {
 						else
 							p_ammo = MAX_AMMO;
 						#ifdef MODE_128K
-							wyz_play_sound (3);
+							wyz_play_sound (SFX_REFILL_GET);
 						#else
 							beep_fx (9);
 						#endif
@@ -114,7 +114,7 @@ void hotspots_do (void) {
 						else
 							timer_t = 99;
 						#ifdef MODE_128K
-							wyz_play_sound (3);
+							wyz_play_sound (SFX_REFILL_GET);
 						#else
 							beep_fx (7);
 						#endif
@@ -125,7 +125,7 @@ void hotspots_do (void) {
 					case 6:
 						mem_save ();
 						#ifdef MODE_128K
-							wyz_play_sound (3);
+							wyz_play_sound (SFX_START);
 						#else
 							beep_fx (7);
 						#endif
