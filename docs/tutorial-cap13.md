@@ -343,7 +343,7 @@ Como hemos dicho, no nos detendremos en cómo montar una OGT aqui, sino que lo d
 
 Pondremos en `mus/` todo lo necesario, a saber:
 
-1. `WYZproPlay47aZX.ASM`, el código del player, ya modificado con la lista de canciones, e incluyendo nuestros instrumentos y efectos de sonido.
+1. `WYZproPlay47aZXc.ASM`, el código del player, ya modificado con la lista de canciones, e incluyendo nuestros instrumentos y efectos de sonido.
 2. `instrumentos.asm`, con los instrumentos según exporta Wyz Player.
 3. `efectos.asm`, con los efectos según los exporta Wyz Player.
 4. `*.mus`, todas las canciones.
@@ -352,7 +352,7 @@ Con todo en su sitio, sólo tendremos que llamar al ensamblador `pasmo`, incluid
 
 ```
     echo Making music
-    ..\..\..\src\utils\pasmo ..\mus\WYZproPlay47aZX.ASM ..\bin\RAM1.bin
+    ..\..\..\src\utils\pasmo ..\mus\WYZproPlay47aZXc.ASM ..\bin\RAM1.bin
 ```
 
 Finalmente me gusta chivar lo que ocupa cada archivo:

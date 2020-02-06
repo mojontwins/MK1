@@ -58,9 +58,87 @@ El siguiente paso será comprimir todos los archivos `.mus`. Te recomiendo que t
 
 ## Efectos de sonido
 
-El siguiente paso será crear lo efectos de sonido. Quiero dar las gracias a **Greenweb Sevilla** y a **thEpOpE** por sus contribuciones en este apartado: el primero por la creación de un tutorial con el proceso y el segundo por escribir la herramienta de conversión y las modificaciones necesarias a **WYZ Player** para que los efectos puedan usar el canal de ruido.
+El siguiente paso será crear lo efectos de sonido. Quiero dar las gracias a **GreenWebSevilla** y a **thEpOpE** por sus contribuciones en este apartado: el primero por la creación de un (tutorial)[https://github.com/mojontwins/MK1/blob/master/docs/contribs/Manual%20FX%20para%20MK2%20con%20WYZ.pdf] con el proceso y el segundo por escribir la herramienta de conversión `WyzFx2Asm.exe` y las modificaciones necesarias a **WYZ Player** para que los efectos puedan usar el canal de ruido.
 
+Aunque obviamente todo es posible y te puedes poner a refinar esto muchísimo más, por defecto **MTE MK1** tiene la siguiente lista de sonidos numerados, como siempre, a partir de cero:
 
+|#|Khe
+|---|---
+|0|Efecto "START"
+|1|Tile rompiscible golpeado
+|2|Tile rompiscible destruído
+|3|Empujar una caja / abrir un cerrojo
+|4|Disparar
+|5|Coger un objeto coleccionable
+|6|Matar a un enemigo
+|7|Golpear a un enemigo
+|8|Modo "un sólo objeto", recoger
+|9|Modo "un sólo objeto", ya tengo
+|10|Coger una llave
+|11|Coger cualquier tipo de refill
+|12|Sartar
+|13|Pincharse
+|14|Ser golpeado por enemigo
+
+La lista está compuesta por una serie de macros definidos en el archivo `assets/ay_fx_numbers.h`, por si alguna vez tienes la necesidad de cambiarlo o ampliarlo.
+
+Para cambiar los efectos de sonido tendremos que crear una lista de *efectos* equivalente en **WYZ Player**. El primer efecto se convertirá en el primer efecto de sonido (el 0, "START"), el segundo efecto en el segundo efecto de sonido, etcétera. Puedes encontrar más detalles sobre el tema en (el tutorial de **GreenWebSevilla**)[https://github.com/mojontwins/MK1/blob/master/docs/contribs/Manual%20FX%20para%20MK2%20con%20WYZ.pdf] y en el (manual de WYZ Tracker)[https://sites.google.com/site/augustoruiz/wyztracker#TOC-Editor-de-efectos]
+
+Una vez que tengamos la lista creada, la grabaremos en formato `.fx`. El siguiente paso es convertirla a código ASM, y para ello emplearemos la herramienta de conversión `WyzFx2Asm.exe` de **thEpOpE**  que encontraremos en `/src/utils/`.
+
+Esta herramienta funciona de forma interactiva. Al ejecutarla, nos pedirá que ubiquemos primero el archivo `.fx` de entrada, y seguidamente, que seleccionemos una ubicación para el archivo de salida `efectos.asm`. Elegiremos el directorio `mus/` de nuestro proyecto.
 
 ## Montando el player
+
+Lo siguiente será montar nuestro playlist en el player. Para eso tenemos que editar el código de **WYZ Player**, o sea, el archivo `WYZproPlay47aZX.ASM` que esta en `mus/`.
+
+Lo primero que hay que hacer es incluir todas las canciones comprimidas de nuestra OGT en orden, usando una etiqueta `SONG_n`, con `n` el número de orden empezando en 0, para cada una. Encontrarás donde hacerlo porque en el archivo originalmente hay un *stub* `SONG_0` que deberás eliminar para poner tu lista. Por ejemplo, para la OGT de **Goku Mal** nos quedaria así:
+
+```asm
+	;; Las canciones tienen que estar comprimidas con aplib
+			    
+	SONG_0:
+		INCBIN "01_TITLE!.mus.bin"
+	SONG_1:
+		INCBIN "02_INTRO!!!.mus.bin"
+	SONG_2:
+		INCBIN "03_ZONE123!.mus.bin"
+	SONG_3:
+		INCBIN "04_FASE1.mus.bin"
+	SONG_4:
+		INCBIN "05_FASE2.mus.bin"
+	SONG_5:
+		INCBIN "06_FASE3.mus.bin"
+	SONG_6:
+		INCBIN "07_ZONE5!.mus.bin"
+	SONG_7:
+		INCBIN "08_FASE5.mus.bin"
+	SONG_8:
+		INCBIN "10_GAME_OVER!.mus.bin"
+	SONG_9:
+		INCBIN "09_ENDING!.mus.bin"
+```
+
+Ahora hay que hacer un array con esas etiquetas para que el motor las pueda usar. Un poco más abajo verás la etiqueta `TABLA_SONG`. Ahí, tras el `DW`, deberás referenciar las etiquetas de todas tus canciones. Para **Goku Mal** queda así:
+
+```asm
+	;; Añadir entradas para cada canción
+					
+	TABLA_SONG:     DW      SONG_0, SONG_1, SONG_2, SONG_3
+					DW      SONG_4, SONG_5, SONG_6, SONG_7
+					DW      SONG_8, SONG_9
+```
+
+Si no hemos alterado la lista de efectos de sonido, no tendremos que tocar nada más. Si sí que lo hemos hecho, habra que modificar la lista etiquetada como `TABLA_EFECTOS` para que aparezcan los efectos en orden. Por defecto sale así:
+
+```asm
+;; Añadir entradas para cada efecto
+
+TABLA_EFECTOS:  DW  	EFECTO0, EFECTO1, EFECTO2, EFECTO3
+				DW  	EFECTO4, EFECTO5, EFECTO6, EFECTO7
+				DW  	EFECTO8, EFECTO9, EFECTO10, EFECTO11
+				DW  	EFECTO12, EFECTO13, EFECTO14
+```
+
+¡Y listo! Todo debería estar en su sitio. Si no lo está, revísalo todo y hazlo más despacito.
 

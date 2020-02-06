@@ -65,7 +65,7 @@ echo Running The Librarian
 
 echo Making music
 cd ..\mus
-..\..\..\src\utils\pasmo ..\mus\WYZproPlay47aZX.ASM ..\bin\RAM1.bin > nul
+..\..\..\src\utils\pasmo ..\mus\WYZproPlay47aZXc.ASM ..\bin\RAM1.bin > nul
 cd ..\dev
 
 echo DONE
