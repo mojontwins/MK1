@@ -37,4 +37,5 @@
 
 	wyz_stop_sound ();
 	wyz_play_sound (SFX_START);
+	halts_delay (100);
 }
