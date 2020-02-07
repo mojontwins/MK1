@@ -8,7 +8,7 @@
 	for (gpit = 0; gpit < 3; ++ gpit) {
 		get_resource (splash_screens [gpit], 16384);
 		espera_activa (500);
-		wyz_play_sound (SFX_START);
+		wyz_play_sound (1);
 		cortina ();
 		blackout ();
 	}
