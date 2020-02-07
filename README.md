@@ -32,10 +32,11 @@ Por nuestra parte es posible que el motor sólo reciba correcciones, pero los pu
 
 **MTE MK1** ha sido diseñado y desarrollado por los **Mojon Twins** y utiliza:
 
-* Una versión modificada de **splib2**, de Alvin Albrecht.
-* Efectos de sonido y Phaser1 engine music player por Shiru.
-* Decompresor appack por dwedit, adaptado por Utopian y optimizado por Metalbrain.
-* Compresor para aplib "apultra" https://github.com/emmanuel-marty/apultra
+* Una versión modificada de **splib2**, de **Alvin Albrecht**.
+* Efectos de sonido y Phaser1 engine music player por **Shiru**.
+* Decompresor appack por **dwedit**, adaptado por **Utopian** y optimizado por **Metalbrain**.
+* Compresor para aplib [apultra](https://github.com/emmanuel-marty/apultra) de **Emmanuel Marty**
+* WYZ Player por WYZ, modificado por **na_th_an** (compresión) y **thEpOpE** (FX con ruido).
 
 # Licencia
 
@@ -53,4 +54,4 @@ Los **recursos gráficos y sonoros** de nuestros juegos son [donationware](https
 
 Si te gusta esto y aprecias la cantidad de horas que le hemos echado, [invita a un café](https://ko-fi.com/I2I0JUJ9).
 
-Pásalo guay.
+Y lo más importante: pásalo guay.

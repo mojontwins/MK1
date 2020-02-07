@@ -25,7 +25,7 @@
 	scf
 	ld	a, $ff
 	ld	ix, $C000
-	ld	de, 5465
+	ld	de, 5584
 	call $0556
 	di
 
