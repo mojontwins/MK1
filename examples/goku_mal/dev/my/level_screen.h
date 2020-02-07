@@ -4,16 +4,72 @@
 // This code is used to display the "new level" screen. You can customize it for your game:
 
 {
-	blackout_area ();
-	
-	level_str [7] = 49 + level;
-	_x = 12; _y = 12; _t = 71; _gp_gen = level_str; print_str ();
-	sp_UpdateNow ();
-	#ifdef MODE_128K
-		wyz_play_sound (SFX_START);
-	#else			
-		beep_fx (1);
-	#endif
+	// Show cutscenes at the beginning of levels 0 and 3
 
-	espera_activa (100);
+	if (level == 0) {		
+		do_cutscene (0, 3, 1);
+	} else if (level == 3) {
+		do_cutscene (4, 4, 1);
+	}
+
+	// Show new level screen (customized)
+
+	// Unpack tileset
+	get_resource (LEVEL_SCREEN_TSC_BIN, (unsigned int) (tileset));
+
+	// Show zone screen
+	get_resource (level ? ZONEB_BIN : ZONEA_BIN, 16384);
+
+	// Show password
+	if (level) {
+		_x = 7; _y = 18; _t = 70; _gp_gen = " PASSWORD "; print_str ();
+		_gp_gen = passwords + ((level - 1) * PASSWORD_LENGTH);
+		gpx = 9; for (gpit = 0; gpit < PASSWORD_LENGTH; ++ gpit) {
+			#asm
+					ld  hl, (__gp_gen)
+					ld  a, (hl)
+					inc hl
+					ld  (__gp_gen), hl
+					ld  e, a
+					
+					ld  d, 70
+					
+					ld  a, (_gpx)
+					ld  c, a
+					inc a 
+					ld  (_gpx), a
+					
+					ld  a, 19
+
+					call SPPrintAtInv
+			#endasm
+		}
+	}
+
+	// Show big number
+	map_pointer = level * 54 + levelnumbers;
+	for (gpy = 16; gpy < 22; ++ gpy) {
+		for (gpx = 22; gpx < 31; ++ gpx) {
+			#asm
+					ld  hl, (_map_pointer)
+					ld  a, (hl)
+					inc hl
+					ld  (_map_pointer), hl
+					ld  e, a
+					
+					ld  d, 71
+					
+					ld  a, (_gpx)
+					ld  c, a
+					
+					ld  a, (_gpy)
+
+					call SPPrintAtInv
+			#endasm
+		}
+	}
+
+	wyz_play_music (2);
+	espera_activa (250);
+	wyz_stop_sound ();
 }

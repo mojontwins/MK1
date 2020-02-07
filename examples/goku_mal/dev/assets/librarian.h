@@ -30,7 +30,7 @@ RESOURCE resources [] = {
     { 4, 0xFB71 },
     { 6, 0xC5B8 },
     { 3, 0xFD07 },
-    { 6, 0xC8C7 }
+    { 3, 0xFE90 }
 };
 
 #define LEVEL0C_BIN                     0
@@ -52,6 +52,6 @@ RESOURCE resources [] = {
 #define TITLE_BIN                       16
 #define LOGO_BIN                        17
 #define CONTROLS_BIN                    18
-#define LEVEL_SCREEN_TSC_BIN            19
-#define MARCO_BIN                       20
+#define MARCO_BIN                       19
+#define LEVEL_SCREEN_TSC_BIN            20
 

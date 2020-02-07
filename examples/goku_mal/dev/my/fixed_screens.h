@@ -12,6 +12,10 @@
 #endif
 
 void game_ending (void) {
+	// Show final cutscene
+	do_cutscene (5, 6, 9);
+
+	// On to the normal ending
 	sp_UpdateNow();
 	blackout ();
 	#ifdef MODE_128K

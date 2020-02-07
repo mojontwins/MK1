@@ -98,20 +98,21 @@ End Function
 Sub usage
 	Print "Usage: "
 	Print 
-	Print "$ chr2bin charset.png charset.bin [defaultink|noattrs]"
+	Print "$ chr2bin charset.png charset.bin n [defaultink|noattrs]"
 	Print
 	Print "where:"
-	Print "   * charset.png is a 256x64 file with 256 chars."
+	Print "   * charset.png is a 256x64 file with max. 256 chars."
 	Print "   * charset.bin is the output, 2304/2048 bytes bin file."
+	Print "   * n how many chars, 1-256"
 	Print "   * defaultink: a number 0-7. Use this colour as 2nd colour if there's only"
 	Print "     one colour in a 8x8 cell"
-	Print "   * noattrs: just outputs the bitmaps."
+	Print "   * noattrs: just outputs the bitmaps. Omit and you get 256 chars nonetheless"
 End Sub
 
 ' VARS.
 
 Dim As Byte flag, is_packed
-Dim As integer i, j, x, y, xx, yy, f, fout, idx, byteswritten, totalsize, iniByte, finByte, noattrs
+Dim As integer i, j, x, y, xx, yy, f, fout, idx, byteswritten, totalsize, iniByte, finByte, noattrs, charCount
 Dim As uByte d
 Dim As String levelBin
 Dim As Any Ptr img
@@ -121,19 +122,18 @@ Dim As uByte tileset (2303)
 
 Print "chr2bin v0.4 20200119 ~ ";
 
-If Len (Command (2)) = 0 Then
-	usage
-	End
-End If
+If Len (Command (3)) = 0 Then usage: End
 
-If Command (3) <> "defaultink" Then defaultInk = -1 Else defaultInk = Val (Command (4))
-noattrs = (Command (3) = "noattrs") 
+charCount = Val (Command (3)): If charCount = 0 Then usage: End
+
+If Command (4) = "" Then defaultInk = -1 Else defaultInk = Val (Command (4))
+noattrs = (Command (4) = "noattrs") 
 
 levelBin = Command (2)
 
 screenres 640, 480, 32, , -1
-Kill levelBin
 
+Kill levelBin
 fout = FreeFile
 Open levelBin for Binary as #fout
 
@@ -149,13 +149,15 @@ img = png_load (Command (1))
 idx = 0 
 For y = 0 To 7
 	For x = 0 To 31
-		getUDGIntoCharset img, x * 8, y * 8, tileset (), idx
-		idx = idx + 1
+		if (idx < charCount) Then
+			getUDGIntoCharset img, x * 8, y * 8, tileset (), idx
+			idx = idx + 1
+		End If
 	Next x
 Next y
 iniByte = 0
 
-If noattrs Then finByte = 2047 Else finByte = 2303
+If noattrs Then finByte = idx*8-1 Else finByte = 2303
 
 For i = iniByte To finByte
 	d = tileset (i)

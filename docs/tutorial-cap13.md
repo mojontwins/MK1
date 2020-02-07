@@ -239,17 +239,18 @@ Añadimos pues una llamada a buildlevels para cada uno de nuestros niveles, ajus
     del ..\bin\level?.bin  > nul
 ```
 
-Ahora necesitamos una conversión más que usaremos luego en nuestras super pantallas de nuevo nivel super mega hiper chachis. Vamos a importar un tileset completo que tenemos en `level_screen_ts.png`. En la imagen hay 256 caracteres en 256x64 pixels, y para importar algo así tenemos `chr2bin`:
+Ahora necesitamos una conversión más que usaremos luego en nuestras super pantallas de nuevo nivel super mega hiper chachis. Vamos a importar 192 caracteres que tenemos en `level_screen_ts.png` que descomprimiremos sobre el area del tileset para mostrar números gordunos. Para esa conversión tenemos `chr2bin`:
 
 ```
     C:\git\MK1\src\utils>chr2bin.exe
     chr2bin v0.4 20200119 ~ Usage:
 
-    $ chr2bin charset.png charset.bin [defaultink|noattrs]
+    $ chr2bin charset.png charset.bin n [defaultink|noattrs]
 
     where:
-       * charset.png is a 256x64 file with 256 chars.
+       * charset.png is a 256x64 file with max. 256 chars.
        * charset.bin is the output, 2304/2048 bytes bin file.
+       * n how many chars, 1-256
        * defaultink: a number 0-7. Use this colour as 2nd colour if there's only
          one colour in a 8x8 cell
        * noattrs: just outputs the bitmaps.
@@ -258,7 +259,7 @@ Ahora necesitamos una conversión más que usaremos luego en nuestras super pant
 Para lo que vamos a usar estos gráficos no necesitamos los atributos así que los convertiremos así; luego los comprimimos y limpiamos:
 
 ```
-    ..\..\..\src\utils\chr2bin ..\gfx\level_screen_ts.png ..\bin\level_screen_ts.bin noattrs > nul
+    ..\..\..\src\utils\chr2bin ..\gfx\level_screen_ts.png ..\bin\level_screen_ts.bin 192 noattrs > nul
     ..\..\..\src\utils\apultra ..\bin\level_screen_ts.bin ..\bin\level_screen_tsc.bin > nul
 
     del ..\bin\level_screen_ts.bin > nul 
@@ -910,7 +911,7 @@ Imprimimos unas cosas y luego esperamos que el usuarios pulse 1 o 2. En el caso 
 La función es muy tonta pero la puedes aprovechar para tus propios passwords con alguna que otra modificación:
 
 ```c 
-    // extra_functions.h
+    // extra_vars.h
         
     #define PASSWORD_LENGTH 6
     #define MENU_Y          16
@@ -925,7 +926,11 @@ La función es muy tonta pero la puedes aprovechar para tus propios passwords co
     #endasm
 
     unsigned char *password = "****** ";
+```
 
+```c 
+    // extra_functions.h
+   
     unsigned char check_password (void) {
         wyz_play_sound (SFX_START);
 
@@ -983,14 +988,93 @@ Con esto y tal y como llevamos la cosa, si compilas tendrás el sistema de passw
 
 ### Las cutscenes
 
-El sistema de cutscenes que implementaremos en una función `do_cutscene` es muy sencillo. Para cada idioma tendremos 7 cadenas de texto, una por cada imagen.  La función recibirá dos números del 1 al 7, y mostrará las imagenes y cadenas de texto entre ambos números, ambos inclusive.
+El sistema de cutscenes que implementaremos en una función `do_cutscene` es muy sencillo. Para cada idioma tendremos 7 cadenas de texto, una por cada imagen.  La función recibirá dos números del 1 al 7, y mostrará las imagenes y cadenas de texto entre ambos números, ambos inclusive. También recibirá un tercer parámetro con la música que debe tocar.
 
 Hay tres puntos en los que hay que montar cutscenes: el primero es al empezar un juego nuevo; se mostrarán las cadenas 0 a 3. El segundo es antes de empezar la cuarta fase (`level == 3`); mostraremos la cadena 4. Y el tercero será al terminar la quinta fase; mostraremos las cadenas 5 y 6.
 
 Montados todo este sistema en `my/ci/extra_routines.h` igualmente, a continuación del código que ya habíamos introducido. Puedes verlo en la carpeta del juego.
 
-Lo que sí vamos a ver aquí son los *enganches*, o sea, las llamadas a `do_cutscene`, que habrá que pincharlas en dos puntos diferentes.
+Lo que sí vamos a ver aquí son los *enganches*, o sea, las llamadas a `do_cutscene`, que habrá que pincharlas en dos puntos diferentes: Si te das cuenta, las dos primeras secuencias se muestran antes de monstrar la pantalla de "NIVEL XX", y la tercera antes de mostrar el final del juego. Por tanto, meteremos las llamadas a `do_cutscene` al principio de `my/level_screen.h` y al principio de la función `game_ending` en `my/fixed_screens.h`.
+
+```c
+    // level_screen.h
+    {
+        // Show cutscenes at the beginning of levels 0 and 3
+
+        if (level == 0) do_cutscene (0, 3, 1);
+        else if (level == 3) do_cutscene (4, 4, 1);
+
+        // Show new level screen (customized)
+        [...]
+    }
+```
+
+```c
+    // fixed_screens.h
+    [...]
+
+    void game_ending (void) {
+        // Show final cutscene
+        do_cutscene (5, 6, 9);
+
+        // On to the normal ending
+        [...]
+    }
+
+    [...]
+```
 
 ### Las pantallas de "nuevo nivel"
+
+Las pantallas de "nuevo nivel" de Goku Mal muestran una imagen de fondo: `zoneA.png` en la primera fase y `zoneB.png` en las siguientes. A partir de la segunda fase se muestra el password correspondiente. Además, se pinta un número bien gordo usando carácteres de un set gráfico especial que tendremos que descomprimir sobre la zona de tiles. Los números gordos se pintan atendiendo a un array lleno de números que tuve a bien de teclear en tiempos, algo que ni se me ocurriría hacer en los tiempos que corren, porque en el rato que tardo en picar números me hago un conversor automático, que es más divertido. Pero bueno, el mal ya está hecho.
+
+Ponemos nuestras ristras en `my/ci/extra_vars.h` a continuación de todo lo que ya tenemos.
+
+```c
+    // extra_vars.h
+
+    unsigned char levelnumbers [] = {
+         64, 65, 66, 66, 66, 66, 66,  0,  0, 
+         67, 68, 66, 66, 66, 66, 66,  0,  0, 
+          0,  0, 66, 66, 66, 66, 66,  0,  0, 
+          0,  0, 66, 66, 66, 66, 66,  0,  0, 
+          0,  0, 66, 66, 66, 66, 66,  0,  0, 
+         69, 66, 66, 66, 66, 66, 66, 66, 70, 
+         
+         71, 66, 66, 66, 66, 66, 66, 66, 72, 
+         66, 66, 73, 74, 74, 74, 75, 66, 66, 
+          0,  0, 76, 77, 78, 79, 66, 66, 80, 
+         81, 79, 66, 66, 82, 83, 84, 85,  0, 
+         66, 66, 86, 85,  0,  0,  0, 66, 66, 
+         66, 66, 66, 66, 66, 66, 66, 66, 66, 
+         
+         66, 66, 66, 66, 66, 66, 66, 66, 66, 
+         66, 66, 87, 88, 89, 90, 66, 91, 92, 
+          0, 93, 94, 95, 66, 66, 66, 96, 97, 
+         98, 68, 68, 68, 68, 68, 99, 66, 66,
+         66, 66,114,  0,  0,  0,115, 66, 66, 
+        100, 66, 66, 66, 66, 66, 66, 66,101,
+        
+          0,  0,102,103, 66,104,105,  0,  0,
+        102,103, 66,104,105,  0,  0,  0,  0,
+         66,104,105,  0,106,106,  0,  0,  0,
+         66, 66, 66, 66, 66, 66, 66, 66, 66, 
+         66, 66, 66, 66, 66, 66, 66, 66, 66, 
+          0,  0,  0,  0, 66, 66,  0,  0,  0,
+          
+         66, 66, 66, 66, 66, 66, 66, 66, 66, 
+         66, 66,  0,  0,  0,  0,  0,  0,  0,
+         66, 66,107,108, 66, 66, 66,109,110,
+         68, 68,111,112,112,112,113, 66, 66,
+         66, 66,114,  0,  0,  0,115, 66, 66,
+        100, 66, 66, 66, 66, 66, 66, 66,101
+    };  
+```
+
+El código que saca la pantalla, toca la música de nuevo nivel y saca el numerón lo meteremos sustituyendo el que hay por defecto en `my/level_screen.h`, detrás de las llamadas a `do_cutscene` que pusimos antes. Tiene este aspecto:
+
+```c
+
+```
 
 ## Fin!

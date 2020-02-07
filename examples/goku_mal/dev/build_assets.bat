@@ -55,7 +55,7 @@ echo Converting levels
 del ..\bin\level?.bin  > nul
 
 echo Converting more stuff
-..\..\..\src\utils\chr2bin ..\gfx\level_screen_ts.png ..\bin\level_screen_ts.bin noattrs > nul
+..\..\..\src\utils\chr2bin ..\gfx\level_screen_ts.png ..\bin\level_screen_ts.bin 192 noattrs > nul
 ..\..\..\src\utils\apultra ..\bin\level_screen_ts.bin ..\bin\level_screen_tsc.bin > nul
 
 del ..\bin\level_screen_ts.bin > nul 
