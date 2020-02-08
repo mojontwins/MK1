@@ -204,8 +204,8 @@ void main (void) {
 					//wyz_play_music (8);
 					game_over ();
 				}
-				cortina ();
 			#endif
+			cortina ();
 		}
 		
 		clear_sprites ();

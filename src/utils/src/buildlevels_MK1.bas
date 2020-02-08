@@ -680,11 +680,12 @@ Else
 	For idx = 1 To max
 		' Read
 		get #f, , e.x
+		get #f, , e.y
 		get #f, , e.t
 		
 		' Write
 		' unsigned char xy
-		d = e.x: put #fout, , d
+		d = e.x*16 + e.y: put #fout, , d
 		' unsigned char t
 		d = e.t: put #fout, , d
 		' unsigned char act

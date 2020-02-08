@@ -4,6 +4,9 @@
 // You can change this function. To set level to anything different than 0.
 
 {
+	sp_UpdateNow ();
+	blackout ();
+
 	#ifdef MODE_128K
 		get_resource (TITLE_BIN, 16384);
 		wyz_play_music (0);

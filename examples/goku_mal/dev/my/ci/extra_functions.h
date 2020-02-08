@@ -1,6 +1,19 @@
 // MTE MK1 (la Churrera) v5.0
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
+// Partial cortina (looks better)
+
+void cortina2 (void) {
+	#asm
+			ld	hl, 22528+32
+			ld  de, 22528+33
+			ld  bc, 768-97
+			xor a
+			ld  (hl), a
+			ldir
+	#endasm
+}
+
 // Just waits n frames
 
 void halts_delay (unsigned char n) {
@@ -135,7 +148,7 @@ void do_cutscene (unsigned char ini, unsigned char fin, unsigned char music) {
 		get_resource (pic_resource [intro_iterator], 16384);
 		_gp_gen = intro_texts [intro_iterator + text_offs]; show_intro_text ();
 		espera_activa (SCREEN_WAIT);
-		cortina ();
+		cortina2 ();
 		sp_WaitForNoKey ();
 	}
 	wyz_stop_sound ();
