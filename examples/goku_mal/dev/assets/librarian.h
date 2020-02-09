@@ -16,7 +16,7 @@ RESOURCE resources [] = {
     { 3, 0xDC4F },
     { 3, 0xE505 },
     { 3, 0xED77 },
-    { 3, 0xF5A7 },
+    { 3, 0xF5B3 },
     { 4, 0xC000 },
     { 4, 0xC77D },
     { 4, 0xCE6F },
@@ -29,8 +29,8 @@ RESOURCE resources [] = {
     { 6, 0xC000 },
     { 4, 0xFB81 },
     { 6, 0xC5B8 },
-    { 3, 0xFD90 },
-    { 3, 0xFF19 }
+    { 3, 0xFD9C },
+    { 3, 0xFF25 }
 };
 
 #define LEVEL0C_BIN                     0
