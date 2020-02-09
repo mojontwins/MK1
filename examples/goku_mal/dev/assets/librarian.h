@@ -18,17 +18,17 @@ RESOURCE resources [] = {
     { 3, 0xED77 },
     { 3, 0xF5B3 },
     { 4, 0xC000 },
-    { 4, 0xC77D },
-    { 4, 0xCE6F },
-    { 4, 0xD559 },
-    { 4, 0xDBF0 },
-    { 4, 0xE27B },
-    { 4, 0xE8EF },
-    { 4, 0xEF5F },
-    { 4, 0xF587 },
+    { 4, 0xC75D },
+    { 4, 0xCE33 },
+    { 4, 0xD509 },
+    { 4, 0xDB81 },
+    { 4, 0xE1F1 },
+    { 4, 0xE85E },
+    { 4, 0xEEB2 },
+    { 4, 0xF4BA },
     { 6, 0xC000 },
-    { 4, 0xFB81 },
-    { 6, 0xC5B8 },
+    { 4, 0xFAB4 },
+    { 6, 0xC59A },
     { 3, 0xFD9C },
     { 3, 0xFF25 }
 };
@@ -44,9 +44,9 @@ RESOURCE resources [] = {
 #define INTRO5_BIN                      8
 #define INTRO6_BIN                      9
 #define INTRO2_BIN                      10
-#define INTRO4_BIN                      11
-#define INTRO3_BIN                      12
-#define ENDING_BIN                      13
+#define ENDING_BIN                      11
+#define INTRO4_BIN                      12
+#define INTRO3_BIN                      13
 #define INTRO1_BIN                      14
 #define DEDICADO_BIN                    15
 #define TITLE_BIN                       16
