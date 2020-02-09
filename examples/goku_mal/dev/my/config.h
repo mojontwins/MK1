@@ -104,7 +104,7 @@
 
 #define PLAYER_CAN_FIRE						// If defined, shooting engine is enabled.
 //#define PLAYER_CAN_FIRE_FLAG		1		// If defined, player can only fire when flag # is 1
-#define PLAYER_BULLET_SPEED			8		// Pixels/frame. 
+#define PLAYER_BULLET_SPEED			12		// Pixels/frame. 
 #define MAX_BULLETS					4		// Max number of bullets on screen. Be careful!.
 #define PLAYER_BULLET_Y_OFFSET		6		// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET		0		// vertical offset from the player's left/right.
@@ -161,7 +161,7 @@
 // Top view:
 // ---------
 
-//#define PLAYER_GENITAL				// Enable top view.
+//#define PLAYER_GENITAL					// Enable top view.
 //#define TOP_OVER_SIDE 					// UP/DOWN has priority over LEFT/RIGHT
 //#define PLAYER_BOUNCE_WITH_WALLS			// Bounce when hitting a wall. Only really useful in MOGGY_STYLE mode
 
@@ -288,7 +288,7 @@
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_MAX_VX				192 	// Max velocity
+#define PLAYER_MAX_VX				212 	// Max velocity
 #define PLAYER_AX					48		// Acceleration
 #define PLAYER_RX					32		// Friction
 

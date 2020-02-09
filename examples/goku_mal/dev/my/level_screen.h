@@ -18,6 +18,8 @@
 	get_resource (LEVEL_SCREEN_TSC_BIN, (unsigned int) (tileset));
 
 	// Show zone screen
+	sp_UpdateNow ();
+	blackout ();
 	get_resource (level ? ZONEB_BIN : ZONEA_BIN, 16384);
 
 	// Show password
@@ -69,6 +71,7 @@
 		}
 	}
 
+	sp_UpdateNow ();
 	wyz_play_music (2);
 	espera_activa (250);
 	wyz_stop_sound ();
