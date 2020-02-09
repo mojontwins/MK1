@@ -1139,4 +1139,16 @@ El código que saca la pantalla, toca la música de nuevo nivel y saca el numer�
     wyz_stop_sound ();
 ```
 
+### Boost al subir de pantalla
+
+Una cosa que suele ayudar mucho al gameplay, sobre todo cuando el juego es más de avanzar que de explorar, es dar un pequeño boost al jugador al subir a la pantalla de arriba. Vamos a detectar que estemos cambiando de pantalla hacia arriba para dar a la VY el máximo valor negativo, lo que hará más fácil dirigir a Goku Mal a una plataforma en lugar de fallar y volver a la pantalla de abajo.
+
+Si recordamos, `my/ci/before_entering_screen.h` se inyecta justo al ir a cambiar pantalla, cuando `n_pant` y `o_pant` son distintas. Justo ahí podremos detectar que `n_pant == (o_pant - level_data->map_w)` y en ese caso aplicar el boost:
+
+```c
+    // before_entering_screen.h
+
+    if (n_pant == (o_pant - level_data->map_w)) p_vy = -PLAYER_MAX_VY_SALTANDO;
+```
+
 ## Fin!

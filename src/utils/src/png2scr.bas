@@ -96,14 +96,14 @@ For y = 0 to 23
 					c1 = 7
 					if (c2 and 64) then c1 = c1 + 64
 				else
-					c2 = 0
-					if (c1 and 64) then c2 = c2 + 64
+					c1 = 0
+					if (c2 and 64) then c1 = c1 + 64
 				end if
 			end if
-		else 
-			If (c1 and 63) < (c2 and 63) Then Swap c1, c2
-		end if
+		End If
 
+		If (c1 and 63) < (c2 and 63) Then Swap c1, c2
+		
 		cpBuff (y, x).c1 = c1
 		cpBuff (y, x).c2 = c2
 		

@@ -30,6 +30,7 @@
 			#asm
 					ld  hl, (__gp_gen)
 					ld  a, (hl)
+					sub 32
 					inc hl
 					ld  (__gp_gen), hl
 					ld  e, a
