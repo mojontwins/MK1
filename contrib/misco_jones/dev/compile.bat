@@ -51,7 +51,7 @@ zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 
 echo Construyendo cinta
 rem cambia LOADER por el nombre que quieres que salga en Program:
-..\..\..\src\utils\bas2tap -a10 -sDOGMOLE loader\loader.bas loader.tap > nul
+..\..\..\src\utils\bas2tap -a10 -sMISCO loader\loader.bas loader.tap > nul
 ..\..\..\src\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
 ..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
 copy /b loader.tap + screen.tap + main.tap %game%.tap > nul

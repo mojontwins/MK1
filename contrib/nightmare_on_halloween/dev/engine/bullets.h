@@ -42,6 +42,14 @@ void bullets_update (void) {
 	#endasm
 }
 
+#ifdef PLAYER_GENITAL
+	// Based upon facing >> 1: RIGHT LEFT UP DOWN
+	signed char _bxo [] = { 12, -4, 8 - PLAYER_BULLET_X_OFFSET, PLAYER_BULLET_X_OFFSET };
+	signed char _byo [] = { PLAYER_BULLET_Y_OFFSET, PLAYER_BULLET_Y_OFFSET, -4, 12};
+	signed char _bmxo [] = { PLAYER_BULLET_SPEED, -PLAYER_BULLET_SPEED, 0, 0 };
+	signed char _bmyo [] = { 0, 0, -PLAYER_BULLET_SPEED, PLAYER_BULLET_SPEED };
+#endif
+
 void bullets_fire (void) {
 	#ifdef PLAYER_CAN_FIRE_FLAG 
 		if (flags [PLAYER_CAN_FIRE_FLAG] == 0) return;
@@ -55,32 +63,73 @@ void bullets_fire (void) {
 		if (bullets_estado [b_it] == 0) {
 			_b_estado = 1;
 			#ifdef PLAYER_GENITAL
+				/*
 				switch (p_facing) {
-					case FACING_LEFT:
-						_b_x = gpx - 4;
-						_b_mx = -PLAYER_BULLET_SPEED;
-						_b_y = gpy + PLAYER_BULLET_Y_OFFSET;
-						_b_my = 0;
-						break;
 					case FACING_RIGHT:
 						_b_x = gpx + 12;
-						_b_mx = PLAYER_BULLET_SPEED;
 						_b_y = gpy + PLAYER_BULLET_Y_OFFSET;
+						_b_mx = PLAYER_BULLET_SPEED;
+						_b_my = 0;
+						break;
+					case FACING_LEFT:
+						_b_x = gpx - 4;
+						_b_y = gpy + PLAYER_BULLET_Y_OFFSET;
+						_b_mx = -PLAYER_BULLET_SPEED;
 						_b_my = 0;
 						break;
 					case FACING_DOWN:
 						_b_x = gpx + PLAYER_BULLET_X_OFFSET;
 						_b_y = gpy + 12;
-						_b_my = PLAYER_BULLET_SPEED;
 						_b_mx = 0;
+						_b_my = PLAYER_BULLET_SPEED;
 						break;
 					case FACING_UP:
 						_b_x = gpx + 8 - PLAYER_BULLET_X_OFFSET;
 						_b_y = gpy - 4;
-						_b_my = -PLAYER_BULLET_SPEED;
 						_b_mx = 0;
+						_b_my = -PLAYER_BULLET_SPEED;
 						break;
 				}
+				*/
+				/*
+				rda = p_facing >> 1;
+				_b_x = gpx + _bxo [rda];
+				_b_y = gpy + _byo [rda];
+				_b_mx = _bmxo [rda];
+				_b_my = _bmyo [rda];
+				*/
+				
+				#asm
+						ld  a, (_p_facing)
+						srl a
+						ld  c, a
+						ld  b, 0
+
+						ld  hl, __bxo
+						add hl, bc						
+						ld  d, (hl)
+						ld  a, (_gpx)
+						add d
+						ld  (__b_x),a
+
+						ld  hl, __byo
+						add hl, bc
+						ld  d, (hl)
+						ld  a, (_gpy)
+						add d
+						ld  (__b_y),a
+
+						ld  hl, __bmxo
+						add hl, bc
+						ld  a, (hl)
+						ld  (__b_mx),a
+
+						ld  hl, __bmyo
+						add hl, bc
+						ld  a, (hl)
+						ld  (__b_my),a
+				#endasm
+				
 			#else
 				#ifdef CAN_FIRE_UP
 					if ((pad0 & sp_UP) == 0) {

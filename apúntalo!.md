@@ -21,3 +21,5 @@
 [ ] Full bootèe engine
 [X] Sustituir aplib por apultra.
 [ ] Sacar malotes.life del struct?
+[ ] Helmet vuelve a ocupar demasiado (!?) - He cambiado selección de x, y, mx, my de las balas a array-based/asm -> test; propagate
+

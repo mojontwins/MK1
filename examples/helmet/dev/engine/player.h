@@ -34,7 +34,7 @@ void player_init (void) {
 	p_disparando = 0;
 	#ifdef MAX_AMMO
 		#ifdef INITIAL_AMMO
-			p_ammo = INITIAL_AMMO
+			p_ammo = INITIAL_AMMO;
 		#else
 			p_ammo = MAX_AMMO;
 		#endif

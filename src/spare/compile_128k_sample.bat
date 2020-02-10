@@ -44,7 +44,7 @@ echo Construyendo cinta
     ram4_length=?..\bin\RAM4.bin ^
     ram6_length=?..\bin\RAM6.bin ^
     ram7_length=?..\bin\RAM7.bin ^
-    mb_length=?..\bin\%game%.bin  > nul
+    mb_length=?%game%.bin  > nul
 
 ..\..\..\src\utils\pasmo.exe loader\loader.asm ..\bin\loader.bin loader.txt
 
@@ -56,7 +56,7 @@ echo Construyendo cinta
     data                ..\bin\RAM4.bin ^
     data                ..\bin\RAM6.bin ^
     data                ..\bin\RAM7.bin ^
-    data                ..\bin\%game%.bin
+    data                %game%.bin
 
 if [%1]==[justcompile] goto :end
 if [%1]==[noclean] goto :end

@@ -2,6 +2,10 @@
 
 Eventualmente. Dame un respiro D-: Esto va a ser un WIP largo. Dejarse venir con los PDF }:-D
 
+## Antes de empezar
+
+¿Cuánto puede ocupar mi güego? Pues en 48K la pila se coloca bajando desde 61697. No suele ocupar mucho, y 61697 - 24000 = 37697. Pongamos que **37500 bytes** es una buena marca.
+
 ## Variables globales
 
 Aquí las variables globales que te pueden interesar:

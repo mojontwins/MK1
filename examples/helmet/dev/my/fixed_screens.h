@@ -30,6 +30,12 @@ void game_ending (void) {
 		rda = 7; rdb = 2;
 		lame_sound ();
 	#endif
+
+	// Custom for Helmet
+	_x = 7; _y = 7; _t = 70; _gp_gen = "CONGRATULATIONS!"; print_str ();
+	_x = 1; _y = 9; _t = 71; _gp_gen = "YOU MANAGED TO SET THE BOMBS!"; print_str ();
+	_x = 3; _y = 10;         _gp_gen = "AND DESTROY THE COMPUTER"; print_str ();
+	_x = 4; _y = 11;         _gp_gen = "MISSION ACCOMPLISHED!!"; print_str ();
 	
 	espera_activa (500);
 }

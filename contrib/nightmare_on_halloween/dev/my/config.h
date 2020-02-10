@@ -17,9 +17,9 @@
 #define SCR_INICIO					0		// Initial screen
 #define PLAYER_INI_X				3		//
 #define PLAYER_INI_Y				3		// Initial tile coordinates
-#define SCR_FIN 					99		// Last screen. 99 = deactivated.
-#define PLAYER_FIN_X				99		//
-#define PLAYER_FIN_Y				99		// Player tile coordinates to finish game
+//#define SCR_FIN 					99		// Last screen. 99 = deactivated.
+//#define PLAYER_FIN_X				99		//
+//#define PLAYER_FIN_Y				99		// Player tile coordinates to finish game
 #define PLAYER_NUM_OBJETOS			5		// Objects to get to finish game
 #define PLAYER_LIFE 				5		// Max and starting life gauge.
 #define PLAYER_REFILL				1		// Life recharge

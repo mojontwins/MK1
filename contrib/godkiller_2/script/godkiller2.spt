@@ -1,0 +1,149 @@
+# godkiller2 analpenetration script
+# Copyleft 201X aspis
+# Churrera 3.1 script engine by mojon twins & vah-ka
+
+# flags:
+# 1	- Contador de Objetos_almas
+# 2 - objetos en sus posiciones
+# 3 - sello
+# 4 - ANTORCHA
+# 5 - escudo
+# 6 - contador de items
+# 7 - reliquias piramide s/n
+
+ENTERING GAME
+	IF TRUE
+	THEN
+		SET FLAG 1 = 0
+		SET FLAG 6 = 0
+		SET FLAG 3 = 0
+		SET FLAG 4 = 0
+		PRINT_TILE_AT (26, 0) = 0
+		PRINT_TILE_AT (28, 0) = 0
+		PRINT_TILE_AT (30, 0) = 0
+	END
+END
+
+# -------------------------- entering any -----------------------------
+ENTERING ANY	
+	IF TRUE
+	THEN
+		TEXT ____CIUDAD_DE_DIS___	
+	END
+END		
+		
+
+
+
+PRESS_FIRE AT SCREEN 28
+	IF PLAYER_TOUCHES 7,5
+	THEN
+		SOUND 7
+		SOUND 6
+		WARP_TO 35, 7, 2
+	END
+END
+
+
+#WARPING
+PRESS_FIRE AT SCREEN 35
+	IF PLAYER_TOUCHES 3,5
+	THEN 
+		SOUND 7
+		SOUND 6
+		WARP_TO 3 ,10,4
+	END
+END
+
+#-----tablilla --------------
+PRESS_FIRE AT SCREEN 8
+	IF PLAYER_TOUCHES 6,1
+	IF FLAG 3 = 0
+	THEN
+			#Objeto cogido
+		SET FLAG 3 = 1
+			#Borramos objeto
+		TEXT ___RUNAS_DE_DIS___
+		SET TILE (6,1) = 0
+			#pintamos en el marcador
+		PRINT_TILE_AT (26,0) = 22
+			#incrtementamos contador
+		INC FLAG 6,1
+		SOUND 7
+		
+	END
+END
+
+PRESS_FIRE AT SCREEN 10
+	IF PLAYER_TOUCHES 6,3
+	IF FLAG 4 = 1
+	THEN
+		WARP_TO 10,6,7
+		SOUND 7
+		SOUND 6
+		SOUND 5
+		TEXT ___LA_LLAMA_TE_GUIA___
+	END
+END
+
+PRESS_FIRE AT SCREEN 11
+	IF PLAYER_TOUCHES 12,7
+	IF FLAG 4 = 1
+	THEN
+		SET TILE (12,8) = 0
+		SOUND 7
+		SOUND 6
+		SOUND 5
+	END
+END
+
+#------antorcha
+
+PRESS_FIRE AT SCREEN 15
+	IF PLAYER_TOUCHES 13,4
+	IF FLAG 4 = 0
+	THEN
+			#Objeto cogido
+		SET FLAG 4 = 1
+			#Borramos objeto
+		TEXT ____FUEGO_ESTIGIO___
+		SET TILE (13,4) = 0
+			#pintamos en el marcador
+		PRINT_TILE_AT (28,0) = 19
+			#incrtementamos contador
+		INC FLAG 6,1
+		SOUND 7
+		
+	END
+END
+
+
+#----------- ESCUDO -------
+PRESS_FIRE AT SCREEN 38
+	IF PLAYER_TOUCHES 6,4
+	IF FLAG 5 = 0
+	THEN
+			#Objeto cogido
+		SET FLAG 5 = 1
+			#Borramos objeto
+		TEXT __VOLUNTAD_DE_CRONOS__
+		SET TILE (6,4) = 0
+			#pintamos en el marcador
+		PRINT_TILE_AT (30,0) = 21
+			#incrtementamos contador
+		INC FLAG 6,1
+		SOUND 7
+	END
+END
+
+
+# ----FINAL ---
+
+PRESS_FIRE AT SCREEN 4
+	IF PLAYER_TOUCHES 7,1
+	IF FLAG 1 = 15
+	IF FLAG 6 = 3
+	THEN
+		WIN	
+	END
+END
