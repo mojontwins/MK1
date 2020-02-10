@@ -32,7 +32,7 @@
              LD   (NOTE_PTR),HL                  ; Set the note offset (within this pattern) to 0
 
 .player
-             DI
+
              PUSH IY
              ;LD   A,BORDER_COL
              xor a
@@ -192,7 +192,7 @@
              LD   HL,$2758
              EXX
              POP  IY
-             EI
+
              RET
 
 .render

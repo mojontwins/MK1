@@ -11,23 +11,11 @@ void msc_init_all (void) {
 
 unsigned char read_byte (void) {
     #asm
-        #ifdef MODE_128K
-            di
-            ld b, SCRIPT_PAGE
-            call SetRAMBank
-        #endif
-
             ld  hl, (_script)
             ld  a, (hl)
             ld  (_safe_byte), a
             inc hl
             ld  (_script), hl
-
-        #ifdef MODE_128K
-            ld b, 0
-            call SetRAMBank
-            ei
-        #endif
     #endasm
     return safe_byte;
 }
@@ -69,11 +57,6 @@ void read_two_bytes_D_E (void) {
     #asm
             // Read two bytes: flag #, number
 
-            #ifdef MODE_128K
-                di
-                ld  b, SCRIPT_PAGE
-                call SetRAMBank
-            #endif
 
                 ld  hl, (_script)
                 ld  d, (hl)         // flag #
@@ -82,11 +65,6 @@ void read_two_bytes_D_E (void) {
                 inc hl
                 ld  (_script), hl
 
-            #ifdef MODE_128K
-                ld  b, 0
-                call SetRAMBank
-                ei
-            #endif
     #endasm
 }
 unsigned char *next_script;
@@ -98,13 +76,6 @@ void run_script (unsigned char whichs) {
     debug_print_16bits (0, 23, asm_int);
 #endif
 
-#ifdef MODE_128K
-    #asm
-        di
-        ld b, SCRIPT_PAGE
-        call SetRAMBank
-    #endasm
-#endif
 
     #asm
         ld hl, (_asm_int)
@@ -115,13 +86,6 @@ void run_script (unsigned char whichs) {
         ld  (_script), hl
     #endasm
 
-#ifdef MODE_128K
-    #asm
-        ld b, 0
-        call SetRAMBank
-        ei
-    #endasm
-#endif
 
 #ifdef DEBUG
     debug_print_16bits (5, 23, (unsigned int) script);
@@ -254,7 +218,7 @@ void run_script (unsigned char whichs) {
                         // SOUND sc_n
                         // Opcode: E0 sc_n
 #ifdef MODE_128K
-                        _AY_PL_SND (read_vbyte ());
+                        wyz_play_sound (read_vbyte ());
 #else
                         beep_fx (read_vbyte ());
 #endif
