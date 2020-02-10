@@ -1126,6 +1126,8 @@ INCLUDE "instrumentos.asm"
 SONG_0:
 	INCBIN "menu.mus.bin"
 SONG_1:
+	INCBIN "empty.mus.bin"
+SONG_2:
 	INCBIN "ending.mus.bin"
 
 ;; INCLUIR LOS EFECTOS DE SONIDO:
@@ -1134,7 +1136,7 @@ INCLUDE "efectos.asm"
 
 ;; Añadir entradas para cada canción
 				
-TABLA_SONG:     DW      SONG_0, SONG_1
+TABLA_SONG:     DW      SONG_0, SONG_1, SONG_2
 
 ;; Añadir entradas para cada efecto
 

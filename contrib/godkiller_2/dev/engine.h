@@ -560,9 +560,9 @@ void draw_scr (void) {
 	#endif
 
 	enems_load ();
-	
+
 	#ifdef ACTIVATE_SCRIPTING
-		#ifdef LINE_OF_TEXT
+		#if defined LINE_OF_TEXT && !defined LINE_OF_TEXT_NO_AUTOERASE
 			_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT; _t = LINE_OF_TEXT_ATTR; _gp_gen = "                              "; print_str ();
 		#endif
 		// Ejecutamos los scripts de entrar en pantalla:

@@ -10,7 +10,7 @@ El modo 128K con un solo nivel fue creado ex profeso para desarrolladores que es
 
 Para portar **Godkiller 2** a **MTE MK1 v5** he hecho lo siguiente:
 
-1. tomé como base `src/spare/compile_128k.bat` para la generación de la cinta con el cargador en ensamble para 128K.
+1. tomé como base `src/spare/compile_128k.bat` para la generación de la cinta con el cargador en ensamble para 128K. No hay que olvidarse de poner el número de pantallas (40) en la llamada a `msc3_mk1` y las dimensiones del mapa en `mapcnv`. Además, este juego es `UNPACKED`.
 
 2. Hice las modificaciones al mismo descritas en el capítulo 13 del tutorial (eliminar carga de RAM4, RAM6 y RAM7)
 
@@ -46,7 +46,7 @@ Para portar **Godkiller 2** a **MTE MK1 v5** he hecho lo siguiente:
 ```
 (`dev/build_assets.bat`)
 
-4. Monté la OGT en `mus/` comprimiendo los archivos `.mus` como mandan los cánones de v5.
+4. Monté la OGT en `mus/` comprimiendo los archivos `.mus` como mandan los cánones de v5. También he añadido "empty.mus.bin" porque el juego no tiene música ingame pero el sistema necesita un stub.
 
 ```
 	@echo off
@@ -62,6 +62,8 @@ Para portar **Godkiller 2** a **MTE MK1 v5** he hecho lo siguiente:
 	SONG_0:
 		INCBIN "menu.mus.bin"
 	SONG_1:
+		INCBIN "empty.mus.bin"
+	SONG_2:
 		INCBIN "ending.mus.bin"
 
 	;; INCLUIR LOS EFECTOS DE SONIDO:
@@ -70,7 +72,7 @@ Para portar **Godkiller 2** a **MTE MK1 v5** he hecho lo siguiente:
 
 	;; Añadir entradas para cada canción
 					
-	TABLA_SONG:     DW      SONG_0, SONG_1
+	TABLA_SONG:     DW      SONG_0, SONG_1, SONG_2
 
 	;; Añadir entradas para cada efecto
 	[...]

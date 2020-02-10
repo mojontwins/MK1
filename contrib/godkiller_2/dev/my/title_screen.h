@@ -19,4 +19,8 @@
 	#endif
 
 	select_joyfunc ();
+
+	#ifdef MODE_128K
+		wyz_stop_sound ();
+	#endif
 }
