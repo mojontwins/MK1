@@ -134,9 +134,9 @@ void main (void) {
 		
 		{
 			#ifdef COMPRESSED_LEVELS
-				prepare_level (level);			
-				
 				#include "my/level_screen.h"
+			
+				prepare_level (level);				
 			#endif
 					
 			#ifndef DIRECT_TO_PLAY
@@ -204,8 +204,8 @@ void main (void) {
 					//wyz_play_music (8);
 					game_over ();
 				}
-				cortina ();
 			#endif
+			cortina ();
 		}
 		
 		clear_sprites ();

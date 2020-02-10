@@ -25,12 +25,14 @@ Lo siguiente es modificar `compile.bat` para las dimensiones del mapa, el númer
 
 	set game=helmet
 
-	echo Compilando script
 	cd ..\script
-	..\..\..\src\utils\msc3_mk1.exe %game%.spt 24
+	if not exist %game%.spt goto :noscript
+	echo Compilando script
+	..\..\..\src\utils\msc3_mk1.exe %game%.spt 24 > nul
 	copy msc.h ..\dev\my > nul
 	copy msc-config.h ..\dev\my > nul
 	copy scripts.bin ..\dev\ > nul
+	:noscript
 	cd ..\dev
 
 	echo Convirtiendo mapa

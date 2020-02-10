@@ -317,6 +317,7 @@
 
 		#include "my/ci/extra_routines.h"
 	}
+	sp_UpdateNow ();
 	sp_WaitForNoKey ();
 
 	#ifdef MODE_128K		

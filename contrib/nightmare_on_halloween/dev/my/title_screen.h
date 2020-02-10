@@ -5,6 +5,8 @@
 
 {
 	sp_UpdateNow ();
+	blackout ();
+	
 	#ifdef MODE_128K
 		get_resource (TITLE_BIN, 16384);
 		wyz_play_music (0);

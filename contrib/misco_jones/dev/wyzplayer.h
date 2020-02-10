@@ -12,7 +12,7 @@
 
 #define WYZPLAYERINIT		0xC018	// INIT_BUFFERS		EQU 0C018H
 #define WYZPLAYERISR		0xC000	// INICIO			EQU 0C000H
-#define INICIAEFECTO		0xC46B	// INICIA_EFECTO	EQU 0C46BH
+#define INICIAEFECTO		0xC47E	// INICIA_EFECTO	EQU 0C46BH
 #define CARGA_CANCION		0xC087	// CARGA_CANCION	EQU 0C087H
 #define SILENCIA_PLAYER		0xC062	// PLAYER_OFF		EQU 0C062H
 
@@ -43,39 +43,36 @@ void wyz_init (void) {
 	#endasm
 }
 
-void wyz_play_sound (unsigned char fx_number) {
-	asm_int = fx_number;
-	
-	#asm
-		di
-		ld b,1
-		call SetRAMBank
-		ld a, (_asm_int)
-		ld b, a
-		call INICIAEFECTO
-		ld b,0
-		call SetRAMBank
-		ei
-	#endasm
-}
-
-void wyz_play_music (unsigned char song_number) {
-	asm_int = song_number;
-
+void __FASTCALL__ wyz_play_sound (unsigned char fx_number) {
 	#asm
 		di
 		ld b, 1
 		call SetRAMBank
-		ld a, (_asm_int)
-		call CARGA_CANCION
+		; __FASTCALL__ -> fx_number is in l!
+		ld b, l
+		call INICIAEFECTO
 		ld b, 0
 		call SetRAMBank
 		ei
 	#endasm
 }
 
-void wyz_stop_sound (void)
-{
+void __FASTCALL__ wyz_play_music (unsigned char song_number) {
+	#asm
+		di
+		ld b, 1
+		call SetRAMBank
+		; __FASTCALL__ -> song_number is in l!
+		ld a, l
+		call CARGA_CANCION
+		ld b, 0
+		call SetRAMBank
+		ei
+	#endasm
+	song_playing = song_number;
+}
+
+void wyz_stop_sound (void) {
 	#asm
 		di
 		ld b,1

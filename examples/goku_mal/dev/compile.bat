@@ -7,12 +7,14 @@ set game=goku_mal
 if [%1]==[justcompile] goto :compile
 if [%1]==[clean] goto :clean
 
-echo Compilando script
 cd ..\script
+if not exist %game%.spt goto :noscript
+echo Compilando script
 ..\..\..\src\utils\msc3_mk1.exe %game%.spt 24 > nul
 copy msc.h ..\dev\my > nul
 copy msc-config.h ..\dev\my > nul
 copy scripts.bin ..\dev\ > nul
+:noscript
 cd ..\dev
 
 if [%1]==[justscripts] goto :compile

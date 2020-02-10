@@ -82,9 +82,8 @@ void bullets_fire (void) {
 						break;
 				}
 			#else
-				
 				#ifdef CAN_FIRE_UP
-					if (!(pad0 & sp_UP)) {
+					if ((pad0 & sp_UP) == 0) {
 						_b_y = gpy;
 						_b_my = -PLAYER_BULLET_SPEED;
 					} else if (!(pad0 & sp_DOWN)) {
@@ -99,7 +98,7 @@ void bullets_fire (void) {
 
 
 				#ifdef CAN_FIRE_UP
-					if (!(pad0 & sp_LEFT) || !(pad0 & sp_RIGHT) || ((pad0 & sp_UP) && (pad0 & sp_DOWN))) {
+					if ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0 || ((pad0 & sp_UP) && (pad0 & sp_DOWN))) {
 				#endif
 					if (p_facing == 0) {
 						_b_x = gpx - 4;

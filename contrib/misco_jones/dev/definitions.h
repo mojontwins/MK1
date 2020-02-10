@@ -287,3 +287,7 @@ unsigned char *_gp_gen;
 	const signed char _dx [] = { 0, COCOS_V, 0, -COCOS_V };
 	const signed char _dy [] = { -COCOS_V, 0, COCOS_V, 0 };
 #endif
+
+#ifdef MODE_128K
+	unsigned char song_playing = 0;
+#endif

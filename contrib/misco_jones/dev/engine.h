@@ -609,10 +609,6 @@ void select_joyfunc (void) {
 	#ifdef MODE_128K
 		wyz_play_sound (SFX_START);
 		sp_WaitForNoKey ();
-	#else
-		#asm
-			di
-		#endasm
 	#endif
 }
 
