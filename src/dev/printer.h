@@ -746,7 +746,10 @@ void print_str (void) {
 
 			ld  a, (__x)
 			ld  c, a
+			cp  31
+			jr  z, print_str_no_inc_a
 			inc a
+		.print_str_no_inc_a			
 			ld  (__x), a
 			
 			ld  a, (__y)

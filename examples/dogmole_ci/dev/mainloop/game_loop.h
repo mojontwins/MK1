@@ -47,7 +47,7 @@
 	#endif
 
 	#include "my/ci/entering_game.h"
-			
+	
 	#ifdef PLAYER_STEPS_ON_ENEMIES 	
 		#ifdef SHOW_TOTAL
 		// Show total of enemies next to the killed amount.

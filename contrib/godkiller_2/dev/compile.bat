@@ -39,7 +39,7 @@ if [%1]==[justassets] goto :end
 
 :compile
 echo Compilando guego
-zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+zcc +zx -vn mk1.c -m -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 ..\..\..\src\utils\printsize.exe %game%.bin
 ..\..\..\src\utils\printsize.exe scripts.bin
 
@@ -51,7 +51,7 @@ echo Construyendo cinta
     ram3_length=?..\bin\RAM3.bin ^
     mb_length=?%game%.bin  > nul
 
-..\..\..\src\utils\pasmo.exe loader\loader.asm ..\bin\loader.bin loader.txt
+..\..\..\src\utils\pasmo.exe loader\loader.asm ..\bin\loader.bin
 
 ..\..\..\src\utils\GenTape.exe %game%.tap ^
     basic 'GODKILLER2' 10 ..\bin\loader.bin ^

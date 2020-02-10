@@ -47,7 +47,7 @@
 	#endif
 
 	#include "my/ci/entering_game.h"
-			
+	
 	#ifdef PLAYER_STEPS_ON_ENEMIES 	
 		#ifdef SHOW_TOTAL
 		// Show total of enemies next to the killed amount.
@@ -284,26 +284,24 @@
 
 		// Win game condition
 		
-		#if defined ACTIVATE_SCRIPTING || defined PLAYER_NUM_OBJETOS || defined SCR_FIN
-			if (0
-				#ifdef ACTIVATE_SCRIPTING
-					|| script_result == 1 || script_result > 2
+		if (0
+			#ifdef ACTIVATE_SCRIPTING
+				|| script_result == 1 || script_result > 2
+			#endif
+			#ifdef PLAYER_NUM_OBJETOS
+				|| p_objs == PLAYER_NUM_OBJETOS
+			#endif
+			#ifdef SCR_FIN
+				|| (n_pant == SCR_FIN
+				#if defined PLAYER_FIN_X && defined PLAYER_FIN_Y				
+					&& ((gpx + 8) >> 4) == PLAYER_FIN_X && ((gpy + 8) >> 4) == PLAYER_FIN_Y
 				#endif
-				#ifdef PLAYER_NUM_OBJETOS
-					|| p_objs == PLAYER_NUM_OBJETOS
-				#endif
-				#ifdef SCR_FIN
-					|| (n_pant == SCR_FIN
-					#if defined PLAYER_FIN_X && defined PLAYER_FIN_Y				
-						&& ((gpx + 8) >> 4) == PLAYER_FIN_X && ((gpy + 8) >> 4) == PLAYER_FIN_Y
-					#endif
-					)
-				#endif
-			) {
-				success = 1;
-				playing = 0;
-			}
-		#endif
+				)
+			#endif
+		) {
+			success = 1;
+			playing = 0;
+		}
 		
 		// Game over condition
 		if (p_life == 0

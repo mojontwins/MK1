@@ -497,27 +497,24 @@ void draw_scr (void) {
 				ld  a, (_n_pant)
 				ld  c, a
 
-				ld  a, (hl)			// A = cerrojos [gpit].np
+				ld  b, (hl)			// B = cerrojos [gpit].np
 				inc hl
 
-				cp  c
-				jr  nz, _open_locks_done
-				
-				ld  a, (hl)
+				ld  d, (hl) 		// D = cerrojos [gpit].x;
 				inc hl
 
-				ld  d, a 			// D = cerrojos [gpit].x;
-
-				ld  a, (hl)
+				ld  e, (hl)			// E = cerrojos [gpit].y;
 				inc hl
-
-				ld  e, a 			// E = cerrojos [gpit].y;
 
 				ld  a, (hl)			// A = cerrojos [gpit].st
 				inc hl
 
 				or  a
-				jr  nz, _open_locks_done				
+				jr  nz, _open_locks_done
+
+				ld  a, b
+				cp  c
+				jr  nz, _open_locks_done
 				
 			._open_locks_do
 				ld  a, d
@@ -560,9 +557,9 @@ void draw_scr (void) {
 	#endif
 
 	enems_load ();
-	
+
 	#ifdef ACTIVATE_SCRIPTING
-		#ifdef LINE_OF_TEXT
+		#if defined LINE_OF_TEXT && !defined LINE_OF_TEXT_NO_AUTOERASE
 			_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT; _t = LINE_OF_TEXT_ATTR; _gp_gen = "                              "; print_str ();
 		#endif
 		// Ejecutamos los scripts de entrar en pantalla:

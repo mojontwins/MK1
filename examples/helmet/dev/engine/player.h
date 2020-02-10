@@ -642,11 +642,11 @@ unsigned char player_move (void) {
 		if ((pad0 & sp_FIRE) == 0 && p_disparando == 0) {			
 			p_disparando = 1;
 			#ifdef FIRE_TO_PUSH	
-				if (pushed_any == 0)
+				//if (pushed_any == 0)
 			#endif
 				bullets_fire ();
 			#ifdef FIRE_TO_PUSH	
-				else pushed_any = 0;
+				//else pushed_any = 0;
 			#endif
 		}
 		
