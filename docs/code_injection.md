@@ -54,6 +54,8 @@ Sirve para añadir nuevos tipos de hotspots. El código que añadas a este archi
 		break;
 ```
 
+Recuerda que a partir del número 4 (inclusive) el hotspot N se dibuja con el tile 16+N. Tienes un ejemplo de hotspots personalizados en el postmortem del port a v5 del **Godkiller 2** original [aquí](https://github.com/mojontwins/MK1/tree/master/contrib/godkiller_2).
+
 ## Módulo de enemigos
 
 ### `enems_load.h`

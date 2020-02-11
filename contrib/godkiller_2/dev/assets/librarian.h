@@ -11,7 +11,7 @@ typedef struct {
 
 RESOURCE resources [] = {
     { 3, 0xC000 },
-    { 3, 0xCF84 }
+    { 3, 0xCF30 }
 };
 
 #define TITLE_BIN                       0

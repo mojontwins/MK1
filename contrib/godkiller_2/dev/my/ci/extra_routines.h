@@ -7,10 +7,11 @@
 		rda = 0;
 		switch (n_pant) {
 			case 10:
-				if (flags [0x0a] == 0) break;
-				rda = 1;
-				_x = 6; _y = 23; _t = 71; 
-				gp_gen = " LA LLAMA TE GUIA "; print_str ();
+				if (flags [7]) {
+					rda = 1;
+					_x = 6; _y = 23; _t = 71; 
+					_gp_gen = " LA LLAMA TE GUIA "; print_str ();
+				}
 				break;
 
 			case 28:
@@ -27,7 +28,7 @@
 			if (p_tx == warp_from_x [rda] && p_ty == warp_from_y [rda]) {
 				n_pant = warp_to_n_pant [rda];
 				gpx = warp_to_x [rda] << 4; p_x = gpx << FIXBITS;
-				gpy = warp_to_y [rda] << 4; p_x = gpx << FIXBITS;
+				gpy = warp_to_y [rda] << 4; p_y = gpy << FIXBITS;
 				wyz_play_sound (5);
 			}
 		}
@@ -38,9 +39,9 @@
 		}
 
 		if (n_pant == 4 && p_tx == 7 && p_ty == 1) {
-			if (p_objs == 15 && flags [6] == 3) {
+			if (p_objs == 15 && flags [0] == 3) {
 				success = 1;
 				playing = 0;			
 			}
-		}		
+		}
 	}

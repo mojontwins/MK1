@@ -4,4 +4,5 @@
 // entering_screen.h
 
 _x = 6; _y = 23; _t = 71;
-_gp_gen = "   CIUDAD_DE_DIS  "; print_str ();
+_gp_gen = (n_pant == 10) ? "   USA LA LLAMA   " : "   CIUDAD_DE_DIS  ";
+print_str ();
