@@ -48,7 +48,7 @@ La Churrera es copyleft The Mojon Twins y se distribuye bajo una [licencia LGPL]
 
 *Pero* si quieres hacer un juego con el motor entenderemos que quieras hacer copias físicas en cinta o en cualquier otro medio. En ese caso **sólo tienes que avisarnos**, que nos gusta saber estas cosas.
 
-Los **juegos de ejemplo** contenidos en `examples/` son propiedad de **Mojon Twins** y no pueden ser reproducidos en formato físico sin llegar a un acuerdo con nostros.
+Los **juegos de ejemplo** contenidos en `/examples` son propiedad de **Mojon Twins** y no pueden ser reproducidos en formato físico sin llegar a un acuerdo con nostros.
 
 Los **juegos realizados por otros desarrolladores** contenidos en `/contrib` son propiedad de sus respectivos desarrolladores y los derechos quedan reservados a los mismos.
 
