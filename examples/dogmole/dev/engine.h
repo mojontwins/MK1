@@ -132,6 +132,12 @@ void espera_activa (int espera) {
 				if ((pad0 & sp_FIRE) == 0)				
 			#endif		
 			{ 
+				#ifdef FIRE_TO_PUSH			
+					// Para no disparar...
+					//pushed_any = 1;
+					p_disparando = 1;
+				#endif
+
 				if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 < 15 && y1 < 10) {
 					rda = map_buff [COORDS(x1,y1)];
 					
@@ -151,12 +157,7 @@ void espera_activa (int espera) {
 					#else			
 						beep_fx (2);	
 					#endif
-
-					#ifdef FIRE_TO_PUSH			
-						// Para no disparar...
-						pushed_any = 1;
-					#endif
-					
+				
 					#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING) && defined(PUSHING_ACTION)
 						// Call scripting
 						just_pushed = 1;

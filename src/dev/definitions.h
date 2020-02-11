@@ -212,10 +212,6 @@ unsigned char maincounter;
 	unsigned char just_pushed;
 #endif
 
-#ifdef FIRE_TO_PUSH	
-	unsigned char pushed_any;
-#endif	
-
 // Engine globals (for speed) & size!
 
 unsigned char gpx, gpox, gpy, gpd, gpc, gpt;

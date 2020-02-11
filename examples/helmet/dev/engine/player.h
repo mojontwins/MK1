@@ -153,8 +153,7 @@ void player_calc_bounding_box (void) {
 	#endif
 }
 
-unsigned char player_move (void) {
-	wall_v = wall_h = 0;
+unsigned char player_move (void) {	
 		
 	// ***************************************************************************
 	//  MOVEMENT IN THE VERTICAL AXIS
@@ -228,6 +227,7 @@ unsigned char player_move (void) {
 
 			if ( ! ((pad0 & sp_UP) == 0 || (pad0 & sp_DOWN) == 0)) {
 				p_facing_v = 0xff;
+				wall_v = 0;
 				if (p_vy > 0) {
 					p_vy -= PLAYER_RX;
 					if (p_vy < 0) p_vy = 0;
@@ -310,7 +310,9 @@ unsigned char player_move (void) {
 
 			p_y = gpy << 6;
 
-			wall_v = WTOP;
+			#ifdef PLAYER_GENITAL
+				wall_v = WTOP;
+			#endif
 		}
 	}
 	
@@ -348,7 +350,9 @@ unsigned char player_move (void) {
 
 			p_y = gpy << 6;
 			
-			wall_v = WBOTTOM;
+			#ifdef PLAYER_GENITAL
+				wall_v = WBOTTOM;
+			#endif
 		}
 	}
 
@@ -444,6 +448,7 @@ unsigned char player_move (void) {
 			p_vx += PLAYER_RX;
 			if (p_vx > 0) p_vx = 0;
 		}
+		wall_h = 0;
 	}
 
 	if ((pad0 & sp_LEFT) == 0) {
