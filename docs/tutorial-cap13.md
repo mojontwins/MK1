@@ -1,10 +1,12 @@
 # Capítulo 13: Un juego de 128K
 
+Si quieres saber como hacer un juego para 128K de un sólo nivel (pero con música AY y más sitio para tus cosas en RAM baja) puedes echarle un vistazo al [postmortem del port a v5 de **Godkiller 2**](https://github.com/mojontwins/MK1/tree/master/contrib/godkiller_2). Con todo lo que sabes y lo que pone ahí deberías tener suficiente.
+
 ¡Vaya! Si has conseguido llegar hasta aquí sin mandarme a freir castañas es que debes ser todo un experto en **MTE MK1**, o quizá viste el título del capítulo por separado y has venido directamente aquí porque a lo que tú aspiras es a hacer un juego de verdaz, nada de mierdecillas. 
 
 Sea como sea, voy a suponer que has entendido muy bien cómo funciona el multinivel en **MTE MK1** y no me entretendré en explicaciones sobre el tema. También vamos a ver alguna que otra inyección de código, que voy a suponer que sabes como va.
 
-Vamos a construir un juego multinivel de 128K, con cutscenes, casinos y furcias. Vamos a construir
+Aqui vamos a construir un juego multinivel de 128K, con cutscenes, casinos y furcias. Vamos a construir
 
 ## Goku Mal
 
