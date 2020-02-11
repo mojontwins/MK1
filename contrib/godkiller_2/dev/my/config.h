@@ -126,10 +126,10 @@
 // Scripting
 // ---------
 
-#define ACTIVATE_SCRIPTING					// Activates msc scripting and flag related stuff.
+//#define ACTIVATE_SCRIPTING				// Activates msc scripting and flag related stuff.
 //#define MAX_FLAGS 				32
 //#define SCRIPTING_DOWN					// Use DOWN as the action key.
-#define SCRIPTING_KEY_M						// Use M as the action key instead.
+//#define SCRIPTING_KEY_M					// Use M as the action key instead.
 //#define SCRIPTING_KEY_FIRE				// User FIRE as the action key instead.
 //#define SCRIPTING_KEY_NONE 				// No action key. 
 //#define ENABLE_EXTERN_CODE				// Enables custom code to be run from the script using EXTERN n
