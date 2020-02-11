@@ -32,11 +32,13 @@ Por nuestra parte es posible que el motor sólo reciba correcciones, pero los pu
 
 **MTE MK1** ha sido diseñado y desarrollado por los **Mojon Twins** y utiliza:
 
-* Una versión modificada de **splib2**, de **Alvin Albrecht**.
+* Una versión modificada de **splib2**, por **Alvin Albrecht**.
 * Efectos de sonido y Phaser1 engine music player por **Shiru**.
 * Decompresor appack por **dwedit**, adaptado por **Utopian** y optimizado por **Metalbrain**.
-* Compresor para aplib [apultra](https://github.com/emmanuel-marty/apultra) de **Emmanuel Marty**
+* Compresor para aplib [apultra](https://github.com/emmanuel-marty/apultra) por **Emmanuel Marty**
 * WYZ Player por WYZ, modificado por **na_th_an** (compresión) y **thEpOpE** (FX con ruido).
+* WYZ Tracker 0.5.0.2 por **Augusto Ruiz**.
+* ROM-based tape loader y Gentape por **Antonio Villena**
 
 # Licencia
 
