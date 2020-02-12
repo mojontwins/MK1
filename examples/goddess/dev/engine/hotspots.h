@@ -17,8 +17,7 @@ void hotspots_do (void) {
 		// Deactivate hotspot
 		_x = hotspot_x >> 4; _y = hotspot_y >> 4; _t = orig_tile;
 		draw_invalidate_coloured_tile_gamearea ();
-		gpit = 0;
-
+		
 		// Was it an object, key or life boost?
 		if (hotspots [n_pant].act) {
 			hotspots [n_pant].act = 0;

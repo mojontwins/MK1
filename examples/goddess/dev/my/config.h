@@ -73,10 +73,10 @@
 
 #define ENABLE_FANTIES						// If defined, Fanties are enabled!
 #define FANTIES_BASE_CELL 			2		// Base sprite cell (0, 1, 2 or 3)
-#define FANTIES_SIGHT_DISTANCE		80	 	// Used in our type 6 enemies.
+#define FANTIES_SIGHT_DISTANCE		_fanties_sight_distance	 	// Used in our type 6 enemies.
 #define FANTIES_MAX_V 				256 	// Flying enemies max speed (also for custom type 6 if you want)
 #define FANTIES_A 					12		// Flying enemies acceleration.
-#define FANTIES_LIFE_GAUGE			10		// Amount of shots needed to kill flying enemies.
+#define FANTIES_LIFE_GAUGE			_fanties_life_gauge		// Amount of shots needed to kill flying enemies.
 #define FANTIES_TYPE_HOMING					// Unset for simple fanties.
 
 //#define ENABLE_ORTHOSHOOTERS				// If defined, orthoshooters are active
