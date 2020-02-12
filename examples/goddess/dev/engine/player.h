@@ -259,7 +259,9 @@ unsigned char player_move (void) {
 				if (p_vy < -PLAYER_MAX_VY_JETPAC) p_vy = -PLAYER_MAX_VY_JETPAC;
 
 				#include "my/ci/on_jetpac_boost.h"
-			}
+
+				p_jetpac_on = 1;
+			} else p_jetpac_on = 0;
 		}
 	#endif
 

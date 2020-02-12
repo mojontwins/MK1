@@ -294,7 +294,7 @@ void draw_scr_background (void) {
 				._draw_scr_packed_alt
 					call _rand
 					ld  a, l
-					and l
+					and 15
 					cp  1
 					jr  z, _draw_scr_packed_alt_subst
 

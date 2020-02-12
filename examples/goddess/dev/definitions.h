@@ -106,6 +106,9 @@ unsigned char p_ammo;
 unsigned char p_killme;
 unsigned char p_kill_amt;
 unsigned char p_tx, p_ty;
+#ifdef PLAYER_HAS_JETPAC
+	unsigned char p_jetpac_on;
+#endif
 signed int ptgmx, ptgmy;
 
 const unsigned char *spacer = "            ";

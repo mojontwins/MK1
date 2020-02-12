@@ -39,6 +39,7 @@ Estas variables controlan el estado del juego. En qué nivel estamos, en qué pa
 * `ptgmx`, `ptgmy`: valocidad a la que una plataforma móvil está desplazando al jugador (si `p_gotten` vale 1).
 * `p_saltando`: el jugador está saltando.
 * `p_cont_salto`: contador de frames de salto.
+* `p_jetpac_on`: el jetpac está propulsando (estamos pulsando *arriba*).
 * `p_facing`: orientación del jugador. En vista lateral, valdrá 0 si mira a la derecha y 1 si mira a la izquierda. En vista genital, tomará un valor `FACING_RIGHT`, `FACING_LEFT`, `FACING_UP` y `FACING_DOWN`
 * `p_estado`, `p_ct_estado`: Estados alterables (por ahora, `EST_NORMAL` o '`EST_PARP` (parpadeando)).
 * `possee`: en vista lateral, el jugador está sobre una plataforma fija.
@@ -52,6 +53,7 @@ Estas variables controlan el estado del juego. En qué nivel estamos, en qué pa
 * `p_disparando`: el jugador pulsó el botón de disparo y aún no lo soltó.
 * `p_facing_v` y `p_facing_h`: se emplean en la vista genital para almacenar valores temporales que luego se resuelven en `p_facing` dependiendo de si está o no definida `TOP_OVER_SIDE`.
 * `p_killme`: el jugador fue alcanzado por un enemigo o colisionó con un tile que mata y debe morir este frame (se consume en el bucle principal a cada vuelta).
+* `p_kill_amt`: cuánta vida se restará cuando `p_killme` se pone a cierto. Se resetea a 1 al principio de cada frame.
 
 ### Enemies
 
@@ -272,6 +274,12 @@ Mata al enemigo `enit` (levanta el bit 4 de `_en_t`). Nótese que si se llama de
 	enems_kill ();
 	malotes [enoffs + enit].t = _en_t;
 ```
+
+### Jugador
+
+#### `void player_deplete (void)`
+
+Resta a la vida del jugador `p_kill_amt` unidades que, si no lo hemos modificado durante el frame actual, valdrá 1.
 
 ### Sonido (48K)
 
