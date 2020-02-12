@@ -1,0 +1,281 @@
+# Cheril the goddess script file
+# Copyleft 2011 by The Mojon Twins.
+# Churrera 4.0
+
+# Initial actions
+# No need to reset flags 5 to 10, 
+# that's done automaticly by the engine.
+
+ENTERING GAME
+	IF TRUE
+	THEN
+		SET FLAG 1 = 1
+		SET FLAG 2 = 2
+		SET FLAG 3 = 3
+		SET FLAG 4 = 4
+	END
+END
+
+# General actions
+# Activates bolt if objects 1,2,3 
+# placed correctly.
+
+ENTERING ANY
+	IF FLAG 6 = 0
+	IF FLAG 8 = 1
+	IF FLAG 9 = 1
+	IF FLAG 10 = 1
+	THEN
+		SET FLAG 6 = 1
+		TEXT A_BOLT_SHOWED_SOMEWHERE
+	END	
+END
+
+# Screen 7: Ending screen. Has a door which will open
+# using object #4 IF the bolt has been activated.
+
+ENTERING SCREEN 7
+	IF FLAG 7 <> 1 
+	THEN
+		SET TILE (13, 3) = 29
+		SET TILE (13, 4) = 30
+	END
+	IF FLAG 6 = 1
+	THEN
+		SET TILE (10, 5) = 28
+	END	
+END
+
+PRESS_FIRE AT SCREEN 7
+	IF PLAYER_TOUCHES 10, 4
+	IF FLAG 6 = 1
+	IF FLAG 7 <> 1
+	IF FLAG 5 = 4
+	THEN
+		SET FLAG 7 = 1
+		SET TILE (13, 3) = 0
+		SET TILE (13, 4) = 29
+		SHOW
+		SOUND 9
+		SET TILE (13, 4) = 0
+		SHOW
+		SOUND 9
+		TEXT BECOME_A_TRUE_GODDESS!!
+	END
+END
+
+## RECHARGE CHAMBERS
+
+# Recharge chamber 1
+
+ENTERING SCREEN 15
+	IF TRUE
+	THEN
+		SET TILE (11, 7) = 31
+	END
+END
+
+PRESS_FIRE AT SCREEN 15
+	IF PLAYER_TOUCHES 11, 6
+	THEN
+		RECHARGE
+		SOUND 2
+	END FI
+END
+
+# Recharge chamber 2
+
+ENTERING SCREEN 11
+	IF TRUE
+	THEN
+		SET TILE (12, 8) = 31
+	END
+END
+
+PRESS_FIRE AT SCREEN 11
+	IF PLAYER_TOUCHES 12, 7
+	THEN
+		RECHARGE
+		SOUND 2
+	END FI
+END
+
+## OBJECT SCREENS
+
+# Object screen #1 (initially ROCK)
+
+ENTERING SCREEN 5
+	IF FLAG 1 <> 0
+	THEN
+		SET FLAG 11 = 20
+		ADD FLAGS 11, 1
+		SET TILE (6, 6) = #11
+	END
+END
+
+PRESS_FIRE AT SCREEN 5
+	IF PLAYER_TOUCHES 6, 6
+	THEN
+		SOUND 6
+		SWAP 1, 5
+		SET FLAG 11 = 20
+		ADD FLAGS 11, 1
+		SET TILE (6, 6) = #11
+	END
+END
+
+# Object screen #2 (initially PAPER)
+
+ENTERING SCREEN 23
+	IF FLAG 2 <> 0
+	THEN
+		SET FLAG 11 = 20
+		ADD FLAGS 11, 2
+		SET TILE (12, 7) = #11
+	END
+END
+
+PRESS_FIRE AT SCREEN 23
+	IF PLAYER_TOUCHES 12, 7
+	THEN
+		SOUND 6
+		SWAP 2, 5
+		SET FLAG 11 = 20
+		ADD FLAGS 11, 2
+		SET TILE (12, 7) = #11
+	END
+END
+
+# Object screen #3 (initially SCISSORS)
+
+ENTERING SCREEN 2
+	IF FLAG 3 <> 0
+	THEN
+		SET FLAG 11 = 20
+		ADD FLAGS 11, 3
+		SET TILE (7, 6) = #11
+	END
+END
+
+PRESS_FIRE AT SCREEN 2
+	IF PLAYER_TOUCHES 7, 6
+	THEN
+		SOUND 6
+		SWAP 3, 5
+		SET FLAG 11 = 20
+		ADD FLAGS 11, 3
+		SET TILE (7, 6) = #11
+	END
+END
+
+# Object screen #4 (initially KEY)
+
+ENTERING SCREEN 0
+	IF FLAG 4 <> 0
+	THEN
+		SET FLAG 11 = 20
+		ADD FLAGS 11, 4
+		SET TILE (2, 5) = #11
+	END
+END
+
+PRESS_FIRE AT SCREEN 0
+	IF PLAYER_TOUCHES 2, 5
+	THEN
+		SOUND 6
+		SWAP 4, 5
+		SET FLAG 11 = 20
+		ADD FLAGS 11, 4
+		SET TILE (2, 5) = #11
+	END
+END
+
+## PLATE SCREENS [TEMPLE]
+
+# Temple of the Rock
+# Paper (#2) Wins Rock!!
+
+ENTERING SCREEN 18
+	IF TRUE
+	THEN
+		SET TILE (6, 8) = 25
+	END
+END
+
+PRESS_FIRE AT SCREEN 18
+	IF PLAYER_TOUCHES 6, 7
+	IF FLAG 5 = 2
+	THEN
+		SOUND 7
+		TEXT ____ROCK_TEMPLE_ACTIVATED
+		SET FLAG 8 = 1
+		SET FLAG 5 = 0
+	END
+END
+
+# Temple of the Paper
+# Scissors (#3) Wins Paper!!
+
+ENTERING SCREEN 12
+	IF TRUE
+	THEN
+		SET TILE (7, 5) = 26
+	END
+END
+
+PRESS_FIRE AT SCREEN 12
+	IF PLAYER_TOUCHES 7, 4
+	IF FLAG 5 = 3
+	THEN
+		SOUND 7
+		TEXT ___PAPER_TEMPLE_ACTIVATED
+		SET FLAG 9 = 1
+		SET FLAG 5 = 0
+	END
+END
+
+# Temple of the Scissors
+# Rock (#1) Wins Scissors!!
+
+ENTERING SCREEN 22
+	IF TRUE
+	THEN
+		SET TILE (4, 8) = 27
+	END
+END
+
+PRESS_FIRE AT SCREEN 22
+	IF PLAYER_TOUCHES 4, 7
+	IF FLAG 5 = 1
+	THEN
+		SOUND 7
+		TEXT __SCISSORS_TEMPLE_ACTIVATED
+		SET FLAG 10 = 1
+		SET FLAG 5 = 0
+	END
+END
+
+# Screen messages
+
+ENTERING SCREEN 16
+	IF TRUE
+	THEN
+		TEXT IN_THE_PROVINCE_OF_BADAJOZ...
+	END
+END
+
+ENTERING SCREEN 4
+	IF TRUE
+	THEN
+		TEXT __VENDO_MOTO_SEMINUEVA
+	END
+END
+
+ENTERING SCREEN 9
+	IF TRUE
+	THEN
+		TEXT ____AROGAS_ENTREGAGAS
+	END
+END
+		
+# And that's all, folks!
