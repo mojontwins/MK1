@@ -51,6 +51,7 @@
 //#define DEACTIVATE_KEYS					// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
 //#define ONLY_ONE_OBJECT 					// If defined, only one object can be carried at a time.
+//#define DEACTIVATE_REFILLS					// If defined, life refills are not present.
 #define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
 //#define REVERSE_OBJECTS_COUNT 			// Counts from PLAYER_NUM_OBJETOS to 0
 #define DEACTIVATE_EVIL_TILE				// If defined, no killing tiles (behaviour 1) are detected.
@@ -307,6 +308,7 @@
 // 8 = Full obstacle (blocks player from all directions)
 // 10 = special obstacle (pushing blocks OR locks!)
 // 16 = Breakable (#ifdef BREAKABLE_WALLS)
+// 128 = C.I. launcher tile, launches my/ci/on_special_tile.h on touch
 // You can add the numbers to get combined behaviours
 // Save for 10 (special), but that's obvious, innit?
 #ifndef COMPRESSED_LEVELS

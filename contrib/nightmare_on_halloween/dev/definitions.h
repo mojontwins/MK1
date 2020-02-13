@@ -104,7 +104,11 @@ unsigned char p_disparando;
 unsigned char p_facing_v, p_facing_h;
 unsigned char p_ammo;
 unsigned char p_killme;
+unsigned char p_kill_amt;
 unsigned char p_tx, p_ty;
+#ifdef PLAYER_HAS_JETPAC
+	unsigned char p_jetpac_on;
+#endif
 signed int ptgmx, ptgmy;
 
 const unsigned char *spacer = "            ";
@@ -176,6 +180,7 @@ unsigned char map_buff [150] @ FREEPOOL;
 // se colocan a 240,240, que está siempre fuera de pantalla.
 unsigned char hotspot_x;
 unsigned char hotspot_y;
+unsigned char hotspot_destroy;
 unsigned char orig_tile;	// Tile que había originalmente bajo el objeto
 
 // Flags para scripting

@@ -180,6 +180,7 @@ unsigned char map_buff [150] @ FREEPOOL;
 // se colocan a 240,240, que está siempre fuera de pantalla.
 unsigned char hotspot_x;
 unsigned char hotspot_y;
+unsigned char hotspot_destroy;
 unsigned char orig_tile;	// Tile que había originalmente bajo el objeto
 
 // Flags para scripting

@@ -50,6 +50,7 @@
 //#define DIRECT_TO_PLAY					// If defined, title screen is also the game frame.
 //#define DEACTIVATE_KEYS 					// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
+//#define DEACTIVATE_REFILLS				// If defined, life refills are not present.
 //#define ONLY_ONE_OBJECT					// If defined, only one object can be carried at a time.
 //#define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
 //#define REVERSE_OBJECTS_COUNT 			// Counts from PLAYER_NUM_OBJETOS to 0

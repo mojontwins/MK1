@@ -509,10 +509,8 @@ void enems_move (void) {
 								}
 							#endif
 						#endif
-						#ifdef PLAYER_FLICKERS
-							p_estado = EST_PARP;
-							p_ct_estado = 50;
-						#endif
+
+						#include "my/ci/on_enems_collision.h"
 					}
 				}
 			}

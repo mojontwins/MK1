@@ -92,6 +92,7 @@
 			if (sp_KeyPressed (KEY_Y)) { -- n_pant; beep_fx (0); }
 		#endif
 
+		p_kill_amt = 1;
 		pad0 = (joyfunc) (&keys);
 
 		if (o_pant != n_pant) {

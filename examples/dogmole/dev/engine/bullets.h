@@ -178,7 +178,9 @@ void bullets_fire (void) {
 				#endif
 			#endif
 
-			bullets_update ();
+			#include "my/ci/on_player_fires.h"
+
+			bullets_update ();			
 
 			break;
 		}

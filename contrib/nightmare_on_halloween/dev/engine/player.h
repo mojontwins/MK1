@@ -257,7 +257,11 @@ unsigned char player_move (void) {
 			if ((pad0 & sp_UP) == 0) {
 				p_vy -= PLAYER_INCR_JETPAC;
 				if (p_vy < -PLAYER_MAX_VY_JETPAC) p_vy = -PLAYER_MAX_VY_JETPAC;
-			}
+
+				#include "my/ci/on_jetpac_boost.h"
+
+				p_jetpac_on = 1;
+			} else p_jetpac_on = 0;
 		}
 	#endif
 
@@ -674,12 +678,9 @@ unsigned char player_move (void) {
 		
 		if (hit) {
 			#ifdef PLAYER_FLICKERS
-				if (p_estado == EST_NORMAL) {
-					p_estado = EST_PARP;
-					p_ct_estado = 50;
-			#else
-				{
+				if (p_estado == EST_NORMAL)
 			#endif		
+			{
 				#ifdef MODE_128K
 					p_killme = SFX_SPIKES;
 				#else		
@@ -730,11 +731,14 @@ unsigned char player_move (void) {
 	#endif
 }
 
+void player_deplete (void) {
+	p_life = (p_life > p_kill_amt) ? p_life - p_kill_amt : 0;
+}
+
 void player_kill (unsigned char sound) {
 	p_killme = 0;
 
-	if (p_life == 0) return;
-	-- p_life;
+	player_deplete ();
 
 	#ifdef MODE_128K
 		wyz_play_sound (sound);
@@ -751,6 +755,11 @@ void player_kill (unsigned char sound) {
 			p_y = sg_pool [MAX_FLAGS + 2] << 10;
 		#endif	
 		o_pant = 0xff; // Reload
+	#endif
+
+	#ifdef PLAYER_FLICKERS
+		p_estado = EST_PARP;
+		p_ct_estado = 50;
 	#endif
 }
 

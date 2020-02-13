@@ -146,9 +146,10 @@ Activamos esto para conseguir lo que dijimos cuando estábamos haciendo las pant
 ```c
     //#define DEACTIVATE_KEYS                   // If defined, keys are not present.
     //#define DEACTIVATE_OBJECTS                // If defined, objects are not present.
+    //#define DEACTIVATE_REFILLS                // If defined, life refills are not present.
 ```
 
-Estas dos directivas sirven para desactivar llaves u objetos. Si tu juego no usa llaves y cerrojos, deberás activar `DEACTIVATE_KEYS`. Si no vas a usar objetos, activamos `DEACTIVATE_OBJECTS`. Así ahorramos toneladas de código.
+Estas tres directivas sirven para desactivar llaves, objetos o recargas. Si tu juego no usa llaves y cerrojos, deberás activar `DEACTIVATE_KEYS`. Si no vas a usar objetos, activamos `DEACTIVATE_OBJECTS`. Idem con las recargas de vida. Así ahorramos toneladas de código.
 
 Seguramente alguno de vosotros estará pensando ¿por qué no activamos `DEACTIVATE_OBJECTS` en **Dogmole**, si hemos dicho que los objetos los vamos a controlar por scripting? ¡Buena pregunta! Es sencillo: lo que vamos a controlar por scripting es el **conteo de objetos** y la **condición final**, pero necesitamos que el motor gestione la **recogida** y **colocación** de los objetos. No nos los podemos fumar.
 

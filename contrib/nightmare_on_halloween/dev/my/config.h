@@ -50,6 +50,7 @@
 #define DIRECT_TO_PLAY						// If defined, title screen is also the game frame.
 //#define DEACTIVATE_KEYS					// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
+//#define DEACTIVATE_REFILLS					// If defined, life refills are not present.
 //#define ONLY_ONE_OBJECT 					// If defined, only one object can be carried at a time.
 #define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
 //#define REVERSE_OBJECTS_COUNT 			// Counts from PLAYER_NUM_OBJETOS to 0
@@ -250,6 +251,7 @@
 //#define LINE_OF_TEXT				1		// If defined, scripts can show text @ Y = #
 //#define LINE_OF_TEXT_X			1		// X coordinate.
 //#define LINE_OF_TEXT_ATTR 		71		// Attribute
+//#define LINE_OF_TEXT_NO_AUTOERASE			// Do it yourself
 
 // Graphic FX, uncomment which applies...
 
@@ -306,6 +308,7 @@
 // 8 = Full obstacle (blocks player from all directions)
 // 10 = special obstacle (pushing blocks OR locks!)
 // 16 = Breakable (#ifdef BREAKABLE_WALLS)
+// 128 = C.I. launcher tile, launches my/ci/on_special_tile.h on touch
 // You can add the numbers to get combined behaviours
 // Save for 10 (special), but that's obvious, innit?
 #ifndef COMPRESSED_LEVELS

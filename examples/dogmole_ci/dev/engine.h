@@ -294,7 +294,7 @@ void draw_scr_background (void) {
 				._draw_scr_packed_alt
 					call _rand
 					ld  a, l
-					and l
+					and 15
 					cp  1
 					jr  z, _draw_scr_packed_alt_subst
 
@@ -365,6 +365,19 @@ void draw_scr (void) {
 	draw_scr_background ();
 
 	// Object setup
+
+	enems_load ();
+
+	#ifdef ACTIVATE_SCRIPTING
+		#if defined LINE_OF_TEXT && !defined LINE_OF_TEXT_NO_AUTOERASE
+			_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT; _t = LINE_OF_TEXT_ATTR; _gp_gen = "                              "; print_str ();
+		#endif
+		// Ejecutamos los scripts de entrar en pantalla:
+		run_script (2 * MAP_W * MAP_H + 1); 	// ENTERING ANY
+		run_script (n_pant << 1); 				// ENTERING SCREEN n
+	#endif
+
+	#include "my/ci/entering_screen.h"
 
 	/*
 	hotspot_y = 240;
@@ -556,19 +569,6 @@ void draw_scr (void) {
 				jr  nz, _open_locks_loop
 		#endasm
 	#endif
-
-	enems_load ();
-
-	#ifdef ACTIVATE_SCRIPTING
-		#if defined LINE_OF_TEXT && !defined LINE_OF_TEXT_NO_AUTOERASE
-			_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT; _t = LINE_OF_TEXT_ATTR; _gp_gen = "                              "; print_str ();
-		#endif
-		// Ejecutamos los scripts de entrar en pantalla:
-		run_script (2 * MAP_W * MAP_H + 1); 	// ENTERING ANY
-		run_script (n_pant << 1); 				// ENTERING SCREEN n
-	#endif
-
-	#include "my/ci/entering_screen.h"
 
 	#ifdef PLAYER_CAN_FIRE
 		bullets_init ();

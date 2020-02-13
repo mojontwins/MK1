@@ -51,6 +51,7 @@
 #define DEACTIVATE_KEYS						// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
 //#define ONLY_ONE_OBJECT 					// If defined, only one object can be carried at a time.
+//#define DEACTIVATE_REFILLS					// If defined, life refills are not present.
 //#define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
 //#define REVERSE_OBJECTS_COUNT 			// Counts from PLAYER_NUM_OBJETOS to 0
 //#define DEACTIVATE_EVIL_TILE				// If defined, no killing tiles (behaviour 1) are detected.
@@ -250,6 +251,7 @@
 //#define LINE_OF_TEXT				1		// If defined, scripts can show text @ Y = #
 //#define LINE_OF_TEXT_X			1		// X coordinate.
 //#define LINE_OF_TEXT_ATTR 		71		// Attribute
+//#define LINE_OF_TEXT_NO_AUTOERASE			// Do it yourself
 
 // Graphic FX, uncomment which applies...
 

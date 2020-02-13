@@ -41,6 +41,7 @@ void hotspots_do (void);
 void player_init (void);
 void player_calc_bounding_box (void);
 unsigned char player_move (void);
+void player_deplete (void);
 void player_kill (unsigned char sound);
 
 // simple_cocos.h
