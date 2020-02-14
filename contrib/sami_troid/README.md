@@ -14,7 +14,7 @@ Una característica poco documentada de **MTE MK1** es que puedes emplear tu pro
 
 al principio de `config.h` o en `mk1.c`, e incluir tu código en `my/map_custom_decoder.h`. El código debe funcionar de forma análoga al decodificador de mapas PACKED / UNPACKED que viene por defecto: debe pintar los tiles en pantalla sin invalidarlos y rellenar los arrays `map_buff` y `map_attr` (y también `brk_buff` si usas tiles rompiscibles).
 
-Para este juego voy a emplear un decoder que escribí para la revisión de **Tenebra Macabre**, que emplea mapas comprimidos en RLE62, una implementación muy sencilla que emplea seis bits para describir el tile (64 máximo; necesitamos 48 así que va bien) y 2 bits para la longitud de las repeticiones (máximo 4). El compresor, `rle62map_sp.exe`, genera dos archivos binarios: `<prefix>.map.bin` con los índices que necesita y los datos para el mapa, y `<prefix>.locks.bin` con los cerrojos. **MTE MK1* espera el mapa, la definición del tipo cerrojo, y los cerrojos en `assets/mapa.h`, pero por suerte `rle62map_sp.exe` ha sido actualizado e hipervitaminado para que también lo genere :D
+Para este juego voy a emplear un decoder que escribí para la revisión de **Tenebra Macabre**, que emplea mapas comprimidos en RLE62, una implementación muy sencilla que emplea seis bits para describir el tile (64 máximo; necesitamos 48 así que va bien) y 2 bits para la longitud de las repeticiones (máximo 4). El compresor, `rle62map_sp.exe`, genera dos archivos binarios: `<prefix>.map.bin` con los índices que necesita y los datos para el mapa, y `<prefix>.locks.bin` con los cerrojos. **MTE MK1** espera el mapa, la definición del tipo cerrojo, y los cerrojos en `assets/mapa.h`, pero por suerte `rle62map_sp.exe` ha sido actualizado e hipervitaminado para que también lo genere :D
 
 Modificamos `compile.bat` para que llame a `rle62map_sp.exe` en lugar de a `mapcnv.exe`.
 
@@ -22,7 +22,7 @@ Modificamos `compile.bat` para que llame a `rle62map_sp.exe` en lugar de a `mapc
     ..\..\..\src\utils\rle62map_sp.exe in=..\map\mapa.map mk1h=assets\mapa.h out=mapa size=8,9 tlock=15 mk1locks > nul
 ```
 
-Haciendo una ligera prueba, comprobamos que el mapa, que ocuparía 72*150 = 10800 bytes, se queda en 4004, un tamaño mucho más manejable. Además, la decodificación de RLE62 no es más lenta que con los datos en bruto.
+Haciendo una ligera prueba, comprobamos que el mapa, que ocuparía 72x150 = 10800 bytes, se queda en 4004, un tamaño mucho más manejable. Además, la decodificación de RLE62 no es más lenta que con los datos en bruto.
 
 El sistema se completa con el código que he añadido a `my/map_custom_loader.h` al que puedes echar un vistazo si te pica la curiosidad y que, obviamente, puedes usar en tus juegos a discreción.
 
@@ -83,6 +83,95 @@ En esta pantalla, obviamente, tenemos también interacción. En este juego se ha
         END
     END
 ```
+
+Todas las interacciones de este tipo, como siempre, las colocamos en `my/ci/extra_routines.h`. Pero nos damos cuenta de que hay código repetido: el que modifica la pantalla según el valor de `flags [1]`, así que crearemos una función en `my/ci/extra_functions.h` para esto, con lo que el conjunto nos queda así:
+
+```c
+    // extra_functions.h
+
+    void screen_35_decoration (void) {
+        if (flag [1] > 9) {
+            _x = 8; _y = 7;  _n = 0;
+            _t = flag [1] == 14 ? 45 : 44;
+            update_tile ();
+        }
+    }
+```
+
+```c
+    // entering_screen.h
+    
+    if (n_pant == 35) screen_35_decoration ();
+```
+
+```c
+    // extra_routines.h
+    
+    if ((pad0 & sp_DOWN) == 0) {
+        if (n_pant == 35) {
+            if (
+                gpx >= 112 && gpx <= 243 &&
+                gpy >= 128 && gpy <= 159
+            ) {
+                p_objs = 0;
+                ++ flags [1];
+                beep_fx (5);
+
+                screen_35_decoration ();
+            }
+        }
+    }
+```
+
+### Modificaciones al mapa
+
+Hay dos modificaciones en el mapa que dependen del valor de `flags [1]`:
+
+```
+    ENTERING SCREEN 1
+        IF FLAG 1 = 14
+        THEN
+            SET TILE (0, 3) = 0
+        END
+    END
+
+    ENTERING SCREEN 42
+        IF FLAG 1 > 9
+        THEN
+            SET TILE (14, 2) = 0
+        END
+    END
+```
+
+Añadimos todo esto en `my/ci/entering_screen.h`:
+
+```c
+    // entering_screen.h
+
+    switch (n_pant) {
+        case 35:
+            screen_35_decoration ();
+            break;
+
+        case 1:
+            if (flag [1] == 14) {
+                _x = 0; _y = 3; _t = _n = 0;
+                update_tile ();
+            }
+            break;
+
+        case 42:
+            if (flag [1] > 9) {
+                _x = 14; _y = 2; _t = _n = 0;
+                update_tile ();
+            }
+            break;
+    }
+```
+
+### Final del juego
+
+El final del juego se da en la pantalla 0 al accionar el tile en la posición (3, 8):
 
 ## Sonidos custom
 
