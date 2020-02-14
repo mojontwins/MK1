@@ -1,0 +1,125 @@
+# Sami Troid
+
+Port a **MTE MK1 v5** del juego de **Son Link**. Puedes obtener la versión original del juego y el manual desde su [página de github](https://github.com/son-link/SamiTroid/).
+
+Este juego es interesante porque tiene un mapa unpacked enorme. La versión original empleaba un conversor de mapas de Antonio Villena que trabajaba sobre archivos tmx de Tiled. Para montar esta versión he optado por traérmelo un poco a mi terreno y, aprovechando que las pantallas tienen bastante repetición, probar con compresión RLE.
+
+## Decodificación custom de mapas
+
+Una característica poco documentada de **MTE MK1** es que puedes emplear tu propio decompresor de mapas, sustituyendo a los que trae el engine. Para ello tienes que añadir 
+
+```c
+    #define USE_MAP_CUSTOM_DECODER
+```
+
+al principio de `config.h` o en `mk1.c`, e incluir tu código en `my/map_custom_decoder.h`. El código debe funcionar de forma análoga al decodificador de mapas PACKED / UNPACKED que viene por defecto: debe pintar los tiles en pantalla sin invalidarlos y rellenar los arrays `map_buff` y `map_attr` (y también `brk_buff` si usas tiles rompiscibles).
+
+Para este juego voy a emplear un decoder que escribí para la revisión de **Tenebra Macabre**, que emplea mapas comprimidos en RLE62, una implementación muy sencilla que emplea seis bits para describir el tile (64 máximo; necesitamos 48 así que va bien) y 2 bits para la longitud de las repeticiones (máximo 4). El compresor, `rle62map_sp.exe`, genera dos archivos binarios: `<prefix>.map.bin` con los índices que necesita y los datos para el mapa, y `<prefix>.locks.bin` con los cerrojos. **MTE MK1* espera el mapa, la definición del tipo cerrojo, y los cerrojos en `assets/mapa.h`, pero por suerte `rle62map_sp.exe` ha sido actualizado e hipervitaminado para que también lo genere :D
+
+Modificamos `compile.bat` para que llame a `rle62map_sp.exe` en lugar de a `mapcnv.exe`.
+
+```bat
+    ..\..\..\src\utils\rle62map_sp.exe in=..\map\mapa.map mk1h=assets\mapa.h out=mapa size=8,9 tlock=15 mk1locks > nul
+```
+
+Haciendo una ligera prueba, comprobamos que el mapa, que ocuparía 72*150 = 10800 bytes, se queda en 4004, un tamaño mucho más manejable. Además, la decodificación de RLE62 no es más lenta que con los datos en bruto.
+
+El sistema se completa con el código que he añadido a `my/map_custom_loader.h` al que puedes echar un vistazo si te pica la curiosidad y que, obviamente, puedes usar en tus juegos a discreción.
+
+## Deshaciendo el script
+
+**Sami Troid** es un juego de "coger los objetos uno a uno y llevarlos a tal sitio", como ocurre con **Dogmole**, así que desharemos el script original y lo implementaremos todo con sencillas inyecciones de código. Vamos a ir haciéndolo sección a sección y reescribiendo cada cláusula. Este juego emplea el flag 1 para almacenar el número de objetos que se ha llevado a la incubadora.
+
+### La pantalla de la incubadora
+
+```
+    ENTERING SCREEN 35
+        IF FLAG 1 > 9
+        THEN
+            SET TILE (8, 7) = 44
+        END
+        
+        IF FLAG 1 = 14
+        THEN
+            SET TILE (8, 7) = 45
+        END
+    END
+```
+
+Este script modifica un tile de la pantalla dependiendo del número de huevos que hayamos llevado a la incubadora. Añadimos el código a `my/ci/entering_screen.h`:
+
+```c
+    // entering_screen.h
+    if (n_pant == 35) {
+        if (flag [1] > 9) {
+            _x = 8; _y = 7;  _n = 0;
+            _t = flag [1] == 14 ? 45 : 44;
+            update_tile ();
+        }
+    }
+```
+
+En esta pantalla, obviamente, tenemos también interacción. En este juego se hacía pulsando la dirección "Abajo"
+
+```
+    PRESS_FIRE ON SCREEN 35
+        IF PLAYER_IN_X 112, 143
+        IF PLAYER_IN_Y 128, 159
+        IF PLAYER_HAS_OBJECTS
+        THEN
+           DEC OBJECTS 1
+           INC FLAG 1, 1
+           SOUND 5
+        END
+
+        IF FLAG 1 > 9
+        THEN
+            SET TILE (8, 7) = 44
+        END
+
+        IF FLAG 1 = 14
+        THEN
+            SET TILE (8, 7) = 45
+        END
+    END
+```
+
+## Sonidos custom
+
+Este juego emplea un set de sonidos custom contenido en un archivo `beeper3.bin` que hemos colocado en `/bin`. Estas rutinas son completamente independientes entre sí y ocupa cada una 50 bytes. Para hacerlo funcionar tendremos que cambiar `beeper.h` para que llame a los puntos de entrada correctos:
+
+```c
+    extern unsigned char beeper [];
+
+    #asm
+        ._beeper
+            BINARY "../bin/beeper3.bin"
+    #endasm
+
+
+    void beep_fx (unsigned char n) {
+        #asm
+            xor a
+            ld  (23624), a
+        #endasm
+
+        switch (n) {
+            case 0:
+                #asm
+                        call _beeper
+                #endasm
+                break;
+            case 1:
+                #asm
+                    call _beeper + 50
+                #endasm
+                break;          
+
+            [...]
+        }
+    }
+```
+
+## Configuración del teclado
+
+**Sami Troid** utiliza una configuración diferente del teclado:

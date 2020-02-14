@@ -447,54 +447,126 @@
 
 .musicdata
              DEFB 0  ; Pattern loop begin * 2
-             DEFB 2  ; Song length * 2
+             DEFB 8  ; Song length * 2
              DEFW 4         ; Offset to start of song (length of instrument table)
-             DEFB 1      ; Multiple
+             DEFB 2      ; Multiple
              DEFW 0      ; Detune
-             DEFB 0      ; Phase
+             DEFB 4      ; Phase
 
 .patterndata        DEFW      PAT0
+                    DEFW      PAT0
+                    DEFW      PAT1
+                    DEFW      PAT1
 
 ; *** Pattern data - $00 marks the end of a pattern ***
 .pat0
          DEFB $BD,0
-         DEFB 140
-         DEFB 164
-     DEFB 10
-         DEFB 145
-         DEFB 169
-     DEFB 10
+         DEFB 190
+         DEFB 152
+         DEFB 118
+     DEFB 6
+         DEFB 190
          DEFB 147
-         DEFB 171
-     DEFB 4
+     DEFB 7
+         DEFB 190
+         DEFB 151
+     DEFB 7
+         DEFB 190
+         DEFB 152
+     DEFB 7
+         DEFB 190
+         DEFB 152
+     DEFB 7
+         DEFB 190
+         DEFB 151
+     DEFB 7
+         DEFB 190
          DEFB 149
-         DEFB 173
-     DEFB 4
+         DEFB 118
+     DEFB 6
+         DEFB 190
          DEFB 147
-         DEFB 171
-     DEFB 22
-         DEFB 140
-         DEFB 164
-     DEFB 10
-         DEFB 145
-         DEFB 169
-     DEFB 10
-         DEFB 145
-         DEFB 171
-     DEFB 4
+     DEFB 7
+         DEFB 190
+         DEFB 152
+         DEFB 118
+     DEFB 6
+         DEFB 190
+         DEFB 147
+     DEFB 7
+         DEFB 190
+         DEFB 151
+     DEFB 7
+         DEFB 190
+         DEFB 152
+     DEFB 7
+         DEFB 190
+         DEFB 152
+     DEFB 7
+         DEFB 190
+         DEFB 151
+     DEFB 7
+         DEFB 190
          DEFB 149
-         DEFB 173
-     DEFB 4
+         DEFB 118
+     DEFB 6
+         DEFB 190
          DEFB 147
-         DEFB 171
-     DEFB 4
-         DEFB 140
-         DEFB 164
-     DEFB 28
-         DEFB 188
-         DEFB 188
-     DEFB $75
-     DEFB 13
+     DEFB 7
          DEFB $00
-
+.pat1
+         DEFB $BD,0
+         DEFB 232
+         DEFB 152
+         DEFB 118
+     DEFB 6
+         DEFB 254
+         DEFB 147
+     DEFB 7
+         DEFB 190
+         DEFB 151
+     DEFB 7
+         DEFB 190
+         DEFB 152
+     DEFB 7
+         DEFB 254
+         DEFB 152
+     DEFB 7
+         DEFB 190
+         DEFB 151
+     DEFB 7
+         DEFB 173
+         DEFB 149
+         DEFB 118
+     DEFB 6
+         DEFB 171
+         DEFB 147
+     DEFB 7
+         DEFB 164
+         DEFB 152
+         DEFB 118
+     DEFB 6
+         DEFB 190
+         DEFB 147
+     DEFB 7
+         DEFB 190
+         DEFB 151
+     DEFB 7
+         DEFB 190
+         DEFB 152
+     DEFB 7
+         DEFB 190
+         DEFB 152
+     DEFB 7
+         DEFB 190
+         DEFB 151
+     DEFB 7
+         DEFB 159
+         DEFB 149
+         DEFB 118
+     DEFB 6
+         DEFB 190
+         DEFB 147
+     DEFB 7
+         DEFB $00
 #endasm

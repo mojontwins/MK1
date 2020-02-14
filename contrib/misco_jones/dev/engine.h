@@ -206,149 +206,153 @@ void draw_scr_background (void) {
 
 	// Draw 150 tiles
 	
-	for (gpit = 0; gpit < 150; ++ gpit) {	
-		#ifdef UNPACKED_MAP
-			// Mapa tipo UNPACKED
-			/*
-			_t = *map_pointer ++;
-			map_attr [gpit] = behs [_t];
-			map_buff [gpit] = _t;
-			*/
-			#asm
-					ld  hl, (_map_pointer)
-					ld  a, (hl)
-					ld  (__t), a
-					inc hl
-					ld  (_map_pointer), hl
+	#ifdef USE_MAP_CUSTOM_DECODER
+		#include "my/map_custom_decoder.h"
+	#else
+		for (gpit = 0; gpit < 150; ++ gpit) {	
+			#ifdef UNPACKED_MAP
+				// Mapa tipo UNPACKED
+				/*
+				_t = *map_pointer ++;
+				map_attr [gpit] = behs [_t];
+				map_buff [gpit] = _t;
+				*/
+				#asm
+						ld  hl, (_map_pointer)
+						ld  a, (hl)
+						ld  (__t), a
+						inc hl
+						ld  (_map_pointer), hl
 
-					ld  b, 0
-					ld  c, a
-					ld  hl, _behs
-					add hl, bc
-					ld  a, (hl)
+						ld  b, 0
+						ld  c, a
+						ld  hl, _behs
+						add hl, bc
+						ld  a, (hl)
 
-					ld  bc, (_gpit)
-					ld  b, 0
-					ld  hl, _map_attr
-					add hl, bc
-					ld  (hl), a
+						ld  bc, (_gpit)
+						ld  b, 0
+						ld  hl, _map_attr
+						add hl, bc
+						ld  (hl), a
 
-					ld  hl, _map_buff
-					add hl, bc
-					ld  a, (__t)
-					ld  (hl), a
-			#endasm
-		#else
-			// Mapa tipo PACKED
-			/*
-			if (!(gpit & 1)) {
-				gpc = *map_pointer ++;
-				_t = gpc >> 4;
-			} else {
-				_t = gpc & 15;
-			}
-			map_attr [gpit] = behs [_t];
-			if (_t == 0 && (rand () & 15) == 1) _t = 19;
-			map_buff [gpit] = _t;
-			*/
-			#asm
-					ld  a, (_gpit)
-					and 1
-					jr  nz, _draw_scr_packed_existing
-				._draw_scr_packed_new
-					ld  hl, (_map_pointer)
-					ld  a, (hl)
-					ld  (_gpc), a
-					inc hl
-					ld  (_map_pointer), hl
+						ld  hl, _map_buff
+						add hl, bc
+						ld  a, (__t)
+						ld  (hl), a
+				#endasm
+			#else
+				// Mapa tipo PACKED
+				/*
+				if (!(gpit & 1)) {
+					gpc = *map_pointer ++;
+					_t = gpc >> 4;
+				} else {
+					_t = gpc & 15;
+				}
+				map_attr [gpit] = behs [_t];
+				if (_t == 0 && (rand () & 15) == 1) _t = 19;
+				map_buff [gpit] = _t;
+				*/
+				#asm
+						ld  a, (_gpit)
+						and 1
+						jr  nz, _draw_scr_packed_existing
+					._draw_scr_packed_new
+						ld  hl, (_map_pointer)
+						ld  a, (hl)
+						ld  (_gpc), a
+						inc hl
+						ld  (_map_pointer), hl
 
-					srl a
-					srl a
-					srl a
-					srl a
-					jr  _draw_scr_packed_done
+						srl a
+						srl a
+						srl a
+						srl a
+						jr  _draw_scr_packed_done
 
-				._draw_scr_packed_existing
-					ld  a, (_gpc)
-					and 15
+					._draw_scr_packed_existing
+						ld  a, (_gpc)
+						and 15
 
-				._draw_scr_packed_done
-					ld  (__t), a
-					
-					ld  b, 0
-					ld  c, a
-					ld  hl, _behs
-					add hl, bc
-					ld  a, (hl)
+					._draw_scr_packed_done
+						ld  (__t), a
+						
+						ld  b, 0
+						ld  c, a
+						ld  hl, _behs
+						add hl, bc
+						ld  a, (hl)
 
-					ld  bc, (_gpit)
-					ld  b, 0
-					ld  hl, _map_attr
-					add hl, bc
-					ld  (hl), a
+						ld  bc, (_gpit)
+						ld  b, 0
+						ld  hl, _map_attr
+						add hl, bc
+						ld  (hl), a
 
-					ld  a, (__t)
-					or  a
-					jr  nz, _draw_scr_packed_noalt
+						ld  a, (__t)
+						or  a
+						jr  nz, _draw_scr_packed_noalt
 
-				._draw_scr_packed_alt
-					call _rand
-					ld  a, l
-					and 15
-					cp  1
-					jr  z, _draw_scr_packed_alt_subst
+					._draw_scr_packed_alt
+						call _rand
+						ld  a, l
+						and 15
+						cp  1
+						jr  z, _draw_scr_packed_alt_subst
 
-					ld  a, (__t)
-					jr  _draw_scr_packed_noalt
+						ld  a, (__t)
+						jr  _draw_scr_packed_noalt
 
-				._draw_scr_packed_alt_subst
-					ld  a, 19
-					ld  (__t), a
+					._draw_scr_packed_alt_subst
+						ld  a, 19
+						ld  (__t), a
 
-				._draw_scr_packed_noalt
-					ld  hl, _map_buff
-					add hl, bc
-					
-					ld  (hl), a
-			#endasm
-		#endif	
+					._draw_scr_packed_noalt
+						ld  hl, _map_buff
+						add hl, bc
+						
+						ld  (hl), a
+				#endasm
+			#endif	
 
-		#ifdef BREAKABLE_WALLS
-			// brk_buff [gpit] = 0;
-			#asm
-					ld  hl, _brk_buff
-					add hl, bc
-					xor a
-					ld  (hl), a
-			#endasm
-		#endif
+			#ifdef BREAKABLE_WALLS
+				// brk_buff [gpit] = 0;
+				#asm
+						ld  hl, _brk_buff
+						add hl, bc
+						xor a
+						ld  (hl), a
+				#endasm
+			#endif
 
-		draw_coloured_tile ();
-		
-		#if defined ENABLE_TILANIMS && defined UNPACKED_MAP
-			// Detect tilanims
-			if (_t >= ENABLE_TILANIMS) {
-				add_tilanim ((_x - VIEWPORT_X) >> 1, (_y - VIEWPORT_Y) >> 1, _t);	
-			}
-		#endif
+			draw_coloured_tile ();
 			
-		//_x += 2; if (_x == VIEWPORT_X + 30) { _x = VIEWPORT_X; _y += 2; }
-		#asm
-				ld  a, (__x)
-				add 2
-				cp  30 + VIEWPORT_X
-				jr  c, _advance_worm_no_inc_y
+			#if defined ENABLE_TILANIMS && defined UNPACKED_MAP
+				// Detect tilanims
+				if (_t >= ENABLE_TILANIMS) {
+					add_tilanim ((_x - VIEWPORT_X) >> 1, (_y - VIEWPORT_Y) >> 1, _t);	
+				}
+			#endif
+				
+			//_x += 2; if (_x == VIEWPORT_X + 30) { _x = VIEWPORT_X; _y += 2; }
+			#asm
+					ld  a, (__x)
+					add 2
+					cp  30 + VIEWPORT_X
+					jr  c, _advance_worm_no_inc_y
 
-				ld  a, (__y)
-				add 2
-				ld  (__y), a
+					ld  a, (__y)
+					add 2
+					ld  (__y), a
 
-				ld  a, VIEWPORT_X
+					ld  a, VIEWPORT_X
 
-			._advance_worm_no_inc_y
-				ld  (__x), a
-		#endasm
-	}
+				._advance_worm_no_inc_y
+					ld  (__x), a
+			#endasm
+		}
+	#endif
 }
 
 void draw_scr (void) {
