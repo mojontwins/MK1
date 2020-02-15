@@ -407,7 +407,7 @@ void enems_move (void) {
 			
 			// Collide with player
 			
-			#ifndef PLAYER_GENITAL
+			#if !defined PLAYER_GENITAL && !defined DISABLE_PLATFORMS
 				// Platforms
 				if (_en_t == 4) {
 					if (pregotten) {
@@ -536,7 +536,7 @@ void enems_move (void) {
 								_en_y = _en_cy;
 								en_an_next_frame [enit] = sprite_17_a;
 								bullets_estado [gpjt] = 0;
-								#ifndef PLAYER_GENITAL							
+								#if !defined PLAYER_GENITAL && !defined DISABLE_PLATFORMS							
 									if (_en_t != 4) -- _en_life;
 								#else
 									-- _en_life;

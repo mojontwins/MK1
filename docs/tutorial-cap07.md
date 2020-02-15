@@ -208,6 +208,12 @@ Si además activas `EVERYTHING_IS_A_WALL`, cualquier tile de comportamiento dist
 
 Si configuras el motor para disparar o pisar, el número de muertes se irá contando en el flag que indiques aquí si defines esta directiva.
 
+```c
+    //#define DISABLE_PLATFORMS                 // Disables platforms in side-view
+```
+
+Si no vas a necesitar plataformas en tu juego de vista lateral puedes activar esto para no incluir el código de interacción con las plataformas y ahorrar espacio. De regalo tienes un tipo extra de enemigo lineal.
+
 ## Tipos de enemigos extra
 
 Vamos a ver ahora un conjunto de directivas que nos servirán para activar los enemigos de tipos 6 o 7. Recordad lo que mencionamos sobre este tipo de enemigos: el 6 son los Fanties y el 7 son los enemigos que te persiguen de **Mega Meghan** y **Sgt. Helmet: Training Day**.

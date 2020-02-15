@@ -143,7 +143,7 @@ Hay dos modificaciones en el mapa que dependen del valor de `flags [1]`:
     END
 ```
 
-Añadimos todo esto en `my/ci/entering_screen.h`:
+Añadimos todo esto en `my/ci/entering_screen.h`. Hemos reorganizado todo un poco para manejar todas las pantallas en un `switch`:
 
 ```c
     // entering_screen.h
