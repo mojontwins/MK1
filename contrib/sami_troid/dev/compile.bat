@@ -21,7 +21,6 @@ if [%1]==[justscripts] goto :compile
 
 echo Convirtiendo mapa
 ..\..\..\src\utils\rle62map_sp.exe in=..\map\mapa.map mk1h=assets\mapa.h out=mapa size=8,9 tlock=15 mk1locks > nul
-..\..\..\src\utils\printsize.exe mapa.bin
 
 echo Convirtiendo enemigos/hotspots
 ..\..\..\src\utils\ene2h.exe ..\enems\enems.ene assets\enems.h
@@ -46,13 +45,13 @@ if [%1]==[justassets] goto :end
 
 :compile
 echo Compilando guego
-zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+zcc +zx -vn mk1.c -m -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 ..\..\..\src\utils\printsize.exe %game%.bin
 ..\..\..\src\utils\printsize.exe scripts.bin
 
 echo Construyendo cinta
 rem cambia LOADER por el nombre que quieres que salga en Program:
-..\..\..\src\utils\bas2tap -a10 -sNIGHTMARE loader\loader.bas loader.tap > nul
+..\..\..\src\utils\bas2tap -a10 -sSAMI_TROID loader\loader.bas loader.tap > nul
 ..\..\..\src\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
 ..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
 copy /b loader.tap + screen.tap + main.tap %game%.tap > nul

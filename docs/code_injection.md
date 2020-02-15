@@ -95,6 +95,16 @@ Se incluye al final del bucle que carga los enemigos, tras haberles puesto todos
 
 Se ejecuta cada vez que el jugador elimina un enemigo, al igual que la sección `PLAYER_KILLS_ENEMY` del script. En este punto, `enit` es el número de enemigo, `enoffsmasi` su índice general dentro del array `malotes`, etc.
 
+Nótese que este CIP se incluye después de haber marcado al enemigo como *muerto*. La marca de *muerto* se hace levantándole el bit 4, o sea, haciéndole `|16`. Es por esto que si quieres comprobar el tipo del enemigo que acaba de matar tendrás que comparar `_en_t` con el número que quieras levantándole el bit 4. Por ejemplo, para ver si has matado al tipo 2:
+
+```c
+	if (_en_t == (2|16)) {
+		[...]
+	}
+```
+
+¡No olvides los paréntesis!
+
 ## Módulo de jugador
 
 ### `custom_veng.h`

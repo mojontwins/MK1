@@ -7,14 +7,14 @@ switch (n_pant) {
 		break;
 
 	case 1:
-		if (flag [1] == 14) {
+		if (flags [1] == 14) {
 			_x = 0; _y = 3; _t = _n = 0;
 			update_tile ();
 		}
 		break;
 
 	case 42:
-		if (flag [1] > 9) {
+		if (flags [1] > 9) {
 			_x = 14; _y = 2; _t = _n = 0;
 			update_tile ();
 		}

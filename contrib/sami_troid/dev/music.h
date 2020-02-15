@@ -35,6 +35,7 @@
              ;DI
              PUSH IY
              ;LD   A,BORDER_COL
+             xor a
              LD   H,$00
              LD   L,A
              LD   (CNT_1A),HL
@@ -378,6 +379,7 @@
              LD   DE,3700
              LD   BC,$0101
              ;LD   A,BORDER_COL
+             xor a
 .dt_loop0    OUT  ($FE),A
              DEC  B
              JR   NZ,DT_LOOP1
@@ -406,6 +408,7 @@
              LD   H,D
              LD   L,E
              ;LD   A,BORDER_COL
+             xor a
              LD   C,A
 .dn_loop0    LD   A,(HL)
              AND  16

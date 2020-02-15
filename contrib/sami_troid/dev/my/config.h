@@ -216,11 +216,11 @@
 	// Define here if you selected the NORMAL configuration
 
 	struct sp_UDK keys = {
-		0x017f, // .fire
-		0x01df, // .right
-		0x02df, // .left
-		0x01fd, // .down
-		0x01fb	// .up
+		0x047f, // .fire
+		0x08fe, // .right
+		0x01fd, // .left
+		0x02fd, // .down
+		0x087f	// .up
 	};
 #endif
 
