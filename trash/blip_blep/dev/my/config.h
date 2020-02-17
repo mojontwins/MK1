@@ -9,18 +9,19 @@
 
 //#define MODE_128K 						// Read the docs!
 //#define VENG_SELECTOR 					// Very advanced!
+#define USE_MAP_CUSTOM_DECODER
 
 // In this section we define map dimensions, initial and authomatic ending conditions, etc.
 
-#define MAP_W						12		//
-#define MAP_H						2		// Map dimensions in screens
-#define SCR_INICIO					0		// Initial screen
+#define MAP_W						8		//
+#define MAP_H						8		// Map dimensions in screens
+#define SCR_INICIO					56		// Initial screen
 #define PLAYER_INI_X				3		//
 #define PLAYER_INI_Y				3		// Initial tile coordinates
 //#define SCR_FIN 					99		// Last screen. 99 = deactivated.
 //#define PLAYER_FIN_X				99		//
 //#define PLAYER_FIN_Y				99		// Player tile coordinates to finish game
-#define PLAYER_NUM_OBJETOS			5		// Objects to get to finish game
+//#define PLAYER_NUM_OBJETOS		5		// Objects to get to finish game
 #define PLAYER_LIFE 				5		// Max and starting life gauge.
 #define PLAYER_REFILL				1		// Life recharge
 //#define COMPRESSED_LEVELS 				// use levels.h instead of mapa.h and enems.h (!)
@@ -48,14 +49,14 @@
 
 //#define PLAYER_CHECK_MAP_BOUNDARIES		// If defined, you can't exit the map.
 #define DIRECT_TO_PLAY						// If defined, title screen is also the game frame.
-//#define DEACTIVATE_KEYS					// If defined, keys are not present.
+#define DEACTIVATE_KEYS						// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
 //#define DEACTIVATE_REFILLS					// If defined, life refills are not present.
 //#define ONLY_ONE_OBJECT 					// If defined, only one object can be carried at a time.
-#define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
+//#define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
 //#define REVERSE_OBJECTS_COUNT 			// Counts from PLAYER_NUM_OBJETOS to 0
 //#define DEACTIVATE_EVIL_TILE				// If defined, no killing tiles (behaviour 1) are detected.
-//#define PLAYER_BOUNCES					// If defined, collisions make player bounce
+#define PLAYER_BOUNCES						// If defined, collisions make player bounce
 //#define FULL_BOUNCE						// If defined, evil tile bounces equal MAX_VX, otherwise v/2
 //#define SLOW_DRAIN						// Works with bounces. Drain is 4 times slower
 #define PLAYER_FLICKERS 					// If defined, collisions make player flicker instead.
@@ -93,8 +94,8 @@
 // Pushable tile
 // -------------
 
-#define PLAYER_PUSH_BOXES 					// If defined, tile #14 is pushable. Must be type 10.
-#define FIRE_TO_PUSH						// If defined, you have to press FIRE+direction to push.
+//#define PLAYER_PUSH_BOXES 				// If defined, tile #14 is pushable. Must be type 10.
+//#define FIRE_TO_PUSH						// If defined, you have to press FIRE+direction to push.
 //#define ENABLE_PUSHED_SCRIPTING			// If defined, nice goodies (below) are activated:
 //#define MOVED_TILE_FLAG			1		// Current tile "overwritten" with block is stored here.
 //#define MOVED_X_FLAG				2		// X after pushing is stored here.
@@ -170,7 +171,7 @@
 // Side view:
 // ----------
 
-#define PLAYER_HAS_JUMP 					// If defined, player is able to jump.
+//#define PLAYER_HAS_JUMP 					// If defined, player is able to jump.
 //#define PLAYER_HAS_JETPAC 				// If defined, player can thrust a vertical jetpac
 //#define PLAYER_BOOTEE 					// Always jumping engine. Don't forget to disable "HAS_JUMP" and "HAS_JETPAC"!!!
 //#define PLAYER_VKEYS 						// Use with VENG_SELECTOR. Advanced.
@@ -314,8 +315,8 @@
 // Save for 10 (special), but that's obvious, innit?
 #ifndef COMPRESSED_LEVELS
 unsigned char behs [] = {
-	0, 8, 8, 0, 0, 0, 0, 0, 0, 1, 0, 8, 8, 8, 8,10,
-	0, 0, 0, 4, 8, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 4, 0, 8, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 	0, 0, 0, 8, 8, 0, 8, 1, 0, 0, 0, 0, 0, 0, 8, 0,
 };
 #endif

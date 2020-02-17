@@ -9,7 +9,6 @@
 	- t = tile to substitute
 	- C = command:
 			0 - 000 - substitute if equal
-			1 - 001 - substitute if different
 			2 - 010 - substitute if above is equal to
 			3 - 011 - substitute if above is different to
 			6 - 110 - substitute if below is equal to
@@ -21,7 +20,6 @@
 */
 
 #define C_IEQ 0
-#define C_INE 1
 #define C_AEQ 2
 #define C_ANE 3
 #define C_BEQ 6
@@ -33,7 +31,7 @@ const unsigned char embellishments [] = {
 	5, C_ANE, 5, 4,			// 5 -> 4 if a != 5
 	5, C_BNE, 5, 6, 		// 5 -> 6 if b != 5
 	10, C_BNE, 10, 11, 		// 10 -> 11 if b != 10
-	0, CAEQ, 28, 29,		// 0 -> 29 if a == 28
-	0, CAEQ, 29, 29,		// 0 -> 29 if a == 29
+	0, C_AEQ, 28, 29,		// 0 -> 29 if a == 28
+	0, C_AEQ, 29, 29,		// 0 -> 29 if a == 29
 	0xff
 };

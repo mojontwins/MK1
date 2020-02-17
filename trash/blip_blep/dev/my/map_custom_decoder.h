@@ -175,10 +175,10 @@
 
 // Step 3: Render buffer and build map_attr
 
-	_x = _y = 0;
+	rdx = rdy = 0;
 	for (gpit = 0; gpit < 150; ++ gpit) {
-		_t = map_buff [gpit];
-		map_attr = behs [_t];
+		_t = map_buff [gpit]; _x = rdx; _y = rdy;
+		map_attr [gpit] = behs [_t];
 		draw_coloured_tile_gamearea ();
-		++ _x; if (_x == 15) { _x = 0; ++ _y; }
+		++ rdx; if (rdx == 15) { rdx = 0; ++ rdy; }
 	}

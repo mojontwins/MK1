@@ -2,7 +2,7 @@
 
 if [%1]==[help] goto :help
 
-set game=nightmare_on_halloween
+set game=blip_blep
 
 if [%1]==[justcompile] goto :compile
 if [%1]==[clean] goto :clean
@@ -20,7 +20,8 @@ cd ..\dev
 if [%1]==[justscripts] goto :compile
 
 echo Convirtiendo mapa
-..\..\..\src\utils\mapcnv.exe ..\map\mapa.map assets\mapa.h 12 2 15 10 15 > nul
+..\..\..\src\utils\rle53map_sp.exe in=..\map\mapa.map mk1h=assets\mapa.h out=mapa size=8,9 tlock=15 mk1locks fixmappy > nul
+..\..\..\src\utils\printsize.exe mapa.map.bin
 
 echo Convirtiendo enemigos/hotspots
 ..\..\..\src\utils\ene2h.exe ..\enems\enems.ene assets\enems.h
@@ -51,7 +52,7 @@ zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 
 echo Construyendo cinta
 rem cambia LOADER por el nombre que quieres que salga en Program:
-..\..\..\src\utils\bas2tap -a10 -sNIGHTMARE loader\loader.bas loader.tap > nul
+..\..\..\src\utils\bas2tap -a10 -sBLIP_BLEP loader\loader.bas loader.tap > nul
 ..\..\..\src\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
 ..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
 copy /b loader.tap + screen.tap + main.tap %game%.tap > nul
