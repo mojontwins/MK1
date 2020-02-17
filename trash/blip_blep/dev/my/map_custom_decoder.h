@@ -131,10 +131,10 @@
 	// you can reuse this embellishments processor if you like.
 	for (gpit = 0; gpit < 150; ++ gpit) {
 		_t = map_attr [gpit];
-
 		_gp_gen = embellishments;
-		while (rda = *_gp_gen != 0xff) {
-			if (rda == _t) {
+		while ((rda = *_gp_gen) != 0xff) {
+			if (rda == _t) { 
+			
 				++_gp_gen; 
 				rdc = *_gp_gen; ++_gp_gen; 	// command
 				rdd = *_gp_gen; ++_gp_gen;	// parameter
@@ -142,7 +142,7 @@
 				rdb = 0x99;
 
 				if (rdc & 2) {
-					// Above or below
+						// Above or below
 					if (rdc & 4) {
 						// Below
 						rda = gpit < 135 ? map_attr [gpit + 15] : 0xff;
@@ -165,9 +165,9 @@
 
 				if (rdb != 0x99) {
 					if (rdb & 0xc0) {
-						rdb += (rand () & (rdb >> 6));
+						rdb = (rdb & 0x3f) + (rand () & (rdb >> 6));
 					}
-					_t = rdb;
+					_t = rdb; 
 					break;
 				}
 			} else _gp_gen += 4;
@@ -180,8 +180,8 @@
 
 	rdx = rdy = 0;
 	for (gpit = 0; gpit < 150; ++ gpit) {
-		_t = map_buff [gpit]; _x = rdx; _y = rdy;
-		map_attr [gpit] = behs [_t];
+		_x = rdx; _y = rdy; _t = map_buff [gpit]; 
 		draw_coloured_tile_gamearea ();
+		map_attr [gpit] = behs [_t];
 		++ rdx; if (rdx == 15) { rdx = 0; ++ rdy; }
 	}

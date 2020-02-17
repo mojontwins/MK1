@@ -9,3 +9,16 @@
 // You can use the array player_frames [] which contains pointers to the 8
 // frames for the main player in your spriteset.
 
+if (fire_pressed) {
+	rda = 6;
+} else {
+	if (p_vx == 0) {
+		if (p_vy < 0) rda = 7; 
+		else rda = (maincounter >> 4) & 1;
+	} else {
+		rda = 4 - (p_facing << 1);
+		if (p_vy >= 0) rda += ((gpx >> 3) & 1);
+	}
+}
+
+p_next_frame = player_frames [rda];

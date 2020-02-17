@@ -262,7 +262,7 @@
 #define UNPACKED_MAP						// Full, uncompressed maps. Shadows settings are ignored.
 //#define NO_MASKS							// Sprites are rendered using OR instead of masks.
 //#define MASKED_BULLETS					// If needed
-//#define PLAYER_CUSTOM_ANIMATION 			// Code your own animation in my/custom_animation.h
+#define PLAYER_CUSTOM_ANIMATION 			// Code your own animation in my/custom_animation.h
 //#define ENABLE_TILANIMS			32		// If defined, animated tiles are enabled.
 											// the value especifies first animated tile pair.
 //#define PAUSE_ABORT						// Add h=PAUSE, y=ABORT
@@ -280,8 +280,8 @@
 
 // IV.1. Vertical movement. Only for side-view.
 
-#define PLAYER_MAX_VY_CAYENDO		512 	// Max falling speed
-#define PLAYER_G					48		// Gravity acceleration
+#define PLAYER_MAX_VY_CAYENDO		64	 	// Max falling speed
+#define PLAYER_G					4		// Gravity acceleration
 
 #define PLAYER_VY_INICIAL_SALTO 	96		// Initial junp velocity
 #define PLAYER_MAX_VY_SALTANDO		312 	// Max jump velocity
@@ -292,9 +292,9 @@
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_MAX_VX				256 	// Max velocity
-#define PLAYER_AX					48		// Acceleration
-#define PLAYER_RX					64		// Friction
+#define PLAYER_MAX_VX				192 	// Max velocity
+#define PLAYER_AX					32		// Acceleration
+#define PLAYER_RX					32		// Friction
 
 // ============================================================================
 // V. Tile behaviour
