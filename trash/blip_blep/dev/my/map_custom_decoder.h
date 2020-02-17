@@ -8,7 +8,7 @@
 
 #define RLE_FORMAT 53
 
-	// Step 1: Decode to buffers
+// Step 1: Decode to buffer. It uses map_attr as a temporal scratchpad.
 
 	#asm
 		// Get screen address from index.
@@ -92,22 +92,14 @@
 			jr _draw_scr_loop
 
 		._advance_worm
-					// Fill buffers
+			// Fill buffers
+			// Note that this version just copies the tile value to map_attr
+			// as it will be used as a scratchpad. Actual values are written later.
 			ld  bc, (_gpit)
 			ld  b, 0
 			
-			ld  de, (_rdc)
-			ld  d, 0
-			ld  hl, _behs
-			add hl, de
-			ld  a, (hl)
-
-			ld  hl, _map_attr
-			add hl, bc
-			ld  (hl), a
-
 			ld  a, (_rdc)
-			ld  hl, _map_buff
+			ld  hl, _map_attr
 			add hl, bc
 			ld  (hl), a
 
@@ -133,48 +125,60 @@
 		._draw_scr_loop_done			
 	#endasm	
 
-// Step 3: Embellish
+// Step 2: Embellish
 
-// Rules:
-// - Tile 1: alternate 1, 2 @ random
-// - Tile 1: substitute by 3 if t!=1 beneath
-// - Tile 5: substitute by 4 if t!=4 above
-// - Tile 5: substitute by 5 if t!=5 beneath
-// - Tile 10: substitute by 11 if t!=10 above
-// - Tile 0: substitute by 29 if 28 or 29 above
-for (gpit = 0; gpit < 150; ++ gpit) {
-	rda = map_buff [gpit];
-	if (gpit > 15) {
-		rdb = map_buff [gpit - 15];
-		switch (rda) {
-			case 5:
-				if (rdb != 4) rda = 4;
+	// Rules: are in the embellishments array which is N * { t C p s }, 0xff terminated.
+	// you can reuse this embellishments processor if you like.
+	for (gpit = 0; gpit < 150; ++ gpit) {
+		_t = map_attr [gpit];
+
+		_gp_gen = embellishments;
+		while (rda = *_gp_gen != 0xff) {
+			if (rda == _t) {
+				++_gp_gen; 
+				rdc = *_gp_gen; ++_gp_gen; 	// command
+				rdd = *_gp_gen; ++_gp_gen;	// parameter
+				rdn = *_gp_gen; ++_gp_gen; 	// substitute
+
+				if (rdc & 2) {
+					// Above or below
+					if (rdc & 4) {
+						// Below
+						rda = gpit < 135 ? map_attr [gpit + 15] : 0xff;
+					} else {
+						// Above
+						rda = gpit > 14 ? map_attr [gpit - 15] : 0xff;
+					}
+
+					// Compare
+					if (rdc & 1) {
+						// Not equal
+						if (rda != rdd) _t = rdn;
+					} else {
+						// Equal
+						if (rda == rdd) _t = rdn;
+					}
+				} else {
+					_t = rdn;
+				}
+
+				if (_t & 0xc0) {
+					_t += rand () & (_t >> 6);
+				}
+
 				break;
-			case 10:
-				if (rdb != 20) rda = 11;
-				break;
-			case 0:
-				if (rdb == 28 || rdb == 29)
-					rda = 29;
-				break;
+			} else _gp_gen += 4;
 		}
-	}
-	if (gpit < 135) {
-		rdb = map_buff [gpit + 15];
-		switch (rda) {
-			case 1: 
-				if (rdb != 1) rda = 3;
-				break;
-			case 5;
-				if (rdb != 5) rdb = 6;
-				break;
-		}
-	}
-	if (rda == 1) {
-		rda += (rand () & 1);
-	}
-	map_buff [gpit] = rda;
-}
 
-// Step 4: Render buffer
+		map_buff [gpit] = _t;
+	}
 
+// Step 3: Render buffer and build map_attr
+
+	_x = _y = 0;
+	for (gpit = 0; gpit < 150; ++ gpit) {
+		_t = map_buff [gpit];
+		map_attr = behs [_t];
+		draw_coloured_tile_gamearea ();
+		++ _x; if (_x == 15) { _x = 0; ++ _y; }
+	}
