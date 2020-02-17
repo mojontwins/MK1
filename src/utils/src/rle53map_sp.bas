@@ -354,7 +354,9 @@ If sclpGetValue ("mk1h") <> "" Then
 	Print #fOut, ""
 	Print #fOut, "#asm"
 	Print #fOut, "    ._cerrojos"
+	Print #fOut, "    #if MAX_CERROJOS > 0"
 	Print #fOut, "        BINARY """ & makeFileName (fileName, "locks.bin") & """"
+	Print #fOut, "    #endif"
 	Print #fOut, "#endasm"
 	Print #fOut, ""
 	Close #fOut

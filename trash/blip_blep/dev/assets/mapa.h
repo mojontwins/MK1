@@ -9,7 +9,7 @@ extern unsigned char mapa [0];
         BINARY "mapa.map.bin"
 #endasm
 
-#define MAX_CERROJOS 1
+#define MAX_CERROJOS 0
 
 typedef struct {
     unsigned char np, x, y, st;
@@ -19,6 +19,8 @@ extern CERROJOS cerrojos [0];
 
 #asm
     ._cerrojos
+    #if MAX_CERROJOS > 0
         BINARY "mapa.locks.bin"
+    #endif
 #endasm
 

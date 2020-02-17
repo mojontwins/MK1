@@ -96,11 +96,11 @@
 			// Note that this version just copies the tile value to map_attr
 			// as it will be used as a scratchpad. Actual values are written later.
 			ld  bc, (_gpit)
-			ld  b, 0
-			
-			ld  a, (_rdc)
+			ld  b, 0			
 			ld  hl, _map_attr
 			add hl, bc
+
+			ld  a, (_rdc)
 			ld  (hl), a
 
 			// Advance cursor
@@ -139,6 +139,7 @@
 				rdc = *_gp_gen; ++_gp_gen; 	// command
 				rdd = *_gp_gen; ++_gp_gen;	// parameter
 				rdn = *_gp_gen; ++_gp_gen; 	// substitute
+				rdb = 0x99;
 
 				if (rdc & 2) {
 					// Above or below
@@ -153,20 +154,22 @@
 					// Compare
 					if (rdc & 1) {
 						// Not equal
-						if (rda != rdd) _t = rdn;
+						if (rda != rdd) rdb = rdn;
 					} else {
 						// Equal
-						if (rda == rdd) _t = rdn;
+						if (rda == rdd) rdb = rdn;
 					}
 				} else {
-					_t = rdn;
+					rdb = rdn;
 				}
 
-				if (_t & 0xc0) {
-					_t += rand () & (_t >> 6);
+				if (rdb != 0x99) {
+					if (rdb & 0xc0) {
+						rdb += (rand () & (rdb >> 6));
+					}
+					_t = rdb;
+					break;
 				}
-
-				break;
 			} else _gp_gen += 4;
 		}
 
