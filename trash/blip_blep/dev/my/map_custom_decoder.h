@@ -129,6 +129,7 @@
 
 	// Rules: are in the embellishments array which is N * { t C p s }, 0xff terminated.
 	// you can reuse this embellishments processor if you like.
+	/*
 	for (gpit = 0; gpit < 150; ++ gpit) {
 		_t = map_attr [gpit];
 		_gp_gen = embellishments;
@@ -142,7 +143,7 @@
 				rdb = 0x99;
 
 				if (rdc & 2) {
-						// Above or below
+					// Above or below
 					if (rdc & 4) {
 						// Below
 						rda = gpit < 135 ? map_attr [gpit + 15] : 0xff;
@@ -175,6 +176,144 @@
 
 		map_buff [gpit] = _t;
 	}
+	*/
+	#asm
+
+		._embellishment_processor
+			xor a
+			ld  (_gpit), a
+
+		._mcd_ep_outter_loop
+			ld  bc, (_gpit)
+			ld  b, 0
+			ld  hl, _map_attr
+			add hl, bc
+			ld  a, (hl)
+			ld  (__t), a
+
+			ld  hl, _embellishments
+		._mcd_ep_inner_loop
+			ld  a, (hl) 				// Tile number
+			cp  0xff
+			jp  z, _mcd_ep_continue
+
+			ld  c, a 					// C -> Tile number
+			ld  a, (__t) 				// A -> Current tile number
+			cp  c
+			jr  nz, _mcd_ep_next		// Not this one
+
+			inc hl
+			
+			ld  a, (hl)
+			ld  c, a
+			ld  (_rdc), a 				// Command
+			inc hl
+
+			ld  a, (hl)
+			ld  (_rdd), a 				// Parameter
+			inc hl
+
+			ld  a, (hl)
+			ld  (_rdn), a 				// Substitute
+			inc hl
+
+			// Above/Below or same?
+			ld  a, c
+			and 2
+			jr  z, _mcd_ep_check_same
+			
+			ld  a, c
+			and 4
+			jr  z, _mcd_ep_check_above
+
+		._mcd_ep_check_below
+			ld  a, (_gpit)
+			cp  135
+			jr  nc, _mcd_ep_inner_loop 	// Does not apply. Next.
+
+			add 15
+			jr  _mcd_ep_docheck
+
+		._mcd_ep_check_above
+			ld  a, (_gpit)
+			cp  15
+			jr  c, _mcd_ep_inner_loop	// Does not apply. Next.
+
+			sub 15
+
+		._mcd_ep_docheck
+			ld  d, 0
+			ld  e, a
+
+			push hl
+			ld  hl, _map_attr
+			add hl, de
+			ld  a, (hl)		
+			pop hl
+			
+			ld  b, a 					// Save temp. to B
+			ld  a, c
+			and 1
+			jr  z, _mcd_ep_docheck_equal
+
+		._mcd_ep_docheck_not_equal
+			ld  a, (_rdd) 				// Parameter
+			cp  b 						// Saved
+			jr  z, _mcd_ep_inner_loop	// Does not apply. Next.
+			jr  _mcd_ep_check_same
+
+		._mcd_ep_docheck_equal
+			ld  a, (_rdd) 				// Parameter
+			cp  b 						// Saved
+			jr  nz, _mcd_ep_inner_loop	// Does not apply. Next.
+
+		._mcd_ep_check_same
+			ld  a, (_rdn) 				// Substitute
+			ld  (__t), a 				// Do
+			
+			and 0xc0 					// Bit mask
+			jr  z, _mcd_ep_continue
+
+			call _rand 					// -> L
+
+			ld  a, (__t)
+			srl a
+			srl a
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  b, a 					// B = _t >> 6
+			ld  a, l 					// A = rand ()
+			and b 						// A = rand () & (_t >> 6)
+			ld  b, a 					// B = rand () & (_t >> 6)
+
+			ld  a, (__t)
+			add b
+			ld  (__t), a
+				
+			jr  _mcd_ep_continue 		// And don't iterate further.
+
+		._mcd_ep_next
+			ld  bc, 4
+			add hl, bc
+			jp  _mcd_ep_inner_loop
+
+		._mcd_ep_continue
+			ld  bc, (_gpit)
+			ld  b, 0
+			ld  hl, _map_buff
+			add hl, bc
+			ld  a, (__t)
+			ld  (hl), a
+
+			ld  a, c
+			inc a
+			ld  (_gpit), a
+			cp  150
+			jp  nz, _mcd_ep_outter_loop
+
+	#endasm
 
 // Step 3: Render buffer and build map_attr
 
@@ -185,3 +324,5 @@
 		map_attr [gpit] = behs [_t];
 		++ rdx; if (rdx == 15) { rdx = 0; ++ rdy; }
 	}
+
+// Wanna collab? Make the assembly code in this file better.
