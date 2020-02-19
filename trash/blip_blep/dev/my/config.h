@@ -175,8 +175,9 @@
 //#define PLAYER_HAS_JETPAC 				// If defined, player can thrust a vertical jetpac
 //#define PLAYER_BOOTEE 					// Always jumping engine. Don't forget to disable "HAS_JUMP" and "HAS_JETPAC"!!!
 //#define PLAYER_VKEYS 						// Use with VENG_SELECTOR. Advanced.
+//#define PLAYER_DISABLE_GRAVITY			// Disable gravity. Advanced.
 
-//#define PLAYER_STEPS_ON_ENEMIES				// If defined, stepping on enemies kills them
+//#define PLAYER_STEPS_ON_ENEMIES			// If defined, stepping on enemies kills them
 //#define PLAYER_CAN_STEP_ON_FLAG	1		// If defined, player can only kill when flag # is "1"
 //#define PLAYER_MIN_KILLABLE 		3		// Only kill enemies with id >= PLAYER_MIN_KILLABLE
 //#define PLAYER_STEP_SOUND 				// Sound while walking. No effect in the BOOTEE engine.

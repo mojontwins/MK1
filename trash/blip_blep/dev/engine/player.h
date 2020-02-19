@@ -161,60 +161,62 @@ unsigned char player_move (void) {
 
 	#if !defined PLAYER_GENITAL || defined VENG_SELECTOR
 
-		#if defined VENG_SELECTOR && defined PLAYER_VKEYS
-			if (veng_selector != VENG_KEYS)
+		#if !defined PLAYER_DISABLE_GRAVITY
+			#if defined VENG_SELECTOR && defined PLAYER_VKEYS
+				if (veng_selector != VENG_KEYS)
+			#endif
+			{
+				// Do gravity
+				
+				#asm
+						; Signed comparisons are hard
+						; p_vy <= PLAYER_MAX_VY_CAYENDO - PLAYER_G
+
+						; We are going to take a shortcut.
+						; If p_vy < 0, just add PLAYER_G.
+						; If p_vy > 0, we can use unsigned comparition anyway.
+
+						ld  hl, (_p_vy)
+						bit 7, h
+						jr  nz, _player_gravity_add 	; < 0
+
+						ld  de, PLAYER_MAX_VY_CAYENDO - PLAYER_G
+						or  a
+						push hl
+						sbc hl, de
+						pop hl
+						jr  nc, _player_gravity_maximum
+
+					._player_gravity_add
+						ld  de, PLAYER_G
+						add hl, de
+						jr  _player_gravity_vy_set
+
+					._player_gravity_maximum
+						ld  hl, PLAYER_MAX_VY_CAYENDO
+
+					._player_gravity_vy_set
+						ld  (_p_vy), hl
+
+					._player_gravity_done
+
+					#ifdef PLAYER_CUMULATIVE_JUMP
+						ld  a, (_p_jmp_on)
+						or  a
+						jr  nz, _player_gravity_p_gotten_done
+					#endif
+
+						ld  a, (_p_gotten)
+						or  a
+						jr  z, _player_gravity_p_gotten_done
+
+						xor a
+						ld  (_p_vy), a
+
+					._player_gravity_p_gotten_done
+				#endasm
+			}	
 		#endif
-		{
-			// Do gravity
-			
-			#asm
-					; Signed comparisons are hard
-					; p_vy <= PLAYER_MAX_VY_CAYENDO - PLAYER_G
-
-					; We are going to take a shortcut.
-					; If p_vy < 0, just add PLAYER_G.
-					; If p_vy > 0, we can use unsigned comparition anyway.
-
-					ld  hl, (_p_vy)
-					bit 7, h
-					jr  nz, _player_gravity_add 	; < 0
-
-					ld  de, PLAYER_MAX_VY_CAYENDO - PLAYER_G
-					or  a
-					push hl
-					sbc hl, de
-					pop hl
-					jr  nc, _player_gravity_maximum
-
-				._player_gravity_add
-					ld  de, PLAYER_G
-					add hl, de
-					jr  _player_gravity_vy_set
-
-				._player_gravity_maximum
-					ld  hl, PLAYER_MAX_VY_CAYENDO
-
-				._player_gravity_vy_set
-					ld  (_p_vy), hl
-
-				._player_gravity_done
-
-				#ifdef PLAYER_CUMULATIVE_JUMP
-					ld  a, (_p_jmp_on)
-					or  a
-					jr  nz, _player_gravity_p_gotten_done
-				#endif
-
-					ld  a, (_p_gotten)
-					or  a
-					jr  z, _player_gravity_p_gotten_done
-
-					xor a
-					ld  (_p_vy), a
-
-				._player_gravity_p_gotten_done
-			#endasm
-		}	
 	#endif
 
 	#if defined PLAYER_GENITAL || (defined VENG_SELECTOR && defined PLAYER_VKEYS)

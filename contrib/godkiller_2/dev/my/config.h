@@ -9,6 +9,7 @@
 
 #define MODE_128K 							// Read the docs!
 //#define VENG_SELECTOR 					// Very advanced!
+//#define USE_MAP_CUSTOM_DECODER
 
 // In this section we define map dimensions, initial and authomatic ending conditions, etc.
 
@@ -50,8 +51,8 @@
 #define DIRECT_TO_PLAY						// If defined, title screen is also the game frame.
 //#define DEACTIVATE_KEYS					// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
-//#define ONLY_ONE_OBJECT 					// If defined, only one object can be carried at a time.
 //#define DEACTIVATE_REFILLS					// If defined, life refills are not present.
+//#define ONLY_ONE_OBJECT 					// If defined, only one object can be carried at a time.
 #define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
 //#define REVERSE_OBJECTS_COUNT 			// Counts from PLAYER_NUM_OBJETOS to 0
 #define DEACTIVATE_EVIL_TILE				// If defined, no killing tiles (behaviour 1) are detected.
@@ -174,6 +175,7 @@
 //#define PLAYER_HAS_JETPAC 				// If defined, player can thrust a vertical jetpac
 //#define PLAYER_BOOTEE 					// Always jumping engine. Don't forget to disable "HAS_JUMP" and "HAS_JETPAC"!!!
 //#define PLAYER_VKEYS 						// Use with VENG_SELECTOR. Advanced.
+//#define PLAYER_DISABLE_GRAVITY			// Disable gravity. Advanced.
 
 //#define PLAYER_STEPS_ON_ENEMIES				// If defined, stepping on enemies kills them
 //#define PLAYER_CAN_STEP_ON_FLAG	1		// If defined, player can only kill when flag # is "1"
