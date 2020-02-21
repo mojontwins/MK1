@@ -25,13 +25,13 @@ if ((pad0 & sp_FIRE) == 0) {
 		_x = (gpx + 8) >> 4; _y = (gpy - 1) >> 4;
 		if (attr (_x, _y) & 16) {
 			break_wall ();
-			pvy = -pvy;
+			p_vy = -p_vy;
 		}
 	}
 #endif
 
 // Water friction
-if (pvy > PLAYER_MAX_VY_CAYENDO) {
-	pvy -= P_WATER_FRICTION;
-	if (pvy < PLAYER_MAX_VY_CAYENDO) pvy = PLAYER_G;
+if (p_vy > PLAYER_MAX_VY_CAYENDO) {
+	p_vy -= P_WATER_FRICTION;
+	if (p_vy < PLAYER_MAX_VY_CAYENDO) p_vy = PLAYER_G;
 }
