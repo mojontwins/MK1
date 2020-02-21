@@ -708,19 +708,19 @@ unsigned char player_move (void) {
 			}
 		}
 		
-		p_next_frame = player_frames [p_facing + p_frame];
+		p_next_frame = player_cells [p_facing + p_frame];
 	#elif defined PLAYER_BOOTEE
 		gpit = p_facing << 2;
 		if (p_vy == 0) {
-			p_next_frame = player_frames [gpit];
+			p_next_frame = player_cells [gpit];
 		} else if (p_vy < 0) {
-			p_next_frame = player_frames [gpit + 1];
+			p_next_frame = player_cells [gpit + 1];
 		} else {
-			p_next_frame = player_frames [gpit + 2];
+			p_next_frame = player_cells [gpit + 2];
 		}
 	#else	
 		if (!possee && !p_gotten) {
-			p_next_frame = player_frames [8 + p_facing];
+			p_next_frame = player_cells [8 + p_facing];
 		} else {
 			gpit = p_facing << 2;
 			if (p_vx == 0) {
@@ -728,7 +728,7 @@ unsigned char player_move (void) {
 			} else {
 				rda = ((gpx + 4) >> 3) & 3;
 			}
-			p_next_frame = player_frames [gpit + rda];
+			p_next_frame = player_cells [gpit + rda];
 		}
 	#endif
 }

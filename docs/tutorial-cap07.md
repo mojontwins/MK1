@@ -753,11 +753,11 @@ Si definimos `PLAYER_CUSTOM_ANIMATION` tendremos que ocuparnos de escribir el c�
 |`p_facing`|Dirección a la que mira el jugador (*)
 |`possee`|1 si el jugador está sobre una plataforma fija.
 |`p_gotten`|1 si el jugador está sobre una plataforma movil.
-|`player_frames`|Es un array con los 8 frames del sprite.
+|`player_cells`|Es un array con los 8 frames del sprite.
 
 (*) `p_facing` será 0 (derecha) y 1 (izquierda) en vista lateral, o tomará los valores `FACING_LEFT`, `FACING_RIGHT`, `FACING_UP` y `FACING_DOWN` en vista genital. 
 
-El código que escribas debe terminar asignando un componente de `player_frames` al puntero `p_next_frame`. Obviamente, no necesitas escribir un código de animación personalizado para el jugador si no estás haciendo cosas muy raras.
+El código que escribas debe terminar asignando un componente de `player_cells` al puntero `p_next_frame`. Obviamente, no necesitas escribir un código de animación personalizado para el jugador si no estás haciendo cosas muy raras.
 
 ## Pausa y abortar
 

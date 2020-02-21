@@ -40,7 +40,7 @@ Esto permite muchas combinaciones. Lo más básico (que será lo que haremos en 
 
 Pero si os dais cuenta, con estas características las posibilidades son infinitas. Por ejemplo sé podría añadir el movimiento de nadar de **Ninjajar** en `my/ci/custom_veng.h`, activar `VENG_SELECTOR`, y cambiar entre salto o nadar con diferentes valores de `PLAYER_G` dependiendo de si estamos o no en el agua.
 
-Otra cosa que me gustaría mencionar es que, desde siempre, si tu juego no usa disparos, puedes activar a la vez (y sin `VENG_SELECTOR`) el jetpac y los saltos normales, ya que el primero emplea la tecla *arriba* y los segundos la tecla *fire*.
+Otra cosa que me gustaría mencionar una *feature*: desde siempre (desde la versión 3.0 de 2011), si tu juego no usa disparos, puedes activar a la vez (y sin `VENG_SELECTOR`) el jetpac y los saltos normales, ya que el primero emplea la tecla *arriba* y los segundos la tecla *fire*.
 
 ## El movimiento choco
 
@@ -53,7 +53,74 @@ Desde hace mucho tiempo en Mojonia habíamos querido hacer un juego protagonizad
 
 Cuanto más tiempo pulses FIRE, con más fuerza se impulsará el choco al soltarlo, por lo que necesitamos un contador, un valor de incremento, y un valor máximo.
 
+Con esta especificación podemos programar el movimiento básico del chico en sólo unas cuantas lineas de código. Necesitaremos antes definir algunas variables y macros:
+
+```c
+	// extra_vars.h
+
+	// Custom vEng
+
+	unsigned char fire_pressed;
+	signed int p_thrust;
+
+	#define P_THRUST_ADD 	16
+	#define P_THRUST_MAX 	384
+```
+
+Usaremos `fire_pressed` como bandera que nos servirá detectar cuando hemos "despulsado" la tecla de disparo. Si ponemos `fire_pressed` a 1 cuando detectamos que está pulsada y a 0 cuando detectamos que no, si vemos que NO se está pulsando la tecla de disparo pero `fire_pressed` vale 1 eso significará que se acaba de dejar de pulsar. 
+
+`p_thrust` será donde iremos acumulando "fuerza". Al notar que se libera la tecla de disparo se asignará esta "fuerza" a `p_vy` en negativo (hacia arriba). `P_THRUST_MAX` permite configurar la velocidad con la que se acumula la "fuerza", y `P_THRUST_MAX` el valor máximo que se alcanzará. Los valores de más arriba significa que la velocidad máxima que se transferirá a `p_vy` será de 384, y que esta se alcanzará tras 384/16 = 24 frames pulsando la tecla de disparo.
+
+Implementémoslo:
+
+```c
+	// custom_veng.h
+
+	if ((pad0 & sp_FIRE) == 0) {
+		fire_pressed = 1;
+		p_thrust -= P_THRUST_ADD;
+		if (p_thrust < -P_THRUST_MAX) p_thrust = -P_THRUST_MAX;
+		pad0 = 0xff;
+	} else {
+		if (fire_pressed) {
+			p_vy = p_thrust;
+			p_thrust = 0;
+		}
+		fire_pressed = 0;
+	}
+```
+
+Como no estamos usando varios ejes verticales excluyentes no necesitamos activar VENG_SELECTOR ni emplear la variable `veng_selector`.
+
 ## La animación choco
+
+Todo esto no queda nada bien si no cambiamos la animación. Hemos hecho este *spriteset* para el choco con 8 cells de animación:
+
+Los dos primeros muestran al choco en su animación "idle", cuando se está pulsando nada ni ascendiendo (sólo dejando que la gravedad y la inercia muevan al choco). 
+
+Los cuatro siguientes muestral al choco desplazándose hacia la izquierda y hacia la derecha. Hay dos cells de animación para cada dirección. Los iremos alternando si el choco "nada" hacia esa dirección. Si el choco está subiendo tras "lanzarse" (lo de pulsar la tecla de disparo para "hacer fuerza") no se animarán y se usará sólo el primer cell.
+
+El siguiente cell muestra al choco "haciendo fuerza", y el último al choco ascendiendo verticalmente tras soltar el botón de disparo.
+
+Habrá otras implementaciones posibles, pero esta me parece muy legible. Me gusta precalcular el número de frame en una variable temporal (`rda` aquí) y luego emplear el array `player_cells` que contiene 8 punteros a los 8 cells:
+
+```c
+	if (fire_pressed) {
+		rda = 6;
+	} else {
+		if (p_vx == 0) {
+			if (p_vy < 0) rda = 7; 
+			else rda = (maincounter >> 4) & 1;
+		} else {
+			rda = 4 - (p_facing << 1);
+			if (p_vy >= 0) rda += ((gpx >> 3) & 1);
+		}
+	}
+
+	p_next_frame = player_cells [rda];
+```
+
+No hay que olvidarse de activar `PLAYER_CUSTOM_ANIMATION` en `my/config.h`.
 
 ## Más cosas para el choco
 

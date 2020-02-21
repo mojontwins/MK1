@@ -357,7 +357,7 @@ void enems_move (void) {
 				if (en_an_count [enit] == 4) {
 					en_an_count [enit] = 0;
 					en_an_frame [enit] = !en_an_frame [enit];
-					en_an_next_frame [enit] = enem_frames [en_an_base_frame [enit] + en_an_frame [enit]];
+					en_an_next_frame [enit] = enem_cells [en_an_base_frame [enit] + en_an_frame [enit]];
 				}
 				*/
 				#asm
@@ -396,8 +396,8 @@ void enems_move (void) {
 						ld  c, a
 						ld  b, 0
 
-						ld  hl, _enem_frames
-						add hl, bc 						; HL -> enem_frames [en_an_base_frame [enit] + en_an_frame [enit]]
+						ld  hl, _enem_cells
+						add hl, bc 						; HL -> enem_cells [en_an_base_frame [enit] + en_an_frame [enit]]
 
 						ldi
 						ldi 							; Copy 16 bit

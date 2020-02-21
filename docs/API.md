@@ -75,10 +75,10 @@ Hay un array principal: `malotes` viene del archivo `.ene` convertido y es una e
 ```
 
 * `enit`: Se utiliza siempre para iterar enemigos. En los puntos de inyección de código que se incluyen dentro de bucles de enemigos (`enems_load.h`, `enems_move.h`, `on_enems_killed`), siempre apunta al enemigo actual que se está procesando.
-* `en_an_base_frame [3]`: Frame base (0, 2, 4 o 6) de los enemigos. Sirven para construir índices de la tabla `enem_frames`, que contiene punteros a los 8 gráficos de los enemigos:
+* `en_an_base_frame [3]`: Frame base (0, 2, 4 o 6) de los enemigos. Sirven para construir índices de la tabla `enem_cells`, que contiene punteros a los 8 gráficos de los enemigos:
 
 ```c
-	const unsigned char *enem_frames [] = {
+	const unsigned char *enem_cells [] = {
 		sprite_9_a, sprite_10_a, sprite_11_a, sprite_12_a, 
 		sprite_13_a, sprite_14_a, sprite_15_a, sprite_16_a
 	};
@@ -154,6 +154,11 @@ Si el hotspot de la pantalla actual está activo (no se ha recogido y es distint
 * `cx1`, `cy1`, `cx2`, `cy2`, `at1`, `at2` son "pseudoparámetros" de entrada y salida para funciones de colisión.
 * `x0`, `y0`, `x1`, `y1` se emplean como "pseudoparámetros" en funciones de mover y destruir tiles.
 * `ptx1`, `pty1`, `ptx2`, `pty2` se utilizan para definir el *bounding box* para la colisión del jugador con el escenario.
+
+### Cells de animación
+
+* `player_cells []` es un array que contiene 8 punteros a los 8 cells de animación para el jugador. Puedes usarlo si defines `PLAYER_CUSTOM_ANIMATION` e implementas tu propio sistema de animación.
+* `enem_cells []` es un array que contiene 8 punteros a los 8 cells de animación para los enemigos.
 
 ## Funciones
 
