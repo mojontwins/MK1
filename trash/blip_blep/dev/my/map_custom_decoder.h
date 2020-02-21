@@ -2,8 +2,9 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 // This custom decoder works in three steps:
-// 1.- Decode a RLE53 map to the buffers
-// 2.- Embellish the buffer
+// 1.- Decode a RLE53 map to map_attr
+// 2.- Copy the pre-made backdrop to map_buff
+// 2.- Embellish map_attr to map_buff if result != 0
 // 3.- Renders the buffer
 
 #define RLE_FORMAT 53
@@ -125,58 +126,17 @@
 		._draw_scr_loop_done			
 	#endasm	
 
-// Step 2: Embellish
+// Step 2: Copy backdrop
 
-	// Rules: are in the embellishments array which is N * { t C p s }, 0xff terminated.
-	// you can reuse this embellishments processor if you like.
-	/*
-	for (gpit = 0; gpit < 150; ++ gpit) {
-		_t = map_attr [gpit];
-		_gp_gen = embellishments;
-		while ((rda = *_gp_gen) != 0xff) {
-			if (rda == _t) { 
-			
-				++_gp_gen; 
-				rdc = *_gp_gen; ++_gp_gen; 	// command
-				rdd = *_gp_gen; ++_gp_gen;	// parameter
-				rdn = *_gp_gen; ++_gp_gen; 	// substitute
-				rdb = 0x99;
+	#asm
+			ld  hl, _backdrop
+			ld  de, _map_buff
+			ld  bc, 150
+			ldir 
+	#endasm
 
-				if (rdc & 2) {
-					// Above or below
-					if (rdc & 4) {
-						// Below
-						rda = gpit < 135 ? map_attr [gpit + 15] : 0xff;
-					} else {
-						// Above
-						rda = gpit > 14 ? map_attr [gpit - 15] : 0xff;
-					}
+// Step 3: Embellish
 
-					// Compare
-					if (rdc & 1) {
-						// Not equal
-						if (rda != rdd) rdb = rdn;
-					} else {
-						// Equal
-						if (rda == rdd) rdb = rdn;
-					}
-				} else {
-					rdb = rdn;
-				}
-
-				if (rdb != 0x99) {
-					if (rdb & 0xc0) {
-						rdb = (rdb & 0x3f) + (rand () & (rdb >> 6));
-					}
-					_t = rdb; 
-					break;
-				}
-			} else _gp_gen += 4;
-		}
-
-		map_buff [gpit] = _t;
-	}
-	*/
 	#asm
 
 		._embellishment_processor
@@ -289,6 +249,7 @@
 			ld  b, a 					// B = rand () & (_t >> 6)
 
 			ld  a, (__t)
+			and 0x3f
 			add b
 			ld  (__t), a
 				
@@ -301,11 +262,16 @@
 
 		._mcd_ep_continue
 			ld  bc, (_gpit)
+			ld  a, (__t)
+			or  a 						// Only if != 0
+			jr  z, _mcd_ep_skip
+			
 			ld  b, 0
 			ld  hl, _map_buff
 			add hl, bc
-			ld  a, (__t)
 			ld  (hl), a
+
+		._mcd_ep_skip
 
 			ld  a, c
 			inc a
@@ -315,13 +281,13 @@
 
 	#endasm
 
-// Step 3: Render buffer and build map_attr
+// Step 4: Render buffer and build map_attr
 
 	rdx = rdy = 0;
 	for (gpit = 0; gpit < 150; ++ gpit) {
 		_x = rdx; _y = rdy; _t = map_buff [gpit]; 
-		draw_coloured_tile_gamearea ();
 		map_attr [gpit] = behs [_t];
+		draw_coloured_tile_gamearea ();		
 		++ rdx; if (rdx == 15) { rdx = 0; ++ rdy; }
 	}
 
