@@ -105,6 +105,8 @@ El siguiente cell muestra al choco "haciendo fuerza", y el último al choco asce
 Habrá otras implementaciones posibles, pero esta me parece muy legible. Me gusta precalcular el número de frame en una variable temporal (`rda` aquí) y luego emplear el array `player_cells` que contiene 8 punteros a los 8 cells:
 
 ```c
+	// custom-animation.h
+
 	if (fire_pressed) {
 		rda = 6;
 	} else {
@@ -125,3 +127,42 @@ No hay que olvidarse de activar `PLAYER_CUSTOM_ANIMATION` en `my/config.h`.
 ## Más cosas para el choco
 
 Queremos que el choco pueda romper bloques rompiscibles cuando se haya lanzado hacia arriba con la suficiente fuerza. Para eso tendremos que ampliar nuestro código en `my/ci/custom_veng.h`. Detectaremos la colisión en el punto central de la fila superior del cuadro de 16x16 que contiene al sprite. Como esto sólo va a detectarse con el choco a determinada velocidad negativa, en este píxel hay cabeza de choco porque el choco estará estirado y quedará bien.
+
+Pensando en que (misteriosamente) queramos reutilizar este movimiento en otro juego con otras características, vamos a hacerlo bien y usar `#ifdef` como mandan los cánones. Añadimos:
+
+```c
+	// custom_veng.h
+
+	[...]
+
+	#ifdef BREAKABLE_WALLS
+		// Detect head
+		if (p_vy < -P_BREAK_VELOCITY_OFFSET) {
+			_x = (gpx + 8) >> 4; _y = (gpy - 1) >> 4;
+			if (attr (_x, _y) & 16) {
+				break_wall ();
+				pvy = -pvy;
+			}
+		}
+	#endif
+```
+
+## Fricción del agua
+
+El problema de esto es que nos hemos puesto en la tesitura de que, al rebotar hacia abajo, `p_vy` puede valer más que `PLAYER_MAX_VY_CAYENDO` y esto no quedaría bien, así que detectaremos esta situación y aplicaremos una fricción para ir frenando al choco:
+
+```c
+	// custom_veng.h
+
+	[...]
+
+	// Water friction
+	if (pvy > PLAYER_MAX_VY_CAYENDO) {
+		pvy -= P_WATER_FRICTION;
+		if (pvy < PLAYER_MAX_VY_CAYENDO) pvy = PLAYER_G;
+	}
+```
+
+## Y esto es todo.
+
+Ya has aprendido (o no) cómo añadir tu propio manejador del eje vertical del movimiento, que además rima con pimiento.
