@@ -117,6 +117,18 @@ Se ejecuta cuando el jugador toca un tile cuyo comportamiento tiene el bit 7 lev
 
 Si tienes varios, puedes saber cuál es llamando a `qtile (p_tx, p_ty)` o consultando el valor de `map_buff [COORDS(p_tx, p_ty)]`. Puede servir parar mil cosas, por ejemplo para implementar teletransportadores.
 
+## Tiles rompiscibles
+
+En estos puntos de inyección de código el tile está en `(_x, _y)` (coordenadas de tile), y `gpaux` contiene `COORDS(_x, _y)` precalculado. `brk_buff [gpaux]` es el número de golpes que lleva el tile.
+
+### `on_breakable_hit.h`
+
+Se ejecuta siempre que golpeemos un tile rompiscible y aún le quede más energía.
+
+### `on_breakable_break.h`
+
+Se ejecuta siempre que golpeemos un tile rompiscible y desaparezca finalmente.
+
 ## Miscelánea
 
 ### `on_tile_pushed.h`
