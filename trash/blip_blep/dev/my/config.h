@@ -123,8 +123,8 @@
 //#define AMMO_REFILL				10		// ammo refill, using tile 20 (hotspot #4)
 //#define INITIAL_AMMO				20		// If defined, ammo = X when entering game.
 
-//#define BREAKABLE_WALLS					// Breakable walls
-//#define BREAKABLE_WALLS_LIFE		1		// Amount of hits to break wall
+#define BREAKABLE_WALLS						// Breakable walls
+#define BREAKABLE_WALLS_LIFE		2		// Amount of hits to break wall
 
 // Scripting
 // ---------
@@ -317,7 +317,7 @@
 #ifndef COMPRESSED_LEVELS
 unsigned char behs [] = {
 	0, 8, 8, 8, 8, 8, 8, 1, 1, 8, 8, 8, 4, 0, 8, 0,
-	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+	0, 0, 0, 0, 0, 0, 0, 0, 0, 0,24,24, 0, 0, 0, 0,
 	0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
 };
 #endif
