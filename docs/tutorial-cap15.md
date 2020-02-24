@@ -159,7 +159,7 @@ El problema de esto es que nos hemos puesto en la tesitura de que, al rebotar ha
 	// Water friction
 	if (p_vy > PLAYER_MAX_VY_CAYENDO) {
 		p_vy -= P_WATER_FRICTION;
-		if (p_vy < PLAYER_MAX_VY_CAYENDO) p_vy = PLAYER_G;
+		if (p_vy < PLAYER_MAX_VY_CAYENDO) p_vy = PLAYER_MAX_VY_CAYENDO;
 	}
 ```
 

@@ -19,6 +19,8 @@ extern CERROJOS cerrojos [0];
 
 #asm
     ._cerrojos
+    #if MAX_CERROJOS > 0
         BINARY "mapa.locks.bin"
+    #endif	
 #endasm
 

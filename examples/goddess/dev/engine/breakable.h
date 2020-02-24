@@ -25,6 +25,8 @@ void break_wall (void) {
 	#ifdef MODE_128K
 		wyz_play_sound (gpit);
 	#else			
+		// Show what just happened before the sound interrupts the action
+		sp_UpdateNow ();
 		beep_fx (gpit);
 	#endif
 }

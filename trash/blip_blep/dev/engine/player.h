@@ -57,7 +57,6 @@ void player_init (void) {
 	#endif
 }
 
-
 void player_calc_bounding_box (void) {
 	#if defined (BOUNDING_BOX_8_BOTTOM)
 		#asm
