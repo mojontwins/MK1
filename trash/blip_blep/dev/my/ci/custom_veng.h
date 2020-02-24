@@ -30,8 +30,11 @@ if ((pad0 & sp_FIRE) == 0) {
 	}
 #endif
 
-// Water friction
-if (p_vy > PLAYER_MAX_VY_CAYENDO) {
+// Water gravity & friction
+if (p_vy < PLAYER_MAX_VY_CAYENDO) {
+	p_vy += PLAYER_G;
+	if (p_vy > PLAYER_MAX_VY_CAYENDO) p_vy = PLAYER_MAX_VY_CAYENDO;
+} else {
 	p_vy -= P_WATER_FRICTION;
 	if (p_vy < PLAYER_MAX_VY_CAYENDO) p_vy = PLAYER_MAX_VY_CAYENDO;
 }

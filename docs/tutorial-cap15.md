@@ -29,13 +29,13 @@ Desde v5, **MTE MK1** permite varias cosas interesantes:
 Esto permite muchas combinaciones. Lo más básico (que será lo que haremos en este capítulo), es dejar la gravedad tal y como está, desactivar todo lo demás (salto, jetpac, bootee y teclado), y añadir código para gestionar el movimiento del choco. Dejaremos comentado `VENG_SELECTOR` y desactivaremos todas las macros que controlan el movimiento vertical en modo lateral:
 
 ```c
-	// my/config.h
+    // my/config.h
 
-	//#define PLAYER_HAS_JUMP 					// If defined, player is able to jump.
-	//#define PLAYER_HAS_JETPAC 				// If defined, player can thrust a vertical jetpac
-	//#define PLAYER_BOOTEE 					// Always jumping engine. 
-	//#define PLAYER_VKEYS 						// Use with VENG_SELECTOR. Advanced.
-	//#define PLAYER_DISABLE_GRAVITY			// Disable gravity. Advanced.
+    //#define PLAYER_HAS_JUMP                   // If defined, player is able to jump.
+    //#define PLAYER_HAS_JETPAC                 // If defined, player can thrust a vertical jetpac
+    //#define PLAYER_BOOTEE                     // Always jumping engine. 
+    //#define PLAYER_VKEYS                      // Use with VENG_SELECTOR. Advanced.
+    //#define PLAYER_DISABLE_GRAVITY            // Disable gravity. Advanced.
 ```
 
 Pero si os dais cuenta, con estas características las posibilidades son infinitas. Por ejemplo sé podría añadir el movimiento de nadar de **Ninjajar** en `my/ci/custom_veng.h`, activar `VENG_SELECTOR`, y cambiar entre salto o nadar con diferentes valores de `PLAYER_G` dependiendo de si estamos o no en el agua.
@@ -56,15 +56,15 @@ Cuanto más tiempo pulses FIRE, con más fuerza se impulsará el choco al soltar
 Con esta especificación podemos programar el movimiento básico del chico en sólo unas cuantas lineas de código. Necesitaremos antes definir algunas variables y macros:
 
 ```c
-	// extra_vars.h
+    // extra_vars.h
 
-	// Custom vEng
+    // Custom vEng
 
-	unsigned char fire_pressed;
-	signed int p_thrust;
+    unsigned char fire_pressed;
+    signed int p_thrust;
 
-	#define P_THRUST_ADD 	16
-	#define P_THRUST_MAX 	384
+    #define P_THRUST_ADD    16
+    #define P_THRUST_MAX    384
 ```
 
 Usaremos `fire_pressed` como bandera que nos servirá detectar cuando hemos "despulsado" la tecla de disparo. Si ponemos `fire_pressed` a 1 cuando detectamos que está pulsada y a 0 cuando detectamos que no, si vemos que NO se está pulsando la tecla de disparo pero `fire_pressed` vale 1 eso significará que se acaba de dejar de pulsar. 
@@ -74,20 +74,18 @@ Usaremos `fire_pressed` como bandera que nos servirá detectar cuando hemos "des
 Implementémoslo:
 
 ```c
-	// custom_veng.h
-
-	if ((pad0 & sp_FIRE) == 0) {
-		fire_pressed = 1;
-		p_thrust -= P_THRUST_ADD;
-		if (p_thrust < -P_THRUST_MAX) p_thrust = -P_THRUST_MAX;
-		pad0 = 0xff;
-	} else {
-		if (fire_pressed) {
-			p_vy = p_thrust;
-			p_thrust = 0;
-		}
-		fire_pressed = 0;
-	}
+    if ((pad0 & sp_FIRE) == 0) {
+        fire_pressed = 1;
+        p_thrust -= P_THRUST_ADD;
+        if (p_thrust < -P_THRUST_MAX) p_thrust = -P_THRUST_MAX;
+        pad0 = 0xff;
+    } else {
+        if (fire_pressed) {
+            p_vy = p_thrust;
+            p_thrust = 0;
+        }
+        fire_pressed = 0;
+    }
 ```
 
 Como no estamos usando varios ejes verticales excluyentes no necesitamos activar VENG_SELECTOR ni emplear la variable `veng_selector`.
@@ -95,6 +93,8 @@ Como no estamos usando varios ejes verticales excluyentes no necesitamos activar
 ## La animación choco
 
 Todo esto no queda nada bien si no cambiamos la animación. Hemos hecho este *spriteset* para el choco con 8 cells de animación:
+
+![El choco](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/15_sprites_choco.png)
 
 Los dos primeros muestran al choco en su animación "idle", cuando se está pulsando nada ni ascendiendo (sólo dejando que la gravedad y la inercia muevan al choco). 
 
@@ -105,21 +105,21 @@ El siguiente cell muestra al choco "haciendo fuerza", y el último al choco asce
 Habrá otras implementaciones posibles, pero esta me parece muy legible. Me gusta precalcular el número de frame en una variable temporal (`rda` aquí) y luego emplear el array `player_cells` que contiene 8 punteros a los 8 cells:
 
 ```c
-	// custom-animation.h
+    // custom-animation.h
 
-	if (fire_pressed) {
-		rda = 6;
-	} else {
-		if (p_vx == 0) {
-			if (p_vy < 0) rda = 7; 
-			else rda = (maincounter >> 4) & 1;
-		} else {
-			rda = 4 - (p_facing << 1);
-			if (p_vy >= 0) rda += ((gpx >> 3) & 1);
-		}
-	}
+    if (fire_pressed) {
+        rda = 6;
+    } else {
+        if (gpx == gpox) {
+            if (p_vy < 0) rda = 7; 
+            else rda = (maincounter >> 4) & 1;
+        } else {
+            rda = 4 - (p_facing << 1);
+            if (p_vy >= 0) rda += ((gpx >> 3) & 1);
+        }
+    }
 
-	p_next_frame = player_cells [rda];
+    p_next_frame = player_cells [rda];
 ```
 
 No hay que olvidarse de activar `PLAYER_CUSTOM_ANIMATION` en `my/config.h`.
@@ -131,36 +131,79 @@ Queremos que el choco pueda romper bloques rompiscibles cuando se haya lanzado h
 Pensando en que (misteriosamente) queramos reutilizar este movimiento en otro juego con otras características, vamos a hacerlo bien y usar `#ifdef` como mandan los cánones. Añadimos:
 
 ```c
-	// custom_veng.h
+    // custom_veng.h
 
-	[...]
+    [...]
 
-	#ifdef BREAKABLE_WALLS
-		// Detect head
-		if (p_vy < -P_BREAK_VELOCITY_OFFSET) {
-			_x = (gpx + 8) >> 4; _y = (gpy - 1) >> 4;
-			if (attr (_x, _y) & 16) {
-				break_wall ();
-				p_vy = -p_vy;
-			}
-		}
-	#endif
+    #ifdef BREAKABLE_WALLS
+        // Detect head
+        if (p_vy < -P_BREAK_VELOCITY_OFFSET) {
+            _x = (gpx + 8) >> 4; _y = (gpy - 1) >> 4;
+            if (attr (_x, _y) & 16) {
+                break_wall ();
+                p_vy = -p_vy;
+            }
+        }
+    #endif
+```
+
+`P_BREAK_VELOCITY_OFFSET` es el valor mínimo de velocidad que hay que llevar para romper un piedro, y lo definimos con las demás macros en `my/ci/extra_vars.h`:
+
+```c
+    // extra_vars.h
+
+    #define P_BREAK_VELOCITY_OFFSET 128
 ```
 
 ## Fricción del agua
 
-El problema de esto es que nos hemos puesto en la tesitura de que, al rebotar hacia abajo, `p_vy` puede valer más que `PLAYER_MAX_VY_CAYENDO` y esto no quedaría bien, así que detectaremos esta situación y aplicaremos una fricción para ir frenando al choco:
+El problema de esto es que nos hemos puesto en la tesitura de que, al rebotar hacia abajo, `p_vy` puede valer más que `PLAYER_MAX_VY_CAYENDO` y esto no quedaría bien, ya que la implementación de la gravedad limita la velocidad hacia abajo a este valor. Lo que vamos a hacer es desactivar la gravedad y usar nuestra propia implementación. 
+
+Primero descomentamos `PLAYER_DISABLE_GRAVITY` en `my/config.h`. y luego añadimos:
 
 ```c
-	// custom_veng.h
+    // custom_veng.h
 
-	[...]
+    [...]
 
-	// Water friction
-	if (p_vy > PLAYER_MAX_VY_CAYENDO) {
-		p_vy -= P_WATER_FRICTION;
-		if (p_vy < PLAYER_MAX_VY_CAYENDO) p_vy = PLAYER_MAX_VY_CAYENDO;
-	}
+    // Water gravity & friction
+    if (p_vy < PLAYER_MAX_VY_CAYENDO) {
+        p_vy += PLAYER_G;
+        if (p_vy > PLAYER_MAX_VY_CAYENDO) p_vy = PLAYER_MAX_VY_CAYENDO;
+    } else {
+        p_vy -= P_WATER_FRICTION;
+        if (p_vy < PLAYER_MAX_VY_CAYENDO) p_vy = PLAYER_MAX_VY_CAYENDO;
+    }
+```
+
+La macro que nos queda, `P_WATER_FRICTION`, la definimos igualmente en `my/ci/extra_vars.h`:
+
+```c
+    // extra_vars.h
+
+    #define P_WATER_FRICTION        16
+```
+
+## Otro ejemplo
+
+Aquí tenéis un motor de movimiento parecido a subaquatic (que no era **MTE MK1**, ni se le parecía), basado en este spriteset:
+
+
+
+```c
+    // config.h
+```
+
+```c
+    // extra_vars.h
+```
+
+```c
+    // custom_veng.h
+```
+
+```c
+    // custom_animation.h
 ```
 
 ## Y esto es todo.

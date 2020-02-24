@@ -12,7 +12,7 @@
 if (fire_pressed) {
 	rda = 6;
 } else {
-	if (p_vx == 0) {
+	if (gpx == gpox) {
 		if (p_vy < 0) rda = 7; 
 		else rda = (maincounter >> 4) & 1;
 	} else {

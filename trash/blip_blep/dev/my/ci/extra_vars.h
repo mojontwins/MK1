@@ -57,5 +57,5 @@ signed int p_thrust;
 
 #define P_THRUST_ADD 			16
 #define P_THRUST_MAX 			384
-#define P_BREAK_VELOCITY_OFFSET 192
+#define P_BREAK_VELOCITY_OFFSET 128
 #define P_WATER_FRICTION		16
