@@ -192,18 +192,46 @@ Aquí tenéis un motor de movimiento parecido a subaquatic (que no era **MTE MK1
 
 ```c
     // config.h
+    //#define PLAYER_HAS_JUMP                   // If defined, player is able to jump.
+    //#define PLAYER_HAS_JETPAC                 // If defined, player can thrust a vertical jetpac
+    //#define PLAYER_BOOTEE                     // Always jumping engine. Don't forget to disable "HAS_JUMP" and "HAS_JETPAC"!!!
+    //#define PLAYER_VKEYS                      // Use with VENG_SELECTOR. Advanced.
+    #define PLAYER_DISABLE_GRAVITY              // Disable gravity. Advanced.
+
+    [...]
+
+    #define PLAYER_MAX_VX               128     // Max velocity
+    #define PLAYER_AX                   32      // Acceleration
+    #define PLAYER_RX                   64      // Friction
 ```
 
 ```c
     // extra_vars.h
+
+    #define P_MAX_VY_FLOATING           128
+    #define P_AY_FLOATING               16
+    #define P_MAX_VY_DIVING             128
+    #define P_AY_DIVING                 32
 ```
 
 ```c
     // custom_veng.h
+
+    if ((pad0 & sp_DOWN) == 0) {
+        // Dive
+        p_vy += P_AY_DIVING;
+        if (p_vy > P_MAX_VY_DIVING) p_vy = P_MAX_VY_DIVING;
+    } else {
+        // Float
+        p_vy -= P_AY_FLOATING;
+        if (p_vy < -P_MAX_VY_FLOATING) p_vy = -P_MAX_VY_FLOATING;
+    }
 ```
 
 ```c
     // custom_animation.h
+
+
 ```
 
 ## Y esto es todo.

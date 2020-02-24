@@ -177,11 +177,22 @@
 			ld  (_rdn), a 				// Substitute
 			inc hl
 
-			// Above/Below or same?
+			// Command decode is ---RLDUN
+
+			// If Command & 00001010 == 0 -> same
 			ld  a, c
-			and 2
+			and 10
 			jr  z, _mcd_ep_check_same
-			
+
+			// Now start with gpit
+			ld  a, (_gpit)
+			ld  b, a 					// B = _gpit
+
+			ld  a, c
+			and 6 						// 000 xxAAx ?
+			jr  z, _mcd_ep_check_vert_done
+
+		._mcd_ep_check_vert
 			ld  a, c
 			and 4
 			jr  z, _mcd_ep_check_above
@@ -189,21 +200,41 @@
 		._mcd_ep_check_below
 			ld  a, (_gpit)
 			cp  135
-			jr  nc, _mcd_ep_inner_loop 	// Does not apply. Next.
-
+			jr  nc, _mcd_ep_vert_done
 			add 15
-			jr  _mcd_ep_docheck
+			ld  b, a
+			jr  _mcd_ep_vert_done
 
 		._mcd_ep_check_above
 			ld  a, (_gpit)
 			cp  15
-			jr  c, _mcd_ep_inner_loop	// Does not apply. Next.
-
+			jr  c, _mcd_ep_vert_done
 			sub 15
+			ld  b, a			
+
+		._mcd_ep_check_vert_done
+
+		._mcd_ep_check_horz
+			ld  a, c
+			and 8
+			jr  z, _mcd_ep_check_left
+
+		._mcd_ep_check_right
+			inc b
+			jr  _mcd_ep_check_horz_done
+
+		._mcd_ep_check_left
+			dec b
+
+		._mcd_ep_check_horz_done
+			; If not moved, skip
+			ld  a, (_gpit)
+			cp  b
+			jr  z, _mcd_ep_inner_loop
 
 		._mcd_ep_docheck
 			ld  d, 0
-			ld  e, a
+			ld  e, b
 
 			push hl
 			ld  hl, _map_attr
