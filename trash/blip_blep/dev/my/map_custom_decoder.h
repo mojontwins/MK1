@@ -160,7 +160,7 @@
 			ld  c, a 					// C -> Tile number
 			ld  a, (__t) 				// A -> Current tile number
 			cp  c
-			jr  nz, _mcd_ep_next		// Not this one
+			jp  nz, _mcd_ep_next		// Not this one
 
 			inc hl
 			
@@ -200,15 +200,15 @@
 		._mcd_ep_check_below
 			ld  a, (_gpit)
 			cp  135
-			jr  nc, _mcd_ep_vert_done
+			jr  nc, _mcd_ep_check_vert_done
 			add 15
 			ld  b, a
-			jr  _mcd_ep_vert_done
+			jr  _mcd_ep_check_vert_done
 
 		._mcd_ep_check_above
 			ld  a, (_gpit)
 			cp  15
-			jr  c, _mcd_ep_vert_done
+			jr  c, _mcd_ep_check_vert_done
 			sub 15
 			ld  b, a			
 
