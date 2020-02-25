@@ -165,8 +165,7 @@
 			inc hl
 			
 			ld  a, (hl)
-			ld  c, a
-			ld  (_rdc), a 				// Command
+			ld  c, a 					// Command
 			inc hl
 
 			ld  a, (hl)
@@ -313,7 +312,6 @@
 			ld  (_gpit), a
 			cp  150
 			jp  nz, _mcd_ep_outter_loop
-
 	#endasm
 
 // Step 4: Render buffer and build map_attr
