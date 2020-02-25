@@ -179,9 +179,9 @@
 
 			// Command decode is ---RLDUN
 
-			// If Command & 00001010 == 0 -> same
+			// If Command == 0 -> same
 			ld  a, c
-			and 10
+			or  a
 			jr  z, _mcd_ep_check_same
 
 			// Now start with gpit
@@ -189,7 +189,7 @@
 			ld  b, a 					// B = _gpit
 
 			ld  a, c
-			and 6 						// 000 xxAAx ?
+			and 2 						// 000 xxAAx ?
 			jr  z, _mcd_ep_check_vert_done
 
 		._mcd_ep_check_vert
@@ -213,10 +213,14 @@
 			ld  b, a			
 
 		._mcd_ep_check_vert_done
+		
+			ld  a, c
+			and 8
+			jr  z, _mcd_ep_check_horz_done
 
 		._mcd_ep_check_horz
 			ld  a, c
-			and 8
+			and 16
 			jr  z, _mcd_ep_check_left
 
 		._mcd_ep_check_right

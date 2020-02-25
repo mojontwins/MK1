@@ -8,30 +8,37 @@
 
 	- t = tile to substitute
 	- C = command:
-			0 - 000 - substitute if equal
-			2 - 010 - substitute if above is equal to
-			3 - 011 - substitute if above is different to
-			6 - 110 - substitute if below is equal to
-			7 - 111 - substitute if below is different to
+			00000 - substitute if equal
+			--010 - substitute if above is equal to
+			--011 - substitute if above is different to
+			--110 - substitute if below is equal to
+			--111 - substitute if below is different to
+			01--0 - substitute if left is equal to
+			01--1 - substitute if left is different to
+			11--0 - substitute if right is equal to
+			11--1 - substitute if right is different to
+
+			Command is C_EQ|C_NEQ [OR C_UP|C_DOWN] [OR C_LEFT|C_RIGHT]
 	- p = parameter to compare (commands >= 2)
 	- s = substitute by, s + (rand () & (s >> 6))
 
 	Terminate with 0xff
 */
 
-#define C_IEQ 0
-#define C_AEQ 2
-#define C_ANE 3
-#define C_BEQ 6
-#define C_BNE 7
+#define C_EQ 	0
+#define C_NEQ 	1
+#define C_UP 	2
+#define C_DOWN  6
+#define C_LEFT  8
+#define C_RIGHT 24
 
 const unsigned char embellishments [] = {
-	1, C_BNE, 1, 3,			// 1 -> 3 if b != 1
-	1, C_IEQ, 0, 0x41, 		// 1 -> 1 + rand () & 1
-	5, C_ANE, 5, 4,			// 5 -> 4 if a != 5
-	5, C_BNE, 5, 6, 		// 5 -> 6 if b != 5
-	10, C_BNE, 10, 11, 		// 10 -> 11 if b != 10
-	29, C_ANE, 29, 28,		// 0 -> 29 if a == 28
+	 1, C_NEQ|C_DOWN ,  1,  3,			// 1 -> 3 if b != 1
+	 1, C_EQ         ,  0,  1 | 0x40,	// 1 -> 1 + rand () & 1
+	 5, C_NEQ|C_UP   ,  5,  4,			// 5 -> 4 if a != 5
+	 5, C_NEQ|C_DOWN ,  5,  6, 			// 5 -> 6 if b != 5
+	10, C_NEQ|C_DOWN , 10, 11, 			// 10 -> 11 if b != 10
+	29, C_NEQ|C_UP   , 29, 28,			// 29 -> 18 if a != 29
 	0xff
 };
 
