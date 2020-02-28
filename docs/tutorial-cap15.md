@@ -188,7 +188,7 @@ La macro que nos queda, `P_WATER_FRICTION`, la definimos igualmente en `my/ci/ex
 
 Aquí tenéis un motor de movimiento parecido a subaquatic (que no era **MTE MK1**, ni se le parecía), basado en este spriteset:
 
-
+![Subaquatic](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/15_sprites_subaquatic.png)
 
 ```c
     // config.h
@@ -231,7 +231,8 @@ Aquí tenéis un motor de movimiento parecido a subaquatic (que no era **MTE MK1
 ```c
     // custom_animation.h
 
-
+    rda = p_facing ? 0 : 4
+    if (p_vy > 0 || p_vx) rda += (maincounter >> 2) & 1;
 ```
 
 ## Y esto es todo.
