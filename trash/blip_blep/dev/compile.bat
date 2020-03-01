@@ -20,7 +20,7 @@ cd ..\dev
 if [%1]==[justscripts] goto :compile
 
 echo Convirtiendo mapa
-..\..\..\src\utils\rle53map_sp.exe in=..\map\mapa.map mk1h=assets\mapa.h out=mapa size=8,9 mk1locks > nul
+..\..\..\src\utils\rle53map_sp.exe in=..\map\mapa.map mk1h=assets\mapa.h out=mapa size=8,9 tlock=15 mk1locks > nul
 ..\..\..\src\utils\printsize.exe mapa.map.bin
 
 echo Convirtiendo enemigos/hotspots
