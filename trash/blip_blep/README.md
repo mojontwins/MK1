@@ -112,13 +112,13 @@ El tile 0 de la imagen es el tile número 1 del tileset. Cuando el embellecedor 
 
 |t|C|p|s
 |---|---|---|---
-|1|`C_NEQ|C_DOWN`|1|3
+|1|`C_NEQ OR C_DOWN`|1|3
 
 En esta regla, el comando `C` vale `C_NEQ|C_DOWN` que significa "que el tile de debajo sea distinto de", y el parámetro `p` es 1. Por tanto esta regla de sustitución se cumplirá cuando el tile actual valga 1 (`t`), y el tile de abajo (según `C`) sea distinto de 1 (`p`). En este caso no se cumple, ya que el tile que hay debajo del tile 0 también vale 1, por lo que pasaremos a la siguiente regla, que es:
 
 |t|C|p|s
 |---|---|---|---
-|1|`C_EQ`|0|`1|0x40`
+|1|`C_EQ`|0|`1 OR 0x40`
 
 Las reglas que solo son `C_EQ` se cumplen siempre y no comparan con nada. En este caso `s` vale `1|0x40` que significa 1 más un número aleatorio que puede ser 0 o 1. Esto sirve para alternar entre los dos tipos de piedra (tiles 1 y 2) de forma aleatoria.
 
@@ -128,7 +128,7 @@ El tile siguiente (el 1) es igual, y se actuaría igual. Se escribiría 1 o 2, a
 
 |t|C|p|s
 |---|---|---|---
-|1|`C_NEQ|C_DOWN`|1|3
+|1|`C_NEQ OR C_DOWN`|1|3
 
 se cumpliría, pues "el tile de abajo es distinto de" (`C`) 1 (`p`). Por lo tanto, el tile que se escribiría en `map_buff` será 3 (el valor de `s`).
 
