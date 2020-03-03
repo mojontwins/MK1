@@ -121,13 +121,21 @@ Si tienes varios, puedes saber cuál es llamando a `qtile (p_tx, p_ty)` o consul
 
 En estos puntos de inyección de código el tile está en `(_x, _y)` (coordenadas de tile), y `gpaux` contiene `COORDS(_x, _y)` precalculado. `brk_buff [gpaux]` es el número de golpes que lleva el tile.
 
-### `on_breakable_hit.h`
+### `on_wall_hit.h`
 
 Se ejecuta siempre que golpeemos un tile rompiscible y aún le quede más energía.
 
-### `on_breakable_break.h`
+### `on_wall_break.h`
 
 Se ejecuta siempre que golpeemos un tile rompiscible y desaparezca finalmente.
+
+### `custom_emnems_player_collision.h`
+
+Se ejecuta tras la detección de las plataformas, y antes de la colisión normal jugador-enemigos. Esto significa que si tu colisión hace cosas que evitan que el jugador se muera, deberás saltarte la comprobación estándar con un bonito:
+
+```c
+	goto player_enem_collision_done;
+```
 
 ## Miscelánea
 
