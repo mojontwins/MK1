@@ -26,24 +26,24 @@ En el segundo paso copiamos el contenido de un array de 150 tiles representando 
 
 ```c
 
-	// extra_vars.h
+    // extra_vars.h
 
-	[...]
+    [...]
 
-	// Custom backdrop
+    // Custom backdrop
 
-	const unsigned char backdrop [] = {
-		00, 00, 33, 35, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34,
-		00, 33, 35, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34, 35,
-		36, 38, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34, 35, 00,
-		00, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34, 35, 00, 33,
-		00, 33, 34, 35, 33, 35, 36, 38, 00, 33, 34, 35, 00, 33, 35,
-		33, 34, 35, 36, 38, 00, 00, 00, 33, 34, 35, 00, 33, 35, 00,
-		37, 38, 00, 00, 00, 00, 00, 33, 34, 35, 00, 36, 38, 00, 33,
-		00, 00, 00, 00, 00, 00, 36, 37, 38, 00, 00, 00, 00, 33, 35,
-		00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 36, 38, 00,
-		00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00
-	};
+    const unsigned char backdrop [] = {
+        00, 00, 33, 35, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34,
+        00, 33, 35, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34, 35,
+        36, 38, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34, 35, 00,
+        00, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34, 35, 00, 33,
+        00, 33, 34, 35, 33, 35, 36, 38, 00, 33, 34, 35, 00, 33, 35,
+        33, 34, 35, 36, 38, 00, 00, 00, 33, 34, 35, 00, 33, 35, 00,
+        37, 38, 00, 00, 00, 00, 00, 33, 34, 35, 00, 36, 38, 00, 33,
+        00, 00, 00, 00, 00, 00, 36, 37, 38, 00, 00, 00, 00, 33, 35,
+        00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 36, 38, 00,
+        00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00
+    };
 ```
 
 ### Tercer paso: *embellish* 
@@ -51,7 +51,7 @@ En el segundo paso copiamos el contenido de un array de 150 tiles representando 
 El siguiente paso se trata de coger la información de `map_attr`, decorarla automáticamente, y escribirla en `map_buff`. Para eso utilizamos un sistema de sustituciones basadas en el contexto que puedes reutilizar todo lo que quieras. Se basa en una serie de reglas de 4 bytes que tienen este formato (y que definimos en `my/ci/extra_vars.h`):
 
 ```
-	t, C, p, s, ..., 0xff
+    t, C, p, s, ..., 0xff
 ```
 
 * `t` es el tile que hay que sustituir (si se cumple la regla).
@@ -76,12 +76,12 @@ La regla de comparación es un valor de 5 bits que se organiza así:
 Como habrás adivinado (o no) los movimientos horizontal y vertical se pueden combinar, por lo que un valor por ejemplo `01011` significa *sustituir si el tile de arriba a la izquierda es diferente de*. Para hacer todo más legible se definen estas macros que se pueden combinar entre sí para formar todos los valores:
 
 ```c
-	#define C_EQ 	0
-	#define C_NEQ 	1
-	#define C_UP 	2
-	#define C_DOWN  6
-	#define C_LEFT  8
-	#define C_RIGHT 24
+    #define C_EQ    0
+    #define C_NEQ   1
+    #define C_UP    2
+    #define C_DOWN  6
+    #define C_LEFT  8
+    #define C_RIGHT 24
 ```
 
 La rutina va recorriendo los valores temporales de `map_attr` uno a uno e iterando sobre la lista de sustituciones. Si el valor actual corresponde a `t`, realiza la comparación entre tile que le diga `C` y `p`. Si se cumple, escribe en `map_buff` el valor `s`; si no, escribe `t`. En cuanto hace una sustitución deja de iterar por la lista de sustituciones y pasa al siguiente tile.
@@ -91,17 +91,17 @@ Las sustituciones (`s`) pueden llevar levantados los bits 6 y 7. Si esto ocurre,
 La lista de todas las sustituciones está en el array `embellishments` de `my/ci/extra_vars.h`. Vamos a ver un par de ellos para ilustrar mejor como funciona esto.
 
 ```c
-	// extra_vars.h
+    // extra_vars.h
 
-	const unsigned char embellishments [] = {
-		 1, C_NEQ|C_DOWN ,  1,  3,			// 1 -> 3 if b != 1
-		 1, C_EQ         ,  0,  1 | 0x40,	// 1 -> 1 + rand () & 1
-		 5, C_NEQ|C_UP   ,  5,  4,			// 5 -> 4 if a != 5
-		 5, C_NEQ|C_DOWN ,  5,  6, 			// 5 -> 6 if b != 5
-		10, C_NEQ|C_DOWN , 10, 11, 			// 10 -> 11 if b != 10
-		29, C_NEQ|C_UP   , 29, 28,			// 29 -> 18 if a != 29
-		0xff
-	};
+    const unsigned char embellishments [] = {
+         1, C_NEQ|C_DOWN ,  1,  3,          // 1 -> 3 if b != 1
+         1, C_EQ         ,  0,  1 | 0x40,   // 1 -> 1 + rand () & 1
+         5, C_NEQ|C_UP   ,  5,  4,          // 5 -> 4 if a != 5
+         5, C_NEQ|C_DOWN ,  5,  6,          // 5 -> 6 if b != 5
+        10, C_NEQ|C_DOWN , 10, 11,          // 10 -> 11 if b != 10
+        29, C_NEQ|C_UP   , 29, 28,          // 29 -> 18 if a != 29
+        0xff
+    };
 ```
 
 El proceso recorre, como hemos dicho, todos los tiles *temporales* de la pantalla en orden (esto es, de izquierda a derecha y de arriba a abajo). Veremos que pasa con los tiles 0 y 2, por ejemplo:
@@ -149,10 +149,10 @@ En este último paso se coge el contenido de `map_buff`, se rellena en base a é
 Empleamos el punto de inyección de código `my/ci/on_wall_hit.h` para sustituir los tiles que se están rompiendo por otro gráfico. Este punto de inyección se ejecuta cuando hemos golpeado un tile sin romperlo, así que es ideal para esto:
 
 ```c
-	// on_wall_hit.h
+    // on_wall_hit.h
 
-	// _x, _y contain the tile coordinates.
-	_t = 27; draw_invalidate_coloured_tile_gamearea ();
+    // _x, _y contain the tile coordinates.
+    _t = 27; draw_invalidate_coloured_tile_gamearea ();
 ```
 
 ## Matar bichos a cabezazos
@@ -168,16 +168,16 @@ Esto tiene un problema: como no está activado ninguno de los motores de "matar 
 
 ```c
 
-	// extra_vars.h
+    // extra_vars.h
 
-	[...]
+    [...]
 
-	// Add the explosion manually
+    // Add the explosion manually
 
-	extern unsigned char sprite_17_a []; 
-	#asm
-	    ._sprite_17_a
-	        BINARY "sprites_extra.bin"
-	#endasm
+    extern unsigned char sprite_17_a []; 
+    #asm
+        ._sprite_17_a
+            BINARY "sprites_extra.bin"
+    #endasm
 ```
 
