@@ -22,10 +22,20 @@ if ((pad0 & sp_FIRE) == 0) {
 #ifdef BREAKABLE_WALLS
 	// Detect head
 	if (p_vy < -P_BREAK_VELOCITY_OFFSET) {
-		_x = (gpx + 8) >> 4; _y = (gpy - 1) >> 4;
-		if (attr (_x, _y) & 16) {
+		cx1 = ptx1; cx2 = ptx2;
+		cy1 = cy2 = (gpy - 1) >> 4;
+		cm_two_points ();
+
+		if (at1 & 16) {
+			_x = cx1; _y = cy1;
 			break_wall ();
-			p_vy = -p_vy;
+			p_vy = P_BREAK_VELOCITY_OFFSET;
+		}
+
+		if (at1 != at2 && (at2 & 16)) {
+			_x = cx2; _y = cy2;
+			break_wall ();
+			p_vy = P_BREAK_VELOCITY_OFFSET;
 		}
 	}
 #endif

@@ -124,7 +124,7 @@
 //#define INITIAL_AMMO				20		// If defined, ammo = X when entering game.
 
 #define BREAKABLE_WALLS						// Breakable walls
-#define BREAKABLE_WALLS_LIFE		2		// Amount of hits to break wall
+#define BREAKABLE_WALLS_LIFE		1		// Amount of hits to break wall
 
 // Scripting
 // ---------
