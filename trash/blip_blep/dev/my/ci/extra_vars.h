@@ -66,3 +66,11 @@ signed int p_thrust;
 #define P_THRUST_MAX 			384
 #define P_BREAK_VELOCITY_OFFSET 128
 #define P_WATER_FRICTION		16
+
+// Add the explosion manually
+
+extern unsigned char sprite_17_a []; 
+#asm
+    ._sprite_17_a
+        BINARY "sprites_extra.bin"
+#endasm

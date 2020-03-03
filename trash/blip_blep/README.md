@@ -6,7 +6,7 @@ TODO description
 
 ## Custom vEng
 
-Este güego emplea un motor de eje vertical personalizado que podrás ver descrito en el capítulo 15 del Tutorial de **MTE MK1**.
+Este güego emplea un motor de eje vertical personalizado que podrás ver descrito en el [capítulo 15 del Tutorial de **MTE MK1**](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap15.md).
 
 ## Custom map renderer
 
@@ -22,7 +22,29 @@ Para esta parte usamos el decompresor de RLE en su versión RLE53 (5 bits de nú
 
 ### Segundo paso, *backdrop*
 
-En el segundo paso copiamos el contenido de un array de 150 tiles representando el fondo marino en `map_buff`.
+En el segundo paso copiamos el contenido de un array de 150 tiles representando el fondo marino en `map_buff`. Este array está definido en `my/ci/extra_vars.h`:
+
+```c
+
+	// extra_vars.h
+
+	[...]
+
+	// Custom backdrop
+
+	const unsigned char backdrop [] = {
+		00, 00, 33, 35, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34,
+		00, 33, 35, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34, 35,
+		36, 38, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34, 35, 00,
+		00, 00, 33, 34, 35, 33, 35, 33, 35, 00, 33, 34, 35, 00, 33,
+		00, 33, 34, 35, 33, 35, 36, 38, 00, 33, 34, 35, 00, 33, 35,
+		33, 34, 35, 36, 38, 00, 00, 00, 33, 34, 35, 00, 33, 35, 00,
+		37, 38, 00, 00, 00, 00, 00, 33, 34, 35, 00, 36, 38, 00, 33,
+		00, 00, 00, 00, 00, 00, 36, 37, 38, 00, 00, 00, 00, 33, 35,
+		00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 36, 38, 00,
+		00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00, 00
+	};
+```
 
 ### Tercer paso: *embellish* 
 
@@ -114,6 +136,8 @@ Y así con todos los tiles y todas las reglas. Como cuando se cumple una regla y
 
 Los tiles resultantes de aplicar las reglas se escribirán en `map_buff` si son distintos de 0, y así se verá el fondo que pusimos en el paso 2.
 
+Aquí tenéis el [documento de diseño original del *embellisher*](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/XX_embellisher.pdf) (!)
+
 ### Cuarto paso: *render*
 
 En este último paso se coge el contenido de `map_buff`, se rellena en base a él `map_attr` con los comportamientos de tile correspondientes (de `behs`) y se pintan los tiles, sin invalidar, en la pantalla. Y con esto tendríamos compuesta nuestra imagen:
@@ -138,5 +162,22 @@ Emplearemos la misma macro que usamos para determinar que la velocidad era sufic
 Detectaremos la colisión de la parte superior de la cabeza del choco con el cuadro de colisión del enemigo y, si se registra esta colisión, llamaremos a `enems_kill` y rebotaremos al choco. No nos debemos olvidar de hacer un `goto player_enem_collision_done;` al final para saltarnos la colisión normal, o si no el choco también perderá vida:
 
 ```c
+```
+
+Esto tiene un problema: como no está activado ninguno de los motores de "matar enemigos" por defecto no se estará incluyendo el sprite de la explosión (`sprite_17_a`). Para solucionarlo, lo añadimos a mano en `my/ci/extra_vars.h`:
+
+```c
+
+	// extra_vars.h
+
+	[...]
+
+	// Add the explosion manually
+
+	extern unsigned char sprite_17_a []; 
+	#asm
+	    ._sprite_17_a
+	        BINARY "sprites_extra.bin"
+	#endasm
 ```
 

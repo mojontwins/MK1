@@ -360,6 +360,7 @@ HOTSPOT hotspots [] = {
 	{0, 0, 0}, 
 	{0, 0, 0}, 
 	{0, 0, 0}, 
+	{52, 1, 0}, 
 	{0, 0, 0}, 
 	{0, 0, 0}, 
 	{0, 0, 0}, 
@@ -397,6 +398,16 @@ HOTSPOT hotspots [] = {
 	{0, 0, 0}, 
 	{0, 0, 0}, 
 	{0, 0, 0}, 
+	{35, 2, 0}, 
+	{0, 0, 0}, 
+	{0, 0, 0}, 
+	{0, 0, 0}, 
+	{0, 0, 0}, 
+	{0, 0, 0}, 
+	{0, 0, 0}, 
+	{0, 0, 0}, 
+	{0, 0, 0}, 
+	{130, 1, 0}, 
 	{0, 0, 0}, 
 	{0, 0, 0}, 
 	{0, 0, 0}, 
@@ -406,23 +417,12 @@ HOTSPOT hotspots [] = {
 	{0, 0, 0}, 
 	{0, 0, 0}, 
 	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}, 
-	{0, 0, 0}
+	{118, 1, 0}
 };
 
-#define N_HOTSPOTS_TYPE_0 64
-#define N_HOTSPOTS_TYPE_1 0
-#define N_HOTSPOTS_TYPE_2 0
+#define N_HOTSPOTS_TYPE_0 60
+#define N_HOTSPOTS_TYPE_1 3
+#define N_HOTSPOTS_TYPE_2 1
 #define N_HOTSPOTS_TYPE_3 0
 #define N_HOTSPOTS_TYPE_4 0
 #define N_HOTSPOTS_TYPE_5 0
