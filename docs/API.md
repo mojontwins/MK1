@@ -63,25 +63,25 @@ Hay un array principal: `malotes` viene del archivo `.ene` convertido y es una e
 * `malotes`: Información general (persistente) de todos los enemigos del nivel actual. Se trata de un array de structs `MALOTE` con esta definición:
 
 ```c
-	typedef struct {
-		unsigned char x, y;
-		unsigned char x1, y1, x2, y2;
-		char mx, my;
-		char t;
-	#ifdef PLAYER_CAN_FIRE
-		unsigned char life;
-	#endif
-	} MALOTE;
+    typedef struct {
+        unsigned char x, y;
+        unsigned char x1, y1, x2, y2;
+        char mx, my;
+        char t;
+    #ifdef PLAYER_CAN_FIRE
+        unsigned char life;
+    #endif
+    } MALOTE;
 ```
 
 * `enit`: Se utiliza siempre para iterar enemigos. En los puntos de inyección de código que se incluyen dentro de bucles de enemigos (`enems_load.h`, `enems_move.h`, `on_enems_killed`), siempre apunta al enemigo actual que se está procesando.
 * `en_an_base_frame [3]`: Frame base (0, 2, 4 o 6) de los enemigos. Sirven para construir índices de la tabla `enem_cells`, que contiene punteros a los 8 gráficos de los enemigos:
 
 ```c
-	const unsigned char *enem_cells [] = {
-		sprite_9_a, sprite_10_a, sprite_11_a, sprite_12_a, 
-		sprite_13_a, sprite_14_a, sprite_15_a, sprite_16_a
-	};
+    const unsigned char *enem_cells [] = {
+        sprite_9_a, sprite_10_a, sprite_11_a, sprite_12_a, 
+        sprite_13_a, sprite_14_a, sprite_15_a, sprite_16_a
+    };
 ```
 
 * `en_an_frame [3]`, `en_an_count` se utilizan para animar a los enemigos normales. Cada 4 frames (contadas por `en_an_count`), el valor de cada `en_an_frame` alterna entre 0 y 1. `en_an_count` También se utiliza como contador de frames mientras se muestra la explosión en modo 128K.
@@ -122,9 +122,9 @@ Para ahorrar tiempo y memoria (y hacer que el posible paso a ensamble se más se
 Los hotspots del nivel actual se almacenan en un array `hotspots` de estructuras `HOTSPOT` que tiene estos miembros:
 
 ```c
-	typedef struct {
-		unsigned char xy, tipo, act;
-	} HOTSPOT;
+    typedef struct {
+        unsigned char xy, tipo, act;
+    } HOTSPOT;
 ```
 
 Si el hotspot de la pantalla actual está activo (no se ha recogido y es distinto de 0), entonces:
@@ -233,9 +233,9 @@ Imprime el contenido de una cadena o cualquier buffer terminado en 0 en pantalla
 Recordemos que podemos hacer algo así en C y que z88dk el quisquilloso se lo come:
 
 ```c
-	_x = 2; _y = 2; _t = 6;
-	_gp_gen = "OLA K ASE";
-	print_str ();
+    _x = 2; _y = 2; _t = 6;
+    _gp_gen = "OLA K ASE";
+    print_str ();
 ```
 
 #### `void blackout_area (void)`
@@ -275,9 +275,9 @@ Actualiza el sprite del enemigo `enit` a la posición `_en_x`, `_en_y` y cambia 
 Mata al enemigo `enit` (levanta el bit 4 de `_en_t`). Nótese que si se llama desde fuera el bucle principal de enemigos habrá que dar un valor correcto a `_en_t` antes de llamar y actualizar el array `malotes` después:
 
 ```c 
-	_en_t = malotes [enoffs + enit].t;
-	enems_kill ();
-	malotes [enoffs + enit].t = _en_t;
+    _en_t = malotes [enoffs + enit].t;
+    enems_kill ();
+    malotes [enoffs + enit].t = _en_t;
 ```
 
 ### Jugador
@@ -375,14 +375,14 @@ Para ello llamaremos a la rutina `spPrintAtInv` que recibe los siguientes parám
 Por ejemplo, para imprimir una A color azul sobre cyan en la posición 7, 8:
 
 ```c
-	#asm
-			ld  a, 8
-			ld  c, 7
-			ld  d, 5*8+1
-			ld  e, 33
+    #asm
+            ld  a, 8
+            ld  c, 7
+            ld  d, 5*8+1
+            ld  e, 33
 
-			call spPrintAtInv
-	#endasm
+            call spPrintAtInv
+    #endasm
 ```
 
 #### Vamos a imprimir muchos caracteres juntos
@@ -425,9 +425,9 @@ En cada frame leemos los controles y los escribimos en la variable `pad0`. Los c
 Por ejemplo, para comprobar si se está pulsando 'abajo':
 
 ```c
-	if ((pad0 & sp_DOWN) == 0) {
-		// Estamos pulsando "abajo"
-	}
+    if ((pad0 & sp_DOWN) == 0) {
+        // Estamos pulsando "abajo"
+    }
 ```
 
 ## Cómo hacer...
@@ -437,14 +437,14 @@ Por ejemplo, para comprobar si se está pulsando 'abajo':
 Para hacer que el nivel termine satisfactoriamente habrá que...
 
 ```c
-	success = 1;
-	playing = 0;
+    success = 1;
+    playing = 0;
 ```
 
 Para producir un *game over* inmediato, simplemente:
 
 ```c 
-	success = playing = 0;
+    success = playing = 0;
 ```
 
 ## ¿Algo más?

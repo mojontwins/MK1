@@ -43,15 +43,15 @@ Se ejecuta al salir del bucle principal del juego. Aquí podremos jugar con los 
 Sirve para añadir nuevos tipos de hotspots. El código que añadas a este archivo se añadirá al `switch` que comprueba el tipo de hotspot cuando el jugador lo ha tocado, por lo que deberás añadir tu código en forma de nuevos `case` directamente:
 
 ```c
-	case 7:
-		// Mi implementación del hotspot de tipo 7
-		beep_fx (7);
-		break;
+    case 7:
+        // Mi implementación del hotspot de tipo 7
+        beep_fx (7);
+        break;
 
-	case 8: 
-		// Otro hotspot especial que añado
-		++ flags [8];
-		break;
+    case 8: 
+        // Otro hotspot especial que añado
+        ++ flags [8];
+        break;
 ```
 
 Recuerda que a partir del número 4 (inclusive) el hotspot N se dibuja con el tile 16+N. Tienes un ejemplo de hotspots personalizados en el postmortem del port a v5 del **Godkiller 2** original [aquí](https://github.com/mojontwins/MK1/tree/master/contrib/godkiller_2).
@@ -63,10 +63,10 @@ Recuerda que a partir del número 4 (inclusive) el hotspot N se dibuja con el ti
 Junto con `enems_move.h`, sirve para añadir nuevos tipos de enemigos. El código que añadas a este archivo se añadirá al `switch` que comprueba el tipo de enemigo por si hay que inicializar algún valor especial cada vez que se entra en una pantalla, por lo que deberás añadir tu código en forma de nuevos `case` directamente, por ejemplo:
 
 ```c
-	case 5:
-		// This enemy type has a fixed base frame: 
-		en_an_base_frame [enit] = 4;
-		break;
+    case 5:
+        // This enemy type has a fixed base frame: 
+        en_an_base_frame [enit] = 4;
+        break;
 ```
 
 ### `enems_move.h`
@@ -74,10 +74,10 @@ Junto con `enems_move.h`, sirve para añadir nuevos tipos de enemigos. El códig
 Junto con `enems_init.h`, sirve para añadir nuevos tipos de enemigos. El código que añadas a este archivo se añadirá al `switch` que comprueba el tipo de enemigo para saber cómo debe moverlo durante el bucle de juego, por lo que deberás añadir tu código en forma de nuevos `case` directamente, por ejemplo: 
 
 ```c
-	case 5:
-		// static, idle, dummy enemy
-		active = 1;
-		break;
+    case 5:
+        // static, idle, dummy enemy
+        active = 1;
+        break;
 ```
 
 En este punto, `enit` es el número de enemigo, `enoffsmasi` su índice general dentro del array `malotes`,  y sus valores estáran copiados en `_en_x`, `_en_y`, `_en_mx`, `_en_my`, `_en_x1`, `_en_y1`, `_en_x2`, `_en_y2`, `_en_t` y `_en_life`. Para que el enemigo sea interactuable (se pueda matar o colisionar) habrá que poner `active` a 1.
@@ -87,8 +87,8 @@ En este punto, `enit` es el número de enemigo, `enoffsmasi` su índice general 
 Se incluye al final del bucle que carga los enemigos, tras haberles puesto todos los valores necesarios para su inicialización, y te permite modificar lo que necesites. Por ejemplo puedes hacer que los enemigos reinicien su posición inicial al entrar en cada pantalla añadiendo este código:
 
 ```c
-	malotes [enoffsmasi].x = malotes [enoffsmasi].x1;
-	malotes [enoffsmasi].y = malotes [enoffsmasi].x2;
+    malotes [enoffsmasi].x = malotes [enoffsmasi].x1;
+    malotes [enoffsmasi].y = malotes [enoffsmasi].x2;
 ```
 
 ### `on_enems_killed.h`
@@ -98,9 +98,9 @@ Se ejecuta cada vez que el jugador elimina un enemigo, al igual que la sección 
 Nótese que este CIP se incluye después de haber marcado al enemigo como *muerto*. La marca de *muerto* se hace levantándole el bit 4, o sea, haciéndole `|16`. Es por esto que si quieres comprobar el tipo del enemigo que acaba de matar tendrás que comparar `_en_t` con el número que quieras levantándole el bit 4. Por ejemplo, para ver si has matado al tipo 2:
 
 ```c
-	if (_en_t == (2|16)) {
-		[...]
-	}
+    if (_en_t == (2|16)) {
+        [...]
+    }
 ```
 
 ¡No olvides los paréntesis!
@@ -134,7 +134,7 @@ Se ejecuta siempre que golpeemos un tile rompiscible y desaparezca finalmente.
 Se ejecuta tras la detección de las plataformas, y antes de la colisión normal jugador-enemigos. Esto significa que si tu colisión hace cosas que evitan que el jugador se muera, deberás saltarte la comprobación estándar con un bonito:
 
 ```c
-	goto player_enem_collision_done;
+    goto player_enem_collision_done;
 ```
 
 ## Miscelánea
