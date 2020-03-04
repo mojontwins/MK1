@@ -162,6 +162,27 @@ Emplearemos la misma macro que usamos para determinar que la velocidad era sufic
 Detectaremos la colisión de la parte superior de la cabeza del choco con el cuadro de colisión del enemigo y, si se registra esta colisión, llamaremos a `enems_kill` y rebotaremos al choco. No nos debemos olvidar de hacer un `goto player_enem_collision_done;` al final para saltarnos la colisión normal, o si no el choco también perderá vida:
 
 ```c
+    // custom_emnems_player_collision.h
+
+    cx2 = _en_x; cy2 = _en_y;
+    if (collide () && _en_y >= gpy - 8 && p_vy < -P_BREAK_VELOCITY_OFFSET) {
+        // animate death
+        en_an_next_frame [enit] = sprite_17_a;
+        enems_draw_current ();
+        sp_UpdateNow ();
+
+        beep_fx (5);
+        en_an_next_frame [enit] = sprite_18_a;  
+        
+        // Kill enemy
+        enems_kill ();
+
+        // Rebound player
+        p_vy = -p_vy;
+
+        // Skip normal collision
+        goto player_enem_collision_done;
+    }
 ```
 
 Esto tiene un problema: como no está activado ninguno de los motores de "matar enemigos" por defecto no se estará incluyendo el sprite de la explosión (`sprite_17_a`). Para solucionarlo, lo añadimos a mano en `my/ci/extra_vars.h`:
@@ -176,6 +197,14 @@ Esto tiene un problema: como no está activado ninguno de los motores de "matar 
 
     extern unsigned char sprite_17_a []; 
     #asm
+            defb 0, 255
+            defb 0, 255
+            defb 0, 255
+            defb 0, 255
+            defb 0, 255
+            defb 0, 255
+            defb 0, 255
+            defb 0, 255
         ._sprite_17_a
             BINARY "sprites_extra.bin"
     #endasm

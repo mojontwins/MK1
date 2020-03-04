@@ -10,7 +10,7 @@
 // goto player_enem_collision_done;
 
 cx2 = _en_x; cy2 = _en_y;
-if (collide () && _en_y >= gpx - 8) {
+if (collide () && _en_y >= gpy - 8 && p_vy < -P_BREAK_VELOCITY_OFFSET) {
 	// animate death
 	en_an_next_frame [enit] = sprite_17_a;
 	enems_draw_current ();

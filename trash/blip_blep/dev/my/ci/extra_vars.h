@@ -71,6 +71,14 @@ signed int p_thrust;
 
 extern unsigned char sprite_17_a []; 
 #asm
+        defb 0, 255
+        defb 0, 255
+        defb 0, 255
+        defb 0, 255
+        defb 0, 255
+        defb 0, 255
+        defb 0, 255
+        defb 0, 255
     ._sprite_17_a
         BINARY "sprites_extra.bin"
 #endasm

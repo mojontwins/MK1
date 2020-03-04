@@ -49,9 +49,9 @@
 
 //#define PLAYER_CHECK_MAP_BOUNDARIES		// If defined, you can't exit the map.
 #define DIRECT_TO_PLAY						// If defined, title screen is also the game frame.
-#define DEACTIVATE_KEYS						// If defined, keys are not present.
+//#define DEACTIVATE_KEYS					// If defined, keys are not present.
 //#define DEACTIVATE_OBJECTS				// If defined, objects are not present.
-//#define DEACTIVATE_REFILLS					// If defined, life refills are not present.
+//#define DEACTIVATE_REFILLS				// If defined, life refills are not present.
 //#define ONLY_ONE_OBJECT 					// If defined, only one object can be carried at a time.
 //#define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
 //#define REVERSE_OBJECTS_COUNT 			// Counts from PLAYER_NUM_OBJETOS to 0
@@ -64,7 +64,7 @@
 //#define WALLS_STOP_ENEMIES				// If defined, enemies react to the scenary
 //#define EVERYTHING_IS_A_WALL				// If defined, any tile <> type 0 is a wall, otherwise just 8.
 //#define BODY_COUNT_ON 			2		// If defined, count enemies on flag #
-//#define DISABLE_PLATFORMS 				// Disables platforms in side-view
+#define DISABLE_PLATFORMS 					// Disables platforms in side-view
 
 // Extra enemy types
 // -----------------

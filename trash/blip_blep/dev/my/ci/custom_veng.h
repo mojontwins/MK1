@@ -32,7 +32,7 @@ if ((pad0 & sp_FIRE) == 0) {
 			p_vy = P_BREAK_VELOCITY_OFFSET;
 		}
 
-		if (at1 != at2 && (at2 & 16)) {
+		if (cx1 != cx2 && (at2 & 16)) {
 			_x = cx2; _y = cy2;
 			break_wall ();
 			p_vy = P_BREAK_VELOCITY_OFFSET;

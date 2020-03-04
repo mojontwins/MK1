@@ -320,6 +320,7 @@
 	for (gpit = 0; gpit < 150; ++ gpit) {
 		_x = rdx; _y = rdy; _t = map_buff [gpit]; 
 		map_attr [gpit] = behs [_t];
+		brk_buff [gpit] = 0;
 		draw_coloured_tile_gamearea ();		
 		++ rdx; if (rdx == 15) { rdx = 0; ++ rdy; }
 	}
