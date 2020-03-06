@@ -117,6 +117,19 @@ Se ejecuta cuando el jugador toca un tile cuyo comportamiento tiene el bit 7 lev
 
 Si tienes varios, puedes saber cuál es llamando a `qtile (p_tx, p_ty)` o consultando el valor de `map_buff [COORDS(p_tx, p_ty)]`. Puede servir parar mil cosas, por ejemplo para implementar teletransportadores.
 
+### Colisiones con el fondo
+
+Se definen cuatro puntos de inserción de código cuando ocurre una colisión contra el escenario que detiene al jugador:
+
+```
+    bg_collision/obstacle_up.h
+    bg_collision/obstacle_down.h
+    bg_collision/obstacle_left.h
+    bg_collision/obstacle_right.h
+```
+
+El código se ejecuta justo ANTES de parar y posicionar bien al jugador. En este punto `p_vx` y `p_vy` aún tienen sus valores originales.
+
 ## Tiles rompiscibles
 
 En estos puntos de inyección de código el tile está en `(_x, _y)` (coordenadas de tile), y `gpaux` contiene `COORDS(_x, _y)` precalculado. `brk_buff [gpaux]` es el número de golpes que lleva el tile.

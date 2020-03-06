@@ -57,7 +57,6 @@ void player_init (void) {
 	#endif
 }
 
-
 void player_calc_bounding_box (void) {
 	#if defined (BOUNDING_BOX_8_BOTTOM)
 		#asm
@@ -298,6 +297,8 @@ unsigned char player_move (void) {
 		cm_two_points ();
 
 		if ((at1 & 8) || (at2 & 8)) {
+			#include "my/ci/bg_collision/obstacle_up.h"
+
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
 				p_vy = -(p_vy / 2);
 			#else
@@ -316,7 +317,7 @@ unsigned char player_move (void) {
 
 			p_y = gpy << 6;
 
-			#ifdef PLAYER_GENITAL
+			#if defined PLAYER_GENITAL || defined LOCKS_CHECK_VERTICAL
 				wall_v = WTOP;
 			#endif
 		}
@@ -340,6 +341,8 @@ unsigned char player_move (void) {
 			//if (((gpy - 1) & 15) < 7 && ((at1 & 12) || (at2 & 12))) {
 		#endif			
 		{
+			#include "my/ci/bg_collision/obstacle_down.h"
+
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
 				p_vy = -(p_vy / 2);
 			#else
@@ -356,7 +359,7 @@ unsigned char player_move (void) {
 
 			p_y = gpy << 6;
 			
-			#ifdef PLAYER_GENITAL
+			#if defined PLAYER_GENITAL || defined LOCKS_CHECK_VERTICAL
 				wall_v = WBOTTOM;
 			#endif
 		}
@@ -510,6 +513,8 @@ unsigned char player_move (void) {
 		cm_two_points ();
 
 		if ((at1 & 8) || (at2 & 8)) {
+			#include "my/ci/bg_collision/obstacle_left.h"
+
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
 				p_vx = -(p_vx / 2);
 			#else
@@ -528,6 +533,7 @@ unsigned char player_move (void) {
 		#ifndef DEACTIVATE_EVIL_TILE
 			else hit_h = ((at1 & 1) || (at2 & 1));
 		#endif
+
 	}
 
 	#if defined (PLAYER_GENITAL)
@@ -540,6 +546,8 @@ unsigned char player_move (void) {
 		cm_two_points ();
 
 		if ((at1 & 8) || (at2 & 8)) {
+			#include "my/ci/bg_collision/obstacle_right.h"
+
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
 				p_vx = -(p_vx / 2);
 			#else
@@ -558,6 +566,7 @@ unsigned char player_move (void) {
 		#ifndef DEACTIVATE_EVIL_TILE
 			else hit_h = ((at1 & 1) || (at2 & 1));
 		#endif
+
 	}
 
 	// Priority to decide facing
@@ -589,7 +598,7 @@ unsigned char player_move (void) {
 	}
 
 	#if defined (PLAYER_PUSH_BOXES) || !defined (DEACTIVATE_KEYS)
-		#ifdef PLAYER_GENITAL
+		#if defined PLAYER_GENITAL || defined LOCKS_CHECK_VERTICAL
 			if (wall_v == WTOP) {
 				// interact up			
 				#if defined (BOUNDING_BOX_8_BOTTOM)
