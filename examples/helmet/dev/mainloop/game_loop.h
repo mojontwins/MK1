@@ -11,7 +11,7 @@
 	#endif
 
 	#ifndef COMPRESSED_LEVELS		
-		#ifndef DEACTIVATE_KEYS
+		#if !defined DEACTIVATE_KEYS && MAX_CERROJOS > 0
 			locks_init ();
 		#endif
 	#endif
