@@ -58,7 +58,7 @@ El siguiente paso será comprimir todos los archivos `.mus`. Te recomiendo que t
 
 ## Efectos de sonido
 
-El siguiente paso será crear lo efectos de sonido. Quiero dar las gracias a **GreenWebSevilla** y a **thEpOpE** por sus contribuciones en este apartado: el primero por la creación de un (tutorial)[https://github.com/mojontwins/MK1/blob/master/docs/contribs/Manual%20FX%20para%20MK2%20con%20WYZ.pdf] con el proceso y el segundo por escribir la herramienta de conversión `WyzFx2Asm.exe` y las modificaciones necesarias a **WYZ Player** para que los efectos puedan usar el canal de ruido.
+El siguiente paso será crear lo efectos de sonido. Quiero dar las gracias a **GreenWebSevilla** y a **thEpOpE** por sus contribuciones en este apartado: el primero por la creación de un [tutorial](https://github.com/mojontwins/MK1/blob/master/docs/contribs/Manual%20FX%20para%20MK2%20con%20WYZ.pdf) con el proceso y el segundo por escribir la herramienta de conversión `WyzFx2Asm.exe` y las modificaciones necesarias a **WYZ Player** para que los efectos puedan usar el canal de ruido.
 
 Aunque obviamente todo es posible y te puedes poner a refinar esto muchísimo más, por defecto **MTE MK1** tiene la siguiente lista de sonidos numerados, como siempre, a partir de cero:
 
@@ -82,7 +82,7 @@ Aunque obviamente todo es posible y te puedes poner a refinar esto muchísimo m�
 
 La lista está compuesta por una serie de macros definidos en el archivo `assets/ay_fx_numbers.h`, por si alguna vez tienes la necesidad de cambiarlo o ampliarlo.
 
-Para cambiar los efectos de sonido tendremos que crear una lista de *efectos* equivalente en **WYZ Player**. El primer efecto se convertirá en el primer efecto de sonido (el 0, "START"), el segundo efecto en el segundo efecto de sonido, etcétera. Puedes encontrar más detalles sobre el tema en (el tutorial de **GreenWebSevilla**)[https://github.com/mojontwins/MK1/blob/master/docs/contribs/Manual%20FX%20para%20MK2%20con%20WYZ.pdf] y en el (manual de WYZ Tracker)[https://sites.google.com/site/augustoruiz/wyztracker#TOC-Editor-de-efectos]
+Para cambiar los efectos de sonido tendremos que crear una lista de *efectos* equivalente en **WYZ Player**. El primer efecto se convertirá en el primer efecto de sonido (el 0, "START"), el segundo efecto en el segundo efecto de sonido, etcétera. Puedes encontrar más detalles sobre el tema en [el tutorial de **GreenWebSevilla**](https://github.com/mojontwins/MK1/blob/master/docs/contribs/Manual%20FX%20para%20MK2%20con%20WYZ.pdf) y en el [manual de WYZ Tracker](https://sites.google.com/site/augustoruiz/wyztracker#TOC-Editor-de-efectos)
 
 Una vez que tengamos la lista creada, la grabaremos en formato `.fx`. El siguiente paso es convertirla a código ASM, y para ello emplearemos la herramienta de conversión `WyzFx2Asm.exe` de **thEpOpE**  que encontraremos en `/src/utils/`.
 
