@@ -95,38 +95,38 @@ Lo siguiente será montar nuestro playlist en el player. Para eso tenemos que ed
 Lo primero que hay que hacer es incluir todas las canciones comprimidas de nuestra OGT en orden, usando una etiqueta `SONG_n`, con `n` el número de orden empezando en 0, para cada una. Encontrarás donde hacerlo porque en el archivo originalmente hay un *stub* `SONG_0` que deberás eliminar para poner tu lista. Por ejemplo, para la OGT de **Goku Mal** nos quedaria así:
 
 ```asm
-	;; Las canciones tienen que estar comprimidas con aplib
-			    
-	SONG_0:
-		INCBIN "01_TITLE!.mus.bin"
-	SONG_1:
-		INCBIN "02_INTRO!!!.mus.bin"
-	SONG_2:
-		INCBIN "03_ZONE123!.mus.bin"
-	SONG_3:
-		INCBIN "04_FASE1.mus.bin"
-	SONG_4:
-		INCBIN "05_FASE2.mus.bin"
-	SONG_5:
-		INCBIN "06_FASE3.mus.bin"
-	SONG_6:
-		INCBIN "07_ZONE5!.mus.bin"
-	SONG_7:
-		INCBIN "08_FASE5.mus.bin"
-	SONG_8:
-		INCBIN "10_GAME_OVER!.mus.bin"
-	SONG_9:
-		INCBIN "09_ENDING!.mus.bin"
+    ;; Las canciones tienen que estar comprimidas con aplib
+                
+    SONG_0:
+        INCBIN "01_TITLE!.mus.bin"
+    SONG_1:
+        INCBIN "02_INTRO!!!.mus.bin"
+    SONG_2:
+        INCBIN "03_ZONE123!.mus.bin"
+    SONG_3:
+        INCBIN "04_FASE1.mus.bin"
+    SONG_4:
+        INCBIN "05_FASE2.mus.bin"
+    SONG_5:
+        INCBIN "06_FASE3.mus.bin"
+    SONG_6:
+        INCBIN "07_ZONE5!.mus.bin"
+    SONG_7:
+        INCBIN "08_FASE5.mus.bin"
+    SONG_8:
+        INCBIN "10_GAME_OVER!.mus.bin"
+    SONG_9:
+        INCBIN "09_ENDING!.mus.bin"
 ```
 
 Ahora hay que hacer un array con esas etiquetas para que el motor las pueda usar. Un poco más abajo verás la etiqueta `TABLA_SONG`. Ahí, tras el `DW`, deberás referenciar las etiquetas de todas tus canciones. Para **Goku Mal** queda así:
 
 ```asm
-	;; Añadir entradas para cada canción
-					
-	TABLA_SONG:     DW      SONG_0, SONG_1, SONG_2, SONG_3
-					DW      SONG_4, SONG_5, SONG_6, SONG_7
-					DW      SONG_8, SONG_9
+    ;; Añadir entradas para cada canción
+                    
+    TABLA_SONG:     DW      SONG_0, SONG_1, SONG_2, SONG_3
+                    DW      SONG_4, SONG_5, SONG_6, SONG_7
+                    DW      SONG_8, SONG_9
 ```
 
 Si no hemos alterado la lista de efectos de sonido, no tendremos que tocar nada más. Si sí que lo hemos hecho, habra que modificar la lista etiquetada como `TABLA_EFECTOS` para que aparezcan los efectos en orden. Por defecto sale así:
@@ -134,10 +134,10 @@ Si no hemos alterado la lista de efectos de sonido, no tendremos que tocar nada 
 ```asm
 ;; Añadir entradas para cada efecto
 
-TABLA_EFECTOS:  DW  	EFECTO0, EFECTO1, EFECTO2, EFECTO3
-				DW  	EFECTO4, EFECTO5, EFECTO6, EFECTO7
-				DW  	EFECTO8, EFECTO9, EFECTO10, EFECTO11
-				DW  	EFECTO12, EFECTO13, EFECTO14
+TABLA_EFECTOS:  DW      EFECTO0, EFECTO1, EFECTO2, EFECTO3
+                DW      EFECTO4, EFECTO5, EFECTO6, EFECTO7
+                DW      EFECTO8, EFECTO9, EFECTO10, EFECTO11
+                DW      EFECTO12, EFECTO13, EFECTO14
 ```
 
 ¡Y listo! Todo debería estar en su sitio. Si no lo está, revísalo todo y hazlo más despacito.
