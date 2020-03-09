@@ -1154,3 +1154,5 @@ Si recordamos, `my/ci/before_entering_screen.h` se inyecta justo al ir a cambiar
 ```
 
 ## Fin!
+
+Otro capítulo super denso, pero que creo que cubre todo lo que necesitabas saber pero nunca te atreviste a preguntar sobre juegos de 128K multinivel.
