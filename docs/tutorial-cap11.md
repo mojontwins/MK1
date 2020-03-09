@@ -241,3 +241,4 @@ Tenemos el scripting para hacer muchas cosas, pero se puede lograr mucho más me
 Otra ventaja de los puntos de inyección de código es que, para juegos con scripts pequeños, generalmente ahorran bastante espacio. Quédate con este dato: [en el momento de elaborar este tutorial] usando scripting, dogmole ocupa 28189 bytes, y usando inyección de código ocupa 26972, ¡que son 1218 bytes menos!
 
 Te recomiendo que te pases por los diferentes ejemplos incluidos con **MTE MK1** y revises los *postmortem* donde se explica cómo se ha resuelto la implementación de los güegos.
+ 

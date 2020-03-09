@@ -163,3 +163,4 @@ Se ejecuta cada vez que hemos empujado un bloque. En este punto podremos usar es
 ### `on_unlocked_bolt.h`
 
 Se ejecuta cada vez que el jugador abra un cerrojo. `p_keys` ya se ha decrementado en este punto. El cerrojo está en las coordenadas (`x0, y0`).
+ 
