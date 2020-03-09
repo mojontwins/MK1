@@ -448,3 +448,7 @@ Sí, puedes hacer niveles de diferentes tamaños, de eso te has tenido que dar c
 En efecto, aunque la geometría del nivel de igual, tiene que caber en el buffer. Al final la geometría da lo mismo, porque un mapa o un conjunto de enemigos y hotspots no deja de estar ordenados como una tira de pantallas en memoria. 
 
 Por tanto, lo que hay que hacer es ver cuál es tu nivel más grande (el que más pantallas tenga) y hacer que los valores de `MAP_W` y `MAP_H` en `my/config.h` coincidan con sus dimensiones. Con esto ya lo tienes.
+
+## Y listo
+
+Como ves, ya me detengo menos en decir tonterías y más en vomitar información, pero a estas alturas del cuento asumo que las bases están bien interiorizadas y además nos estamos moviendo ya a niveles más avanzados. Así que agárrate, que vienen más curvas.
