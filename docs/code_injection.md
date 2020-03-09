@@ -142,7 +142,7 @@ Se ejecuta siempre que golpeemos un tile rompiscible y aún le quede más energ�
 
 Se ejecuta siempre que golpeemos un tile rompiscible y desaparezca finalmente.
 
-### `custom_emnems_player_collision.h`
+### `custom_enems_player_collision.h`
 
 Se ejecuta tras la detección de las plataformas, y antes de la colisión normal jugador-enemigos. Esto significa que si tu colisión hace cosas que evitan que el jugador se muera, deberás saltarte la comprobación estándar con un bonito:
 

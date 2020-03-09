@@ -6,7 +6,7 @@ Hay una buena colección de puntos de inyección de código que están documenta
 
 ## Tocando el totete
 
-Exacto: programar en C usando puntos de inyección de código significa tocarle directamente el totete al motor de **MTE MK1**. Eso significa que tendremos que conocer hasta cierto punto qué tocar y cómo: funciones de la API, variables globales importantes... Todo eso podréis mirarlo en la [documentación](https://github.com/mojontwins/MK1/blob/master/docs/code_injection.md). Sin embargo, aunque todo está ahí, trataremos de ir describiendo como es debido todo lo que usemos a medida que vayamos metiendo cosas.
+Exacto: programar en C usando puntos de inyección de código significa tocarle directamente el totete al motor de **MTE MK1**. Eso significa que tendremos que conocer hasta cierto punto dónde tocar, qué tocar y cómo: qué puntos de inyección hay, las funciones de la API, variables globales importantes... Todo eso podréis mirarlo en la [documentación de los CIP](https://github.com/mojontwins/MK1/blob/master/docs/code_injection.md) y en la [API de **MTE MK1**](https://github.com/mojontwins/MK1/blob/master/docs/API.md). Sin embargo, aunque todo está ahí, trataremos de ir describiendo como es debido todo lo que usemos a medida que vayamos metiendo cosas.
 
 ## Recordando el diseño de gameplay
 
@@ -239,3 +239,5 @@ Me hago cargo de que este capítulo es bastante árido, pero espero que sirva co
 Tenemos el scripting para hacer muchas cosas, pero se puede lograr mucho más mediante puntos de inyección de código (por ejemplo, añadir nuevos tipos de enemigos o incluso nuevos motores de movimiento para el jugador). Obviamente, es más complicado usar los puntos de inyección de código, sobre todo si no se conoce bien cómo funciona el motor por dentro.
 
 Otra ventaja de los puntos de inyección de código es que, para juegos con scripts pequeños, generalmente ahorran bastante espacio. Quédate con este dato: [en el momento de elaborar este tutorial] usando scripting, dogmole ocupa 28189 bytes, y usando inyección de código ocupa 26972, ¡que son 1218 bytes menos!
+
+Te recomiendo que te pases por los diferentes ejemplos incluidos con **MTE MK1** y revises los *postmortem* donde se explica cómo se ha resuelto la implementación de los güegos.
