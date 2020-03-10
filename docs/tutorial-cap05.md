@@ -140,14 +140,14 @@ Si abres `compile.bat` en tu editor de textos verás toda una sección dedicada 
 
 ## Comprimiendo las pantallas
 
-Como te habrás dado cuenta, los 6912 bytes que ocupa cada pantalla por tres (o por dos) son un pasote, por lo que habrá que comprimirlas. Para eso usaremos el compresor `apack.exe` del paquete de la biblioteca aplib. Tranqui, lo hemos incluido en la carpeta utils. 
+Como te habrás dado cuenta, los 6912 bytes que ocupa cada pantalla por tres (o por dos) son un pasote, por lo que habrá que comprimirlas. Para eso usaremos el compresor `apultra.exe` que comprime un binario en formato aplib. Tranqui, lo hemos incluido en la carpeta utils. 
 
 De nuevo, `compile.bat` se encargará de comprimir las pantallas de título, marco y final (la de carga va a pelo en el `.tap` ya que usaremos un sencillo cargador BASIC de toda la vida):
 
 ```
-    ..\utils\apack.exe ..\gfx\title.scr title.bin > nul
-    ..\utils\apack.exe ..\gfx\marco.scr marco.bin > nul
-    ..\utils\apack.exe ..\gfx\ending.scr ending.bin > nul
+    ..\utils\apultra.exe ..\gfx\title.scr title.bin > nul
+    ..\utils\apultra.exe ..\gfx\marco.scr marco.bin > nul
+    ..\utils\apultra.exe ..\gfx\ending.scr ending.bin > nul
 ```
 
 ## Y ya hemos terminado
