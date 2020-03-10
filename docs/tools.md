@@ -2,11 +2,11 @@
 
 En este documento describimos brevemente las diferentes herramientas disponibles en el toolchain. Para más información, consúltese el tutorial.
 
-## apack.exe
+## `apack.exe`
 
 Conversor en formato aplib. Versión legacy.
 
-## apultra.exe
+## `apultra.exe`
 
 Conversor en formato aplib con mejor ratio de conversión, realizado por **Emmanuel Marty**. Más info en el [repositorio de **apultra**](https://github.com/emmanuel-marty/apultra).
 
@@ -16,7 +16,7 @@ Conversor en formato aplib con mejor ratio de conversión, realizado por **Emman
 
 * Comprime `in.bin` y genera `out.bin`. Se puede usar rutas absolutas o relativas.
 
-## asm2z88dk.exe
+## `asm2z88dk.exe`
 
 Procesa archivos en ensamble para adaptarlos a las peculiaridades de **z88dk**. Ojal, **no se trata de una herramienta de propósito general**. Aunque puede que se porte bien con otros archivos, está escrita básicamente para preparar los archivos exportados desde **Beepola** y **BeepFX**.
 
@@ -37,7 +37,7 @@ Procesa archivos en ensamble para adaptarlos a las peculiaridades de **z88dk**. 
 
 Ver el [capítulo 10 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap10.md).
 
-## bas2tap.exe
+## `bas2tap.exe`
 
 Por **Martijn Van Der Heide**. Convierte un archivo en formato texto con un programa en Sinclair BASIC a un archivo .tap con un bloque BASIC.
 
@@ -56,7 +56,7 @@ Por **Martijn Van Der Heide**. Convierte un archivo en formato texto con un prog
 	       -s = set "filename" in BASIC header
 ```
 
-## behs2bin.exe
+## `behs2bin.exe`
 
 Toma un archivo de texto con una lista separada por comas de 48 valores y genera un archivo binario de 48 bytes con esos valores. Se emplea para importar arrays de comportamientos (*behs*) en juegos multi nivel.
 
@@ -76,7 +76,7 @@ Toma un archivo de texto con una lista separada por comas de 48 valores y genera
 
 Ver el [capítulo 12 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap12.md).
 
-## bin2tap.exe
+## `bin2tap.exe`
 
 Por **mike/zeroteam**. Convierte un archivo en formato binario a un archivo .tap con un 'CODE' con su contenido.
 
@@ -102,7 +102,7 @@ Por **mike/zeroteam**. Convierte un archivo en formato binario a un archivo .tap
 	  -v  | --version     version info
 ```
 
-## buildlevels_MK1.exe
+## `buildlevels_MK1.exe`
 
 Toma los recursos y configuración de un nivel y genera un level bundle para **MTE MK1** v5 (modo 128K multinivel).
 
@@ -173,7 +173,7 @@ Toma los recursos y configuración de un nivel y genera un level bundle para **M
 
 Consúltese el [capítulo 13 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap13.md).
 
-## chr2bin.exe
+## `chr2bin.exe`
 
 Convierte N patrones desde un archivo png de 256x64 bytes. Util para customs.
 
@@ -195,60 +195,294 @@ Convierte N patrones desde un archivo png de 256x64 bytes. Util para customs.
 * `charset.png` nombre de archivo de entrada. Debe tener 256x64 pixels, por lo que podrá contener un máximo de 256 patrones.
 * `charset.bin` es el nombre de archivo de salida.
 * `n` es el número de caracteres
-
+* `defaultink` es el número de tinta por defecto si el patrón sólo tiene un color liso.
+* `noattrs` sacar sólo los bitmaps, sin atributos.
 
 Ver el [capítulo 13 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap13.md).
 
-## downgrademap.exe
+## `ene2bin_mk1.exe`
 
-## ene2bin_mk1.exe
+Exporta un set de enemigos y hotspots `.ene` en formato binario para juegos multinivel.
 
-## ene2h.exe
+```
+    $ ene2bin_mk1.exe
+    $ ene2bin_mk1.exe enems.ene enems+hotspots.bin life_gauge [2bytes]
 
-## flipenems.exe
+    The 2bytes parameter is for really old .ene files which
+    stored the hotspots 2 bytes each instead of 3 bytes.
+    As a rule of thumb:
+    .ene file created with ponedor.exe -> 3 bytes.
+    .ene file created with colocador.exe for MK1 -> 2 bytes.
+```
 
-## flipmap.exe
+* `enems.ene` es el archivo de entrada.
+* `enems+hotspots.bin` es el archivo de salida
+* `life_gauge` es el número de impactos que deben recibir los enemigos antes de morir (por defecto).
 
-## GenTape.exe
+Ver el [capítulo 12 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap12.md).
 
-## h2ene.exe
+## `ene2h.exe`
 
-## h2map.exe
+Exporta un set de enemigos y hotspots `.ene` en formato de arrays y structs de código C.
 
-## imanol.exe
+```
+    $ ene2h.exe
+    $ ene2h.exe enems.ene enems.h [2bytes]
 
-## librarian2.exe
+    The 2bytes parameter is for really old .ene files which
+    stored the hotspots 2 bytes each instead of 3 bytes.
+    As a rule of thumb:
+    .ene file created with ponedor.exe -> 3 bytes.
+    .ene file created with colocador.exe for MK1 -> 2 bytes.
+```
 
-## mapcnv.exe
+* `enems.ene` es el archivo de entrada.
+* `enems+hotspots.bin` es el archivo de salida
+* `life_gauge` es el número de impactos que deben recibir los enemigos antes de morir (por defecto).
 
-## mapcnvbin.exe
+Ver el [capítulo 6 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap06.md).
 
-## msc3_mk1.exe
+## `GenTape.exe`
 
-## pasmo.exe
+Por **Antonio villena**. Construye un archivo *.tap* a partir de una colección de bloques. En **MTE MK1** se emplea para generar las cintas de los juegos 128K.
 
-## png2scr.exe
+[Código fuente](https://github.com/antoniovillena/zx7b/blob/master/GenTape/GenTape.c)
 
-## ponedor.exe
+Ver el [capítulo 13 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap06.md).
 
-## printsize.exe
+## `imanol.exe`
 
-## reordenator.exe
+Realiza sustituciones sencillas en un archivo de texto buscando patrones y sustituyéndolos por textos o cálculos con tamaños de archivos. Como un **sed** muy específico.
 
-## rle53map_sp.exe
+```
+	$ imanol
+	imanol v0.2
+	Pattern Find And Replace Preprocessor for MK2 0.90+
 
-## rle62map_sp.exe
+	usage:
 
-## sprcnv.exe
+	$ imanol.exe in=infile.txt out=outfile.txt key=value ...
 
-## sprcnv2.exe
+	Parameters to imanol.exe are specified as key=value, where keys are
+	as follow:
 
-## sprcnvbin.exe
+	in             Input filename with %%%find%%% parameters.
+	out            Output filename.
+	key            %%%find%%% parameter to search for and be replaced by value
 
-## sprcnvbin8.exe
+	If the value starts with '?', the actual text which is written is the result
+	of a simple summatory expresion as in ?V1+V2+V3+... where Vn can be either a
+	number or a filename. If Vn is a filename, the value summed is the file size.
 
-## tmxcnv.exe
+	If you don't know what's this for, you don't need it.
+```
 
-## ts2bin.exe
+Por ejemplo, si en el archivo de entrada `infile.txt` encuentra esta linea:
 
-## WyzFx2Asm.exe
+```
+	¡El archivo %%%exe_name%%% ocupa %%%exe_size%%% bytes!
+```
+
+Y usas estos parámetros:
+
+```
+	$ imanol.exe in=infile.txt out=outfile.txt exe_size=?imanol.exe exe_name=imanol.exe
+```
+
+Se generará un archivo `outfile.txt` que será igual que `infile.txt` salvo por esa linea, que se habrá convertido en:
+
+```
+	¡El archivo imanol.exe ocupa 69120 bytes!
+```
+
+Ya que `imanol.exe` ocupa 69120 bytes y hemos sustituido `exe_size` por `?imanol.exe` (nótese el `?`; significa *el tamaño de `imanol.exe`*) y `exe_name` por `imanol.exe`.
+
+Ver el [capítulo 13 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap06.md).
+
+## `librarian2.exe`
+
+Sirve para empaquetar un conjunto de binarios en páginas extra de RAM. Librarian2 busca una buena organización para minimizar el número de páginas usadas, siempre que sea posible (aunque no lo intenta con demasiada intensidad).
+
+```
+    * librarian2.exe
+    librarian v2.0 20200202 ~ **ERROR** list is Missing!
+
+    usage:
+
+    $ librarian2 list=list.txt index=output.h [bins_prefix=bins_prefix]
+                 [rams_prefix=rams_prefix] [manual]
+
+        * list.txt contains the list of binaries to store
+        * output.h is the output file with the index
+        * bins_prefix will be prepended to input preload?.bin & bin files
+        * rams_prefix will be prepended to output RAMn.bin files
+        * use manual for manual order.
+```
+
+* `list` (obligatorio) indica la ruta al archivo con la lista de binarios.
+* `index` (obligatorio) indica la ruta al archivo de código que contendrá el índice de binarios (esto es: dónde encontrarlos). Para **MTE MK1** esta ruta debe ser `/dev/assets/librarian.h`.
+* `bins_prefix` (opcional) sirve para proporcionar una ruta para los archivos binarios que aparecen en la lista. Si ejecutamos **The Librarian** desde `dev/`, desde nuestro script, y los binarios en la lista aparecen simplemente nombrados pero estan en `bin/`, como será nuestro caso, tendremos que emplear este parámetro con el valor `../bìn/` para que **The Librarian** pueda encontrarlos.
+* `rams_prefix` (opcional) funciona parecido pero con los archivos `RAM?.bin` de salida. Si no ponemos nada los creará en `dev/`, pero quereos que estén en `bin/`, por lo que tendremos que especificar `../bin/` también como valor de este parámetro.
+* Por último, si añadimos `manual` a la linea de comando, se empleará el orden natural. Nosotros confiaremos en el algoritmo para este juego, que funcionará genialmente y ubicará los 35K de binarios comprimidos en tenemos en tres páginas de RAM: RAM3, RAM4 y RAM6.
+
+Ver el [capítulo 13 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap06.md).
+
+## `mapcnv.exe`
+
+Esta utilidad pilla archivos `MAP` de **Mappy** y los divide en pantallas, generando un archivo de código .C con los arrays y estructuras necesarias. Además, si estamos usando tilesets de 16 tiles, empaqueta 2 tiles por cada byte).
+
+```
+$ ..\utils\mapcnv.exe
+** USO **
+   MapCnv archivo.map archivo.h ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]
+
+   - archivo.map : Archivo de entrada exportado con mappy en formato raw.
+   - archivo.h : Archivo de salida
+   - ancho_mapa : Ancho del mapa en pantallas.
+   - alto_mapa : Alto del mapa en pantallas.
+   - ancho_pantalla : Ancho de la pantalla en tiles.
+   - alto_pantalla : Alto de la pantalla en tiles.
+   - tile_cerrojo : Nº del tile que representa el cerrojo.
+   - packed : Escribe esta opción para mapas de la churrera de 16 tiles.
+   - fixmappy : Escribe esta opción para arreglar lo del tile 0 no negro
+
+Por ejemplo, para un mapa de 6x5 pantallas para MTE MK1:
+
+   MapCnv mapa.map mapa.h 6 5 15 10 15 packed
+```
+
+* `archivo.map` es el archivo de entrada con nuestro mapa recién exportado de **Mappy**.
+* `archivo.h` es el nombre de archivo para la salida.
+* `ancho_mapa` es el ancho del mapa en pantallas. 
+* `alto_mapa` es el alto del mapa en pantallas. 
+* `ancho_pant` es el ancho de cada pantalla en tiles. Para **MTE MK1**, siempre es 15.
+* `alto_pant` es el alto de cada pantalla en tiles. Para **MTE MK1**, siempre es 10.
+* `tile_cerrojo` es el número de tile que hace de cerrojo. Para **MTE MK1** siempre ha de ser el tile número 15. Si tu juego no usa cerrojos, pon aquí un valor fuera de rango como 99. 
+* `packed` se pone, tal cual, si nuestro tileset es de 16 tiles. Si usamos un tileset de 48 tiles, simplemente no ponemos nada. 
+* `fixmappy` lo pondremos si nuestro tileset no tiene un primer tile todo a negro y pasamos de hacer un tileset especial, dejando que mappy lo insertase. Así `mapcnv` lo tiene en cuenta y hace sus fullerias.
+
+Ver el [capítulo 3 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap03.md).
+
+## `mapcnvbin.exe`
+
+Análogo, pero exportando binarios. El resultado contendrá todo el mapa y acto seguido los cerrojos.
+
+```
+    $ ..\utils\mapcnvbin.exe
+    ** USO **
+       MapCnvBin archivo.map archivo.h ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]
+
+       - archivo.map : Archivo de entrada exportado con mappy en formato raw.
+       - archivo.h : Archivo de salida
+       - ancho_mapa : Ancho del mapa en pantallas.
+       - alto_mapa : Alto del mapa en pantallas.
+       - ancho_pantalla : Ancho de la pantalla en tiles.
+       - alto_pantalla : Alto de la pantalla en tiles.
+       - tile_cerrojo : Nº del tile que representa el cerrojo.
+       - packed : Escribe esta opción para mapas de la churrera de 16 tiles.
+       - fixmappy : Escribe esta opción para arreglar lo del tile 0 no negro
+
+    Por ejemplo, para un mapa de 6x5 pantallas para MTE MK1:
+
+       MapCnvBin mapa.map mapa.bin 6 5 15 10 15 packed
+
+    Output will contain the map, and then the bolts
+```
+
+* `archivo.map` es el archivo de entrada con nuestro mapa recién exportado de **Mappy**.
+* `archivo.h` es el nombre de archivo para la salida.
+* `ancho_mapa` es el ancho del mapa en pantallas. 
+* `alto_mapa` es el alto del mapa en pantallas. 
+* `ancho_pant` es el ancho de cada pantalla en tiles. Para **MTE MK1**, siempre es 15.
+* `alto_pant` es el alto de cada pantalla en tiles. Para **MTE MK1**, siempre es 10.
+* `tile_cerrojo` es el número de tile que hace de cerrojo. Para **MTE MK1** siempre ha de ser el tile número 15. Si tu juego no usa cerrojos, pon aquí un valor fuera de rango como 99. 
+* `packed` se pone, tal cual, si nuestro tileset es de 16 tiles. Si usamos un tileset de 48 tiles, simplemente no ponemos nada. 
+* `fixmappy` lo pondremos si nuestro tileset no tiene un primer tile todo a negro y pasamos de hacer un tileset especial, dejando que mappy lo insertase. Así `mapcnv` lo tiene en cuenta y hace sus fullerias.
+
+Ver el [capítulo 12 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap12.md).
+
+## `msc3_mk1.exe`
+
+Compilador de scripts. Información detallada en la [documentación de MSC3](https://github.com/mojontwins/MK1/blob/master/docs/scripting.md).
+
+## `png2scr.exe`
+
+Convierte un archivo `png` creado con las restricciones de los gráficos de Spectrum a formato `scr` (imagen binaria de la porción de RAM que el Spectrum emplea para componer la imagen).
+
+Con respecto a la paleta del Spectrum, como todas estas cosas, los valores que soportan por defecto los conversores incluidos en el toolchain son bastante arbitrarios. Para que todo vaya bien, usa unos valores de R, G, B de 200 si quieres representar los colores sin BRIGHT y de 255 si quieres representar los colores con BRIGHT. A Mappy no le gusta el magenta intenso (255, 0, 255), así que para este color puedes usar por ejemplo (254, 0, 255).
+
+Si no te quieres rayar, usa los colores de esta paleta:
+
+![Paleta](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_palette.png)
+
+## `ponedor.exe`
+
+Utilidad de colocación de enemigos y hotspots. 
+
+```
+    $ ..\utils\ponedor.exe -h
+    Edit an existing set:
+    $ ponedor.exe file.ene
+
+    Create new set:
+    $ ponedor.exe new out=file.ene map=file.map tiles=file.png|bmp [adjust=n] size=w,h
+                      [scrsize=w,h] [nenems=n] [x2]
+
+    out           output filename
+    map           map file (raw, headerless, 1 byte per tile, row order)
+    tiles         tileset in png or bmp format.
+    adjust        substract this number from every byte read from the map file. Def=0
+    size          map size in screens
+    scrsize       screen size in tiles. Def=16,12
+    nenems        number of enemies per screen. Def=3
+    x2            zoom x2 (hacky)
+```
+
+Cuando ejecutas el Ponedor (por ejemplo, haciendo doble click sobre `ponedor.bat` en `/enems`) aparecerá la pantalla principal en al que podemos cargar un proyecto existente o configurar uno nuevo:
+
+![Creando un nuevo proyecto](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/06_ponedor_create_new.png)
+
+* `Map W` y `Map H` son el **ancho** y el **alto** de nuestro mapa **en pantallas**, o sea, las **dimensiones del mapa**. En el caso de **dogmole** habría que rellenar 8 y 3.
+* `Scr W` y `Scr H` son las **dimensiones de cada pantalla**, en **tiles**. Para todos los güegos de **MTE MK1** estos valores son 15 y 10 (de hecho, vienen ya puestos por defecto). No toques aquí.
+* `Nenems` es el número de enemigos máximo por pantalla. En **MTE MK1** debe ser 3, ni más ni menos. También viene puesto por defecto. No toques aquí tampoco.
+* `Adjust` podrá valer 0 o 1, dependiendo se Mappy hizo fullerías. Si recordarás, a la hora de explicar cómo se montaba el mapa, mencionamos que Mappy quiere un tile negro como tile 0 y que si no se lo das, él se lo pone desplazando un espacio todos los tuyos. **Si te pasó esto, deberás cambiar el 0 que aparece en esta casilla por un 1**. De ese modo nuestro Ponedor estará coscado y pintará bien el mapa.
+* Donde pone `TS` tenemos que poner la ruta del archivo con el tileset, que debería ser `work.png` a secas si lo has copiado en `enems`, aunque puedes usar el botón `Find` para ubicarlo desde un explorador si no te apetece escribir 8 caracteres.
+* En `Map` hay que poner la ruta del archivo con el mapa, que debería ser `mapa.map` a secas si lo copiaste a `enems`. También puedes usar `Find`.
+* No te olvides de poner **el nombre de archivo de salida** en la casilla `Output`. Si no quieres tocar `compile.bat`, este nombre debe ser `enems.ene`. 
+
+Si prefieres usar la linea de comandos como yo, 
+
+* Para editar un archivo `.ene` existente, simplemente ejecutar `ponedor.exe archivo.ene`.
+* Para crear un archivo `.ene` nuevo, especificar `new` como primer parámetro, y acto seguido:
+* `out=file.ene` para el archivo de salida.
+* `map=mapa.map` el archivo con el mapa.
+* `tiles=file.png` el tileset.
+* `adjust=1` si tu primer tile no era negro sólido.
+* `size=w,h` con `w` y `h` el tamaño en pantallas.
+* `scrsize=15,10`, las dimensiones de cada pantalla para **MTE MK1**.
+* `nenems=3`, el número de enemigos por pantalla para **MTE MK1**.
+* En cualquier caso, `x2` hace la pantalla algo más grande.
+
+Ver el [capítulo 6 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap06.md).
+
+## `printsize.exe`
+
+Escribe el tamaño del archivo que recibe como parámetro.
+
+## `rle53map_sp.exe` y `rle62map_sp.exe`
+
+Comprimen un mapa en formato RLE 5.3 o 6.2 indexado para usar con decodificadores de mapas personalizados. Dadme la coña para que escriba un tutorial sobre esto, o mirad **Sami Troid** o **Blip Blep**.
+
+## `sprcnv.exe`
+
+## `sprcnv2.exe`
+
+## `sprcnvbin.exe`
+
+## `sprcnvbin8.exe`
+
+## `tmxcnv.exe`
+
+## `ts2bin.exe`
+
+## `WyzFx2Asm.exe`
