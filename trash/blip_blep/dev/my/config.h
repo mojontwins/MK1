@@ -233,15 +233,15 @@
 // Set to 99 so it doesn't show even if it should!!
 
 #define VIEWPORT_X					1		//
-#define VIEWPORT_Y					0		// Viewport character coordinates
-#define LIFE_X						22		//
-#define LIFE_Y						21		// Life gauge counter character coordinates
-#define OBJECTS_X					17		//
-#define OBJECTS_Y					21		// Objects counter character coordinates
+#define VIEWPORT_Y					1		// Viewport character coordinates
+#define LIFE_X						12		//
+#define LIFE_Y						23		// Life gauge counter character coordinates
+#define OBJECTS_X					15		//
+#define OBJECTS_Y					23		// Objects counter character coordinates
 #define OBJECTS_ICON_X				15		// 
 #define OBJECTS_ICON_Y				21		// Objects icon character coordinates (use with ONLY_ONE_OBJECT)
-#define KEYS_X						27		//
-#define KEYS_Y						21		// Keys counter character coordinates
+#define KEYS_X						18		//
+#define KEYS_Y						23		// Keys counter character coordinates
 #define KILLED_X					12		//
 #define KILLED_Y					21		// Kills counter character coordinates
 #define AMMO_X						99		// 
