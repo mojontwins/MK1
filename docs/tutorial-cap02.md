@@ -72,13 +72,13 @@ Con respecto a la paleta del Spectrum, como todas estas cosas, los valores que s
 
 Si no te quieres rayar, usa los colores de esta paleta:
 
-![Un lienzo vacío](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_palette.png)
+![Paleta](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_palette.png)
 
 ## Haciendo un tileset de 16 tiles
 
 Si has decidido ahorrar memoria (por ejemplo, si planeas que el motor del güego termine siendo medianamente complejo, con scripting y muchas cosas molonas, o si prefieres que tu mapa sea bien grande) y usar tilesets de 16 tiles, tienes que crear algo así:
 
-![Un lienzo vacío](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_tileset_16.png)
+![16 tiles](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_tileset_16.png)
 
 El tileset se divide en dos secciones: **la primera, formada por los primeros dieciséis tiles, es la sección de mapa**. Es la que usaremos para hacer nuestro mapa. La segunda, formada por los cuatro siguientes, es la **sección especial** que se usará para pintar cosas especiales.
 

@@ -475,6 +475,18 @@ Comprimen un mapa en formato RLE 5.3 o 6.2 indexado para usar con decodificadore
 
 ## `sprcnv.exe`
 
+Utilidad de conversión de spritesets.
+
+```
+    $ ..\utils\sprcnv.exe
+    ** USO **
+       sprcnv archivo.png archivo.h [nomask]
+
+    Convierte un Spriteset de 16 sprites
+```
+
+Ver el [capítulo 4 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap04.md).
+
 ## `sprcnv2.exe`
 
 ## `sprcnvbin.exe`
