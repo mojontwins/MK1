@@ -11,7 +11,7 @@ Conversor en formato aplib. Versión legacy.
 Conversor en formato aplib con mejor ratio de conversión, realizado por **Emmanuel Marty**. Más info en el [repositorio de **apultra**](https://github.com/emmanuel-marty/apultra).
 
 ```
-	$ apultra.exe in.bin out.bin
+    $ apultra.exe in.bin out.bin
 ```
 
 * Comprime `in.bin` y genera `out.bin`. Se puede usar rutas absolutas o relativas.
@@ -21,15 +21,15 @@ Conversor en formato aplib con mejor ratio de conversión, realizado por **Emman
 Procesa archivos en ensamble para adaptarlos a las peculiaridades de **z88dk**. Ojal, **no se trata de una herramienta de propósito general**. Aunque puede que se porte bien con otros archivos, está escrita básicamente para preparar los archivos exportados desde **Beepola** y **BeepFX**.
 
 ```
-	$ asm2z88dk.exe in.asm out.h [mk1]
+    $ asm2z88dk.exe in.asm out.h [mk1]
 
-	in.asm - standard assembly (pasmo)
-	out.h - output filename
+    in.asm - standard assembly (pasmo)
+    out.h - output filename
 
-	This program:
-	 1. Changes labels: to .labels
-	 2. Adds #asm / #endasm
-	 3. If mk1, removes DI/EI and stuff
+    This program:
+     1. Changes labels: to .labels
+     2. Adds #asm / #endasm
+     3. If mk1, removes DI/EI and stuff
 ```
 
 * Procesa `in.asm` y genera `out.h`. Se puede usar rutas absolutas o relativas.
@@ -42,18 +42,18 @@ Ver el [capítulo 10 del tutorial](https://github.com/mojontwins/MK1/blob/master
 Por **Martijn Van Der Heide**. Convierte un archivo en formato texto con un programa en Sinclair BASIC a un archivo .tap con un bloque BASIC.
 
 ```
-	$ bas2tap.exe
+    $ bas2tap.exe
 
-	BAS2TAP v2.5 by Martijn van der Heide of ThunderWare Research Center
+    BAS2TAP v2.5 by Martijn van der Heide of ThunderWare Research Center
 
-	Usage: BAS2TAP [-q] [-w] [-e] [-c] [-aX] [-sX] FileIn [FileOut]
-	       -q = quiet: no banner, no progress indication
-	       -w = suppress generation of warnings
-	       -e = write errors to stdout in stead of stderr channel
-	       -c = case independant tokens (be careful here!)
-	       -n = disable syntax checking
-	       -a = set auto-start line in BASIC header
-	       -s = set "filename" in BASIC header
+    Usage: BAS2TAP [-q] [-w] [-e] [-c] [-aX] [-sX] FileIn [FileOut]
+           -q = quiet: no banner, no progress indication
+           -w = suppress generation of warnings
+           -e = write errors to stdout in stead of stderr channel
+           -c = case independant tokens (be careful here!)
+           -n = disable syntax checking
+           -a = set auto-start line in BASIC header
+           -s = set "filename" in BASIC header
 ```
 
 ## `behs2bin.exe`
@@ -61,15 +61,15 @@ Por **Martijn Van Der Heide**. Convierte un archivo en formato texto con un prog
 Toma un archivo de texto con una lista separada por comas de 48 valores y genera un archivo binario de 48 bytes con esos valores. Se emplea para importar arrays de comportamientos (*behs*) en juegos multi nivel.
 
 ```
-	$ utils\behs2bin.exe
-	behs2bin 0.1
-	usage
+    $ utils\behs2bin.exe
+    behs2bin 0.1
+    usage
 
-	$ behs2bin behs.txt behs.bin
+    $ behs2bin behs.txt behs.bin
 
-	where:
-	   * behs.txt behaviours file
-	   * behs.bin output binary file
+    where:
+       * behs.txt behaviours file
+       * behs.bin output binary file
 ```
 
 * Procesa `behs.txt` y genera `behs.bin`. Se puede usar rutas absolutas o relativas.
@@ -81,25 +81,25 @@ Ver el [capítulo 12 del tutorial](https://github.com/mojontwins/MK1/blob/master
 Por **mike/zeroteam**. Convierte un archivo en formato binario a un archivo .tap con un 'CODE' con su contenido.
 
 ```
-	$ bin2tap.exe --help
-	bin2tap v.1.3
-	Copyright (C) 2009 mike/zeroteam
-	Usage: bin2tap [options] file.bin
+    $ bin2tap.exe --help
+    bin2tap v.1.3
+    Copyright (C) 2009 mike/zeroteam
+    Usage: bin2tap [options] file.bin
 
-	Options:
-	  -o output_file      output TAP file
-	  -a address          start address of binary file [32768]
-	  -b                  include BASIC loader
-	  -c clear_address    CLEAR address in BASIC loader [24575]
-	  -r run_address      address where to start bin. file for BASIC loader [32768]
-	  -cb border_colour   border colour set by loader [0]
-	  -cp paper_colour    paper colour set by loader [0]
-	  -ci ink_colour      ink colour set by loader [7]
-	  -d80                create D80 syntax loader
-	  -append             append tap at end of file
-	  -hp | --header-poke include POKE command for dissabling tape headers
-	  -h  | --help        usage information
-	  -v  | --version     version info
+    Options:
+      -o output_file      output TAP file
+      -a address          start address of binary file [32768]
+      -b                  include BASIC loader
+      -c clear_address    CLEAR address in BASIC loader [24575]
+      -r run_address      address where to start bin. file for BASIC loader [32768]
+      -cb border_colour   border colour set by loader [0]
+      -cp paper_colour    paper colour set by loader [0]
+      -ci ink_colour      ink colour set by loader [7]
+      -d80                create D80 syntax loader
+      -append             append tap at end of file
+      -hp | --header-poke include POKE command for dissabling tape headers
+      -h  | --help        usage information
+      -v  | --version     version info
 ```
 
 ## `buildlevels_MK1.exe`
@@ -255,44 +255,44 @@ Ver el [capítulo 13 del tutorial](https://github.com/mojontwins/MK1/blob/master
 Realiza sustituciones sencillas en un archivo de texto buscando patrones y sustituyéndolos por textos o cálculos con tamaños de archivos. Como un **sed** muy específico.
 
 ```
-	$ imanol
-	imanol v0.2
-	Pattern Find And Replace Preprocessor for MK2 0.90+
+    $ imanol
+    imanol v0.2
+    Pattern Find And Replace Preprocessor for MK2 0.90+
 
-	usage:
+    usage:
 
-	$ imanol.exe in=infile.txt out=outfile.txt key=value ...
+    $ imanol.exe in=infile.txt out=outfile.txt key=value ...
 
-	Parameters to imanol.exe are specified as key=value, where keys are
-	as follow:
+    Parameters to imanol.exe are specified as key=value, where keys are
+    as follow:
 
-	in             Input filename with %%%find%%% parameters.
-	out            Output filename.
-	key            %%%find%%% parameter to search for and be replaced by value
+    in             Input filename with %%%find%%% parameters.
+    out            Output filename.
+    key            %%%find%%% parameter to search for and be replaced by value
 
-	If the value starts with '?', the actual text which is written is the result
-	of a simple summatory expresion as in ?V1+V2+V3+... where Vn can be either a
-	number or a filename. If Vn is a filename, the value summed is the file size.
+    If the value starts with '?', the actual text which is written is the result
+    of a simple summatory expresion as in ?V1+V2+V3+... where Vn can be either a
+    number or a filename. If Vn is a filename, the value summed is the file size.
 
-	If you don't know what's this for, you don't need it.
+    If you don't know what's this for, you don't need it.
 ```
 
 Por ejemplo, si en el archivo de entrada `infile.txt` encuentra esta linea:
 
 ```
-	¡El archivo %%%exe_name%%% ocupa %%%exe_size%%% bytes!
+    ¡El archivo %%%exe_name%%% ocupa %%%exe_size%%% bytes!
 ```
 
 Y usas estos parámetros:
 
 ```
-	$ imanol.exe in=infile.txt out=outfile.txt exe_size=?imanol.exe exe_name=imanol.exe
+    $ imanol.exe in=infile.txt out=outfile.txt exe_size=?imanol.exe exe_name=imanol.exe
 ```
 
 Se generará un archivo `outfile.txt` que será igual que `infile.txt` salvo por esa linea, que se habrá convertido en:
 
 ```
-	¡El archivo imanol.exe ocupa 69120 bytes!
+    ¡El archivo imanol.exe ocupa 69120 bytes!
 ```
 
 Ya que `imanol.exe` ocupa 69120 bytes y hemos sustituido `exe_size` por `?imanol.exe` (nótese el `?`; significa *el tamaño de `imanol.exe`*) y `exe_name` por `imanol.exe`.
@@ -489,12 +489,56 @@ Ver el [capítulo 4 del tutorial](https://github.com/mojontwins/MK1/blob/master/
 
 ## `sprcnv2.exe`
 
+Esta utilidad funciona casi igual que `sprcnv.exe` pero permite especificar cuántos sprites queremos convertir.
+
+```
+    $ src\utils\sprcnv2.exe
+    ** USO **
+       sprcnv2 archivo.png archivo.h n [nomask]
+
+    Convierte un Spriteset de n sprites
+```
+
+Obviamente este es para cosas custom y raras que tengas que hacer y tal.
+
 ## `sprcnvbin.exe`
+
+Como `sprcnv2.exe`, pero sacando binario. En **MTE MK1** v5 sin tocar se emplea para importar la explosión.
 
 ## `sprcnvbin8.exe`
 
-## `tmxcnv.exe`
+Como `sprcnvbin.exe`, pero para sprititos de 8x8. En **MTE MK1** v5 sin tocar se emplea para importar los proyectiles.
 
 ## `ts2bin.exe`
 
+Utilidad de conversión de tilesets.
+
+```
+    $ src\utils\ts2bin.exe
+    ts2bin v0.4 20200119 ~ Usage:
+
+    $ ts2bin font.png/nofont work.png|notiles|blank ts.bin defaultink
+
+    where:
+       * font.png is a 256x16 file with 64 chars ascii 32-95
+         (use 'nofont' if you don't want to include a font & gen. 192 tiles)
+       * work.png is a 256x48 file with your 16x16 tiles
+         (use 'notiles' if you don't want to include a tileset & gen. 64 tiles)
+         (use 'blank' if you want to generate a 100% blank placeholder tileset)
+       * ts.bin is the output, 2304 bytes bin file.
+       * defaultink: a number 0-7. Use this colour as 2nd colour if there's only
+         one colour in a 8x8 cell
+```
+
+* El primer parámetro es el nombre de archivo de la fuente (incluyendo su ubicación si es necesaria), o la palabra `nofont` si sólo quieres convertir el tileset (cosa que viene bien para hacer otras cosas que no son un juego de la churrera normal). 
+* El segundo parámetro es el nombre del archivo con el tileset (incluyendo su ubicación si es necesaria), o la palabra `notiles` si sólo quieres convertir la fuente (bla bla bla, no con la churrera en situaciones normales), o `blank` si quieres generar el binario completo sólo con la fuente y con los tiles en negro, que es lo que llamamos un "placeholder para multi nivel" y que ya entenderás cuando veamos los multinivel.
+* El tercer parámetro es el nombre del archivo que quieres generar (incluyendo su ubicación si es necesaria). En el caso de la churrera, el archivo resultante ocupará 2304 y contendrá todos los patrones (fuente y tileset) y los colores que se usan en el tileset.
+* El cuarto parámetro es opcional, y sirve para especificar un color de tinta 0-7 que quieres que se utilice si se encuentra algún "patrón" que sea un cuadrado de color sólido como segundo color. Si sabes de Spectrum le encontrarás sentido a esto.
+
+Ver el [capítulo 2 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap02.md).
+
 ## `WyzFx2Asm.exe`
+
+Utilidad para importar efectos para AY hechos con Wyz Tracker por **thEpOpE**.
+
+Ver el [capítulo 14 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap14.md).
