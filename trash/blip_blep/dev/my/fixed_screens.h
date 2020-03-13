@@ -35,9 +35,9 @@ void game_ending (void) {
 }
 
 void game_over (void) {
-	_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
-	_x = 10; _y = 12; _t = 79; _gp_gen = " GAME OVER! "; print_str ();
-	_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
+	_x = 10; _y = 11; _t = 79; _gp_gen = "#''''''''''$"; print_str ();
+	_x = 10; _y = 12; _t = 79; _gp_gen = "(GAME OVER!("; print_str ();
+	_x = 10; _y = 13; _t = 79; _gp_gen = "%''''''''''&"; print_str ();
 	sp_UpdateNow ();
 
 	#ifdef MODE_128K
