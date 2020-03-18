@@ -572,6 +572,8 @@ void enems_move (void) {
 
 				}
 			#endif
+
+			#include "my/ci/enems_extra_actions.h"
 		} 
 
 		#asm		

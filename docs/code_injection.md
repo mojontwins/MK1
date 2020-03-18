@@ -105,6 +105,10 @@ Nótese que este CIP se incluye después de haber marcado al enemigo como *muert
 
 ¡No olvides los paréntesis!
 
+### `enems_extra_actions.h`
+
+Se include al final del bucle de actualización del enemigo, y se ejecutará sólo si este enemigo tiene `active` a 1. El punto exacto de inclusión es justo tras comprobar la colisión con las balas (si se incluye esta característica). Puedes usarlo por ejemplo para comprobar la colisión con otros agentes custom, como un "hitter".
+
 ## Módulo de jugador
 
 ### `custom_veng.h`
