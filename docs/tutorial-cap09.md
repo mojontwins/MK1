@@ -1,4 +1,4 @@
-# Capítulo 9: scripting básico
+# Capítulo 9: Scripting básico
 
 Aquí te he dejado el paquete de materiales de este capítulo, que en realidad consiste en el script de **Dogmole** terminado.
 
