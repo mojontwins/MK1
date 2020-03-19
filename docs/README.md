@@ -32,7 +32,6 @@ En este directorio está disponible la documentación existente sobre **MTE MK1*
 * [Godkiller 2](https://github.com/mojontwins/MK1/blob/master/contrib/godkiller_2/README.md)
 * [Sami Troid](https://github.com/mojontwins/MK1/blob/master/contrib/sami_troid/README.md)
 * [Cheril the Goddess](https://github.com/mojontwins/MK1/blob/master/examples/goddess/README.md)
-* [Goku Mal](https://github.com/mojontwins/MK1/blob/master/examples/goku_mal/README.md)
 * [Sgt. Helmet's Training Day](https://github.com/mojontwins/MK1/blob/master/examples/helmet/README.md)
 
 Pronto más.
