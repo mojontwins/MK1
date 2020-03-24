@@ -43,7 +43,7 @@ Function inCommand (spec As String) As Integer
 End Function
 
 Dim As Integer map_w, map_h, scr_w, scr_h, bolt
-Dim As Integer x, y, xx, yy, i, j, f, packed, ct, b, fixmappy
+Dim As Integer x, y, xx, yy, i, j, f, packed, ct, b, fixmappy, totalBytes
 Dim As uByte d, ac
 Dim As String o
 
@@ -108,7 +108,7 @@ close f
 
 open Command (2) for output as #f
 
-i = 0:b = 0
+i = 0:b = 0: totalBytes = 0
 
 for yy = 0 To map_h - 1
 	for xx = 0 To map_w - 1
@@ -128,6 +128,7 @@ for yy = 0 To map_h - 1
 				if packed = 0 then
 					d = BigOrigMap (yy * scr_h + y, xx * scr_w + x)
 					Put #f, , d
+					totalBytes = totalBytes + 1
 				else
 					if ct = 0 then
 						ac = BigOrigMap (yy * scr_h + y, xx * scr_w + x) * 16
@@ -135,6 +136,7 @@ for yy = 0 To map_h - 1
 						ac = ac + BigOrigMap (yy * scr_h + y, xx * scr_w + x) 
 						Put #f, , ac
 						b = b + 1
+						totalBytes = totalBytes + 1
 					end if
 					ct = 1 - ct
 				end if
@@ -145,14 +147,8 @@ for yy = 0 To map_h - 1
 	next xx
 next yy
 
-close #f
-
-? b
-
 if i > 0 Then	
-	
-	d = i
-	put #f, , d
+
 	for j = 0 to i - 1
 		d = bolts(j).np
 		put #f, , d
@@ -162,6 +158,7 @@ if i > 0 Then
 		put #f, , d
 		d = 1
 		put #f, , d
+		totalBytes = totalBytes + 4
 	next j
 end if
 
@@ -170,6 +167,7 @@ if packed = 0 then
 else
 	Print "Se escribió mapa.bin con " + trim(str(map_h*map_w)) + " pantallas empaquetadas (" + trim(str(map_h*map_w*scr_h*scr_w / 2)) + " bytes)."
 end if
-if i > 0 then Print "Se encontraron " + trim(str(i)) + " cerrojos. Se escribió bolts.bin"
+if i > 0 then Print "Se encontraron " + trim(str(i)) + " cerrojos."
+Print "total bytes " & totalBytes
 print " "
 end
