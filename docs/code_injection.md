@@ -99,7 +99,7 @@ Nótese que este CIP se incluye después de haber marcado al enemigo como *muert
 
 ```c
     if (_en_t == (2|16)) {
-        [...]
+
     }
 ```
 
@@ -120,6 +120,10 @@ Sirve para añadir un manejador custom para el eje vertical de movimiento del ju
 Se ejecuta cuando el jugador toca un tile cuyo comportamiento tiene el bit 7 levantado (cumple & 128). Cuando esto ocurre, `p_tx` y `p_ty`, que contienen el tile que toca el centro del sprite del jugador, indican precisamente las coordenadas de dicho tile.
 
 Si tienes varios, puedes saber cuál es llamando a `qtile (p_tx, p_ty)` o consultando el valor de `map_buff [COORDS(p_tx, p_ty)]`. Puede servir parar mil cosas, por ejemplo para implementar teletransportadores.
+
+### `on_player_killed.h`
+
+Se ejecuta cuando el jugador muere, tras haber restado vidas. Ten en cuenta que en este punto puede que `plives` valga 0 con lo que acto seguido acabará el juego. Puedes emplearlo por ejemplo para mover al jugador al principio del nivel.
 
 ### Colisiones con el fondo
 
