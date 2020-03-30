@@ -205,7 +205,9 @@ void main (void) {
 					game_over ();
 				}
 			#endif
+			#if !defined (DIRECT_TO_PLAY) || !defined (COMPRESSED_LEVELS)
 			cortina ();
+			#endif
 		}
 		
 		clear_sprites ();
