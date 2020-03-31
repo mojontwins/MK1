@@ -4,7 +4,7 @@ O *vEng* personalizado. Cómo me gusta inventarne términos y que luego la gente
 
 Programar un nuevo eje vertical suele generar una necesidad: definir una nueva forma de organizar los 8 cells de animación del sprite del jugador para adecuarse al nuevo tipo de movimiento. Por suerte esto también lo tenemos cubierto: es fácil definir tu propia animación para el personaje.
 
-¿Por qué sólo el vertical? Porque suele ser suficiente para hacer de todo. ¿Y por qué no también el horizontal? Bueno, ahí estamos esperando vuestros *pull request*. Recordad que mayormente **MTE MK1** tiene características que hemos necesitado para nuestros juegos o que nos habéis pedido y hemos considerado factibles. 
+¿Por qué sólo el vertical? Para no liarla. También se puede cambiar el horizontal, pero no lo cubriremos en este capítulo. Tienes un par de breves ejemplos en la [documentación de los puntos de inyección de código](https://github.com/mojontwins/MK1/blob/master/docs/code_injection.md).
 
 Para añadir tu propio eje vertical deberás poner código en `my/ci/custom_veng.h`.
 

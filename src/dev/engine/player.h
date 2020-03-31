@@ -446,43 +446,47 @@ unsigned char player_move (void) {
 	//  MOVEMENT IN THE HORIZONTAL AXIS
 	// ***************************************************************************
 
-	if ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {
-		#ifdef PLAYER_GENITAL		
-			p_facing_h = 0xff;
-		#endif
-		if (p_vx > 0) {
-			p_vx -= PLAYER_RX;
-			if (p_vx < 0) p_vx = 0;
-		} else if (p_vx < 0) {
-			p_vx += PLAYER_RX;
-			if (p_vx > 0) p_vx = 0;
-		}
-		wall_h = 0;
-	}
-
-	if ((pad0 & sp_LEFT) == 0) {
-		#ifdef PLAYER_GENITAL
-			p_facing_h = FACING_LEFT;
-		#endif
-		if (p_vx > -PLAYER_MAX_VX) {
-			#ifndef PLAYER_GENITAL			
-				p_facing = 0;
+	#ifndef PLAYER_DISABLE_DEFAULT_HENG
+		if ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {
+			#ifdef PLAYER_GENITAL		
+				p_facing_h = 0xff;
 			#endif
-			p_vx -= PLAYER_AX;
+			if (p_vx > 0) {
+				p_vx -= PLAYER_RX;
+				if (p_vx < 0) p_vx = 0;
+			} else if (p_vx < 0) {
+				p_vx += PLAYER_RX;
+				if (p_vx > 0) p_vx = 0;
+			}
+			wall_h = 0;
 		}
-	}
 
-	if ((pad0 & sp_RIGHT) == 0) {
-		#ifdef PLAYER_GENITAL	
-			p_facing_h = FACING_RIGHT;
-		#endif
-		if (p_vx < PLAYER_MAX_VX) {
-			p_vx += PLAYER_AX;
-			#ifndef PLAYER_GENITAL						
-				p_facing = 1;
+		if ((pad0 & sp_LEFT) == 0) {
+			#ifdef PLAYER_GENITAL
+				p_facing_h = FACING_LEFT;
 			#endif
+			if (p_vx > -PLAYER_MAX_VX) {
+				#ifndef PLAYER_GENITAL			
+					p_facing = 0;
+				#endif
+				p_vx -= PLAYER_AX;
+			}
 		}
-	}
+
+		if ((pad0 & sp_RIGHT) == 0) {
+			#ifdef PLAYER_GENITAL	
+				p_facing_h = FACING_RIGHT;
+			#endif
+			if (p_vx < PLAYER_MAX_VX) {
+				p_vx += PLAYER_AX;
+				#ifndef PLAYER_GENITAL						
+					p_facing = 1;
+				#endif
+			}
+		}
+	#endif
+
+	#include "my/ci/custom_heng.h"
 
 	p_x = p_x + p_vx;
 	#ifndef PLAYER_GENITAL

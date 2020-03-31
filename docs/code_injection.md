@@ -115,6 +115,85 @@ Se include al final del bucle de actualización del enemigo, y se ejecutará só
 
 Sirve para añadir un manejador custom para el eje vertical de movimiento del jugador. Esto tiene bastantes implicaciones y formas de usar. Se explicará en un tutorial próximamente.
 
+### `custom_heng.h`
+
+Sirve para añadir un manejador cutom para el eje horizontal de movimiento. Por defecto, el eje horizontal se controla con las teclas izquierda/derecha: pulsando una de estas teclas aplicamos aceleración en el eje horizontal, y si no se pulsa ninguna se aplica una fricción en dirección contraria al movimiento. Puedes programar tu propio eje horizontal desactivando el que viene por defecto con `PLAYER_DISABLE_DEFAULT_HENG` en `my/config.h` y añadiendo tu código a `custom_heng.h`.
+
+Por ejemplo, puedes programar un motor horizontal que sólo se mueva horizontalmente si estás en el aire (`possee` vale 1 si estamos sobre una plataforma).
+
+```c
+    // custom_heng.h
+    // PLAYER_DISABLE_DEFAULT_HENG está definido en my/config.h
+
+    if (possee == 0) {
+
+        // This is a copy of the default horizontal engine...
+        if ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {
+            if (p_vx > 0) { 
+                p_vx -= PLAYER_RX; if (p_vx < 0) p_vx = 0; 
+            } else if (p_vx < 0) {
+                p_vx += PLAYER_RX; if (p_vx > 0) p_vx = 0;
+            }
+            wall_h = 0;
+        }
+
+        if ((pad0 & sp_LEFT) == 0) {
+            if (p_vx > -PLAYER_MAX_VX) {
+                p_facing = 0; p_vx -= PLAYER_AX;
+            }
+        }
+
+        if ((pad0 & sp_RIGHT) == 0) {
+            if (p_vx < PLAYER_MAX_VX) {
+                p_vx += PLAYER_AX; p_facing = 1;
+            }
+        }
+
+    }
+```
+
+O puedes conseguir un motor de plataformas más realista evitando que el jugador pueda aplicar aceleración en el aire. Además, en el aire se aplica una fricción especial, mucho más baja que la normal:
+
+```c
+    // custom_heng.h
+    // PLAYER_DISABLE_DEFAULT_HENG está definido en my/config.h
+
+    if (possee == 0) {
+
+        if (p_vx > 0) { 
+            p_vx -= PLAYER_RX_AIRBORNE; if (p_vx < 0) p_vx = 0; 
+        } else if (p_vx < 0) {
+            p_vx += PLAYER_RX_AIRBORNE; if (p_vx > 0) p_vx = 0;
+        }
+        wall_h = 0;
+
+    } else {
+
+        // This is a copy of the default horizontal engine...
+        if ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {
+            if (p_vx > 0) { 
+                p_vx -= PLAYER_RX; if (p_vx < 0) p_vx = 0; 
+            } else if (p_vx < 0) {
+                p_vx += PLAYER_RX; if (p_vx > 0) p_vx = 0;
+            }
+            wall_h = 0;
+        }
+
+        if ((pad0 & sp_LEFT) == 0) {
+            if (p_vx > -PLAYER_MAX_VX) {
+                p_facing = 0; p_vx -= PLAYER_AX;
+            }
+        }
+
+        if ((pad0 & sp_RIGHT) == 0) {
+            if (p_vx < PLAYER_MAX_VX) {
+                p_vx += PLAYER_AX; p_facing = 1;
+            }
+        }
+
+    }
+```
+
 ### `on_special_tile.h`
 
 Se ejecuta cuando el jugador toca un tile cuyo comportamiento tiene el bit 7 levantado (cumple & 128). Cuando esto ocurre, `p_tx` y `p_ty`, que contienen el tile que toca el centro del sprite del jugador, indican precisamente las coordenadas de dicho tile.
