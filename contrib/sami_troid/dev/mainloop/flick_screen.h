@@ -50,11 +50,11 @@
 		#endif
 	#else
 		#if MAP_W > 1		
-			if (gpx == 0 && ((pad0 & sp_LEFT) == 0)) {
+			if (gpx == 0 && p_vx < 0) {
 				-- n_pant;
 				gpx = 224; p_x = 14336;
 			}
-			if (gpx == 224 && ((pad0 & sp_RIGHT) == 0)) {		// 14336 = 224 * 64
+			if (gpx == 224 && p_vx > 0) {		// 14336 = 224 * 64
 				++ n_pant;
 				gpx = p_x = 0;
 			}			
