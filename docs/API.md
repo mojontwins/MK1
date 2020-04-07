@@ -341,6 +341,108 @@ Está disponible en modo `128K` y sirve para descomprimir un recurso situado en 
 
 Está disponible en modo `48K` cuando se activa `COMPRESSED_LEVELS`. Sirve para descomprimir desde la dirección `from` a la dirección `to`. Pueden usarse punteros si les haces un cast a `(unsigned int)`.
 
+## El juego de caracteres y el tileset
+
+Al estar construido sobre **splib2**, **MTE MK1** es capaz de presentar 256 patrones, o carácteres, o trozos de 8x8 píxeles. De estos 256 caracteres, los primeros 64 se utilizan para imprimir textos y valores numéricos, y los 192 restantes para componer hasta 48 metatiles de 2x2 patrones.
+
+Entender como se organizan estos tiles en memoria viene muy bien para hacer muchas fullerías interesantes.
+
+### Modo sencillo: un solo nivel
+
+En el modo sencillo, que se emplea cuando el juego solo lleva un nivel (esto es, `COMPRESSED_LEVELS` está desactivado), el charset, el tileset, y los atributos ocupan una zona de memoria contigua de 2304 bytes a partir de la dirección de memoria a la que apunta la variable `tileset`:
+
+- 512 bytes para los 64 caracteres de la fuente (8 × 64 = 512).
+- 1536 bytes para los 192 caracteres que se emplean en dibujar los 48 metatiles (48 × 4 × 8 = 1536).
+- 256 bytes para 256 atributos: uno por cada caracter del set.
+
+Los atributos solo se emplean en realidad para los caracteres 64 a 255, pero ahorrarse los 64 primeros (que no se usan) añadiría una complejidad al *backend* que ocuparía más de 64 bytes.
+
+### Modo multinivel
+
+En el modo multinivel, la fuente está separada del resto (colocada en memoria a partir de la dirección de memoria a la que apunta la variable `font`), de forma que `tileset` apunta directamente al primer byte del primer caracter que se utiliza para dibujar los metatiles (el 64). Los atributos van justo después. Esto está hecho así para que en los *level bundles* se pueda hacer un bloque con todo lo que cambia sin tener que comprimir la fuente en cada nivel (que es lo que ocurría en MK1 < 5.0 o MK2 < 1.0).
+
+### Cambiando el tileset
+
+En juegos multinivel, cada nivel define su propio tileset (por lo general), pero puede surgir la necesidad de tener que remplazar el tileset en medio de un nivel (por ejemplo si tu juego tiene un único nivel). Vamos a poner el ejemplo de un juego mononivel en el que queramos alternar entre tres tilesets, que hemos llamado `work0.png`, `work1.png` y `work2.png`.
+
+`assets/tileset.h` espera un charset completo, así que generaremos uno que contenga la fuente y un metatileset "vacío". Por suerte, `ts2bin.exe` puede hacer esto por nosotros. Modificamos la llamada en `compile.bat` para que no tome ningún `work.png`; especificando `blank` se generarán caracteres y atributos a 0:
+
+```
+    ..\utils\ts2bin.exe ..\gfx\font.png blank tileset.bin 7 >nul
+```
+
+Luego habrá que importar los tres tilesets y comprimirlos. No queremos incluir ninguna fuente, por eso especificamos `none` en vez de la ruta para la fuente. Colocaremos el resultado en `/bin`. Posteriormente usaremos `apultra.exe` para comprimir. Podemos añadir estas lineas debajo de la que acabamos de modificar:
+
+```
+    ..\utils\ts2bin.exe none ..\gfx\work0.png ..\bin\work0.bin 7 >nul
+    ..\utils\ts2bin.exe none ..\gfx\work1.png ..\bin\work1.bin 7 >nul
+    ..\utils\ts2bin.exe none ..\gfx\work2.png ..\bin\work2.bin 7 >nul
+
+    ..\utils\apultra.exe ..\bin\work0.bin ..\bin\work0c.bin >nul
+    ..\utils\apultra.exe ..\bin\work1.bin ..\bin\work1c.bin >nul
+    ..\utils\apultra.exe ..\bin\work2.bin ..\bin\work2c.bin >nul
+```
+
+Ya tenemos todo lo que necesitamos. `tileset.bin`, que contiene la fuente y un tileset vacío, se importa en `assets/tileset.h`, pero nuestros bloques comprimidos tendremos que incluirlos en nuestro código custom. Un buen sitio es `my/ci/extra_vars.h`:
+
+```c
+    // extra_vars.h
+
+    extern unsigned char ts0 [0];
+    extern unsigned char ts1 [0];
+    extern unsigned char ts2 [0];
+
+    #asm
+        ._ts0
+            BINARY "../bin/work0c.bin"
+        ._ts1
+            BINARY "../bin/work1c.bin"
+        ._ts2
+            BINARY "../bin/work2c.bin"
+    #endasm
+```
+
+Con esto, tendremos `ts0`, `ts1` y `ts2` para apuntar a nuestros tilesets comprimidos, y con los `BINARY` los hemos incluido en nuestro binario. Ahora hay que decidir en qué momento descomprimirlos. Esto dependerá mucho de tu juego, pero pongamos un ejemplo que será bastante válido porque en la mayoría de los juegos se vuelve atrás (si en tu juego no se vuelve atrás esto sería mucho más sencillo):
+
+Nuestro juego ficticio tiene 30 pantallas, y queremos usar un tileset en cada 10.
+
+Para reducir los delays (descomprimir un tileset tarda tiempo), vamos a controlar qué tileset hay cargado y cargaremos un nuevo sólo si es necesario. Usaremos una variable `cur_tileset` que crearemos en `my/ci/extra_vars.h`. Para incluir una inicialización automática, emplearemos un valor fuera de rango al inicio del juego, para que la primera vez que se cargue una pantalla se descomprima el tileset correcto sin importar donde empecemos (lo que puede venir bien si estamos haciendo debug):
+
+```c
+    // entering_game.h
+
+    cur_tileset = 99;   // Fuera de rango
+```
+
+Al entrar en cada pantalla comprobaremos donde estamos y el valor de `cur_tileset` para decidir si cambiamos de tileset. También nos haremos un array con los punteros a los binarios comprimidos:
+
+```c
+    // extra_vars.h
+
+    unsigned char cur_tileset;
+    unsigned char *tsc [] = { ts0, ts1, ts2 };
+```
+
+Para cambiar de tileset habrá que descomprimir nuestros binarios comprimidos, que contienen el metatileset y sus atributos, en el sitio correcto. Como estamos en configuración *mononivel*, esto será a partir de `tileset + 512`, para saltarnos la fuente.
+
+```c 
+    // entering_screen.h
+
+    if (n_pant < 10) rda = 0;
+    else if (n_pant < 20) rda = 1;
+    else rda = 2;
+
+    if (rda != cur_tileset) {
+        cur_tileset = rda;
+        gp_gen = tsc [cur_tileset];
+        #asm
+            ld hl, (_gp_gen)
+            ld de, _tileset + 512
+            call depack
+        #endasm
+    }
+``` 
+
 ## Bajo nivel y splib2
 
 Iré apuntando aquí cosas de splib2 que piense que pueden ser interesantes a la hora de escribir tu propio código en los puntos de inyección. Generalmente usarás sólo la API del motor, pero es posible que haya que afinar en un momento dado.
