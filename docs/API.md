@@ -423,10 +423,10 @@ Al entrar en cada pantalla comprobaremos donde estamos y el valor de `cur_tilese
     unsigned char *tsc [] = { ts0, ts1, ts2 };
 ```
 
-Para cambiar de tileset habrá que descomprimir nuestros binarios comprimidos, que contienen el metatileset y sus atributos, en el sitio correcto. Como estamos en configuración *mononivel*, esto será a partir de `tileset + 512`, para saltarnos la fuente.
+Para cambiar de tileset habrá que descomprimir nuestros binarios comprimidos, que contienen el metatileset y sus atributos, en el sitio correcto. Como estamos en configuración *mononivel*, esto será a partir de `tileset + 512`, para saltarnos la fuente. Un buen sitio es justo antes de cambiar de pantalla, para que la próxima se pinte con el nuevo tileset al invalidarse todo el viewport:
 
 ```c 
-    // entering_screen.h
+    // before_entering_screen.h
 
     if (n_pant < 10) rda = 0;
     else if (n_pant < 20) rda = 1;
@@ -434,9 +434,9 @@ Para cambiar de tileset habrá que descomprimir nuestros binarios comprimidos, q
 
     if (rda != cur_tileset) {
         cur_tileset = rda;
-        gp_gen = tsc [cur_tileset];
+        _gp_gen = tsc [cur_tileset];
         #asm
-            ld hl, (_gp_gen)
+            ld hl, (__gp_gen)
             ld de, _tileset + 512
             call depack
         #endasm
