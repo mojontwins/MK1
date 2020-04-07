@@ -610,7 +610,7 @@ unsigned char player_move (void) {
 				#elif defined (BOUNDING_BOX_8_CENTERED)
 					cy1 = (gpy + 3) >> 4;
 				#else
-					cy1 = gpy >> 3;		
+					cy1 = (gpy - 1) >> 3;		
 				#endif
 
 				if (attr (cx1, cy1) == 10) {
