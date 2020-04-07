@@ -60,12 +60,14 @@ Print #f, "// MTE MK1 (la Churrera) v5.0"
 Print #f, "// Copyleft 2010-2014, 2020 by the Mojon Twins"
 Print #f, ""
 print #f, "// Sprites.h"
-print #f, "// Generado por SprCnv de la Churrera"
-print #f, "// Copyleft 2010, 2013 The Mojon Twins"
 if nomask then print #f, "// No masks"
 print #f, " "
 
-print #f, "extern unsigned char sprites [];"
+for sprite = 1 to Val (Command (3))
+	print #f, "extern unsigned char sprite_" + Trim(Str(sprite)) + "_a []; "
+	print #f, "extern unsigned char sprite_" + Trim(Str(sprite)) + "_b []; "
+	print #f, "extern unsigned char sprite_" + Trim(Str(sprite)) + "_c []; "
+next sprite
 
 print #f, " "
 
@@ -80,8 +82,6 @@ else
 	for i = 0 to 7: print #f, "        defb 0, 255":next i: print #f, " "
 endif
 
-print #f, "._sprites"
-
 If nomask then
 	n = val (Command (3)) / 2
 else
@@ -92,7 +92,7 @@ for sprite = 1 to n
 
 	' Primera columna 
 	
-	'print #f, "    ._sprite_" + Trim (Str(Sprite)) + "_a"
+	print #f, "    ._sprite_" + Trim (Str(Sprite)) + "_a"
 	if nomask then
 		print #f,"; Sprites #" & str ((sprite-1) * 2) & " y " & str ((sprite-1) * 2 + 1)
 	else
@@ -132,7 +132,7 @@ for sprite = 1 to n
 	
 	' Segunda columna 
 	
-	'print #f, "    ._sprite_" + Trim (Str(Sprite)) + "_b"
+	print #f, "    ._sprite_" + Trim (Str(Sprite)) + "_b"
 	print #f,"; Segunda columna"
 	
 	' Ahora tengo que calcular los dos valores de la primera columna
@@ -167,7 +167,7 @@ for sprite = 1 to n
 	
 	' Tercera columna
 	
-	'print #f, "    ._sprite_" + Trim (Str(Sprite)) + "_c"
+	print #f, "    ._sprite_" + Trim (Str(Sprite)) + "_c"
 	print #f, "; tercera columna"
 	for yy = 0 to 23
 		if nomask then 
