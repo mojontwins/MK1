@@ -640,7 +640,7 @@ unsigned char player_move (void) {
 			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED)
 				cx1 = (gpx + 3) >> 4;
 			#else
-				cx1 = gpx >> 4;		
+				cx1 = (gpx - 1) >> 4;		
 			#endif		
 
 			if (attr (cx1, cy1) == 10) {
