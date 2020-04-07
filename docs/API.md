@@ -374,9 +374,9 @@ En juegos multinivel, cada nivel define su propio tileset (por lo general), pero
 Luego habrá que importar los tres tilesets y comprimirlos. No queremos incluir ninguna fuente, por eso especificamos `none` en vez de la ruta para la fuente. Colocaremos el resultado en `/bin`. Posteriormente usaremos `apultra.exe` para comprimir. Podemos añadir estas lineas debajo de la que acabamos de modificar:
 
 ```
-    ..\utils\ts2bin.exe none ..\gfx\work0.png ..\bin\work0.bin 7 >nul
-    ..\utils\ts2bin.exe none ..\gfx\work1.png ..\bin\work1.bin 7 >nul
-    ..\utils\ts2bin.exe none ..\gfx\work2.png ..\bin\work2.bin 7 >nul
+    ..\utils\ts2bin.exe nofont ..\gfx\work0.png ..\bin\work0.bin 7 >nul
+    ..\utils\ts2bin.exe nofont ..\gfx\work1.png ..\bin\work1.bin 7 >nul
+    ..\utils\ts2bin.exe nofont ..\gfx\work2.png ..\bin\work2.bin 7 >nul
 
     ..\utils\apultra.exe ..\bin\work0.bin ..\bin\work0c.bin >nul
     ..\utils\apultra.exe ..\bin\work1.bin ..\bin\work1c.bin >nul
