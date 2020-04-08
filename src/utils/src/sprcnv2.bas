@@ -8,6 +8,20 @@
 #define RGBA_B( c ) ( CUInt( c )        And 255 )
 #define RGBA_A( c ) ( CUInt( c ) Shr 24         )
 
+Function inCommand (spec As String) As Integer
+	Dim As Integer res, i
+
+	i = 0: res = 0
+
+	Do
+		If Command (i) = "" Then Exit Do
+		If Command (i) = spec Then res = -1: Exit Do
+		i = i + 1
+	Loop
+
+	Return res
+End Function
+
 Sub WarningMessage ()
 End Sub
 
@@ -18,13 +32,18 @@ Sub Usage ()
 	Print "Convierte un Spriteset de n sprites"
 End Sub
 
+Function labelName (extra As Integer, i As Integer) As String
+	If i <= 16 Or extra = 0 Then Return "sprite"
+	Return "extra_sprite"
+End Function
+
 '
 '
 '
 
 dim as any ptr img 			' will contain the image loaded from the PNG
 dim as String filename, o
-dim as integer i, j, f, sprite, x, y, xx, yy, ac, nomask, n
+dim as integer i, j, f, sprite, x, y, xx, yy, ac, nomask, extra, n
 dim as unsigned long p1, p2
 
 WarningMessage () 			' Esto lo quito algún día, cuando deje de ser cutrón
@@ -34,7 +53,8 @@ If Len (Command (1)) = 0 Or Len (Command (2)) = 0 Or len (Command (3)) = 0 Then
 	End
 End If
 
-If lcase(Command (4)) = "nomask" Then nomask = -1 else nomask = 0
+If inCommand ("nomask") Then nomask = -1 else nomask = 0
+If inCommand ("extra") Then extra = -1 else extra = 0
 
 ' Primero cargo el archivo de imagen
 screenres 640, 480, 32, , -1
@@ -64,9 +84,10 @@ if nomask then print #f, "// No masks"
 print #f, " "
 
 for sprite = 1 to Val (Command (3))
-	print #f, "extern unsigned char sprite_" + Trim(Str(sprite)) + "_a []; "
-	print #f, "extern unsigned char sprite_" + Trim(Str(sprite)) + "_b []; "
-	print #f, "extern unsigned char sprite_" + Trim(Str(sprite)) + "_c []; "
+
+	print #f, "extern unsigned char " & labelName (extra, sprite) & "_" + Trim(Str(sprite)) + "_a []; "
+	print #f, "extern unsigned char " & labelName (extra, sprite) & "_" + Trim(Str(sprite)) + "_b []; "
+	print #f, "extern unsigned char " & labelName (extra, sprite) & "_" + Trim(Str(sprite)) + "_c []; "
 next sprite
 
 print #f, " "
@@ -92,7 +113,7 @@ for sprite = 1 to n
 
 	' Primera columna 
 	
-	print #f, "    ._sprite_" + Trim (Str(Sprite)) + "_a"
+	print #f, "    ._" & labelName (extra, sprite) & "_" + Trim (Str(Sprite)) + "_a"
 	if nomask then
 		print #f,"; Sprites #" & str ((sprite-1) * 2) & " y " & str ((sprite-1) * 2 + 1)
 	else
@@ -132,7 +153,7 @@ for sprite = 1 to n
 	
 	' Segunda columna 
 	
-	print #f, "    ._sprite_" + Trim (Str(Sprite)) + "_b"
+	print #f, "    ._" & labelName (extra, sprite) & "_" + Trim (Str(Sprite)) + "_b"
 	print #f,"; Segunda columna"
 	
 	' Ahora tengo que calcular los dos valores de la primera columna
@@ -167,7 +188,7 @@ for sprite = 1 to n
 	
 	' Tercera columna
 	
-	print #f, "    ._sprite_" + Trim (Str(Sprite)) + "_c"
+	print #f, "    ._" & labelName (extra, sprite) & "_" + Trim (Str(Sprite)) + "_c"
 	print #f, "; tercera columna"
 	for yy = 0 to 23
 		if nomask then 
