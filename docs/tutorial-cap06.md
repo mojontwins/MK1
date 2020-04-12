@@ -33,7 +33,7 @@ En primer lugar tenemos el concepto de enemigo. Un enemigo, para **MTE MK1**, so
 
 Los enemigos tienen asociados diversos valores y algo muy importante: el tipo. El tipo de enemigo define su comportamiento y, además, el gráfico con el que se pinta. Atención porque esto es un tanto confuso, sobre todo porque no se diseñó a priori y está algo parcheado (léase más arriba el asunto de las plataformas móviles):
 
-Los enemigos de **tipos 1, 2 o 3** (y el **4** en los güegos de vista genital) describen trayectorias lineales y se dibujan con el primer, segundo o tercer (o cuarto) sprite de enemigos del tileset. Cuando hablamos de trayectorias lineales nos referimos a dos posibles casos:
+Los enemigos de **tipos 1, 2 ó 3** (y el **4** en los güegos de vista genital) describen trayectorias lineales y se dibujan con el primer, segundo o tercer (o cuarto) sprite de enemigos del tileset. Cuando hablamos de trayectorias lineales nos referimos a dos posibles casos:
 
 1. **Trayectorias rectilíneas**, verticales u horizontales: se definen el punto de inicio y el punto de final describiendo una línea recta vertical u horizontal. El enemigo sigue esa línea imaginaria yendo y viniendo ad infinitum.
 
