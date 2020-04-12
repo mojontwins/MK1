@@ -2,9 +2,9 @@
 
 ## Antes de empezar
 
-En este capítulo y en prácticamente todos los demás tendremos que abrir una ventana de linea de comandos para ejecutar scripts y programillas, además de para lanzar la compilación del juego y cosas por el estilo. Lo que quiero decir es que deberías tener alguna noción básica de estos manejes. Si no sabes lo que es esto que te pongo aquí abajo, es mejor que consultes algún tutorial básico sobre el manejo de la ventana de linea de comandos (o consola) del sistema operativo que uses. O eso, o que llames a tu amigo el de las gafas y la camiseta de Piedra-Papel-Tijeras-Lagarto-Spock.
+En este capítulo y en prácticamente todos los demás tendremos que abrir una ventana de línea de comandos para ejecutar scripts y programillas, además de para lanzar la compilación del juego y cosas por el estilo. Lo que quiero decir es que deberías tener alguna noción básica de estos manejes. Si no sabes lo que es esto que te pongo aquí abajo, es mejor que consultes algún tutorial básico sobre el manejo de la ventana de línea de comandos (o consola) del sistema operativo que uses. O eso, o que llames a tu amigo el de las gafas y la camiseta de Piedra-Papel-Tijeras-Lagarto-Spock.
 
-![Consola de linea de comandos](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_console.png)
+![Consola de línea de comandos](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_console.png)
 
 Podéis echar un vistazo por ejemplo a [este tutorial](http://www.falconmasters.com/offtopic/como-utilizar-consola-de-windows/). Con los comandos listados en la sección *Lista de comandos básicos* tendréis más que suficiente.
 
@@ -18,7 +18,7 @@ Descárgalo y ponlo en una carpeta temporal, que ya iremos poniendo cosas en nue
 
 ## Tileset... ¿De qué leches estamos hablando?
 
-Pues de tiles. ¿Que qué es un tile? Pues para ponerlo sencillo, no es más que un cachito de gráfico que es del mismo tamaño y forma que otros cachitos de gráficos. Para que lo veas, busca la traducción: tile significa “azulejo”, (aunque nosotros preferimos pensar que en ralidad se trata de las siglas “Tengo Ideas Locas y Estrafalarias”). Ahora piensa en la pared de tu cuarto de baño, e imagina que en cada azulejo hay un cachito de gráfico. Tenemos el azulejo con un cachito de ladrillo, el azulejo con un cachito de hierba, y el azulejo negro y el azulejo con un cachito de suelo. Con varios de cada uno podemos ordenarlos de forma que hagamos un dibujo que se parezca a una casa de campo. Un cuarto de baño así molaría de la hostia, por cierto. Siempre hay que hacer pipí. Y caca.
+Pues de tiles. ¿Que qué es un _tile_? Pues para ponerlo sencillo, no es más que un cachito de gráfico que es del mismo tamaño y forma que otros cachitos de gráficos. Para que lo veas, busca la traducción: tile significa “azulejo”, (aunque nosotros preferimos pensar que en ralidad se trata de las siglas “Tengo Ideas Locas y Estrafalarias”). Ahora piensa en la pared de tu cuarto de baño, e imagina que en cada azulejo hay un cachito de gráfico. Tenemos el azulejo con un cachito de ladrillo, el azulejo con un cachito de hierba, y el azulejo negro y el azulejo con un cachito de suelo. Con varios de cada uno podemos ordenarlos de forma que hagamos un dibujo que se parezca a una casa de campo. Un cuarto de baño así molaría de la hostia, por cierto. Siempre hay que hacer pipí. Y caca.
 
 ![Una casa de campo](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_tiles.png)
 
@@ -26,9 +26,9 @@ Esto es lo que usa **MTE MK1** para pintar los gráficos de fondo. Como guardar 
 
 Colisión
 
-**MTE MK1**, además, usa los tiles para otra cosa: para la colisión. Colisión es un nombre muy chulo para referirse a algo muy tonto: el protagonista del güego podrá andar por la pantalla o no dependiendo del tipo del tile que vaya a pisar. O sea, que cada tile tiene asociado un comportamiento. Por ejemplo, al tile negro del ejemplo de arriba podríamos ponerle un comportamiento “traspasable” para que el jugador pudiera moverse libremente por el espacio ocupado por estos tiles. En cambio, el tile de la hierba debería ser “obstáculo”, entendiendo que debe impedir que el protagonista se mueva por el espacio que ocupan. Un güegos de plataformas, por ejemplo, el motor hará caer al protagonista siempre que no haya un tile “obstáculo” bajo sus pies.
+**MTE MK1**, además, usa los tiles para otra cosa: para la colisión. Colisión es un nombre muy chulo para referirse a algo muy tonto: el protagonista del güego podrá andar por la pantalla o no dependiendo del tipo del tile que vaya a pisar. O sea, que cada tile tiene asociado un comportamiento. Por ejemplo, al tile negro del ejemplo de arriba podríamos ponerle un comportamiento “traspasable” para que el jugador pudiera moverse libremente por el espacio ocupado por estos tiles. En cambio, el tile de la hierba debería ser “obstáculo”, entendiendo que debe impedir que el protagonista se mueva por el espacio que ocupan. En un güego de plataformas, por ejemplo, el motor hará caer al protagonista siempre que no haya un tile “obstáculo” bajo sus pies.
 
-En los güegos de **MTE MK1** tenemos los siguientes tipos de tiles, o, mejor dicho, los siguientes comportamientos para los tiles. Cada uno, además, tiene un código que necesitaremos saber. Ahora no, sino más adelante, cuando ya tengamos todo el material y estemos montando el güego. Por ahora nos basta con la lista:
+En los güegos de **MTE MK1** tenemos los siguientes tipos de tiles o, mejor dicho, los siguientes comportamientos para los tiles. Cada uno, además, tiene un código que necesitaremos saber. Ahora no, sino más adelante, cuando ya tengamos todo el material y estemos montando el güego. Por ahora nos basta con la lista:
 
 1. *Tipo “0”, traspasable*. En los güegos de plataformas puede ser el cielo, unos ladrillos de fondo, el cuadro del tío Narciso, un florero feo o unas montañas a tomar por culo. En los güegos de vista genital los usaremos para el suelo por el que podemos andar. O sea, cosas que no detengan la marcha del muñeco.
 
@@ -42,7 +42,7 @@ En los güegos de **MTE MK1** tenemos los siguientes tipos de tiles, o, mejor di
 
 6. *Tipo “10”, interactuable*. Es un obstáculo pero que sea de tipo “10” hace que el motor esté coscao y sepa que es especial. De este tipo son, por ahora, los cerrojos y los bloques que se pueden empujar. Hablaremos de ellos dentro de poco.
 
-7. *Tipo “10”, destructible*. Son tiles que se pueden romper disparándoles.
+7. *Tipo “16”, destructible*. Son tiles que se pueden romper disparándolos.
 
 Vaya mierda, pensarás, ¡si faltan números! Y más que faltaban antes. Esto está hecho queriendo, amigos, porque simplifica mucho los cálculos y permite **combinar comportamientos** sumando los números, hasta donde tenga sentido. Por ejemplo, un tile *obstáculo que mata* (8+1 = 9) no tiene sentido porque no lo vamos a poder tocar nunca, pero un *obstáculo destructible* (8+16 = 24) sí que lo tiene. De hecho, si no ponemos los destructibles como obstáculos *se podrán traspasar*.
 
@@ -60,15 +60,15 @@ Los **tiles empujables** son unos tiles que, al empujarlos con el protagonista, 
 
 Eso, vamos al lío ya. Vamos a dibujar nuestro tileset, o a rapiñarlo de por ahí, o a pedir a nuestro amigo que sabe dibujar que nos lo haga. Que sí, hombre, que te busques uno, que hay muchos grafistas faltos de amor. Lo primero que tenemos que decidir es si vamos a usar un tileset de 16 tiles diferentes o de 48, que son los dos tamaños de tilesets que soporta **MTE MK1**. Qué tontería, estarás pensando, ¡de 48! ¡son más! Por supuesto que son más, mi querido Einstein, pero ocurre una cosa: 16 tiles diferentes se pueden representar con un número de 4 bits. Eso significa que en un byte, que tiene 8 bits, podemos almacenar dos tiles. ¿Adónde quiero llegar? ¡Bien, lo habéis adivinado! Los mapas ocupan exactamente la mitad de memoria si usamos tilesets de 16 tiles en lugar de tilesets de 48.
 
-Ya sé que 16 pueden parecer pocos tiles, pero pensad que la mayoría de nuestros güegos están hechos así, y muy feos no quedan. Con un poco de inventiva podemos hacer pantallas muy chulas con pocos tiles. Además, como veremos más adelante en este mismo capítulo, usar tilesets de 16 tiles nos permitirá activar el efecto de sombras automáticas, que hará que parezca que tenemos bastantes más de 16 tiles. 
+Ya sé que 16 pueden parecer pocos tiles, pero pensad que la mayoría de nuestros güegos están hechos así, y muy feos no quedan. Con un poco de inventiva podemos hacer pantallas muy chulas con pocos tiles. Además, como veremos más adelante en este mismo capítulo, usar tilesets de 16 tiles nos permitirá activar el efecto de sombras automáticas, que hará que parezca que tenemos bastantes más de 16 tiles.
 
 Otra cosa que se puede hacer es hacer juegos de varios niveles cortos en el que cambiemos de tileset para cada nivel. Esto dará suficiente variedad y permitirá usar mapas que ocupen la mitad.
 
-Por lo pronto id abriendo vuestro programa de edición gráfica preferido y creando un nuevo archivo de 256×48 píxels. Seguro que vuestro programa de edición gráfica tiene una opción para activar una rejilla (o grid). Colocadla para que haga recuadros de 16×16 píxels y, a ser posible, que tenga 2 subdivisiones, para que podamos ver donde empieza cada carácter. Esto nos ayudará a hacer los gráficos siguiendo las restricciones del Spectrum, o a poder saber donde empieza y termina cada tile a la hora de recortarlos y/o dibujarlos. Yo uso una versión super vieja de Photoshop y cuando creo un nuevo tileset me veo delante de algo así:
+Por lo pronto id abriendo vuestro programa de edición gráfica preferido y creando un nuevo archivo de 256×48 píxels. Seguro que vuestro programa de edición gráfica tiene una opción para activar una rejilla (o grid). Colocadla para que haga recuadros de 16×16 píxels y, a ser posible, que tenga 2 subdivisiones, para que podamos ver donde empieza cada carácter. Esto nos ayudará a hacer los gráficos siguiendo las restricciones del Spectrum, o a poder saber donde empieza y termina cada tile a la hora de recortarlos y/o dibujarlos. Yo uso una versión super vieja de Photoshop y, cuando creo un nuevo tileset, me veo delante de algo así:
 
 ![Un lienzo vacío](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_empty_ts.png)
 
-Con respecto a la paleta del Spectrum, como todas estas cosas, los valores que soportan por defecto los conversores incluidos en el toolchain son bastante arbitrarios. Para que todo vaya bien, usa unos valores de R, G, B de 200 si quieres representar los colores sin BRIGHT y de 255 si quieres representar los colores con BRIGHT. A Mappy no le gusta el magenta intenso (255, 0, 255), así que para este color puedes usar por ejemplo (254, 0, 255).
+Con respecto a la paleta del Spectrum, como todas estas cosas, los valores que soportan por defecto los conversores incluidos en el _toolchain_ son bastante arbitrarios. Para que todo vaya bien, usa unos valores de R, G, B de 200 si quieres representar los colores sin BRIGHT y de 255 si quieres representar los colores con BRIGHT. A Mappy no le gusta el magenta intenso (255, 0, 255), así que para este color puedes usar por ejemplo (254, 0, 255).
 
 Si no te quieres rayar, usa los colores de esta paleta:
 
@@ -108,7 +108,7 @@ Está formada por cuatro tiles que son, de izquierda a derecha:
 
 ¿Se pilla bien? Básicamente hay que dibujar 20 tiles: 16 para hacer el mapa, y 4 para representar objetos y restar monotonía de los fondos. Huelga decir que si, por ejemplo, no vas a usar llaves y cerrojos en tu güego, te puedes ahorrar pintar la llave en el tile 18.
 
-En el dogmole, por ejemplo, no hay tiles empujables. Por eso nuestro tile 14 es un mejillón del cantábrico que, como todos sabemos, no se puede empujar.
+En el Dogmole, por ejemplo, no hay tiles empujables. Por eso nuestro tile 14 es un mejillón del cantábrico que, como todos sabemos, no se puede empujar.
 
 ### Sombreado automático
 
@@ -132,7 +132,7 @@ Para verlo, vamos a echarle el ojete a algunos tilesets de nuestros güegos, a m
 
 ![Lala Lah](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_ts_lah.png)
 
-Aquí tenemos el tileset de **Lala lah**. Como vemos,el primer tile es el fondo azul que se ve en la mayoría de las pantallas. Le sigue un trozo de plataforma que también es un tile de fondo, y después el rebordecico que es un tile tipo “plataforma” (tipo 4). Si juegas al güego verás cómo se comporta este tile, para terminar de entenderlo. El piedro amarillo que le sigue es un obstáculo (tipo 8). Luego hay dos matojitos psicodélicos para adornar de fondo (tipo 0). Luego otro piedro (8), un fondo enladrillado (0), una variación de los cuadricos (0), una bola de pinchos que mata (tipo 1), una caja con estrella (8), dos tiles para hacer tiras no traspasables (y, por tanto, de tipo 8), una plataforma to roneona (tipo 4), y para terminar el tile nº 15 será de tipo 10, porque usamos cerrojos y los cerrojos tienen que ser obstáculos interactuables. Luego tenemos la recarga, el objeto y la llave, el tile alternativo para el fondo, y en la tira de abajo los que se usan en el sombreado automático. Vamos a ver otro:
+Aquí tenemos el tileset de **Lala lah**. Como vemos, el primer tile es el fondo azul que se ve en la mayoría de las pantallas. Le sigue un trozo de plataforma que también es un tile de fondo, y después el rebordecico que es un tile tipo “plataforma” (tipo 4). Si juegas al güego verás cómo se comporta este tile, para terminar de entenderlo. El piedro amarillo que le sigue es un obstáculo (tipo 8). Luego hay dos matojitos psicodélicos para adornar de fondo (tipo 0). Luego otro piedro (8), un fondo enladrillado (0), una variación de los cuadricos (0), una bola de pinchos que mata (tipo 1), una caja con estrella (8), dos tiles para hacer tiras no traspasables (y, por tanto, de tipo 8), una plataforma to roneona (tipo 4), y para terminar el tile nº 15 será de tipo 10, porque usamos cerrojos y los cerrojos tienen que ser obstáculos interactuables. Luego tenemos la recarga, el objeto y la llave, el tile alternativo para el fondo, y en la tira de abajo los que se usan en el sombreado automático. Vamos a ver otro:
 
 ![D'Veel'Ng](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_ts_d'veel'ng.png)
 
@@ -140,7 +140,7 @@ Este es el tileset de **D'Veel'Ng**, un güego de perspectiva genital. Este empi
 
 ![Monono](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_ts_monono.png)
 
-Ahora toca el del **Monono**. Este es muy sencillo de ver: empezamos con el tile de fondo principal, vacío del todo (tipo 0). Seguimos con seis obstáculos (tipo 8). Luego tenemos dos tiles de fondo más, para adornar los fondos: la ventanica para asomarse y desi ola k ase y el escudo. Luego hay tres tiles-obstáculo más (tipo 8), unos pinches venenozos (tipo 1), nuestra típica plataforma metálica copyright Mojon Twins signature special (tipo 4), una caja que se puede empujar (tile 14, tipo 10) y un cerrojo (tile 15, tipo 10). Luego lo de siempre: recarga, objeto, llave, alternativo. Este no tiene sombreado automático.
+Ahora toca el del **Monono**. Este es muy sencillo de ver: empezamos con el tile de fondo principal, vacío del todo (tipo 0). Seguimos con seis obstáculos (tipo 8). Luego tenemos dos tiles de fondo más, para adornar los fondos: la ventanica para asomarse y desí ola k ase y el escudo. Luego hay tres tiles-obstáculo más (tipo 8), unos pinches venenozos (tipo 1), nuestra típica plataforma metálica copyright Mojon Twins signature special (tipo 4), una caja que se puede empujar (tile 14, tipo 10) y un cerrojo (tile 15, tipo 10). Luego lo de siempre: recarga, objeto, llave, alternativo. Este no tiene sombreado automático.
 
 Podría seguir, pero es que no tengo más ganas.
 
@@ -158,9 +158,9 @@ Como único ejemplo tenemos el tileset de Zombie Calavera. Si te fijas, en Zombi
 
 ## Ya tenemos el tileset pintado. Ahora ¿qué?
 
-**MTE MK2** utiliza un set de 256 "patrones" para las partes "fijas" (fondo, textos, marcadores). Un "patrón", o carácter, no es más que una imagen de 8x8 píxeles. De los 256 "patrones", los 64 primeros contendrán letras, números y símbolos, y los 192 restantes los diferentes trozos empleados para construir el tileset que has pintado.
+**MTE MK1** utiliza un set de 256 "patrones" para las partes "fijas" (fondo, textos, marcadores). Un "patrón", o carácter, no es más que una imagen de 8x8 píxeles. De los 256 "patrones", los 64 primeros contendrán letras, números y símbolos, y los 192 restantes los diferentes trozos empleados para construir el tileset que has pintado.
 
-Para conseguir tener todos sus trocitos tal y como los necesita, **MTE_MK2** dispone de un convertidor lamado `ts2bin.exe`, ubicado, como todas las utilidades, en el directorio `src/utils`. `ts2bin.exe` necesita DOS archivos para funcionar: uno con los 64 "patrones" de la fuente, y otro con tu "tileset".
+Para conseguir tener todos sus trocitos tal y como los necesita, **MTE_MK1** dispone de un convertidor lamado `ts2bin.exe`, ubicado, como todas las utilidades, en el directorio `src/utils`. `ts2bin.exe` necesita DOS archivos para funcionar: uno con los 64 "patrones" de la fuente, y otro con tu "tileset".
 
 Si no quieres tocar nada, lo primero que tienes que hacer es coger tu tileset, llamarlo `work.png`, y grabarlo en `/gfx` (sustituyendo el que viene por defecto). Luego necesitas hacer el archivo con la fuente.
 
@@ -176,11 +176,11 @@ Lo más fácil es utilizar como plantilla el archivo `fuente_base.png` incluido 
 
 ## La conversión e importación
 
-Como hemos dicho, la utilidad `ts2bin` incluida en `/utils` se encarga de tomar una fuente y un tileset y generar un binario con todos los patrones en el formato que espera **MTE MK2**. La invocación al conversor está incluida en `compile.bat` para que tú no tengas nada más que hacer que editar los gráficos y ponerlos en su sitio (y hacer todas las modificaciones que necesites de forma indolora) (los que hayan catado la Churrera en sus versiones anteriores estará ahora dando palmas con las orejas porque antes había que hacer bastante trabajo manual).
+Como hemos dicho, la utilidad `ts2bin` incluida en `/utils` se encarga de tomar una fuente y un tileset y generar un binario con todos los patrones en el formato que espera **MTE MK1**. La invocación al conversor está incluida en `compile.bat` para que tú no tengas nada más que hacer que editar los gráficos y ponerlos en su sitio (y hacer todas las modificaciones que necesites de forma indolora) (los que hayan catado la Churrera en sus versiones anteriores estará ahora dando palmas con las orejas porque antes había que hacer bastante trabajo manual).
 
-Sin embargo, por tema del saber, que no ocupa lugar, vamos a explicar como funciona.
+Sin embargo, por tema del saber, que no ocupa lugar, vamos a explicar cómo funciona.
 
-`ts2bin` está pensado para ser llamado desde linea de comandos (o desde un archivo de script como `compile.bat`). Si lo ejecutas a pelo desde la ventana de linea de comandos él mismo te chiva qué parámetros espera:
+`ts2bin` está pensado para ser llamado desde línea de comandos (o desde un archivo de script como `compile.bat`). Si lo ejecutas a pelo desde la ventana de línea de comandos, él mismo te chiva qué parámetros espera:
 
 ```
     $ src\utils\ts2bin.exe
@@ -199,7 +199,7 @@ Sin embargo, por tema del saber, que no ocupa lugar, vamos a explicar como funci
          one colour in a 8x8 cell
 ```
 
-El primer parámetro es el nombre de archivo de la fuente (incluyendo su ubicación si es necesaria), o la palabra `nofont` si sólo quieres convertir el tileset (cosa que viene bien para hacer otras cosas que no son un juego de la churrera normal). 
+El primer parámetro es el nombre de archivo de la fuente (incluyendo su ubicación si es necesaria), o la palabra `nofont` si sólo quieres convertir el tileset (cosa que viene bien para hacer otras cosas que no son un juego de la churrera normal).
 
 El segundo parámetro es el nombre del archivo con el tileset (incluyendo su ubicación si es necesaria), o la palabra `notiles` si sólo quieres convertir la fuente (bla bla bla, no con la churrera en situaciones normales), o `blank` si quieres generar el binario completo sólo con la fuente y con los tiles en negro, que es lo que llamamos un "placeholder para multi nivel" y que ya entenderás cuando veamos los multinivel.
 
@@ -207,13 +207,13 @@ El tercer parámetro es el nombre del archivo que quieres generar (incluyendo su
 
 El cuarto parámetro es opcional, y sirve para especificar un color de tinta 0-7 que quieres que se utilice si se encuentra algún "patrón" que sea un cuadrado de color sólido como segundo color. Si sabes de Spectrum le encontrarás sentido a esto.
 
-Si abres `compile.bat` verás que los parámetros que se emplean en la llamada para obtener los patrones se corresponden con los que hemos mencionado más arriba (la fuente se llama `font.png` y el tileset `work.png`, y se ubican en `gfx`). El archivo de salida es `tileset.bin` y se emplea `7` como `defaultink`.:
+Si abres `compile.bat` verás que los parámetros que se emplean en la llamada para obtener los patrones se corresponden con los que hemos mencionado más arriba (la fuente se llama `font.png` y el tileset `work.png`, y se ubican en `gfx`). El archivo de salida es `tileset.bin` y se emplea `7` como `defaultink`:
 
 ```
     ..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png tileset.bin 7
 ```
 
-**Si tu juego necesita sprites de otro color sobre cuadros totalmente negros tendrás que modificar esta linea con el color que necesites**.
+**Si tu juego necesita sprites de otro color sobre cuadros totalmente negros tendrás que modificar esta línea con el color que necesites**.
 
 Los `..\utils\` y `..\gfx` hacen referencia a que los archivos se ubican en esas carpetas que están un nivel más *abajo* de donde está `compile.bat`. El `> nul` del final hace que las mierdas que dice `ts2bin` no se muestren.
 
