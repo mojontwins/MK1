@@ -116,7 +116,7 @@ Este es el spriteset de nuestra genial conversión de **El Hobbit** (uno de nues
 
 Este otro spriteset es el de **Mega Meghan**. Aquí volvemos a tener a la prota (Meghan, la asesina malvada) en las cuatro direcciones posibles con dos frames de animación para cada una en la tira superior, y a cuatro mujeres encueras (que hacen de enemigas) en la tira inferior.
 
-Fíjate como, en este caso, nuestra vista genital la hemos diseñado con cierta perspectiva: cuando los muñecos van para arriba se dan la vuelta y cuando van para abajo miran de frente. Eso queda super chuli.
+Fíjate como, en este caso, nuestra vista genital la hemos diseñado con cierta perspectiva: cuando los muñecos van para arriba se dan la vuelta y cuando van para abajo miran de frente. Eso queda súper chuli.
 
 ## Dibujando nuestro spriteset
 
