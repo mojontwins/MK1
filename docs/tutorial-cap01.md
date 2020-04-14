@@ -126,7 +126,7 @@ Nos hará falta el editor Mappy para hacer los mapas del juego. La versión mojo
 
 Cuando lleguemos a la parte del sonido hablaremos de las utilidades Beepola y BeepFX. Puedes buscarlas y descargarlas ahora si quieres, pero no las utilizaremos hasta el final.
 
-Otra cosa que necesitarás será un buen editor de gráficos para pintar los monitos y los cachitos de escenario. Te vale cualquiera que grabe en `.png`. Te reitero que si no sabes dibujar y no tienes ningún amigo que sepa puedes pillar los gráficos de Mojon Twins. Igualmente vas a necesitar un editor gráfico para recortar y pegar nuestros gráficos en los tuyos. Te vale cualquier cosa. Yo uso una versión super vieja de Photoshop o el genial Aseprite porque es a lo que estoy acostumbrado. Mucha gente usa Gimp. Hay un montón, elije el que más te guste. Pero que grabe .png. Remember. Se bebes no kandusikas.
+Otra cosa que necesitarás será un buen editor de gráficos para pintar los monitos y los cachitos de escenario. Te vale cualquiera que grabe en `.png`. Te reitero que si no sabes dibujar y no tienes ningún amigo que sepa puedes pillar los gráficos de Mojon Twins. Igualmente vas a necesitar un editor gráfico para recortar y pegar nuestros gráficos en los tuyos. Te vale cualquier cosa. Yo uso una versión súper vieja de Photoshop o el genial Aseprite porque es a lo que estoy acostumbrado. Mucha gente usa Gimp. Hay un montón, elije el que más te guste. Pero que grabe .png. Remember. Se bebes no kandusikas.
 
 Una vez que eso esté instalado y tal, necesitaremos **MTE MK1**. Descarga este repositorio a tu disco duro.
 
