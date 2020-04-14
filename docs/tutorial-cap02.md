@@ -64,7 +64,7 @@ Ya sé que 16 pueden parecer pocos tiles, pero pensad que la mayoría de nuestro
 
 Otra cosa que se puede hacer es hacer juegos de varios niveles cortos en el que cambiemos de tileset para cada nivel. Esto dará suficiente variedad y permitirá usar mapas que ocupen la mitad.
 
-Por lo pronto id abriendo vuestro programa de edición gráfica preferido y creando un nuevo archivo de 256×48 píxeles. Seguro que vuestro programa de edición gráfica tiene una opción para activar una rejilla (o grid). Colocadla para que haga recuadros de 16×16 píxeles y, a ser posible, que tenga 2 subdivisiones, para que podamos ver donde empieza cada carácter. Esto nos ayudará a hacer los gráficos siguiendo las restricciones del Spectrum, o a poder saber donde empieza y termina cada tile a la hora de recortarlos y/o dibujarlos. Yo uso una versión super vieja de Photoshop y, cuando creo un nuevo tileset, me veo delante de algo así:
+Por lo pronto id abriendo vuestro programa de edición gráfica preferido y creando un nuevo archivo de 256×48 píxeles. Seguro que vuestro programa de edición gráfica tiene una opción para activar una rejilla (o grid). Colocadla para que haga recuadros de 16×16 píxeles y, a ser posible, que tenga 2 subdivisiones, para que podamos ver donde empieza cada carácter. Esto nos ayudará a hacer los gráficos siguiendo las restricciones del Spectrum, o a poder saber donde empieza y termina cada tile a la hora de recortarlos y/o dibujarlos. Yo uso una versión súper vieja de Photoshop y, cuando creo un nuevo tileset, me veo delante de algo así:
 
 ![Un lienzo vacío](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/02_empty_ts.png)
 
