@@ -299,9 +299,9 @@ Y se configura con:
 
 2. `ENABLE_PUSHED_SCRIPTING` activa la integración del sistema de _scripting_ con los bloques empujables. Dicha integración se configura con las siguientes directivas:
 
-3. `MOVED_TILE_FLAG`, `MOVED_X_FLAG` y `MOVED_Y_FLAG`: Cuando se empuja un bloque empujable, el tile que "pisa" se almacena en el flag que diga `MOVED_TILE_FLAG`, y sus coordenadas en los flags que digan `MOVED_X_FLAG` y `MOVED_Y_FLAG`. Con esto sabemos, desde el _scripting_, un montón de cosas útiles sólo mirando el valor de esos flags.
+3. `MOVED_TILE_FLAG`, `MOVED_X_FLAG` y `MOVED_Y_FLAG`: Cuando se empuja un bloque empujable, el tile que "pisa" se almacena en el flag que diga `MOVED_TILE_FLAG`, y sus coordenadas en las flags que digan `MOVED_X_FLAG` y `MOVED_Y_FLAG`. Con esto sabemos, desde el _scripting_, un montón de cosas útiles sólo mirando el valor de esos flags.
 
-4. `PUSHING_ACTION`: Si la activamos, las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual serán ejecutadas tras copias los valores a los flags definidos más arriba cuando movamos un bloque empujable. Cuando expliquemos el sistema de _scripting_ esto no te sonará a chino, sólo a croata.
+4. `PUSHING_ACTION`: Si la activamos, las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual serán ejecutadas tras copias los valores a las flags definidos más arriba cuando movamos un bloque empujable. Cuando expliquemos el sistema de _scripting_ esto no te sonará a chino, sólo a croata.
 
 ## Motor de disparos
 
@@ -483,7 +483,7 @@ Como hemos dicho, el temporizador puede administrarse desde el _script_. Es inte
 
 Se trata de definir *check points* en el juego. Se colocan como **hotspots de tipo 6**. Cuando el jugador los toca, se almacena su estado actual:
 
-- Valor de todos los flags. (si aplica)
+- Valor de todos las flags. (si aplica)
 - Posición. (n_pant, tile X, tile Y)
 - Tiempo. (si aplica)
 - Munición. (si aplica)
@@ -504,7 +504,7 @@ El comportamiento por defecto es que no pase nada al morir, y cuando acabe la pa
 
 1. Si se activa `CP_RESET_WHEN_DYING`, además, cada vez que se pierda una vida se trasladará al jugador al último *check point*.
 
-2. Si se activa `CP_RESET_ALSO_VALUES`, además de lo anterior, se restaurará el valor de los flags.
+2. Si se activa `CP_RESET_ALSO_VALUES`, además de lo anterior, se restaurará el valor de las flags.
 
 No usaremos nada de esto en **Dogmole**, por lo que todo se queda comentado.
 
@@ -555,7 +555,7 @@ Si definimos `PLAYER_HAS_JETPAC`, la tecla “arriba” hará que activemos un j
 
 `PLAYER_STEPS_ON_ENEMIES` activa el motor de pisoteo y las otras dos, que lo configuran, son opcionales. Con este motor activado, el jugador podrá saltar sobre los enemigos para matarlos.
 
-1. `PLAYER_CAN_STEP_ON_FLAG`: Si se activa, el valor del flag indicado deberá valer 1 para que el pisoteo funcione. Como ganar un super poder.
+1. `PLAYER_CAN_STEP_ON_FLAG`: Si se activa, el valor del flag indicado deberá valer 1 para que el pisoteo funcione. Como ganar un súper poder.
 
 2. `PLAYER_MIN_KILLABLE` nos sirve para hacer que no todos los enemigos se puedan matar. En Dogmole, sólo podremos matar a los hechiceros, que son de tipo 3. Ojo con esto: si ponemos un 1 podremos matar a todos, si ponemos un 2, a los enemigos tipo 2 y 3, y si ponemos un 3 sólo a los de tipo 3. O sea, se podrá matar a los enemigos cuyo tipo sea mayor o igual al valor que se configure.
 
@@ -783,7 +783,7 @@ Básicamente, tendremos lo que se conoce como *Movimiento Rectilíneo Uniformeme
 
 Los parámetros siguientes sirven para especificar diversos valores relacionados con el movimiento en cada eje en güegos de vista lateral. En los de vista genital, se tomarán los valores del eje horizontal también para el vertical.
 
-Para obtener la suavidad de los movimientos sin usar valores en coma flotante (que son muy costosos de manejar), usamos aritmética de punto fijo. Básicamente los valores se expresan en 1/64 de pixel. Esto significa que el valor empleado se divide entre 64 a la hora de mover los sprites reales a la pantalla. Eso nos da una precisión de 1/64 pixels en ambos ejes, lo que se traduce en mayor suavidad de movimientos. En palabras techis, estamos usando 10 bits para la parte entera y 6 para la parte "decimal", así que decimos que nuestro punto fijo es **10.6**.
+Para obtener la suavidad de los movimientos sin usar valores en coma flotante (que son muy costosos de manejar), usamos aritmética de punto fijo. Básicamente los valores se expresan en 1/64 de pixel. Esto significa que el valor empleado se divide entre 64 a la hora de mover los sprites reales a la pantalla. Eso nos da una precisión de 1/64 píxeles en ambos ejes, lo que se traduce en mayor suavidad de movimientos. En palabras techis, estamos usando 10 bits para la parte entera y 6 para la parte "decimal", así que decimos que nuestro punto fijo es **10.6**.
 
 Somos conscientes en Mojonia de que este apartado es especialmente densote, así que no te preocupes demasiado si, de entrada, te pierdes un poco. Experimenta con los valores hasta que encuentres la combinación ideal para tu güego.
 
@@ -805,7 +805,7 @@ Al movimiento vertical le afecta la gravedad. La velocidad vertical será increm
 
 #### Caída libre
 
-La velocidad del jugador, que medimos en pixels/frame será incrementada en `PLAYER_G` / 64 pixels/frame hasta que llegue al máximo especificado por `PLAYER_MAX_CAYENDO` / 64. Con los valores que hemos elegido para **Dogmole**, la velocidad vertical en caída libre será incrementada en 48 / 64 = 0,75 pixels/frame hasta que llegue a un valor de 512 / 64 = 8 píxeles/frame. O sea, Dogmole caerá más y más rápido hasta que llegue a la velocidad máxima de 8 píxeles por frame.
+La velocidad del jugador, que medimos en píxeles/frame será incrementada en `PLAYER_G` / 64 píxeles/frame hasta que llegue al máximo especificado por `PLAYER_MAX_CAYENDO` / 64. Con los valores que hemos elegido para **Dogmole**, la velocidad vertical en caída libre será incrementada en 48 / 64 = 0,75 píxeles/frame hasta que llegue a un valor de 512 / 64 = 8 píxeles/frame. O sea, Dogmole caerá más y más rápido hasta que llegue a la velocidad máxima de 8 píxeles por frame.
 
 Incrementar `PLAYER_G` hará que se alcance la velocidad máxima mucho antes (porque la aceleración es mayor). Estos valores afectan al salto: a mayor gravedad, menos saltaremos y menos nos durará el impulso inicial. Modificando `PLAYER_MAX_CAYENDO` podremos conseguir que la velocidad máxima, que se alcanzará antes o después dependiendo del valor de `PLAYER_G`, sea mayor o menor. Usando valores pequeños podemos simular entornos de poca gravedad como el espacio exterior, la superficie de la luna, o el fondo del mar. El valor de 512 (equivalente a 8 píxeles por frame) podemos considerarlo el máximo, ya que valores superiores y caídas muy largas podrían resultar en _glitches_ y cosas raras.
 
