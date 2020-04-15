@@ -10,9 +10,9 @@ Sí, ya. Pero ahora te vas a cagar. Porque esto puede ser tan denso y chungo com
 
 ## ¡Vamos a ello, pues!
 
-Vale. ¿Qué es un _script_ de *MTE MK1*? Pues no es más que un conjunto de comprobaciones con acciones asociadas, organizadas en secciones, que sirven para definir el gameplay de tu güego. O sea, las cosas que pasan, y las cosas que tienen que pasar para que todo vaya guay, o para que todo vaya mal.
+Vale. ¿Qué es un _script_ de *MTE MK1*? Pues no es más que un conjunto de comprobaciones con acciones asociadas, organizadas en secciones, que sirven para definir el _gameplay_ de tu güego. O sea, las cosas que pasan, y las cosas que tienen que pasar para que todo vaya guay, o para que todo vaya mal.
 
-A ver, sin _script_ tienes un gameplay básico. Coger X objetos para terminar, matar X bichos... Ir más allá de eso precisa comprobaciones y acciones relacionadas: si estamos en tal sitio y hemos hecho tal cosa, abrir la puerta del castillo. Si entramos en la pantalla tal y hablamos con el personaje cual, que salga el texto “OLA K ASE” y suene un ruidito. A eso nos referimos.
+A ver, sin _script_ tienes un _gameplay_ básico. Coger X objetos para terminar, matar X bichos... Ir más allá de eso precisa comprobaciones y acciones relacionadas: si estamos en tal sitio y hemos hecho tal cosa, abrir la puerta del castillo. Si entramos en la pantalla tal y hablamos con el personaje cual, que salga el texto “OLA K ASE” y suene un ruidito. A eso nos referimos.
 
 El _script_ te sirve desde para colocar un tile bonito en la pantalla 4 y un texto que ponga “ESTÁS EN TU CASA” hasta para reaccionar a lo que hagas en una pantalla, comprobar que has hecho otras cosas, ver que has empujado tal tile, y entonces encender el temporizador o cambiar el escenario o lo que sea.
 
@@ -191,7 +191,7 @@ Para verlo, vamos a crear un _script_ sencillo que introduzca adornos en algunas
 Ahí hay un montón de tiles decorativos que vamos a colocar desde el _scripting_. El sitio para hacerlo son las secciones `ENTERING SCREEN n` de las pantallas que queramos adornar, ya que se ejecutan cuando todo lo demás está en su sitio: el fondo ya estará dibujado, por lo que podremos pintar encima. Vamos a empezar decorando la pantalla número 0, que es donde hay que ir a llevar las cajas. Tendremos que colocar el pedestal, formado por los tiles 22 y 23, y además pondremos más adornos: unas vasijas (29), unas cuantas estanterías (20 y 21), unas cuantas cajas (27 y 28), una armadura (32 y 33) y una bombilla colgando de un cable (30 y 31). Empezamos creando la sección `ENTERING SCREEN 0` en nuestro script `dogmole.spt`:
 
 ```
-    # Vestíbulo de la universidad
+    # Vestíbulo de la Universidad
     ENTERING SCREEN 0
 
     END
@@ -200,7 +200,7 @@ Ahí hay un montón de tiles decorativos que vamos a colocar desde el _scripting
 El pintado de los tiles extra se hace desde la lista de comandos de una cláusula. Como queremos que la cláusula se ejecute siempre, emplearemos la condición más sencilla que existe: la que siempre evalúa a cierto y ya vimos más arriba (como verás, utilizo tabulaciones para ayudarme a distinguir mejor la estructura del _script_. Esto se llama *indentar* y deberías hacerlo tú también. `msc3_mk1` ignora los espacios en blanco así que los usamos simplemente como guía visual humana):
 
 ```
-    # Vestíbulo de la universidad
+    # Vestíbulo de la Universidad
     ENTERING SCREEN 0
         # Decoración y pedestal
         IF TRUE
@@ -221,7 +221,7 @@ El comando para pintar un tile en la pantalla tiene esta forma:
 Donde `(x, y)` es la coordenada (recuerda, tenemos 15×10 tiles en la pantalla, por lo que `x` podrá ir de 0 a 14 e `y` de 0 a 9) y `t` es el número del tile que queremos pintar. Es aquí donde Ponedor vuelve a ser muy útil: recuerda que si pasas el ratón por el área de edición **te va chivando las coordenadas de las casillas**. Así pues, con el Ponedor delante para chivar casillas y ver dónde tenemos que pintar las cosas, vamos colocando primero el pedestal y luego todas las decoraciones:
 
 ```
-    # Vestíbulo de la universidad
+    # Vestíbulo de la Universidad
     ENTERING SCREEN 0
         # Decoración y pedestal
         IF TRUE
@@ -274,7 +274,7 @@ Cuando el jugador empiece la partida se ejecutará la sección `ENTERING GAME`. 
 ¡Hala! Jodó, qué bien. Más, más. Vamos a pintar más tiles para decorar otras pantallas. Exactamente de la misma forma que hemos decorado la pantalla 0, vamos a decorar también la pantalla 1, colocando el cartel de la Universidad de Miskatonic (tiles 24, 25, y 26) y unas armaduras (tiles 32 y 33):
 
 ```
-    # Pasillo de la universidad
+    # Pasillo de la Universidad
     ENTERING SCREEN 1
         # Cartel de miskatonic, etc.
         IF TRUE
@@ -330,7 +330,7 @@ De la misma manera añadimos código para poner más decoraciones en el mapa. La
 Cuando tienes que pintar más de tres tiles tenemos un atajo que hace que el _script_ sea más rápido de escribir y que además ocupe menos bytes. Se trata de emplear el comando `DECORATIONS`, al que deberá seguir una lista de posiciones de tile y números de tile, uno por línea, terminados con un `END`. De este modo, el _script_ que habíamos introducido para las pantallas 0 y 1 se convierte en:
 
 ```
-    # Vestíbulo de la universidad
+    # Vestíbulo de la Universidad
     ENTERING SCREEN 0
         # Decoración y pedestal
         IF TRUE
@@ -359,7 +359,7 @@ Cuando tienes que pintar más de tres tiles tenemos un atajo que hace que el _sc
         END
     END
 
-    # Pasillo de la universidad
+    # Pasillo de la Universidad
     ENTERING SCREEN 1
         # Cartel de miskatonic, etc.
         IF TRUE
