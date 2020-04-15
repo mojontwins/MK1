@@ -6,7 +6,7 @@ Por cierto, este capítulo es denso como su puta madre. Pero así es la vida. Si
 
 ## En qué se basa el multiniveleo
 
-Básicamente el multinivel en **MTE MK1** (¡y en **MK2**!) se basa un poco en engañar al chamán. Básicamente el motor es como el abuelo y tú vas y le cambias las pastillas de sitio y le pones las verdes en vez de las rojas. 
+Básicamente el multinivel en **MTE MK1** (¡y en **MK2**!) se basa un poco en engañar al chamán. Básicamente el motor es como el abuelo y tú vas y le cambias las pastillas de sitio y le pones las verdes en vez de las rojas.
 
 Para entendernos, **MTE MK1** funcionará (salvo por un par de detalles) como si estuviese ejecutando un juego normal de sólo un nivel como los de la churrera de toda la vida, solo que habrá un agente que se encargará de, antes de que empiece el bucle de juego, de *descomprimir* un nuevo set formado por mapa, cerrojos, tileset, enemigos, hotspots, comportamientos y opcionalmente sprites sobre los actuales, efectivamente *cambiando de fase*.
 
@@ -25,7 +25,7 @@ Esto activará los manejes necesarios para el multiniveleo y además indicará q
 
 ## Modificando `compile.bat`
 
-Como hemos dicho, los recursos comprimidos se descomprimirán sobre "espacios" especiales para cada tipo de datos que maneja el motor. Por lo general, esto implica que no tendremos que generar enemigos o mapas desde `compile.bat`. Lo único que vamos a dejar es la generación de un tileset "vacío" (porque necesitamos la fuente), un spriteset y las pantallas fijas. Del hacer hueco para el resto ya se encarga **MTE MK1** con la configuración que le hemos hecho. Por tanto abrimos en `compile.bat` y:
+Como hemos dicho, los recursos comprimidos se descomprimirán sobre "espacios" especiales para cada tipo de datos que maneja el motor. Por lo general, esto implica que no tendremos que generar enemigos o mapas desde `compile.bat`. Lo único que vamos a dejar es la generación de un tileset "vacío" (porque necesitamos la fuente), un spriteset y las pantallas fijas. De hacer hueco para el resto ya se encarga **MTE MK1** con la configuración que le hemos hecho. Por tanto abrimos en `compile.bat` y:
 
 1. Nos fumamos la conversión del mapa (`mapcnv`) y la importación de los enemigos (`ene2h`).
 
@@ -45,7 +45,7 @@ Los *assets* o los *recursos* son las *cosas* con las que vamos a construir nues
 
 2. Un set de cerrojos. Cada cerrojo representa eso, un cerrojo. Se almacena en qué pantalla está y en qué coordenadas, y si está abierto o cerrado.
 
-3. Un tileset, o 192 carácteres o "patrones" y los atributos (o colores) con los que se pintan. 
+3. Un tileset, o 192 carácteres o "patrones" y los atributos (o colores) con los que se pintan.
 
 4. Un set de enemigos, con tres por pantalla. Cada enemigo ocupa 10 bytes.
 
@@ -55,11 +55,11 @@ Los *assets* o los *recursos* son las *cosas* con las que vamos a construir nues
 
 7. Opcionalmente (en 48K, en 128K no es opcional) un spriteset de 16 tiles de 144 bytes más una "cabecera" de 16 bytes (2320 bytes).
 
-Nosotros tendremos que generar nuestro conjunto de recursos, comprimirlos en formato aplib, y luego combinarlos para formar los niveles. El primer paso, por tanto (aparte de, ejem, *hacerlos*) será generar binarios comprimidos de cada uno de ellos, en el formato de **MTE MK1**. 
+Nosotros tendremos que generar nuestro conjunto de recursos, comprimirlos en formato aplib, y luego combinarlos para formar los niveles. El primer paso, por tanto (aparte de, ejem, *hacerlos*) será generar binarios comprimidos de cada uno de ellos, en el formato de **MTE MK1**.
 
-Personalmente, a mi me gusta crearme un archivo `.bat` aparte de `compile.bat` que se encargue de convertir y comprimir todos los assets. En este archivo llamaremos a los conversores para cada recurso y luego comprimiremos el resultado. Puedes guardarlo todo en `/bin` y así no lo tienes por medio.
+Personalmente, a mí me gusta crearme un archivo `.bat` aparte de `compile.bat` que se encargue de convertir y comprimir todos los _assets_. En este archivo llamaremos a los conversores para cada recurso y luego comprimiremos el resultado. Puedes guardarlo todo en `/bin` y así no lo tienes por medio.
 
-Si eres una persona avispada estarás pensando que no paro de hablar de binarios y algunos de los conversores echan archivos .h con los arrays en formato código. Y así es, ¡cinco puntos para Gryffindor, señorita Granger!. Por suerte, hay versiones de esos conversores pensadas para multinivel que escupen binarios. Y en esta sección lo vamos a ver usando la generación de recursos de **Helmet** como ejemplo.
+Si eres una persona avispada estarás pensando que no paro de hablar de binarios y algunos de los conversores echan archivos .h con los arrays en formato código. Y así es, ¡cinco puntos para Gryffindor, señorita Granger! Por suerte, hay versiones de esos conversores pensadas para multinivel que escupen binarios. Y en esta sección lo vamos a ver usando la generación de recursos de **Helmet** como ejemplo.
 
 ### Tilesets sin fuente
 
@@ -69,11 +69,11 @@ Si eres una persona avispada estarás pensando que no paro de hablar de binarios
     ..\..\..\src\utils\ts2bin.exe nofont ..\gfx\work0.png ..\bin\tileset0.bin 6 >nul
 ```
 
-En **Helmet** tenemos tres fases y usamos tres tilesets diferentes, por lo que verás tres lineas de `ts2bin` diferentes en `build_assets.bat`. Recuerda que el numerito que se pasa como cuarto parámetro es la tinta por defecto que se debe usar si en un patrón sólo hay un color. Fijáos que en la fase 2, donde el suelo es mayormente cyan, pasamos un "5".
+En **Helmet** tenemos tres fases y usamos tres tilesets diferentes, por lo que verás tres líneas de `ts2bin` diferentes en `build_assets.bat`. Recuerda que el numerito que se pasa como cuarto parámetro es la tinta por defecto que se debe usar si en un patrón sólo hay un color. Fijaos que en la fase 2, donde el suelo es mayormente cyan, pasamos un "5".
 
-Fíjate también como colocamos la salida de la conversión en `/bin` especificando la ruta relativa desde `/dev` directamente en el tercer parámetro. Si esto de rutas relativas te suena a chino deberías leer [algún tutorial sobre el tema](https://www.abrirllave.com/cmd/rutas-relativas-y-absolutas.php) y reforzar tus conocimientos de la ventana de linea de comandos.
+Fíjate también en cómo colocamos la salida de la conversión en `/bin` especificando la ruta relativa desde `/dev` directamente en el tercer parámetro. Si esto de rutas relativas te suena a chino deberías leer [algún tutorial sobre el tema](https://www.abrirllave.com/cmd/rutas-relativas-y-absolutas.php) y reforzar tus conocimientos de la ventana de línea de comandos.
 
-El siguiente paso es comprimirlo todo. Puedes usar `apack` de toda la vida o `apultra`. Apultra es [un nuevo compresor de Emmanuel Marty](https://github.com/emmanuel-marty/apultra) que comprime un poco más que el viejo `apack`. Por contra es bastante más lento, pero si tu PC no es como el mío y pertenece a la actualidad no lo notarás. 
+El siguiente paso es comprimirlo todo. Puedes usar `apack` de toda la vida o `apultra`. Apultra es [un nuevo compresor de Emmanuel Marty](https://github.com/emmanuel-marty/apultra) que comprime un poco más que el viejo `apack`. Por contra es bastante más lento, pero si tu PC no es como el mío y pertenece a la actualidad no lo notarás.
 
 Por convención, la versión comprimida de cada binario se llamará igual que el binario pero con una "c" al final, e igualmente la dejaremos en `/bin`. Personalmente me encargo además de borrar los archivos sin comprimir por el tema del orden y la limpieza. Esta sección, para **Helmet**, queda así:
 
@@ -101,7 +101,7 @@ El viejo `mapcnv` que venimos usando desde tiempos inmemoriales sacaba un archiv
     ** USO **
        MapCnvBin archivo.map archivo.h ancho_mapa alto_mapa ancho_pantalla alto_pantalla tile_cerrojo [packed] [fixmappy]
 
-       - archivo.map : Archivo de entrada exportado con mappy en formato raw.
+       - archivo.map : Archivo de entrada exportado con Mappy en formato raw.
        - archivo.h : Archivo de salida
        - ancho_mapa : Ancho del mapa en pantallas.
        - alto_mapa : Alto del mapa en pantallas.
@@ -159,7 +159,7 @@ De la misma forma que pasaba con los mapas, normalmente usábamos un conversor q
 
 ```
 
-El funcionamiento es análogo, aunque deberemos fijarnos muy bien en el parámetro `life_gauge`. Para ahorrar código, como este valor va en la estructura y se descomprime cada vez que empezamos el nivel, si va ya puesto en el binario nos ahorramos el código que lo inicializa. En **helmet** este valor es 2. 
+El funcionamiento es análogo, aunque deberemos fijarnos muy bien en el parámetro `life_gauge`. Para ahorrar código, como este valor va en la estructura y se descomprime cada vez que empezamos el nivel, si va ya puesto en el binario nos ahorramos el código que lo inicializa. En **helmet** este valor es 2.
 
 Seguidamente comprimimos y borramos y bla bla. Nos queda así:
 
@@ -176,13 +176,13 @@ Seguidamente comprimimos y borramos y bla bla. Nos queda así:
     del  ..\bin\enems_hotspots?.bin
 ```
 
-Tomamos nota de los archivos generados: `enems_hotspots0c.bin`, `enems_hotspots1c.bin` y `enems_hotspots2c.bin`. 
+Tomamos nota de los archivos generados: `enems_hotspots0c.bin`, `enems_hotspots1c.bin` y `enems_hotspots2c.bin`.
 
 ### Los comportamientos (behs)
 
 El array `behs` de `my/config.h` ya no se utilizará. En su lugar tendremos un binario de 48 bytes comprimido con los sets de comportamientos. Para generar estos binarios de forma sencilla tenemos `behs2bin`, que toma una lista de 48 valores separada por comas y la convierte en un binario de 48 bytes.
 
-Lo primero por tanto será crear los archivos con las listas de comportamientos. Nosotros en **helmet** usamos dos, ya que los dos primeros tilesets son equivalentes y podemos reaprovechar los comportamientos. 
+Lo primero por tanto será crear los archivos con las listas de comportamientos. Nosotros en **Helmet** usamos dos, ya que los dos primeros tilesets son equivalentes y podemos reaprovechar los comportamientos.
 
 Así se ve un archivo de texto con comportamientos. Nada muy excitante:
 
@@ -239,7 +239,7 @@ El levelset es un array que contiene información sobre cada nivel de tu juego. 
 
 (en modo 48K; en modo 128K es más sencillo pero ya lo veremos en otro capítulo, más adelante). El tema está en crear un array que referencie qué recursos necesitamos para cada nivel y algunos valores relevantes. Pero antes necesitamos que los recursos *estén disponibles*.
 
-La forma de hacerlo es crear una referencia externa a ellos y posteriormente incluirlos desde ensamble en linea con la directiva `BINARY`. Super top todo. Soy consciente de que esto se complica, pero puedes tirar de receta.
+La forma de hacerlo es crear una referencia externa a ellos y posteriormente incluirlos desde ensamble en línea con la directiva `BINARY`. Super top todo. Soy consciente de que esto se complica, pero puedes tirar de receta.
 
 Básicamente primero se define una referencia externa para poder añadir cosas a nuestro array:
 
@@ -249,7 +249,7 @@ Básicamente primero se define una referencia externa para poder añadir cosas a
 
 Esto sencillamente le dice al compilador que hay "algo" fuera que se llama `my_extern_array`. (Probablemente haya mejores formas de hacer esto, pero eso es lo que se traga `z88dk` y si no está roto, no lo arregles).
 
-Luego se mete una sección de ensamble en linea y se mete lo que antes hemos referenciado, tal que así:
+Luego se mete una sección de ensamble en línea y se mete lo que antes hemos referenciado, tal que así:
 
 ```c
     #asm
@@ -262,9 +262,9 @@ Ojal como la etiqueta del ensamble equivale al nombre del array externo referenc
 
 El `BINARY` lo que hace es incluir como datos lo que se encuentre en el archivo cuya ruta recibe como parámetro. Y esto es lo que nos hace el truco.
 
-De esta forma estamos metiendo muy fácilmente los binarios que necesitamos en nuestro código, y será la técnica que emplearemos para meter todos los recursos comprimidos. Los importaremos e incluiremos de esta manera en `my/levelset.h` y posteriormente los referenciaremos en el array del *levelset*. 
+De esta forma estamos metiendo muy fácilmente los binarios que necesitamos en nuestro código, y será la técnica que emplearemos para meter todos los recursos comprimidos. Los importaremos e incluiremos de esta manera en `my/levelset.h` y posteriormente los referenciaremos en el array del *levelset*.
 
-Ahora es cuando coges el papel donde habías apuntado todos los binarios que tenías. Yo he creado estas referencias externas para incluirlos todos. Fíjate como se incluye la ruta relativa adónde está el archivo `mk1.c`, o sea, `../bin/`:
+Ahora es cuando coges el papel donde habías apuntado todos los binarios que tenías. Yo he creado estas referencias externas para incluirlos todos. Fíjate en cómo se incluye la ruta relativa donde está el archivo `mk1.c`, o sea, `../bin/`:
 
 ```c
     // In 48K mode, include here your compressed binaries:
@@ -376,7 +376,7 @@ Aquí estamos en una situación igual. *Engañaremos al Chamán* (TM) de igual m
 
 Como se ve, si sólo queremos que se detecte que llegamos a la pantalla final, `SCR_FIN` debe estar definida pero `PLAYER_FIN_X` y `PLAYER_FIN_Y` no; si todas están definidas se comprobará también la posición.
 
-Como esto lo hemos usado muy poco no tuve a bien meterlo en la estructura `LEVEL`, pero podemos controlarlo nosotros igualmente con un poco de inyección de código (ver el [capítulo 11](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap11.md)). Veamos el caso en que queramos comprobar las tres cosas.
+Como esto lo hemos usado muy poco no tuve a bien meterlo en la estructura `LEVEL`, pero podemos controlarlo nosotros igualmente con un poco de inyección de código (ver el [capítulo 11](./tutorial-cap11.md)). Veamos el caso en que queramos comprobar las tres cosas.
 
 En primer lugar creamos tres arrays con los valores para cada fase de nuestro juego en `my/ci/extra_vars.h`. Vamos a poner que tenemos tres fases en nuestro juego ficticio que deben acabarse en las pantallas 5, 17 y 12, y coordenadas (7,8), (10,6) y (1,1), respectivamente.
 
@@ -387,7 +387,7 @@ En primer lugar creamos tres arrays con los valores para cada fase de nuestro ju
     unsigned char player_fin_y [MAX_LEVELS] = { 8,  6,  1 };
 ```
 
-Y con esto, no tenemos más que hacer las definiciones en base a estos arrays y la variable `level` en `my/config.h`.
+Y con esto, no tenemos más que hacer las definiciones basándonos en estos arrays y la variable `level` en `my/config.h`.
 
 ```c
     #define SCR_FIN                     scr_fin [level]
@@ -395,15 +395,15 @@ Y con esto, no tenemos más que hacer las definiciones en base a estos arrays y 
     #define PLAYER_FIN_Y                player_fin_y [level]
 ```
 
-### Scripting
+### _Scripting_
 
-Terminar el nivel mediante scripting es muy sencillo. Al igual que para juegos de un solo nivel, si comentamos la definición de las macros `MAX_OBJECTS` y `SCR_FIN` y activamos el scripting, la única forma de terminar la fase será ejecutando
+Terminar el nivel mediante _scripting_ es muy sencillo. Al igual que para juegos de un solo nivel, si comentamos la definición de las macros `MAX_OBJECTS` y `SCR_FIN` y activamos el _scripting_, la única forma de terminar la fase será ejecutando
 
 ```
     WIN GAME
 ```
 
-desde el script. Además, en multilevel tenemos otra:
+desde el _script_. Además, en multilevel tenemos otra:
 
 ```
     GAME ENDING
@@ -425,9 +425,9 @@ Para interrumpir el bucle del juego hay que poner la variable `playing` a 0. Ent
     success = 1; level = 0xff;
 ```
 
-3. Si tenemos el scripting activado podemos lograr lo mismo poniendo `script_result` a 4.
+3. Si tenemos el _scripting_ activado podemos lograr lo mismo poniendo `script_result` a 4.
 
-4. Si tenemos el scripting desactivado y ponemos `warp_to_level` a 1, o si lo tenemos activado y ponemos `script_result` a 3, se volverá a ejecutar el bucle de juego sin modificar `level`, `n_pant`, `p_x`, `gpx`, `p_y` ni `gpy`, por lo que podemos usar para saltar de un nivel a un punto concreto de otro:
+4. Si tenemos el _scripting_ desactivado y ponemos `warp_to_level` a 1, o si lo tenemos activado y ponemos `script_result` a 3, se volverá a ejecutar el bucle de juego sin modificar `level`, `n_pant`, `p_x`, `gpx`, `p_y` ni `gpy`, por lo que podemos usar para saltar de un nivel a un punto concreto de otro:
 
 ```c
     level = 2;
@@ -445,7 +445,7 @@ Aquí estoy, verborrea loca en Groenlandia, aquí estoy soltando panoja según s
 
 Sí, puedes hacer niveles de diferentes tamaños, de eso te has tenido que dar cuenta porque tienes `map_w` y `map_h` en la estructura `LEVEL`. A lo mejor también te has dado cuenta de la clave de todo esto: como el sistema funciona descomprimiendo un binario comprimido en un espacio en el que hemos hecho sitio, y este sitio se hace obviamente haciendo caso de las variables `MAP_W` y `MAP_H`, entonces ha de cumplirse que el número de pantallas del nivel que más tenga tiene que ser menor o igual que `MAP_W` * `MAP_H`. Si te habías dado cuenta de este detalle, otros diez puntos para Gryffindor, señorita Granger, y una estrellita.
 
-En efecto, aunque la geometría del nivel de igual, tiene que caber en el buffer. Al final la geometría da lo mismo, porque un mapa o un conjunto de enemigos y hotspots no deja de estar ordenados como una tira de pantallas en memoria. 
+En efecto, aunque la geometría del nivel de igual, tiene que caber en el buffer. Al final la geometría da lo mismo, porque un mapa o un conjunto de enemigos y hotspots no deja de estar ordenados como una tira de pantallas en memoria.
 
 Por tanto, lo que hay que hacer es ver cuál es tu nivel más grande (el que más pantallas tenga) y hacer que los valores de `MAP_W` y `MAP_H` en `my/config.h` coincidan con sus dimensiones. Con esto ya lo tienes.
 
