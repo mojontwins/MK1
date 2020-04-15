@@ -8,9 +8,9 @@ Descárgate los materiales de este capítulo (básicamente, el proyecto Beepola 
 
 ## Cambiando la música
 
-Para poder cambiar la música de un juego necesitamos disponer de la misma y de su player en formato de código fuente. Puede hacerse de otras maneras (como en los inicios, cuando usábamos *Wham! The Music Box*) pero es un dolor. En la actualidad existen varias formas de componer música 1 bit para Spectrum en programas que se ejecutan en nuestros PC y exportan el código del player y la música en un bonito archivo .asm, como Beepola. 
+Para poder cambiar la música de un juego necesitamos disponer de la misma y de su _player_ en formato de código fuente. Puede hacerse de otras maneras (como en los inicios, cuando usábamos *Wham! The Music Box*) pero es un dolor. En la actualidad existen varias formas de componer música 1 bit para Spectrum en programas que se ejecutan en nuestros PC y exportan el código del _player_ y la música en un bonito archivo .asm, como Beepola.
 
-**Beepola** ([link](http://freestuff.grok.co.uk/Beepola/)) es un tracker de toda la vida que es capaz de manejar varios players. Puedes elegir el que quieras **siempre que no necesite cosas extrañas como estar ubicado en un sitio concreto o necesitar un manejador de interrupciones**. Por ejemplo, nosotros solemos usar **Phaser - Synth Drums** que suena muy bien, permite algunas chiribitas, y tiene una percusión potente y que no ocupa un montón. Nosotros vamos a seguir el procedimiento para este player precisamente, pero al final daremos pautas para adaptar otro tipo de players.
+**Beepola** ([link](http://freestuff.grok.co.uk/Beepola/)) es un _tracker_ de toda la vida que es capaz de manejar varios _players_. Puedes elegir el que quieras **siempre que no necesite cosas extrañas como estar ubicado en un sitio concreto o necesitar un manejador de interrupciones**. Por ejemplo, nosotros solemos usar **Phaser - Synth Drums** que suena muy bien, permite algunas chiribitas, y tiene una percusión potente y que no ocupa un montón. Nosotros vamos a seguir el procedimiento para este player precisamente, pero al final daremos pautas para adaptar otro tipo de players.
 
 No vamos a explicar aquí cómo se maneja Beepola. Si eres músico te harás rápido con el programa, y si no lo eres, seguro que tu amigo el músico sabe usarlo. Solo nos detendremos en la parte que nos interesa: la **exportación**. Si quieres practicar ya puedes probar a cargar el achivo `dogmole.bbsong` que incluimos con este capítulo y seguir las indicaciones a partir de aquí.
 
@@ -41,21 +41,21 @@ Si hemos guardado `dogmole_music_phaser.asm` en `/mus`, podemos irnos a `/dev` y
     $ ..\utils\asm2z88dk.exe ..\mus\dogmole_music_phaser.asm music.h mk1
 ```
 
-Y con esto habremos terminado. 
+Y con esto habremos terminado.
 
 ### Otros players
 
-Podemos usar otros players siempre que cumplan las siguientes restricciones:
+Podemos usar otros _players_ siempre que cumplan las siguientes restricciones:
 
-1.- No necesitan ubicarse en una posición específica de RAM (de todos modos, el player acabará fuera de la memoria en contienda cuando se compile el juego, por lo que si el requisito es que estén fuera de la memoria en contienda nos valdría).
+1.- No necesitan ubicarse en una posición específica de RAM (de todos modos, el _player_ acabará fuera de la memoria en contienda cuando se compile el juego, por lo que si el requisito es que estén fuera de la memoria en contienda nos valdría).
 
 2.- No necesita una rutina de servicio de interrupción (ISR) específica.
 
 3.- Se ejecuta llamando a un punto de entrada y sale al pulsar una tecla.
 
-Si todo eso se cumple habrá que averiguar cuál es el punto de entrada del player. Para eso hay que mirar el código en ensamble o quizá consultar la documentación del player concreto y ver cuál es, identificar adónde hay que llamar para que se ponga a tocar la música. Por ejemplo, para Phaser, este punto es la etiqueta `musicstart`.
+Si todo eso se cumple habrá que averiguar cuál es el punto de entrada del _player_. Para eso hay que mirar el código en ensamble o quizá consultar la documentación del _player_ concreto y ver cuál es, identificar adónde hay que llamar para que se ponga a tocar la música. Por ejemplo, para Phaser, este punto es la etiqueta `musicstart`.
 
-Una vez identificado, tendremos que modificar la función `select_joyfunc` en `engine.h`, que es donde se hace la llamada al player:
+Una vez identificado, tendremos que modificar la función `select_joyfunc` en `engine.h`, que es donde se hace la llamada al _player_:
 
 ```c
         #asm
@@ -70,7 +70,7 @@ Cambiamos el `musicstart` con la etiqueta de entrada al player y listo.
 
 Cambiar los efectos de sonido puede ser más problemático. El set que incluye **MTE MK1** fue creado a mano por Shiru hace eones. Si quieres usar otros sonidos tendrás que buscarte la forma de generarlos.
 
-**BeepFx** ([link](https://shiru.untergrund.net/software.shtml)), del propio Shiru, puede servirnos. En este tutorial describiremos cómo integrar el player de sonidos de BeepFX con **MTE MK1**. Para integrar otros generadores de sonidos habrá que hacer algo muy parecido.
+**BeepFx** ([link](https://shiru.untergrund.net/software.shtml)), del propio Shiru, puede servirnos. En este tutorial describiremos cómo integrar el _player_ de sonidos de BeepFX con **MTE MK1**. Para integrar otros generadores de sonidos habrá que hacer algo muy parecido.
 
 El objetivo es construir 10 sonidos que sirvan para estas cosas:
 
@@ -95,13 +95,13 @@ En el menú principal de la aplicación seleccionamos `File → Compile`.
 
 Marcamos `Assembly` e `Include player code` y pulsamos `Compile`. Grabamos el archivo como, por ejemplo, `mus/dogmole_fx.asm`.
 
-Al igual que pasaba con la música de Beepola, el código que exporta BeepFX no nos sirve directamente, sino que habrá que pasarlo por la turmix. Suponiendo que tengamos el archivo guardad como `mus/dogmole_fx.asm`, nos vamos a `/dev` y ejecutamos así el conversor:
+Al igual que pasaba con la música de Beepola, el código que exporta BeepFX no nos sirve directamente, sino que habrá que pasarlo por la turmix. Suponiendo que tengamos el archivo guardado como `mus/dogmole_fx.asm`, nos vamos a `/dev` y ejecutamos así el conversor:
 
 ```
     $ ..\utils\asm2z88dk.exe ..\mus\dogmole_fx.asm beeper.h mk1
 ```
 
-Pero todavía no es suficiente, ya que necesitamos una interfaz con **MTE MK1**, una función en C que reciba un parámetro, lo cocine, y llame al player de efectos de BeepFx. Editamos `beeper.h` y añadimos este código al final, que hace precisamente eso:
+Pero todavía no es suficiente, ya que necesitamos una interfaz con **MTE MK1**, una función en C que reciba un parámetro, lo cocine, y llame al _player_ de efectos de BeepFx. Editamos `beeper.h` y añadimos este código al final, que hace precisamente eso:
 
 ```c
 
@@ -119,4 +119,4 @@ Pero todavía no es suficiente, ya que necesitamos una interfaz con **MTE MK1**,
     }
 ```
 
-Y listo. Si quieres que suenen más tipos de sonido o remapear los que hay me temo que te tendrás que poner a toquetear código.
+Y listo. Si quieres que suenen más tipos de sonido o remapear los que hay, me temo que te tendrás que poner a toquetear código.
