@@ -206,7 +206,7 @@ Si además activas `EVERYTHING_IS_A_WALL`, cualquier tile de comportamiento dist
     //#define BODY_COUNT_ON             2       // If defined, count enemies on flag #
 ```
 
-Si configuras el motor para disparar o pisar, el número de muertes se irá contando en el flag que indiques aquí si defines esta directiva.
+Si configuras el motor para disparar o pisar, el número de muertes se irá contando en la flag que indiques aquí si defines esta directiva.
 
 ```c
     //#define DISABLE_PLATFORMS                 // Disables platforms in side-view
@@ -299,7 +299,7 @@ Y se configura con:
 
 2. `ENABLE_PUSHED_SCRIPTING` activa la integración del sistema de _scripting_ con los bloques empujables. Dicha integración se configura con las siguientes directivas:
 
-3. `MOVED_TILE_FLAG`, `MOVED_X_FLAG` y `MOVED_Y_FLAG`: Cuando se empuja un bloque empujable, el tile que "pisa" se almacena en el flag que diga `MOVED_TILE_FLAG`, y sus coordenadas en las flags que digan `MOVED_X_FLAG` y `MOVED_Y_FLAG`. Con esto sabemos, desde el _scripting_, un montón de cosas útiles sólo mirando el valor de esos flags.
+3. `MOVED_TILE_FLAG`, `MOVED_X_FLAG` y `MOVED_Y_FLAG`: Cuando se empuja un bloque empujable, el tile que "pisa" se almacena en la flag que diga `MOVED_TILE_FLAG`, y sus coordenadas en las flags que digan `MOVED_X_FLAG` y `MOVED_Y_FLAG`. Con esto sabemos, desde el _scripting_, un montón de cosas útiles sólo mirando el valor de esos flags.
 
 4. `PUSHING_ACTION`: Si la activamos, las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual serán ejecutadas tras copias los valores a las flags definidos más arriba cuando movamos un bloque empujable. Cuando expliquemos el sistema de _scripting_ esto no te sonará a chino, sólo a croata.
 
