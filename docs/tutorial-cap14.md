@@ -1,13 +1,13 @@
 # Capítulo 14: Sonido 128K
 
-En este capítulo veremos cómo montar una banda sonora u OGT usando WYZ Tracker 1.5.2 de **Augusto Ruiz** y WYZ Player 4.7 de **WYZ**. 
+En este capítulo veremos cómo montar una banda sonora u OGT usando WYZ Tracker 1.5.2 de **Augusto Ruiz** y WYZ Player 4.7 de **WYZ**.
 
 ## Introducción y preparativos
 
 Lo primero que necesitamos hacer es descomprimir y preparar WYZ Tracker. Para eso:
 
-1. descomprimiremos el archivo `env/WYZTracker-0.5.0.2.zip` donde estemos instalando las utilidades.
-2. Entraremos en el directorio de WYZ Tracker y ejecutaremos `oalinst.exe` para instalar OpenAL. Dale a todo si a todo guay.
+1. Descomprimiremos el archivo `env/WYZTracker-0.5.0.2.zip` donde estemos instalando las utilidades.
+2. Entraremos en el directorio de WYZ Tracker y ejecutaremos `oalinst.exe` para instalar OpenAL. Dale a todo sí a todo guay.
 
 ![OpenAL installer](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/14_openal.png)
 
@@ -17,13 +17,13 @@ Lo primero que necesitamos hacer es descomprimir y preparar WYZ Tracker. Para es
 
 La música de tu juego se compone de canciones que se comprimen de forma individual en formato aplib y se descomprimen a un buffer antes de tocarlas.
 
-El sistema de sonido emplea RAM1. Tiene 16K para el player, la música comprimida, y el buffer de descompresión. Recuerda que tu binario no debe ocupar más de 16K menos lo que ocupe la canción más grande, o no se podrá descomprimir para tocarla.
+El sistema de sonido emplea RAM1. Tiene 16K para el _player_, la música comprimida, y el buffer de descompresión. Recuerda que tu binario no debe ocupar más de 16K menos lo que ocupe la canción más grande, o no se podrá descomprimir para tocarla.
 
 ### Instrumentos y efectos
 
 Las canciones están compuestas por una serie de eventos ordenados en el tiempo: notas musicales o percusiones. Las notas suenan a través de los *instrumentos*, que definen más o menos el timbre (añade muchas comillas, tú ya me entiendes), y la percusión mediante los *efectos*.
 
-Para hacer una OGT para **MTE MK1** la restricción es que todas las canciones tienen que usar el mismo set de instrumentos y el mismo set de efectos. No nos vamos a poner aquí a decir cómo tienes que manejarte haciendo música, pero la técnica suele ser hacer la primera canción e ir creando los instrumentos y efectos según te van haciendo falta, grabarlos, y cuando empieces la siguiente canción cargar los mismos sets, y, si necesitas algún instrumento o efecto más, añadirlo. Trabajar de forma incremental, vaya. 
+Para hacer una OGT para **MTE MK1** la restricción es que todas las canciones tienen que usar el mismo set de instrumentos y el mismo set de efectos. No nos vamos a poner aquí a decir cómo tienes que manejarte haciendo música, pero la técnica suele ser hacer la primera canción e ir creando los instrumentos y efectos según te van haciendo falta, grabarlos, y cuando empieces la siguiente canción cargar los mismos sets, y, si necesitas algún instrumento o efecto más, añadirlo. Trabajar de forma incremental, vaya.
 
 ![Grabar instrumentos](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/14_wyz_instrumentos.png)
 
@@ -38,7 +38,7 @@ Esto generará dos archivos:
 1. Archivo `.mus`, con la canción en sí.
 2. Archivo `.mus.asm`, con los instrumentos y efectos de la canción.
 
-Cuando tengamos exportadas todas las canciones, podremos descartar todos los archivos `.mus.asm` menos el que esté más completo. Este lo renombraremos como `instrumentos.asm`. Este archivo y todos los `.mus` los colocaremos en el directorio `/mus` junto con el código del player, `WYZproPlay47aZXc.ASM`.
+Cuando tengamos exportadas todas las canciones, podremos descartar todos los archivos `.mus.asm` menos el que esté más completo. Este lo renombraremos como `instrumentos.asm`. Este archivo y todos los `.mus` los colocaremos en el directorio `/mus` junto con el código del _player_, `WYZproPlay47aZXc.ASM`.
 
 El siguiente paso será comprimir todos los archivos `.mus`. Te recomiendo que te crees un archivo `.bat` para hacer esto de forma automática porque siempre hay algún retoquecillo que te obliga a reconstruirlo todo. Puedes tomar como ejemplo este archivo que he creado para la OGT de **Goku Mal** y que he puesto en `/mus` para ejecutar a mano cuando lo necesite:
 
@@ -58,7 +58,7 @@ El siguiente paso será comprimir todos los archivos `.mus`. Te recomiendo que t
 
 ## Efectos de sonido
 
-El siguiente paso será crear lo efectos de sonido. Quiero dar las gracias a **GreenWebSevilla** y a **thEpOpE** por sus contribuciones en este apartado: el primero por la creación de un [tutorial](https://github.com/mojontwins/MK1/blob/master/docs/contribs/Manual%20FX%20para%20MK2%20con%20WYZ.pdf) con el proceso y el segundo por escribir la herramienta de conversión `WyzFx2Asm.exe` y las modificaciones necesarias a **WYZ Player** para que los efectos puedan usar el canal de ruido.
+El siguiente paso será crear los efectos de sonido. Quiero dar las gracias a **GreenWebSevilla** y a **thEpOpE** por sus contribuciones en este apartado: el primero por la creación de un [tutorial](https://github.com/mojontwins/MK1/blob/master/docs/contribs/Manual%20FX%20para%20MK2%20con%20WYZ.pdf) con el proceso y el segundo por escribir la herramienta de conversión `WyzFx2Asm.exe` y las modificaciones necesarias a **WYZ Player** para que los efectos puedan usar el canal de ruido.
 
 Aunque obviamente todo es posible y te puedes poner a refinar esto muchísimo más, por defecto **MTE MK1** tiene la siguiente lista de sonidos numerados, como siempre, a partir de cero:
 
@@ -66,7 +66,7 @@ Aunque obviamente todo es posible y te puedes poner a refinar esto muchísimo m�
 |---|---
 |0|Efecto "START"
 |1|Tile rompiscible golpeado
-|2|Tile rompiscible destruído
+|2|Tile rompiscible destruido
 |3|Empujar una caja / abrir un cerrojo
 |4|Disparar
 |5|Coger un objeto coleccionable
@@ -88,15 +88,15 @@ Una vez que tengamos la lista creada, la grabaremos en formato `.fx`. El siguien
 
 Esta herramienta funciona de forma interactiva. Al ejecutarla, nos pedirá que ubiquemos primero el archivo `.fx` de entrada, y seguidamente, que seleccionemos una ubicación para el archivo de salida `efectos.asm`. Elegiremos el directorio `mus/` de nuestro proyecto.
 
-## Montando el player
+## Montando el _player_
 
-Lo siguiente será montar nuestro playlist en el player. Para eso tenemos que editar el código de **WYZ Player**, o sea, el archivo `WYZproPlay47aZX.ASM` que esta en `mus/`.
+Lo siguiente será montar nuestro _playlist_ en el _player_. Para eso tenemos que editar el código de **WYZ Player**, o sea, el archivo `WYZproPlay47aZX.ASM` que esta en `mus/`.
 
-Lo primero que hay que hacer es incluir todas las canciones comprimidas de nuestra OGT en orden, usando una etiqueta `SONG_n`, con `n` el número de orden empezando en 0, para cada una. Encontrarás donde hacerlo porque en el archivo originalmente hay un *stub* `SONG_0` que deberás eliminar para poner tu lista. Por ejemplo, para la OGT de **Goku Mal** nos quedaria así:
+Lo primero que hay que hacer es incluir todas las canciones comprimidas de nuestra OGT en orden, usando una etiqueta `SONG_n`, con `n` el número de orden empezando en 0, para cada una. Encontrarás donde hacerlo porque en el archivo originalmente hay un *stub* `SONG_0` que deberás eliminar para poner tu lista. Por ejemplo, para la OGT de **Goku Mal** nos quedaría así:
 
 ```asm
     ;; Las canciones tienen que estar comprimidas con aplib
-                
+
     SONG_0:
         INCBIN "01_TITLE!.mus.bin"
     SONG_1:
@@ -123,13 +123,13 @@ Ahora hay que hacer un array con esas etiquetas para que el motor las pueda usar
 
 ```asm
     ;; Añadir entradas para cada canción
-                    
+
     TABLA_SONG:     DW      SONG_0, SONG_1, SONG_2, SONG_3
                     DW      SONG_4, SONG_5, SONG_6, SONG_7
                     DW      SONG_8, SONG_9
 ```
 
-Si no hemos alterado la lista de efectos de sonido, no tendremos que tocar nada más. Si sí que lo hemos hecho, habra que modificar la lista etiquetada como `TABLA_EFECTOS` para que aparezcan los efectos en orden. Por defecto sale así:
+Si no hemos alterado la lista de efectos de sonido, no tendremos que tocar nada más. Si sí que lo hemos hecho, habrá que modificar la lista etiquetada como `TABLA_EFECTOS` para que aparezcan los efectos en orden. Por defecto sale así:
 
 ```asm
 ;; Añadir entradas para cada efecto
