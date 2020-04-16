@@ -115,7 +115,7 @@ La pantalla de carga es la que se muestra mientras... bueno, ya tu sabeh. Debe g
 
 Todo el proceso está automatizado en `compile.bat` pero vamos a ver cémo es y de qué se trata, como viene siendo costumbre.
 
-La conversión de imagenes PNG a formato de Spectrum (que se suele llamar SCR) se realiza mediante otra utilidad del _toolchain_, `png2scr`. De nuevo, si la ejecutamos desde la ventana de línea de comandos sin parámetros nos los chiva:
+La conversión de imágenes PNG a formato de Spectrum (que se suele llamar SCR) se realiza mediante otra utilidad del _toolchain_, `png2scr`. De nuevo, si la ejecutamos desde la ventana de línea de comandos sin parámetros nos los chiva:
 
 ```
 $ ..\utils\png2scr.exe
