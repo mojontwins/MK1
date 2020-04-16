@@ -1,6 +1,6 @@
 # Herramientas de MTE MK1
 
-En este documento describimos brevemente las diferentes herramientas disponibles en el toolchain. Para más información, consúltese el tutorial.
+En este documento describimos brevemente las diferentes herramientas disponibles en el _toolchain_. Para más información, consúltese el tutorial.
 
 ## `apack.exe`
 
@@ -74,7 +74,7 @@ Toma un archivo de texto con una lista separada por comas de 48 valores y genera
 
 * Procesa `behs.txt` y genera `behs.bin`. Se puede usar rutas absolutas o relativas.
 
-Ver el [capítulo 12 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap12.md).
+Ver el [capítulo 12 del tutorial](./tutorial-cap12.md).
 
 ## `bin2tap.exe`
 
@@ -107,60 +107,60 @@ Por **mike/zeroteam**. Convierte un archivo en formato binario a un archivo .tap
 Toma los recursos y configuración de un nivel y genera un level bundle para **MTE MK1** v5 (modo 128K multinivel).
 
 ```
-    $ buildlevels_MK1.exe                                     
-    buildlevel v0.5 20200125                                                     
-    Builds a level bundle for MTE MK1 5.0+                                       
-                                                                                 
-    usage                                                                        
-                                                                                 
-    $ buildlevel.exe output.bin key1=value1 key2=value2 ...                      
-                                                                                 
-    output.bin     Output file name.                                             
-                                                                                 
-    Parameters to buildlevel.exe are specified as key=value, where keys are as   
-    follows:                                                                     
-                                                                                 
-    MAP DATA                                                                     
-                                                                                 
-    mapsize        Needed if game contains differently sized levels: MAP_W*MAP:H 
-    mapfile        Especifies the .map file. packed/unpacked autodetected.       
-    map_w          Map width in screens.                                         
-    map_h          Map height in screens.                                        
-    decorations    Output filename for decorations. This makes your map packed.  
+    $ buildlevels_MK1.exe
+    buildlevel v0.5 20200125
+    Builds a level bundle for MTE MK1 5.0+
+
+    usage
+
+    $ buildlevel.exe output.bin key1=value1 key2=value2 ...
+
+    output.bin     Output file name.
+
+    Parameters to buildlevel.exe are specified as key=value, where keys are as
+    follows:
+
+    MAP DATA
+
+    mapsize        Needed if game contains differently sized levels: MAP_W*MAP:H
+    mapfile        Especifies the .map file. packed/unpacked autodetected.
+    map_w          Map width in screens.
+    map_h          Map height in screens.
+    decorations    Output filename for decorations. This makes your map packed.
     lock           Tile # for locks. (optional)
     fixmappy       Fixes mappy's 'no first black tile' behaviour
-                                                                                 
-    TILESET/CHARSET DATA                                                         
-                                                                                 
-    tilesfile      work.png (256x48) containing 48 16x16 tiles.                  
-    behsfile       behs.txt containing 48 comma-separated values.                
-    defaultink     Value to use when PAPER=INK.                                  
-                                                                                 
-    SPRITESET                                                                    
-                                                                                 
-    spritesfile    sprites.png (256x?) containing N 16x16 sprites + masks.       
-    nsprites       # of sprites in sprites.png. If omitted, defaults to 16.      
-                                                                                 
-    ENEMIES                                                                      
-                                                                                 
-    enemsfile      enems.ene file                                                
-                                                                                 
-    HEADER STUFF                                                                 
-                                                                                 
-    scr_ini        Initial screen #                                              
-    ini_x          Initial x position (tiles)                                    
-    ini_y          Initial y position (tiles)                                    
-    max_objs       Max objects (can be omitted If not appliable)                 
-    enems_life     Enems life                                                    
+
+    TILESET/CHARSET DATA
+
+    tilesfile      work.png (256x48) containing 48 16x16 tiles.
+    behsfile       behs.txt containing 48 comma-separated values.
+    defaultink     Value to use when PAPER=INK.
+
+    SPRITESET
+
+    spritesfile    sprites.png (256x?) containing N 16x16 sprites + masks.
+    nsprites       # of sprites in sprites.png. If omitted, defaults to 16.
+
+    ENEMIES
+
+    enemsfile      enems.ene file
+
+    HEADER STUFF
+
+    scr_ini        Initial screen #
+    ini_x          Initial x position (tiles)
+    ini_y          Initial y position (tiles)
+    max_objs       Max objects (can be omitted If not appliable)
+    enems_life     Enems life
 ```
 
 * `output.bin` (obligatorio) es el nombre de archivo de salida, donde se escribirá toda la mandanga. El resto de los parámetros se escribe en formato `clave=valor`.
 * `mapsize` (opcional): indica el número total de pantallas que hay en el espacio de memoria reservado para el nivel, esto es, el resultado de multiplicar `MAP_W * MAP_H`. Es opcional porque si todos tus niveles tienen el mismo número de pantallas te basta con especificar los siguientes parámetros:
 * `map_w` y `map_h` (obligatorios): especifican el ancho y alto en pantallas del nivel. Recuerda que `map_w * map_h` debe ser menor que el resultado de `MAP_W * MAP_H` (las macros de `my/config.h`) y por tanto menor o igual que `mapsize` si lo has especificado.
 * `mapfile` (obligatorio) es una ruta al archivo con el mapa en formato `.MAP`.
-* `decorations` (opcional) es una ruta a un archivo de salida en formato script del motor con decoraciones automáticas y que puedes incluir desde tu script para adornar las pantallas de forma automática. Básicamente el mapa se fuerza a *PACKED* y los tiles fuera de rango se escriben como decoraciones de las que se imprimen en los `ENTERING SCREEN`. Debe usarse en combinación con el scripting.
+* `decorations` (opcional) es una ruta a un archivo de salida en formato script del motor con decoraciones automáticas y que puedes incluir desde tu script para adornar las pantallas de forma automática. Básicamente el mapa se fuerza a *PACKED* y los tiles fuera de rango se escriben como decoraciones de las que se imprimen en los `ENTERING SCREEN`. Debe usarse en combinación con el _scripting_.
 * `lock` (opcional) sirve para especificar qué tile hace de cerrojo. Para **MTE MK1** tiene que ser el 15. Puedes omitir el parámetro si no usas cerrojos.
-* `fixmappy` (opcional) para deshacer el desbarajuste que lía mappy si tu tileset no empieza por uno completamente negro.
+* `fixmappy` (opcional) para deshacer el desbarajuste que lía Mappy si tu tileset no empieza por uno completamente negro.
 * `tilesfile` (obligatorio) debe contener la ruta al archivo con el tileset de hasta 48 tiles, que debe ser un archivo tipo png de 256x48, como hemos visto.
 * `behsfile` (obligatorio) es la ruta al archivo con los comportamientos, en el formato que vimos en el anterior capítulo: un archivo de texto con los 48 valores separados por comas.
 * `defaultink` (opcional) especifica una tinta por defecto para los patrones que solo tengan un color, igual que en `ts2bin`.
@@ -168,14 +168,14 @@ Toma los recursos y configuración de un nivel y genera un level bundle para **M
 * `nsprites` (opcional) por si tenemos más de 16 sprites y que, por el momento, omitiremos (no soportado por el motor).
 * `enemsfile` (obligatorio) contendra la ruta al archivo de colocación de enemigos y hotspots `.ene` del Ponedor.
 * Los datos de inicio `scr_ini`, `ini_x` e `ini_y` (obligatorios) sirven para indicar donde se empieza.
-* `max_objs` (opcional) es el número de objetos recogiscibles del nivel. Recuerda que este parámetro no se tomará en cuenta de todos modos a menos que hagamos la configuración parecida a la que explicaos en el capítulo anterior (en el apartado **Controlando la condición de final de cada nivel**) y que veremos mas tarde.
+* `max_objs` (opcional) es el número de objetos recogiscibles del nivel. Recuerda que este parámetro no se tomará en cuenta de todos modos a menos que hagamos la configuración parecida a la que explicaos en el capítulo anterior (en el apartado **Controlando la condición de final de cada nivel**) y que veremos más tarde.
 * `enems_life` (obligatorio) establece la vida de los enemigos.
 
-Consúltese el [capítulo 13 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap13.md).
+Consúltese el [capítulo 13 del tutorial](./tutorial-cap13.md).
 
 ## `chr2bin.exe`
 
-Convierte N patrones desde un archivo png de 256x64 bytes. Util para customs.
+Convierte N patrones desde un archivo png de 256x64 bytes. Útil para customs.
 
 ```
     $ chr2bin.exe
@@ -198,7 +198,7 @@ Convierte N patrones desde un archivo png de 256x64 bytes. Util para customs.
 * `defaultink` es el número de tinta por defecto si el patrón sólo tiene un color liso.
 * `noattrs` sacar sólo los bitmaps, sin atributos.
 
-Ver el [capítulo 13 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap13.md).
+Ver el [capítulo 13 del tutorial](./tutorial-cap13.md).
 
 ## `ene2bin_mk1.exe`
 
@@ -219,7 +219,7 @@ Exporta un set de enemigos y hotspots `.ene` en formato binario para juegos mult
 * `enems+hotspots.bin` es el archivo de salida
 * `life_gauge` es el número de impactos que deben recibir los enemigos antes de morir (por defecto).
 
-Ver el [capítulo 12 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap12.md).
+Ver el [capítulo 12 del tutorial](./tutorial-cap12.md).
 
 ## `ene2h.exe`
 
@@ -240,7 +240,7 @@ Exporta un set de enemigos y hotspots `.ene` en formato de arrays y structs de c
 * `enems+hotspots.bin` es el archivo de salida
 * `life_gauge` es el número de impactos que deben recibir los enemigos antes de morir (por defecto).
 
-Ver el [capítulo 6 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap06.md).
+Ver el [capítulo 6 del tutorial](./tutorial-cap06.md).
 
 ## `GenTape.exe`
 
@@ -248,7 +248,7 @@ Por **Antonio villena**. Construye un archivo *.tap* a partir de una colección 
 
 [Código fuente](https://github.com/antoniovillena/zx7b/blob/master/GenTape/GenTape.c)
 
-Ver el [capítulo 13 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap06.md).
+Ver el [capítulo 13 del tutorial](./tutorial-cap06.md).
 
 ## `imanol.exe`
 
@@ -277,7 +277,7 @@ Realiza sustituciones sencillas en un archivo de texto buscando patrones y susti
     If you don't know what's this for, you don't need it.
 ```
 
-Por ejemplo, si en el archivo de entrada `infile.txt` encuentra esta linea:
+Por ejemplo, si en el archivo de entrada `infile.txt` encuentra esta línea:
 
 ```
     ¡El archivo %%%exe_name%%% ocupa %%%exe_size%%% bytes!
@@ -289,7 +289,7 @@ Y usas estos parámetros:
     $ imanol.exe in=infile.txt out=outfile.txt exe_size=?imanol.exe exe_name=imanol.exe
 ```
 
-Se generará un archivo `outfile.txt` que será igual que `infile.txt` salvo por esa linea, que se habrá convertido en:
+Se generará un archivo `outfile.txt` que será igual que `infile.txt` salvo por esa línea, que se habrá convertido en:
 
 ```
     ¡El archivo imanol.exe ocupa 69120 bytes!
@@ -323,7 +323,7 @@ Sirve para empaquetar un conjunto de binarios en páginas extra de RAM. Libraria
 * `index` (obligatorio) indica la ruta al archivo de código que contendrá el índice de binarios (esto es: dónde encontrarlos). Para **MTE MK1** esta ruta debe ser `/dev/assets/librarian.h`.
 * `bins_prefix` (opcional) sirve para proporcionar una ruta para los archivos binarios que aparecen en la lista. Si ejecutamos **The Librarian** desde `dev/`, desde nuestro script, y los binarios en la lista aparecen simplemente nombrados pero estan en `bin/`, como será nuestro caso, tendremos que emplear este parámetro con el valor `../bìn/` para que **The Librarian** pueda encontrarlos.
 * `rams_prefix` (opcional) funciona parecido pero con los archivos `RAM?.bin` de salida. Si no ponemos nada los creará en `dev/`, pero quereos que estén en `bin/`, por lo que tendremos que especificar `../bin/` también como valor de este parámetro.
-* Por último, si añadimos `manual` a la linea de comando, se empleará el orden natural. Nosotros confiaremos en el algoritmo para este juego, que funcionará genialmente y ubicará los 35K de binarios comprimidos en tenemos en tres páginas de RAM: RAM3, RAM4 y RAM6.
+* Por último, si añadimos `manual` a la línea de comando, se empleará el orden natural. Nosotros confiaremos en el algoritmo para este juego, que funcionará genialmente y ubicará los 35K de binarios comprimidos en tenemos en tres páginas de RAM: RAM3, RAM4 y RAM6.
 
 Ver el [capítulo 13 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap06.md).
 
@@ -353,12 +353,12 @@ Por ejemplo, para un mapa de 6x5 pantallas para MTE MK1:
 
 * `archivo.map` es el archivo de entrada con nuestro mapa recién exportado de **Mappy**.
 * `archivo.h` es el nombre de archivo para la salida.
-* `ancho_mapa` es el ancho del mapa en pantallas. 
-* `alto_mapa` es el alto del mapa en pantallas. 
+* `ancho_mapa` es el ancho del mapa en pantallas.
+* `alto_mapa` es el alto del mapa en pantallas.
 * `ancho_pant` es el ancho de cada pantalla en tiles. Para **MTE MK1**, siempre es 15.
 * `alto_pant` es el alto de cada pantalla en tiles. Para **MTE MK1**, siempre es 10.
-* `tile_cerrojo` es el número de tile que hace de cerrojo. Para **MTE MK1** siempre ha de ser el tile número 15. Si tu juego no usa cerrojos, pon aquí un valor fuera de rango como 99. 
-* `packed` se pone, tal cual, si nuestro tileset es de 16 tiles. Si usamos un tileset de 48 tiles, simplemente no ponemos nada. 
+* `tile_cerrojo` es el número de tile que hace de cerrojo. Para **MTE MK1** siempre ha de ser el tile número 15. Si tu juego no usa cerrojos, pon aquí un valor fuera de rango como 99.
+* `packed` se pone, tal cual, si nuestro tileset es de 16 tiles. Si usamos un tileset de 48 tiles, simplemente no ponemos nada.
 * `fixmappy` lo pondremos si nuestro tileset no tiene un primer tile todo a negro y pasamos de hacer un tileset especial, dejando que mappy lo insertase. Así `mapcnv` lo tiene en cuenta y hace sus fullerias.
 
 Ver el [capítulo 3 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap03.md).
@@ -391,12 +391,12 @@ Análogo, pero exportando binarios. El resultado contendrá todo el mapa y acto 
 
 * `archivo.map` es el archivo de entrada con nuestro mapa recién exportado de **Mappy**.
 * `archivo.h` es el nombre de archivo para la salida.
-* `ancho_mapa` es el ancho del mapa en pantallas. 
-* `alto_mapa` es el alto del mapa en pantallas. 
+* `ancho_mapa` es el ancho del mapa en pantallas.
+* `alto_mapa` es el alto del mapa en pantallas.
 * `ancho_pant` es el ancho de cada pantalla en tiles. Para **MTE MK1**, siempre es 15.
 * `alto_pant` es el alto de cada pantalla en tiles. Para **MTE MK1**, siempre es 10.
-* `tile_cerrojo` es el número de tile que hace de cerrojo. Para **MTE MK1** siempre ha de ser el tile número 15. Si tu juego no usa cerrojos, pon aquí un valor fuera de rango como 99. 
-* `packed` se pone, tal cual, si nuestro tileset es de 16 tiles. Si usamos un tileset de 48 tiles, simplemente no ponemos nada. 
+* `tile_cerrojo` es el número de tile que hace de cerrojo. Para **MTE MK1** siempre ha de ser el tile número 15. Si tu juego no usa cerrojos, pon aquí un valor fuera de rango como 99.
+* `packed` se pone, tal cual, si nuestro tileset es de 16 tiles. Si usamos un tileset de 48 tiles, simplemente no ponemos nada.
 * `fixmappy` lo pondremos si nuestro tileset no tiene un primer tile todo a negro y pasamos de hacer un tileset especial, dejando que mappy lo insertase. Así `mapcnv` lo tiene en cuenta y hace sus fullerias.
 
 Ver el [capítulo 12 del tutorial](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap12.md).
@@ -417,7 +417,7 @@ Si no te quieres rayar, usa los colores de esta paleta:
 
 ## `ponedor.exe`
 
-Utilidad de colocación de enemigos y hotspots. 
+Utilidad de colocación de enemigos y hotspots.
 
 ```
     $ ..\utils\ponedor.exe -h
@@ -448,9 +448,9 @@ Cuando ejecutas el Ponedor (por ejemplo, haciendo doble click sobre `ponedor.bat
 * `Adjust` podrá valer 0 o 1, dependiendo se Mappy hizo fullerías. Si recordarás, a la hora de explicar cómo se montaba el mapa, mencionamos que Mappy quiere un tile negro como tile 0 y que si no se lo das, él se lo pone desplazando un espacio todos los tuyos. **Si te pasó esto, deberás cambiar el 0 que aparece en esta casilla por un 1**. De ese modo nuestro Ponedor estará coscado y pintará bien el mapa.
 * Donde pone `TS` tenemos que poner la ruta del archivo con el tileset, que debería ser `work.png` a secas si lo has copiado en `enems`, aunque puedes usar el botón `Find` para ubicarlo desde un explorador si no te apetece escribir 8 caracteres.
 * En `Map` hay que poner la ruta del archivo con el mapa, que debería ser `mapa.map` a secas si lo copiaste a `enems`. También puedes usar `Find`.
-* No te olvides de poner **el nombre de archivo de salida** en la casilla `Output`. Si no quieres tocar `compile.bat`, este nombre debe ser `enems.ene`. 
+* No te olvides de poner **el nombre de archivo de salida** en la casilla `Output`. Si no quieres tocar `compile.bat`, este nombre debe ser `enems.ene`.
 
-Si prefieres usar la linea de comandos como yo, 
+Si prefieres usar la línea de comandos como yo,
 
 * Para editar un archivo `.ene` existente, simplemente ejecutar `ponedor.exe archivo.ene`.
 * Para crear un archivo `.ene` nuevo, especificar `new` como primer parámetro, y acto seguido:
@@ -530,7 +530,7 @@ Utilidad de conversión de tilesets.
          one colour in a 8x8 cell
 ```
 
-* El primer parámetro es el nombre de archivo de la fuente (incluyendo su ubicación si es necesaria), o la palabra `nofont` si sólo quieres convertir el tileset (cosa que viene bien para hacer otras cosas que no son un juego de la churrera normal). 
+* El primer parámetro es el nombre de archivo de la fuente (incluyendo su ubicación si es necesaria), o la palabra `nofont` si sólo quieres convertir el tileset (cosa que viene bien para hacer otras cosas que no son un juego de la churrera normal).
 * El segundo parámetro es el nombre del archivo con el tileset (incluyendo su ubicación si es necesaria), o la palabra `notiles` si sólo quieres convertir la fuente (bla bla bla, no con la churrera en situaciones normales), o `blank` si quieres generar el binario completo sólo con la fuente y con los tiles en negro, que es lo que llamamos un "placeholder para multi nivel" y que ya entenderás cuando veamos los multinivel.
 * El tercer parámetro es el nombre del archivo que quieres generar (incluyendo su ubicación si es necesaria). En el caso de la churrera, el archivo resultante ocupará 2304 y contendrá todos los patrones (fuente y tileset) y los colores que se usan en el tileset.
 * El cuarto parámetro es opcional, y sirve para especificar un color de tinta 0-7 que quieres que se utilice si se encuentra algún "patrón" que sea un cuadrado de color sólido como segundo color. Si sabes de Spectrum le encontrarás sentido a esto.
