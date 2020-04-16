@@ -11,7 +11,7 @@ Descarga la última release estable de la v5 de la carpeta "releases".
 El motor / _framework_ reside en `src`. El código, tal y como está, genera un juego mínimo por defecto que debes *remplazar* con el tuyo. Para compilarlo, sigue los siguientes pasos:
 
 1. Descomprime la versión mínima de z88dk que encontrarás en `env/` en la raíz de `C:` (el archivo `env/z88dk10-stripped.zip`). Se creará un directorio `C:\z88dk10\` con los archivos del compilador.
-2. Desde una ventana de linea de comandos, entra en `src/dev` y ejecuta los siguientes comandos:
+2. Desde una ventana de línea de comandos, entra en `src/dev` y ejecuta los siguientes comandos:
 
 ```
 	$ setenv.bat
