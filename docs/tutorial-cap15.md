@@ -1,8 +1,8 @@
 # Capítulo 15: Custom Vertical Engine
 
-O *vEng* personalizado. Cómo me gusta inventarne términos y que luego la gente los use. En mojonia nos encanta que digáis "perspectiva genital". Pero ¿qué es un deso? Pues muy sencillo: una forma fácil de introducir tu propio código para controlar el movimiento en el eje vertical. 
+O *vEng* personalizado. Cómo me gusta inventarme términos y que luego la gente los use. En Mojonia nos encanta que digáis "perspectiva genital". Pero ¿qué es un deso? Pues muy sencillo: una forma fácil de introducir tu propio código para controlar el movimiento en el eje vertical.
 
-Programar un nuevo eje vertical suele generar una necesidad: definir una nueva forma de organizar los 8 cells de animación del sprite del jugador para adecuarse al nuevo tipo de movimiento. Por suerte esto también lo tenemos cubierto: es fácil definir tu propia animación para el personaje.
+Programar un nuevo eje vertical suele generar una necesidad: definir una nueva forma de organizar los 8 _cells_ de animación del sprite del jugador para adecuarse al nuevo tipo de movimiento. Por suerte esto también lo tenemos cubierto: es fácil definir tu propia animación para el personaje.
 
 ¿Por qué sólo el vertical? Para no liarla. También se puede cambiar el horizontal, pero no lo cubriremos en este capítulo. Tienes un par de breves ejemplos en la [documentación de los puntos de inyección de código](https://github.com/mojontwins/MK1/blob/master/docs/code_injection.md).
 
@@ -20,7 +20,7 @@ Como sabrás, desde el día 1 **MTE MK1** soporta juegos en vista lateral y en v
 
 Desde v5, **MTE MK1** permite varias cosas interesantes:
 
-* Activar varias características del eje vertical *a la vez*. Si, en modo de vista lateral, definimos `VENG_SELECTOR` en `my/config.h`, podremos marcar a la vez varios motores de eje vertical (salto, jetpac, bootee, teclado (como en vista genital)) y elegir cuál está activo en cada momento dandole valores a la variable `veng_selector` (hay macros creadas en `definitions.h` para las selecciones: `VENG_JUMP`, `VENG_JETPAC`, `VENG_BOOTEE` y `VENG_KEYS`, respectivamente).
+* Activar varias características del eje vertical *a la vez*. Si, en modo de vista lateral, definimos `VENG_SELECTOR` en `my/config.h`, podremos marcar a la vez varios motores de eje vertical (salto, jetpac, bootee, teclado (como en vista genital)) y elegir cuál está activo en cada momento dándole valores a la variable `veng_selector` (hay macros creadas en `definitions.h` para las selecciones: `VENG_JUMP`, `VENG_JETPAC`, `VENG_BOOTEE` y `VENG_KEYS`, respectivamente).
 
 * Desactivar la gravedad en modo de vista lateral.
 
@@ -33,7 +33,7 @@ Esto permite muchas combinaciones. Lo más básico (que será lo que haremos en 
 
     //#define PLAYER_HAS_JUMP                   // If defined, player is able to jump.
     //#define PLAYER_HAS_JETPAC                 // If defined, player can thrust a vertical jetpac
-    //#define PLAYER_BOOTEE                     // Always jumping engine. 
+    //#define PLAYER_BOOTEE                     // Always jumping engine.
     //#define PLAYER_VKEYS                      // Use with VENG_SELECTOR. Advanced.
     //#define PLAYER_DISABLE_GRAVITY            // Disable gravity. Advanced.
 ```
@@ -53,7 +53,7 @@ Desde hace mucho tiempo en Mojonia habíamos querido hacer un juego protagonizad
 
 Cuanto más tiempo pulses FIRE, con más fuerza se impulsará el choco al soltarlo, por lo que necesitamos un contador, un valor de incremento, y un valor máximo.
 
-Con esta especificación podemos programar el movimiento básico del chico en sólo unas cuantas lineas de código. Necesitaremos antes definir algunas variables y macros:
+Con esta especificación podemos programar el movimiento básico del chico en sólo unas cuantas líneas de código. Necesitaremos antes definir algunas variables y macros:
 
 ```c
     // extra_vars.h
@@ -67,7 +67,7 @@ Con esta especificación podemos programar el movimiento básico del chico en s�
     #define P_THRUST_MAX    384
 ```
 
-Usaremos `fire_pressed` como bandera que nos servirá detectar cuando hemos "despulsado" la tecla de disparo. Si ponemos `fire_pressed` a 1 cuando detectamos que está pulsada y a 0 cuando detectamos que no, si vemos que NO se está pulsando la tecla de disparo pero `fire_pressed` vale 1 eso significará que se acaba de dejar de pulsar. 
+Usaremos `fire_pressed` como bandera que nos servirá detectar cuando hemos "despulsado" la tecla de disparo. Si ponemos `fire_pressed` a 1 cuando detectamos que está pulsada y a 0 cuando detectamos que no, si vemos que NO se está pulsando la tecla de disparo pero `fire_pressed` vale 1 eso significará que se acaba de dejar de pulsar.
 
 `p_thrust` será donde iremos acumulando "fuerza". Al notar que se libera la tecla de disparo se asignará esta "fuerza" a `p_vy` en negativo (hacia arriba). `P_THRUST_MAX` permite configurar la velocidad con la que se acumula la "fuerza", y `P_THRUST_MAX` el valor máximo que se alcanzará. Los valores de más arriba significa que la velocidad máxima que se transferirá a `p_vy` será de 384, y que esta se alcanzará tras 384/16 = 24 frames pulsando la tecla de disparo.
 
@@ -96,9 +96,9 @@ Todo esto no queda nada bien si no cambiamos la animación. Hemos hecho este *sp
 
 ![El choco](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/15_sprites_choco.png)
 
-Los dos primeros muestran al choco en su animación "idle", cuando se está pulsando nada ni ascendiendo (sólo dejando que la gravedad y la inercia muevan al choco). 
+Los dos primeros muestran al choco en su animación "idle", cuando se está pulsando nada ni ascendiendo (sólo dejando que la gravedad y la inercia muevan al choco).
 
-Los cuatro siguientes muestral al choco desplazándose hacia la izquierda y hacia la derecha. Hay dos cells de animación para cada dirección. Los iremos alternando si el choco "nada" hacia esa dirección. Si el choco está subiendo tras "lanzarse" (lo de pulsar la tecla de disparo para "hacer fuerza") no se animarán y se usará sólo el primer cell.
+Los cuatro siguientes muestran al choco desplazándose hacia la izquierda y hacia la derecha. Hay dos cells de animación para cada dirección. Los iremos alternando si el choco "nada" hacia esa dirección. Si el choco está subiendo tras "lanzarse" (lo de pulsar la tecla de disparo para "hacer fuerza") no se animarán y se usará sólo el primer cell.
 
 El siguiente cell muestra al choco "haciendo fuerza", y el último al choco ascendiendo verticalmente tras soltar el botón de disparo.
 
@@ -111,7 +111,7 @@ Habrá otras implementaciones posibles, pero esta me parece muy legible. Me gust
         rda = 6;
     } else {
         if (gpx == gpox) {
-            if (p_vy < 0) rda = 7; 
+            if (p_vy < 0) rda = 7;
             else rda = (maincounter >> 4) & 1;
         } else {
             rda = 4 - (p_facing << 1);
@@ -167,7 +167,7 @@ Pensando en que (misteriosamente) queramos reutilizar este movimiento en otro ju
 
 ## Fricción del agua
 
-El problema de esto es que nos hemos puesto en la tesitura de que, al rebotar hacia abajo, `p_vy` puede valer más que `PLAYER_MAX_VY_CAYENDO` y esto no quedaría bien, ya que la implementación de la gravedad limita la velocidad hacia abajo a este valor. Lo que vamos a hacer es desactivar la gravedad y usar nuestra propia implementación. 
+El problema de esto es que nos hemos puesto en la tesitura de que, al rebotar hacia abajo, `p_vy` puede valer más que `PLAYER_MAX_VY_CAYENDO` y esto no quedaría bien, ya que la implementación de la gravedad limita la velocidad hacia abajo a este valor. Lo que vamos a hacer es desactivar la gravedad y usar nuestra propia implementación.
 
 Primero descomentamos `PLAYER_DISABLE_GRAVITY` en `my/config.h`. y luego añadimos:
 
@@ -196,7 +196,7 @@ La macro que nos queda, `P_WATER_FRICTION`, la definimos igualmente en `my/ci/ex
 
 ## Otro ejemplo
 
-Aquí tenéis un motor de movimiento parecido a subaquatic (que no era **MTE MK1**, ni se le parecía), basado en este spriteset:
+Aquí tenéis un motor de movimiento parecido a Subaquatic (que no era **MTE MK1**, ni se le parecía), basado en este spriteset:
 
 ![Subaquatic](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/15_sprites_subaquatic.png)
 
