@@ -1,7 +1,8 @@
 # Mejoras y adiciones que quiero metel
 
+```
 [X] Simple linear cocos
-[X] Steady_shooters 
+[X] Steady_shooters
 [ ] Reordenar x1, y1, x2, y2 para permitir velocidades no potencias de 2
 [ ] FPS fijos
 [X] Asegurarse de que funciona SCR_FIN != 99
@@ -22,4 +23,4 @@
 [X] Sustituir aplib por apultra.
 [ ] Sacar malotes.life del struct?
 [X] Helmet vuelve a ocupar demasiado (!?) - He cambiado selección de x, y, mx, my de las balas a array-based/asm -> test; propagate
-
+```
