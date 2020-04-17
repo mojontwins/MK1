@@ -58,7 +58,7 @@ Cada flag puede almacenar **un valor de 0 a 127**, lo cual nos da de sobra para 
 
 ## Valores numéricos y flags
 
-En el _script_, la mayoría de las comprobaciones y comandos toman valores numéricos. Por ejemplo, `IF PLAYER_TOUCHES 4, 5` evaluará a “cierto” si el jugador está tocando la casilla de coordenadas (4, 5). Si anteponemos un # al número, estaremos **referenciando el valor del flag correspondiente**, de forma que `IF PLAYER_TOUCHES #4, #5` evaluará a “cierto” si el jugador está tocando la casilla de coordenadas almacenadas en las flags 4 y 5, sea cual sea este valor.
+En el _script_, la mayoría de las comprobaciones y comandos toman valores numéricos. Por ejemplo, `IF PLAYER_TOUCHES 4, 5` evaluará a “cierto” si el jugador está tocando la casilla de coordenadas (4, 5). Si anteponemos un # al número, estaremos **referenciando el valor de la flag correspondiente**, de forma que `IF PLAYER_TOUCHES #4, #5` evaluará a “cierto” si el jugador está tocando la casilla de coordenadas almacenadas en las flags 4 y 5, sea cual sea este valor.
 
 Este nivel de indirección (apréndete esa palabra para decirla en la discoteca: las nenas caen fulminadas ante los programadores que conocen este concepto) es realmente útil porque así podrás ahorrar mucho código. Por ejemplo, es lo que permite, en **Cadàveriön**, que el control del número de estatuas colocadas o de eliminar la cancela que bloquea la salida de cada pantalla puedan hacerse desde una única sección común: todas las coordenadas están almacenadas en flags y usamos el operador # para acceder a sus valores en las comprobaciones.
 
