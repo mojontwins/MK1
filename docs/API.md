@@ -33,7 +33,7 @@ Estas variables controlan el estado del juego. En qué nivel estamos, en qué pa
 ### Player
 
 * `p_x`, `p_y`: coordenadas del jugador en punto fijo 10.6, 1/64 de píxel.
-* `gpx`, `gpy`: coordenadas del jugador en píxels (`gp? = p_? / 64`).
+* `gpx`, `gpy`: coordenadas del jugador en píxeles (`gp? = p_? / 64`).
 * `p_tx`, `p_ty`: coordenadas de la casilla (coordenadas de tile) sobre la que está el punto central del sprite del jugador.
 * `p_vx`, `p_vy`: velocidad del jugador en cada eje, en 1/64 de píxel por frame.
 * `ptgmx`, `ptgmy`: valocidad a la que una plataforma móvil está desplazando al jugador (si `p_gotten` vale 1).
@@ -104,7 +104,7 @@ Hay un array principal: `malotes` viene del archivo `.ene` convertido y es una e
 
 Para ahorrar tiempo y memoria (y hacer que el posible paso a ensamble se más sencillo) a cada frame y para cada enemigo se copian temporalmente los valores de `malotes` en el siguiente conjunto de variables temporales (nótese que hay una por cada componente del struct).  En los puntos de inyección de código `enems_move.h` y `on_enems_killed` contendrán los valores del enemigo actual **y pueden modificarse**, ya que al final de cada vuelta del bucle de actualización se actualiza `malotes` con los nuevos valores.
 
-* `_en_x`, `_en_y`: Coordenadas (en pixels) del enemigo actual.
+* `_en_x`, `_en_y`: Coordenadas (en píxeles) del enemigo actual.
 * `_en_x1`, `_en_x2`, `_en_y1`, `_en_y2`: Límites de trayectoria del enemigo actual. `_en_x1`, `_en_y1` se utilizan además en los fanties y en los EIJs para señalar el punto de origen donde fueron definidos los enemigos en Ponedor. Puedes reutilizar estas variables en tus tipos custom de enemigos como quieras.
 * `_en_mx`, `_en_my`: Píxels en cada eje que deberá moverse el enemigo en el frame actual.
 * `_en_t`: Tipo del enemigo.
@@ -113,8 +113,8 @@ Para ahorrar tiempo y memoria (y hacer que el posible paso a ensamble se más se
 ## Balas
 
 * `bullets_estado [MAX_BULLETS]` vale 1 si la bala está activa.
-* `bullets_x [MAX_BULLETS]` y `bullets_y [MAX_BULLETS]` contienen las coordenadas en pixels de la bala.
-* `bullets_mx [MAX_BULLETS]` y `bullets_my [MAX_BULLETS]` contienen cuántos píxels debe moverse cada bala en cada eje cada frame mientras esté activa.
+* `bullets_x [MAX_BULLETS]` y `bullets_y [MAX_BULLETS]` contienen las coordenadas en píxeles de la bala.
+* `bullets_mx [MAX_BULLETS]` y `bullets_my [MAX_BULLETS]` contienen cuántos píxeles debe moverse cada bala en cada eje cada frame mientras esté activa.
 * `bullets_life [MAX_BULLETS]` "duración" de la bala, que se decrementa cada frame hasta llegar a 0, momento en el que la bala desaparece, si se activa `LIMITED_BULLETS`.
 
 ### Hotspots
@@ -129,7 +129,7 @@ Los hotspots del nivel actual se almacenan en un array `hotspots` de estructuras
 
 Si el hotspot de la pantalla actual está activo (no se ha recogido y es distinto de 0), entonces:
 
-* `hotspot_x`, `hotspot_y` coordenadas (en pixels) del hotspot. El jugador colisionará con el cuadrado que va desde este punto hasta (`hotspot_x` + 15, `hotspot_y` + 15).
+* `hotspot_x`, `hotspot_y` coordenadas (en píxeles) del hotspot. El jugador colisionará con el cuadrado que va desde este punto hasta (`hotspot_x` + 15, `hotspot_y` + 15).
 * `orig_tile` es el tile que había originalmente en lugar del hotspot.
 
 ### Timer
@@ -258,7 +258,7 @@ Devuelve el número del tile situado en las coordenadas (`x`, `y`) de la rejilla
 
 #### `unsigned char collide (void)`
 
-Sirve para saber si el player colisiona con un ente de 16x16 pixels situado en las coordenadas (`cx2`, `cy2`). Si se define `SMALL_COLLISION` la caja de colisión es de 8x8. Si no, es de 13x13. Devuelve `1` si hay colisión.
+Sirve para saber si el player colisiona con un ente de 16x16 píxeles situado en las coordenadas (`cx2`, `cy2`). Si se define `SMALL_COLLISION` la caja de colisión es de 8x8. Si no, es de 13x13. Devuelve `1` si hay colisión.
 
 #### `unsigned char cm_two_points (void)`
 
