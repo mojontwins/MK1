@@ -24,7 +24,7 @@ Antes de empezar vamos a recapitular, porque es importante que sepamos qué esta
 
 En primer lugar, **la puerta de la Universidad está cerrada**, y para abrirla **hay que matar a todos los monjes**. Hay **20 monjes** puestos por todo el mapa, en la parte de abajo (las dos filas inferiores) y hay que cargárselos a todos. Cuando estén todos muertos, habrá que **quitar el piedro** que colocamos en el mapa a la entrada de la Universidad.
 
-Luego hay que programar la lógica del pedestal, dentro de la Universidad. Si **tocamos el pedestal llevando un objeto**, lo **perdemos** y se **incrementará un flag** contando el número de objetos que hemos depositado. Cuando este número **llegue a 10**, habremos **ganado** el juego.
+Luego hay que programar la lógica del pedestal, dentro de la Universidad. Si **tocamos el pedestal llevando un objeto**, lo **perdemos** y se **incrementará una flag** contando el número de objetos que hemos depositado. Cuando este número **llegue a 10**, habremos **ganado** el juego.
 
 El _script_ de este juego va a ser muy sencillo. Lo primero que tenemos que mirar es qué vamos a necesitar almacenar para destinar algunas flags para ello. En nuestro caso, como el motor ya se encarga de contar los monjes que hemos matado, sólo necesitaremos ir contando las cajas que vamos depositando y además necesitaremos recordar si hemos quitado el piedro o no. Vamos a usar dos flags: la 1 y la 3. ¿Por qué estas dos y no otras? Pues porque sí. En realidad, da igual.
 
