@@ -9,18 +9,18 @@ Este documento es válido para MK1 v5, MK2 v.0.88c y msc 3.91 o superiores.
 
 *DISCLAIMER: msc3 soporta más comprobaciones/comandos que no salen en este documento (pero sí en motor-de-clausulas.txt). No se garantiza que funcionen. Algunos directamente no lo harán (son de la rama 4 de la MK1).*
 
-*DISCLAIMER 2: Con el scripting se pueden hacer cosas increíbles. Cosas que ni te imaginas. Nosotros hemos hecho cosas que ni nos imaginábamos que fueran posibles. Miles de accidentes afortunados y cosas asín. Dale vueltas, probablemente encuentres la solución. Y si no, puedes preguntar. Pero dale vueltas antes. Confiamos en tí. Dale, Fran.*
+*DISCLAIMER 2: Con el scripting se pueden hacer cosas increíbles. Cosas que ni te imaginas. Nosotros hemos hecho cosas que ni nos imaginábamos que fueran posibles. Miles de accidentes afortunados y cosas asín. Dale vueltas, probablemente encuentres la solución. Y si no, puedes preguntar. Pero dale vueltas antes. Confiamos en ti. Dale, Fran.*
 
 msc3
 ====
 
 msc3 significa "Mojon Script Compiler 3".
 
-msc3 es el compilador de scripts. Comenzó siendo una solución sencilla para compilar scripts basados en cláusulas en un bytecode fácilmente interpretable por el motor, pero se ha convertido en un monstruo increíble de múltiples tentáculos y cambiantes formas, como un pequeño Nyarlathotep.
+msc3 es el compilador de _scripts_. Comenzó siendo una solución sencilla para compilar _scripts_ basados en cláusulas en un _bytecode_ fácilmente interpretable por el motor, pero se ha convertido en un monstruo increíble de múltiples tentáculos y cambiantes formas, como un pequeño Nyarlathotep.
 
-msc3 genera un archivo binario script.bin con el bytecode del script y un par de archivos .h que contienen el intérprete y su configuración (msc.h y msc-config.h).
+msc3 genera un archivo binario script.bin con el _bytecode_ del _script_ y un par de archivos .h que contienen el intérprete y su configuración (msc.h y msc-config.h).
 
-msc3 necesita poco para funcionar: un script, el número de pantallas en total que tiene el mapa global de nuestro juego (*), y si debe preparar el intérprete para funcionar desde la RAM extra de los modelos de 128K.
+msc3 necesita poco para funcionar: un _script_, el número de pantallas en total que tiene el mapa global de nuestro juego (*), y si debe preparar el intérprete para funcionar desde la RAM extra de los modelos de 128K.
 
 msc3 se ejecuta desde línea de comandos y su sintaxis es:
 
@@ -28,14 +28,14 @@ msc3 se ejecuta desde línea de comandos y su sintaxis es:
     $ msc3.exe archivo.spt N [rampage]
 ```
 
-Donde archivo.spt es el archivo con el script que hay que compilar, N es el número de pantallas de nuestro juego (*), y [rampage] es un parámetro opcional que, si se indica, hace que msc3 genere un intérprete preparado para interpretar script.bin desde una página de RAM extra de los modelos de 128K.
+Donde archivo.spt es el archivo con el _script_ que hay que compilar, N es el número de pantallas de nuestro juego (*), y [rampage] es un parámetro opcional que, si se indica, hace que msc3 genere un intérprete preparado para interpretar `script.bin` desde una página de RAM extra de los modelos de 128K.
 
 (*) En juegos multi-nivel en el que cada nivel tiene un número de pantallas, se refiere al tamaño máximo en pantallas para el que se reserva memoria en RAM baja, o sea, el resultado de multiplicar `MAP_W` por `MAP_H`.
 
 Motor de cláusulas
 ==================
 
-Los scripts de MK2 se organizan en secciones. Cada sección se ejecutará en un momento preciso y en una pantalla precisa.
+Los _scripts_ de MK2 se organizan en secciones. Cada sección se ejecutará en un momento preciso y en una pantalla precisa.
 
 Principalmente tenemos secciones tipo ENTERING, que se ejecutarán al entrar en una pantalla, secciones PRESS_FIRE, que se ejecutarán al pulsar la tecla de acción, y secciones especiales que responderán a diversos eventos. Estos son los tipos de secciones:
 
@@ -89,9 +89,9 @@ Se ejecuta cuando el jugador mata a un enemigo, siempre que hayamos definido la 
 
 -
 
-Los scripts `PRESS_FIRE` se ejecutarán en más supuestos además de cuando el jugador pulse acción:
+Los _scripts_ `PRESS_FIRE` se ejecutarán en más supuestos además de cuando el jugador pulse acción:
 
-* Si tenemos `#define ENABLE_FIRE_ZONE` en config.h, hemos definido una zona de acción con `SET_FIRE_ZONE` en nuestro script, y el jugador entra en dicha zona.
+* Si tenemos `#define ENABLE_FIRE_ZONE` en config.h, hemos definido una zona de acción con `SET_FIRE_ZONE` en nuestro _script_, y el jugador entra en dicha zona.
 
 * Si empujamos un bloque y tenemos definido en config.h las directivas `ENABLE_PUSHED_SCRIPTING` y `PUSHING_ACTION`.
 
@@ -102,15 +102,15 @@ En versiones anteriores de MK2 y la Churrera también se lanzaban al matar un en
 Varios niveles
 ==============
 
-Podemos definir script para varios niveles. El mejor ejemplo actual para verlo en acción es Ninjajar!. En nuestro archivo de script concatenamos los scripts de nuestros niveles uno detrás de otro separados por una línea
+Podemos definir _scripts_ para varios niveles. El mejor ejemplo actual para verlo en acción es Ninjajar!. En nuestro archivo de _script_ concatenamos los _scripts_ de nuestros niveles uno detrás de otro separados por una línea
 
 ```
     END_OF_LEVEL
 ```
 
-Al compilar, msc3 generará una constante para identificar dónde empieza cada script para cada nivel que podremos usar en nuestro `level_manager` o como mejor nos convenga. La constante será del tipo `SCRIPT_X` con X el número de orden del script dentro del archivo .spt.
+Al compilar, msc3 generará una constante para identificar dónde empieza cada _script_ para cada nivel que podremos usar en nuestro `level_manager` o como mejor nos convenga. La constante será del tipo `SCRIPT_X` con X el número de orden del _script_ dentro del archivo .spt.
 
-Sin embargo, a partir de MK2 0.90 podemos tener más control sobre esto. Si incluimos al principio de una sección de nuestro script (en realidad puede aparecer en cualquier sitio antes de `END_OF_LEVEL`, pero seamos ordenados) una línea
+Sin embargo, a partir de MK2 0.90 podemos tener más control sobre esto. Si incluimos al principio de una sección de nuestro _script_ (en realidad puede aparecer en cualquier sitio antes de `END_OF_LEVEL`, pero seamos ordenados) una línea
 
 ```
     LEVELID xxxxx
@@ -140,7 +140,7 @@ La sintaxis es:
 
 Todas las cláusulas de una sección se ejecutan en orden, sin parar (a menos que así lo indiques con un comando `BREAK` o tras algunos comandos como `WARP_TO`, `WARP_TO_LEVEL`, `REHASH`, `REPOSTN` o `REENTER`).
 
-Muchas veces puedes ahorrar script y evitar usar BREAK. La mayoría de las veces el tiempo de ejecución de un script no es crítico y puedes permitirtelo.
+Muchas veces puedes ahorrar _script_ y evitar usar BREAK. La mayoría de las veces el tiempo de ejecución de un _script_ no es crítico y puedes permitírtelo.
 
 En vez de:
 
@@ -181,9 +181,9 @@ Y te ahorras un BREAK.
 Flags
 =====
 
-El motor de scripting maneja un conjunto de banderas o flags que pueden contener un valor de 0 a 127 y que se utilizan como variables. Los flags suelen referenciarse como FLAG N con N de 0 a 127 en el script.
+El motor de _scripting_ maneja un conjunto de banderas o flags que pueden contener un valor de 0 a 127 y que se utilizan como variables. Las flags suelen referenciarse como FLAG N con N de 0 a 127 en el _script_.
 
-En casi todas las comprobaciones y comandos que admiten valores inmediatos se puede utilizar la construcción #N donde N es un número de flag, que significa "el valor del flag N".
+En casi todas las comprobaciones y comandos que admiten valores inmediatos se puede utilizar la construcción #N donde N es un número de flag, que significa "el valor de la flag N".
 
 Por ejemplo:
 
@@ -191,13 +191,13 @@ Por ejemplo:
     IF FLAG 5 = #3
 ```
 
-Será cierta si el valor del flag 5 es igual al valor del flag 3, o:
+Será cierta si el valor de la flag 5 es igual al valor de la flag 3, o:
 
 ```
     WARP_TO #3, #4, #5
 ```
 
-Saltará a la pantalla contenida en el FLAG 3, en la posición indicada por los flags 4 y 5. Por el contrario:
+Saltará a la pantalla contenida en la FLAG 3, en la posición indicada por las flags 4 y 5. Por el contrario:
 
 ```
     WARP_TO 3, 4, 5
@@ -214,21 +214,21 @@ Sin modificaciones, MK2 permite 32 flags, pero este número puede cambiarse fác
 Alias
 =====
 
-Para no tener que recordar tantos números de flags, esposible definir alias. Cada alias representa un número de flag, y comienzan con el carácter "$". De este modo, podemos asociar por ejemplo el alias `$LLAVE` al flag 2 y usar en el script este alias en vez del 2:
+Para no tener que recordar tantos números de flags, es posible definir alias. Cada alias representa un número de flag, y comienzan con el carácter "$". De este modo, podemos asociar por ejemplo el alias `$LLAVE` a la flag 2 y usar en el _script_ este alias en vez del 2:
 
 ```
     IF FLAG $LLAVE = 1
 ```
 
-Los alias también funcionan con la construcción #N, de este modo si escribimos `#$NENEMS` nos referiremos al contenido del flag cuyo alias es `NENEMS`:
+Los alias también funcionan con la construcción #N, de este modo si escribimos `#$NENEMS` nos referiremos al contenido de la flag cuyo alias es `NENEMS`:
 
 ```
     IF FLAG $TOTAL = #$NENEMS
 ```
 
-Se cumple si el valor del flag cuyo alias es `$TOTAL` coincide con el valor del flag cuyo alias es `$NENEMS`.
+Se cumple si el valor de la flag cuyo alias es `$TOTAL` coincide con el valor de la flag cuyo alias es `$NENEMS`.
 
-Los alias deben definirse al principio del script (en realidad pueden definirse en cualquier parte del script, pero sólo serán válidos en la parte del script que viene después) en una sección `DEFALIAS` que debe tener el siguiente formato:
+Los alias deben definirse al principio del _script_ (en realidad pueden definirse en cualquier parte del _script_, pero sólo serán válidos en la parte del _script_ que viene después) en una sección `DEFALIAS` que debe tener el siguiente formato:
 
 ```
     DEFALIAS
@@ -251,7 +251,7 @@ y también
     IF $LLAVE = 1
 ```
 
-También podemos definir macros sencillos dentro de `DEFALIAS`. Los macros empiezan por el carácter %. Todo lo que venga después del nombre del macro se considera el texto de sustitución. Por ejemplo, si defines:
+También podemos definir macros sencillas dentro de `DEFALIAS`. Las macros empiezan por el carácter %. Todo lo que venga después del nombre de la macro se considera el texto de sustitución. Por ejemplo, si defines:
 
 ```
     %CLS EXTERN 0
@@ -262,7 +262,7 @@ Cada vez que pongas `%CLS` en tu código msc3 lo sustituirá por `EXTERN 0`.
 Decoraciones
 ============
 
-Cada script (y con esto quiero decir cada script de nivel incluido en nuestro archivo de script) puede incluir un set de decoraciones tal y como genera map2bin.exe. Para ello habrá que incluir la directiva INC_DECORATIONS al principio del script:
+Cada _script_ (y con esto quiero decir cada _script_ de nivel incluido en nuestro archivo de _script_) puede incluir un set de decoraciones tal y como genera map2bin.exe. Para ello habrá que incluir la directiva INC_DECORATIONS al principio del _script_:
 
 ```
     INC_DECORATIONS archivo.spt
@@ -273,9 +273,9 @@ Donde archivo.spt es el archivo .spt que genera map2bin.exe
 El intérprete dinámico
 ======================
 
-msc3 genera un intérprete que sólo será capaz de entender las comprobaciones y comandos que hayas introducido en tu script. Esto se hace para ahorrar memoria no generando código que jamás se ejecutará.
+msc3 genera un intérprete que sólo será capaz de entender las comprobaciones y comandos que hayas introducido en tu _script_. Esto se hace para ahorrar memoria no generando código que jamás se ejecutará.
 
-A veces hay varias formas de conseguir una cosa en tu script. Si tienes que elegir, no elijas la que produzca un script más sencillo, sino la que haga que tengas que utilizar menos variedad de comprobaciones o de comandos, ya que un poco más de script ocupa muchísimo menos que el código C necesario para ejecutar una comprobación o comando.
+A veces hay varias formas de conseguir una cosa en tu _script_. Si tienes que elegir, no elijas la que produzca un _script_ más sencillo, sino la que haga que tengas que utilizar menos variedad de comprobaciones o de comandos, ya que un poco más de _script_ ocupa muchísimo menos que el código C necesario para ejecutar una comprobación o comando.
 
 Siempre cierto
 ==============
@@ -286,37 +286,37 @@ Hay una comprobación que siempre vale cierto y que se utiliza para ejecutar com
     IF TRUE
 ```
 
-Comprobaciones y comandos relacionados con los flags
+Comprobaciones y comandos relacionados con las flags
 ====================================================
 
-Gran parte de tu script estará comprobando valores de los flags y modificando dichos valores. Para ello hay todo un set de comprobaciones y comandos.
+Gran parte de tu _script_ estará comprobando valores de las flags y modificando dichos valores. Para ello hay todo un set de comprobaciones y comandos.
 
 Comprobaciones con flags
 ------------------------
 
 ```
-IF FLAG x = n           Evaluará a CIERTO si el flag "x" vale "n"
+IF FLAG x = n           Evaluará a CIERTO si la flag "x" vale "n"
 
-IF FLAG x < n           Evaluará a CIERTO si el flag "x" < n
+IF FLAG x < n           Evaluará a CIERTO si la flag "x" < n
 
-IF FLAG x > n           Evaluará a CIERTO si el flag "x" > n
+IF FLAG x > n           Evaluará a CIERTO si la flag "x" > n
 
-IF FLAG x <> n          Evaluará a CIERTO si el flag "x" <> n
+IF FLAG x <> n          Evaluará a CIERTO si la flag "x" <> n
 ```
 
-Estas otras cuatro son "legacy". Están aquí porque era la única forma de comparar dos flags en las primeras versiones del sistema de scripting,  pero pueden obviarse - de hecho DEBEN obviarse, ya que así ahorraremos código de intérprete.
+Estas otras cuatro son "legacy". Están aquí porque era la única forma de comparar dos flags en las primeras versiones del sistema de _scripting_, pero pueden obviarse - de hecho DEBEN obviarse, ya que así ahorraremos código de intérprete.
 
 ```
-IF FLAG x = FLAG y      Evaluará a CIERTO si el flag "x" = flag "y"
+IF FLAG x = FLAG y      Evaluará a CIERTO si la flag "x" = flag "y"
                         Equivale a IF FLAG x = #y
 
-IF FLAG x < FLAG y      Evaluará a CIERTO si el flag "x" < flag "y"
+IF FLAG x < FLAG y      Evaluará a CIERTO si la flag "x" < flag "y"
                         Equivale a IF FLAG x < #y
 
-IF FLAG x > FLAG y      Evaluará a CIERTO si el flag "x" > flag "y"
+IF FLAG x > FLAG y      Evaluará a CIERTO si la flag "x" > flag "y"
                         Equivale a IF FLAG x > #y
 
-IF FLAG x <> FLAG y     Evaluará a CIERTO si el flag "x" <> flag "y"
+IF FLAG x <> FLAG y     Evaluará a CIERTO si la flag "x" <> flag "y"
                         Equivale a IF FLAG x <> #y
 ```
 
@@ -326,18 +326,18 @@ Comandos con flags
 ------------------
 
 ```
-SET FLAG x = n          Da el valor N al flag X.
+SET FLAG x = n          Da el valor N a la flag X.
                         Huelga decir que SET FLAG x = #y dará el valor del
-                        flag y al flag x. Pero ya lo he dicho.
+                        flag y a la flag x. Pero ya lo he dicho.
 
-INC FLAG x, n           Incrementa el valor del flag X en N.
+INC FLAG x, n           Incrementa el valor de la flag X en N.
 
-DEC FLAG x, n           Decrementa el valor del flag X en N
+DEC FLAG x, n           Decrementa el valor de la flag X en N
 
 FLIPFLOP x              Si x vale 0, valdrá 1. Si vale 1, valdrá 0.
                         Lo que viene a ser un flip-flop, vaya.
 
-SWAP x, y               Intercambia el valor de los flags x e y
+SWAP x, y               Intercambia el valor de las flags x e y
 ```
 
 Estas dos son legacy ya que pueden simularse con INC/DEC FLAG. Lo mismo de antes, permanecen aquí desde las primeras versiones cuando no existía la construcción #N.
@@ -353,7 +353,7 @@ SUB FLAGS x, y          Hace x = x - y.
 Cosas del motor que modifican flags
 ===================================
 
-Todo este jaleo de flags sería mucho menos útil si el motor no pudiese modificarlos también dando información de estado. Ciertas directivas de config.h harán que ciertos flags se actualicen con valores del motor:
+Todo este jaleo de flags sería mucho menos útil si el motor no pudiese modificarlas también dando información de estado. Ciertas directivas de config.h harán que ciertas flags se actualicen con valores del motor:
 
 Número de objetos recogidos
 ---------------------------
@@ -362,19 +362,19 @@ Directiva `OBJECT_COUNT`
 
 Con "objetos" me refiero a los objetos coleccionables automáticos que se colocan usando hotspots de tipo 1 en el Colocador.
 
-Si se define esta directiva, el valor especificado indicará que flag debe actualizar el motor con el número de objetos que el jugador lleva  ecogidos. Por ejemplo
+Si se define esta directiva, el valor especificado indicará qué flag debe actualizar el motor con el número de objetos que el jugador lleva recogidos. Por ejemplo
 
 ```c
     #define OBJECT_COUNT 1
 ```
 
-Hará que el FLAG 1 contenga en todo momento el número de objetos que lleva el jugador recogidos. De ese modo,
+Hará que la FLAG 1 contenga en todo momento el número de objetos que lleva el jugador recogidos. De ese modo,
 
 ```
     IF FLAG 1 = 5
 ```
 
-Se cumpliará cuando el jugador haya recogido 5 objetos.
+Se cumplirá cuando el jugador haya recogido 5 objetos.
 
 Número de enemigos en la pantalla
 ---------------------------------
@@ -389,22 +389,22 @@ Si se define esta directiva, el motor contará cuántos enemigos activos hay en 
     #define COUNT_SCR_ENEMS_ON_FLAG 1
 ```
 
-Hara que el FLAG 1 contenga el número de enemigos que había en la pantalla al entrar.
+Hara que la FLAG 1 contenga el número de enemigos que había en la pantalla al entrar.
 
 Número de enemigos eliminados
 -----------------------------
 
 Directiva `BODY_COUNT_ON`
 
-Si se define esta directiva, el motor incrementará el flag especificado siempre que el jugador elimine un enemigo. Por ejemplo,
+Si se define esta directiva, el motor incrementará la flag especificada siempre que el jugador elimine un enemigo. Por ejemplo,
 
 ```c
     #define BODY_COUNT_ON 2
 ```
 
-Hará que el FLAG 2 se incremente cada vez que el jugador mata un enemigo. Esto puede ser muy util para usarlo en conjunción con `COUNT_SCR_ENEMS_ON_FLAG`.
+Hará que la FLAG 2 se incremente cada vez que el jugador mata un enemigo. Esto puede ser muy útil para usarlo en conjunción con `COUNT_SCR_ENEMS_ON_FLAG`.
 
-Siguiendo nuestro ejemplo (cuenta enemigos en pantalla en el flag 1, e incrementar el flag 2 al matar un enemigo), si al entrar en una nueva pantalla establecemos el flag 2 a 0 (resetear la cuenta de enemigos matados:
+Siguiendo nuestro ejemplo (cuenta enemigos en pantalla en la flag 1, e incrementar la flag 2 al matar un enemigo), si al entrar en una nueva pantalla establecemos la flag 2 a 0 (resetear la cuenta de enemigos matados):
 
 ```
     ENTERING ANY
@@ -433,13 +433,13 @@ Contar los TILE_GET
 
 Directiva `TILE_GET_FLAG`
 
-El motor te permite definir un tile del mapa como "recogible". Por ejemplo, monedas. Puedes colocar monedas en el mapa, o hacerlas aparecer al romper una piedra (ver Ninjajar!). Si te has empapado whatsnew.txt sabrás que la directiva `TILE_GET n` hace que el tile "n" sea "recogible". Esto se utiliza en conjunción con la directiva `TILE_GET_FLAG`, de forma que cuando el jugador toque un tile número `TILE_GET` se incremente ese flag.
+El motor te permite definir un tile del mapa como "recogible". Por ejemplo, monedas. Puedes colocar monedas en el mapa, o hacerlas aparecer al romper una piedra (ver Ninjajar!). Si te has empapado `whatsnew.txt` sabrás que la directiva `TILE_GET n` hace que el tile "n" sea "recogible". Esto se utiliza en conjunción con la directiva `TILE_GET_FLAG`, de forma que cuando el jugador toque un tile número `TILE_GET` se incremente esa flag.
 
 No se puede usar `TILE_GET` sin `TILE_GET_FLAG`, por supuesto.
 
-Por ejemplo, puedes hacer que tu tile 10 sea un diamante y colocar estos diamantes por todo el mapa. Luego defines `TILE_GET` a 10 y `TILE_GET_FLAG` a 1. Cada vez que el jugador toque un diamante, este desaparecerá y el flag 1 se incrementará.
+Por ejemplo, puedes hacer que tu tile 10 sea un diamante y colocar estos diamantes por todo el mapa. Luego defines `TILE_GET` a 10 y `TILE_GET_FLAG` a 1. Cada vez que el jugador toque un diamante, este desaparecerá y la flag 1 se incrementará.
 
-En Ninjajar se usa de un modo más complejo, en conjunción con la directiva `BREAKABLE_TILE_GET n`. En ninjajar está definido así:
+En Ninjajar se usa de un modo más complejo, en conjunción con la directiva `BREAKABLE_TILE_GET n`. En Ninjajar está definido así:
 
 ```c
     #define BREAKABLE_TILE_GET 12
@@ -447,11 +447,11 @@ En Ninjajar se usa de un modo más complejo, en conjunción con la directiva `BR
     #define TILE_GET_FLAG 1
 ```
 
-Y produce este comportamiento: Si el jugador rompe el tile 12, que es la caja con estrellas (que en sus "behaviours" tiene activado el flag "rompible"), aparecerá el tile `TILE_GET`, que es el 22, la moneda. Si el jugador toca un tile 22 (una moneda), esta desaparecerá y se incrementará el flag 1, que es la cuenta del dinero que llevamos recogido.
+Y produce este comportamiento: Si el jugador rompe el tile 12, que es la caja con estrellas (que en sus "behaviours" tiene activado la flag "rompible"), aparecerá el tile `TILE_GET`, que es el 22, la moneda. Si el jugador toca un tile 22 (una moneda), esta desaparecerá y se incrementará la flag 1, que es la cuenta del dinero que llevamos recogido.
 
 Nótese que Ninjajar usa mapas de 16 tiles - las monedas sólo aparecerán al romper bloques estrella.
 
-Todo esto funciona automáticamente, nosotros sólo tendremos que preocuparno de examinar el valor del FLAG definido en `TILE_GET_FLAG` desde nuestro script.
+Todo esto funciona automáticamente, nosotros sólo tendremos que preocuparnos de examinar el valor del FLAG definido en `TILE_GET_FLAG` desde nuestro _script_.
 
 Bloques que se empujan
 ----------------------
@@ -460,9 +460,9 @@ Directivas `MOVED_TILE_FLAG`, `MOVED_X_FLAG` y `MOVED_Y_FLAG`
 
 Si hemos activado que el jugador pueda empujar cajas (tile 14 del tileset, con "behaviour" = 10) mediante `#define PLAYER_PUSH_BOXES`, y además activamos la directiva `ENABLE_PUSHED_SCRIPTING`, cada vez que el jugador mueva una caja (o bloque, lo que sea que hayamos puesto en el tile 14 ;-) ), ocurrirá esto:
 
-- El número de tile que se "pisa" se copiará en el flag `MOVED_TILE_FLAG`.
-- La coordenada X a la que se mueve la caja se copia en el flag `MOVED_X_FLAG`.
-- La coordenada Y a la que se mueve la caja se copia en el flag `MOVED_Y_FLAG`.
+- El número de tile que se "pisa" se copiará en la flag `MOVED_TILE_FLAG`.
+- La coordenada X a la que se mueve la caja se copia en la flag `MOVED_X_FLAG`.
+- La coordenada Y a la que se mueve la caja se copia en la flag `MOVED_Y_FLAG`.
 
 Si, además, definimos `PUSHING_ACTION`, se lanzarán las secciones `PRESS_FIRE` (la `ANY` y la correspondiente a la pantalla actual) y podremos hacer las comprobaciones inmediatamente.
 
@@ -479,7 +479,7 @@ Por ejemplo, si queremos abrir una puerta si se empuja una caja a la posición (
     #define MOVED_Y_FLAG        3
 ```
 
-Y en nuestro script...
+Y en nuestro _script_...
 
 ```
     PRESS_FIRE AT SCREEN 4
@@ -509,7 +509,7 @@ Que se pueda o no disparar
 
 Directiva `PLAYER_CAN_FIRE_FLAG`
 
-Si tenemos nuestro motor configurado para un juego de disparos usando la directiva `PLAYER_CAN_FIRE` y sus compañeras, podemos definir que el jugador sólo pueda disparar si un flag determinado vale 1 dándole el número de ese flag a la directiva `PLAYER_CAN_FIRE_FLAG`. Por ejemplo:
+Si tenemos nuestro motor configurado para un juego de disparos usando la directiva `PLAYER_CAN_FIRE` y sus compañeras, podemos definir que el jugador sólo pueda disparar si una flag determinada vale 1 dándole el número de esa flag a la directiva `PLAYER_CAN_FIRE_FLAG`. Por ejemplo:
 
 ```c
     #define PLAYER_CAN_FIRE_FLAG 4
@@ -547,11 +547,11 @@ Golpeado por una "floating object" lanzable
 
 Directiva `CARRIABLE_BOXES_COUNT_KILLS`
 
-En realidad, morir aplastado por una caja cuenta como incremento en el flag definido en `BODY_COUNT_ON`, pero por alguna misteriosa razón que no recuerdo (probablemente, desorganización mental) lo puse también separado.
+En realidad, morir aplastado por una caja cuenta como incremento en la flag definida en `BODY_COUNT_ON`, pero por alguna misteriosa razón que no recuerdo (probablemente, desorganización mental) lo puse también separado.
 
-Si se activa esta directiva el número de flag indicado contará sólo los enemigos que mueran golpeados por un floating object lanzable.
+Si se activa esta directiva el número de flag indicada contará sólo los enemigos que mueran golpeados por un "floating object" lanzable.
 
-(Si se define `BODY_COUNT_ON` también incrementarán el flag definido ahí... no sé, a lo mejor te sirve de algo).
+(Si se define `BODY_COUNT_ON` también incrementarán la flag definida ahí... no sé, a lo mejor te sirve de algo).
 
 "Floating objects" que caen afectados por la gravedad
 -----------------------------------------------------
@@ -560,15 +560,15 @@ Si se activa esta directiva el número de flag indicado contará sólo los enemi
 
 Directivas `ENABLE_FO_SCRIPTING`, `FO_X_FLAG`, `FO_Y_FLAG` y `FO_T_FLAG`
 
-Si tu juego utiliza "floating objects" (Leovigildo 1, 2 y 3), si activas la gravedad con `FO_GRAVITY` los objetos caeran si no tienen nigún obstáculo debajo.
+Si tu juego utiliza "floating objects" (Leovigildo 1, 2 y 3), si activas la gravedad con `FO_GRAVITY` los objetos caerán si no tienen ningún obstáculo debajo.
 
-En Leovigildo 3 nos inventamos un puzzle en el que había que dejar caer una corchoneta de sartar sobre Amador el Domador para estrujarlo. Esto necesitó ampliar el motor para poder comprobar adónde caía un "floating object".
+En Leovigildo 3 nos inventamos un puzle en el que había que dejar caer una corchoneta de sartar sobre Amador el Domador para estrujarlo. Esto necesitó ampliar el motor para poder comprobar adónde caía un "floating object".
 
 Si activamos `ENABLE_FO_SCRIPTING`, se ejecutarán las secciones `PRESS_FIRE` general y de la pantalla actual cada vez que un "floating object" caiga y descienda una casilla.
 
-Justo antes de llamar al script, la posición a la que ha caído se copiará en los flags indicados en `FO_X_FLAG` y `FO_Y_FLAG`,  y el tipo del "floating object" se copiará en `FO_T_FLAG`.
+Justo antes de llamar al _script_, la posición a la que ha caído se copiará en las flags indicados en `FO_X_FLAG` y `FO_Y_FLAG`,  y el tipo del "floating object" se copiará en `FO_T_FLAG`.
 
-Es interesante saber que el flag `FO_T_FLAG` se pondrá a 0 al entrar en una pantalla.
+Es interesante saber que la flag `FO_T_FLAG` se pondrá a 0 al entrar en una pantalla.
 
 ```c
     #define ENABLE_FO_SCRIPTING
@@ -611,7 +611,7 @@ Y en el `PRESS_FIRE` de la pantalla de Amador encontramos...
 Comprobaciones y comandos relacionados con la posición
 ======================================================
 
-También tenemos varias formas de comprobar y modificar la posición - incluso cambiando de pantalla ¡y de nivel!
+También tenemos varias formas de comprobar y modificar la posición &mdash;incluso cambiando de pantalla ¡y de nivel!
 
 Comprobaciones sobre la posición
 --------------------------------
@@ -621,7 +621,7 @@ Comprobaciones sobre la posición
                             el tile (x, y). x e y pueden llevar #.
 
     IF PLAYER_IN_X x1, x2   Evaluará a CIERTO si el jugador está horizontalmente
-                            entre las coordeadas en pixels x1 y x2.
+                            entre las coordeadas en píxeles x1 y x2.
 
     IF PLAYER_IN_Y y1, y2   Evaluará a CIERTO si el jugador está verticalmente
                             entre las coordeandas en pixles y1 e y2.
@@ -654,7 +654,7 @@ Estos comandos sirven para modificar la posición del personaje. Todas se expres
 Comprobaciones sobre la pantalla
 --------------------------------
 
-Aunque poder definir scripts en ENTERING n y PRESS_FIRE AT n donde n es la pantalla actual y que sólo se ejecuten cuando estamos en dicha pantalla, hay veces en las que es necesario saber en qué pantalla estamos en una de las secciones "generales" (cuando se acaba el TIMER, cuando matamos un enemigo...) Para esos casos tenemos:
+Aunque poder definir _scripts_ en ENTERING n y PRESS_FIRE AT n donde n es la pantalla actual y que sólo se ejecuten cuando estamos en dicha pantalla, hay veces en las que es necesario saber en qué pantalla estamos en una de las secciones "generales" (cuando se acaba el TIMER, cuando matamos un enemigo...) Para esos casos tenemos:
 
 ```
     IF NPANT n              Evaluará a CIERTO si el jugador está en la pantalla n
@@ -696,18 +696,18 @@ Sí, hacer juegos de muchos niveles y tal es complicado. La vida es asín.
 Redibujar la pantalla
 =====================
 
-Es util si haces algo que se cargue la pantalla, como sacar un cuadro de texto con un `EXTERN` (ver más adelante) (todo lo que hemos hecho de Ninjajar en adelante usa `EXTERN` principalmente para sacar cuadros de texto que se cargan la zona de juego). Así vuelves a pintarlo todo. Sólo hay que ejecutar:
+Es útil si haces algo que se cargue la pantalla, como sacar un cuadro de texto con un `EXTERN` (ver más adelante) (todo lo que hemos hecho de Ninjajar en adelante usa `EXTERN` principalmente para sacar cuadros de texto que se cargan la zona de juego). Así vuelves a pintarlo todo. Sólo hay que ejecutar:
 
 ```
     REDRAW
 ```
 
-Ojete: existe un buffer de tamaño pantalla donde cada cosa que se imprime  (bien por la rutina que se ejecuta al entrar en una pantalla nueva y que compone el escenario, bien por un `SET TILE (X, Y) = T` del scripting, etc.) se copia ahí. `REDRAW` simplemente vuelca ese buffer a la pantalla. ¡Si has modificado la pantalla con cosas desde el script, `REDRAW` no la va a volver a su estado original!
+Ojete: existe un buffer de tamaño pantalla donde cada cosa que se imprime  (bien por la rutina que se ejecuta al entrar en una pantalla nueva y que compone el escenario, bien por un `SET TILE (X, Y) = T` del _scripting_, etc.) se copia ahí. `REDRAW` simplemente vuelca ese buffer a la pantalla. ¡Si has modificado la pantalla con cosas desde el _script_, `REDRAW` no la va a volver a su estado original!
 
 "Reentrar" en la pantalla
 =========================
 
-A veces necesitas volver a ejecutar todo el script de `ENTERING ANY` y/o de `ENTERING SCREEN n`, o necesitas reinicializar los enemigos (si les cambias el tipo al vuelo, ver más adelante), o sabe dios qué.
+A veces necesitas volver a ejecutar todo el _script_ de `ENTERING ANY` y/o de `ENTERING SCREEN n`, o necesitas reinicializar los enemigos (si les cambias el tipo al vuelo, ver más adelante), o sabe dios qué.
 
 Hay varias formas de reentrar en la pantalla:
 
@@ -730,26 +730,26 @@ Hay varias formas de modificar la pantalla:
 Cambiar tiles del área de juego
 -------------------------------
 
-Cambiar tiles del área de juego modifica efectivamente el area de juego. Quiero decir que los cambios son persistentes (sobreviven a un REDRAW) y además los tiles modificados son interactuables. O sea, si modificas la pantalla eliminando una pared con un tile transparente, el jugador podrá pasar por ahí.
+Cambiar tiles del área de juego modifica efectivamente el área de juego. Quiero decir que los cambios son persistentes (sobreviven a un REDRAW) y además los tiles modificados son interactuables. O sea, si modificas la pantalla eliminando una pared con un tile transparente, el jugador podrá pasar por ahí.
 
 ```
     SET TILE (x, y) = t     Pone el tile t en la coordenada (x, y).
                             Las coordenadas (x, y) están a nivel de tiles.
 ```
 
-Por supuesto, y esto es muy útil, tanto x como y como t pueden llevar `#` para indicar el contenido de un flag. Para imprimir en 4, 5 el tile que diga el flag 2, hacemos
+Por supuesto, y esto es muy útil, tanto x como y como t pueden llevar `#` para indicar el contenido de una flag. Para imprimir en 4, 5 el tile que diga la flag 2, hacemos
 
 ```
     SET TILE (4, 5) = #2.
 ```
 
-Para imprimir un tile 7 en las coordendas almacenadas en los flags 2 (x) y 3 (y), hacemos:
+Para imprimir un tile 7 en las coordenadas almacenadas en las flags 2 (x) y 3 (y), hacemos:
 
 ```
     SET TILE (#2, #3) = 7
 ```
 
-Y, recordemos, siempre que referenciemos un flag podemos usar un alias. No lo estoy recordando todo el rato porque confío en tu inteligencia, pero
+Y, recordemos, siempre que referenciemos una flag podemos usar un alias. No lo estoy recordando todo el rato porque confío en tu inteligencia, pero
 
 ```
     DEFALIAS
@@ -808,7 +808,7 @@ Muy, muy tonto. Si lo necesitas, funciona igual que SET TILE pero sólo sustituy
 Imprimir tiles en cualquier sitio
 ---------------------------------
 
-Podemos imprimir un tile en cualquier sitio de la pantalla, sea en el area de juego o bien fuera (por ejemplo, en una zona del marcador).   Para ello usamos:
+Podemos imprimir un tile en cualquier sitio de la pantalla, sea en el área de juego o bien fuera (por ejemplo, en una zona del marcador). Para ello usamos:
 
 ```
     PRINT_TILE_AT (x, y) = n
@@ -816,16 +816,16 @@ Podemos imprimir un tile en cualquier sitio de la pantalla, sea en el area de ju
                             coordenadas DE CARACTER (x = 0-30, y = 0-22).
 ```
 
-Esta función sólo imprime. Aunque el tile que pintemos esté sobre el area de juego no la afectará en absoluto para nada.
+Esta función sólo imprime. Aunque el tile que pintemos esté sobre el área de juego no la afectará en absoluto para nada.
 
-Una cosa muy chula para lo que puede servir esto es para hacer pasajes secretos: en tu mapa haces un pasillo, pero luego en el ENTERING SCREEN lo cubres de tiles con `PRINT_TILE_AT`... Como estos tiles no afectan al area de juego, parecerá que no se puede pasar por ahí... pero ¡sí que se puede!
+Una cosa muy chula para lo que puede servir esto es para hacer pasajes secretos: en tu mapa haces un pasillo, pero luego en el ENTERING SCREEN lo cubres de tiles con `PRINT_TILE_AT`... Como estos tiles no afectan al área de juego, parecerá que no se puede pasar por ahí... pero ¡sí que se puede!
 
 Mostrar cambios
 ---------------
 
-Todas las impresiones de tiles en el motor se hacen a un buffer. En cada cuadro de juego, este buffer se dibuja en la pantalla siguiendo un divertido y mágico proceso. Sin embargo, durante la ejecución del script, no se vuelca el buffer a la pantalla.
+Todas las impresiones de tiles en el motor se hacen a un _buffer_. En cada cuadro de juego, este _buffer_ se dibuja en la pantalla siguiendo un divertido y mágico proceso. Sin embargo, durante la ejecución del _script_, no se vuelca el _buffer_ a la pantalla.
 
-Si cambiamos algo y queremos que se vea inmediatamente sin tener que esperar a volver al juego (por ejemplo, si estamos haciendo una animación), necesitamos decirle al intérprete de forma explícita que pinte el buffer en la pantalla. Esto se hace con el comando:
+Si cambiamos algo y queremos que se vea inmediatamente sin tener que esperar a volver al juego (por ejemplo, si estamos haciendo una animación), necesitamos decirle al intérprete de forma explícita que pinte el _buffer_ en la pantalla. Esto se hace con el comando:
 
 ```
     SHOW
@@ -841,13 +841,13 @@ Ya hemos hablado, pero no habíamos mencionado que:
                             haber empujado una caja.
 ```
 
-Esto es MUY UTIL. Tienes que tener en cuenta que la posición del objeto empujado (almacenada en los flags definidos en `MOVED_X_FLAG` y `MOVED_Y_FLAG`) y el tile que ha sobrescrito (almacenado en el flag definido en `MOVED_TILE_FLAG`) son persistentes - estos flags conservarán su valor hasta que se mueva otro bloque.
+Esto es MUY ÚTIL. Tienes que tener en cuenta que la posición del objeto empujado (almacenada en las flags definidas en `MOVED_X_FLAG` y `MOVED_Y_FLAG`) y el tile que ha sobrescrito (almacenado en la flag definida en `MOVED_TILE_FLAG`) son persistentes &mdash;estos flags conservarán su valor hasta que se mueva otro bloque.
 
-En la sección `PRESS_FIRE` se puede entrar de varias formas, por ejemplo pulsando acción. A lo mejor no te conviene que se hagan comprobaciones que impliquen los flags afectados por los bloques empujados si no hemos entrado tras empujar un bloque.
+En la sección `PRESS_FIRE` se puede entrar de varias formas, por ejemplo pulsando acción. A lo mejor no te conviene que se hagan comprobaciones que impliquen las flags afectados por los bloques empujados si no hemos entrado tras empujar un bloque.
 
 Cadaverion hace uso de esto.
 
-En Cadaverion hay que empujar cierto número de estatuas sobre cierto número de pedestales. La configuración en config.h relacionada con esto es:
+En Cadaverion hay que empujar cierto número de estatuas sobre cierto número de pedestales. La configuración en `config.h` relacionada con esto es:
 
 ```c
     #define ENABLE_PUSHED_SCRIPTING
@@ -857,13 +857,13 @@ En Cadaverion hay que empujar cierto número de estatuas sobre cierto número de
     #define PUSHING_ACTION
 ```
 
-En el `ENTERING` de cada pantalla, se establece en el flag #9 el número de estatuas/pedestales que hay. O sea, el flag #9 contendrá el número de estatuas que tenemos que colocar en sus pedestales.
+En el `ENTERING` de cada pantalla, se establece en la flag #9 el número de estatuas/pedestales que hay. O sea, la flag #9 contendrá el número de estatuas que tenemos que colocar en sus pedestales.
 
 En cada pantalla hay una cancela que hay que abrir poniendo las estatuas en sus pedestales. En el `ENTERING` definimos su posición en las flags #6 y #7 (resp., coordenadas X e Y).
 
-En el flag #10 vamos a ir contando las estatuas que colocamos en su sitio. Cuando todas las estatuas estén en su sitio, (esto es, el flag 9 y el flag 10 contengan el mismo valor) vamos a abrir la cancela que permite ir a la siguiente pantalla.
+En la flag #10 vamos a ir contando las estatuas que colocamos en su sitio. Cuando todas las estatuas estén en su sitio, (esto es, la flag 9 y la flag 10 contengan el mismo valor) vamos a abrir la cancela que permite ir a la siguiente pantalla.
 
-Vamos a usar el flag #11 como bandera. Si vale 0, la cancela está cerrada. Si vale 1, la hemos abierto ya. Entonces, este código es el que abre la cancela:
+Vamos a usar la flag #11 como bandera. Si vale 0, la cancela está cerrada. Si vale 1, la hemos abierto ya. Entonces, este código es el que abre la cancela:
 
 ```
     IF FLAG 9 = #10
@@ -904,7 +904,7 @@ En el `PRESS_FIRE AT ANY`, que se lanzará (junto con el `PRESS_FIRE AT SCREEN n
 
 Esto es: hemos llegado aquí por haber empujado una estatua (`JUST_PUSHED`) y el tile que hemos "pisado" es el 13 (un pedestal). Entonces, sumamos 1 a la cuenta de estatuas colocadas.
 
-¿Qué pasaría si no pusiésemos `JUST_PUSHED`? Pues imagina: tú coges, mueves una estatua al pedestal. en el FLAG 1 se copia el tile que acaba de pisar, que es 13. Pero ese valor se queda ahí... Si pulsas ACCIÓN, por ejemplo, el valor seguirá ahí, y contaría como que hemos pisado otro pedestal. No mola.
+¿Qué pasaría si no pusiésemos `JUST_PUSHED`? Pues imagina: tú coges, mueves una estatua al pedestal. en la FLAG 1 se copia el tile que acaba de pisar, que es 13. Pero ese valor se queda ahí... Si pulsas ACCIÓN, por ejemplo, el valor seguirá ahí, y contaría como que hemos pisado otro pedestal. No mola.
 
 El código completo de esta cláusula es este, porque se hace otra cosa muy interesante:
 
@@ -935,7 +935,7 @@ Clever, uh?
 El timer
 ========
 
-El timer es una cosa muy chula que hay en el motor MK2 (también estaba en la Churrera, pero ahora es más mejón). Básicamente es un valor que se decrementa cada cierto número de cuadros de juego. Cuando llega a 0, puede hacerse que el jugador pierda una vida, o que haya un game over... O puede ejecutarse una sección especial del script.
+El timer es una cosa muy chula que hay en el motor MK2 (también estaba en la Churrera, pero ahora es más mejón). Básicamente es un valor que se decrementa cada cierto número de cuadros de juego. Cuando llega a 0, puede hacerse que el jugador pierda una vida, o que haya un game over... O puede ejecutarse una sección especial del _script_.
 
 (Hay mucho sobre el timer, que puede funcionar de forma autónoma y hacer muchas cosas, pero eso no nos incumbe. Mira en whatsnew.txt o pregunta).
 
@@ -972,7 +972,7 @@ En realidad, "comando", porque sólo hay este:
                             en segundos. Experimenta.
 ```
 
-OJO: `SET_TIMER`, con "_". Sí, ya sé que hay un `SET FLAG` sin "_". Asín es,  acéptalo. Get over it. Te equivocarás mil veces. Yo me equivoco mil veces. Pero me jodo. En serio, ya lo cambiaré.
+OJO: `SET_TIMER`, con "_". Sí, ya sé que hay un `SET FLAG` sin "_". Asín es, acéptalo. Get over it. Te equivocarás mil veces. Yo me equivoco mil veces. Pero me jodo. En serio, ya lo cambiaré.
 
 TODO: Cambiar esto.
 
@@ -1012,7 +1012,7 @@ El inventario
 
 **No disponible en MK1**
 
-Esto empezó de coña, se empepinó en Leovigildo, y ahora es un pepino genial que nos permite hacer muchas cosas con muy poco código. Ains, hubiera venido bien en Ninjajar! - hubiese ahorrado un montón de código de script y de quebraderos de cabeza.
+Esto empezó de coña, se empepinó en Leovigildo, y ahora es un pepino genial que nos permite hacer muchas cosas con muy poco código. Ains, hubiera venido bien en Ninjajar! - hubiese ahorrado un montón de código de _script_ y de quebraderos de cabeza.
 
 El inventario no es más que un contenedor de objetos. Podemos definir cuántos objetos como máximo vamos a llevar.
 
@@ -1029,7 +1029,7 @@ Vamos a hablar primero del inventario "a pelo" y luego hablamos de los "floating
 Definiendo nuestro inventario.
 ------------------------------
 
-El inventario se define en un apartado especial a principio del script. En él se definen los diferentes parámetros necesarios para poner en marcha el sistema y tiene esta forma:
+El inventario se define en un apartado especial a principio del _script_. En él se definen los diferentes parámetros necesarios para poner en marcha el sistema y tiene esta forma:
 
 ```
     ITEMSET
@@ -1051,7 +1051,7 @@ Vamos describiendo cada línea una por una (sí, son necesarias todas).
 
     LOCATION x, y           Indica la posición (x, y) a nivel de caracteres
                             de la esquina superior del inventario, que se
-                            corresponde a dónde aparecerá el primer item.
+                            corresponde a dónde aparecerá el primer ítem.
 
     DISPOSITION disp, sep   "disp" debe valer HORZ o VERT, para indicar si
                             queremos que los slots de nuestro inventario se
@@ -1098,7 +1098,7 @@ Cada slot ocupa 2x2 caracteres (lo que ocupa un tile) pero debe dejarse un espac
                             actual seleccionado.
 ```
 
-Para no estorbar, yo suelo definir los flags 30 y 31 (los dos últimos si usamos los 32 que vienen por defecto) para estos dos valores. Así, en todo momento, el flag 30 (`SLOT_FLAG 30`) contiene qué slot está seleccionado (un número de 0 a n - 1; si el inventario tiene 4 slots, podrá valer 0, 1, 2 o 3 dependiendo de cuál esté seleccionado), y el flag 31 (`ITEM_FLAG 31`) contiene el objeto que hay en ese slot.
+Para no estorbar, yo suelo definir las flags 30 y 31 (las dos últimas si usamos las 32 que vienen por defecto) para estos dos valores. Así, en todo momento, la flag 30 (`SLOT_FLAG 30`) contiene qué slot está seleccionado (un número de 0 a n - 1; si el inventario tiene 4 slots, podrá valer 0, 1, 2 ó 3 dependiendo de cuál esté seleccionado), y la flag 31 (`ITEM_FLAG 31`) contiene el objeto que hay en ese slot.
 
 Ejemplos: Leovigildo 1, por ejemplo:
 
@@ -1114,7 +1114,7 @@ Ejemplos: Leovigildo 1, por ejemplo:
     END
 ```
 
-Tenemos un inventario que podrá contener cuatro objetos. Hemos dejado sitio en el marcador para él, a partir de las coordenadas (18, 21). Se pintará en horizontal, con un nuevo slot cada 3 caracteres. El selector será rojo intenso (2 + 64 = 66) y se pintará con los caracteres 62 y 63. El tile que representará un slot vacío es el 31, que en el tileset aparece como un recuadro azul. El flag 30 contendrá el slot seleccionado, y el flag 31 contendrá qué objeto hay en ese slot (0 si no hay ninguno).
+Tenemos un inventario que podrá contener cuatro objetos. Hemos dejado sitio en el marcador para él, a partir de las coordenadas (18, 21). Se pintará en horizontal, con un nuevo slot cada 3 caracteres. El selector será rojo intenso (2 + 64 = 66) y se pintará con los caracteres 62 y 63. El tile que representará un slot vacío es el 31, que en el tileset aparece como un recuadro azul. La flag 30 contendrá el slot seleccionado, y la flag 31 contendrá qué objeto hay en ese slot (0 si no hay ninguno).
 
 En Leovigildo 3 también tenemos un inventario:
 
@@ -1140,16 +1140,16 @@ Acceso directo a cada slot
 Podemos acceder directamente a cada slot, recordemos, numerados de 0 a n - 1, usando "ITEM", tanto en condiciones como en comandos:
 
 ```
-    IF ITEM n = t           Evalúa CIERTO si en el slot N está el item T
+    IF ITEM n = t           Evalúa CIERTO si en el slot N está el ítem T
 
-    IF ITEM n <> t          Evalúa CIERTO si en el slot N no está el item T
+    IF ITEM n <> t          Evalúa CIERTO si en el slot N no está el ítem T
                             (Dudo que esto sirva para algo... pero bueno)
 
     SET ITEM n = t          Pone el objeto representado por el tile T en el
                             slot N.
 ```
 
-`SET ITEM` nos servirá para inicializar el inventario, por ejemplo, o para hacer aparecer objetos en él por arte potagio. Al principio de cada  uego puedes hacer:
+`SET ITEM` nos servirá para inicializar el inventario, por ejemplo, o para hacer aparecer objetos en él por arte potagio. Al principio de cada juego puedes hacer:
 
 ```
     SET ITEM 0 = 0
@@ -1160,7 +1160,7 @@ Podemos acceder directamente a cada slot, recordemos, numerados de 0 a n - 1, us
 
 (para un inventario de 4 slots). Yo lo uso también cuando estoy haciendo debug, para ponerme en el inventario objetos que necesito para probar alguna cosa.
 
-Al igual que ocurría con las impresiones, los cambios no serán visibles  hasta que ocurra el siguiente cuadro de juego. Si por alguna razón necesitas modificar el inventario y que se muestre en el medio de un script, puedes usar
+Al igual que ocurría con las impresiones, los cambios no serán visibles hasta que ocurra el siguiente cuadro de juego. Si por alguna razón necesitas modificar el inventario y que se muestre en el medio de un _script_, puedes usar
 
 ```
     REDRAW_ITEMS
@@ -1168,10 +1168,10 @@ Al igual que ocurría con las impresiones, los cambios no serán visibles  hasta
 
 Para refrescar el inventario en pantalla.
 
-Slot seleccionado y objeto seleccionado en el script
+Slot seleccionado y objeto seleccionado en el _script_
 ----------------------------------------------------
 
-Lo de arriba es suficiente para que aparezca el inventario cuando ejecutemos el juego, pero habrá que hacerlo funcionar. Para ello usaremos los flags definidos para tal fin en `SLOT_FLAG` e `ITEM_FLAG`.
+Lo de arriba es suficiente para que aparezca el inventario cuando ejecutemos el juego, pero habrá que hacerlo funcionar. Para ello usaremos las flags definidas para tal fin en `SLOT_FLAG` e `ITEM_FLAG`.
 
 Hemos hablado de alias. Podríamos definir estos alias (contando con que estamos siguiendo el ejemplo y hemos definido `SLOT_FLAG` en 30 e `ITEM_FLAG` en 31):
 
@@ -1182,21 +1182,21 @@ Hemos hablado de alias. Podríamos definir estos alias (contando con que estamos
     END
 ```
 
-Incluso podríamos usar los flags 30 y 31 a pelo...
+Incluso podríamos usar las flags 30 y 31 a pelo...
 
-Se puede hacer todo con esto, pero hay ciertas condiciones y ciertos comandos predefinidos que harán tu script más legible... y que serán traducidos de forma transparente a manejes con los flags definidos en `SLOT_FLAG` e `ITEM_FLAG` - por lo que no te costarán "código de intérprete".
+Se puede hacer todo con esto, pero hay ciertas condiciones y ciertos comandos predefinidos que harán tu _script_ más legible... y que serán traducidos de forma transparente a manejes con las flags definidas en `SLOT_FLAG` e `ITEM_FLAG` &mdash;por lo que no te costarán "código de intérprete".
 
 ```
-    IF SEL_ITEM = T         Evalúa CIERTO si el item que hay en el slot
+    IF SEL_ITEM = T         Evalúa CIERTO si el ítem que hay en el slot
                             seleccionado es el representado por el tile T.
                             (Internamente equivale a IF FLAG $ITEM_FLAG = T)
 
-    IF SEL_ITEM <> T        Evalúa CIERTO si el item que hay en el slot
+    IF SEL_ITEM <> T        Evalúa CIERTO si el ítem que hay en el slot
                             seleccionado NO es el representado por el tile T.
                             (Internamente equivale a IF FLAG $ITEM_FLAG <> T)
 ```
 
-Además se definen el alias automático:
+Además se define el alias automático:
 
 ```
     SLOT_SELECTED           Equivale al valor del slot seleccionado.
@@ -1208,11 +1208,11 @@ Por tanto, podemos establecer qué ITEM queremos en el slot actual haciendo
     SET ITEM SLOT_SELECTED = T
 ```
 
-Esto se utiliza así. Se supone que cuando pulsamos "acción", es para usar el item que tenemos seleccionado en un sitio específico de la pantalla.
+Esto se utiliza así. Se supone que cuando pulsamos "acción", es para usar el ítem que tenemos seleccionado en un sitio específico de la pantalla.
 
 Vamos a poner un ejemplo práctico para ver el funcionamiento básico del inventario. Todo esto se simplifica muchísimo con el uso de "floating objects" de tipo contenedor, pero vamos a verlo primero en plan comando.
 
-Imaginad que llegamos a una habitación donde hay un objeto, una hoja de papel. Se trata del tile 22 de nuestro tileset. Lo hemos colocado en la  posición (5, 4) al entrar en la habitación en concreto, que es la 6. Tenemos un flag especial, $PAPEL, que valdrá 0 si aún no lo hemos cogido.
+Imaginad que llegamos a una habitación donde hay un objeto, una hoja de papel. Se trata del tile 22 de nuestro tileset. Lo hemos colocado en la  posición (5, 4) al entrar en la habitación en concreto, que es la 6. Tenemos una flag especial, $PAPEL, que valdrá 0 si aún no lo hemos cogido.
 
 ```
     ENTERING SCREEN 6
@@ -1225,7 +1225,7 @@ Imaginad que llegamos a una habitación donde hay un objeto, una hoja de papel. 
 
 Ahora vamos a permitir que el jugador coja el papel. Para ello, el jugador se irá a por el papel (tocando la posición (5, 4), esto es) y pulsará la tecla de Acción. Esto lanzará el script de PRESS_FIRE correspondiente.
 
-En él vamos a detectar que estamos en el sitio correcto, vamos a eliminar el papel de la pantalla, lo vamos a meter como ITEM en el inventario, y pondremos el flag $PAPEL a 1 para que no vuelva a aparecer:
+En él vamos a detectar que estamos en el sitio correcto, vamos a eliminar el papel de la pantalla, lo vamos a meter como ÍTEM en el inventario, y pondremos la flag $PAPEL a 1 para que no vuelva a aparecer:
 
 ```
     PRESS_FIRE AT SCREEN 6
@@ -1241,11 +1241,11 @@ En él vamos a detectar que estamos en el sitio correcto, vamos a eliminar el pa
 
 La línea `SET ITEM SLOT_SELECTED = 22` hace que el papel aparezca en el inventario, justo en el slot que el usuario tuviese seleccionado.
 
-Obviamente, si había algo ahí se machacará - para evitarlo habría que montar un pequeño pifostio, pero para eso tenemos los "floating objects" que vermos después. Ahora mismo da igual que machaque, es un ejemplo.
+Obviamente, si había algo ahí se machacará &mdash;para evitarlo habría que montar un pequeño pifostio, pero para eso tenemos los "floating objects" que veremos después. Ahora mismo da igual que machaque, es un ejemplo.
 
-Nos vamos a otra pantalla de nuestro juego, pongamos que es la numero 8. Pongamos que tenemos en (7, 7) a un personaje que espera que le demos un papel para escribir una carta. Cuando se lo demos, se pondrá "contento" y esto hará que pasen cosas. El estado de "contento" lo expresaremos en un flag $CONTENTO, que valdrá 0 al principio.
+Nos vamos a otra pantalla de nuestro juego, pongamos que es la numero 8. Pongamos que tenemos en (7, 7) a un personaje que espera que le demos un papel para escribir una carta. Cuando se lo demos, se pondrá "contento" y esto hará que pasen cosas. El estado de "contento" lo expresaremos en una flag $CONTENTO, que valdrá 0 al principio.
 
-El jugador deberá seleccionar el item en el inventario y luego irse al sitio correcto y pulsar acción. Eso lanzará nuestro script de `PRESS_FIRE`:
+El jugador deberá seleccionar el ítem en el inventario y luego irse al sitio correcto y pulsar acción. Eso lanzará nuestro _script_ de `PRESS_FIRE`:
 
 ```
     PRESS_FIRE AT SCREEN 8
@@ -1269,21 +1269,21 @@ Como véis, hemos quitado el objeto del inventario simplemente diciéndole al ju
 
 **No disponible en MK1**
 
-Los "Floating Objects" de tipo "container" no son más que "cajas" donde podemos meter un objeto. Estas cajas se colocan en una pantalla desde el script y se les puede asignar un contenido.
+Los "Floating Objects" de tipo "container" no son más que "cajas" donde podemos meter un objeto. Estas cajas se colocan en una pantalla desde el _script_ y se les puede asignar un contenido.
 
-Los "Floating Objects" de tipo "container" (a partir de ahora, les vamos a llamar contenedores) hacen que manejar el inventario sea muy sencillo, ya que, cuando el usuario pulse ACCION tocando uno, harán que el objeto que haya en el slot seleccionado y el objeto contenido en el container se intercambien de forma automática, sin script de por medio. Eso nos sirve para:
+Los "Floating Objects" de tipo "container" (a partir de ahora, los vamos a llamar contenedores) hacen que manejar el inventario sea muy sencillo, ya que, cuando el usuario pulse ACCIÓN tocando uno, harán que el objeto que haya en el slot seleccionado y el objeto contenido en el container se intercambien de forma automática, sin _script_ de por medio. Eso nos sirve para:
 
 - Si el slot seleccionado está vacío, "cogeremos el objeto".
 - Si el slot seleccionado está lleno, el objeto que había se intercambiará por el del contenedor, y no se perderá nada.
 - Si el contenedor está vacío pero no el slot seleccionado, "dejaremos el objeto".
 
-Para poder usar contenedores, hay que habilitarlos en config.h. Además, hay que hacerle saber al motor qué flag de nuestro script representa el slot seleccionado (tal y como lo definimos en la sección ITEMSET de nuestro script):
+Para poder usar contenedores, hay que habilitarlos en config.h. Además, hay que hacerle saber al motor qué flag de nuestro _script_ representa el slot seleccionado (tal y como lo definimos en la sección ITEMSET de nuestro _script_):
 
 ```c
     #define ENABLE_FO_OBJECT_CONTAINERS
 ```
 
-Con esto activamos los conenedores y le decimos al motor que el slot seleccionado se almacena en el flag 30.
+Con esto activamos los contenedores y le decimos al motor que el slot seleccionado se almacena en la flag 30.
 
 Ah, ¡y que no se nos olvide habilitar los "floating objects", en general!
 
@@ -1296,12 +1296,12 @@ Creando un contenedor
 
 Los contenedores pueden crearse desde cualquier cuerpo de cláusula, pero se suelen crear en las secciones ENTERING en un IF TRUE.
 
-A cada contenedor se le asigna un flag. El valor de dicho flag indicará qué objeto hay en el contenedor, y será 0 si está vacío.
+A cada contenedor se le asigna una flag. El valor de dicho flag indicará qué objeto hay en el contenedor, y será 0 si está vacío.
 
 Los contenedores se crean con el siguiente comando:
 
 ```
-    ADD_CONTAINER FLAG, X, Y    Crea un contenedor para el flag FLAG en (X, Y)
+    ADD_CONTAINER FLAG, X, Y    Crea un contenedor para la flag FLAG en (X, Y)
 ```
 
 Es buena práctica crear un alias para cada contenedor y ponerles `CONT_`, para distinguirlos fácilmente. Por ejemplo, vamos a crear un contenedor para el papel del ejemplo anterior:
@@ -1314,7 +1314,7 @@ Es buena práctica crear un alias para cada contenedor y ponerles `CONT_`, para 
     END
 ```
 
-El papel salía en la pantalla 6, así que vamos a crear ese contenedor en la sección `ENTERING SCREEN` de la pantalla 6. Recordad que antes teníamos que imprimir el tile y tal (ver sección anterior), pero con los contenedores no es necesario. Tampoco vamos a necesitar un flag $PAPEL ni pollas.
+El papel salía en la pantalla 6, así que vamos a crear ese contenedor en la sección `ENTERING SCREEN` de la pantalla 6. Recordad que antes teníamos que imprimir el tile y tal (ver sección anterior), pero con los contenedores no es necesario. Tampoco vamos a necesitar una flag $PAPEL ni pollas.
 
 ```
     ENTERING SCREEN 6
@@ -1325,7 +1325,7 @@ El papel salía en la pantalla 6, así que vamos a crear ese contenedor en la se
     END
 ```
 
-¿Pero dónde decimos que en ese contenedor tiene que estar el objeto que se representa por el tile 22 (la hoja de papel) - Recordemos que los contenedores son en ralidad abstracciones de flags, así que para que el contenedor que acabamos de crear tenga una hoja de papel, habrá que darle ese valor al flag ¿Cuando? Al principio del juego:
+¿Pero dónde decimos que en ese contenedor tiene que estar el objeto que se representa por el tile 22 (la hoja de papel) &mdash;Recordemos que los contenedores son en realidad abstracciones de flags, así que para que el contenedor que acabamos de crear tenga una hoja de papel, habrá que darle ese valor a la flag ¿Cuándo? Al principio del juego:
 
 ```
     ENTERING GAME
@@ -1340,7 +1340,7 @@ Con esto, en cada partida habrá un contenedor en (5, 4) de la pantalla 6 que te
 
 Cuando el jugador llegue a la pantalla 6, toque el contenedor (en (5, 4)) y pulse la tecla de acción, el motor intercambiará automáticamente el contenido del slot seleccionado con el contenido del contenedor. Así, si el slot seleccionado estaba vacío, pasará a contener la hoja de papel y el contenedor se quedará vacío. Si teníamos un objeto en ese slot, pasará a estar en la posición (5, 4) y el papel en nuestro inventario.
 
-Y nosotros no tendremos que hacer nada. Ni en el script, ni en nada.
+Y nosotros no tendremos que hacer nada. Ni en el _script_, ni en nada.
 
 A la hora de irnos a la pantalla 8 a dárselo al jipi, todo sigue igual:
 
@@ -1354,14 +1354,14 @@ A la hora de irnos a la pantalla 8 a dárselo al jipi, todo sigue igual:
     END
 ```
 
-Obviamente, los contenidos de los contenedores no tienen por qué crearse desde el principio del juego. Por ejemplo, en Leovigildo III los objetos para el puzzle final no están disponibles hasta que no hablamos con Nicanor el Aguador en la última pantalla. Inicialmente se ponen a 0 y llegados a ese punto ya se les da valor.
+Obviamente, los contenidos de los contenedores no tienen por qué crearse desde el principio del juego. Por ejemplo, en Leovigildo III los objetos para el puzle final no están disponibles hasta que no hablamos con Nicanor el Aguador en la última pantalla. Inicialmente se ponen a 0 y llegados a ese punto ya se les da valor.
 
 Otros floating objects
 ======================
 
-El motor soporta otros tipos de floating objects: cajas que se transportan, por ejemplo. Todo esto tiene que ver con la configuración del motor y tal, pero como se colocan desde el script, lo menciono aquí.
+El motor soporta otros tipos de "floating objects": cajas que se transportan, por ejemplo. Todo esto tiene que ver con la configuración del motor y tal, pero como se colocan desde el _script_, lo menciono aquí.
 
-Un floating object está representado por un número de tile y su ubicación inicial. Para crear un floating object tenemos que ejecutar el siguiente comando en el cuerpo de una cláusula (generalmente, en el IF TRUE dentro de una sección `ENTERING SCREEN`):
+Un "floating object" está representado por un número de tile y su ubicación inicial. Para crear un "floating object" tenemos que ejecutar el siguiente comando en el cuerpo de una cláusula (generalmente, en el IF TRUE dentro de una sección `ENTERING SCREEN`):
 
 ```
     ADD_FLOATING_OBJECT T, X, Y
@@ -1370,7 +1370,7 @@ Un floating object está representado por un número de tile y su ubicación ini
 
 Como decíamos, el comportamiento de FO dependerá de tile que se le asigne y esto a su vez dependerá de cómo tengamos configurado el juego.
 
-Por ejemplo, en Leovigildo las cajas que podemos acarrear y apilar son un floating object y están representadas por el tile 16. Para ello, hemos hecho la siguiente configuración en config.h:
+Por ejemplo, en Leovigildo las cajas que podemos acarrear y apilar son un "floating object" y están representadas por el tile 16. Para ello, hemos hecho la siguiente configuración en config.h:
 
 ```c
     #define ENABLE_FLOATING_OBJECTS
@@ -1379,9 +1379,9 @@ Por ejemplo, en Leovigildo las cajas que podemos acarrear y apilar son un floati
     #define CARRIABLE_BOXES_ALTER_JUMP 180
 ```
 
-La primera habilita los floating objects, en general. La segunda habilita los floating objects de tipo "CARRIABLE_BOXES" (cajas transportables). La tercera dice que estas cajas se representan por el tile 16. La última tiene que ver con la configuración de esta mierda: si se define, la fuerza del salto se verá alterada cuando llevemos una caja (para saltar menos) y el valor máximo de la velocidad vertical será el definido.
+La primera habilita los "floating objects", en general. La segunda habilita los "floating objects" de tipo "CARRIABLE_BOXES" (cajas transportables). La tercera dice que estas cajas se representan por el tile 16. La última tiene que ver con la configuración de esta mierda: si se define, la fuerza del salto se verá alterada cuando llevemos una caja (para saltar menos) y el valor máximo de la velocidad vertical será el definido.
 
-Con esto, añadiremos una de estas bonitas cajas a la pantalla 4 en la posición (5, 5) poniendo esto en el script:
+Con esto, añadiremos una de estas bonitas cajas a la pantalla 4 en la posición (5, 5) poniendo esto en el _script_:
 
 ```
     ENTERING SCREEN 4
@@ -1433,7 +1433,7 @@ Sobre estas dos últimas digo lo mismo que antes: usando OBJECT_COUNT y una flag
 Terminar el juego
 =================
 
-Comandos para terminar el juego desde el scripting (es necesario activar, en config.h, `#define WIN_CONDITION 2`, en el caso de que queramos GANAR desde el script - para GAME OVER No es necesario).
+Comandos para terminar el juego desde el _scripting_ (es necesario activar, en config.h, `#define WIN_CONDITION 2`, en el caso de que queramos GANAR desde el _script_ - para GAME OVER No es necesario).
 
 ```
     GAME OVER               Termina el juego con un GAME OVER.
@@ -1448,14 +1448,14 @@ Comandos para terminar el juego desde el scripting (es necesario activar, en con
                             secuencia final.
 ```
 
-[Sólo en MK2] Para que `GAME_ENDING` funcione hay que indicarlo en config.h con un bonito `#define SCRIPTED_GAME_ENDING`.
+[Sólo en MK2] Para que `GAME_ENDING` funcione hay que indicarlo en `config.h` con un bonito `#define SCRIPTED_GAME_ENDING`.
 
 Fire Zone
 =========
 
-La "fire zone" de una pantalla es una zona rectangular definida a nivel de pixels que lanzará la sección `PRESS_FIRE` de la pantalla (y `PRESS_FIRE AT ANY`) si el jugador la toca. Nos sirve para lanzar trozos de script cuando el jugador toque algo o entre en algún sitio.
+La "fire zone" de una pantalla es una zona rectangular definida a nivel de píxeles que lanzará la sección `PRESS_FIRE` de la pantalla (y `PRESS_FIRE AT ANY`) si el jugador la toca. Nos sirve para lanzar trozos de _script_ cuando el jugador toque algo o entre en algún sitio.
 
-Hay que activarlas en config.h
+Hay que activarlas en `config.h`
 
 ```c
     #define ENABLE_FIRE_ZONE
@@ -1467,7 +1467,7 @@ Para definir el `FIRE_ZONE` activo de una pantalla usamos este comando desde cua
     SET_FIRE_ZONE x1, y1, x2, y2
 ```
 
-Que definirá un rectángulo desde (x1, y1) a (x2, y2), en píxels.
+Que definirá un rectángulo desde (x1, y1) a (x2, y2), en píxeles.
 
 Si quieres desactivar la "fire zone" sólo tienes que poner un rectángulo fuera de rango o vacío:
 
@@ -1475,7 +1475,7 @@ Si quieres desactivar la "fire zone" sólo tienes que poner un rectángulo fuera
     SET_FIRE_ZONE 0, 0, 0, 0
 ```
 
-Para que sea menos coñazo trabajar, y ya que la mayoría de las veces las  fire zones hay que calcularlas en base a un rango de tiles, msc3 entenderá el comando
+Para que sea menos coñazo trabajar, y ya que la mayoría de las veces las fire zones hay que calcularlas basándonose en un rango de tiles, msc3 entenderá el comando
 
 ```
     SET_FIRE_ZONE_TILES tx1, ty1, tx2, ty2
@@ -1486,7 +1486,7 @@ donde los parámetros definen un rango en coordenadas de tile (ambos límites in
 Modificando enemigos
 ====================
 
-La modificación más sencilla es la que permite activar o desactivar enemigos. Los enemigos tienen, internamente, un flag que los activa o desactiva para, por ejemplo, matarlos y que no salgan más. Desde el script podemos modificar ese flag para conseguir varios efectos.
+La modificación más sencilla es la que permite activar o desactivar enemigos. Los enemigos tienen, internamente, una flag que los activa o desactiva para, por ejemplo, matarlos y que no salgan más. Desde el _script_ podemos modificar esa flag para conseguir varios efectos.
 
 Por ejemplo, en Ninjajar! hacemos aparecer plataformas móviles como resultado de acciones más o menos complejas. Para ello, creamos la plataforma normalmente en esa pantalla, la desactivamos en el ENTERING SCREEN, y la activamos posteriormente cuando la acción necesaria ha sido ejecutada.
 
@@ -1498,7 +1498,7 @@ En las pantallas hay tres enemigos, numerados 0, 1 y 2. Estos números se corres
     ENEMY n OFF             Desactiva el enemigo "n".
 ```
 
-Otra cosa que podemos hacer con los enemigos es cambiar su tipo. En el tipo del enemigo, con el nuevo motor introducido en Leovigildo III, tenemos codificado el tipo de movimiento, si dispara o no, y el número de sprite (todo esto detallado en whatsnew.txt, no voy a detenerme aquí), así que con esto tenemos una herramienta bastante potente.
+Otra cosa que podemos hacer con los enemigos es cambiar su tipo. En el tipo del enemigo, con el nuevo motor introducido en Leovigildo III, tenemos codificado el tipo de movimiento, si dispara o no, y el número de sprite (todo esto detallado en `whatsnew.txt`, no voy a detenerme aquí), así que con esto tenemos una herramienta bastante potente.
 
 ```
     ENEMY n TYPE t          Establece el tipo "t" para el enemigo "n".
@@ -1506,7 +1506,7 @@ Otra cosa que podemos hacer con los enemigos es cambiar su tipo. En el tipo del 
 
 A partir de aquí **no disponible en MK1**:
 
-El problema es que estamos modificando un parámetro básico del enemigo. Si nuestro juego maneja varios niveles no importa, ya que siempre tenemos una copia (comprimida) de los valores originales que podemos restaurar cuando nos de la gana.
+El problema es que estamos modificando un parámetro básico del enemigo. Si nuestro juego maneja varios niveles no importa, ya que siempre tenemos una copia (comprimida) de los valores originales que podemos restaurar cuando nos dé la gana.
 
 El problema viene en los juegos de un solo nivel. Si cambiamos el tipo de un enemigo, perderemos el tipo original para siempre. Para poder recuperarlo necesitaremos una "copia de seguridad" de los tipos de todos los enemigos. Esta copia ocupa 3 bytes por pantalla y hay que activarla desde config.h:
 
@@ -1523,33 +1523,33 @@ Con la copia de seguridad activada, podemos restaurar todos los enemigos a su va
         ENEMIES RESTORE ALL     Restaura el tipo de TODOS los enemigos del nivel.
 ```
 
-Si sólo necesitas restaurarlos al empezar cada partida, puedes pasar de usar `ENEMIES RESTORE ALL` en el script y activar la directiva `RESTORE_ON_INIT` en config.h
+Si sólo necesitas restaurarlos al empezar cada partida, puedes pasar de usar `ENEMIES RESTORE ALL` en el _script_ y activar la directiva `RESTORE_ON_INIT` en config.h
 
 
 ```c
     #define RUN_SCRIPT_ON_KILL
 ```
 
-Ejecuta la sección `PLAYER_KILLS_ENEMY` el script siempre que el jugador mate un enemigo, sea como sea.
+Ejecuta la sección `PLAYER_KILLS_ENEMY` el _script_ siempre que el jugador mate un enemigo, sea como sea.
 
 Código externo
 ==============
 
-Hay muchas cosas que no podemos hacer directamente desde el script y por ello el sistema permite ejecutar código externo, que no es más que una función definida en el código de MK2.
+Hay muchas cosas que no podemos hacer directamente desde el _script_ y por ello el sistema permite ejecutar código externo, que no es más que una función definida en el código de MK2.
 
-Para usar código externo habrá que incluir dicha función activando en config.h la directiva
+Para usar código externo habrá que incluir dicha función activando en `config.h` la directiva
 
 ```c
     #define ENABLE_EXTERN_CODE
 ```
 
-Esto hará que se incluya el archivo extern.h en la compilación. Este archivo puede contener el código que nos de la gana siempre que el punto de entrada sea la función
+Esto hará que se incluya el archivo `extern.h` en la compilación. Este archivo puede contener el código que nos dé la gana siempre que el punto de entrada sea la función
 
 ```c
     void do_extern_action (unsigned char n);
 ```
 
-En nuestro script disponemos del comando EXTERN:
+En nuestro _script_ disponemos del comando EXTERN:
 
 ```
     EXTERN n                Hace una llamada a do_extern_action pasándole "n",
@@ -1557,21 +1557,21 @@ En nuestro script disponemos del comando EXTERN:
                             construcciones #.
 ```
 
-En el extern.h de casi todos los juegos a partir de Ninjajar verás código para imprimir textos comprimidos con textstuffer.exe e incluidos en un  text.bin. A nosotros nos parece muy conveniente, pero siempre puedes usar esta característica para lo que te de la gana.
+En el `extern.h` de casi todos los juegos a partir de Ninjajar verás código para imprimir textos comprimidos con textstuffer.exe e incluidos en un `text.bin`. A nosotros nos parece muy conveniente, pero siempre puedes usar esta característica para lo que te dé la gana.
 
-**No disponible en MK1**: Es posible que 256 posibles acciones externas sean pocas (por ejemplo, si vas a usar mucho texto en tu juego y necesitas hacer más cosas - Ninjajar! usa 226 líneas de texto, casi nos quedamos sin valores). En ese caso podemos activar el "extern extendido" en config.h. Además de lo anterior, tienes que definir
+**No disponible en MK1**: Es posible que 256 posibles acciones externas sean pocas (por ejemplo, si vas a usar mucho texto en tu juego y necesitas hacer más cosas - Ninjajar! usa 226 líneas de texto, casi nos quedamos sin valores). En ese caso podemos activar el "extern extendido" en `config.h`. Además de lo anterior, tienes que definir
 
 ```c
     #define EXTERN_E
 ```
 
-Ojo, que esto desactiva EXTERN y no incluye el archivo extern.h. En su lugar incluye extern_e.h y activa el comando EXTERN_E. Ahora el punto de entrada, dentro de extern_e.h, debe ser
+Ojo, que esto desactiva EXTERN y no incluye el archivo `extern.h`. En su lugar incluye `extern_e.h` y activa el comando EXTERN_E. Ahora el punto de entrada, dentro de `extern_e.h`, debe ser
 
 ```c
     void do_extern_action (unsigned char n, unsigned char m);
 ```
 
-y en nuestro script deberemos usar el comando:
+y en nuestro _script_ deberemos usar el comando:
 
 ```
     EXTERN_E n, m           Hace una llamada a do_extern_action pasándole n y m,
@@ -1584,15 +1584,15 @@ Safe Spot
 
 **No disponible en MK1**
 
-Si defines `#define DIE_AND_RESPAWN` en config.h, el jugador, al morir, va a reaparecer en el "último punto seguro". Si `DIE_AND_RESPAWN` está activo, el motor salva la posición (pantalla, x, y) cada vez que nos posamos sobre un tile no traspasable (que no sea un "floating object").
+Si defines `#define DIE_AND_RESPAWN` en `config.h`, el jugador, al morir, va a reaparecer en el "último punto seguro". Si `DIE_AND_RESPAWN` está activo, el motor salva la posición (pantalla, x, y) cada vez que nos posamos sobre un tile no traspasable (que no sea un "floating object").
 
-Podemos controlar la definición del "punto seguro" (safe spot) desde nuestro script. Si decidimos hacer esto (por ejemplo, para definir un "checkpoint" de forma manual), es conveniente desactivar que el motor almacene el safe spot de forma automática con:
+Podemos controlar la definición del "punto seguro" (safe spot) desde nuestro _script_. Si decidimos hacer esto (por ejemplo, para definir un "checkpoint" de forma manual), es conveniente desactivar que el motor almacene el safe spot de forma automática con:
 
 ```c
     #define DISABLE_AUTO_SAFE_SPOT
 ```
 
-Hagamos o no hagamos esto, podemos definir el safe spot desde el script con estos dos comandos:
+Hagamos o no hagamos esto, podemos definir el safe spot desde el _script_ con estos dos comandos:
 
 ```
     SET SAFE HERE           Establece el "safe spot" a la posición actual del
