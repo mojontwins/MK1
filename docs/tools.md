@@ -192,7 +192,7 @@ Convierte N patrones desde un archivo png de 256x64 bytes. Útil para customs.
        * noattrs: just outputs the bitmaps.
 ```
 
-* `charset.png` nombre de archivo de entrada. Debe tener 256x64 pixels, por lo que podrá contener un máximo de 256 patrones.
+* `charset.png` nombre de archivo de entrada. Debe tener 256x64 píxeles, por lo que podrá contener un máximo de 256 patrones.
 * `charset.bin` es el nombre de archivo de salida.
 * `n` es el número de caracteres
 * `defaultink` es el número de tinta por defecto si el patrón sólo tiene un color liso.
