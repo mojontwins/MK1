@@ -94,15 +94,15 @@ El primer paso será comentar `ACTIVATE_SCRIPTING` en `my/config.h`. Luego habr�
 
 ### `ENTERING_GAME`
 
-Tenemos que empezar poniendo el flag 1 a 0. También pondremos el 2, que es el que controla la venta de la moto seminueva. Añadimos este código en `my/ci/entering_game.h`.
+Tenemos que empezar poniendo la flag 1 a 0. También pondremos el 2, que es el que controla la venta de la moto seminueva. Añadimos este código en `my/ci/entering_game.h`.
 
 ### `ENTERING ANY`
 
-En esta sección se imprimen mensajes diciendo lo que hay que hacer, dependiendo del valor del flag 1. Añadimos código para esto en `my/ci/entering_screen.h`.
+En esta sección se imprimen mensajes diciendo lo que hay que hacer, dependiendo del valor de la flag 1. Añadimos código para esto en `my/ci/entering_screen.h`.
 
 ### `ENTERING SCREEN n`
 
-En el mismo archivo rellenamos la funcionalidad de las secciones `ENTERING SCREEN n`.  En primer lugar, pintar las decoraciones (ordenador, bombas, moto). Creamos los arrays para estas decoraciones en `my/ci/extra_vars.h`. 
+En el mismo archivo rellenamos la funcionalidad de las secciones `ENTERING SCREEN n`.  En primer lugar, pintar las decoraciones (ordenador, bombas, moto). Creamos los arrays para estas decoraciones en `my/ci/extra_vars.h`.
 
 Finalmente haremos la comprobación de que hemos llegado al principio con la misión cumplida.
 
