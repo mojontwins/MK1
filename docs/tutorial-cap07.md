@@ -162,9 +162,9 @@ Seguimos con dos directivas con una aplicación muy específica: si activamos la
 
 Con esto conseguimos en **Dogmole** el efecto que necesitamos de que haya que ir llevando las cajas una a una: configuramos el motor para que sólo permita que llevemos un objeto (una caja), y luego, cuando hagamos el _script_, haremos que cuando llevemos la caja al sitio donde hay que ir depositándolas (un sitio concreto de la Universidad) *liberemos el objeto* para que se vuelva a activar la recogida de objetos y así podamos ir a por la siguiente caja.
 
-La segunda directiva, `OBJECT_COUNT`, sirve para que en el **marcador de objetos**, en lugar de la cuenta interna de objetos recogidos, **se muestre el valor de uno de los *flags* del sistema de scripting**. Ya lo veremos en el futuro, cuando expliquemos el motor de _scripting_, pero los _scripts_ tienen hasta 32 variables o *flags* que podemos usar para almacenar valores y realizar comprobaciones. Cada variable tiene un número. Si definimos esta directiva, el motor mostrará el valor del flag indicado en el contador de objetos del marcador, en lugar del contador interno de objetos. Desde el _script_ iremos incrementando dicho valor cada vez que el jugador llegue a la Universidad y deposite un objeto.
+La segunda directiva, `OBJECT_COUNT`, sirve para que en el **marcador de objetos**, en lugar de la cuenta interna de objetos recogidos, **se muestre el valor de una de las *flags* del sistema de scripting**. Ya lo veremos en el futuro, cuando expliquemos el motor de _scripting_, pero los _scripts_ tienen hasta 32 variables o *flags* que podemos usar para almacenar valores y realizar comprobaciones. Cada variable tiene un número. Si definimos esta directiva, el motor mostrará el valor de la flag indicada en el contador de objetos del marcador, en lugar del contador interno de objetos. Desde el _script_ iremos incrementando dicho valor cada vez que el jugador llegue a la Universidad y deposite un objeto.
 
-En definitiva, sólo necesitaremos definir `OBJECT_COUNT` si somos nosotros los que vamos a llevar la cuenta, a mano, desde el _script_ (o mediante inyección de código), usando uno de sus flags. Si no vamos a usar _scripting_, o no vamos a necesitar controlar a mano el número de objetos recogidos, tendremos que comentar esta directiva para que no sea tomada en cuenta.
+En definitiva, sólo necesitaremos definir `OBJECT_COUNT` si somos nosotros los que vamos a llevar la cuenta, a mano, desde el _script_ (o mediante inyección de código), usando una de sus flags. Si no vamos a usar _scripting_, o no vamos a necesitar controlar a mano el número de objetos recogidos, tendremos que comentar esta directiva para que no sea tomada en cuenta.
 
 ```c
     //#define DEACTIVATE_EVIL_TILE              // If defined, no killing tiles (behaviour 1) are detected.
@@ -301,7 +301,7 @@ Y se configura con:
 
 3. `MOVED_TILE_FLAG`, `MOVED_X_FLAG` y `MOVED_Y_FLAG`: Cuando se empuja un bloque empujable, el tile que "pisa" se almacena en la flag que diga `MOVED_TILE_FLAG`, y sus coordenadas en las flags que digan `MOVED_X_FLAG` y `MOVED_Y_FLAG`. Con esto sabemos, desde el _scripting_, un montón de cosas útiles sólo mirando el valor de esos flags.
 
-4. `PUSHING_ACTION`: Si la activamos, las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual serán ejecutadas tras copias los valores a las flags definidos más arriba cuando movamos un bloque empujable. Cuando expliquemos el sistema de _scripting_ esto no te sonará a chino, sólo a croata.
+4. `PUSHING_ACTION`: Si la activamos, las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual serán ejecutadas tras copias los valores a las flags definidas más arriba cuando movamos un bloque empujable. Cuando expliquemos el sistema de _scripting_ esto no te sonará a chino, sólo a croata.
 
 ## Motor de disparos
 
@@ -321,7 +321,7 @@ Y se configura con todas estas, que partimos en bloques:
     //#define MAX_BULLETS               3       // Max number of bullets on screen. Be careful!.
 ```
 
-1. `PLAYER_CAN_FIRE_FLAG` se usa con _scripting_ o inyección de código. Si está activa, el jugador sólo podrá disparar si el valor del flag que indica es 1. Puedes usarlo para que no se pueda matal hasta que se encuentre la pihtola.
+1. `PLAYER_CAN_FIRE_FLAG` se usa con _scripting_ o inyección de código. Si está activa, el jugador sólo podrá disparar si el valor de la flag que indica es 1. Puedes usarlo para que no se pueda matal hasta que se encuentre la pihtola.
 
 2. `PLAYER_BULLET_SPEED` controla la velocidad de las balas. 8 píxeles por cuadro es un buen valor y es el que hemos usado en todos los güegos. Un valor mayor puede hacer que se pierdan colisiones, ya que todo lo que ocurre en pantalla es discreto (no continuo) y si un enemigo se mueve rápidamente en dirección contraria a una bala que se mueve demasiado rápido, es posible que de _frame_ a _frame_ se crucen sin colisionar. Si piensas un poco en ello y te imaginas el juego en cámara lenta como una sucesión de _frames_ lo entenderás.
 
@@ -365,7 +365,7 @@ Las balas, además, pueden tener un alcance limitado, lo que da mucho juego para
     //#define LB_FRAMES_FLAG            2       // If defined, defines which flag determines the # of frames
 ```
 
-Si activamos `LIMITED_BULLETS`, las balas durarán solo cierto número de _frames_. Este número de _frames_ será el valor del flag `LB_FRAMES_FLAG` si se activa esta directiva, o el valor de `LB_FRAMES` directamente si queremos que sea fijo.
+Si activamos `LIMITED_BULLETS`, las balas durarán solo cierto número de _frames_. Este número de _frames_ será el valor de la flag `LB_FRAMES_FLAG` si se activa esta directiva, o el valor de `LB_FRAMES` directamente si queremos que sea fijo.
 
 ### Tiles destructibles
 
@@ -483,7 +483,7 @@ Como hemos dicho, el temporizador puede administrarse desde el _script_. Es inte
 
 Se trata de definir *check points* en el juego. Se colocan como **hotspots de tipo 6**. Cuando el jugador los toca, se almacena su estado actual:
 
-- Valor de todos las flags. (si aplica)
+- Valor de todas las flags. (si aplica)
 - Posición. (n_pant, tile X, tile Y)
 - Tiempo. (si aplica)
 - Munición. (si aplica)
@@ -555,7 +555,7 @@ Si definimos `PLAYER_HAS_JETPAC`, la tecla “arriba” hará que activemos un j
 
 `PLAYER_STEPS_ON_ENEMIES` activa el motor de pisoteo y las otras dos, que lo configuran, son opcionales. Con este motor activado, el jugador podrá saltar sobre los enemigos para matarlos.
 
-1. `PLAYER_CAN_STEP_ON_FLAG`: Si se activa, el valor del flag indicado deberá valer 1 para que el pisoteo funcione. Como ganar un súper poder.
+1. `PLAYER_CAN_STEP_ON_FLAG`: Si se activa, el valor de la flag indicada deberá valer 1 para que el pisoteo funcione. Como ganar un súper poder.
 
 2. `PLAYER_MIN_KILLABLE` nos sirve para hacer que no todos los enemigos se puedan matar. En Dogmole, sólo podremos matar a los hechiceros, que son de tipo 3. Ojo con esto: si ponemos un 1 podremos matar a todos, si ponemos un 2, a los enemigos tipo 2 y 3, y si ponemos un 3 sólo a los de tipo 3. O sea, se podrá matar a los enemigos cuyo tipo sea mayor o igual al valor que se configure.
 
@@ -651,7 +651,7 @@ Definen la posición del marcador de las vidas (del numerico, vaya).
     #define OBJECTS_Y                   21      // Objects counter character coordinates
 ```
 
-Definen la posición del contador de objetos, si usamos objetos (la posición del numerico). Recordad que en **Dogmole**, por configuración, en estas coordenadas se mostrará el valor del flag que usaremos para llevar el recuento de los objetos, y no el contador interno de objetos.
+Definen la posición del contador de objetos, si usamos objetos (la posición del numerico). Recordad que en **Dogmole**, por configuración, en estas coordenadas se mostrará el valor de la flag que usaremos para llevar el recuento de los objetos, y no el contador interno de objetos.
 
 ```c
     #define OBJECTS_ICON_X              15      //
