@@ -80,7 +80,7 @@ Aunque obviamente todo es posible y te puedes poner a refinar esto muchísimo m�
 |13|Pincharse
 |14|Ser golpeado por enemigo
 
-La lista está compuesta por una serie de macros definidos en el archivo `assets/ay_fx_numbers.h`, por si alguna vez tienes la necesidad de cambiarlo o ampliarlo.
+La lista está compuesta por una serie de macros definidas en el archivo `assets/ay_fx_numbers.h`, por si alguna vez tienes la necesidad de cambiarlo o ampliarlo.
 
 Para cambiar los efectos de sonido tendremos que crear una lista de *efectos* equivalente en **WYZ Player**. El primer efecto se convertirá en el primer efecto de sonido (el 0, "START"), el segundo efecto en el segundo efecto de sonido, etcétera. Puedes encontrar más detalles sobre el tema en [el tutorial de **GreenWebSevilla**](https://github.com/mojontwins/MK1/blob/master/docs/contribs/Manual%20FX%20para%20MK2%20con%20WYZ.pdf) y en el [manual de WYZ Tracker](https://sites.google.com/site/augustoruiz/wyztracker#TOC-Editor-de-efectos)
 
