@@ -22,7 +22,7 @@ La explosión es un sprite de 16×16. Para cambiarla tendremos que sustituir `/g
 
 ![Una nueva explosión](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/05_explosion.png)
 
-Una vez hecho, lo guardamos, como hemos dicho, como `\gfx\sprites_extra.png`, sustituyendo al que viene por defecto.
+Una vez hecho, lo guardamos, como hemos dicho, como `/gfx/sprites_extra.png`, sustituyendo al que viene por defecto.
 
 ### Cambiando el disparo
 
@@ -32,7 +32,7 @@ De forma muy parecida al sprite de la explosión tendremos que crear una imagen 
 
 ![Una nueva explosión](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/05_bala.png)
 
-Una vez hecho, lo guardamos, como hemos dicho, como `\gfx\sprites_bullet.png`, sustituyendo al que viene por defecto.
+Una vez hecho, lo guardamos, como hemos dicho, como `/gfx/sprites_bullet.png`, sustituyendo al que viene por defecto.
 
 Como **Dogmole** no utiliza balas, no hay ningún archivo nuevo de bala en el paquetito de archivos de este capítulo.
 
@@ -50,7 +50,7 @@ Como ya hemos mencionado, se trata de la pantalla que se muestra con el título 
 
 ![Pantalla de título de Lala The Magikal Beta](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/05_title_lala.png)
 
-Cuando hagas la tuya, guárdala como `title.png` en el directorio `\gfx`.
+Cuando hagas la tuya, guárdala como `title.png` en el directorio `/gfx`.
 
 ## La pantalla del marco de juego
 
@@ -79,7 +79,7 @@ Veámoslo con un ejemplo. Esta es la pantalla del marco de juego de **Lala Prolo
 
 Como digo, hay que apuntar todos esos valores porque habrá que usarlos a la hora de construir la configuración de nuestro güego, dentro de un par de capítulos.
 
-Cuando tengas la tuya, se graba como `marco.png` en el directorio `\gfx`.
+Cuando tengas la tuya, se graba como `marco.png` en el directorio `/gfx`.
 
 ## Pantalla de título y marco combinados
 
@@ -97,7 +97,7 @@ Como vemos, por un lado tenemos el título del güego y las opciones de control,
 4. El contador de vidas se dibujará en (22, 21)
 5. Por último, el contador de llaves lo tendremos en (27, 21).
 
-En este caso, la pantalla de título/marco combinados se guarda como `title.png` en `\gfx`. No habrá archivo `marco.png` para los juegos que combinen título y marco en la misma pantalla, como es nuestro caso con **Dogmole**.
+En este caso, la pantalla de título/marco combinados se guarda como `title.png` en `/gfx`. No habrá archivo `marco.png` para los juegos que combinen título y marco en la misma pantalla, como es nuestro caso con **Dogmole**.
 
 ## La pantalla del final
 
