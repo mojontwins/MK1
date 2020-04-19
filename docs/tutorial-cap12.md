@@ -45,7 +45,7 @@ Los *assets* o los *recursos* son las *cosas* con las que vamos a construir nues
 
 2. Un set de cerrojos. Cada cerrojo representa eso, un cerrojo. Se almacena en qué pantalla está y en qué coordenadas, y si está abierto o cerrado.
 
-3. Un tileset, o 192 carácteres o "patrones" y los atributos (o colores) con los que se pintan.
+3. Un tileset, o 192 caracteres o "patrones" y los atributos (o colores) con los que se pintan.
 
 4. Un set de enemigos, con tres por pantalla. Cada enemigo ocupa 10 bytes.
 
