@@ -176,7 +176,7 @@ Lo más fácil es utilizar como plantilla el archivo `fuente_base.png` incluido 
 
 ## La conversión e importación
 
-Como hemos dicho, la utilidad `ts2bin` incluida en `/utils` se encarga de tomar una fuente y un tileset y generar un binario con todos los patrones en el formato que espera **MTE MK1**. La invocación al conversor está incluida en `compile.bat` para que tú no tengas nada más que hacer que editar los gráficos y ponerlos en su sitio (y hacer todas las modificaciones que necesites de forma indolora) (los que hayan catado la Churrera en sus versiones anteriores estará ahora dando palmas con las orejas porque antes había que hacer bastante trabajo manual).
+Como hemos dicho, la utilidad `ts2bin` incluida en `/utils` se encarga de tomar una fuente y un _tileset_ y generar un binario con todos los patrones en el formato que espera **MTE MK1**. La invocación al conversor está incluida en `compile.bat` para que tú no tengas nada más que hacer que editar los gráficos y ponerlos en su sitio (y hacer todas las modificaciones que necesites de forma indolora) (los que hayan catado la Churrera en sus versiones anteriores estará ahora dando palmas con las orejas porque antes había que hacer bastante trabajo manual).
 
 Sin embargo, por tema del saber, que no ocupa lugar, vamos a explicar cómo funciona.
 
@@ -215,7 +215,7 @@ Si abres `compile.bat` verás que los parámetros que se emplean en la llamada p
 
 **Si tu juego necesita sprites de otro color sobre cuadros totalmente negros tendrás que modificar esta línea con el color que necesites**.
 
-Los `..\utils\` y `..\gfx` hacen referencia a que los archivos se ubican en esas carpetas que están un nivel más *abajo* de donde está `compile.bat`. El `> nul` del final hace que las mierdas que dice `ts2bin` no se muestren.
+Los `../utils/` y `../gfx` hacen referencia a que los archivos se ubican en esas carpetas que están un nivel más *abajo* de donde está `compile.bat`. El `> nul` del final hace que las mierdas que dice `ts2bin` no se muestren.
 
 Puedes probar a ejecutar el comando desde `dev` tal y como aparece para ver como se genera `tileset.bin`:
 
