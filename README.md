@@ -8,7 +8,7 @@ El motor ha ido evolucionando desde 2010 y fue abandonado a principios de 2014 c
 
 Descarga la última release estable de la v5 de la carpeta "releases".
 
-El motor / _framework_ reside en `src`. El código, tal y como está, genera un juego mínimo por defecto que debes *reemplazar* con el tuyo. Para compilarlo, sigue los siguientes pasos:
+El motor/_framework_ reside en [/src](./src). El código, tal y como está, genera un juego mínimo por defecto que debes *reemplazar* con el tuyo. Para compilarlo, sigue los siguientes pasos:
 
 1. Descomprime la versión mínima de z88dk que encontrarás en `env/` en la raíz de `C:` (el archivo `env/z88dk10-stripped.zip`). Se creará un directorio `C:\z88dk10\` con los archivos del compilador.
 2. Desde una ventana de línea de comandos, entra en `src/dev` y ejecuta los siguientes comandos:
@@ -22,7 +22,7 @@ El primer comando establece las variables de entorno necesarias. El segundo cons
 
 # Documentación
 
-Puedes encontrar documentación y un tutorial en el directorio [docs/](./docs)
+Puedes encontrar documentación y un tutorial en el directorio [docs](./docs).
 
 # Evolución
 
@@ -44,15 +44,15 @@ Por nuestra parte es posible que el motor sólo reciba correcciones, pero los _p
 
 # Licencia
 
-La Churrera es copyleft The Mojon Twins y se distribuye bajo una [licencia LGPL](./LICENSE). Puedes hacer juegos como quieras, pero acuérdate de añadir el logo en un lugar visible, que así salimos beneficiados todos:
+La Churrera es _copyleft_ The Mojon Twins y se distribuye bajo una [licencia LGPL](./LICENSE). Puedes hacer juegos como quieras, pero acuérdate de añadir el logo en un lugar visible, que así salimos beneficiados todos:
 
 ![Logo MTE MK1](https://github.com/mojontwins/MK1/blob/master/logo.png)
 
 *Pero* si quieres hacer un juego con el motor entenderemos que quieras hacer copias físicas en cinta o en cualquier otro medio. En ese caso **sólo tienes que avisarnos**, que nos gusta saber estas cosas.
 
-Los **juegos de ejemplo** contenidos en `/examples` son propiedad de **Mojon Twins** y no pueden ser reproducidos en formato físico sin llegar a un acuerdo con nostros.
+Los **juegos de ejemplo** contenidos en [/examples](./examples) son propiedad de **Mojon Twins** y no pueden ser reproducidos en formato físico sin llegar a un acuerdo con nosotros.
 
-Los **juegos realizados por otros desarrolladores** contenidos en `/contrib` son propiedad de sus respectivos desarrolladores y los derechos quedan reservados a los mismos.
+Los **juegos realizados por otros desarrolladores** contenidos en [/contrib](./contrib) son propiedad de sus respectivos desarrolladores y los derechos quedan reservados a los mismos.
 
 Los **recursos gráficos y sonoros** de nuestros juegos son [donationware](https://en.wikipedia.org/wiki/Donationware).
 
