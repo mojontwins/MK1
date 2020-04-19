@@ -417,7 +417,7 @@ Si no te quieres rayar, usa los colores de esta paleta:
 
 ## `ponedor.exe`
 
-Utilidad de colocación de enemigos y hotspots.
+Utilidad de colocación de enemigos y _hotspots_.
 
 ```
     $ ..\utils\ponedor.exe -h
