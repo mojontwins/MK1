@@ -18,7 +18,7 @@ Se ejecuta antes de empezar el juego, justo tras seleccionar control en la panta
 
 ### `entering_game.h`
 
-Se ejecuta al empezar el bucle de juego, exactamente igual que la sección `ENTERING GAME` del script. Nótese que `before_game.h` se incluye *antes de empezar el juego* pero `entering_game.h` se incluye *antes de empezar cada nivel*.
+Se ejecuta al empezar el bucle de juego, exactamente igual que la sección `ENTERING GAME` del _script_. Nótese que `before_game.h` se incluye *antes de empezar el juego* pero `entering_game.h` se incluye *antes de empezar cada nivel*.
 
 ### `before_entering_screen.h`
 
@@ -26,15 +26,15 @@ Se ejecuta antes de hacer un cambio de pantalla, justo tras detectar que el juga
 
 ### `entering_screen.h`
 
-Se ejecuta tras el cambio de pantalla, antes de volver al bucle principal, al igual que las secciones `ENTERING SCREEN` del script. En este punto la pantalla ya está en el buffer, los enemigos y hotspots están inicializados, etc.
+Se ejecuta tras el cambio de pantalla, antes de volver al bucle principal, al igual que las secciones `ENTERING SCREEN` del _script_. En este punto la pantalla ya está en el _buffer_, los enemigos y hotspots están inicializados, etc.
 
 ### `extra_routines.h`
 
-Se ejecuta a cada vuelta del bucle de juego, justo al final, tras haber actualizado todos los actores, dibujado los cambios, etc. Puede usarse para realizar el tipo de tareas que se delegaban a `PRESS_FIRE` en el script pero con más flexibilidad
+Se ejecuta a cada vuelta del bucle de juego, justo al final, tras haber actualizado todos los actores, dibujado los cambios, etc. Puede usarse para realizar el tipo de tareas que se delegaban a `PRESS_FIRE` en el _script_ pero con más flexibilidad
 
 ### `after_game_loop.h`
 
-Se ejecuta al salir del bucle principal del juego. Aquí podremos jugar con los valores de `level`, `success` y `script_result` si queremos implementar lógicas de niveles o quizá aprovechar para mostrar mensajes o secuencias de salida. [En 128K] la música está parada y la pantalla borrada.
+Se ejecuta al salir del bucle principal del juego. Aquí podremos jugar con los valores de `level`, `success` y `_script__result` si queremos implementar lógicas de niveles o quizá aprovechar para mostrar mensajes o secuencias de salida. [En 128K] la música está parada y la pantalla borrada.
 
 ## Hotspots
 
@@ -48,7 +48,7 @@ Sirve para añadir nuevos tipos de hotspots. El código que añadas a este archi
         beep_fx (7);
         break;
 
-    case 8: 
+    case 8:
         // Otro hotspot especial que añado
         ++ flags [8];
         break;
@@ -64,14 +64,14 @@ Junto con `enems_move.h`, sirve para añadir nuevos tipos de enemigos. El códig
 
 ```c
     case 5:
-        // This enemy type has a fixed base frame: 
+        // This enemy type has a fixed base frame:
         en_an_base_frame [enit] = 4;
         break;
 ```
 
 ### `enems_move.h`
 
-Junto con `enems_init.h`, sirve para añadir nuevos tipos de enemigos. El código que añadas a este archivo se añadirá al `switch` que comprueba el tipo de enemigo para saber cómo debe moverlo durante el bucle de juego, por lo que deberás añadir tu código en forma de nuevos `case` directamente, por ejemplo: 
+Junto con `enems_init.h`, sirve para añadir nuevos tipos de enemigos. El código que añadas a este archivo se añadirá al `switch` que comprueba el tipo de enemigo para saber cómo debe moverlo durante el bucle de juego, por lo que deberás añadir tu código en forma de nuevos `case` directamente, por ejemplo:
 
 ```c
     case 5:
@@ -93,7 +93,7 @@ Se incluye al final del bucle que carga los enemigos, tras haberles puesto todos
 
 ### `on_enems_killed.h`
 
-Se ejecuta cada vez que el jugador elimina un enemigo, al igual que la sección `PLAYER_KILLS_ENEMY` del script. En este punto, `enit` es el número de enemigo, `enoffsmasi` su índice general dentro del array `malotes`, etc.
+Se ejecuta cada vez que el jugador elimina un enemigo, al igual que la sección `PLAYER_KILLS_ENEMY` del _script_. En este punto, `enit` es el número de enemigo, `enoffsmasi` su índice general dentro del array `malotes`, etc.
 
 Nótese que este CIP se incluye después de haber marcado al enemigo como *muerto*. La marca de *muerto* se hace levantándole el bit 4, o sea, haciéndole `|16`. Es por esto que si quieres comprobar el tipo del enemigo que acaba de matar tendrás que comparar `_en_t` con el número que quieras levantándole el bit 4. Por ejemplo, para ver si has matado al tipo 2:
 
@@ -129,8 +129,8 @@ Por ejemplo, puedes programar un motor horizontal que sólo se mueva horizontalm
 
         // This is a copy of the default horizontal engine...
         if ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {
-            if (p_vx > 0) { 
-                p_vx -= PLAYER_RX; if (p_vx < 0) p_vx = 0; 
+            if (p_vx > 0) {
+                p_vx -= PLAYER_RX; if (p_vx < 0) p_vx = 0;
             } else if (p_vx < 0) {
                 p_vx += PLAYER_RX; if (p_vx > 0) p_vx = 0;
             }
@@ -160,8 +160,8 @@ O puedes conseguir un motor de plataformas más realista evitando que el jugador
 
     if (possee == 0) {
 
-        if (p_vx > 0) { 
-            p_vx -= PLAYER_RX_AIRBORNE; if (p_vx < 0) p_vx = 0; 
+        if (p_vx > 0) {
+            p_vx -= PLAYER_RX_AIRBORNE; if (p_vx < 0) p_vx = 0;
         } else if (p_vx < 0) {
             p_vx += PLAYER_RX_AIRBORNE; if (p_vx > 0) p_vx = 0;
         }
@@ -171,8 +171,8 @@ O puedes conseguir un motor de plataformas más realista evitando que el jugador
 
         // This is a copy of the default horizontal engine...
         if ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {
-            if (p_vx > 0) { 
-                p_vx -= PLAYER_RX; if (p_vx < 0) p_vx = 0; 
+            if (p_vx > 0) {
+                p_vx -= PLAYER_RX; if (p_vx < 0) p_vx = 0;
             } else if (p_vx < 0) {
                 p_vx += PLAYER_RX; if (p_vx > 0) p_vx = 0;
             }
@@ -250,4 +250,3 @@ Se ejecuta cada vez que hemos empujado un bloque. En este punto podremos usar es
 ### `on_unlocked_bolt.h`
 
 Se ejecuta cada vez que el jugador abra un cerrojo. `p_keys` ya se ha decrementado en este punto. El cerrojo está en las coordenadas (`x0, y0`).
- 

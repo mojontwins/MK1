@@ -2,31 +2,31 @@
 
 Si quieres saber como hacer un juego para 128K de un sólo nivel (pero con música AY y más sitio para tus cosas en RAM baja) puedes echarle un vistazo al [postmortem del port a v5 de **Godkiller 2**](https://github.com/mojontwins/MK1/tree/master/contrib/godkiller_2). Con todo lo que sabes y lo que pone ahí deberías tener suficiente.
 
-¡Vaya! Si has conseguido llegar hasta aquí sin mandarme a freir castañas es que debes ser todo un experto en **MTE MK1**, o quizá viste el título del capítulo por separado y has venido directamente aquí porque a lo que tú aspiras es a hacer un juego de verdaz, nada de mierdecillas. 
+¡Vaya! Si has conseguido llegar hasta aquí sin mandarme a freír castañas es que debes de ser todo un experto en **MTE MK1**, o quizá viste el título del capítulo por separado y has venido directamente aquí porque a lo que tú aspiras es a hacer un juego de verdaz, nada de mierdecillas.
 
-Sea como sea, voy a suponer que has entendido muy bien cómo funciona el multinivel en **MTE MK1** y no me entretendré en explicaciones sobre el tema. También vamos a ver alguna que otra inyección de código, que voy a suponer que sabes como va.
+Sea como sea, voy a suponer que has entendido muy bien cómo funciona el multinivel en **MTE MK1** y no me entretendré en explicaciones sobre el tema. También vamos a ver alguna que otra inyección de código, que voy a suponer que sabes cómo va.
 
-Aqui vamos a construir un juego multinivel de 128K, con cutscenes, casinos y furcias. Vamos a construir
+Aquí vamos a construir un juego multinivel de 128K, con cutscenes, casinos y furcias. Vamos a construir
 
 ## Goku Mal
 
-**Goku Mal** fue el primer juego para 128K de escrito con **MTE MK1** (que, con él, evolucionó a la versión 3.99.3, si mal no recuerdo). También fue nuestro último juego con el motor, ya que para el siguiente ya nos inventamos MK2.
+**Goku Mal** fue el primer juego para 128K escrito con **MTE MK1** (que, con él, evolucionó a la versión 3.99.3, si mal no recuerdo). También fue nuestro último juego con el motor, ya que para el siguiente ya nos inventamos MK2.
 
 Se trata de un juego muy sencillo que tiene cinco fases en las que básicamente avanzamos y disparamos, salvo en la cuarta, en la que dejamos un momento aparte el desarrollo puramente lineal y nos entretendremos recogiendo rosas antes de volver a la acción.
 
-La configuración del motor será de vista lateral, con saltos y disparos en 8 direcciones. Este juego levantó una gran polémica entre los super tacañones, ya que estaba pensado para jugarse con dos botones de acción y no incluimos una opción para los que están acostumbrado a agarrarse de un joystick de un solo botón (esto no es una referencia fálica). En esta revisión corregiremos eso.
+La configuración del motor será de vista lateral, con saltos y disparos en 8 direcciones. Este juego levantó una gran polémica entre los súper tacañones, ya que estaba pensado para jugarse con dos botones de acción y no incluimos una opción para los que están acostumbrados a agarrarse de un joystick de un solo botón (esto no es una referencia fálica). En esta revisión corregiremos eso.
 
 Tienes el juego completo en el directorio `/examples`. En este tutorial, además de muchas explicaciones, seguiremos paso por paso el mismo proceso que he seguido yo para montarlo en **MTE MK1** v5.
 
 ## Los juegos multinivel de 128K
 
-Si recordaréis, un juego multinivel de 48K de **MTE MK1** se parece mucho a un juego normal, solo que antes de empezar a jugar descomprimimos nuevos datos sobre el espacio donde el motor espera encontrarlos. 
+Si recordáis, un juego multinivel de 48K de **MTE MK1** se parece mucho a un juego normal, solo que antes de empezar a jugar descomprimimos nuevos datos sobre el espacio donde el motor espera encontrarlos.
 
 En 128K es básicamente lo mismo, pero con la diferencia de que tendremos casi toda la RAM extra como almacén de datos contenidos. En concreto, de las cinco páginas que no forman los 48K base del Spectrum de 128K, usaremos una para la música y tendremos cuatro más para datos comprimidos. ¡Y en 64K cabe mogollón de cosas!
 
-Para que te hagas una idea, las tres fases de Helmet ocupaban menos de 7Kb.
+Para que te hagas una idea, las tres fases de Helmet ocupaban menos de 7KB.
 
-Aunque al principio el tema acojone un poco, lo cierto es que hacer un juego de 128K es más sencillo que un multinivel de 48K, porque aunque tenga más trabajo (normalmente meteremos más contenido y además tendremos que diseñar una banda sonora), los procesos son mucho más sencillos, como veremos muy pronto. 
+Aunque al principio el tema acojone un poco, lo cierto es que hacer un juego de 128K es más sencillo que un multinivel de 48K, porque aunque tenga más trabajo (normalmente meteremos más contenido y además tendremos que diseñar una banda sonora), los procesos son mucho más sencillos, como veremos muy pronto.
 
 ## Empezamos
 
@@ -34,16 +34,16 @@ Lo primero que haremos será reunir todos los recursos. Posteriormente veremos c
 
 ### Todos los tiestos.
 
-He puesto *recursos* o *assets* porque sonaba más profesional y tal, pero la verdad es que en mojonia siempre llamamos a estas cosas *tiestos*. Vamos a ver qué tiestos lleva **Goku Mal**.
+He puesto *recursos* o *assets* porque sonaba más profesional y tal, pero la verdad es que en Mojonia siempre llamamos a estas cosas *tiestos*. Vamos a ver qué tiestos lleva **Goku Mal**.
 
-Todos los tiestos irán en la RAM extra. Generaremos un script `build_assets.bat` para construir los binarios que se cargarán en la RAM extra, incluyendo la banda sonora.
+Todos los tiestos irán en la RAM extra. Generaremos un _script_ `build_assets.bat` para construir los binarios que se cargarán en la RAM extra, incluyendo la banda sonora.
 
-En primer lugar tendremos un buen porrón de pantallas comprimidas. Además de las tres estándar de **MTE MK1** (título, marco y final) tendremos tres splash screens que se muestran tras cargar el juego y varias con imagenes para las *cutscenes*. Esta es una lista completa:
+En primer lugar tendremos un buen porrón de pantallas comprimidas. Además de las tres estándar de **MTE MK1** (título, marco y final) tendremos tres _splash screens_ que se muestran tras cargar el juego y varias con imágenes para las *cutscenes*. Esta es una lista completa:
 
 1. `title.png`, `marco.png` y `ending.png` ya sabes para qué son. Este juego, como ves, tiene marco separado de la pantalla de título.
 2. `logo.png` tiene un logo de los Mojon Twins y el título del juego y se muestra nada más finalizar la carga.
 3. `dedicado.png` es una dedicatoria, y se muestra también una única vez, al terminar la carga.
-4. `controls.png` la hicimos para que los super tacañones no se quejaran mucho por no usar OPQA (¡ni QAOP!), pero no funcionó para nada porque igualmente nos pusieron a parir.
+4. `controls.png` la hicimos para que los súper tacañones no se quejaran mucho por no usar OPQA (¡ni QAOP!), pero no funcionó para nada porque igualmente nos pusieron a parir.
 5. `intro1.png`, `intro2.png`, `intro3.png` e `intro4.png` se muestran al iniciar una nueva partida y contienen la introducción del juego.
 6. `intro5.png` se muestra antes de la fase 4 y sirve para ilustrar una escena del argumento del juego.
 7. `intro6.png` e `intro7.png` forman parte de la secuencia final.
@@ -52,20 +52,20 @@ En primer lugar tendremos un buen porrón de pantallas comprimidas. Además de l
 
 Sin salirnos de `gfx/`, tendremos además los gráficos para construir los niveles:
 
-1. `work0.png`, `work1.png`, `work2.png`, `work3.png` y `work4.png` contienen los tilesets de las cinco fases. Es importante notar que todos estos tilesets tienen un tile 0 que no es del todo negro, por lo que habrá que tener en cuenta esto más adelante (ya que los .MAP tendrán los valores desplazados debido al glitch de mappy que ya conocemos bien). Tenemos aquí sus archivos de comportamientos asociados, `behs0.txt` a `behs4.txt`.
+1. `work0.png`, `work1.png`, `work2.png`, `work3.png` y `work4.png` contienen los tilesets de las cinco fases. Es importante notar que todos estos tilesets tienen un tile 0 que no es del todo negro, por lo que habrá que tener en cuenta esto más adelante (ya que los .MAP tendrán los valores desplazados debido al _glitch_ de Mappy que ya conocemos bien). Tenemos aquí sus archivos de comportamientos asociados, `behs0.txt` a `behs4.txt`.
 2. `sprites0.png`, `sprites1.png`, `sprites2.png`, `sprites3.png` y `sprites4.png` contienen los cinco spritesets correspondientes a cada una de las cinco fases.
 3. `font.png` contiene la fuente base que se usará durante el juego.
-4. `level_screen_ts.png` es un charset completo que se empleará para las pantallas de nuevo nivel especiales que tiene este juego.
+4. `level_screen_ts.png` es un _charset_ completo que se empleará para las pantallas del nuevo nivel especial que tiene este juego.
 
 En `map/` tenemos los mapas de los cinco niveles, `mapa0.fmp` a `mapa4.fmp` y sus exports en formato `MAP`: `mapa0.MAP` a `mapa5.MAP`.
 
 En `enems/` tenemos los archivos de colocación de cosas para Ponedor, `enems0.ene` a `enems4.ene`. También hemos copiado aquí los `work?.png` con los tilesets y los `mapa?.MAP` con los mapas para que Ponedor los tenga bien a mano.
 
-Este juego no tiene scripting, así que por último tenemos la banda sonora y OGT en el directorio `mus/`. Esta OGT fue creada con **Davidian** y tiene un montón de canciones. Ahora nos vamos a centrar más en la importación y construcción del juego pero dedicaré un capítulo para hablaros de cómo montar las OGT con Wyz Player.
+Este juego no tiene _scripting_, así que por último tenemos la banda sonora y OGT en el directorio `mus/`. Esta OGT fue creada con **Davidian** y tiene un montón de canciones. Ahora nos vamos a centrar más en la importación y construcción del juego pero dedicaré un capítulo para hablaros de cómo montar las OGT con Wyz Player.
 
 ### Importación: pantallas fijas
 
-Empezaremos a construir nuestro script encargado de crear los binarios con las pantallas fijas. Atención y muy importante: **Para que MTE MK1 funcione en modo 128K, las pantallas fijas básicas title, marco y ending deben llamarse `title.bin`, `marco.bin` y `ending.bin`**
+Empezaremos a construir nuestro _script_ encargado de crear los binarios con las pantallas fijas. Atención y muy importante: **Para que MTE MK1 funcione en modo 128K, las pantallas fijas básicas title, marco y ending deben llamarse `title.bin`, `marco.bin` y `ending.bin`**
 
 ```bat
     @echo off
@@ -110,60 +110,60 @@ Empezaremos a construir nuestro script encargado de crear los binarios con las p
     :skipscr
 ```
 
-Como normalmente en un desarrollo de este tipo las pantallas fijas son lo que menos va a evolucionar y además tardan un ratillo en comprimirse, añadimos un poco de magia batch. Cuando ejecutemos `build_assets.bat` con el parámetro `skipscr` la ejecución se saltará la conversión de las imagenes, lo que vendrá bien cuando tengamos que regenerar una y otra vez los mapas o la colocación de enemigos (repito, en un desarrollo normal en el que vas construyendo y depurando el juego poco a poco. Aquí ya lo tengo todo hecho). 
+Como normalmente en un desarrollo de este tipo las pantallas fijas son lo que menos va a evolucionar y además tardan un ratillo en comprimirse, añadimos un poco de magia _batch_. Cuando ejecutemos `build_assets.bat` con el parámetro `skipscr` la ejecución se saltará la conversión de las imágenes, lo que vendrá bien cuando tengamos que regenerar una y otra vez los mapas o la colocación de enemigos (repito, en un desarrollo normal en el que vas construyendo y depurando el juego poco a poco. Aquí ya lo tengo todo hecho).
 
 ### Importación: Level bundles
 
-En modo 128K quisimos simplificar la importación de niveles creando los **level bundles**, que no son más que gruesos binarios que contienen todos los tiestos que definen un nivel: mapa, cerrojos, tileset, enemigos, hotspots, comportamientos y spriteset. Estos binarios se descomprimen de un plumazo sobre la zone de datos de **MTE MK1** ya que están organizados de la misma forma que ésta.
+En modo 128K quisimos simplificar la importación de niveles creando los **level bundles**, que no son más que gruesos binarios que contienen todos los tiestos que definen un nivel: mapa, cerrojos, tileset, enemigos, hotspots, comportamientos y spriteset. Estos binarios se descomprimen de un plumazo sobre la zona de datos de **MTE MK1** ya que están organizados de la misma forma que ésta.
 
 Para crear estos bundles utilizamos `buildlevels_MK1.exe` que puede recibir y recibe un millón de parámetros. Como siempre podemos ejecutar sin pasar nada y nos los chiva:
 
 ```
-    C:\git\MK1\src\utils>buildlevels_MK1.exe                                     
-    buildlevel v0.5 20200125                                                     
-    Builds a level bundle for MTE MK1 5.0+                                       
-                                                                                 
-    usage                                                                        
-                                                                                 
-    $ buildlevel.exe output.bin key1=value1 key2=value2 ...                      
-                                                                                 
-    output.bin     Output file name.                                             
-                                                                                 
-    Parameters to buildlevel.exe are specified as key=value, where keys are as   
-    follows:                                                                     
-                                                                                 
-    MAP DATA                                                                     
-                                                                                 
-    mapsize        Needed if game contains differently sized levels: MAP_W*MAP:H 
-    mapfile        Especifies the .map file. packed/unpacked autodetected.       
-    map_w          Map width in screens.                                         
-    map_h          Map height in screens.                                        
-    decorations    Output filename for decorations. This makes your map packed.  
+    C:\git\MK1\src\utils>buildlevels_MK1.exe
+    buildlevel v0.5 20200125
+    Builds a level bundle for MTE MK1 5.0+
+
+    usage
+
+    $ buildlevel.exe output.bin key1=value1 key2=value2 ...
+
+    output.bin     Output file name.
+
+    Parameters to buildlevel.exe are specified as key=value, where keys are as
+    follows:
+
+    MAP DATA
+
+    mapsize        Needed if game contains differently sized levels: MAP_W*MAP:H
+    mapfile        Especifies the .map file. packed/unpacked autodetected.
+    map_w          Map width in screens.
+    map_h          Map height in screens.
+    decorations    Output filename for decorations. This makes your map packed.
     lock           Tile # for locks. (optional)
     fixmappy       Fixes mappy's 'no first black tile' behaviour
-                                                                                 
-    TILESET/CHARSET DATA                                                         
-                                                                                 
-    tilesfile      work.png (256x48) containing 48 16x16 tiles.                  
-    behsfile       behs.txt containing 48 comma-separated values.                
-    defaultink     Value to use when PAPER=INK.                                  
-                                                                                 
-    SPRITESET                                                                    
-                                                                                 
-    spritesfile    sprites.png (256x?) containing N 16x16 sprites + masks.       
-    nsprites       # of sprites in sprites.png. If omitted, defaults to 16.      
-                                                                                 
-    ENEMIES                                                                      
-                                                                                 
-    enemsfile      enems.ene file                                                
-                                                                                 
-    HEADER STUFF                                                                 
-                                                                                 
-    scr_ini        Initial screen #                                              
-    ini_x          Initial x position (tiles)                                    
-    ini_y          Initial y position (tiles)                                    
-    max_objs       Max objects (can be omitted If not appliable)                 
-    enems_life     Enems life                                                    
+
+    TILESET/CHARSET DATA
+
+    tilesfile      work.png (256x48) containing 48 16x16 tiles.
+    behsfile       behs.txt containing 48 comma-separated values.
+    defaultink     Value to use when PAPER=INK.
+
+    SPRITESET
+
+    spritesfile    sprites.png (256x?) containing N 16x16 sprites + masks.
+    nsprites       # of sprites in sprites.png. If omitted, defaults to 16.
+
+    ENEMIES
+
+    enemsfile      enems.ene file
+
+    HEADER STUFF
+
+    scr_ini        Initial screen #
+    ini_x          Initial x position (tiles)
+    ini_y          Initial y position (tiles)
+    max_objs       Max objects (can be omitted If not appliable)
+    enems_life     Enems life
 ```
 
 Como ves, se trata de un increíble batiburrillo de cosas de todos los conversores que hemos visto hasta el momento. Es posible que te estés preguntando por qué narices no se usa algo así también para los juegos normales y nos olvidamos de tanto conversor. Y es una pregunta muy interesante para la que ahora mismo no tengo respuesta :-D
@@ -178,11 +178,11 @@ Vamos por partes:
 
 4. `mapfile` (obligatorio) es una ruta al archivo con el mapa en formato `.MAP`.
 
-5. `decorations` (opcional) es una ruta a un archivo de salida en formato script del motor con decoraciones automáticas y que puedes incluir desde tu script para adornar las pantallas de forma automática. Básicamente el mapa se fuerza a *PACKED* y los tiles fuera de rango se escriben como decoraciones de las que se imprimen en los `ENTERING SCREEN`. Es una característica de `msc3` que aún no hemos comentado.
+5. `decorations` (opcional) es una ruta a un archivo de salida en formato _script_ del motor con decoraciones automáticas y que puedes incluir desde tu _script_ para adornar las pantallas de forma automática. Básicamente el mapa se fuerza a *PACKED* y los tiles fuera de rango se escriben como decoraciones de las que se imprimen en los `ENTERING SCREEN`. Es una característica de `msc3` que aún no hemos comentado.
 
 6. `lock` (opcional) sirve para especificar qué tile hace de cerrojo. Para **MTE MK1** tiene que ser el 15. Puedes omitir el parámetro si no usas cerrojos.
 
-7. `fixmappy` (opcional) para deshacer el desbarajuste que lía mappy si tu tileset no empieza por uno completamente negro.
+7. `fixmappy` (opcional) para deshacer el desbarajuste que lía Mappy si tu tileset no empieza por uno completamente negro.
 
 8. `tilesfile` (obligatorio) debe contener la ruta al archivo con el tileset de hasta 48 tiles, que debe ser un archivo tipo png de 256x48, como hemos visto.
 
@@ -194,21 +194,21 @@ Vamos por partes:
 
 12. `nsprites` (opcional) por si tenemos más de 16 sprites y que, por el momento, omitiremos (no soportado por el motor).
 
-13. `enemsfile` (obligatorio) contendra la ruta al archivo de colocación de enemigos y hotspots `.ene` del Ponedor.
+13. `enemsfile` (obligatorio) contendrá la ruta al archivo de colocación de enemigos y hotspots `.ene` del Ponedor.
 
 14. Los datos de inicio `scr_ini`, `ini_x` e `ini_y` (obligatorios) sirven para indicar donde se empieza.
 
-15. `max_objs` (opcional) es el número de objetos recogiscibles del nivel. Recuerda que este parámetro no se tomará en cuenta de todos modos a menos que hagamos la configuración parecida a la que explicaos en el capítulo anterior (en el apartado **Controlando la condición de final de cada nivel**) y que veremos mas tarde.
+15. `max_objs` (opcional) es el número de objetos recogiscibles del nivel. Recuerda que este parámetro no se tomará en cuenta de todos modos a menos que hagamos la configuración parecida a la que explicaos en el capítulo anterior (en el apartado **Controlando la condición de final de cada nivel**) y que veremos más tarde.
 
 16. `enems_life` (obligatorio) establece la vida de los enemigos.
 
-Hemos dicho que **Goku Mal** es un juego muy sencillo. En él no ha scriping y originalmente había algo de código custom, pero en esta recreación intentaremos hacerlo funcionar primero con lo más básico de **MTE MK1**. En las cuatro fases de acción en las que sólo hay que avanzar colocaremos un único item al final de la fase, de forma que al tocarlo terminaremos el nivel. En la fase 4, en la que hay que reunir un número de flores, igualmente terminaremos al reunirlas todas. Por tanto, la condición de final de todas las fases será sencillamente recoger todos los objetos.
+Hemos dicho que **Goku Mal** es un juego muy sencillo. En él no hay _scriping_ y originalmente había algo de código _custom_, pero en esta recreación intentaremos hacerlo funcionar primero con lo más básico de **MTE MK1**. En las cuatro fases de acción en las que sólo hay que avanzar colocaremos un único ítem al final de la fase, de forma que al tocarlo terminaremos el nivel. En la fase 4, en la que hay que reunir un número de flores, igualmente terminaremos al reunirlas todas. Por tanto, la condición de final de todas las fases será sencillamente recoger todos los objetos.
 
 Lo que tenemos que hacer ahora es escribir las cinco llamadas a `buildlevels_MK1` para generar los cinco *level bundles*. Veamos el primero.
 
-El primer nivel se compone de `mapa0.map`, `enems0.ene`, `work0.png`, `behs0.txt` y `sprites0.png`. Se trata de un nivel vertical de 25 pantallas de altura. En este juego todos los niveles tienen 25 pantallas en diferentes geometrías menos el cuarto, que tiene 15, por lo que es necesario emplear el parametro `mapsize`. Configuraremos `MAP_W` y `MAP_H` en `my/config.h` para que multiplicados den 25, y usaremos `mapsize=25` en todas las conversiones.
+El primer nivel se compone de `mapa0.map`, `enems0.ene`, `work0.png`, `behs0.txt` y `sprites0.png`. Se trata de un nivel vertical de 25 pantallas de altura. En este juego todos los niveles tienen 25 pantallas en diferentes geometrías menos el cuarto, que tiene 15, por lo que es necesario emplear el parámetro `mapsize`. Configuraremos `MAP_W` y `MAP_H` en `my/config.h` para que multiplicados den 25, y usaremos `mapsize=25` en todas las conversiones.
 
-Como el primer tile de nuestro tileset no estaba vacío y lo hemos usado directamente para crear el mapa en mappy, éste ha desplazado todos los valores una unidad y necesitaremos especificar `fixmappy`.
+Como el primer tile de nuestro tileset no estaba vacío y lo hemos usado directamente para crear el mapa en Mappy, éste ha desplazado todos los valores una unidad y necesitaremos especificar `fixmappy`.
 
 En el nivel se empieza en el nivel más bajo, o sea, en la pantalla 24, pegados al suelo, en la parte izquierda (coordenadas (2, 8)). En este juego no usamos cerrojos, por lo que omitiremos el parámetro. Tendremos que recordar activar `DEACTIVATE_KEYS`, ya que en el level bundle no se generarán cerrojos y por tanto tenemos que decirle al motor que no reserve sitio para ellos.
 
@@ -222,7 +222,7 @@ Por tanto la llamada a `buildlevels_MK1.exe`, pensada para ejecutarse desde `dev
 
 Si ejecutas esto directamente verás todo el proceso y todas las partes que, si te fijas, aparecen en el mismo orden que los distintos espacios reservados en `assets/levels.h` para poder plantar el binario justo ahí y que todo funcione.
 
-Añadimos pues una llamada a buildlevels para cada uno de nuestros niveles, ajustando los parámetros necesarios según cada nivel. Fíjate en como las dimensiones del mapa van cambiando (aunque siempre son 25 pantallas), en cada nivel se empieza en un sitio diferente, cambia el número de objetos, y la cantidad de vida de los enemigos. Posteriormente comprimimos y limpiamos:
+Añadimos pues una llamada a `buildlevels` para cada uno de nuestros niveles, ajustando los parámetros necesarios según cada nivel. Fíjate en como las dimensiones del mapa van cambiando (aunque siempre son 25 pantallas), en cada nivel se empieza en un sitio diferente, cambia el número de objetos, y la cantidad de vida de los enemigos. Posteriormente comprimimos y limpiamos:
 
 ```
     echo Converting levels
@@ -241,7 +241,7 @@ Añadimos pues una llamada a buildlevels para cada uno de nuestros niveles, ajus
     del ..\bin\level?.bin  > nul
 ```
 
-Ahora necesitamos una conversión más que usaremos luego en nuestras super pantallas de nuevo nivel super mega hiper chachis. Vamos a importar 192 caracteres que tenemos en `level_screen_ts.png` que descomprimiremos sobre el area del tileset para mostrar números gordunos. Para esa conversión tenemos `chr2bin`:
+Ahora necesitamos una conversión más que usaremos luego en nuestras súper pantallas de nuevo nivel súper mega hiper chachis. Vamos a importar 192 caracteres que tenemos en `level_screen_ts.png` que descomprimiremos sobre el área del tileset para mostrar números gordunos. Para esa conversión tenemos `chr2bin`:
 
 ```
     C:\git\MK1\src\utils>chr2bin.exe
@@ -264,7 +264,7 @@ Para lo que vamos a usar estos gráficos no necesitamos los atributos así que l
     ..\..\..\src\utils\chr2bin ..\gfx\level_screen_ts.png ..\bin\level_screen_ts.bin 192 noattrs > nul
     ..\..\..\src\utils\apultra ..\bin\level_screen_ts.bin ..\bin\level_screen_tsc.bin > nul
 
-    del ..\bin\level_screen_ts.bin > nul 
+    del ..\bin\level_screen_ts.bin > nul
 ```
 
 ### The Librarian
@@ -277,7 +277,7 @@ Para meter todos estos tiestos en la RAM extra usaremos **The Librarian** en su 
 
 2. Manual: **The Librarian** sigue el orden que aparece en el archivo de entrada con la lista.
 
-Aunque no es necesario por ahora para este juego, **The Librarian** además acepta precargar binarios al principio de una o varias RAMs, y empezará a acomodar el resto de tus binarios detrás. Esto sirve por ejemplo para colocar el script de tu juego en RAM extra, por ejemplo en RAM6. En un caso así, se renombraría `scripts.bin` como `preload6.bin` y **The Librarian** lo colocaría automáticamente al principio de RAM6 y acomodaría el resto de los binarios en las otras RAMs y tras los scripts en RAM6. Así le podríamos decir al motor que los scripts están al principio de RAM6 y todo funcionaría. Pero como **Goku Mal** no tiene scripting, pues no necesitareos esta característica.
+Aunque no es necesario por ahora para este juego, **The Librarian** además acepta precargar binarios al principio de una o varias RAMs, y empezará a acomodar el resto de tus binarios detrás. Esto sirve por ejemplo para colocar el _script_ de tu juego en RAM extra, por ejemplo en RAM6. En un caso así, se renombraría `scripts.bin` como `preload6.bin` y **The Librarian** lo colocaría automáticamente al principio de RAM6 y acomodaría el resto de los binarios en las otras RAMs y tras los _scripts_ en RAM6. Así le podríamos decir al motor que los _scripts_ están al principio de RAM6 y todo funcionaría. Pero como **Goku Mal** no tiene _scripting_, pues no necesitaremos esta característica.
 
 Finalmente, lo otro que hace **The Librarian** es generar una estructura con información sobre dónde encontrar cada binario y macros para identificarlos, que necesitaremos más adelante cuando estemos construyendo nuestro *levelset*.
 
@@ -303,18 +303,18 @@ Los parámetros hacen lo siguiente:
 
 1. `list` (obligatorio) indica la ruta al archivo con la lista de binarios. A mí me gusta dejarla en `/bin` y llamarla `list.txt`.
 2. `index` (obligatorio) indica la ruta al archivo de código que contendrá el índice de binarios (esto es: dónde encontrarlos). Para **MTE MK1** esta ruta debe ser `/dev/assets/librarian.h`.
-3. `bins_prefix` (opcional) sirve para proporcionar una ruta para los archivos binarios que aparecen en la lista. Si ejecutamos **The Librarian** desde `dev/`, desde nuestro script, y los binarios en la lista aparecen simplemente nombrados pero estan en `bin/`, como será nuestro caso, tendremos que emplear este parámetro con el valor `../bìn/` para que **The Librarian** pueda encontrarlos.
-4. `rams_prefix` (opcional) funciona parecido pero con los archivos `RAM?.bin` de salida. Si no ponemos nada los creará en `dev/`, pero quereos que estén en `bin/`, por lo que tendremos que especificar `../bin/` también como valor de este parámetro.
-5. Por último, si añadimos `manual` a la linea de comando, se empleará el orden natural. Nosotros confiaremos en el algoritmo para este juego, que funcionará genialmente y ubicará los 35K de binarios comprimidos en tenemos en tres páginas de RAM: RAM3, RAM4 y RAM6.
+3. `bins_prefix` (opcional) sirve para proporcionar una ruta para los archivos binarios que aparecen en la lista. Si ejecutamos **The Librarian** desde `dev/`, desde nuestro _script_, y los binarios en la lista aparecen simplemente nombrados pero estan en `bin/`, como será nuestro caso, tendremos que emplear este parámetro con el valor `../bìn/` para que **The Librarian** pueda encontrarlos.
+4. `rams_prefix` (opcional) funciona parecido pero con los archivos `RAM?.bin` de salida. Si no ponemos nada los creará en `dev/`, pero queremos que estén en `bin/`, por lo que tendremos que especificar `../bin/` también como valor de este parámetro.
+5. Por último, si añadimos `manual` a la línea de comando, se empleará el orden natural. Nosotros confiaremos en el algoritmo para este juego, que funcionará genialmente y ubicará los 35K de binarios comprimidos en tres páginas de RAM: RAM3, RAM4 y RAM6.
 
-Por lo tanto, lo siguiente será añadir una nueva linea a nuestro `build_assets.bat`: la llamada a **The Librarian**, que será:
+Por lo tanto, lo siguiente será añadir una nueva línea a nuestro `build_assets.bat`: la llamada a **The Librarian**, que será:
 
 ```
     echo Running The Librarian
     ..\..\..\src\utils\librarian2.exe list=..\bin\list.txt index=assets\librarian.h bins_prefix=..\bin\ rams_prefix=..\bin\ > nul
 ```
 
-Y crear un archivo `list.txt` en `bin/` con la lista de todos los binarios, uno por linea, o sea:
+Y crear un archivo `list.txt` en `bin/` con la lista de todos los binarios, uno por línea, o sea:
 
 ```
     title.bin
@@ -346,12 +346,12 @@ Como hemos dicho, no nos detendremos en cómo montar una OGT aqui, sino que lo d
 
 Pondremos en `mus/` todo lo necesario, a saber:
 
-1. `WYZproPlay47aZXc.ASM`, el código del player, ya modificado con la lista de canciones, e incluyendo nuestros instrumentos y efectos de sonido.
+1. `WYZproPlay47aZXc.ASM`, el código del _player_, ya modificado con la lista de canciones, e incluyendo nuestros instrumentos y efectos de sonido.
 2. `instrumentos.asm`, con los instrumentos según exporta Wyz Player.
 3. `efectos.asm`, con los efectos según los exporta Wyz Player.
 4. `*.mus`, todas las canciones.
 
-Con todo en su sitio, sólo tendremos que llamar al ensamblador `pasmo`, incluido en `/src/utils/`, para generar RAM1.bin y colocarla en `bin/`. Añadimos una última linea a nuestro `build_assets.bat`:
+Con todo en su sitio, sólo tendremos que llamar al ensamblador `Pasmo`, incluido en `/src/utils/`, para generar RAM1.bin y colocarla en `bin/`. Añadimos una última línea a nuestro `build_assets.bat`:
 
 ```
     echo Making music
@@ -406,9 +406,9 @@ La carga de un juego de 128K, desde BASIC, se basa en ir cargando primero cada R
 
 Así era y ha sido siempre hasta que haciendo **Ninjajar!** nos vimos en la tesitura de que estábamos llenando también RAM7 completamente y descubrimos de mala manera que el 128 BASIC corrompe RAM7. Por eso, haciendo uso de la infinita sabiduría de **Antonio Villena**, construimos un sencillo cargador en ensamble.
 
-El cargador de marras es `dev/loader/loaderzx.asm-orig`. Este archivo tendrá que ser preprocesado para sustituir unas macros que tiene por la longitud real de los diferentes archivos que tiene que cargar y posteriormente compilado por pasmo, pero lo primero que tendremos que hacer es adaptar el archivo a nuestro proyecto, ya que de fábrica viene preparado para cargar RAM1, RAM3, RAM4, RAM6 y RAM7.
+El cargador de marras es `dev/loader/loaderzx.asm-orig`. Este archivo tendrá que ser preprocesado para sustituir unas macros que tiene por la longitud real de los diferentes archivos que tiene que cargar y posteriormente compilado por Pasmo, pero lo primero que tendremos que hacer es adaptar el archivo a nuestro proyecto, ya que de fábrica viene preparado para cargar RAM1, RAM3, RAM4, RAM6 y RAM7.
 
-En Goku Mal no tenemos RAM7, así que tendremos que editar el archivo y quitar el bloque que carga esta ram, o sea, eliminar todo esto (linea 68 a la 79):
+En Goku Mal no tenemos RAM7, así que tendremos que editar el archivo y quitar el bloque que carga esta RAM, o sea, eliminar todo esto (línea 68 a la 79):
 
 ```asm
     ; RAM7
@@ -462,9 +462,9 @@ Por esto otro:
 
 Atención que aquí hay un poco de magias. Empezamos ejecutando `imanol.exe`, que es un programa sencillo para hacer sustituciones textuales por cosas calculadas, como la longitud de un archivo. Aquí simplemente estamos preprocesando `loaderzx.asm-orig` para generar un `loader.asm` con las longitudes correctas de cada bloque.
 
-En la siguiente linea llamamos a pasmo para que lo ensamble y genere un `../bin/loader.bin`.
+En la siguiente línea llamamos a Pasmo para que lo ensamble y genere un `../bin/loader.bin`.
 
-Por último usamos GenTape del mismo **Antonio Villena** para construir la cinta con todos los bloques necesarios. Fíjate com va primero la pantalla de carga seguida de los cuatro bloques para las RAMs extra que usamos (RAM1, RAM3, RAM4 y RAM6) y finalmente el binario principal. Si tu juego tiene un número de RAMs diferentes tendrás que ajustar esto también.
+Por último usamos GenTape del mismo **Antonio Villena** para construir la cinta con todos los bloques necesarios. Fíjate en cómo va primero la pantalla de carga seguida de los cuatro bloques para las RAMs extra que usamos (RAM1, RAM3, RAM4 y RAM6) y finalmente el binario principal. Si tu juego tiene un número de RAMs diferentes tendrás que ajustar esto también.
 
 ## Qué ha hecho The Librarian
 
@@ -527,9 +527,9 @@ Es el momento de crear nuestro *levelset*. En modo 128K, como usamos *level bund
     } LEVEL;
 ```
 
-Para cada nivel, por tanto, sólo tendremos que referenciar el recurso con el *level bundle* correspondiente al nivel, el número de la música de fondo en la OGT y, si tenemos activado el scripting, un offset al inicio del script correspondiente al nivel, cosa que, como ya hemos mencionado varias veces en este capítulo, dejaremos para otra ocasión.
+Para cada nivel, por tanto, sólo tendremos que referenciar el recurso con el *level bundle* correspondiente al nivel, el número de la música de fondo en la OGT y, si tenemos activado el _scripting_, un offset al inicio del _script_ correspondiente al nivel, cosa que, como ya hemos mencionado varias veces en este capítulo, dejaremos para otra ocasión.
 
-Como en modo 48K, el *levelset* se define en el array `levels`. Como no tenemos scripting en **Goku Mal**, nuestro *levelset* es tal que así:
+Como en modo 48K, el *levelset* se define en el array `levels`. Como no tenemos _scripting_ en **Goku Mal**, nuestro *levelset* es tal que así:
 
 ```c
     // Define your level sequence array here:
@@ -543,7 +543,7 @@ Como en modo 48K, el *levelset* se define en el array `levels`. Como no tenemos 
     };
 ```
 
-Los números 3, 4, 5, 7, 3 referencian músicas de la OGT que, como hemos dicho también, ya explicaremos como montar.
+Los números 3, 4, 5, 7, 3 referencian músicas de la OGT que, como hemos dicho también, ya explicaremos cómo montar.
 
 ## La estructura level_data
 
@@ -590,14 +590,14 @@ Primero vamos a montar el mínimo funcional: las fases se ejecutarán y se podr�
 
 La primera es fácil. Tendremos que tocar tres directivas:
 
-```c 
+```c
     #define MODE_128K                           // Read the docs!
     [...]
     #define COMPRESSED_LEVELS                   // use levels.h instead of mapa.h and enems.h (!)
     #define MAX_LEVELS                  5       // # of compressed levels
 ```
 
-Con esto tenemos el motor configurado en modo 128K y esperando un levelset en la memoria extra. Además estamos diciéndole al manejador principal que hay cinco niveles. 
+Con esto tenemos el motor configurado en modo 128K y esperando un levelset en la memoria extra. Además estamos diciéndole al manejador principal que hay cinco niveles.
 
 ### La configuración de Goku Mal
 
@@ -627,7 +627,7 @@ En la configuración principal lo único reseñable es `PLAYER_NUM_OBJETOS`. En 
     #define SMALL_COLLISION                     // 8x8 centered collision instead of 12x12
 ```
 
-En el apartado de colisiones, usamos las *benévolas*, lo que hará que el gameplay de este juego, que es un *shooter*, sea mucho más mejor y menos peor.
+En el apartado de colisiones, usamos las *benévolas*, lo que hará que el _gameplay_ de este juego, que es un *shooter*, sea mucho más mejor y menos peor.
 
 ```c
     #define PLAYER_CHECK_MAP_BOUNDARIES         // If defined, you can't exit the map.
@@ -636,7 +636,7 @@ En el apartado de colisiones, usamos las *benévolas*, lo que hará que el gamep
     #define PLAYER_FLICKERS                     // If defined, collisions make player flicker instead.
 ```
 
-En el apartado de configuraciones generales configuramos para que se compruebe que no nos salimos del mapa (porque los niveles no tienen "paredes" externas para que haya más espacio para moverse), quitamos las llaves, ponemos rebote completo para con los pinchos y decimos que el jugador parpadée un rato cuando le alcancen.
+En el apartado de configuraciones generales configuramos para que se compruebe que no nos salimos del mapa (porque los niveles no tienen "paredes" externas para que haya más espacio para moverse), quitamos las llaves, ponemos rebote completo para con los pinchos y decimos que el jugador parpadee un rato cuando lo alcancen.
 
 ```c
     #define ENABLE_FANTIES                      // If defined, Fanties are enabled!
@@ -652,7 +652,7 @@ En este juego necesitamos *fanties* de tipo *homing*. De hecho, fueron introduci
 
 ```c
     #define PLAYER_CAN_FIRE                     // If defined, shooting engine is enabled.
-    #define PLAYER_BULLET_SPEED         8       // Pixels/frame. 
+    #define PLAYER_BULLET_SPEED         8       // Pixels/frame.
     #define MAX_BULLETS                 4       // Max number of bullets on screen. Be careful!.
     #define PLAYER_BULLET_Y_OFFSET      6       // vertical offset from the player's top.
     #define PLAYER_BULLET_X_OFFSET      0       // vertical offset from the player's left/right.
@@ -687,9 +687,9 @@ Obviamente.
     #define USE_TWO_BUTTONS                 // Alternate keyboard scheme for two-buttons games
 ```
 
-Este juego usa dos botones de acción: uno para saltar y otro para disparar. Como ya he comentado, por eso nos pusieron a parir los unsolobotoners, los OPQArs y los QAOPers. Unos porque no querían cambiar las teclas que usaban siempre y otros, con más razón, porque jugar con joystick era muy raro. 
+Este juego usa dos botones de acción: uno para saltar y otro para disparar. Como ya he comentado, por eso nos pusieron a parir los unsolobotoners, los OPQArs y los QAOPers. Unos porque no querían cambiar las teclas que usaban siempre y otros, con más razón, porque jugar con joystick era muy raro.
 
-No hay solución buena a jugar con joystick, pero al menos la que implementa **MTE MK1** v5 es mejor que nada: cuando selecciónas joystick en un juego con `USE_TWO_BUTTONS` se remapean los controles y *arriba* significa a la vez *arriba* y *botón de salto*. No será tan controlable como teniendo dos botones, pero al menos se podrá jugar.
+No hay solución buena a jugar con joystick, pero al menos la que implementa **MTE MK1** v5 es mejor que nada: cuando seleccionas joystick en un juego con `USE_TWO_BUTTONS` se remapean los controles y *arriba* significa a la vez *arriba* y *botón de salto*. No será tan controlable como teniendo dos botones, pero al menos se podrá jugar.
 
 ```c
     #define VIEWPORT_X                  1       //
@@ -698,13 +698,13 @@ No hay solución buena a jugar con joystick, pero al menos la que implementa **M
     #define LIFE_Y                      0       // Life gauge counter character coordinates
     #define OBJECTS_X                   99      //
     #define OBJECTS_Y                   99      // Objects counter character coordinates
-    #define OBJECTS_ICON_X              99      // 
+    #define OBJECTS_ICON_X              99      //
     #define OBJECTS_ICON_Y              99      // Objects icon character coordinates (use with ONLY_ONE_OBJECT)
     #define KEYS_X                      99      //
     #define KEYS_Y                      99      // Keys counter character coordinates
     #define KILLED_X                    99      //
     #define KILLED_Y                    99      // Kills counter character coordinates
-    #define AMMO_X                      99      // 
+    #define AMMO_X                      99      //
     #define AMMO_Y                      99      // Ammo counter character coordinates
     #define TIMER_X                     29      //
     #define TIMER_Y                     0       // Timer counter coordinates
@@ -746,7 +746,7 @@ Las constantes que definen el movimiento permiten saltos muy altos, resbalones, 
 
 ## Valores importantes diferentes en cada nivel
 
-Antes hemos visto la fullería que hemos hecho con `PLAYER_NUM_OBJETOS` para poder controlar el final de cada fase con un número diferente de objetos, que era parecida a la que describimos para el modo 48K en el capítulo anterior, pero levemente diferente. Aprovechamos para resumir aquí cómo se implementarían otros casos en los que querramos tener valores diferentes para cosas importantes en cada nivel.
+Antes hemos visto la fullería que hemos hecho con `PLAYER_NUM_OBJETOS` para poder controlar el final de cada fase con un número diferente de objetos, que era parecida a la que describimos para el modo 48K en el capítulo anterior, pero levemente diferente. Aprovechamos para resumir aquí cómo se implementarían otros casos en los que queramos tener valores diferentes para cosas importantes en cada nivel.
 
 ### Número de objetos
 
@@ -758,7 +758,7 @@ Como ya hemos visto, se trata de configurar `PLAYER_NUM_OBJETOS` al valor de la 
 
 ### Llegar a un sitio concreto
 
-Se hace exactamente igual que en modo 48K: creando arrays en `my/ci/extra_vars.h` y configurando `SCR_FIN` y opcionalmente también `PLAYER_FIN_X` y `PLAYER_FIN_Y` para que apunten a esos arrays usando la variable `level`. 
+Se hace exactamente igual que en modo 48K: creando arrays en `my/ci/extra_vars.h` y configurando `SCR_FIN` y opcionalmente también `PLAYER_FIN_X` y `PLAYER_FIN_Y` para que apunten a esos arrays usando la variable `level`.
 
 ### Vida de los malos
 
@@ -806,7 +806,7 @@ Ahora vamos a poner las cosas especiales que hacen tu juego más pulido y molón
 
 ### *Splash screens*
 
-Las splash screens son una serie de pantallas que se muestran nada más cargar el juego. Como todo el resto de los tiestos se sacan con `get_resource`. Llamaremos también a `espera_activa` para esperar unos 10 segundos entre cada pantalla (interrumpibles pulsando una tecla). 
+Las _splash screens_ son una serie de pantallas que se muestran nada más cargar el juego. Como todo el resto de los tiestos se sacan con `get_resource`. Llamaremos también a `espera_activa` para esperar unos 10 segundos entre cada pantalla (interrumpibles pulsando una tecla).
 
 Si abrimos `assets/librarian.h` veremos que las macros que representan los recursos que necesitamos para `get_resource` son estos, que habrá que descomprimir directamente sobre la pantalla (dirección 16384):
 
@@ -863,7 +863,7 @@ El código para seleccionar el idioma lo colocaremos también en `my/ci/after_lo
     cortina ();
 ```
 
-Este código hará que lang valga 0 para inglés o 1 para español.
+Este código hará que lang valga 0 para inglés ó 1 para español.
 
 ### El menú y los passwords
 
@@ -873,7 +873,7 @@ El juego es capaz de saltar a la fase que sea usando una serie de passwords text
     {
         #ifdef MODE_128K
             get_resource (TITLE_BIN, 16384);
-        #else       
+        #else
             #asm
                 ld hl, _s_title
                 ld de, 16384
@@ -889,14 +889,14 @@ El juego es capaz de saltar a la fase que sea usando una serie de passwords text
         print_str ();
 
         _x = 11; _y = 17;         _gp_gen = lang ? "1 JUGAR   " : "1 PLAY    ";
-        print_str ();   
+        print_str ();
 
         _x = 11; _y = 18;         _gp_gen =        "2 PASSWORD";
         print_str ();
 
         sp_UpdateNow ();
         level = 99; while (level == 99) {
-            gpjt = sp_GetKey (); 
+            gpjt = sp_GetKey ();
             switch (gpjt) {
                 case '1': level = 0; break;
                 case '2': level = check_password ();
@@ -908,13 +908,13 @@ El juego es capaz de saltar a la fase que sea usando una serie de passwords text
     }
 ```
 
-Imprimimos unas cosas y luego esperamos que el usuarios pulse 1 o 2. En el caso que pulse 1, se pone `level` a 0 y empezamos. Si pulsa 2, `level` valdrá el resultado de `check_password`, que es una función que tendremos que implementar. ¿Dónde? Pues en el sitio de implementar funciones, que es `my/ci/extra_functions.h`.
+Imprimimos unas cosas y luego esperamos que el usuario pulse 1 ó 2. En el caso que pulse 1, se pone `level` a 0 y empezamos. Si pulsa 2, `level` valdrá el resultado de `check_password`, que es una función que tendremos que implementar. ¿Dónde? Pues en el sitio de implementar funciones, que es `my/ci/extra_functions.h`.
 
 La función es muy tonta pero la puedes aprovechar para tus propios passwords con alguna que otra modificación:
 
-```c 
+```c
     // extra_vars.h
-        
+
     #define PASSWORD_LENGTH 6
     #define MENU_Y          16
     #define MENU_X          11
@@ -930,9 +930,9 @@ La función es muy tonta pero la puedes aprovechar para tus propios passwords co
     unsigned char *password = "****** ";
 ```
 
-```c 
+```c
     // extra_functions.h
-   
+
     unsigned char check_password (void) {
         wyz_play_sound (SFX_START);
 
@@ -950,7 +950,7 @@ La función es muy tonta pero la puedes aprovechar para tus propios passwords co
             password [gpit] = '*';
             _x = 16 - PASSWORD_LENGTH / 2; print_str ();
             sp_UpdateNow ();
-            
+
             do {
                 gpjt = sp_GetKey ();
             } while (gpjt == 0);
@@ -990,13 +990,13 @@ Con esto y tal y como llevamos la cosa, si compilas tendrás el sistema de passw
 
 ### Las cutscenes
 
-El sistema de cutscenes que implementaremos en una función `do_cutscene` es muy sencillo. Para cada idioma tendremos 7 cadenas de texto, una por cada imagen.  La función recibirá dos números del 1 al 7, y mostrará las imagenes y cadenas de texto entre ambos números, ambos inclusive. También recibirá un tercer parámetro con la música que debe tocar.
+El sistema de cutscenes que implementaremos en una función `do_cutscene` es muy sencillo. Para cada idioma tendremos 7 cadenas de texto, una por cada imagen.  La función recibirá dos números del 1 al 7, y mostrará las imágenes y cadenas de texto entre ambos números, ambos inclusive. También recibirá un tercer parámetro con la música que debe tocar.
 
 Hay tres puntos en los que hay que montar cutscenes: el primero es al empezar un juego nuevo; se mostrarán las cadenas 0 a 3. El segundo es antes de empezar la cuarta fase (`level == 3`); mostraremos la cadena 4. Y el tercero será al terminar la quinta fase; mostraremos las cadenas 5 y 6.
 
 Montados todo este sistema en `my/ci/extra_routines.h` igualmente, a continuación del código que ya habíamos introducido. Puedes verlo en la carpeta del juego.
 
-Lo que sí vamos a ver aquí son los *enganches*, o sea, las llamadas a `do_cutscene`, que habrá que pincharlas en dos puntos diferentes: Si te das cuenta, las dos primeras secuencias se muestran antes de monstrar la pantalla de "NIVEL XX", y la tercera antes de mostrar el final del juego. Por tanto, meteremos las llamadas a `do_cutscene` al principio de `my/level_screen.h` y al principio de la función `game_ending` en `my/fixed_screens.h`.
+Lo que sí vamos a ver aquí son los *enganches*, o sea, las llamadas a `do_cutscene`, que habrá que pincharlas en dos puntos diferentes: Si te das cuenta, las dos primeras secuencias se muestran antes de mostrar la pantalla de "NIVEL XX", y la tercera antes de mostrar el final del juego. Por tanto, meteremos las llamadas a `do_cutscene` al principio de `my/level_screen.h` y al principio de la función `game_ending` en `my/fixed_screens.h`.
 
 ```c
     // level_screen.h
@@ -1028,7 +1028,7 @@ Lo que sí vamos a ver aquí son los *enganches*, o sea, las llamadas a `do_cuts
 
 ### Las pantallas de "nuevo nivel"
 
-Las pantallas de "nuevo nivel" de Goku Mal muestran una imagen de fondo: `zoneA.png` en la primera fase y `zoneB.png` en las siguientes. A partir de la segunda fase se muestra el password correspondiente. Además, se pinta un número bien gordo usando carácteres de un set gráfico especial que tendremos que descomprimir sobre la zona de tiles. Los números gordos se pintan atendiendo a un array lleno de números que tuve a bien de teclear en tiempos, algo que ni se me ocurriría hacer en los tiempos que corren, porque en el rato que tardo en picar números me hago un conversor automático, que es más divertido. Pero bueno, el mal ya está hecho.
+Las pantallas de "nuevo nivel" de Goku Mal muestran una imagen de fondo: `zoneA.png` en la primera fase y `zoneB.png` en las siguientes. A partir de la segunda fase se muestra el password correspondiente. Además, se pinta un número bien gordo usando caracteres de un set gráfico especial que tendremos que descomprimir sobre la zona de tiles. Los números gordos se pintan atendiendo a un array lleno de números que tuve a bien de teclear en tiempos, algo que ni se me ocurriría hacer en los tiempos que corren, porque en el rato que tardo en picar números me hago un conversor automático, que es más divertido. Pero bueno, el mal ya está hecho.
 
 Ponemos nuestras ristras en `my/ci/extra_vars.h` a continuación de todo lo que ya tenemos.
 
@@ -1036,41 +1036,41 @@ Ponemos nuestras ristras en `my/ci/extra_vars.h` a continuación de todo lo que 
     // extra_vars.h
 
     unsigned char levelnumbers [] = {
-         64, 65, 66, 66, 66, 66, 66,  0,  0, 
-         67, 68, 66, 66, 66, 66, 66,  0,  0, 
-          0,  0, 66, 66, 66, 66, 66,  0,  0, 
-          0,  0, 66, 66, 66, 66, 66,  0,  0, 
-          0,  0, 66, 66, 66, 66, 66,  0,  0, 
-         69, 66, 66, 66, 66, 66, 66, 66, 70, 
-         
-         71, 66, 66, 66, 66, 66, 66, 66, 72, 
-         66, 66, 73, 74, 74, 74, 75, 66, 66, 
-          0,  0, 76, 77, 78, 79, 66, 66, 80, 
-         81, 79, 66, 66, 82, 83, 84, 85,  0, 
-         66, 66, 86, 85,  0,  0,  0, 66, 66, 
-         66, 66, 66, 66, 66, 66, 66, 66, 66, 
-         
-         66, 66, 66, 66, 66, 66, 66, 66, 66, 
-         66, 66, 87, 88, 89, 90, 66, 91, 92, 
-          0, 93, 94, 95, 66, 66, 66, 96, 97, 
+         64, 65, 66, 66, 66, 66, 66,  0,  0,
+         67, 68, 66, 66, 66, 66, 66,  0,  0,
+          0,  0, 66, 66, 66, 66, 66,  0,  0,
+          0,  0, 66, 66, 66, 66, 66,  0,  0,
+          0,  0, 66, 66, 66, 66, 66,  0,  0,
+         69, 66, 66, 66, 66, 66, 66, 66, 70,
+
+         71, 66, 66, 66, 66, 66, 66, 66, 72,
+         66, 66, 73, 74, 74, 74, 75, 66, 66,
+          0,  0, 76, 77, 78, 79, 66, 66, 80,
+         81, 79, 66, 66, 82, 83, 84, 85,  0,
+         66, 66, 86, 85,  0,  0,  0, 66, 66,
+         66, 66, 66, 66, 66, 66, 66, 66, 66,
+
+         66, 66, 66, 66, 66, 66, 66, 66, 66,
+         66, 66, 87, 88, 89, 90, 66, 91, 92,
+          0, 93, 94, 95, 66, 66, 66, 96, 97,
          98, 68, 68, 68, 68, 68, 99, 66, 66,
-         66, 66,114,  0,  0,  0,115, 66, 66, 
+         66, 66,114,  0,  0,  0,115, 66, 66,
         100, 66, 66, 66, 66, 66, 66, 66,101,
-        
+
           0,  0,102,103, 66,104,105,  0,  0,
         102,103, 66,104,105,  0,  0,  0,  0,
          66,104,105,  0,106,106,  0,  0,  0,
-         66, 66, 66, 66, 66, 66, 66, 66, 66, 
-         66, 66, 66, 66, 66, 66, 66, 66, 66, 
+         66, 66, 66, 66, 66, 66, 66, 66, 66,
+         66, 66, 66, 66, 66, 66, 66, 66, 66,
           0,  0,  0,  0, 66, 66,  0,  0,  0,
-          
-         66, 66, 66, 66, 66, 66, 66, 66, 66, 
+
+         66, 66, 66, 66, 66, 66, 66, 66, 66,
          66, 66,  0,  0,  0,  0,  0,  0,  0,
          66, 66,107,108, 66, 66, 66,109,110,
          68, 68,111,112,112,112,113, 66, 66,
          66, 66,114,  0,  0,  0,115, 66, 66,
         100, 66, 66, 66, 66, 66, 66, 66,101
-    };  
+    };
 ```
 
 El código que saca la pantalla, toca la música de nuevo nivel y saca el numerón lo meteremos sustituyendo el que hay por defecto en `my/level_screen.h`, detrás de las llamadas a `do_cutscene` que pusimos antes. Tiene este aspecto:
@@ -1097,14 +1097,14 @@ El código que saca la pantalla, toca la música de nuevo nivel y saca el numer�
                     inc hl
                     ld  (__gp_gen), hl
                     ld  e, a
-                    
+
                     ld  d, 70
-                    
+
                     ld  a, (_gpx)
                     ld  c, a
-                    inc a 
+                    inc a
                     ld  (_gpx), a
-                    
+
                     ld  a, 19
 
                     call SPPrintAtInv
@@ -1122,12 +1122,12 @@ El código que saca la pantalla, toca la música de nuevo nivel y saca el numer�
                     inc hl
                     ld  (_map_pointer), hl
                     ld  e, a
-                    
+
                     ld  d, 71
-                    
+
                     ld  a, (_gpx)
                     ld  c, a
-                    
+
                     ld  a, (_gpy)
 
                     call SPPrintAtInv
@@ -1143,7 +1143,7 @@ El código que saca la pantalla, toca la música de nuevo nivel y saca el numer�
 
 ### Boost al subir de pantalla
 
-Una cosa que suele ayudar mucho al gameplay, sobre todo cuando el juego es más de avanzar que de explorar, es dar un pequeño boost al jugador al subir a la pantalla de arriba. Vamos a detectar que estemos cambiando de pantalla hacia arriba para dar a la VY el máximo valor negativo, lo que hará más fácil dirigir a Goku Mal a una plataforma en lugar de fallar y volver a la pantalla de abajo.
+Una cosa que suele ayudar mucho al _gameplay_, sobre todo cuando el juego es más de avanzar que de explorar, es dar un pequeño boost al jugador al subir a la pantalla de arriba. Vamos a detectar que estemos cambiando de pantalla hacia arriba para dar a la VY el máximo valor negativo, lo que hará más fácil dirigir a Goku Mal a una plataforma en lugar de fallar y volver a la pantalla de abajo.
 
 Si recordamos, `my/ci/before_entering_screen.h` se inyecta justo al ir a cambiar pantalla, cuando `n_pant` y `o_pant` son distintas. Justo ahí podremos detectar que `n_pant == (o_pant - level_data->map_w)` y en ese caso aplicar el boost:
 
@@ -1155,4 +1155,4 @@ Si recordamos, `my/ci/before_entering_screen.h` se inyecta justo al ir a cambiar
 
 ## Fin!
 
-Otro capítulo super denso, pero que creo que cubre todo lo que necesitabas saber pero nunca te atreviste a preguntar sobre juegos de 128K multinivel.
+Otro capítulo súper denso, pero que creo que cubre todo lo que necesitabas saber pero nunca te atreviste a preguntar sobre juegos de 128K multinivel.

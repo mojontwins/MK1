@@ -1,23 +1,23 @@
 I - Brainstorming
 =================
 
-Tengo que almacenar cl·usulas y acciones. Lo primero que tengo que hacer, para intentar diseÒar un formato sencillo, com˙n y compacto, es ver cu·ntos tipos de cl·usulas y cu·ntos tipos de acciones necesito, y quÈ tipos de cl·usulas y acciones voy a tener. Esto es lo primero. Vayamos por partes...
+Tengo que almacenar cl√°usulas y acciones. Lo primero que tengo que hacer, para intentar dise√±ar un formato sencillo, com√∫n y compacto, es ver cu√°ntos tipos de cl√°usulas y cu√°ntos tipos de acciones necesito, y qu√© tipos de cl√°usulas y acciones voy a tener. Esto es lo primero. Vayamos por partes...
 
-El tema de las cl·usulas es que cada script se compondr· por un montÛn de estas comprobaciones, que podr·n ser lanzadas de dos formas: al pulsar SPACE (acciÛn) o al entrar en la pantalla. Luego tendrÈ que ver cÛmo lo organizo para que sea eficiente recorrer las listas. Pero antes, lo primero es lo primero. 
+El tema de las cl√°usulas es que cada script se compondr√° por un mont√≥n de estas comprobaciones, que podr√°n ser lanzadas de dos formas: al pulsar SPACE (acci√≥n) o al entrar en la pantalla. Luego tendr√© que ver c√≥mo lo organizo para que sea eficiente recorrer las listas. Pero antes, lo primero es lo primero.
 
-Una cl·usula, en pseudolenguaje, puede ser tal que asÌ. Por ejemplo, en la pantalla 8 pulsamos FIRE al lado de un ordenador (en el tile 7, 4) para meter un diskette (ITEM 3). Esto deber· abrir una puerta en la pantalla 15. Para esto, usamos el FLAG 1
+Una cl√°usula, en pseudolenguaje, puede ser tal que as√≠. Por ejemplo, en la pantalla 8 pulsamos FIRE al lado de un ordenador (en el tile 7, 4) para meter un diskette (ITEM 3). Esto deber√° abrir una puerta en la pantalla 15. Para esto, usamos la FLAG 1
 
-PRESS_FIRE AT SCREEN 8          ; Pulsamos ACCI”N en la pantalla 8
+PRESS_FIRE AT SCREEN 8          ; Pulsamos ACCI√ìN en la pantalla 8
     IF PLAYER_HAS_ITEM 3        ; Si tenemos el ITEM 3
-    IF PLAYER_IN_X 6, 8         ; PosiciÛn del jugador:
-    IF PLAYER_IN_Y 3, 5         ; Esto define un rect·ngulo centrado en el tile 7, 4
+    IF PLAYER_IN_X 6, 8         ; Posici√≥n del jugador:
+    IF PLAYER_IN_Y 3, 5         ; Esto define un rect√°ngulo centrado en el tile 7, 4
     THEN                        ; Si se cumple todo lo de arriba...
         SET ITEM 3, 0           ; Perdemos el ITEM 3
         SET FLAG 1, 1           ; Ponemos FLAG 1 a 1
     END                         ; Fin de las acciones
 END                             ; Fin de las comprobaciones
 
-En la pantalla 15, deberemos comprobar el estado del flag 1 para eliminar la puerta, que ocupa los tiles (8, 4) y (9, 4):
+En la pantalla 15, deberemos comprobar el estado de la flag 1 para eliminar la puerta, que ocupa los tiles (8, 4) y (9, 4):
 
 ENTERING SCREEN 15              ; Entramos en la pantalla 15
     IF FLAG 1 = 1               ; Si FLAG 1 vale 1
@@ -26,12 +26,12 @@ ENTERING SCREEN 15              ; Entramos en la pantalla 15
         SET TILE (9, 4) = 0     ; Ponemos el tile 0 en lugar de la puerta que hay en el mapa.
     END
 END
-    
-Otra cosa importante: el compilador adem·s generar· el cÛdigo del intÈrprete de forma que sÛlo genere las comprobaciones de las cl·usulas y acciones utilizadas en el script, para ahorrar memoria.
+
+Otra cosa importante: el compilador adem√°s generar√° el c√≥digo del int√©rprete de forma que s√≥lo genere las comprobaciones de las cl√°usulas y acciones utilizadas en el script, para ahorrar memoria.
 
 Especiales:
 
-SecciÛn							Se codifica como
+Secci√≥n							Se codifica como
 ENTERING ANY					ENTERING #MAX_PANTS
 ENTERING GAME					ENTERING #(MAX_PANTS+1)
 PRESS_FIRE AT ANY               FIRE #MAX_PANTS
@@ -42,256 +42,256 @@ I.0. Items
 ==========
 
 Se puede usar items y se puede hacer que el usuario los pueda seleccionar con la tecla "Z".
-Todo se hace en una secciÛn que debe definirse al principio del script, parecida a esta:
+Todo se hace en una secci√≥n que debe definirse al principio del script, parecida a esta:
 
 ITEMSET
-	# N˙mero de huecos:
+	# N√∫mero de huecos:
 	SIZE 6
-	
-	# PosiciÛn x, y
+
+	# Posici√≥n x, y
 	LOCATION 1, 21
-	
+
 	# Horizonta/vertical, espaciado
 	DISPOSITION HORZ, 3
-	
+
 	# Color y caracteres para pintar el selector
 	SELECTOR 66, 8, 9
-	
-	# Flag que contiene quÈ hueco est· seleccionado
+
+	# Flag que contiene qu√© hueco est√° seleccionado
 	SLOT_FLAG 20
-	
-	# Flag que contiene quÈ objeto est· en el hueco seleccionado
+
+	# Flag que contiene qu√© objeto est√° en el hueco seleccionado
 	ITEM_FLAG 21
 END
 
 Luego tendremos comprobaciones y comandos destinadas a manejar los items.
 
-I.1. Tipos de cl·usulas (IFs)
+I.1. Tipos de cl√°usulas (IFs)
 =============================
 
-* IF PLAYER_HAS_ITEM t      
-    DescripciÛn: Evaluar· a CIERTO si el jugador tiene el item de tile T en su inventario.
+* IF PLAYER_HAS_ITEM t
+    Descripci√≥n: Evaluar√° a CIERTO si el jugador tiene el √≠tem de tile T en su inventario.
     Opcode: 01 x
-    
+
 * IF PLAYER_HASN'T_ITEM x
-    DescripciÛn: Evaluar· a CIERTO si el jugador NO tiene el item de tile T en su inventario.
+    Descripci√≥n: Evaluar√° a CIERTO si el jugador NO tiene el √≠tem de tile T en su inventario.
     Opcode: 02 x
-    
-°OJO! Las dos anteriores meten bastante cÛdigo de intÈrprete. Es mejor no usarlas si
+
+¬°OJO! Las dos anteriores meten bastante c√≥digo de int√©rprete. Es mejor no usarlas si
 se puede evitar. Hay formas mejores de gestionar el inventario:
 
 * IF SEL_ITEM = t
-	DescripciÛn: CIERTO si el item seleccionado es T
+	Descripci√≥n: CIERTO si el √≠tem seleccionado es T
 	Opcode: 10 ITEM_FLAG t
-	El cÛdigo generado equivale a IF FLAG ITEM_FLAG = t
-	
+	El c√≥digo generado equivale a IF FLAG ITEM_FLAG = t
+
 * IF SEL_ITEM <> t
-	DescripciÛn: CIERTO si el item seleccionado no es T
+	Descripci√≥n: CIERTO si el √≠tem seleccionado no es T
 	Opcode: 13 ITEM_FLAG t
-	El cÛdigo generado equivale a IF FLAG ITEM_FLAG <> t
-	
+	El c√≥digo generado equivale a IF FLAG ITEM_FLAG <> t
+
 * IF ITEM n = t
-	DescripciÛn: CIERTO si en el slot N est· T
+	Descripci√≥n: CIERTO si en el slot N est√° T
 	Opcode: 04 n t
-	
+
 * IF ITEM n <> t
-	DescripciÛn: CIERTO si en el slot N est· T
+	Descripci√≥n: CIERTO si en el slot N est√° T
 	Opcode: 05 n t
-    
+
 * IF FLAG x = n
-    DescripciÛn: Evaluar· a CIERTO si el flag "x" vale "n"
+    Descripci√≥n: Evaluar√° a CIERTO si la flag "x" vale "n"
     Opcode: 10 x n
-    
+
 * IF FLAG x < n
-    DescripciÛn: Evaluar· a CIERTO si el flag "x" < n
+    Descripci√≥n: Evaluar√° a CIERTO si la flag "x" < n
     Opcode: 11 x n
-    
+
 * IF FLAG x > n
-    DescripciÛn: Evaluar· a CIERTO si el flag "x" > n
+    Descripci√≥n: Evaluar√° a CIERTO si la flag "x" > n
     Opcode: 12 x n
-    
+
 * IF FLAG x <> n
-	DescripciÛn: Evaluar· a CIERTO si el flag "x" <> n
+	Descripci√≥n: Evaluar√° a CIERTO si la flag "x" <> n
     Opcode: 13 x n
-    
+
 * IF FLAG x = FLAG y
-    DescripciÛn: Evaluar· a CIERTO si el flag "x" = flag "y"
+    Descripci√≥n: Evaluar√° a CIERTO si la flag "x" = flag "y"
     Opcode: 14 x y
-    
+
 * IF FLAG x < FLAG y
-    DescripciÛn: Evaluar· a CIERTO si el flag "x" < flag "y"
+    Descripci√≥n: Evaluar√° a CIERTO si la flag "x" < flag "y"
     Opcode: 15 x y
-    
+
 * IF FLAG x > FLAG y
-    DescripciÛn: Evaluar· a CIERTO si el flag "x" > flag "y"
+    Descripci√≥n: Evaluar√° a CIERTO si la flag "x" > flag "y"
     Opcode: 16 x y
-    
+
 * IF FLAG x <> FLAG y
-    DescripciÛn: Evaluar· a CIERTO si el flag "x" <> flag "y"
+    Descripci√≥n: Evaluar√° a CIERTO si la flag "x" <> flag "y"
     Opcode: 17 x y
-    
+
 * IF PLAYER_TOUCHES x, y
-    DescripciÛn: Evaluar· a CIERTO si el jugador est· tocando el tile (x, y)
+    Descripci√≥n: Evaluar√° a CIERTO si el jugador est√° tocando el tile (x, y)
     Opcode: 20 x y
-    
+
 * IF PLAYER_IN_X x1, x2
-    DescripciÛn: Evaluar· a CIERTO si el jugador est· horizontalmente entre los tiles x1, x2
+    Descripci√≥n: Evaluar√° a CIERTO si el jugador est√° horizontalmente entre los tiles x1, x2
     Opcode: 21 x1 x2
 
 * IF PLAYER_IN_Y y1, y2
-    DescripciÛn: Evaluar· a CIERTO si el jugador est· verticalmente entre los tiles y1, y2
+    Descripci√≥n: Evaluar√° a CIERTO si el jugador est√° verticalmente entre los tiles y1, y2
     Opcode: 22 y1 y2
-    
+
 * IF ALL_ENEMIES_DEAD
-	DescripciÛn: Evaluar· a CIERTO si todos los enemigos est·n muertos.
+	Descripci√≥n: Evaluar√° a CIERTO si todos los enemigos est√°n muertos.
 	Opcode: 30
 
 * IF ENEMIES_KILLED_EQUALS n
-	DescripciÛn: Evaluar· a CIERTO si el n˙mero de enemigos eliminados es n.
+	Descripci√≥n: Evaluar√° a CIERTO si el n√∫mero de enemigos eliminados es n.
 	Opcode: 31 n
 
 * IF PLAYER_HAS_OBJECTS
-	DescripciÛn: Evaluar· a CIERTO si el jugador tiene objetos.
+	Descripci√≥n: Evaluar√° a CIERTO si el jugador tiene objetos.
 	Opcode: 40
-	
+
 * IF OBJECT_COUNT = n
-	DescripciÛn: Evaluar· a CIERTO si el jugador tiene N objetos.
+	Descripci√≥n: Evaluar√° a CIERTO si el jugador tiene N objetos.
 	Opcode: 41 n
 
 * IF NPANT n
-	Descripcion: Evaluar· a CIERTO si el jugador est· en la pantalla n
+	Descripcion: Evaluar√° a CIERTO si el jugador est√° en la pantalla n
 	Opcode: 50 n
 
 * IF NPANT_NOT n
-	Descripcion: Evaluar· a CIERTO si el jugador NO est· en la pantalla n
+	Descripcion: Evaluar√° a CIERTO si el jugador NO est√° en la pantalla n
 	Opcode: 51 n
-		
+
 * IF JUST_PUSHED
-	DescripciÛn: viene de acabar de empujar (!)
+	Descripci√≥n: viene de acabar de empujar (!)
 	Opcode: 60
-	
+
 * IF TIMER >= x
-	DescripciÛn: el timer >= x
+	Descripci√≥n: el timer >= x
 	Opcode: 70 x
-	
+
 * IF TIMER <= x
 	Opcode: 71 x
-	
+
 * IF LEVEL = n
-	DescripciÛn: CIERTO si el nivel actual es n
+	Descripci√≥n: CIERTO si el nivel actual es n
 	Opcode: 80 n
-	
+
 * IF TRUE
-	DescripciÛn: Siempre CIERTO
+	Descripci√≥n: Siempre CIERTO
 	Opcode: F0
-	
+
 * THEN
-    DescripciÛn: Termina las evaluaciones y comienza a ejecutar:
+    Descripci√≥n: Termina las evaluaciones y comienza a ejecutar:
     Opcode: FF
-    
+
 I.2. Tipos de acciones
 ======================
 
 * SET ITEM n = t
-    DescripciÛn: Asigna el item t al slot n
+    Descripci√≥n: Asigna el √≠tem t al slot n
     Opcode: 00 x n
-    
+
 * SET FLAG x = n
-    DescripciÛn: Da el valor N al flag X.
+    Descripci√≥n: Da el valor N a la flag X.
     Opcode: 01 x n
-    
+
 * INC FLAG x, n
-    DescripciÛn: Incrementa el valor del flag X en N.
+    Descripci√≥n: Incrementa el valor de la flag X en N.
     Opcode: 10 x n
-    
+
 * DEC FLAG x, n
-    DescripciÛn: Decrementa el valor del flag X en N
+    Descripci√≥n: Decrementa el valor de la flag X en N
     Opcode: 11 x n
-    
+
 * ADD FLAGS x, y
-    DescripciÛn x = x + y
+    Descripci√≥n x = x + y
     Opcode: 12 x y
-    
+
 * SUB FLAGS x, y
-    DescripciÛn: x = x - y
+    Descripci√≥n: x = x - y
     Opcode: 13 x y
-    
+
 * FLIPFLOP x
-	DescripciÛn: x = 1 - x
-	Opcode: 15 x    
-    
+	Descripci√≥n: x = 1 - x
+	Opcode: 15 x
+
 * SET TILE (x, y) = n
-    DescripciÛn: Establece que el tile (x, y) de la pantalla sea el n
+    Descripci√≥n: Establece que el tile (x, y) de la pantalla sea el n
     Opcode: 20 x y n
-    
+
 * INC LIFE n
-    DescripciÛn: Incrementa el valor de la vida en n
+    Descripci√≥n: Incrementa el valor de la vida en n
     Opcode: 30 n
-    
+
 * DEC LIFE n
-    DescripciÛn: Decrementa el valor de la vida en n
+    Descripci√≥n: Decrementa el valor de la vida en n
     Opcode: 31 n
 
-* FLICKER	
-	DescripciÛn: El jugador pasa a estado flicker
+* FLICKER
+	Descripci√≥n: El jugador pasa a estado flicker
 	Opcode: 32
-    
+
 * INC OBJECTS n
-	DescripciÛn: AÒade n objetos m·s.
+	Descripci√≥n: A√±ade n objetos m√°s.
 	Opcode: 40 n
-	
+
 * DEC OBJECTS n
-	DescripciÛn: Resta n objetos (si objects >= n; si no objects = 0).
-	“pcode: 41 n
-  
+	Descripci√≥n: Resta n objetos (si objects >= n; si no objects = 0).
+	√ípcode: 41 n
+
 * SWAP x, y
-	DescripciÛn: intercambia el valor de los flags x e y
+	Descripci√≥n: intercambia el valor de las flags x e y
 	Opcode: 14 x y
-	
+
 * PRINT_TILE_AT (x, y) = n
 	Opcode: 50 x y n
-	
+
 * SET_FIRE_ZONE x1, y1, x2, y2
 	Opcode: 51 x1 y1 x2 y2
 
 * SHOW_COINS
 	Opcode: 60
-	
+
 * HIDE_COINS
 	Opcode: 61
-	
+
 * ENABLE_KILL_SLOWLY
 	Opcode: 62
-	
+
 * DISABLE_KILL_SLOWLY
 	Opcode: 63
-	
+
 * ENABLE_TYPE_6
 	Opcode: 64
-	
+
 * DISABLE_TYPE_6
 	Opcode: 65
-	
+
 * ENABLE_MAKE_TYPE_6
 	Opcode: 66
 
 * DISABLE_MAKE_TYPE_6
 	Opcode: 67
-	
+
 * REENTER
-	DrescripciÛn: Re-entra en la pantalla (con todo lo que ello significa)
+	Drescripci√≥n: Re-entra en la pantalla (con todo lo que ello significa)
 	Opcode: 6F
-	
+
 * REDRAW
-	DescripciÛn: SÛlo redibuja la pantalla.
+	Descripci√≥n: S√≥lo redibuja la pantalla.
 	Opcode: 6E
-	
+
 * WARP_TO n,x,y
-	DescripciÛn: Salta a la pantalla n,x,y
+	Descripci√≥n: Salta a la pantalla n,x,y
 	Opcode: 6D n x y
-	
+
 * REPOSTN x, y
-	DescripciÛn: REENTER a x, y sin respawn de enemigos.
+	Descripci√≥n: REENTER a x, y sin respawn de enemigos.
 	Opcode: 6C x y
 
 * SETX x
@@ -299,81 +299,81 @@ I.2. Tipos de acciones
 
 * SETY y
 	Opcode: 6A y
-	
+
 * WARP_TO_LEVEL l, n_pant, x, y, silent
 	Opcode: 69 l n x y s
-	
+
 * SET_TIMER a, b
-	DescripciÛn: Timer = a, rate = b
+	Descripci√≥n: Timer = a, rate = b
 	Opcode: 70 a b
-	
+
 * TIMER_START
-	DescripciÛn: enciende el temporizador
+	Descripci√≥n: enciende el temporizador
 	Opcode: 71
 
 * TIMER_STOP
-	DescripciÛn: apaga el temporizador
+	Descripci√≥n: apaga el temporizador
 	Opcode: 72
-	
+
 * SOUND n
-	DescripciÛn: peta_el_beeper (n);
+	Descripci√≥n: peta_el_beeper (n);
 	Opcode: E0 n
-	      
+
 * SHOW
 	Descripcion: Actualiza la pantalla
 	Opcode: E1
-	
+
 * RECHARGE
 	Description: Recarga toda la vida
 	Opcode: E2
-	
+
 * TEXT
-	DescripciÛn: Imprime un texto
+	Descripci√≥n: Imprime un texto
 	Opcode:	E3 chars 255
-	
+
 * EXTERN n
-	DescripciÛn: ejecuta una funciÛn "extern" pas·ndole como par·metro N
+	Descripci√≥n: ejecuta una funci√≥n "extern" pas√°ndole como par√°metro N
 	Opcode: E4 n
-	
+
 * PAUSE n
-	DescripciÛn: Espera "n" ticks.
+	Descripci√≥n: Espera "n" ticks.
 	Opcode: E5 n
-	
+
 * MUSIC n
-	DescripciÛn: Toca la m˙sica "n"
+	Descripci√≥n: Toca la m√∫sica "n"
 	Opcode: E6 n
-	
+
 * REDRAW_ITEMS
-	DescripciÛn: fuerza un redibujado de los items
+	Descripci√≥n: fuerza un redibujado de los items
 	Opcode: E7
-	
+
 * GAME OVER
-    DescripciÛn: Pierde el juego
+    Descripci√≥n: Pierde el juego
     Opcode: F0
 
 * WIN GAME
-    DescripciÛn: Gana el juego
+    Descripci√≥n: Gana el juego
     Opcode: F1
 
 * END
-    DescripciÛn: Termina el bloque.
+    Descripci√≥n: Termina el bloque.
     Opcode: FF
-    
-II. IDEAS COMPILACI”N
 
-El cÛdigo compilado:
+II. IDEAS COMPILACI√ìN
+
+El c√≥digo compilado:
 
 [code]defb 18                     ; Este bloque ocupa 18 bytes
 defb 0x01                   ; Es del tipo "Press fire"
 defb 0x01, 0x03             ; IF PLAYER_HAS_ITEM 3
-defb 0x21, 0x06, 0x08       ; IF PLAYER_IN_X 6, 8 
+defb 0x21, 0x06, 0x08       ; IF PLAYER_IN_X 6, 8
 defb 0x22, 0x03, 0x05       ; IF PLAYER_IN_Y 3, 5
 defb 0xFF                   ; THEN
 defb 0x00, 0x03, 0x00       ; SET ITEM 3, 0
 defb 0x01, 0x01, 0x01       ; SET FLAG 1, 1
 defb 0xFF                   ; END[/code]
 
-El intÈrprete generado:
+El int√©rprete generado:
 
 [code]
 // Comprobaciones
@@ -390,15 +390,15 @@ while (!terminado) {
             if (items [x].status == 0)
                 terminado = 1;
             break;
-            
-        case 0x02: 
+
+        case 0x02:
             // IF PLAYER_HASN'T_ITEM x
             // Opcode: 02 x
             x = read_byte ();
             if (items [x].status == 1)
                 terminado = 1;
             break;
-            
+
         case 0x10:
             // IF FLAG x = n
             // Opcode: 10 x n
@@ -407,14 +407,14 @@ while (!terminado) {
             if (flags [x] != n)
                 terminado = 1;
             break;
-            
-        // etcÈtera
-    
+
+        // etc√©tera
+
         case 0xFF:
             terminado = 1;
-            continue = 1;       
+            continue = 1;
     }
-    
+
 if (continue) {
     // Acciones
     terminado = 0;
@@ -428,7 +428,7 @@ if (continue) {
                 n = read_byte ();
                 items [x] = n;
                 break;
-                
+
             case 0x10:
                 // INC FLAG x, n
                 // Opcode: 10 x n
@@ -436,9 +436,9 @@ if (continue) {
                 n = read_byte ();
                 flags [x] += n;
                 break;
-                
-            // etcÈtera
-            
+
+            // etc√©tera
+
             case 0xFF:
                 terminado = 1;
         }

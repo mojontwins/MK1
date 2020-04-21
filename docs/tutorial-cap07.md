@@ -6,7 +6,7 @@ Antes que nada, bájate el paquete de materiales correspondiente a este capítul
 
 ## Venga ya. ¡Quiero ver cosas moviéndose!
 
-En eso estamos. Este capítulo va a ser densote, pero densote. Prepárate para absorber cual porífero abisal toneladas y toneladas de información. Para seguir este capítulo recomendamos que te comas un buen tico-tico de sandía, que fortalece el cerebro y el peshito.
+En eso estamos. Este capítulo va a ser densote, pero densote. Prepárate para absorber cual porífero abisal toneladas y toneladas de información. Para seguir este capítulo recomendamos que te comas un buen TicoTico de sandía, que fortalece el cerebro y el peshito.
 
 ![Enemigos en el mapa](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/07_tico_tico.jpg)
 
@@ -14,11 +14,11 @@ Para empezar de fácil, vamos primero a hacer una especie de recapitulación par
 
 1. El primer paso fue hacerse con una copia del repositorio y copiar el contenido de la carpeta `/src` a una nueva con el nombre de tu proyecto.
 
-2. El segundo paso se trató de editar `/dev/compile.bat` y cambiar el nombre del juego en la linea que empieza por `set game=`.
+2. El segundo paso se trató de editar `/dev/compile.bat` y cambiar el nombre del juego en la línea que empieza por `set game=`.
 
 3. Todos los gráficos deberían estar en `/gfx` con los nombres correctos, a saber: `font.png` y `work.png` para los patrones fijos, `sprites.png`, `sprites_extra.png` y `sprites_bullet.png` para los sprites, y `loading.png`, `title.png`, `marco.png` (si usas marco separado de la pantalla de título) y `ending.png` para las pantallas fijas.
 
-4. El cuarto paso fue poner el mapa en `/map` exportado en formato `MAP`, y luego volver a editar `/dev/compile.bat` para modificar la linea del conversor (`mapcnv`) con el tamaño de tu mapa: Para **Dogmole** sería:
+4. El cuarto paso fue poner el mapa en `/map` exportado en formato `MAP`, y luego volver a editar `/dev/compile.bat` para modificar la línea del conversor (`mapcnv`) con el tamaño de tu mapa: Para **Dogmole** sería:
 
 ```
     ..\utils\mapcnv.exe ..\map\mapa.map 8 3 15 10 15 packed > nul
@@ -30,9 +30,9 @@ Para empezar de fácil, vamos primero a hacer una especie de recapitulación par
 
 ## El archivo de configuración
 
-Si te fijas en nuestra carpeta de desarrollo `/dev`, existe una subcarpeta `/dev/my`, y dentro de esta un archivo llamado `config.h`. Quédate con su cara: es el archivo más importante de todos, ya que es el que decide qué trozos del engine se ensamblan para formar el güego, y qué valores de parámetros se emplean en dichos trozos. Tendrías que haberlo hecho ya, pero por si acaso: abre `/dev/my/config.h` en tu editor de textos favorito (que no sea mierder). Y ahora flípalo con la cantidad de cosas que hay. Vamos a ir por partes, explicando cada sección, para qué sirven los valores, cómo interpretarlos, y rellenándolos para nuestro Dogmole de ejemplo. 
+Si te fijas, en nuestra carpeta de desarrollo `/dev` existe una subcarpeta `/dev/my` y, dentro de ésta, un archivo llamado `config.h`. Quédate con su cara: es el archivo más importante de todos, ya que es el que decide qué trozos del _engine_ se ensamblan para formar el güego, y qué valores de parámetros se emplean en dichos trozos. Tendrías que haberlo hecho ya, pero por si acaso: abre `/dev/my/config.h` en tu editor de textos favorito (que no sea mierder). Y ahora flípalo con la cantidad de cosas que hay. Vamos a ir por partes, explicando cada sección, para qué sirven los valores, cómo interpretarlos, y rellenándolos para nuestro Dogmole de ejemplo.
 
-En este archivo lo que hay es un porrón de directivas `#define`, que definen (!) símbolos que luego están por el código diciéndole al compilador qué partes o no incluir, o qué valor dar a algunas partes. Por lo general, nuestro cometido aquí será *comentar* las directivas que no queramos, y *descomentar* (!) las que sí queramos. La expresión *comentar*, en este contexto, es un false friend de una elipsis y más o menos significa "convertir en un comentario", o sea, en texto que el compilador ignore. **MTE MK1** está escrito en lenguaje `C`, por lo que la forma de hacer que una linea sea ignorada es ponerle dos barras delante: `//`. Cada vez que hablemos de *desactivar* o *comentar* una directiva nos estaremos refiriendo a ponerle `//` delante, y cada vez que digamos *activar* o *descomentar* nos estaremos refiriendo a quitarle el `//`. 
+En este archivo lo que hay es un porrón de directivas `#define`, que definen (!) símbolos que luego están por el código diciéndole al compilador qué partes o no incluir, o qué valor dar a algunas partes. Por lo general, nuestro cometido aquí será *comentar* las directivas que no queramos, y *descomentar* (!) las que sí queramos. La expresión *comentar*, en este contexto, es un _false friend_ de una elipsis y más o menos significa "convertir en un comentario", o sea, en texto que el compilador ignore. **MTE MK1** está escrito en lenguaje `C`, por lo que la forma de hacer que una línea sea ignorada es ponerle dos barras delante: `//`. Cada vez que hablemos de *desactivar* o *comentar* una directiva nos estaremos refiriendo a ponerle `//` delante, y cada vez que digamos *activar* o *descomentar* nos estaremos refiriendo a quitarle el `//`.
 
 Aquí es importante tener un buen editor de textos *no mierder* que además tenga resaltado de sintaxis, porque eso nos ayudará a ver muy fácilmente qué está activo y qué no, ya que los comentarios suelen ponerse todos de un color especial.
 
@@ -83,7 +83,7 @@ Aquí definimos la posición final a la que debemos llegar para terminar el güe
     //#define PLAYER_NUM_OBJETOS        99      // Objects to get to finish game
 ```
 
-Este parámetro define el número de objetos que tenemos que reunir para terminar el güego. En güegos sencillos como **Lala Prologue**, el conteo de objetos y la comprobación de que lo tenemos todos es automática y emplea este valor: en cuanto el jugador tenga ese número de objetos se mostrará la pantalla del final. En nuestro caso, no: nosotros vamos a usar scripting para manejar los objetos y las comprobaciones de que hemos hecho todo lo que teníamos que hacer para ganar la partida, así que no vamos a necesitar para nada esto. Por tanto, **la dejaremos comentada** para que el motor ignore el conteo de objetos automático. Si estás haciendo un güego por tu cuenta en el que simplemente hay que recoger todos los objetos, como en tantos que hemos lanzado, coloca aquí el número máximo de objetos necesarios.
+Este parámetro define el número de objetos que tenemos que reunir para terminar el güego. En güegos sencillos como **Lala Prologue**, el conteo de objetos y la comprobación de que lo tenemos todos es automática y emplea este valor: en cuanto el jugador tenga ese número de objetos se mostrará la pantalla del final. En nuestro caso, no: nosotros vamos a usar _scripting_ para manejar los objetos y las comprobaciones de que hemos hecho todo lo que teníamos que hacer para ganar la partida, así que no vamos a necesitar para nada esto. Por tanto, **la dejaremos comentada** para que el motor ignore el conteo de objetos automático. Si estás haciendo un güego por tu cuenta en el que simplemente hay que recoger todos los objetos, como en tantos que hemos lanzado, coloca aquí el número máximo de objetos necesarios.
 
 ### Vida inicial y valor de recarga
 
@@ -117,7 +117,7 @@ Vayamos por partes, como dijo Victor Frankenstein…
 
 La caja de colisión se refiere al cuadrado que ocupa “realmente” nuestro sprite. Para entendernos, nuestro sprite va a chocar contra el escenario. Dicha colisión se calcula con un cuadrado imaginario que puede tener dos tamaños: 16×16 u 8×8. El motor sencillamente comprueba que ese cuadrado no se meta en un bloque obstáculo.
 
-Para que entiendas la diferencia, fíjate cómo interactúa Lala con el escenario en **Lala Prologue** (que tiene una caja de colisión de 16×16 que ocupa todo el sprite) y en **Lala Lah** (en la que usamos una caja de colisión de 8×8, más pequeña que el sprite). 
+Para que entiendas la diferencia, fíjate cómo interactúa Lala con el escenario en **Lala Prologue** (que tiene una caja de colisión de 16×16 que ocupa todo el sprite) y en **Lala Lah** (en la que usamos una caja de colisión de 8×8, más pequeña que el sprite).
 
 Si elegimos una colisión de 8×8 con el escenario, tenemos dos opciones: que el recuadro esté centrado en el sprite o que esté en la parte baja:
 
@@ -151,26 +151,26 @@ Activamos esto para conseguir lo que dijimos cuando estábamos haciendo las pant
 
 Estas tres directivas sirven para desactivar llaves, objetos o recargas. Si tu juego no usa llaves y cerrojos, deberás activar `DEACTIVATE_KEYS`. Si no vas a usar objetos, activamos `DEACTIVATE_OBJECTS`. Idem con las recargas de vida. Así ahorramos toneladas de código.
 
-Seguramente alguno de vosotros estará pensando ¿por qué no activamos `DEACTIVATE_OBJECTS` en **Dogmole**, si hemos dicho que los objetos los vamos a controlar por scripting? ¡Buena pregunta! Es sencillo: lo que vamos a controlar por scripting es el **conteo de objetos** y la **condición final**, pero necesitamos que el motor gestione la **recogida** y **colocación** de los objetos. No nos los podemos fumar.
+Seguramente alguno de vosotros estará pensando ¿por qué no activamos `DEACTIVATE_OBJECTS` en **Dogmole**, si hemos dicho que los objetos los vamos a controlar por _scripting_? ¡Buena pregunta! Es sencillo: lo que vamos a controlar por _scripting_ es el **conteo de objetos** y la **condición final**, pero necesitamos que el motor gestione la **recogida** y **colocación** de los objetos. No nos los podemos fumar.
 
 ```c
     #define ONLY_ONE_OBJECT                     // If defined, only one object can be carried at a time.
     #define OBJECT_COUNT                1       // Defines which FLAG will be used to store the object count.
 ```
 
-Seguimos con dos directivas con una aplicación muy específica: si activamos la primera, `ONLY_ONE_OBJECT`, sólo podremos llevar un objeto *cada vez*. Una vez que cojas un objeto, la recogida de objetos se bloquea y no puedes coger más. Para volver a activar la recogida de objetos hay que *liberar el objeto*, y para eso tendremos que usar scripting o *inyección de código* (que algún día explicaremos en otro tutorial). 
+Seguimos con dos directivas con una aplicación muy específica: si activamos la primera, `ONLY_ONE_OBJECT`, sólo podremos llevar un objeto *cada vez*. Una vez que cojas un objeto, la recogida de objetos se bloquea y no puedes coger más. Para volver a activar la recogida de objetos hay que *liberar el objeto*, y para eso tendremos que usar _scripting_ o *inyección de código* (que algún día explicaremos en otro tutorial).
 
-Con esto conseguimos en **Dogmole** el efecto que necesitamos de que haya que ir llevando las cajas una a una: configuramos el motor para que sólo permita que llevemos un objeto (una caja), y luego, cuando hagamos el script, haremos que cuando llevemos la caja al sitio donde hay que irlas depositando (un sitio concreto de la Universidad) *liberemos el objeto* para que se vuelva a activar la recogida de objetos y así podamos ir a por la siguiente caja.
+Con esto conseguimos en **Dogmole** el efecto que necesitamos de que haya que ir llevando las cajas una a una: configuramos el motor para que sólo permita que llevemos un objeto (una caja), y luego, cuando hagamos el _script_, haremos que cuando llevemos la caja al sitio donde hay que ir depositándolas (un sitio concreto de la Universidad) *liberemos el objeto* para que se vuelva a activar la recogida de objetos y así podamos ir a por la siguiente caja.
 
-La segunda directiva, `OBJECT_COUNT`, sirve para que en el **marcador de objetos**, en lugar de la cuenta interna de objetos recogidos, **se muestre el valor de uno de los *flags* del sistema de scripting**. Ya lo veremos en el futuro, cuando expliquemos el motor de scripting, pero los scripts tienen hasta 32 variables o *flags* que podemos usar para almacenar valores y realizar comprobaciones. Cada variable tiene un número. Si definimos esta directiva, el motor mostrará el valor del flag indicado en el contador de objetos del marcador, en lugar del contador interno de objetos. Desde el script iremos incrementando dicho valor cada vez que el jugador llegue a la Universidad y deposite un objeto.
+La segunda directiva, `OBJECT_COUNT`, sirve para que en el **marcador de objetos**, en lugar de la cuenta interna de objetos recogidos, **se muestre el valor de una de las *flags* del sistema de scripting**. Ya lo veremos en el futuro, cuando expliquemos el motor de _scripting_, pero los _scripts_ tienen hasta 32 variables o *flags* que podemos usar para almacenar valores y realizar comprobaciones. Cada variable tiene un número. Si definimos esta directiva, el motor mostrará el valor de la flag indicada en el contador de objetos del marcador, en lugar del contador interno de objetos. Desde el _script_ iremos incrementando dicho valor cada vez que el jugador llegue a la Universidad y deposite un objeto.
 
-En definitiva, sólo necesitaremos definir `OBJECT_COUNT` si somos nosotros los que vamos a llevar la cuenta, a mano, desde el script (o mediante inyección de código), usando uno de sus flags. Si no vamos a usar scripting, o no vamos a necesitar controlar a mano el número de objetos recogidos, tendremos que comentar esta directiva para que no sea tomada en cuenta.
+En definitiva, sólo necesitaremos definir `OBJECT_COUNT` si somos nosotros los que vamos a llevar la cuenta, a mano, desde el _script_ (o mediante inyección de código), usando una de sus flags. Si no vamos a usar _scripting_, o no vamos a necesitar controlar a mano el número de objetos recogidos, tendremos que comentar esta directiva para que no sea tomada en cuenta.
 
 ```c
     //#define DEACTIVATE_EVIL_TILE              // If defined, no killing tiles (behaviour 1) are detected.
 ```
 
-Activa esta directiva si quieres desactivar los tiles que te matan (tipo 1). Si no usas tiles de tipo 1 en tu juego, descomenta esta linea y ahorrarás espacio, ya que así la detección de tiles matantes no se incluirá en el código.
+Activa esta directiva si quieres desactivar los tiles que te matan (tipo 1). Si no usas tiles de tipo 1 en tu juego, descomenta esta línea y ahorrarás espacio, ya que así la detección de tiles matantes no se incluirá en el código.
 
 ```c
     #define PLAYER_BOUNCES                      // If defined, collisions make player bounce
@@ -198,15 +198,15 @@ Desactiva esta directiva si quieres que, en el caso de que el personaje vaya a s
     //#define EVERYTHING_IS_A_WALL              // If defined, any tile <> type 0 is a wall, otherwise just 8.
 ```
 
-Si activas `WALLS_STOP_ENEMIES`, los tiles de tipo 8 pararán la trayectoria de los enemigos lineales, haciéndolos cambiar de dirección igual que si llegasen a sus límites de trayectoria. Esto es interesante por ejemplo si quieres hacer trayectorias diagonales interesantes o tienes tiles empujables o escenario destructible.
+Si activas `WALLS_STOP_ENEMIES`, los tiles de tipo 8 pararán la trayectoria de los enemigos lineales, haciéndoles cambiar de dirección igual que si llegasen a sus límites de trayectoria. Esto es interesante por ejemplo si quieres hacer trayectorias diagonales interesantes o tienes tiles empujables o escenario destructible.
 
 Si además activas `EVERYTHING_IS_A_WALL`, cualquier tile de comportamiento distinto de 0 (recuerda los tipos de tile que explicamos en el capítulo 2) será considerado un obstáculo.
 
-```c 
+```c
     //#define BODY_COUNT_ON             2       // If defined, count enemies on flag #
 ```
 
-Si configuras el motor para disparar o pisar, el número de muertes se irá contando en el flag que indiques aquí si defines esta directiva.
+Si configuras el motor para disparar o pisar, el número de muertes se irá contando en la flag que indiques aquí si defines esta directiva.
 
 ```c
     //#define DISABLE_PLATFORMS                 // Disables platforms in side-view
@@ -241,11 +241,11 @@ Y se configuran con estas otras:
     //#define FANTIES_TYPE_HOMING               // Unset for simple fanties.
 ```
 
-1. `FANTIES_BASE_CELL` selecciona con qué gráfico pintaremos a los fanties de entre los 4 disponibles (3 si estás en vista lateral y usas plataformas). El valor debe ser 0, 1, 2 o 3, porque recuerda, los verdaderos desarrolladores empiezan a contar desde 0.
+1. `FANTIES_BASE_CELL` selecciona con qué gráfico pintaremos a los Fanties de entre los 4 disponibles (3 si estás en vista lateral y usas plataformas). El valor debe ser 0, 1, 2 ó 3, porque recuerda, los verdaderos desarrolladores empiezan a contar desde 0.
 
-2. `FANTIES_SIGHT_DISTANCE` sólo tiene sentido para los fanties de tipo "Homing". Es la distancia, en píxel, a la que ven. Si no te acercas a menos de esa distancia se quedarán en su *nido* (donde los pones con el Ponedor).
+2. `FANTIES_SIGHT_DISTANCE` sólo tiene sentido para los Fanties de tipo "Homing". Es la distancia, en píxeles, a la que ven. Si no te acercas a menos de esa distancia se quedarán en su *nido* (donde los pones con el Ponedor).
 
-3. `FANTY_MAX_V` define la velocidad máxima. Para hacerte una idea, divide el valor entre 64 y el resultado es el número de píxels que avanzará por cada cuadro (frame) de juego como máximo. Si definimos 256, el enemigo volador podrá acelerar hasta los 4 píxels por frame.
+3. `FANTY_MAX_V` define la velocidad máxima. Para hacerte una idea, divide el valor entre 64 y el resultado es el número de píxeles que avanzará por cada cuadro (_frame_) de juego como máximo. Si definimos 256, el enemigo volador podrá acelerar hasta los 4 píxeles por frame.
 
 4. `FANTY_A` es el valor de aceleración. Cada cuadro de juego, la velocidad se incrementará en el valor indicado en dirección hacia el jugador, si no está escondido. Cuanto menor sea este valor, más tardará el enemigo en reaccionar a un cambio de dirección del jugador.
 
@@ -255,7 +255,7 @@ Y se configuran con estas otras:
 
 ### Los Enemigos Increíblemente Jartibles
 
-La casilla donde los pones en Ponedor será el "punto de aparición", o el "spawning point" para los que les guste el Checoslovaco. En ese punto, cada cierto tiempo, aparecerá un enemigo que perseguirá al jugador. Cuando el enemigo muera (a tiros, normalmente), tras ese cierto tiempo, aparecerá un nuevo enemigo. Y así *ad nauseam*. De ahí el nombre del tipo de enemigos. Los enemigos que te persiguen, por cierto, se detienen con los obstáculos del escenario, lo cual es de agradecer.
+La casilla donde los pones en Ponedor será el "punto de aparición", o el "spawning point" para los que les guste el checoslovaco. En ese punto, cada cierto tiempo, aparecerá un enemigo que perseguirá al jugador. Cuando el enemigo muera (a tiros, normalmente), tras ese cierto tiempo, aparecerá un nuevo enemigo. Y así *ad nauseam*. De ahí el nombre del tipo de enemigos. Los enemigos que te persiguen, por cierto, se detienen con los obstáculos del escenario, lo cual es de agradecer.
 
 Los EIJs se activan con esta directiva (en **Dogmole** la dejamos desactivada):
 
@@ -270,9 +270,9 @@ Y se configuran con estas otras:
     //#define PURSUERS_BASE_CELL        3       // If defined, type 7 enemies are always #
 ```
 
-1. `DEATH_COUNT_EXPRESSION`. Si tenemos activado el motor de disparos, cuando matemos a un enemigo de tipo 7 tardará un tiempo en volver a salir. Dicho tiempo, expresado en número de cuadros (frames), se calcula usando la expresión definida en esta directiva. La que se ve en el ejemplo es la que se emplea en **Sgt. Helmet: Training Day**: 20 más un número al azar entre 0 y 15 (o sea, entre 20 y 35 frames).
+1. `DEATH_COUNT_EXPRESSION`. Si tenemos activado el motor de disparos, cuando matemos a un enemigo de tipo 7 tardará un tiempo en volver a salir. Dicho tiempo, expresado en número de cuadros (_frames_), se calcula usando la expresión definida en esta directiva. La que se ve en el ejemplo es la que se emplea en **Sgt. Helmet: Training Day**: 20 más un número al azar entre 0 y 15 (o sea, entre 20 y 35 _frames_).
 
-2. `PURSUERS_BASE_CELL` selecciona con qué gráfico pintaremos a los EIJs de entre los 4 disponibles (3 si estás en vista lateral y usas plataformas). El valor debe ser 0, 1, 2 o 3, porque recuerda, bla bli blu.
+2. `PURSUERS_BASE_CELL` selecciona con qué gráfico pintaremos a los EIJs de entre los 4 disponibles (3 si estás en vista lateral y usas plataformas). El valor debe ser 0, 1, 2 ó 3, porque recuerda, bla bli blu.
 
 ## Motor de bloques empujables
 
@@ -295,13 +295,13 @@ Y se configura con:
     //#define PUSHING_ACTION                    // If defined, pushing a tile runs PRESS_FIRE script
 ```
 
-1. `FIRE_TO_PUSH`: Si está activa, el jugador debe pulsar fire además de la dirección en la que empuja o no. En **Cheril of the Bosque**, por ejemplo, no hay que pulsar fire: sólo tocando el bloque mientras avanzamos se desplazará. En **D'Veel'Ng**, sí que es necesario pulsar fire para empujar un bloque. Si vas a usar bloques empujables, debes decidir la opción que más te gusta (y que mejor se adecue al tipo de gameplay que quieras conseguir).
+1. `FIRE_TO_PUSH`: Si está activa, el jugador debe pulsar fire además de la dirección en la que empuja o no. En **Cheril of the Bosque**, por ejemplo, no hay que pulsar fire: sólo tocando el bloque mientras avanzamos se desplazará. En **D'Veel'Ng**, sí que es necesario pulsar fire para empujar un bloque. Si vas a usar bloques empujables, debes decidir la opción que más te gusta (y que mejor se adecúe al tipo de _gameplay_ que quieras conseguir).
 
-2. `ENABLE_PUSHED_SCRIPTING` activa la integración del sistema de scripting con los bloques empujables. Dicha integración se configura con las siguientes directivas:
+2. `ENABLE_PUSHED_SCRIPTING` activa la integración del sistema de _scripting_ con los bloques empujables. Dicha integración se configura con las siguientes directivas:
 
-3. `MOVED_TILE_FLAG`, `MOVED_X_FLAG` y `MOVED_Y_FLAG`: Cuando se empuja un bloque empujable, el tile que "pisa" se almacena en el flag que diga `MOVED_TILE_FLAG`, y sus coordenadas en los flags que digan `MOVED_X_FLAG` y `MOVED_Y_FLAG`. Con esto sabemos, desde el scripting, un montón de cosas útiles sólo mirando el valor de esas flags.
+3. `MOVED_TILE_FLAG`, `MOVED_X_FLAG` y `MOVED_Y_FLAG`: Cuando se empuja un bloque empujable, el tile que "pisa" se almacena en la flag que diga `MOVED_TILE_FLAG`, y sus coordenadas en las flags que digan `MOVED_X_FLAG` y `MOVED_Y_FLAG`. Con esto sabemos, desde el _scripting_, un montón de cosas útiles sólo mirando el valor de esos flags.
 
-4. `PUSHING_ACTION`: Si la activamos, las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual serán ejecutadas tras copias los valores a los flags definidos más arriba cuando movamos un bloque empujable. Cuando expliquemos el sistema de scripting esto no te sonará a chino, sólo a croata.
+4. `PUSHING_ACTION`: Si la activamos, las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual serán ejecutadas tras copias los valores a las flags definidas más arriba cuando movamos un bloque empujable. Cuando expliquemos el sistema de _scripting_ esto no te sonará a chino, sólo a croata.
 
 ## Motor de disparos
 
@@ -317,15 +317,15 @@ Y se configura con todas estas, que partimos en bloques:
 
 ```c
     //#define PLAYER_CAN_FIRE_FLAG      1       // If defined, player can only fire when flag # is 1
-    //#define PLAYER_BULLET_SPEED       8       // Pixels/frame. 
+    //#define PLAYER_BULLET_SPEED       8       // Pixels/frame.
     //#define MAX_BULLETS               3       // Max number of bullets on screen. Be careful!.
 ```
 
-1. `PLAYER_CAN_FIRE_FLAG` se usa con scripting o inyección de código. Si está activa, el jugador sólo podrá disparar si el valor del flag que indica es 1. Puedes usarlo para que no se pueda matal hasta que se encuentre la pihtola.
+1. `PLAYER_CAN_FIRE_FLAG` se usa con _scripting_ o inyección de código. Si está activa, el jugador sólo podrá disparar si el valor de la flag que indica es 1. Puedes usarlo para que no se pueda matal hasta que se encuentre la pihtola.
 
-2. `PLAYER_BULLET_SPEED` controla la velocidad de las balas. 8 píxels por cuadro es un buen valor y es el que hemos usado en todos los güegos. Un valor mayor puede hacer que se pierdan colisiones, ya que todo lo que ocurre en pantalla es discreto (no continuo) y si un enemigo se mueve rápidamente en dirección contraria a una bala que se mueve demasiado rápido, es posible que de frame a frame se crucen sin colisionar. Si piensas un poco en ello y te imaginas el juego en cámara lenta como una sucesión de frames lo entenderás.
+2. `PLAYER_BULLET_SPEED` controla la velocidad de las balas. 8 píxeles por cuadro es un buen valor y es el que hemos usado en todos los güegos. Un valor mayor puede hacer que se pierdan colisiones, ya que todo lo que ocurre en pantalla es discreto (no continuo) y si un enemigo se mueve rápidamente en dirección contraria a una bala que se mueve demasiado rápido, es posible que de _frame_ a _frame_ se crucen sin colisionar. Si piensas un poco en ello y te imaginas el juego en cámara lenta como una sucesión de _frames_ lo entenderás.
 
-3. El valor de `MAX_BULLETS` controla el número máximo de balas que podrá haber en pantalla. Ten cuidado con esto, porque valores muy altos podrían comer mucha memoria y además ralentizar bastante el juego. 
+3. El valor de `MAX_BULLETS` controla el número máximo de balas que podrá haber en pantalla. Ten cuidado con esto, porque valores muy altos podrían comer mucha memoria y además ralentizar bastante el juego.
 
 ```c
     //#define PLAYER_BULLET_Y_OFFSET    6       // vertical offset from the player's top.
@@ -334,9 +334,9 @@ Y se configura con todas estas, que partimos en bloques:
 
 Estas dos directivas definen dónde aparecen las balas cuando se disparan. El comportamiento de estos valores cambia según la vista:
 
-* Si el güego es en **vista lateral**, sólo podemos disparar a la izquierda o a la derecha (y, si lo configuramos, también en diagonal, pero sólo influye si el jugador mira a izquierda o a derecha). En ese caso, `PLAYER_BULLET_Y_OFFSET` define la altura, en píxels, a la que aparecerá la bala contando desde la parte superior del sprite del personaje. Esto sirve para ajustar de forma que salgan de la pistola o de donde queramos (de la pisha por ejemplo). `PLAYER_BULLET_X_OFFSET` se ignora completamente.
+* Si el güego es en **vista lateral**, sólo podemos disparar a la izquierda o a la derecha (y, si lo configuramos, también en diagonal, pero sólo influye si el jugador mira a izquierda o a derecha). En ese caso, `PLAYER_BULLET_Y_OFFSET` define la altura, en píxeles, a la que aparecerá la bala contando desde la parte superior del sprite del personaje. Esto sirve para ajustar de forma que salgan de la pistola o de donde queramos (de la pisha por ejemplo). `PLAYER_BULLET_X_OFFSET` se ignora completamente.
 
-* Si el güego es en **vista genital**, el comportamiento es igual que el descrito si miramos para la izquierda o para la derecha, pero si miramos para arriba o para abajo la bala aparecerá desplazada lateralmente `PLAYER_BULLET_X_OFFSET` píxels desde la izquierda si miramos hacia abajo o desde la derecha si miramos hacia arriba. **Esto significa que nuestro personaje es diestro** a menos que seamos más listos que la quina *y juguemos con valores negativos*. Fijáos en los sprites de **Mega Meghan**.
+* Si el güego es en **vista genital**, el comportamiento es igual que el descrito si miramos para la izquierda o para la derecha, pero si miramos para arriba o para abajo la bala aparecerá desplazada lateralmente `PLAYER_BULLET_X_OFFSET` píxeles desde la izquierda si miramos hacia abajo o desde la derecha si miramos hacia arriba. **Esto significa que nuestro personaje es diestro** a menos que seamos más listos que la quina *y juguemos con valores negativos*. Fijáos en los sprites de **Mega Meghan**.
 
 ```c
     //#define ENEMIES_LIFE_GAUGE        4       // Amount of shots needed to kill enemies.
@@ -347,7 +347,7 @@ Estas dos directivas definen dónde aparecen las balas cuando se disparan. El co
 
 Estas de aquí sirven para controlar cosas misceláneas balísticas
 
-1. `ENEMIES_LIFE_GAUGE` define el número de tiros que deberán llevarse para morirse. 
+1. `ENEMIES_LIFE_GAUGE` define el número de tiros que deberán llevarse para morirse.
 
 2. Si activamos `RESPAWN_ON_ENTER`, los enemigos habrán resucitado si salimos de la pantalla y volvemos a entrar. Como en los güegos clásicos, illo.
 
@@ -355,7 +355,7 @@ Estas de aquí sirven para controlar cosas misceláneas balísticas
 
 4. `CAN_FIRE_UP` deja que el jugador dispare en diagonales y para arriba en juegos de vista lateral, como en **Goku Mal**.
 
-Por cierto, los enemigos matados se van contando y dicho valor puede controlarse desde el script.
+Por cierto, los enemigos matados se van contando y dicho valor puede controlarse desde el _script_.
 
 Las balas, además, pueden tener un alcance limitado, lo que da mucho juego para hacer *cosas que no son balas con balas*. Este comportamiento se puede configurar con las siguientes directivas:
 
@@ -365,7 +365,7 @@ Las balas, además, pueden tener un alcance limitado, lo que da mucho juego para
     //#define LB_FRAMES_FLAG            2       // If defined, defines which flag determines the # of frames
 ```
 
-Si activamos `LIMITED_BULLETS`, las balas durarán solo cierto número de frames. Este número de frames será el valor del flag `LB_FRAMES_FLAG` si se activa esta directiva, o el valor de `LB_FRAMES` directamente si queremos que sea fijo.
+Si activamos `LIMITED_BULLETS`, las balas durarán solo cierto número de _frames_. Este número de _frames_ será el valor de la flag `LB_FRAMES_FLAG` si se activa esta directiva, o el valor de `LB_FRAMES` directamente si queremos que sea fijo.
 
 ### Tiles destructibles
 
@@ -382,7 +382,7 @@ Recuerda, además, que el tipo 16 por sí mismo no hace nada, sino que **debe se
 
 ## Scripting
 
-Las siguientes directivas sirven para activar el motor de scripting y definir un par de cosas relacionadas con el mismo. Por ahora las vamos a dejar sin activar, para poder ir compilando y probando el güego ya sin tener que hacer un script. Porque tenemos ganas ya, ¿no? Tranquilos, volveremos a ellas más adelante.
+Las siguientes directivas sirven para activar el motor de _scripting_ y definir un par de cosas relacionadas con el mismo. Por ahora las vamos a dejar sin activar, para poder ir compilando y probando el güego ya sin tener que hacer un _script_. Porque tenemos ganas ya, ¿no? Tranquilos, volveremos a ellas más adelante.
 
 Con la primera activamos el sistema de scripting:
 
@@ -402,19 +402,19 @@ Con las siguientes lo configuramos:
 //#define ENABLE_FIRE_ZONE                  // Allows to define a zone which auto-triggers "FIRE"
 ```
 
-1. `MAX_FLAGS` sirve para configurar el número de *flags* que estarán disponibles para el sistema de scripting. 32 es un valor muy adecuado para la mayoría de las cosas, pero siempre puedes ir aquí y ajustar el número una vez que hayas terminado de hacer el juego para afeitar unos cuantos bytes.
+1. `MAX_FLAGS` sirve para configurar el número de *flags* que estarán disponibles para el sistema de _scripting_. 32 es un valor muy adecuado para la mayoría de las cosas, pero siempre puedes ir aquí y ajustar el número una vez que hayas terminado de hacer el juego para afeitar unos cuantos bytes.
 
-2. Las tres siguientes directivas sirven para elegir qué tecla de acción activará el scripting. Habrá que activar una de ellas y desactivar las otras dos. Podemos elegir entre que la tecla de acción sea "abajo", **M** o el botón de disparo (usando la configuración de controles que sea).
+2. Las tres siguientes directivas sirven para elegir qué tecla de acción activará el _scripting_. Habrá que activar una de ellas y desactivar las otras dos. Podemos elegir entre que la tecla de acción sea "abajo", **M** o el botón de disparo (usando la configuración de controles que sea).
 
-3. `ENABLE_EXTERN_CODE` permite que escribamos código C para responder al comando `EXTERN` del script. `EXTERN` tomará un parámetro y el intérprete lo pasará tal cual a una función especial `do_extern_action` que está en `/dev/my` y donde podremos añadir nuestro código. Ya lo trataremos en más detalle cuando hablemos del scripting.
+3. `ENABLE_EXTERN_CODE` permite que escribamos código C para responder al comando `EXTERN` del script. `EXTERN` tomará un parámetro y el intérprete lo pasará tal cual a una función especial `do_extern_action` que está en `/dev/my` y donde podremos añadir nuestro código. Ya lo trataremos en más detalle cuando hablemos del _scripting_.
 
-4. `ENABLE_FIRE_ZONE` permite utilizar el comando `SET_FIRE_ZONE` del script, que activa un rectángulo en pantalla que lanzará las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual cuando el personaje la toque. De nuevo, ya lo trataremos más adelante.
+4. `ENABLE_FIRE_ZONE` permite utilizar el comando `SET_FIRE_ZONE` del _script_, que activa un rectángulo en pantalla que lanzará las cláusulas de las secciones `PRESS_FIRE` de la pantalla actual cuando el personaje la toque. De nuevo, ya lo trataremos más adelante.
 
-Como te he dicho, por ahora dejamos `ACTIVATE_SCRIPTING` desactivada. Ya la activaremos cuando empecemos a hacer nuestro script.
+Como te he dicho, por ahora dejamos `ACTIVATE_SCRIPTING` desactivada. Ya la activaremos cuando empecemos a hacer nuestro _script_.
 
 ## Timer
 
-Se trata de un temporizador que podemos usar de forma automática o desde el script. El temporizador toma un valor inicial, va contando hacia abajo, puede recargarse, se puede configurar cada cuántos frames se decrementa o decidir qué hacer cuando se agota. 
+Se trata de un temporizador que podemos usar de forma automática o desde el _script_. El temporizador toma un valor inicial, va contando hacia abajo, puede recargarse, se puede configurar cada cuántos _frames_ se decrementa o decidir qué hacer cuando se agota.
 
 Con esta directiva activamos el sistema de timer. En **Dogmole** no lo usaremos.
 
@@ -425,30 +425,30 @@ Con esta directiva activamos el sistema de timer. En **Dogmole** no lo usaremos.
 Con las siguientes lo configuramos. Son unas cuantas. Veámoslas:
 
 ```c
-    #define TIMER_INITIAL       99  
+    #define TIMER_INITIAL       99
     #define TIMER_REFILL        25
     #define TIMER_LAPSE         32
     #define TIMER_START
 ```
 
-1. `TIMER_INITIAL` especifica el valor inicial del temporizador. 
+1. `TIMER_INITIAL` especifica el valor inicial del temporizador.
 
 2. Las recargas de tiempo, que se ponen con el Ponedor como *hotspots* de **tipo 5**, recargarán el
-valor especificado en `TIMER_REFILL`.  El valor máximo del timer, tanto para el inicial como al recargar, es de 99. 
+valor especificado en `TIMER_REFILL`.  El valor máximo del timer, tanto para el inicial como al recargar, es de 99.
 
-3. `TIMER_LAPSE` cntrola intervalo de tiempo que transcurre entre cada decremento del temporizador, y está medido en frames. Los juegos de **MTE MK1** suelen ejecutarse a una media de 20 fps, para que te hagas una idea.
+3. `TIMER_LAPSE` cntrola intervalo de tiempo que transcurre entre cada decremento del temporizador, y está medido en _frames_. Los juegos de **MTE MK1** suelen ejecutarse a una media de 20 fps, para que te hagas una idea.
 
 4. Si se define TIMER_START, el temporizador estará activo desde el principio del juego
 
 Tenemos, además, algunas directivas que definen qué pasará cuando el temporizador llegue a cero. Hay que activar solo una de ellas, dejando las demás comentadas.:
 
 ```c
-    #define TIMER_SCRIPT_0  
+    #define TIMER_SCRIPT_0
     //#define TIMER_GAMEOVER_0
     //#define TIMER_KILL_0
 ```
 
-1. `TIMER_SCRIPT_0`: Cuando llegue a cero el temporizador se ejecutará una sección especial del script, `ON_TIMER_OFF`. Es ideal para llevar todo el control del temporizador por scripting, como ocurre en **Cadàveriön**.
+1. `TIMER_SCRIPT_0`: Cuando llegue a cero el temporizador se ejecutará una sección especial del _script_, `ON_TIMER_OFF`. Es ideal para llevar todo el control del temporizador por scripting, como ocurre en **Cadàveriön**.
 
 2. `TIMER_GAME_OVER_0`: El juego terminará cuando el temporizador llegue a cero (Game Over).
 
@@ -470,29 +470,29 @@ Esperad, no os vayáis, que hay más:
 
 ```c
     //#define TIMER_AUTO_RESET
-    #define SHOW_TIMER_OVER 
+    #define SHOW_TIMER_OVER
 ```
 
-1. `TIMER_AUTO_RESET`: Si se define esta opción, el temporizador volverá al máximo tras llegar a cero de forma automática. Si vas a realizar el control por scripting, mejor deja esta comentada.
+1. `TIMER_AUTO_RESET`: Si se define esta opción, el temporizador volverá al máximo tras llegar a cero de forma automática. Si vas a realizar el control por _scripting_, mejor deja esta comentada.
 
 2. `SHOW_TIMER_OVER`: Si se define esta, en el caso de que hayamos definido o bien TIMER_SCRIPT_0 o bien TIMER_KILL_0, se mostrará un cartel de "TIME'S UP!" cuando el temporizador llegue a cero.
 
-Como hemos dicho, el temporizador puede administrarse desde el script. Es interesante que, si decidimos hacer esto, activemos `TIMER_SCRIPT_0` para que cuando el temporizador llegue a cero se ejecute la sección `ON_TIMER_OFF` de nuestro script y que el control sea total. 
+Como hemos dicho, el temporizador puede administrarse desde el _script_. Es interesante que, si decidimos hacer esto, activemos `TIMER_SCRIPT_0` para que cuando el temporizador llegue a cero se ejecute la sección `ON_TIMER_OFF` de nuestro _script_ y que el control sea total.
 
 ## Guardar estado
 
 Se trata de definir *check points* en el juego. Se colocan como **hotspots de tipo 6**. Cuando el jugador los toca, se almacena su estado actual:
 
-- Valor de todos los flags. (si aplica)
+- Valor de todas las flags. (si aplica)
 - Posición. (n_pant, tile X, tile Y)
 - Tiempo. (si aplica)
 - Munición. (si aplica)
 
 Cuando esto ocurre, cuando se va a iniciar una nueva partida se da la opción entre empezar de nuevo o continuar desde el último *check point*.
 
-Nótese que no es posible almacenar llaves y objetos, ya que esto implicaría hacer copias en memoria de estructuras grandes. Esta funcionalidad está más pensada para juegos en los que la lógica venga regida por un script.
+Nótese que no es posible almacenar llaves y objetos, ya que esto implicaría hacer copias en memoria de estructuras grandes. Esta funcionalidad está más pensada para juegos en los que la lógica venga regida por un _script_.
 
-También se puede configurar el motor para que la vuelta al check point se de siempre que perdamos una vida.
+También se puede configurar el motor para que la vuelta al *check point* se dé siempre que perdamos una vida.
 
 ```c
 //#define ENABLE_CHECKPOINTS                // Enable checkpoints
@@ -504,7 +504,7 @@ El comportamiento por defecto es que no pase nada al morir, y cuando acabe la pa
 
 1. Si se activa `CP_RESET_WHEN_DYING`, además, cada vez que se pierda una vida se trasladará al jugador al último *check point*.
 
-2. Si se activa `CP_RESET_ALSO_VALUES`, además de lo anterior, se restaurará el valor de los flags.
+2. Si se activa `CP_RESET_ALSO_VALUES`, además de lo anterior, se restaurará el valor de las flags.
 
 No usaremos nada de esto en **Dogmole**, por lo que todo se queda comentado.
 
@@ -553,9 +553,9 @@ Si definimos `PLAYER_HAS_JETPAC`, la tecla “arriba” hará que activemos un j
     #define PLAYER_MIN_KILLABLE         3       // Only kill enemies with id >= PLAYER_MIN_KILLABLE
 ```
 
-`PLAYER_STEPS_ON_ENEMIES` activa el motor de pisoteo y las otras dos, que lo configuran, son opcionales. Con este motor activado, el jugador podrá saltar sobre los enemigos para matarlos. 
+`PLAYER_STEPS_ON_ENEMIES` activa el motor de pisoteo y las otras dos, que lo configuran, son opcionales. Con este motor activado, el jugador podrá saltar sobre los enemigos para matarlos.
 
-1. `PLAYER_CAN_STEP_ON_FLAG`: Si se activa, el valor del flag indicado deberá valer 1 para que el pisoteo funcione. Como ganar un super poder.
+1. `PLAYER_CAN_STEP_ON_FLAG`: Si se activa, el valor de la flag indicada deberá valer 1 para que el pisoteo funcione. Como ganar un súper poder.
 
 2. `PLAYER_MIN_KILLABLE` nos sirve para hacer que no todos los enemigos se puedan matar. En Dogmole, sólo podremos matar a los hechiceros, que son de tipo 3. Ojo con esto: si ponemos un 1 podremos matar a todos, si ponemos un 2, a los enemigos tipo 2 y 3, y si ponemos un 3 sólo a los de tipo 3. O sea, se podrá matar a los enemigos cuyo tipo sea mayor o igual al valor que se configure.
 
@@ -590,7 +590,7 @@ Las teclas que se usarán en el juego pueden definirse fácilmente para cualquie
             0x02fd, // .down
             0x02fb  // .up
         };
-        
+
         int key_jump = 0x087f;
         int key_fire = 0x047f;
     #else
@@ -606,7 +606,7 @@ Las teclas que se usarán en el juego pueden definirse fácilmente para cualquie
     #endif
 ```
 
-De "fábrica", las teclas son **W A S D** para la "cruceta" y **N M** para los "botones" en el modo de dos botones, y **O P Q A** y **SPACE** en el modo normal. 
+De "fábrica", las teclas son **W A S D** para la "cruceta" y **N M** para los "botones" en el modo de dos botones, y **O P Q A** y **SPACE** en el modo normal.
 
 Si quieres otras teclas en la configuración que vayas a usar, el tema se trata de cambiar esos numeritos, lo cual no es nada complicado porque hemos incluido esta tabla justo arriba para que la tengas enfrente a la hora de cambiarlos. La tabla es algo así:
 
@@ -637,7 +637,7 @@ En esta sección colocamos todos los elementos en la pantalla. ¿Recordáis cuan
     #define VIEWPORT_Y                  0       // Viewport character coordinates
 ```
 
-Definen la posición (siempre en coordenadas de carácter) del área de juego. Nuestro área de juego empezará en (0, 1), y esos son los valores que le damos a `VIEWPORT_X` y `VIEWPORT_Y`.
+Definen la posición (siempre en coordenadas de carácter) del área de juego. Nuestra área de juego empezará en (0, 1), y esos son los valores que le damos a `VIEWPORT_X` y `VIEWPORT_Y`.
 
 ```c
     #define LIFE_X                      22      //
@@ -651,10 +651,10 @@ Definen la posición del marcador de las vidas (del numerico, vaya).
     #define OBJECTS_Y                   21      // Objects counter character coordinates
 ```
 
-Definen la posición del contador de objetos, si usamos objetos (la posición del numerico). Recordad que en **Dogmole**, por configuración, en estas coordenadas se mostrará el valor del flag que usaremos para llevar el recuento de los objetos, y no el contador interno de objetos.
+Definen la posición del contador de objetos, si usamos objetos (la posición del numerico). Recordad que en **Dogmole**, por configuración, en estas coordenadas se mostrará el valor de la flag que usaremos para llevar el recuento de los objetos, y no el contador interno de objetos.
 
 ```c
-    #define OBJECTS_ICON_X              15      // 
+    #define OBJECTS_ICON_X              15      //
     #define OBJECTS_ICON_Y              21      // Objects icon character coordinates (use with ONLY_ONE_OBJECT)
 ```
 
@@ -675,7 +675,7 @@ Define la posición del contador de llaves.
 La cuenta de enemigos matados o moridos.
 
 ```c
-    #define AMMO_X                      99      // 
+    #define AMMO_X                      99      //
     #define AMMO_Y                      99      // Ammo counter character coordinates
     #define TIMER_X                     99      //
     #define TIMER_Y                     99      // Timer counter coordinates
@@ -683,9 +683,9 @@ La cuenta de enemigos matados o moridos.
 
 Estas últimas son para colocar un marcador de munición y mostrar el valor del timer, pero como no las vamos a usar, las dejamos a `99`.
 
-## La linea de texto
+## La línea de texto
 
-**MTE_MK1** permite imprimir una sencilla linea de texto desde el script. Para activar esta funcionalidad, define `LINE_OF_TEXT` con la coordenada `Y` de la linea de texto. Adicionalmente, `LINE_OF_TEXT_X` sirve para definir su coordenada `X` (0 o 1, normalmente) y `LINE_OF_TEXT_ATTR` el color del texto, en atributos de Spectrum (recuerda, el número que salga de aplicar la fórmula `INK + 8*PAPER + 64*BRIGHT + 128*FLASH`).
+**MTE_MK1** permite imprimir una sencilla línea de texto desde el script. Para activar esta funcionalidad, define `LINE_OF_TEXT` con la coordenada `Y` de la línea de texto. Adicionalmente, `LINE_OF_TEXT_X` sirve para definir su coordenada `X` (0 o 1, normalmente) y `LINE_OF_TEXT_ATTR` el color del texto, en atributos de Spectrum (recuerda, el número que salga de aplicar la fórmula `INK + 8*PAPER + 64*BRIGHT + 128*FLASH`).
 
 ## Efectos gráficos
 
@@ -700,7 +700,7 @@ Estas dos se encargan de las sombras de los tiles, y podemos activar sólo una d
 
 `USE_AUTO_TILE_SHADOWS` emplea versiones sombreadas de los tiles de fondo para hacer las sombras, tal y como explicamos. Desactivando ambas no se dibujarán sombras.
 
-En **Dogmole** no usaremos sombras de ningún tipo, porque las de atributos no nos gustan y las de tiles no nos las podemos permitir porque usaremos esos tiles para embellecer algunas pantallas imprimiendo gráficos por medio del script.
+En **Dogmole** no usaremos sombras de ningún tipo, porque las de atributos no nos gustan y las de tiles no nos las podemos permitir porque usaremos esos tiles para embellecer algunas pantallas imprimiendo gráficos por medio del _script_.
 
 ```c
     //#define UNPACKED_MAP                      // Full, uncompressed maps. Shadows settings are ignored.
@@ -717,22 +717,22 @@ Si definimos `UNPACKED_MAP` estaremos diciéndole al motor que nuestro mapa es d
 
 `NO_MASKS`  hace que los sprites del jugador y los enemigos se dibujen sin máscaras, con un sencillo OR. Esto funciona bien si tus fondos son planos o muy poco complejos porque el render es más rápido y ganamos algunos ciclos, lo que significa más faps de esos.
 
-`MASKED_BULLETS` hace que los sprites de las balas usen máscaras para más bonitor general si usas fondos complejos.
+`MASKED_BULLETS` hace que los sprites de las balas usen máscaras, lo que resulta más bonitor en general si usas fondos complejos.
 
 ### Tiles animados
 
-**MTE MK1** te da la opción de usar tiles animados de una forma muy sencilluna. Básicamente un tile animado es una pareja de tiles correlativos en el tileset. Tú colocas (mediante mapa o mediante scripting) el primero de ellos en pantalla y el motor lo animará alternándo entre éste y su pareja cada cierto tiempo un poco al azar (básicamente elige uno de entre todos los que hay cada frame y lo cambia). En **MTE MK1** los tiles animados tienen que estar al final del tileset todos seguidos, con lo que realmente sólo tienen utilidad si tu mapa es `UNPACKED` (de 48 tiles) o si vas a poner decoraciones con el script.
+**MTE MK1** te da la opción de usar tiles animados de una forma muy sencilluna. Básicamente un tile animado es una pareja de tiles correlativos en el tileset. Tú colocas (mediante mapa o mediante _scripting_) el primero de ellos en pantalla y el motor lo animará alternando entre éste y su pareja cada cierto tiempo un poco al azar (básicamente elige uno de entre todos los que hay cada frame y lo cambia). En **MTE MK1** los tiles animados tienen que estar al final del tileset todos seguidos, con lo que realmente sólo tienen utilidad si tu mapa es `UNPACKED` (de 48 tiles) o si vas a poner decoraciones con el _script_.
 
 ```c
     //#define ENABLE_TILANIMS           32      // If defined, animated tiles are enabled.
                                                 // the value especifies first animated tile pair.
 ```
 
-El valor configurado es el del primer par de tiles animados, si `ENABLE_TILANIMS` está activo. Por ejemplo, si pones `44`, tus tiles animados serán la pareja `44, 45` y la pareja `46, 47`. Siempre que pongas un tile `44` o `45` (en tu mapa unpacked, o desde el script si tu tileset para el mapa es de 16 tiles), se animará.
+El valor configurado es el del primer par de tiles animados, si `ENABLE_TILANIMS` está activo. Por ejemplo, si pones `44`, tus tiles animados serán la pareja `44, 45` y la pareja `46, 47`. Siempre que pongas un tile `44` o `45` (en tu mapa unpacked, o desde el _script_ si tu tileset para el mapa es de 16 tiles), se animará.
 
 ### Color del marcador
 
-```c 
+```c
     #define HUD_INK                     7       // Use this attribute for digits in the hud
 ```
 
@@ -744,18 +744,18 @@ Define de qué color se pintan los números en el marcador del juego.
     //#define PLAYER_CUSTOM_ANIMATION           // Code your own animation in my/custom_animation.h
 ```
 
-Si definimos `PLAYER_CUSTOM_ANIMATION` tendremos que ocuparnos de escribir el código que seleccionará el gráfico del sprite del jugador en cada frame de juego basándonos en el estado actual del jugador y escribirlo en `p_next_frame`. Esto se hace en `my/custom_animation.h`. Para facilitarte el trabajo, estas son algunas de las variables que puedes consultar:
+Si definimos `PLAYER_CUSTOM_ANIMATION` tendremos que ocuparnos de escribir el código que seleccionará el gráfico del _sprite_ del jugador en cada frame de juego basándonos en el estado actual del jugador y escribirlo en `p_next_frame`. Esto se hace en `my/custom_animation.h`. Para facilitarte el trabajo, estas son algunas de las variables que puedes consultar:
 
 |Variables|Contenido
 |---|---
-|`gpx`, `gpy`|Posición (x, y) en píxels del jugador.
+|`gpx`, `gpy`|Posición (x, y) en píxeles del jugador.
 |`p_vx`, `p_vy`|Velocidad (horizontal, vertical) del jugador.
 |`p_facing`|Dirección a la que mira el jugador (*)
 |`possee`|1 si el jugador está sobre una plataforma fija.
 |`p_gotten`|1 si el jugador está sobre una plataforma movil.
 |`player_cells`|Es un array con los 8 frames del sprite.
 
-(*) `p_facing` será 0 (derecha) y 1 (izquierda) en vista lateral, o tomará los valores `FACING_LEFT`, `FACING_RIGHT`, `FACING_UP` y `FACING_DOWN` en vista genital. 
+(*) `p_facing` será 0 (derecha) y 1 (izquierda) en vista lateral, o tomará los valores `FACING_LEFT`, `FACING_RIGHT`, `FACING_UP` y `FACING_DOWN` en vista genital.
 
 El código que escribas debe terminar asignando un componente de `player_cells` al puntero `p_next_frame`. Obviamente, no necesitas escribir un código de animación personalizado para el jugador si no estás haciendo cosas muy raras.
 
@@ -777,15 +777,15 @@ Si se define, se mostrará un cuadro con los objetos que te quedan por coger cad
 
 ## Configuración del movimiento del personaje principal
 
-En esta sección configuraremos como se moverá nuestro jugador. Es muy probable que los valores que pongas aquí tengas que irlos ajustando por medio del método de prueba y error. Si tienes unas nociones básicas de física, te vendrán muy bien para saber cómo afecta cada parámetro.
+En esta sección configuraremos cómo se moverá nuestro jugador. Es muy probable que los valores que pongas aquí tengas que irlos ajustando por medio del método de prueba y error. Si tienes unas nociones básicas de física, te vendrán muy bien para saber cómo afecta cada parámetro.
 
 Básicamente, tendremos lo que se conoce como *Movimiento Rectilíneo Uniformemente Acelerado* (MRUA) en cada eje: el horizontal y el vertical. Básicamente tendremos una posición (digamos X) que se verá afectada por una velocidad (digamos VX), que a su vez se verá afectada por una aceleración (o sea, AX).
 
 Los parámetros siguientes sirven para especificar diversos valores relacionados con el movimiento en cada eje en güegos de vista lateral. En los de vista genital, se tomarán los valores del eje horizontal también para el vertical.
 
-Para obtener la suavidad de los movimientos sin usar valores en coma flotante (que son muy costosos de manejar), usamos aritmética de punto fijo. Básicamente los valores se expresan en 1/64 de pixel. Esto significa que el valor empleado se divide entre 64 a la hora de mover los sprites reales a la pantalla. Eso nos da una precisión de 1/64 pixels en ambos ejes, lo que se traduce en mayor suavidad de movimientos. En palabras techis, estamos usando 10 bits para la parte entera y 6 para la parte "decimal", así que decimos que nuestro punto fijo es **10.6**.
+Para obtener la suavidad de los movimientos sin usar valores en coma flotante (que son muy costosos de manejar), usamos aritmética de punto fijo. Básicamente los valores se expresan en 1/64 de pixel. Esto significa que el valor empleado se divide entre 64 a la hora de mover los sprites reales a la pantalla. Eso nos da una precisión de 1/64 píxeles en ambos ejes, lo que se traduce en mayor suavidad de movimientos. En palabras techis, estamos usando 10 bits para la parte entera y 6 para la parte "decimal", así que decimos que nuestro punto fijo es **10.6**.
 
-Somos conscientes en mojonia de que este apartado es especialmente densote, así que no te preocupes demasiado si, de entrada, te pierdes un poco. Experimenta con los valores hasta que encuentres la combinación ideal para tu güego.
+Somos conscientes en Mojonia de que este apartado es especialmente densote, así que no te preocupes demasiado si, de entrada, te pierdes un poco. Experimenta con los valores hasta que encuentres la combinación ideal para tu güego.
 
 ### Eje vertical en güegos de vista lateral
 
@@ -805,9 +805,9 @@ Al movimiento vertical le afecta la gravedad. La velocidad vertical será increm
 
 #### Caída libre
 
-La velocidad del jugador, que medimos en pixels/frame será incrementada en `PLAYER_G` / 64 pixels/frame hasta que llegue al máximo especificado por `PLAYER_MAX_CAYENDO` / 64. Con los valores que hemos elegido para **Dogmole**, la velocidad vertical en caída libre será incrementada en 48 / 64 = 0,75 pixels/frame hasta que llegue a un valor de 512 / 64 = 8 píxels/frame. O sea, Dogmole caerá más y más rápido hasta que llegue a la velocidad máxima de 8 píxels por frame. 
+La velocidad del jugador, que medimos en píxeles/frame será incrementada en `PLAYER_G` / 64 píxeles/frame hasta que llegue al máximo especificado por `PLAYER_MAX_CAYENDO` / 64. Con los valores que hemos elegido para **Dogmole**, la velocidad vertical en caída libre será incrementada en 48 / 64 = 0,75 píxeles/frame hasta que llegue a un valor de 512 / 64 = 8 píxeles/frame. O sea, Dogmole caerá más y más rápido hasta que llegue a la velocidad máxima de 8 píxeles por frame.
 
-Incrementar `PLAYER_G` hará que se alcance la velocidad máxima mucho antes (porque la aceleración es mayor). Estos valores afectan al salto: a mayor gravedad, menos saltaremos y menos nos durará el impulso inicial. Modificando `PLAYER_MAX_CAYENDO` podremos conseguir que la velocidad máxima, que se alcanzará antes o después dependiendo del valor de `PLAYER_G`, sea mayor o menor. Usando valores pequeños podemos simular entornos de poca gravedad como el espacio exterior, la superficie de la luna, o el fondo del mar. El valor de 512 (equivalente a 8 píxels por frame) podemos considerarlo el máximo, ya que valores superiores y caídas muy largas podrían resultar en glitches y cosas raras.
+Incrementar `PLAYER_G` hará que se alcance la velocidad máxima mucho antes (porque la aceleración es mayor). Estos valores afectan al salto: a mayor gravedad, menos saltaremos y menos nos durará el impulso inicial. Modificando `PLAYER_MAX_CAYENDO` podremos conseguir que la velocidad máxima, que se alcanzará antes o después dependiendo del valor de `PLAYER_G`, sea mayor o menor. Usando valores pequeños podemos simular entornos de poca gravedad como el espacio exterior, la superficie de la luna, o el fondo del mar. El valor de 512 (equivalente a 8 píxeles por frame) podemos considerarlo el máximo, ya que valores superiores y caídas muy largas podrían resultar en _glitches_ y cosas raras.
 
 #### Salto
 
@@ -827,7 +827,7 @@ El siguiente set de parámetros describen el comportamiento del movimiento en el
     #define PLAYER_RX                   64      // Friction
 ```
 
-1. `PLAYER_MAX_VX` indica la velocidad máxima a la que el personaje se desplazará horizontalmente (o en cualquier dirección si el güego es en vista genital). Cuanto mayor sea este número, más correrá, y más lejos llegará cuando salte (horizontalmente). Un valor de 256 significa que el personaje correrá a un máximo de 256/64 = 4 píxels por frame.
+1. `PLAYER_MAX_VX` indica la velocidad máxima a la que el personaje se desplazará horizontalmente (o en cualquier dirección si el güego es en vista genital). Cuanto mayor sea este número, más correrá, y más lejos llegará cuando salte (horizontalmente). Un valor de 256 significa que el personaje correrá a un máximo de 256/64 = 4 píxeles por frame.
 
 2. `PLAYER_AX` controla la aceleración que sufre el personaje mientras el jugador pulsa una tecla de dirección. Cuando mayor sea el valor, antes se alcanzará la velocidad máxima. Valores pequeños hacen que “cueste arrancar”. Un valor de 48 significa que se tardará aproximadamente 6 frames (256/48) en alcanzar la velocidad máxima.
 
@@ -839,7 +839,7 @@ Usar valores pequeños de `PLAYER_AX` y `PLAYER_RX` harán que el personaje pare
 
 ¿Recordáis que explicamos como cada tile tiene un tipo de comportamiento asociado? Tiles que matan, que son obstáculos, plataformas, o interactuables. En esta sección (la última, por fin) de `my/config.h` definimos el comportamiento de cada uno de los 48 tiles del tileset completo **aunque estemos usando mapas *packed* de 16 tiles**.
 
-Tendremos que definir los comportamientos de los 48 tiles sin importar que nuestro güego utilice un tileset de 16 porque los tiles extra que no van en el mapa podrían llegar a aparecer por obra del script o de inyección de código. En Dogmole no vamos a poner ningún obstáculo “fuera de tileset”, pero güegos como los de la saga de **Ramiro el Vampiro** sí que tienen obstáculos de este tipo.
+Tendremos que definir los comportamientos de los 48 tiles sin importar que nuestro güego utilice un tileset de 16 porque los tiles extra que no van en el mapa podrían llegar a aparecer por obra del _script_ o de inyección de código. En Dogmole no vamos a poner ningún obstáculo “fuera de tileset”, pero güegos como los de la saga de **Ramiro el Vampiro** sí que tienen obstáculos de este tipo.
 
 Para poner los valores, simplemente abrimos el tileset y nos fijamos, están en el mismo orden en el que aparecen los tiles en el tileset:
 
@@ -861,7 +861,7 @@ Recuerda, además, que los tipos de tile son combinables *hasta donde tenga sent
 
 ## ¡Arf, arf, arf!
 
-Ah, ¿aún estás ahí? Pensaba que ya había conseguido aburrirte y quitarte todas las ganas de seguir con esto. Bien, veo que eres un tipo constante y con mucho podewwwr. Sí, ya hemos terminado de configurar nuestro güego. Ahora viene cuando lo compilamos. 
+Ah, ¿aún estás ahí? Pensaba que ya había conseguido aburrirte y quitarte todas las ganas de seguir con esto. Bien, veo que eres un tipo constante y con mucho podewwwr. Sí, ya hemos terminado de configurar nuestro güego. Ahora viene cuando lo compilamos.
 
 A estas alturas del cuento ya tendríamos que tener todo en su sitio y listo (salvo el script) para ser compilado. Incluso `compile.bat` debería tener ya el par de modificaciones necesarias (el nombre del juego y el tamaño del mapa en el conversor).
 
@@ -924,11 +924,11 @@ Como no nos gustan las cajas negras vamos a echar un vistazo a `compile.bat` par
     echo Hecho!
 ```
 
-En él vemos que se realiza toda una serie de fullerías dedicadas a convertir automáticamente todos los archivos implicados en la construcción de nuestro juego: script, mapa, enemigos y gráficos. Acto seguido **compila el juego** y posteriormente **construye la cinta**.
+En él vemos que se realiza toda una serie de fullerías dedicadas a convertir automáticamente todos los archivos implicados en la construcción de nuestro juego: _script_, mapa, enemigos y gráficos. Acto seguido **compila el juego** y posteriormente **construye la cinta**.
 
 ## Preparando el entorno
 
-El script `compile.bat` necesita saber donde está **z88dk**. Nosotros sabemos que está en `C:\z88dk10` porque lo descomprimimos ahí en el paso 1, pero cada vez que abramos una ventana de linea de comandos nueva habrá que recordarle al entorno donde está. Para eso ejecutamos `setenv.bat` que debería mostrar la versión de `zcc` si todo fue bien, algo así:
+El _script_ `compile.bat` necesita saber donde está **z88dk**. Nosotros sabemos que está en `C:\z88dk10` porque lo descomprimimos ahí en el paso 1, pero cada vez que abramos una ventana de línea de comandos nueva habrá que recordarle al entorno donde está. Para eso ejecutamos `setenv.bat` que debería mostrar la versión de `zcc` si todo fue bien, algo así:
 
 ```
     $ setenv.bat
@@ -938,4 +938,4 @@ El script `compile.bat` necesita saber donde está **z88dk**. Nosotros sabemos q
 
 Una vez hecho esto no tenemos más que ejecutar `compila.bat` y, tras un mágico proceso que podremos ver suceder ante nuestros atónitos óculos, obtendremos un archivo `tap` que se llame igual que nuestro juego (el valor de `game` en `compile.bat`). En nuestro caso `dogmole.tap`. Nos vamos rápido y lo cargamos en el emu para ver que todo se mueve y está en su sitio.
 
-Y como ya nos duele la cabeza a tí y a mí, pues lo dejamos hasta el capítulo que viene. Si decidiste empezar con algo sencillo tipo **Lala Prologue** o **Sir Ababol**, ya has terminado. Si no, aún hay muchas cosas por hacer.
+Y como ya nos duele la cabeza a ti y a mí, pues lo dejamos hasta el capítulo que viene. Si decidiste empezar con algo sencillo tipo **Lala Prologue** o **Sir Ababol**, ya has terminado. Si no, aún hay muchas cosas por hacer.

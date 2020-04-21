@@ -10,7 +10,7 @@ Ya queda poco que dibujar. En este capítulo vamos a explicar dos cosas: por un 
 
 ## Sprites Extra
 
-Además del spriteset que vimos en el anterior capítulo, **MTE MK1** utiliza algunos gráficos más si se activan algunas opciones. En concreto, si los enemigos pueden morirse necesitaremos un gráfico de explosión, y si el personaje dispara necesitaremos un gráfico de bala. El paquete trae unos por defecto que se pueden cambiar muy fácilmente (de nuevo, aquellos de vosotros que hayáis catado **MTE MK1** con anterioridad agradeceréis mucho este cambio). 
+Además del spriteset que vimos en el anterior capítulo, **MTE MK1** utiliza algunos gráficos más si se activan algunas opciones. En concreto, si los enemigos pueden morirse necesitaremos un gráfico de explosión, y si el personaje dispara necesitaremos un gráfico de bala. El paquete trae unos por defecto que se pueden cambiar muy fácilmente (de nuevo, aquellos de vosotros que hayáis catado **MTE MK1** con anterioridad agradeceréis mucho este cambio).
 
 Huelga decir que si tu güego no tiene enemigos pisables ni balas, o si te valen las que hay, puedes pasar de esta sección como de la cacota.
 
@@ -20,45 +20,45 @@ Para cambiar estos gráficos únicamente tenéis que sustituir los archivos `spr
 
 La explosión es un sprite de 16×16. Para cambiarla tendremos que sustituir `/gfx/sprites_extra.png` por un nuevo archivo. Si recordáis como estaba construido el spriteset del juego, este archivo es parecido pero solo trae un gráfico y su máscara. Por tanto, deberá tratarse de una imagen de 32×16 que tenga este aspecto (el archivo está incluido en el paquete de archivos de este capítulo):
 
-![Una nueva explosión](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/05_explosion.png) 
+![Una nueva explosión](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/05_explosion.png)
 
-Una vez hecho, lo guardamos, como hemos dicho, como `\gfx\sprites_extra.png`, sustituyendo al que viene por defecto.
+Una vez hecho, lo guardamos, como hemos dicho, como `/gfx/sprites_extra.png`, sustituyendo al que viene por defecto.
 
 ### Cambiando el disparo
 
-El disparo original es una bolita de centrada en un cuadro de c. Pusimos una bolita porque usamos el mismo gráfico para disparos en todas las direcciones, así que una forma “orientada” no nos vale. Por lo tanto, vuestra nueva bala debe ser igualmente un gráfico de 8×8 que valga para todas las direcciones.
+El disparo original es una bolita centrada en un cuadro. Pusimos una bolita porque usamos el mismo gráfico para disparos en todas las direcciones, así que una forma “orientada” no nos vale. Por lo tanto, vuestra nueva bala debe ser igualmente un gráfico de 8×8 que valga para todas las direcciones.
 
 De forma muy parecida al sprite de la explosión tendremos que crear una imagen para definir la bala y su máscara. Esta vez, al ser el gráfico de 8×8, la imagen deberá ser de 16×8 para incluir la máscara; algo así:
 
-![Una nueva explosión](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/05_bala.png) 
+![Una nueva explosión](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/05_bala.png)
 
-Una vez hecho, lo guardamos, como hemos dicho, como `\gfx\sprites_bullet.png`, sustituyendo al que viene por defecto.
+Una vez hecho, lo guardamos, como hemos dicho, como `/gfx/sprites_bullet.png`, sustituyendo al que viene por defecto.
 
 Como **Dogmole** no utiliza balas, no hay ningún archivo nuevo de bala en el paquetito de archivos de este capítulo.
 
 ## Pantallas fijas
 
-Bueno, vamos con el tema de las pantallas fijas. Básicamente, los güegos de **MTE MK1** llevan tres pantallas fijas: la pantalla de título, que es la que muestra, además, el menú (para seleccionar el tipo de control y empezar a jugar), la pantalla del marco de juego, donde se ubicarán los marcadores de vidas, objetos, y cosas así, y la pantalla del final, que será la que se mostrará una vez que el jugador haya cumplido el objetivo encomendado. Además tenemos una pantalla de carga que se muestra mientras te tomas el bocata de nocilla.
+Bueno, vamos con el tema de las pantallas fijas. Básicamente, los güegos de **MTE MK1** llevan tres pantallas fijas: la pantalla de título, que es la que muestra, además, el menú (para seleccionar el tipo de control y empezar a jugar), la pantalla del marco de juego, donde se ubicarán los marcadores de vidas, objetos, y cosas así, y la pantalla del final, que será la que se mostrará una vez que el jugador haya cumplido el objetivo encomendado. Además tenemos una pantalla de carga que se muestra mientras te tomas el bocata de Nocilla.
 
 Para ahorrar memoria, además, se ofrece la posibilidad de que la pantalla de título y la pantalla con el marco del juego sean la misma, con lo que ahorraremos bastante, y que será la opción que tomaremos para nuestro Dogmole.
 
-Otra cosa que no quiero dejar de mencionar es que las pantallas se almacenan en el güego en formato comprimido. El tipo de compresión empleado (como casi todas las compresiones) funciona mejor cuanto más sencillas sean las imagenes. O sea: cuanta más repetición y/o menos cosas haya en las pantallas, menos ocuparán al final. Ten esto muy en cuenta. Si te ves apurado de memoria, una forma de ahorrar que funciona muy bien es hacer que tus pantallas fijas sean menos complejas.
+Otra cosa que no quiero dejar de mencionar es que las pantallas se almacenan en el güego en formato comprimido. El tipo de compresión empleado (como casi todas las compresiones) funciona mejor cuanto más sencillas sean las imágenes. O sea: cuanta más repetición y/o menos cosas haya en las pantallas, menos ocuparán al final. Ten esto muy en cuenta. Si te ves apurado de memoria, una forma de ahorrar que funciona muy bien es hacer que tus pantallas fijas sean menos complejas.
 
 ## La pantalla de título
 
 Como ya hemos mencionado, se trata de la pantalla que se muestra con el título del güego y las opciones de control. La selección de control es fija: si el jugador pulsa 1 seleccionará el control por teclado. Si pulsa 2, elegirá Kempston, y si pulsa 3 es porque quiere jugar con un joystick de la norma Sinclair (Interface 2, puerto 1). ¿Qué quiere decir esto? Pues que tendremos que dibujar una pantalla que, además del título del güego, muestre estras tres opciones. Por ejemplo, algo así:
 
-![Pantalla de título de Lala Prologue Beta](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/05_title_lala.png) 
+![Pantalla de título de Lala The Magikal Beta](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/05_title_lala.png)
 
-Cuando hagas la tuya, guárdala como `title.png` en el directorio `\gfx`.
+Cuando hagas la tuya, guárdala como `title.png` en el directorio `/gfx`.
 
 ## La pantalla del marco de juego
 
 Aquí sí que hay más chicha. La pantalla del marco del juego debe reservar varias zonas importantes y luego separarlas con un adorno e indicadores. Las zonas que tenemos que reservar son:
 
-1. El **área de juego**, que es donde pasan las cosas. Como habrás adivinado, debe ser igual de grande que cada una de nuestras pantallas. Si recuerdas, las pantallas son de 15×10 tiles y, por tanto, ocupan 240×160 píxels. Debes reservar una zona de ese tamaño como área principal de juego.
+1. El **área de juego**, que es donde pasan las cosas. Como habrás adivinado, debe ser igual de grande que cada una de nuestras pantallas. Si recuerdas, las pantallas son de 15×10 tiles y, por tanto, ocupan 240×160 píxeles. Debes reservar una zona de ese tamaño como área principal de juego.
 
-2. El **marcador de vidas/energía/vitalidad/lo que sea**: son dos dígitos que se dibujarán con la fuente que definiste cuando hicimos el tileset. Debes ubicarlo en alguna parte del marco, añadiendo algún gráfico que le de significado. Nosotros solemos poner un dibujito del protagonista y una “x”, como verás en los ejemplos.
+2. El **marcador de vidas/energía/vitalidad/lo que sea**: son dos dígitos que se dibujarán con la fuente que definiste cuando hicimos el tileset. Debes ubicarlo en alguna parte del marco, añadiendo algún gráfico que le dé significado. Nosotros solemos poner un dibujito del protagonista y una “x”, como verás en los ejemplos.
 
 3. El **marcador de llaves** (si usas llaves en tu güego). Tiene las mismas características que el marcador de vidas.
 
@@ -79,7 +79,7 @@ Veámoslo con un ejemplo. Esta es la pantalla del marco de juego de **Lala Prolo
 
 Como digo, hay que apuntar todos esos valores porque habrá que usarlos a la hora de construir la configuración de nuestro güego, dentro de un par de capítulos.
 
-Cuando tengas la tuya, se graba como `marco.png` en el directorio `\gfx`.
+Cuando tengas la tuya, se graba como `marco.png` en el directorio `/gfx`.
 
 ## Pantalla de título y marco combinados
 
@@ -97,7 +97,7 @@ Como vemos, por un lado tenemos el título del güego y las opciones de control,
 4. El contador de vidas se dibujará en (22, 21)
 5. Por último, el contador de llaves lo tendremos en (27, 21).
 
-En este caso, la pantalla de título/marco combinados se guarda como `title.png` en `\gfx`. No habrá archivo `marco.png` para los juegos que combinen título y marco en la misma pantalla, como es nuestro caso con **Dogmole**.
+En este caso, la pantalla de título/marco combinados se guarda como `title.png` en `/gfx`. No habrá archivo `marco.png` para los juegos que combinen título y marco en la misma pantalla, como es nuestro caso con **Dogmole**.
 
 ## La pantalla del final
 
@@ -109,13 +109,13 @@ Cuando la tengamos la grabaremos como `ending.png` en el directorio `/gfx`.
 
 ## La pantalla de carga
 
-La pantalla de carga es la que se muestra mientras... bueno, ya tu sabeh. Debe guardarse igualmente en `/gfx` y llamarse `loading.png`. 
+La pantalla de carga es la que se muestra mientras... bueno, ya tu sabeh. Debe guardarse igualmente en `/gfx` y llamarse `loading.png`.
 
 ## Convirtiendo las pantallas a formato Spectrum y comprimiendo
 
-Todo el proceso está automatizado en `compile.bat` pero vamos a ver como es y de qué se trata, como viene siendo costumbre.
+Todo el proceso está automatizado en `compile.bat` pero vamos a ver cémo es y de qué se trata, como viene siendo costumbre.
 
-La conversión de imagenes PNG a formato de spectrum (que se suele llamar SCR) se realiza mediante otra utilidad del toolchain, `png2scr`. De nuevo, si la ejecutamos desde la ventana de linea de comandos sin parámetros nos los chiva:
+La conversión de imágenes PNG a formato de Spectrum (que se suele llamar SCR) se realiza mediante otra utilidad del _toolchain_, `png2scr`. De nuevo, si la ejecutamos desde la ventana de línea de comandos sin parámetros nos los chiva:
 
 ```
 $ ..\utils\png2scr.exe
@@ -135,12 +135,12 @@ Si abres `compile.bat` en tu editor de textos verás toda una sección dedicada 
     ..\utils\png2scr.exe ..\gfx\title.png ..\gfx\title.scr > nul
     ..\utils\png2scr.exe ..\gfx\marco.png ..\gfx\marco.scr > nul
     ..\utils\png2scr.exe ..\gfx\ending.png ..\gfx\ending.scr > nul
-    ..\utils\png2scr.exe ..\gfx\loading.png loading.bin > nul   
+    ..\utils\png2scr.exe ..\gfx\loading.png loading.bin > nul
 ```
 
 ## Comprimiendo las pantallas
 
-Como te habrás dado cuenta, los 6912 bytes que ocupa cada pantalla por tres (o por dos) son un pasote, por lo que habrá que comprimirlas. Para eso usaremos el compresor `apultra.exe` que comprime un binario en formato aplib. Tranqui, lo hemos incluido en la carpeta utils. 
+Como te habrás dado cuenta, los 6912 bytes que ocupa cada pantalla por tres (o por dos) son un pasote, por lo que habrá que comprimirlas. Para eso usaremos el compresor `apultra.exe` que comprime un binario en formato aplib. Tranqui, lo hemos incluido en la carpeta utils.
 
 De nuevo, `compile.bat` se encargará de comprimir las pantallas de título, marco y final (la de carga va a pelo en el `.tap` ya que usaremos un sencillo cargador BASIC de toda la vida):
 

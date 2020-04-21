@@ -4,28 +4,28 @@ En este directorio está disponible la documentación existente sobre **MTE MK1*
 
 ## El tutorial
 
-* [Capítulo 1: Introducción](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap01.md)
-* [Capítulo 2: Tileset](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap02.md)
-* [Capítulo 3: Mapas](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap03.md)
-* [Capítulo 4: Sprites](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap04.md)
-* [Capítulo 5: Terminando los gráficos](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap05.md)
-* [Capítulo 6: Colocando cosas](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap06.md)
-* [Capítulo 7: Primer montaje](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap07.md)
-* [Capítulo 8: Empezando con el scripting](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap08.md)
-* [Capítulo 9: Scripting básico](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap09.md)
-* [Capítulo 10: Música y FX (48K)](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap10.md)
-* [Capítulo 11: Code Injection Points](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap11.md)
-* [Capítulo 12: Juegos multinivel (48K)](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap12.md)
-* [Capítulo 13: Un juego de 128K](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap13.md)
-* [Capítulo 14: Sonido 128K](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap14.md)
-* [Capítulo 15: Custom Vertical Engine](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap15.md)
+* [Capítulo 1: Introducción](./tutorial-cap01.md)
+* [Capítulo 2: Tileset](./tutorial-cap02.md)
+* [Capítulo 3: Mapas](./tutorial-cap03.md)
+* [Capítulo 4: Sprites](./tutorial-cap04.md)
+* [Capítulo 5: Terminando los gráficos](./tutorial-cap05.md)
+* [Capítulo 6: Colocando cosas](./tutorial-cap06.md)
+* [Capítulo 7: Primer montaje](./tutorial-cap07.md)
+* [Capítulo 8: Empezando con el scripting](./tutorial-cap08.md)
+* [Capítulo 9: Scripting básico](./tutorial-cap09.md)
+* [Capítulo 10: Música y FX (48K)](./tutorial-cap10.md)
+* [Capítulo 11: Code Injection Points](./tutorial-cap11.md)
+* [Capítulo 12: Juegos multinivel (48K)](./tutorial-cap12.md)
+* [Capítulo 13: Un juego de 128K](./tutorial-cap13.md)
+* [Capítulo 14: Sonido 128K](./tutorial-cap14.md)
+* [Capítulo 15: Custom Vertical Engine](./tutorial-cap15.md)
 
 ## Referencias
 
-* [API de **MTE MK1**](https://github.com/mojontwins/MK1/blob/master/docs/API.md)
-* [Sistema de scripting MSC3](https://github.com/mojontwins/MK1/blob/master/docs/scripting.md)
-* [Code Injection Points](https://github.com/mojontwins/MK1/blob/master/docs/code_injection.md)
-* [Herramientas de **MTE MK1**](https://github.com/mojontwins/MK1/blob/master/docs/tools.md)
+* [API de **MTE MK1**](./API.md)
+* [Sistema de scripting MSC3](./scripting.md)
+* [Code Injection Points](./code_injection.md)
+* [Herramientas de **MTE MK1**](./tools.md)
 
 ## Post Mortems
 
