@@ -709,6 +709,12 @@ En **Dogmole** no usaremos sombras de ningún tipo, porque las de atributos no n
 Si definimos `UNPACKED_MAP` estaremos diciéndole al motor que nuestro mapa es de 48 tiles.
 
 ```c
+    #define PACKED_MAP_ALT_TILE         19      // If defined, in 16 tiles mode, alt tile (default 19)
+```
+
+Si estamos en modo "packed" (16 tiles en tu tileset), `PACKED_MAP_ALT_TILE` es el número de tile por el que se sustituye el 0 de forma aleatoria. Si lo comentas, no se sustituirá por ninguno (ahorrando un poco de código, además).
+
+```c
     //#define NO_MASKS                          // Sprites are rendered using OR instead of masks.
     //#define MASKED_BULLETS                    // If needed
 ```

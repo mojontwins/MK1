@@ -104,7 +104,7 @@ Está formada por cuatro tiles que son, de izquierda a derecha:
 
 3. El **tile 18** representa las **llaves**. Si hemos decidido incluir llaves y cerrojos, pintaremos la llave en este tile.
 
-4. El **tile 19** es el **fondo alternativo**. Para dar un poco de *age* a las pantallas, de forma aleatoria, se pintará este tile de vez en cuando en vez del tile 0. Por ejemplo, si tu tile 0 es el cielo, puedes poner una estrellica en este tile. O, si estás haciendo un güego de perspectiva genital, puedes poner una variación del suelo. **Este fondo alternativo sólo funciona en tilesets de 16 tiles**.
+4. El **tile 19** es el **fondo alternativo**. Para dar un poco de *age* a las pantallas, de forma aleatoria, se pintará este tile de vez en cuando en vez del tile 0. Por ejemplo, si tu tile 0 es el cielo, puedes poner una estrellica en este tile. O, si estás haciendo un güego de perspectiva genital, puedes poner una variación del suelo. **Este fondo alternativo sólo funciona en tilesets de 16 tiles**. A partir de la versión 5.3 se puede desactivar o elegir otro tile diferente.
 
 ¿Se pilla bien? Básicamente hay que dibujar 20 tiles: 16 para hacer el mapa, y 4 para representar objetos y restar monotonía de los fondos. Huelga decir que si, por ejemplo, no vas a usar llaves y cerrojos en tu güego, te puedes ahorrar pintar la llave en el tile 18.
 

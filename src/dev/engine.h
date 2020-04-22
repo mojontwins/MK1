@@ -290,6 +290,7 @@ void draw_scr_background (void) {
 						add hl, bc
 						ld  (hl), a
 
+				#ifdef PACKED_MAP_ALT_TILE
 						ld  a, (__t)
 						or  a
 						jr  nz, _draw_scr_packed_noalt
@@ -305,10 +306,12 @@ void draw_scr_background (void) {
 						jr  _draw_scr_packed_noalt
 
 					._draw_scr_packed_alt_subst
-						ld  a, 19
+						ld  a, PACKED_MAP_ALT_TILE
 						ld  (__t), a
 
 					._draw_scr_packed_noalt
+				#endif
+
 						ld  hl, _map_buff
 						add hl, bc
 						

@@ -23,6 +23,8 @@ En principio, para activar el multinivel sólo tendremos que tocar un par de cos
 
 Esto activará los manejes necesarios para el multiniveleo y además indicará que el número de niveles de nuestra secuencia será 3. O sea, que tendremos tres niveles.
 
+Si queremos usar un spriteset diferente en cada nivel tendremos que descomentar `PER_LEVEL_SPRITESET`.
+
 ## Modificando `compile.bat`
 
 Como hemos dicho, los recursos comprimidos se descomprimirán sobre "espacios" especiales para cada tipo de datos que maneja el motor. Por lo general, esto implica que no tendremos que generar enemigos o mapas desde `compile.bat`. Lo único que vamos a dejar es la generación de un tileset "vacío" (porque necesitamos la fuente), un spriteset y las pantallas fijas. De hacer hueco para el resto ya se encarga **MTE MK1** con la configuración que le hemos hecho. Por tanto abrimos en `compile.bat` y:
