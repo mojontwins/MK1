@@ -19,6 +19,7 @@ En este directorio está disponible la documentación existente sobre **MTE MK1*
 * [Capítulo 13: Un juego de 128K](./tutorial-cap13.md)
 * [Capítulo 14: Sonido 128K](./tutorial-cap14.md)
 * [Capítulo 15: Custom Vertical Engine](./tutorial-cap15.md)
+* [Capítulo 16: Más de 16 gráficos para *sprites*](./tutorial-cap16.md)
 
 ## Referencias
 
