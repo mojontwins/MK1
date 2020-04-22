@@ -43,23 +43,17 @@ Para manejarnos cómodamente con ellos los vamos a meter en un array muy parecid
     };
 ```
 
-Hecho esto, utilizaremos `my/ci/enems_extra_actions.h` para cambiar el sprite calculado para los enemigos cuando andan hacia la derecha, y además hacia arriba también si tenemos configurada la vista *genital*:
+Hecho esto, utilizaremos `my/ci/enems_extra_actions.h` para cambiar el sprite calculado para los enemigos cuando andan hacia la izquierda o hacia arriba
 
 ```c
     // enems_extra_actions.h
 
-    if (
-        #ifdef PLAYER_GENITAL
-            _en_mx < 0 || _en_my < 0
-        #else
-            _en_mx < 0
-        #endif
-    ) {
+    if (_en_mx < 0 || _en_my < 0) {
         en_an_next_frame [enit] = extra_enem_cells [en_an_base_frame [enit] + en_an_frame [enit]];
     }
 ```
 
-`en_an_base_frame [enit]` vale 0, 2, 4 o 6 dependiendo del tipo del enemigo (1 a 4) y `en_an_frame [enit]` va haciendo *flip-flop* cambiando entre 0 y 1 cada 4 cuadros. Lo que hacemos es que si el muñeco va hacia la izquierda (o hacia arriba en modo genital), elegimos el sprite de nuestro nuevo array `extra_enems_cells`. En caso contrario, `en_an_next_frame` tendrá el valor estándar obtenido de `enem_cells` (que es el comportamiento natural de **MTE MK1**).
+`en_an_base_frame [enit]` vale 0, 2, 4 o 6 dependiendo del tipo del enemigo (1 a 4) y `en_an_frame [enit]` va haciendo *flip-flop* cambiando entre 0 y 1 cada 4 cuadros. Lo que hacemos es que, si el muñeco va hacia la izquierda o hacia arriba, elegimos el sprite de nuestro nuevo array `extra_enems_cells`. En caso contrario, `en_an_next_frame` tendrá el valor estándar obtenido de `enem_cells` (que es el comportamiento natural de **MTE MK1**).
 
 ## Y listo
 
