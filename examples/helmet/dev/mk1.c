@@ -73,8 +73,6 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 	#include "assets/librarian.h"
 #endif
 
-#include "my/ci/extra_vars.h"
-
 #include "aplib.h"
 #include "pantallas.h"
 
@@ -89,6 +87,8 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 	#include "assets/sprites.h"
 	#include "assets/extrasprites.h"
 #endif
+
+#include "my/ci/extra_vars.h"
 
 #ifdef MODE_128K
 	#include "wyzplayer.h"

@@ -176,7 +176,10 @@
 			simple_coco_update ();
 		#endif
 
-		if (p_killme) player_kill (p_killme);
+		if (p_killme) {
+			player_kill (p_killme);
+			#include "my/ci/on_player_killed.h"
+		}
 
 		#ifdef PLAYER_CAN_FIRE
 			// Move bullets 			

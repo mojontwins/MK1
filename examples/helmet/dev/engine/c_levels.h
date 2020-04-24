@@ -24,7 +24,7 @@ void prepare_level (void) {
 		unpack ((unsigned int) levels [level].c_behs, (unsigned int) (behs));
 
 		#ifdef PER_LEVEL_SPRITESET
-			unpack ((unsigned int) levels [level].c_sprites, (unsigned int) (sprites));
+			unpack ((unsigned int) levels [level].c_sprites, (unsigned int) (sprites + 16));
 		#endif
 
 		level_data->map_w = levels.map_w;
