@@ -141,6 +141,8 @@ void enems_load (void) {
 			#endif
 		#endif
 
+		en_an_next_frame [enit] = sprite_18_a;
+
 		switch (malotes [enoffsmasi].t & 0x1f) {
 			case 1:
 			case 2:
@@ -184,12 +186,7 @@ void enems_load (void) {
 			#endif
 
 				#include "my/ci/enems_load.h"
-
-			default:
-				en_an_next_frame [enit] = sprite_18_a;
 		}
-
-		malotes [enoffsmasi].t &= 0x1f;
 
 		#include "my/ci/enems_extra_mods.h"
 	}
@@ -284,6 +281,8 @@ void enems_move (void) {
 
 				ld  a, (hl)
 				ld  (__en_t), a
+				and 0x1f
+				ld  (_rdt), a
 
 			#ifdef PLAYER_CAN_FIRE
 				inc hl 
@@ -316,7 +315,7 @@ void enems_move (void) {
 			#endif
 		#endif
 
-		switch (_en_t) {
+		switch (rdt) {
 			case 1:
 			case 2:
 			case 3:
@@ -326,7 +325,7 @@ void enems_move (void) {
 			#endif
 				#include "engine/enem_mods/enem_type_lineal.h"
 				#ifdef ENABLE_ORTHOSHOOTERS
-					if (_en_t == 5) {
+					if (rdt == 5) {
 						#include "engine/enem_mods/enem_type_orthoshooters.h"
 					}
 				#endif
@@ -443,9 +442,9 @@ void enems_move (void) {
 					// Step over enemy		
 						#ifdef PLAYER_CAN_STEP_ON_FLAG
 							if (flags [PLAYER_CAN_STEP_ON_FLAG] != 0 && 
-								gpy < _en_y - 2 && p_vy >= 0 && _en_t >= PLAYER_MIN_KILLABLE)
+								gpy < _en_y - 2 && p_vy >= 0 && rdt >= PLAYER_MIN_KILLABLE)
 						#else
-							if (gpy < _en_y - 2 && p_vy >= 0 && _en_t >= PLAYER_MIN_KILLABLE)
+							if (gpy < _en_y - 2 && p_vy >= 0 && rdt >= PLAYER_MIN_KILLABLE)
 						#endif				
 						{
 							#ifdef MODE_128K
@@ -519,7 +518,7 @@ void enems_move (void) {
 			#ifdef PLAYER_CAN_FIRE
 				// Collide with bullets
 				#ifdef FIRE_MIN_KILLABLE
-					if (_en_t >= FIRE_MIN_KILLABLE)
+					if (rdt >= FIRE_MIN_KILLABLE)
 				#endif				
 				{
 					for (gpjt = 0; gpjt < MAX_BULLETS; gpjt ++) {

@@ -219,7 +219,7 @@ unsigned char maincounter;
 
 // Engine globals (for speed) & size!
 
-unsigned char gpx, gpox, gpy, gpd, gpc, gpt;
+unsigned char gpx, gpox, gpy, gpd, gpc;
 unsigned char gpxx, gpyy, gpcx, gpcy;
 unsigned char possee, hit_v, hit_h, hit, wall_h, wall_v;
 unsigned char gpen_x, gpen_y, gpen_cx, gpen_cy, gpaux;
@@ -230,7 +230,7 @@ unsigned char *map_pointer;
 #ifdef PLAYER_CAN_FIRE
 	unsigned char blx, bly;
 #endif
-unsigned char rdx, rdy, rda, rdb, rdc, rdd, rdn;
+unsigned char rdx, rdy, rda, rdb, rdc, rdd, rdn, rdt;
 
 // More stuff
 

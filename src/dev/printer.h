@@ -4,7 +4,7 @@
 // Printing functions
 
 unsigned char attr (unsigned char x, unsigned char y) {
-	if (x >= 14 || y >= 10) return 0;
+	if (x >= 15 || y >= 10) return 0;
 	return map_attr [x + (y << 4) - y];
 }
 
