@@ -342,14 +342,14 @@ Y crear un archivo `list.txt` en `bin/` con la lista de todos los binarios, uno 
 
 ### La OGT
 
-Como hemos dicho, no nos detendremos en cómo montar una OGT aqui, sino que lo dejaremos para otro capítulo. Aquí sólo veremos cómo generar RAM1 a partir de una OGT ya hecha.
+Como hemos dicho, no nos detendremos en cómo montar una OGT aqui, sino que lo dejaremos [para otro capítulo](https://github.com/mojontwins/MK1/blob/master/docs/tutorial-cap14.md). Aquí sólo veremos cómo generar RAM1 a partir de una OGT ya hecha.
 
 Pondremos en `mus/` todo lo necesario, a saber:
 
 1. `WYZproPlay47aZXc.ASM`, el código del _player_, ya modificado con la lista de canciones, e incluyendo nuestros instrumentos y efectos de sonido.
-2. `instrumentos.asm`, con los instrumentos según exporta Wyz Player.
-3. `efectos.asm`, con los efectos según los exporta Wyz Player.
-4. `*.mus`, todas las canciones.
+2. `instrumentos.asm`, con los instrumentos según exporta Wyz Tracker.
+3. `efectos.asm`, con los efectos según los exporta Wyz Tracker.
+4. `*.mus.bin`, todas las canciones exportadas desde Wyz Tracker y comprimidas con `apultra`.
 
 Con todo en su sitio, sólo tendremos que llamar al ensamblador `Pasmo`, incluido en `/src/utils/`, para generar RAM1.bin y colocarla en `bin/`. Añadimos una última línea a nuestro `build_assets.bat`:
 
