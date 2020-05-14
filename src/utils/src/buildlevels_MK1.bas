@@ -378,12 +378,12 @@ For y = 0 To (10 * map_h) - 1
 		' Autodetect lock
 		If d = tile_lock Then
 			If numlocks = 32 Then Puts ("ERROR! No more than 32 locks allowed!!"): End
-			x_pant = x \ 15: y_pant = y \ 10
-			Puts "    lock @ (" & x & ", " & y & ") => (" & x_pant & ", " & y_pant & ")=" & (x_pant + y_pant * map_w) & "."
+			x_pant = x \ 15: y_pant = y \ 10			
 			l (numlocks).np = x_pant + y_pant * map_w
 			l (numlocks).x = x Mod 15
-			l (numlocks).y = y Mod 15
+			l (numlocks).y = y Mod 10
 			l (numlocks).st = 1
+			Puts "    lock @ " & l (numlocks).np & " (" & l (numlocks).x & ", " & l (numlocks).y & ")"
 			numlocks = numlocks + 1
 		End If
 	Next x
