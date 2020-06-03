@@ -21,6 +21,10 @@
 #define FIXBITS 		6	
 #define MAX_ENEMS 		3			
 
+// Fiddle if you need
+#define MAX_TILANIMS	16
+#define TILANIMS_PRIME	7
+
 /* splib2 memory map
 61440 - 61696 IM2 vector table
 61697 - 61936 FREEPOOL (240 bytes)

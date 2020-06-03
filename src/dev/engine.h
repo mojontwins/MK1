@@ -329,15 +329,15 @@ void draw_scr_background (void) {
 				#endasm
 			#endif
 
-			draw_coloured_tile ();
-			
-			#if defined ENABLE_TILANIMS && defined UNPACKED_MAP
-				// Detect tilanims
+			#ifdef ENABLE_TILANIMS
 				if (_t >= ENABLE_TILANIMS) {
-					add_tilanim ((_x - VIEWPORT_X) >> 1, (_y - VIEWPORT_Y) >> 1, _t);	
+					_n = (((_x - VIEWPORT_X) << 3) & 0xf0) | ((_y - VIEWPORT_Y) >> 1);
+					tilanims_add ();	
 				}
 			#endif
-				
+
+			draw_coloured_tile ();
+
 			//_x += 2; if (_x == VIEWPORT_X + 30) { _x = VIEWPORT_X; _y += 2; }
 			#asm
 					ld  a, (__x)
@@ -362,7 +362,7 @@ void draw_scr (void) {
 	is_rendering = 1;
 
 	#ifdef ENABLE_TILANIMS
-		max_tilanims = 0;
+		tilanims_reset ();
 	#endif
 
 	#ifdef ENABLE_FIRE_ZONE
