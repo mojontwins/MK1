@@ -1,5 +1,5 @@
-' Imanol v0.1 [MK2 0.90+]
-' Copyleft 2015 by The Mojon Twins
+' Imanol v0.3.20200604
+' Copyleft 2015,2020 by The Mojon Twins
 
 ' Compile with fbc imanol.bas cmdlineparser.bas
 
@@ -26,7 +26,7 @@ Sub usage
 End Sub
 
 Function myFileLen (fileName As String) As Integer
-	Dim As Integer fTemp, length
+	Dim As uInteger fTemp, length
 	fTemp = FreeFile
 	Open fileName For Binary As fTemp
 	length = Lof (fTemp)
@@ -35,7 +35,7 @@ Function myFileLen (fileName As String) As Integer
 End Function
 
 Function getParmVal (parm As String) As Integer
-	Dim As Integer result
+	Dim As uInteger result
 	result = Val (parm)
 	If result = 0 Then 
 		If FileExists (parm) Then result = myFileLen (parm)
@@ -45,14 +45,14 @@ End Function
 
 ' Variables
 
-Dim As Integer fIn, fOut, cpos, from, cto, offset, filel, result, ccpos, i, lastOp
+Dim As Integer fIn, fOut, cpos, from, cto, offset, filel, result, ccpos, i, lastOp, quotes
 Dim As String linea
 Dim As String leftTrim, rightTrim, find, replace, portn, m
 
 ' GO!
 
-Print "imanol v0.2"
-Print "Pattern Find And Replace Preprocessor for MK2 0.90+"
+Print "imanol v0.3.20200604"
+Print "Pattern Find And Replace Preprocessor"
 Print ""
 
 ' Get command line parameters parsed.
@@ -109,12 +109,16 @@ While Not Eof (fIn)
 				lastOp = 0
 				
 				' Parse (simple, tokenize by +, -)
+				' New: Understands QUOTES
 				result = 0
+				quotes = 0
 				replace = replace & "+"
 				portn = ""
 				For i = 1 To Len (replace)
 					m = Mid (replace, i, 1)
-					If m = "+" Or m = "-" Then
+					If m = Chr(34) Or m = "'" Then
+						If quotes Then quotes = 0 Else quotes = -1
+					ElseIf Not quotes And (m = "+" Or m = "-") Then
 						If lastOp = 0 Then 
 							result = result + getParmVal (portn)
 						Else
