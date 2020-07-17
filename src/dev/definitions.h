@@ -31,8 +31,15 @@ void *u_free = sp_FreeBlock;
 
 // Safe stuff in low(est) RAM
 
-unsigned char safe_byte @ 23296;
+unsigned char safe_byte 		@ 23296;
 
+unsigned int ram_address 		@ 23297;
+unsigned int ram_destination 	@ 23299;
+
+#ifdef MODE_128K
+	unsigned char ram_page 		@ 23301;
+#endif
+	
 // Globales muy globalizadas
 
 struct sp_SS *sp_player;
@@ -173,7 +180,7 @@ unsigned char map_attr [150];
 unsigned char map_buff [150] @ FREEPOOL;
 // Breakable walls/etc
 #ifdef BREAKABLE_WALLS
-	unsigned char brk_buff [150] @ 23297;
+	unsigned char brk_buff [150] @ 23296+16;
 #endif
 
 // posición del objeto (hotspot). Para no objeto,
