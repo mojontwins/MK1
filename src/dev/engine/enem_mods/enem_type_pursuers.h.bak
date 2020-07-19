@@ -9,8 +9,8 @@
 				_en_x = _en_x1;
 				_en_y = _en_y1;
 				en_an_alive [enit] = 1;
-				en_an_rawv [enit] = 1 << (rand () & 3);
-				if (en_an_rawv [enit] > PURSUERS_MAX_V) en_an_rawv [enit] = 2;
+				en_an_rawv [enit] = 1 << (rand () % 5);
+				if (en_an_rawv [enit] > 4) en_an_rawv [enit] = 2;
 				en_an_dead_row [enit] = 11 + (rand () & 7);
 				#if defined(PLAYER_STEPS_ON_ENEMIES) || defined(PLAYER_CAN_FIRE)							
 					_en_life = ENEMIES_LIFE_GAUGE;
