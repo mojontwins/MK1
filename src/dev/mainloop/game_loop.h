@@ -3,6 +3,11 @@
 
 // game_loop.h - Da game loop.
 
+	#asm
+		; Makes debugging easier
+		._game_loop_init
+	#endasm
+
 	playing = 1;
 	player_init ();
 
@@ -86,6 +91,11 @@
 
 	o_pant = 0xff;
 	while (playing) {
+		#asm
+			; Makes debugging easier
+			._game_loop_do
+		#endasm
+
 		#ifdef DEBUG_KEYS
 			if (sp_KeyPressed (KEY_M)) { ++ p_objs; beep_fx (0); }
 			if (sp_KeyPressed (KEY_H)) { ++ n_pant; beep_fx (0); }
@@ -177,8 +187,10 @@
 		#endif
 
 		if (p_killme) {
+			if (p_life) {
 			player_kill (p_killme);
 			#include "my/ci/on_player_killed.h"
+			} else playing = 0;
 		}
 
 		#ifdef PLAYER_CAN_FIRE
@@ -308,7 +320,8 @@
 		}
 		
 		// Game over condition
-		if (p_life == 0
+		#if defined ACTIVATE_SCRIPTING || (defined(TIMER_ENABLE) && defined(TIMER_GAMEOVER_0)) 
+			if (0
 			#ifdef ACTIVATE_SCRIPTING
 				|| (script_result == 2)
 			#endif
@@ -318,6 +331,7 @@
 		) {
 			playing = 0;				
 		}
+		#endif
 
 		#include "my/ci/extra_routines.h"
 	}
