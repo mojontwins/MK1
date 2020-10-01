@@ -15,7 +15,7 @@
 		void enems_init (void) {
 			enit = 0;
 			while (enit < MAP_W * MAP_H * 3) {
-				malotes [enit].t = malotes [enit].t & 15;	
+				malotes [enit].t = malotes [enit].t & 0xEF;	// Clear bit 4
 				#ifdef PLAYER_CAN_FIRE
 					malotes [enit].life = ENEMIES_LIFE_GAUGE;
 				#endif
@@ -226,7 +226,7 @@ void enems_move (void) {
 				ld 	hl, (_enoffsmasi)
 				ld  h, 0
 
-			#ifdef PLAYER_CAN_FIRE
+			#if defined PLAYER_CAN_FIRE || defined COMPRESSED_LEVELS
 				add hl, hl 				// x2
 				ld  d, h
 				ld  e, l 				// DE = x2
