@@ -10,8 +10,8 @@ void prepare_level (void) {
 		#endif
 		{
 			n_pant = level_data.scr_ini;
-			gpx = level_data->ini_x << 4; p_x = gpx << 6;
-			gpy = level_data->ini_y << 4; p_y = gpy << 6;
+			gpx = level_data->ini_x << 4; p_x = gpx << FIXBITS;
+			gpy = level_data->ini_y << 4; p_y = gpy << FIXBITS;
 		}
 
 		#ifdef ACTIVATE_SCRIPTING
@@ -37,8 +37,8 @@ void prepare_level (void) {
 		#endif
 		{
 			n_pant = levels [level].scr_ini;
-			gpx = levels [level].ini_x << 4; p_x = gpx << 6;
-			gpy = levels [level].ini_y << 4; p_y = gpy << 6;
+			gpx = levels [level].ini_x << 4; p_x = gpx << FIXBITS;
+			gpy = levels [level].ini_y << 4; p_y = gpy << FIXBITS;
 		}
 
 		#ifdef ACTIVATE_SCRIPTING

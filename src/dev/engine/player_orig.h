@@ -283,199 +283,92 @@ unsigned char player_move (void) {
 
 	// Collision, may set possee, hit_v
 
-	#asm
-			call _player_calc_bounding_box
+	// Velocity positive (going downwards)
+	player_calc_bounding_box ();
 
-			xor a 
-			ld  (_hit_v), a
+	hit_v = 0;
+	cx1 = ptx1; cx2 = ptx2;
+	#if defined (PLAYER_GENITAL)
+		if (p_vy < 0)
+	#else	
+		if (p_vy + ptgmy < 0) 
+	#endif
+	{
+		cy1 = cy2 = pty1;
+		cm_two_points ();
 
-			ld  a, (_ptx1)
-			ld  (_cx1), a
-			ld  a, (_ptx2)
-			ld  (_cx2), a
+		if ((at1 & 8) || (at2 & 8)) {
+			#include "my/ci/bg_collision/obstacle_up.h"
 
-			// Calculate vertical velocity
-			
-			ld  a, (_p_vy)
-			#if !defined (PLAYER_GENITAL)
-				ld  c, a
-				ld  a, (_ptgmy)
-				add c
-			#endif
-
-			// Skip if not moving in the vertical axis
-
-			or  a
-			jp  z, _va_collision_done
-
-			// Check sign
-
-			bit 7, a
-			jp  z, _va_collision_vy_positive
-
-		._va_collision_vy_negative
-
-			// Velocity negative (going upwards)
-
-			ld  a, (_pty1)
-			ld  (_cy1), a
-			ld  (_cy2), a
-
-			call _cm_two_points
-
-			// if ((at1 & 8) || (at2 & 8)) {
-			ld  a, (_at1)
-			and 8
-			jp  nz, _va_col_vy_neg_do
-
-			ld  a, (_at2)
-			and 8
-			jp  z, _va_collision_checkevil
-
-		._va_col_vy_neg_do
-	#endasm
-		#include "my/ci/bg_collision/obstacle_up.h"
-	#asm
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
-				ld  a, (_p_vy)
-				sra a
-				neg a
+				p_vy = -(p_vy / 2);
 			#else
-				xor a
-			#endif 
-			ld  (_p_vy), a
-
-			ld  a, (_pty1)
-			inc a
-			sla a
-			sla a
-			sla a
-			sla a		
+				p_vy = 0;
+			#endif
 
 			#if defined (BOUNDING_BOX_8_BOTTOM)			
-				// gpy = ((pty1 + 1) << 4) - 8;
-				sub 8
+				gpy = ((pty1 + 1) << 4) - 8;
 			#elif defined (BOUNDING_BOX_8_CENTERED)
-				// gpy = ((pty1 + 1) << 4) - 4;
-				sub 4
+				gpy = ((pty1 + 1) << 4) - 4;
 			#elif defined (BOUNDING_BOX_TINY_BOTTOM)
-				// gpy = ((pty1 + 1) << 4) - 14;
-				sub 14
+				gpy = ((pty1 + 1) << 4) - 14;
 			#else
-				// gpy = ((pty1 + 1) << 4);
+				gpy = ((pty1 + 1) << 4);
 			#endif
 
-			ld  (_gpy), a
-
-			// p_y = gpy << FIXBITS; 16 bits shift
-			ld  d, 0
-			ld  e, a
-			ld  l, FIXBITS
-			call l_asl
-			ld  (_p_y), hl
+			p_y = gpy << FIXBITS;
 
 			#if defined PLAYER_GENITAL || defined LOCKS_CHECK_VERTICAL
-				ld  a, WTOP
-				ld  (_wall_v), a
+				wall_v = WTOP;
 			#endif
+		}
+	}
+	
+	#if defined (PLAYER_GENITAL)
+		if (p_vy > 0)
+	#else	
+		if (p_vy + ptgmy > 0)
+	#endif
+	{
+		cy1 = cy2 = pty2;
+		cm_two_points ();
 
-			jp  _va_collision_checkevil
+		#ifdef PLAYER_GENITAL
+			if ((at1 & 8) || (at2 & 8))
+		#else
+			// Greed Optimization tip! Remove this line and uncomment the next one:
+			// (As long as you don't have type 8 blocks over type 4 blocks in your game, the short line is fine)
+			if ((at1 & 8) || (at2 & 8) || (((gpy - 1) & 15) < 8 && ((at1 & 4) || (at2 & 4))))
+			//if (((gpy - 1) & 15) < 7 && ((at1 & 12) || (at2 & 12))) {
+		#endif			
+		{
+			#include "my/ci/bg_collision/obstacle_down.h"
 
-		._va_collision_vy_positive
-		
-			// Velocity positive (going downwards)
-			ld  a, (_pty2)
-			ld  (_cy1), a
-			ld  (_cy2), a
-
-			call _cm_two_points
-
-			#ifdef PLAYER_GENITAL
-				// if ((at1 & 8) || (at2 & 8)) {
-				ld  a, (_at1)
-				and 8
-				jr  nz, _va_col_vy_pos_do
-
-				ld  a, (_at2)
-				and 8
-				jp  z, _va_collision_checkevil
-			#else
-				// if ((at1 & 8) || 
-				ld  a, (_at1)
-				and 8
-				jr  nz, _va_col_vy_pos_do
-
-				// (at2 & 8) || 
-				ld  a, (_at2)
-				and 8
-				jr  nz, _va_col_vy_pos_do
-
-				// (((gpy - 1) & 15) < 8 &&
-				ld  a, (_gpy)
-				dec a
-				and 15
-				cp  8 
-				jp  nc, _va_collision_checkevil
-
-				// ((at1 & 4) || (at2 & 4))))
-				ld  a, (_at1)
-				and 4
-				jr  nz, _va_col_vy_pos_do
-
-				ld  a, (_at2)
-				and 4
-				jp  z, _va_collision_checkevil
-			#endif
-		._va_col_vy_pos_do
-	#endasm
-		#include "my/ci/bg_collision/obstacle_down.h"
-	#asm
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
-				ld  a, (_p_vy)
-				sra a
-				neg a
+				p_vy = -(p_vy / 2);
 			#else
-				xor a
-			#endif 
-			ld  (_p_vy), a	
-
-			ld  a, (_pty2)
-			dec a 
-			sla a
-			sla a
-			sla a
-			sla a
-
-			#ifdef BOUNDING_BOX_8_CENTERED
-				add 4
-			#endif
-
-			ld  (_gpy), a
-
-			// p_y = gpy << FIXBITS; 16 bits shift
-			ld  d, 0
-			ld  e, a
-			ld  l, FIXBITS
-			call l_asl
-			ld  (_p_y), hl
-
-			#if defined PLAYER_GENITAL || defined LOCKS_CHECK_VERTICAL
-				ld  a, WBOTTOM
-				ld  (_wall_v), a
+				p_vy = 0;
 			#endif
 				
-			jr  _va_collision_done
-
-		._va_collision_checkevil
-
-			#ifndef DEACTIVATE_EVIL_TILE
-				#endasm
-					hit_v = ((at1 & 1) || (at2 & 1));
-				#asm
+			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_TINY_BOTTOM)
+				gpy = (pty2 - 1) << 4;
+			#elif defined (BOUNDING_BOX_8_CENTERED)				
+				gpy = ((pty2 - 1) << 4) + 4;
+			#else
+				gpy = (pty2 - 1) << 4;				
 			#endif
 
-		._va_collision_done
-	#endasm
+			p_y = gpy << FIXBITS;
+			
+			#if defined PLAYER_GENITAL || defined LOCKS_CHECK_VERTICAL
+				wall_v = WBOTTOM;
+			#endif
+		}
+	}
+
+	#ifndef DEACTIVATE_EVIL_TILE
+		if (p_vy) hit_v = ((at1 & 1) || (at2 & 1));
+	#endif
 	
 	gpxx = gpx >> 4;
 	gpyy = gpy >> 4;
@@ -521,7 +414,6 @@ unsigned char player_move (void) {
 				}
 			} else p_saltando = 0;
 		}
-		sp_Border (p_saltando);
 	#endif
 
 	// Bootee engine

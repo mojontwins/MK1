@@ -9,7 +9,7 @@
 				-- n_pant;
 				-- x_pant;
 				gpx = 224;
-				p_x = 14336;
+				p_x = (240<<FIXBITS);
 			}
 
 			#if defined (COMPRESSED_LEVELS)
@@ -33,7 +33,7 @@
 				#endif
 				-- y_pant;					
 				gpy = 144;
-				p_y = 9216;	
+				p_y = (144<<FIXBITS);	
 			}
 
 			#if defined (COMPRESSED_LEVELS)
@@ -52,9 +52,9 @@
 		#if MAP_W > 1		
 			if (gpx == 0 && p_vx < 0) {
 				-- n_pant;
-				gpx = 224; p_x = 14336;
+				gpx = 224; p_x = (240<<FIXBITS);
 			}
-			if (gpx == 224 && p_vx > 0) {		// 14336 = 224 * 64
+			if (gpx == 224 && p_vx > 0) {		
 				++ n_pant;
 				gpx = p_x = 0;
 			}			
@@ -69,10 +69,10 @@
 					n_pant -= MAP_W;
 			#endif
 				gpy = 144;
-				p_y = 9216;	
+				p_y = (144<<FIXBITS);	
 			}
 
-			if (gpy == 144 && p_vy > 0) {				// 9216 = 144 * 64
+			if (gpy == 144 && p_vy > 0) {			
 				#if defined (COMPRESSED_LEVELS)
 					if (n_pant < level_data->map_w * (level_data->map_h - 1)) {
 						n_pant += level_data->map_w;

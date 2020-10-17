@@ -18,7 +18,7 @@
 #include "prototypes.h"
 
 // DON'T touch these
-#define FIXBITS 		6	
+#define FIXBITS 		4	
 #define MAX_ENEMS 		3			
 
 // Fiddle if you need

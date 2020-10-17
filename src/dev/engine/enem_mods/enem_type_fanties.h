@@ -41,8 +41,8 @@
 			ld  (__en_an_vy), de
 	#endasm
 
-	cx2 = _en_x = _en_an_x >> 6;
-	cy2 = _en_y = _en_an_y >> 6;
+	cx2 = _en_x = _en_an_x >> FIXBITS;
+	cy2 = _en_y = _en_an_y >> FIXBITS;
 
 	#ifdef FANTIES_TYPE_HOMING
 		rdd = distance ();
@@ -81,8 +81,8 @@
 		}
 	#endif
 
-	_en_x = _en_an_x >> 6;
-	_en_y = _en_an_y >> 6;
+	_en_x = _en_an_x >> FIXBITS;
+	_en_y = _en_an_y >> FIXBITS;
 
 	#ifdef FANTIES_TYPE_HOMING
 		if (en_an_state [enit] == TYPE_6_RETREATING && 

@@ -97,7 +97,7 @@ unsigned char half_life;
 
 // player
 signed int p_x, p_y;
-signed int p_vx, p_vy;
+signed char p_vx, p_vy;
 unsigned char *p_current_frame, *p_next_frame;
 unsigned char p_saltando, p_cont_salto;
 unsigned char p_frame, p_subframe, p_facing;

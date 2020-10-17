@@ -161,15 +161,15 @@ void enems_load (void) {
 					#else
 						en_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;
 					#endif
-					en_an_state [enit] = malotes [enoffsmasi].t >> 6;
+					en_an_state [enit] = malotes [enoffsmasi].t >> FIXBITS;
 					break;
 			#endif
 
 			#ifdef ENABLE_FANTIES
 				case 6:
 					en_an_base_frame [enit] = FANTIES_BASE_CELL << 1;
-					en_an_x [enit] = malotes [enoffsmasi].x1 << 6;
-					en_an_y [enit] = malotes [enoffsmasi].y1 << 6;
+					en_an_x [enit] = malotes [enoffsmasi].x1 << FIXBITS;
+					en_an_y [enit] = malotes [enoffsmasi].y1 << FIXBITS;
 					en_an_vx [enit] = en_an_vy [enit] = 0;
 
 					#ifdef PLAYER_CAN_FIRE
@@ -417,8 +417,8 @@ void enems_move (void) {
 						if (_en_mx) {
 							if (gpy + 17 >= _en_y && gpy + 8 <= _en_y) {
 								p_gotten = 1;
-								ptgmx = _en_mx << 6;
-								gpy = (_en_y - 16); p_y = gpy << 6;
+								ptgmx = _en_mx << FIXBITS;
+								gpy = (_en_y - 16); p_y = gpy << FIXBITS;
 							}
 						}
 
@@ -428,8 +428,8 @@ void enems_move (void) {
 							(_en_my > 0 && gpy + 17 + _en_my >= _en_y && gpy + 8 <= _en_y)
 						) {
 							p_gotten = 1;
-							ptgmy = _en_my << 6;
-							gpy = (_en_y - 16); p_y = gpy << 6;						
+							ptgmy = _en_my << FIXBITS;
+							gpy = (_en_y - 16); p_y = gpy << FIXBITS;						
 						}
 
 					}
