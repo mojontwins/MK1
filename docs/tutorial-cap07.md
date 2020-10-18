@@ -789,7 +789,7 @@ Básicamente, tendremos lo que se conoce como *Movimiento Rectilíneo Uniformeme
 
 Los parámetros siguientes sirven para especificar diversos valores relacionados con el movimiento en cada eje en güegos de vista lateral. En los de vista genital, se tomarán los valores del eje horizontal también para el vertical.
 
-Para obtener la suavidad de los movimientos sin usar valores en coma flotante (que son muy costosos de manejar), usamos aritmética de punto fijo. Básicamente los valores se expresan en 1/64 de pixel. Esto significa que el valor empleado se divide entre 64 a la hora de mover los sprites reales a la pantalla. Eso nos da una precisión de 1/64 píxeles en ambos ejes, lo que se traduce en mayor suavidad de movimientos. En palabras techis, estamos usando 10 bits para la parte entera y 6 para la parte "decimal", así que decimos que nuestro punto fijo es **10.6**.
+Para obtener la suavidad de los movimientos sin usar valores en coma flotante (que son muy costosos de manejar), usamos aritmética de punto fijo. Básicamente los valores se expresan en 1/16 de pixel. Esto significa que el valor empleado se divide entre 16 a la hora de mover los sprites reales a la pantalla. Eso nos da una precisión de 1/16 píxeles en ambos ejes, lo que se traduce en mayor suavidad de movimientos. En palabras techis, estamos usando 12 bits para la parte entera y 4 para la parte "decimal", así que decimos que nuestro punto fijo es **12.4**.
 
 Somos conscientes en Mojonia de que este apartado es especialmente densote, así que no te preocupes demasiado si, de entrada, te pierdes un poco. Experimenta con los valores hasta que encuentres la combinación ideal para tu güego.
 
@@ -798,22 +798,22 @@ Somos conscientes en Mojonia de que este apartado es especialmente densote, así
 Al movimiento vertical le afecta la gravedad. La velocidad vertical será incrementada por la gravedad hasta que el personaje aterrice sobre una plataforma u obstáculo. Además, a la hora de saltar, habrá un impulso inicial y una aceleración del salto, que también definiremos aquí. Estos son los valores para Dogmole; acto seguido detallaremos cada uno de ellos:
 
 ```c
-    #define PLAYER_MAX_VY_CAYENDO       512     // Max falling speed
-    #define PLAYER_G                    48      // Gravity acceleration
+    #define PLAYER_MAX_VY_CAYENDO       127     // Max falling speed
+    #define PLAYER_G                    12      // Gravity acceleration
 
-    #define PLAYER_VY_INICIAL_SALTO     96      // Initial junp velocity
-    #define PLAYER_MAX_VY_SALTANDO      312     // Max jump velocity
-    #define PLAYER_INCR_SALTO           48      // acceleration while JUMP is pressed
+    #define PLAYER_VY_INICIAL_SALTO     24      // Initial junp velocity
+    #define PLAYER_MAX_VY_SALTANDO      78      // Max jump velocity
+    #define PLAYER_INCR_SALTO           12      // acceleration while JUMP is pressed
 
-    #define PLAYER_INCR_JETPAC          32      // Vertical jetpac gauge
-    #define PLAYER_MAX_VY_JETPAC        256     // Max vertical jetpac speed
+    #define PLAYER_INCR_JETPAC          8       // Vertical jetpac gauge
+    #define PLAYER_MAX_VY_JETPAC        64      // Max vertical jetpac speed
 ```
 
 #### Caída libre
 
-La velocidad del jugador, que medimos en píxeles/frame será incrementada en `PLAYER_G` / 64 píxeles/frame hasta que llegue al máximo especificado por `PLAYER_MAX_CAYENDO` / 64. Con los valores que hemos elegido para **Dogmole**, la velocidad vertical en caída libre será incrementada en 48 / 64 = 0,75 píxeles/frame hasta que llegue a un valor de 512 / 64 = 8 píxeles/frame. O sea, Dogmole caerá más y más rápido hasta que llegue a la velocidad máxima de 8 píxeles por frame.
+La velocidad del jugador, que medimos en píxeles/frame será incrementada en `PLAYER_G` / 16 píxeles/frame hasta que llegue al máximo especificado por `PLAYER_MAX_CAYENDO` / 16. Con los valores que hemos elegido para **Dogmole**, la velocidad vertical en caída libre será incrementada en 12 / 16 = 0,75 píxeles/frame hasta que llegue a un valor de 127 / 16 = 8 píxeles/frame. O sea, Dogmole caerá más y más rápido hasta que llegue a la velocidad máxima de casi 8 píxeles por frame.
 
-Incrementar `PLAYER_G` hará que se alcance la velocidad máxima mucho antes (porque la aceleración es mayor). Estos valores afectan al salto: a mayor gravedad, menos saltaremos y menos nos durará el impulso inicial. Modificando `PLAYER_MAX_CAYENDO` podremos conseguir que la velocidad máxima, que se alcanzará antes o después dependiendo del valor de `PLAYER_G`, sea mayor o menor. Usando valores pequeños podemos simular entornos de poca gravedad como el espacio exterior, la superficie de la luna, o el fondo del mar. El valor de 512 (equivalente a 8 píxeles por frame) podemos considerarlo el máximo, ya que valores superiores y caídas muy largas podrían resultar en _glitches_ y cosas raras.
+Incrementar `PLAYER_G` hará que se alcance la velocidad máxima mucho antes (porque la aceleración es mayor). Estos valores afectan al salto: a mayor gravedad, menos saltaremos y menos nos durará el impulso inicial. Modificando `PLAYER_MAX_CAYENDO` podremos conseguir que la velocidad máxima, que se alcanzará antes o después dependiendo del valor de `PLAYER_G`, sea mayor o menor. Usando valores pequeños podemos simular entornos de poca gravedad como el espacio exterior, la superficie de la luna, o el fondo del mar. El valor de 127 (equivalente a 8 píxeles por frame) podemos considerarlo el máximo, ya que valores superiores no podrían representarse por la variable que controla la velocidad.
 
 #### Salto
 
@@ -828,16 +828,16 @@ Los dos valores que quedan no se usan en **Dogmole** porque tienen que ver con e
 El siguiente set de parámetros describen el comportamiento del movimiento en el eje horizontal si tu güego es en vista lateral, o los de ambos ejes si tu güego es en vista genital. Estos parámetros son mucho más sencillos:
 
 ```c
-    #define PLAYER_MAX_VX               256     // Max velocity
-    #define PLAYER_AX                   48      // Acceleration
-    #define PLAYER_RX                   64      // Friction
+    #define PLAYER_MAX_VX               64      // Max velocity
+    #define PLAYER_AX                   12      // Acceleration
+    #define PLAYER_RX                   16      // Friction
 ```
 
-1. `PLAYER_MAX_VX` indica la velocidad máxima a la que el personaje se desplazará horizontalmente (o en cualquier dirección si el güego es en vista genital). Cuanto mayor sea este número, más correrá, y más lejos llegará cuando salte (horizontalmente). Un valor de 256 significa que el personaje correrá a un máximo de 256/64 = 4 píxeles por frame.
+1. `PLAYER_MAX_VX` indica la velocidad máxima a la que el personaje se desplazará horizontalmente (o en cualquier dirección si el güego es en vista genital). Cuanto mayor sea este número, más correrá, y más lejos llegará cuando salte (horizontalmente). Un valor de 64 significa que el personaje correrá a un máximo de 64/16 = 4 píxeles por frame.
 
-2. `PLAYER_AX` controla la aceleración que sufre el personaje mientras el jugador pulsa una tecla de dirección. Cuando mayor sea el valor, antes se alcanzará la velocidad máxima. Valores pequeños hacen que “cueste arrancar”. Un valor de 48 significa que se tardará aproximadamente 6 frames (256/48) en alcanzar la velocidad máxima.
+2. `PLAYER_AX` controla la aceleración que sufre el personaje mientras el jugador pulsa una tecla de dirección. Cuando mayor sea el valor, antes se alcanzará la velocidad máxima. Valores pequeños hacen que “cueste arrancar”. Un valor de 12 significa que se tardará aproximadamente 5 frames (64/12) en alcanzar la velocidad máxima.
 
-3. `PLAYER_RX` es el valor de fricción o rozamiento. Cuando el jugador deja de pulsar la tecla de movimiento, se aplica esta aceleración en dirección contraria al movimiento. Cuanto mayor sea el valor, antes se detendrá el personaje. Un valor de 64 significa que tardará 4 frames en detenerse si iba al máximo de velocidad.
+3. `PLAYER_RX` es el valor de fricción o rozamiento. Cuando el jugador deja de pulsar la tecla de movimiento, se aplica esta aceleración en dirección contraria al movimiento. Cuanto mayor sea el valor, antes se detendrá el personaje. Un valor de 16 significa que tardará 4 frames en detenerse si iba al máximo de velocidad.
 
 Usar valores pequeños de `PLAYER_AX` y `PLAYER_RX` harán que el personaje parezca resbalar. Es lo que ocurre en güegos como, por ejemplo, **Viaje al Centro de la Napia**. Salvo excepciones misteriosas, casi siempre “se güega mejor” si el valor de `PLAYER_AX` es mayor que el de `PLAYER_RX`.
 

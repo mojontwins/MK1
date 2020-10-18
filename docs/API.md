@@ -32,10 +32,10 @@ Estas variables controlan el estado del juego. En qué nivel estamos, en qué pa
 
 ### Player
 
-* `p_x`, `p_y`: coordenadas del jugador en punto fijo 10.6, 1/64 de píxel.
+* `p_x`, `p_y`: coordenadas del jugador en punto fijo 12.4, 1/14 de píxel.
 * `gpx`, `gpy`: coordenadas del jugador en píxeles (`gp? = p_? / 64`).
 * `p_tx`, `p_ty`: coordenadas de la casilla (coordenadas de tile) sobre la que está el punto central del sprite del jugador.
-* `p_vx`, `p_vy`: velocidad del jugador en cada eje, en 1/64 de píxel por frame.
+* `p_vx`, `p_vy`: velocidad del jugador en cada eje, en 1/16 de píxel por frame.
 * `ptgmx`, `ptgmy`: velocidad a la que una plataforma móvil está desplazando al jugador (si `p_gotten` vale 1).
 * `p_saltando`: el jugador está saltando.
 * `p_cont_salto`: contador de _frames_ de salto.
@@ -91,8 +91,8 @@ Hay un array principal: `malotes` viene del archivo `.ene` convertido y es una e
 
 #### Fanties
 
-* `en_an_x [3]`, `en_an_y [3]` contienen coordenadas de punto fijo (1/64 de pixel) de los enemigos tipo fanties.
-* `en_an_vx [3]`, `en_an_vy [3]` contienen velocidades en cada eje en 1/64 de píxel por frame de los enemigos tipo fanties.
+* `en_an_x [3]`, `en_an_y [3]` contienen coordenadas de punto fijo (1/16 de pixel) de los enemigos tipo fanties.
+* `en_an_vx [3]`, `en_an_vy [3]` contienen velocidades en cada eje en 1/16 de píxel por frame de los enemigos tipo fanties.
 
 #### EIJs (perseguidores)
 
