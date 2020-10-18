@@ -655,6 +655,7 @@ void update_tile (void) {
 void print_number2 (void) {
 	rda = 16 + (_t / 10); rdb = 16 + (_t % 10);
 	#asm
+		._pn2
 			; enter:  A = row position (0..23)
 			;         C = col position (0..31/63)
 			;         D = pallette #
@@ -892,3 +893,17 @@ void clear_sprites (void) {
 		#endif
 	#endasm
 }
+
+#ifdef TEST_DEBUG
+	unsigned char hex_code (unsigned char n) {
+		if (n < 10) return (n + 16);
+		else return n + 23;
+	}
+
+	void print_hex (unsigned char x, unsigned char y, unsigned char h) {
+		_x = x; _y = y; rda = hex_code (h >> 4); rdb = hex_code (h & 15);
+		#asm 
+			jp _pn2
+		#endasm
+	}
+#endif

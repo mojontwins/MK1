@@ -290,7 +290,7 @@
 #define PLAYER_G					8		// Gravity acceleration 
 
 #define PLAYER_VY_INICIAL_SALTO		32 		// Initial junp velocity 
-#define PLAYER_MAX_VY_SALTANDO		80	 	// Max jump velocity 
+#define PLAYER_MAX_VY_SALTANDO		64	 	// Max jump velocity 
 #define PLAYER_INCR_SALTO			24		// acceleration while JUMP is pressed 
 
 #define PLAYER_INCR_JETPAC			8		// Vertical jetpac gauge

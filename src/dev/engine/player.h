@@ -168,6 +168,7 @@ unsigned char player_move (void) {
 				// Do gravity
 				
 				#asm
+					/*
 						; Signed comparisons are hard
 						; p_vy <= PLAYER_MAX_VY_CAYENDO - PLAYER_G
 
@@ -198,6 +199,34 @@ unsigned char player_move (void) {
 						ld  (_p_vy), hl
 
 					._player_gravity_done
+				*/
+					// 8 bit p_vy
+						; Signed comparisons are hard
+						; p_vy <= PLAYER_MAX_VY_CAYENDO - PLAYER_G
+
+						; We are going to take a shortcut.
+						; If p_vy < 0, just add PLAYER_G.
+						; If p_vy > 0, we can use unsigned comparition anyway.
+						ld  a, (_p_vy)
+						bit 7, a
+						jr  nz, _player_gravity_add 	; < 0
+
+						; > 0, compare unsigned p_vy <= PLAYER_MAX_VY_CAYENDO - PLAYER_G
+						; PLAYER_MAX_VY_CAYENDO - PLAYER_G >= p_vy
+						ld  c, a
+						ld  a, PLAYER_MAX_VY_CAYENDO - PLAYER_G 
+						cp  c
+						jr  nc, _player_gravity_add 
+
+						ld  a, PLAYER_MAX_VY_CAYENDO 
+						jr  _player_gravity_vy_set
+
+					._player_gravity_add
+						ld  a, c
+						add PLAYER_G
+
+					._player_gravity_vy_set
+						ld  (_p_vy), a
 
 					#ifdef PLAYER_CUMULATIVE_JUMP
 						ld  a, (_p_jmp_on)
@@ -297,7 +326,7 @@ unsigned char player_move (void) {
 			// Calculate vertical velocity
 			
 			ld  a, (_p_vy)
-			#if !defined (PLAYER_GENITAL)
+			#ifndef PLAYER_GENITAL
 				ld  c, a
 				ld  a, (_ptgmy)
 				add c
@@ -488,7 +517,6 @@ unsigned char player_move (void) {
 	#endif
 
 	// Jump
-
 	#ifdef PLAYER_HAS_JUMP
 		#ifdef VENG_SELECTOR
 			if (veng_selector == VENG_JUMP)
@@ -521,9 +549,8 @@ unsigned char player_move (void) {
 				}
 			} else p_saltando = 0;
 		}
-		sp_Border (p_saltando);
 	#endif
-
+	
 	// Bootee engine
 
 	#ifdef PLAYER_BOOTEE
