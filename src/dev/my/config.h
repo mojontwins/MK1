@@ -11,6 +11,8 @@
 //#define VENG_SELECTOR 					// Very advanced!
 //#define USE_MAP_CUSTOM_DECODER
 
+//#define MIN_FAPS_PER_FRAME 			2	// Beware! It takes 200+ in 48K, free in 128K
+
 // In this section we define map dimensions, initial and authomatic ending conditions, etc.
 
 #define MAP_W						6		//
@@ -76,12 +78,12 @@
 //#define PURSUERS_MAX_V 			2		// 1, 2, 4.
 //#define PURSUERS_BASE_CELL		3		// If defined, type 7 enemies are always #
 
-//#define ENABLE_FANTIES					// If defined, Fanties are enabled!
-//#define FANTIES_BASE_CELL 		2		// Base sprite cell (0, 1, 2 or 3)
+#define ENABLE_FANTIES						// If defined, Fanties are enabled!
+#define FANTIES_BASE_CELL 			2		// Base sprite cell (0, 1, 2 or 3)
 //#define FANTIES_SIGHT_DISTANCE	64 		// Used in our type 6 enemies.
-//#define FANTIES_MAX_V 			256 	// Flying enemies max speed (also for custom type 6 if you want)
-//#define FANTIES_A 				16		// Flying enemies acceleration.
-//#define FANTIES_LIFE_GAUGE		10		// Amount of shots needed to kill flying enemies.
+#define FANTIES_MAX_V 				64 		// Flying enemies max speed (also for custom type 6 if you want)
+#define FANTIES_A 					4		// Flying enemies acceleration.
+#define FANTIES_LIFE_GAUGE			2		// Amount of shots needed to kill flying enemies.
 //#define FANTIES_TYPE_HOMING				// Unset for simple fanties.
 
 //#define ENABLE_ORTHOSHOOTERS				// If defined, orthoshooters are active
@@ -298,9 +300,9 @@
 
 // IV.2. Horizontal (side view) or general (top view) movement.
 
-#define PLAYER_MAX_VX				48	 	// Max velocity (192/64 = 3 p?xels/frame)
-#define PLAYER_AX					6		// Acceleration (24/64 = 0,375 p?xels/frame^2)
-#define PLAYER_RX					8		// Friction (32/64 = 0,5 p?xels/frame^2)
+#define PLAYER_MAX_VX				48	 	// Max velocity 
+#define PLAYER_AX					6		// Acceleration 
+#define PLAYER_RX					8		// Friction
 
 // ============================================================================
 // V. Tile behaviour

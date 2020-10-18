@@ -31,6 +31,7 @@ void ISR(void) {
 		ld b, 0
 		call SetRAMBank			
 	#endasm
+	++ isrc;
 }
 
 void wyz_init (void) {

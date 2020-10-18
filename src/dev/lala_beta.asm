@@ -3,7 +3,7 @@
 ;
 ;	Reconstructed for z80 Module Assembler
 ;
-;	Module compile time: Sun Oct 18 16:50:52 2020
+;	Module compile time: Sun Oct 18 17:54:02 2020
 
 
 
@@ -233,6 +233,275 @@
 	defb	0
 
 ;	SECTION	code
+
+
+	defw 0
+
+._ISR
+	ld	hl,(_isrc)
+	ld	h,0
+	inc	hl
+	ld	a,l
+	ld	(_isrc),a
+	ret
+
+
+	.playsfx
+	;di
+	ld l,a
+	ld h,0
+	add hl,hl
+	ld de,proclist
+	add hl,de
+	ld a,(hl)
+	inc hl
+	ld h,(hl)
+	ld l,a
+	ld de,0
+	jp (hl)
+	.sound1 ;enemy destroyed
+	ex de,hl
+	ld bc,500
+	.sound1l0
+	ld a,(hl)
+	and 16
+	out ($FE),a
+	ld e,a
+	inc a
+	sla a
+	sla a
+	.sound1l1
+	dec a
+	jr nz,sound1l1
+	out ($FE),a
+	ld a,e
+	inc a
+	add a,a
+	add a,a
+	add a,a
+	.sound1l2
+	dec a
+	jr nz,sound1l2
+	ld a,b
+	inc hl
+	dec bc
+	ld a,b
+	or c
+	jr nz,sound1l0
+	;ei
+	ret
+	.sound2 ;enemy hit
+	ex de,hl
+	ld bc,40*256+100
+	.sound2l0
+	ld a,(hl)
+	and 16
+	out ($FE),a
+	inc hl
+	ld a,c
+	.sound2l1
+	dec a
+	jr nz,sound2l1
+	out ($FE),a
+	ld a,c
+	.sound2l2
+	dec a
+	jr nz,sound2l2
+	djnz sound2l0
+	;ei
+	ret
+	.sound3 ;something
+	ex de,hl
+	ld b,100
+	ld de,$1020
+	.sound3l0
+	ld a,(hl)
+	and d
+	out ($FE),a
+	inc hl
+	ld a,e
+	.sound3l0a
+	dec a
+	jr nz,sound3l0a
+	djnz sound3l0
+	ld b,250
+	.sound3l1
+	ld a,(hl)
+	and d
+	out ($FE),a
+	inc hl
+	ld a,2
+	.sound3l2
+	dec a
+	jr nz,sound3l2
+	xor a
+	out ($FE),a
+	ld a,e
+	.sound3l3
+	dec a
+	jr nz,sound3l3
+	djnz sound3l1
+	;ei
+	ret
+	.sound4 ;jump
+	ld bc,20*256+250
+	.sound4l0
+	ld a,16
+	out ($FE),a
+	ld a,4
+	.sound4l1
+	dec a
+	jr nz,sound4l1
+	out ($FE),a
+	ld a,c
+	.sound4l2
+	dec a
+	jr nz,sound4l2
+	dec c
+	dec c
+	djnz sound4l0
+	;ei
+	ret
+	.sound5 ;player hit
+	ex de,hl
+	ld bc,100*256+16
+	.sound5l0
+	ld a,(hl)
+	and c
+	out ($FE),a
+	inc hl
+	ld a,110
+	sub b
+	ld e,a
+	and c
+	out ($FE),a
+	.sound5l1
+	dec e
+	jr nz,sound5l1
+	djnz sound5l0
+	;ei
+	ret
+	.sound6 ;enemy destroyed 2
+	ex de,hl
+	ld bc,20*256+16
+	.sound6l0
+	ld a,(hl)
+	inc hl
+	and c
+	out ($FE),a
+	xor a
+	.sound6l0a
+	dec a
+	jr nz,sound6l0a
+	djnz sound6l0
+	.sound6l1
+	ld a,(hl)
+	inc hl
+	and c
+	out ($FE),a
+	.sound6l2
+	dec a
+	jr nz,sound6l2
+	djnz sound6l1
+	;ei
+	ret
+	.sound7 ;shot
+	ex de,hl
+	ld bc,100*256
+	.sound7l0
+	ld a,(hl)
+	inc hl
+	or c
+	and 16
+	out ($FE),a
+	ld a,(hl)
+	srl a
+	srl a
+	.sound7l1
+	dec a
+	jr nz,sound7l1
+	ld a,c
+	add a,4
+	ld c,a
+	djnz sound7l0
+	;ei
+	ret
+	.sound8 ;take item
+	ld a,200
+	jr soundItem
+	.sound9
+	ld a,175
+	jr soundItem
+	.sound10
+	ld a,100
+	.soundItem
+	ld (frq),a
+	ld b,4
+	ld d,128
+	.sound8l2
+	push bc
+	;.frq=$+1
+	; ld bc,2*256+200
+	defb #01 ;ld bc
+	.frq
+	defb 200 ;+200
+	defb 2 ;2*256
+	.sound8l0
+	push bc
+	ld b,50
+	.sound8l1
+	xor 16
+	and 16
+	out ($FE),a
+	ld e,a
+	ld a,d
+	.sound8l2b
+	dec a
+	jr nz,sound8l2b
+	out ($FE),a
+	ld a,129
+	sub d
+	.sound8l3
+	dec a
+	jr nz,sound8l3
+	ld a,e
+	ld e,c
+	.sound8l4
+	dec e
+	jr nz,sound8l4
+	djnz sound8l1
+	pop bc
+	ld a,c
+	sub 16
+	ld c,a
+	djnz sound8l0
+	pop bc
+	srl d
+	srl d
+	djnz sound8l2
+	;ei
+	ret
+	.proclist
+	defw sound1
+	defw sound2
+	defw sound3
+	defw sound4
+	defw sound5
+	defw sound6
+	defw sound7
+	defw sound8
+	defw sound9
+	defw sound10
+
+._beep_fx
+	ld	hl,2	;const
+	add	hl,sp
+	ld	l,(hl)
+	ld	h,0
+	ld	(_asm_int),hl
+	ld a, (_asm_int)
+	call playsfx
+	ret
 
 
 	; aPPack decompressor
@@ -7420,264 +7689,6 @@
 	defb 0, 255, 0, 255, 0, 255, 0, 255
 	defb 0, 255, 0, 255, 0, 255, 0, 255
 	defb 0, 255, 0, 255, 0, 255, 0, 255
-	.playsfx
-	;di
-	ld l,a
-	ld h,0
-	add hl,hl
-	ld de,proclist
-	add hl,de
-	ld a,(hl)
-	inc hl
-	ld h,(hl)
-	ld l,a
-	ld de,0
-	jp (hl)
-	.sound1 ;enemy destroyed
-	ex de,hl
-	ld bc,500
-	.sound1l0
-	ld a,(hl)
-	and 16
-	out ($FE),a
-	ld e,a
-	inc a
-	sla a
-	sla a
-	.sound1l1
-	dec a
-	jr nz,sound1l1
-	out ($FE),a
-	ld a,e
-	inc a
-	add a,a
-	add a,a
-	add a,a
-	.sound1l2
-	dec a
-	jr nz,sound1l2
-	ld a,b
-	inc hl
-	dec bc
-	ld a,b
-	or c
-	jr nz,sound1l0
-	;ei
-	ret
-	.sound2 ;enemy hit
-	ex de,hl
-	ld bc,40*256+100
-	.sound2l0
-	ld a,(hl)
-	and 16
-	out ($FE),a
-	inc hl
-	ld a,c
-	.sound2l1
-	dec a
-	jr nz,sound2l1
-	out ($FE),a
-	ld a,c
-	.sound2l2
-	dec a
-	jr nz,sound2l2
-	djnz sound2l0
-	;ei
-	ret
-	.sound3 ;something
-	ex de,hl
-	ld b,100
-	ld de,$1020
-	.sound3l0
-	ld a,(hl)
-	and d
-	out ($FE),a
-	inc hl
-	ld a,e
-	.sound3l0a
-	dec a
-	jr nz,sound3l0a
-	djnz sound3l0
-	ld b,250
-	.sound3l1
-	ld a,(hl)
-	and d
-	out ($FE),a
-	inc hl
-	ld a,2
-	.sound3l2
-	dec a
-	jr nz,sound3l2
-	xor a
-	out ($FE),a
-	ld a,e
-	.sound3l3
-	dec a
-	jr nz,sound3l3
-	djnz sound3l1
-	;ei
-	ret
-	.sound4 ;jump
-	ld bc,20*256+250
-	.sound4l0
-	ld a,16
-	out ($FE),a
-	ld a,4
-	.sound4l1
-	dec a
-	jr nz,sound4l1
-	out ($FE),a
-	ld a,c
-	.sound4l2
-	dec a
-	jr nz,sound4l2
-	dec c
-	dec c
-	djnz sound4l0
-	;ei
-	ret
-	.sound5 ;player hit
-	ex de,hl
-	ld bc,100*256+16
-	.sound5l0
-	ld a,(hl)
-	and c
-	out ($FE),a
-	inc hl
-	ld a,110
-	sub b
-	ld e,a
-	and c
-	out ($FE),a
-	.sound5l1
-	dec e
-	jr nz,sound5l1
-	djnz sound5l0
-	;ei
-	ret
-	.sound6 ;enemy destroyed 2
-	ex de,hl
-	ld bc,20*256+16
-	.sound6l0
-	ld a,(hl)
-	inc hl
-	and c
-	out ($FE),a
-	xor a
-	.sound6l0a
-	dec a
-	jr nz,sound6l0a
-	djnz sound6l0
-	.sound6l1
-	ld a,(hl)
-	inc hl
-	and c
-	out ($FE),a
-	.sound6l2
-	dec a
-	jr nz,sound6l2
-	djnz sound6l1
-	;ei
-	ret
-	.sound7 ;shot
-	ex de,hl
-	ld bc,100*256
-	.sound7l0
-	ld a,(hl)
-	inc hl
-	or c
-	and 16
-	out ($FE),a
-	ld a,(hl)
-	srl a
-	srl a
-	.sound7l1
-	dec a
-	jr nz,sound7l1
-	ld a,c
-	add a,4
-	ld c,a
-	djnz sound7l0
-	;ei
-	ret
-	.sound8 ;take item
-	ld a,200
-	jr soundItem
-	.sound9
-	ld a,175
-	jr soundItem
-	.sound10
-	ld a,100
-	.soundItem
-	ld (frq),a
-	ld b,4
-	ld d,128
-	.sound8l2
-	push bc
-	;.frq=$+1
-	; ld bc,2*256+200
-	defb #01 ;ld bc
-	.frq
-	defb 200 ;+200
-	defb 2 ;2*256
-	.sound8l0
-	push bc
-	ld b,50
-	.sound8l1
-	xor 16
-	and 16
-	out ($FE),a
-	ld e,a
-	ld a,d
-	.sound8l2b
-	dec a
-	jr nz,sound8l2b
-	out ($FE),a
-	ld a,129
-	sub d
-	.sound8l3
-	dec a
-	jr nz,sound8l3
-	ld a,e
-	ld e,c
-	.sound8l4
-	dec e
-	jr nz,sound8l4
-	djnz sound8l1
-	pop bc
-	ld a,c
-	sub 16
-	ld c,a
-	djnz sound8l0
-	pop bc
-	srl d
-	srl d
-	djnz sound8l2
-	;ei
-	ret
-	.proclist
-	defw sound1
-	defw sound2
-	defw sound3
-	defw sound4
-	defw sound5
-	defw sound6
-	defw sound7
-	defw sound8
-	defw sound9
-	defw sound10
-
-._beep_fx
-	ld	hl,2	;const
-	add	hl,sp
-	ld	l,(hl)
-	ld	h,0
-	ld	(_asm_int),hl
-	ld a, (_asm_int)
-	call playsfx
-	ret
-
-
 
 ._attr
 	ld	hl,4	;const
@@ -8940,6 +8951,45 @@
 
 
 
+._limit
+	ld	hl,6	;const
+	call	l_gintspsp	;
+	ld	hl,6	;const
+	add	hl,sp
+	call	l_gint	;
+	pop	de
+	call	l_lt
+	jp	nc,i_59
+	ld	hl,4	;const
+	add	hl,sp
+	call	l_gint	;
+	ret
+
+
+.i_59
+	ld	hl,6	;const
+	call	l_gintspsp	;
+	ld	hl,4	;const
+	add	hl,sp
+	call	l_gint	;
+	pop	de
+	call	l_gt
+	jp	nc,i_60
+	pop	bc
+	pop	hl
+	push	hl
+	push	bc
+	ret
+
+
+.i_60
+	ld	hl,6	;const
+	add	hl,sp
+	call	l_gint	;
+	ret
+
+
+
 ._player_init
 	ld	a,#(32 % 256 % 256)
 	ld	(_gpx),a
@@ -9061,7 +9111,7 @@
 	ld	(_p_y),hl
 	ld	a,(_p_gotten)
 	and	a
-	jp	z,i_59
+	jp	z,i_61
 	ld	hl,(_p_y)
 	push	hl
 	ld	hl,_ptgmy
@@ -9069,22 +9119,22 @@
 	pop	de
 	add	hl,de
 	ld	(_p_y),hl
-.i_59
+.i_61
 	ld	hl,(_p_y)
 	xor	a
 	or	h
-	jp	p,i_60
+	jp	p,i_62
 	ld	hl,0	;const
 	ld	(_p_y),hl
-.i_60
+.i_62
 	ld	hl,(_p_y)
 	ld	de,2304	;const
 	ex	de,hl
 	call	l_gt
-	jp	nc,i_61
+	jp	nc,i_63
 	ld	hl,2304	;const
 	ld	(_p_y),hl
-.i_61
+.i_63
 	ld	hl,(_p_y)
 	ex	de,hl
 	ld	l,#(4 % 256)
@@ -9177,16 +9227,16 @@
 	ld	hl,_at1
 	ld	a,(hl)
 	rrca
-	jp	c,i_62
+	jp	c,i_64
 	ld	hl,_at2
 	ld	a,(hl)
 	rrca
-	jp	c,i_62
+	jp	c,i_64
 	ld	hl,0	;const
-	jr	i_63
-.i_62
+	jr	i_65
+.i_64
 	ld	hl,1	;const
-.i_63
+.i_65
 	ld	h,0
 	ld	a,l
 	ld	(_hit_v),a
@@ -9232,12 +9282,12 @@
 	ld	hl,_at1
 	ld	a,(hl)
 	and	#(12 % 256)
-	jp	nz,i_64
+	jp	nz,i_66
 	ld	hl,_at2
 	ld	a,(hl)
 	and	#(12 % 256)
-	jp	z,i_66
-.i_64
+	jp	z,i_68
+.i_66
 	ld	a,(_gpy)
 	ld	e,a
 	ld	d,0
@@ -9246,12 +9296,12 @@
 	ld	de,8	;const
 	ex	de,hl
 	call	l_ult
-	jp	nc,i_66
+	jp	nc,i_68
 	ld	hl,1	;const
-	jr	i_67
-.i_66
+	jr	i_69
+.i_68
 	ld	hl,0	;const
-.i_67
+.i_69
 	ld	h,0
 	ld	a,l
 	ld	(_possee),a
@@ -9269,20 +9319,20 @@
 	ld	a,l
 	ld	(_rda),a
 	and	a
-	jp	z,i_68
+	jp	z,i_70
 	ld	a,(_p_saltando)
 	and	a
-	jp	nz,i_69
+	jp	nz,i_71
 	ld	a,(_possee)
 	and	a
-	jp	nz,i_71
+	jp	nz,i_73
 	ld	a,(_p_gotten)
 	and	a
-	jp	nz,i_71
+	jp	nz,i_73
 	ld	a,(_hit_v)
 	and	a
-	jp	z,i_70
-.i_71
+	jp	z,i_72
+.i_73
 	ld	a,#(1 % 256 % 256)
 	ld	(_p_saltando),a
 	ld	a,#(0 % 256 % 256)
@@ -9291,9 +9341,9 @@
 	push	hl
 	call	_beep_fx
 	pop	bc
-.i_70
-	jp	i_73
-.i_69
+.i_72
+	jp	i_75
+.i_71
 	ld	hl,_p_vy
 	call	l_gchar
 	push	hl
@@ -9319,31 +9369,31 @@
 	ld	de,65456	;const
 	ex	de,hl
 	call	l_lt
-	jp	nc,i_74
+	jp	nc,i_76
 	ld	hl,65456	;const
 	ld	a,l
 	call	l_sxt
 	ld	a,l
 	ld	(_p_vy),a
-.i_74
+.i_76
 	ld	hl,(_p_cont_salto)
 	ld	h,0
 	inc	hl
 	ld	a,l
 	ld	(_p_cont_salto),a
 	cp	#(9 % 256)
-	jp	nz,i_75
+	jp	nz,i_77
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_p_saltando),a
+.i_77
 .i_75
-.i_73
-	jp	i_76
-.i_68
+	jp	i_78
+.i_70
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_p_saltando),a
-.i_76
+.i_78
 	ld	a,(_pad0)
 	ld	e,a
 	ld	d,0
@@ -9352,7 +9402,7 @@
 	ld	de,0	;const
 	ex	de,hl
 	call	l_eq
-	jp	c,i_78
+	jp	c,i_80
 	ld	a,(_pad0)
 	ld	e,a
 	ld	d,0
@@ -9361,21 +9411,21 @@
 	ld	de,0	;const
 	ex	de,hl
 	call	l_eq
-	jp	c,i_78
+	jp	c,i_80
 	ld	hl,0	;const
-	jr	i_79
-.i_78
+	jr	i_81
+.i_80
 	ld	hl,1	;const
-.i_79
+.i_81
 	call	l_lneg
-	jp	nc,i_77
+	jp	nc,i_79
 	ld	hl,_p_vx
 	call	l_gchar
 	xor	a
 	or	h
-	jp	m,i_80
+	jp	m,i_82
 	or	l
-	jp	z,i_80
+	jp	z,i_82
 	ld	hl,_p_vx
 	call	l_gchar
 	ld	bc,-8
@@ -9388,20 +9438,20 @@
 	call	l_gchar
 	xor	a
 	or	h
-	jp	p,i_81
+	jp	p,i_83
 	ld	hl,0	;const
 	ld	a,l
 	call	l_sxt
 	ld	a,l
 	ld	(_p_vx),a
-.i_81
-	jp	i_82
-.i_80
+.i_83
+	jp	i_84
+.i_82
 	ld	hl,_p_vx
 	call	l_gchar
 	xor	a
 	or	h
-	jp	p,i_83
+	jp	p,i_85
 	ld	hl,_p_vx
 	call	l_gchar
 	ld	bc,8
@@ -9414,31 +9464,31 @@
 	call	l_gchar
 	xor	a
 	or	h
-	jp	m,i_84
+	jp	m,i_86
 	or	l
-	jp	z,i_84
+	jp	z,i_86
 	ld	hl,0	;const
 	ld	a,l
 	call	l_sxt
 	ld	a,l
 	ld	(_p_vx),a
+.i_86
+.i_85
 .i_84
-.i_83
-.i_82
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_wall_h),a
-.i_77
+.i_79
 	ld	hl,_pad0
 	ld	a,(hl)
 	and	#(4 % 256)
-	jp	nz,i_85
+	jp	nz,i_87
 	ld	hl,_p_vx
 	call	l_gchar
 	ld	de,65488	;const
 	ex	de,hl
 	call	l_gt
-	jp	nc,i_86
+	jp	nc,i_88
 	ld	a,#(0 % 256 % 256)
 	ld	(_p_facing),a
 	ld	hl,_p_vx
@@ -9449,18 +9499,18 @@
 	call	l_sxt
 	ld	a,l
 	ld	(_p_vx),a
-.i_86
-.i_85
+.i_88
+.i_87
 	ld	hl,_pad0
 	ld	a,(hl)
 	and	#(8 % 256)
-	jp	nz,i_87
+	jp	nz,i_89
 	ld	hl,_p_vx
 	call	l_gchar
 	ld	de,48	;const
 	ex	de,hl
 	call	l_lt
-	jp	nc,i_88
+	jp	nc,i_90
 	ld	hl,_p_vx
 	call	l_gchar
 	ld	bc,6
@@ -9472,8 +9522,8 @@
 	ld	hl,1 % 256	;const
 	ld	a,l
 	ld	(_p_facing),a
-.i_88
-.i_87
+.i_90
+.i_89
 	ld	hl,(_p_x)
 	push	hl
 	ld	hl,_p_vx
@@ -9489,18 +9539,18 @@
 	ld	(_p_x),hl
 	xor	a
 	or	h
-	jp	p,i_89
+	jp	p,i_91
 	ld	hl,0	;const
 	ld	(_p_x),hl
-.i_89
+.i_91
 	ld	hl,(_p_x)
 	ld	de,3584	;const
 	ex	de,hl
 	call	l_gt
-	jp	nc,i_90
+	jp	nc,i_92
 	ld	hl,3584	;const
 	ld	(_p_x),hl
-.i_90
+.i_92
 	ld	hl,(_gpx)
 	ld	h,0
 	ld	a,l
@@ -9629,11 +9679,11 @@
 	ld	hl,_rdb
 	ld	a,(hl)
 	rlca
-	jp	nc,i_91
-.i_91
+	jp	nc,i_93
+.i_93
 	ld	a,(_wall_h)
 	cp	#(3 % 256)
-	jp	nz,i_92
+	jp	nz,i_94
 	ld	hl,(_gpx)
 	ld	h,0
 	inc	hl
@@ -9657,7 +9707,7 @@
 	ld	de,10	;const
 	ex	de,hl
 	call	l_eq
-	jp	nc,i_93
+	jp	nc,i_95
 	ld	hl,(_cy1)
 	ld	h,0
 	ld	a,l
@@ -9676,12 +9726,12 @@
 	ld	a,l
 	ld	(_x1),a
 	call	_process_tile
-.i_93
-	jp	i_94
-.i_92
+.i_95
+	jp	i_96
+.i_94
 	ld	a,(_wall_h)
 	cp	#(4 % 256)
-	jp	nz,i_95
+	jp	nz,i_97
 	ld	hl,(_gpx)
 	ld	h,0
 	ld	bc,12
@@ -9704,7 +9754,7 @@
 	ld	de,10	;const
 	ex	de,hl
 	call	l_eq
-	jp	nc,i_96
+	jp	nc,i_98
 	ld	hl,(_cy1)
 	ld	h,0
 	ld	a,l
@@ -9723,14 +9773,14 @@
 	ld	a,l
 	ld	(_x1),a
 	call	_process_tile
+.i_98
+.i_97
 .i_96
-.i_95
-.i_94
 	ld	a,#(0 % 256 % 256)
 	ld	(_hit),a
 	ld	a,(_hit_v)
 	and	a
-	jp	z,i_97
+	jp	z,i_99
 	ld	a,#(1 % 256 % 256)
 	ld	(_hit),a
 	ld	hl,_p_vy
@@ -9746,11 +9796,11 @@
 	call	l_sxt
 	ld	a,l
 	ld	(_p_vy),a
-	jp	i_98
-.i_97
+	jp	i_100
+.i_99
 	ld	a,(_hit_h)
 	and	a
-	jp	z,i_99
+	jp	z,i_101
 	ld	a,#(1 % 256 % 256)
 	ld	(_hit),a
 	ld	hl,_p_vx
@@ -9766,26 +9816,26 @@
 	call	l_sxt
 	ld	a,l
 	ld	(_p_vx),a
-.i_99
-.i_98
+.i_101
+.i_100
 	ld	a,(_hit)
 	and	a
-	jp	z,i_100
+	jp	z,i_102
 	ld	hl,4 % 256	;const
 	ld	a,l
 	ld	(_p_killme),a
-.i_100
+.i_102
 	ld	hl,(_possee)
 	ld	h,0
 	call	l_lneg
-	jp	nc,i_102
+	jp	nc,i_104
 	ld	hl,(_p_gotten)
 	ld	h,0
 	call	l_lneg
-	jr	c,i_103_i_102
-.i_102
-	jp	i_101
-.i_103_i_102
+	jr	c,i_105_i_104
+.i_104
+	jp	i_103
+.i_105_i_104
 	ld	hl,_player_cells
 	push	hl
 	ld	hl,(_p_facing)
@@ -9797,8 +9847,8 @@
 	add	hl,de
 	call	l_gint	;
 	ld	(_p_next_frame),hl
-	jp	i_104
-.i_101
+	jp	i_106
+.i_103
 	ld	a,(_p_facing)
 	ld	e,a
 	ld	d,0
@@ -9811,12 +9861,12 @@
 	call	l_gchar
 	ld	a,h
 	or	l
-	jp	nz,i_105
+	jp	nz,i_107
 	ld	hl,1 % 256	;const
 	ld	a,l
 	ld	(_rda),a
-	jp	i_106
-.i_105
+	jp	i_108
+.i_107
 	ld	hl,(_gpx)
 	ld	h,0
 	ld	bc,4
@@ -9830,7 +9880,7 @@
 	ld	h,0
 	ld	a,l
 	ld	(_rda),a
-.i_106
+.i_108
 	ld	hl,_player_cells
 	push	hl
 	ld	hl,(_gpit)
@@ -9844,7 +9894,7 @@
 	add	hl,de
 	call	l_gint	;
 	ld	(_p_next_frame),hl
-.i_104
+.i_106
 	ret
 
 
@@ -9856,7 +9906,7 @@
 	ld	hl,(_p_kill_amt)
 	ld	h,0
 	call	l_ugt
-	jp	nc,i_107
+	jp	nc,i_109
 	ld	hl,(_p_life)
 	ld	h,0
 	ex	de,hl
@@ -9865,10 +9915,10 @@
 	ex	de,hl
 	and	a
 	sbc	hl,de
-	jp	i_108
-.i_107
+	jp	i_110
+.i_109
 	ld	hl,0	;const
-.i_108
+.i_110
 	ld	h,0
 	ld	a,l
 	ld	(_p_life),a
@@ -10009,18 +10059,18 @@
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_enit),a
-	jp	i_111
-.i_109
+	jp	i_113
+.i_111
 	ld	hl,(_enit)
 	ld	h,0
 	inc	hl
 	ld	a,l
 	ld	(_enit),a
-.i_111
+.i_113
 	ld	a,(_enit)
 	cp	#(3 % 256)
-	jp	z,i_110
-	jp	nc,i_110
+	jp	z,i_112
+	jp	nc,i_112
 	ld	de,_en_an_frame
 	ld	hl,(_enit)
 	ld	h,0
@@ -10076,21 +10126,23 @@
 	ld	de,31	;const
 	ex	de,hl
 	call	l_and
-.i_114
+.i_116
 	ld	a,l
 	cp	#(1% 256)
-	jp	z,i_115
-	cp	#(2% 256)
-	jp	z,i_116
-	cp	#(3% 256)
 	jp	z,i_117
-	cp	#(4% 256)
+	cp	#(2% 256)
 	jp	z,i_118
-	jp	i_113
-.i_115
-.i_116
+	cp	#(3% 256)
+	jp	z,i_119
+	cp	#(4% 256)
+	jp	z,i_120
+	cp	#(6% 256)
+	jp	z,i_121
+	jp	i_115
 .i_117
 .i_118
+.i_119
+.i_120
 	ld	de,_en_an_base_frame
 	ld	hl,(_enit)
 	ld	h,0
@@ -10118,9 +10170,97 @@
 	pop	de
 	ld	a,l
 	ld	(de),a
-.i_113
-	jp	i_109
-.i_110
+	jp	i_115
+.i_121
+	ld	de,_en_an_base_frame
+	ld	hl,(_enit)
+	ld	h,0
+	add	hl,de
+	ld	(hl),#(4 % 256 % 256)
+	ld	hl,_en_an_x
+	push	hl
+	ld	hl,(_enit)
+	ld	h,0
+	add	hl,hl
+	pop	de
+	add	hl,de
+	push	hl
+	ld	hl,_malotes
+	push	hl
+	ld	hl,(_enoffsmasi)
+	ld	h,0
+	ld	b,h
+	ld	c,l
+	add	hl,bc
+	add	hl,bc
+	ld	b,h
+	ld	c,l
+	add	hl,bc
+	add	hl,bc
+	pop	de
+	add	hl,de
+	inc	hl
+	inc	hl
+	ld	e,(hl)
+	ld	d,0
+	ld	l,#(4 % 256)
+	call	l_asl
+	pop	de
+	call	l_pint
+	ld	hl,_en_an_y
+	push	hl
+	ld	hl,(_enit)
+	ld	h,0
+	add	hl,hl
+	pop	de
+	add	hl,de
+	push	hl
+	ld	hl,_malotes
+	push	hl
+	ld	hl,(_enoffsmasi)
+	ld	h,0
+	ld	b,h
+	ld	c,l
+	add	hl,bc
+	add	hl,bc
+	ld	b,h
+	ld	c,l
+	add	hl,bc
+	add	hl,bc
+	pop	de
+	add	hl,de
+	inc	hl
+	inc	hl
+	inc	hl
+	ld	e,(hl)
+	ld	d,0
+	ld	l,#(4 % 256)
+	call	l_asl
+	pop	de
+	call	l_pint
+	ld	hl,_en_an_vx
+	push	hl
+	ld	hl,(_enit)
+	ld	h,0
+	add	hl,hl
+	pop	de
+	add	hl,de
+	push	hl
+	ld	hl,_en_an_vy
+	push	hl
+	ld	hl,(_enit)
+	ld	h,0
+	add	hl,hl
+	pop	de
+	add	hl,de
+	ld	de,0	;const
+	ex	de,hl
+	call	l_pint
+	pop	de
+	call	l_pint
+.i_115
+	jp	i_111
+.i_112
 	ret
 
 
@@ -10131,7 +10271,7 @@
 	ld	de,7	;const
 	ex	de,hl
 	call	l_ne
-	jp	nc,i_119
+	jp	nc,i_122
 	ld	hl,__en_t
 	call	l_gchar
 	ld	de,16	;const
@@ -10141,7 +10281,7 @@
 	call	l_sxt
 	ld	a,l
 	ld	(__en_t),a
-.i_119
+.i_122
 	ld	hl,(_p_killed)
 	ld	h,0
 	inc	hl
@@ -10170,16 +10310,16 @@
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_enit),a
-	jp	i_122
-.i_120
+	jp	i_125
+.i_123
 	ld	hl,_enit
 	ld	a,(hl)
 	inc	(hl)
-.i_122
+.i_125
 	ld	a,(_enit)
 	cp	#(3 % 256)
-	jp	z,i_121
-	jp	nc,i_121
+	jp	z,i_124
+	jp	nc,i_124
 	ld	a,#(0 % 256 % 256)
 	ld	(_active),a
 	ld	hl,(_enoffs)
@@ -10238,7 +10378,7 @@
 	ld	hl,(__en_x)
 	ld	h,0
 	call	l_uge
-	jp	nc,i_123
+	jp	nc,i_126
 	ld	hl,(_gpx)
 	ld	h,0
 	push	hl
@@ -10248,32 +10388,34 @@
 	add	hl,bc
 	pop	de
 	call	l_ule
-	jp	nc,i_123
+	jp	nc,i_126
 	ld	hl,1	;const
-	jr	i_124
-.i_123
+	jr	i_127
+.i_126
 	ld	hl,0	;const
-.i_124
+.i_127
 	ld	h,0
 	ld	a,l
 	ld	(_pregotten),a
 	ld	hl,(_rdt)
 	ld	h,0
-.i_127
+.i_130
 	ld	a,l
 	cp	#(1% 256)
-	jp	z,i_128
-	cp	#(2% 256)
-	jp	z,i_129
-	cp	#(3% 256)
-	jp	z,i_130
-	cp	#(4% 256)
 	jp	z,i_131
-	jp	i_126
-.i_128
-.i_129
-.i_130
+	cp	#(2% 256)
+	jp	z,i_132
+	cp	#(3% 256)
+	jp	z,i_133
+	cp	#(4% 256)
+	jp	z,i_134
+	cp	#(6% 256)
+	jp	z,i_135
+	jp	i_129
 .i_131
+.i_132
+.i_133
+.i_134
 	ld a, 1
 	ld (_active), a
 	ld a, (__en_mx)
@@ -10310,10 +10452,181 @@
 	neg
 	ld (__en_my), a
 	._enems_lm_change_axis_y_done
-.i_126
+	jp	i_129
+.i_135
+	ld	hl,1 % 256	;const
+	ld	a,l
+	ld	(_active),a
+	ld a, (_enit)
+	sla a
+	ld c, a
+	ld b, 0
+	ld hl, _en_an_x
+	add hl, bc
+	ld e, (hl)
+	inc hl
+	ld d, (hl)
+	ld (__en_an_x), de
+	ld hl, _en_an_y
+	add hl, bc
+	ld e, (hl)
+	inc hl
+	ld d, (hl)
+	ld (__en_an_y), de
+	ld hl, _en_an_vx
+	add hl, bc
+	ld e, (hl)
+	inc hl
+	ld d, (hl)
+	ld (__en_an_vx), de
+	ld hl, _en_an_vy
+	add hl, bc
+	ld e, (hl)
+	inc hl
+	ld d, (hl)
+	ld (__en_an_vy), de
+	ld	hl,(__en_an_x)
+	ex	de,hl
+	ld	l,#(4 % 256)
+	call	l_asr
+	ld	h,0
+	ld	a,l
+	ld	(__en_x),a
+	ld	h,0
+	ld	a,l
+	ld	(_cx2),a
+	ld	hl,(__en_an_y)
+	ex	de,hl
+	ld	l,#(4 % 256)
+	call	l_asr
+	ld	h,0
+	ld	a,l
+	ld	(__en_y),a
+	ld	h,0
+	ld	a,l
+	ld	(_cy2),a
+	ld	hl,(__en_an_vx)
+	push	hl
+	ld	de,(_p_x)
+	ld	hl,(__en_an_x)
+	ex	de,hl
+	and	a
+	sbc	hl,de
+	push	hl
+	ld	hl,4	;const
+	push	hl
+	call	_addsign
+	pop	bc
+	pop	bc
+	pop	de
+	add	hl,de
+	push	hl
+	ld	hl,65472	;const
+	push	hl
+	ld	hl,64	;const
+	push	hl
+	call	_limit
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	(__en_an_vx),hl
+	ld	hl,(__en_an_vy)
+	push	hl
+	ld	de,(_p_y)
+	ld	hl,(__en_an_y)
+	ex	de,hl
+	and	a
+	sbc	hl,de
+	push	hl
+	ld	hl,4	;const
+	push	hl
+	call	_addsign
+	pop	bc
+	pop	bc
+	pop	de
+	add	hl,de
+	push	hl
+	ld	hl,65472	;const
+	push	hl
+	ld	hl,64	;const
+	push	hl
+	call	_limit
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	(__en_an_vy),hl
+	ld	de,(__en_an_x)
+	ld	hl,(__en_an_vx)
+	add	hl,de
+	push	hl
+	ld	hl,0	;const
+	push	hl
+	ld	hl,14336	;const
+	push	hl
+	call	_limit
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	(__en_an_x),hl
+	ld	de,(__en_an_y)
+	ld	hl,(__en_an_vy)
+	add	hl,de
+	push	hl
+	ld	hl,0	;const
+	push	hl
+	ld	hl,9216	;const
+	push	hl
+	call	_limit
+	pop	bc
+	pop	bc
+	pop	bc
+	ld	(__en_an_y),hl
+	ld	hl,(__en_an_x)
+	ex	de,hl
+	ld	l,#(4 % 256)
+	call	l_asr
+	ld	h,0
+	ld	a,l
+	ld	(__en_x),a
+	ld	hl,(__en_an_y)
+	ex	de,hl
+	ld	l,#(4 % 256)
+	call	l_asr
+	ld	h,0
+	ld	a,l
+	ld	(__en_y),a
+	ld a, (_enit)
+	sla a
+	ld c, a
+	ld b, 0
+	ld hl, _en_an_x
+	add hl, bc
+	ld de, (__en_an_x)
+	ld (hl), e
+	inc hl
+	ld (hl), d
+	ld hl, _en_an_y
+	add hl, bc
+	ld de, (__en_an_y)
+	ld (hl), e
+	inc hl
+	ld (hl), d
+	ld hl, _en_an_vx
+	add hl, bc
+	ld de, (__en_an_vx)
+	ld (hl), e
+	inc hl
+	ld (hl), d
+	ld hl, _en_an_vy
+	add hl, bc
+	ld de, (__en_an_vy)
+	ld (hl), e
+	inc hl
+	ld (hl), d
+.i_129
 	ld	a,(_active)
 	and	a
-	jp	z,i_132
+	jp	z,i_136
 	ld	de,_en_an_base_frame
 	ld	hl,(_enit)
 	ld	h,0
@@ -10322,7 +10635,7 @@
 	ld	d,0
 	ld	hl,99	;const
 	call	l_ne
-	jp	nc,i_133
+	jp	nc,i_137
 	ld bc, (_enit)
 	ld b, 0
 	ld hl, _en_an_count
@@ -10355,13 +10668,13 @@
 	ldi
 	ldi ; Copy 16 bit
 	._enems_move_update_frame_done
-.i_133
+.i_137
 	ld	hl,__en_t
 	call	l_gchar
 	ld	de,4	;const
 	ex	de,hl
 	call	l_eq
-	jp	nc,i_134
+	jp	nc,i_138
 	ld a, (_p_saltando)
 	or a
 	jp nz, _enems_platforms_done
@@ -10446,8 +10759,8 @@
 	ld (_p_y), hl
 	ret
 	._enems_platforms_done
-	jp	i_135
-.i_134
+	jp	i_139
+.i_138
 	ld	hl,(__en_x)
 	ld	h,0
 	ld	a,l
@@ -10459,21 +10772,79 @@
 	ld	hl,(_tocado)
 	ld	h,0
 	call	l_lneg
-	jp	nc,i_137
+	jp	nc,i_141
 	call	_collide
 	ld	a,h
 	or	l
-	jp	z,i_137
+	jp	z,i_141
 	ld	a,(_p_estado)
 	cp	#(0 % 256)
-	jr	z,i_138_i_137
-.i_137
-	jp	i_136
-.i_138_i_137
+	jr	z,i_142_i_141
+.i_141
+	jp	i_140
+.i_142_i_141
 	ld	a,#(1 % 256 % 256)
 	ld	(_tocado),a
 	ld	a,#(4 % 256 % 256)
 	ld	(_p_killme),a
+	ld	hl,__en_t
+	call	l_gchar
+	ld	de,6	;const
+	ex	de,hl
+	call	l_eq
+	jp	nc,i_143
+	ld	hl,_en_an_vx
+	push	hl
+	ld	hl,(_enit)
+	ld	h,0
+	add	hl,hl
+	pop	de
+	add	hl,de
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	push	de
+	ld	hl,_en_an_vx
+	push	hl
+	ld	hl,(_enit)
+	ld	h,0
+	add	hl,hl
+	pop	de
+	add	hl,de
+	call	l_gint	;
+	pop	de
+	add	hl,de
+	ld	a,l
+	call	l_sxt
+	ld	a,l
+	ld	(_p_vx),a
+	ld	hl,_en_an_vy
+	push	hl
+	ld	hl,(_enit)
+	ld	h,0
+	add	hl,hl
+	pop	de
+	add	hl,de
+	ld	e,(hl)
+	inc	hl
+	ld	d,(hl)
+	push	de
+	ld	hl,_en_an_vy
+	push	hl
+	ld	hl,(_enit)
+	ld	h,0
+	add	hl,hl
+	pop	de
+	add	hl,de
+	call	l_gint	;
+	pop	de
+	add	hl,de
+	ld	a,l
+	call	l_sxt
+	ld	a,l
+	ld	(_p_vy),a
+	jp	i_144
+.i_143
 	ld	hl,__en_mx
 	call	l_gchar
 	push	hl
@@ -10498,10 +10869,11 @@
 	call	l_sxt
 	ld	a,l
 	ld	(_p_vy),a
-.i_136
-.i_135
+.i_144
+.i_140
 .i_139
-.i_132
+.i_145
+.i_136
 	ld hl, (__baddies_pointer)
 	ld a, (__en_x)
 	ld (hl), a
@@ -10530,8 +10902,8 @@
 	ld a, (__en_t)
 	ld (hl), a
 	inc hl
-	jp	i_120
-.i_121
+	jp	i_123
+.i_124
 	ret
 
 
@@ -10540,11 +10912,11 @@
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_gpit),a
-.i_140
+.i_146
 	ld	a,(_gpit)
 	cp	#(30 % 256)
-	jp	z,i_141
-	jp	nc,i_141
+	jp	z,i_147
+	jp	nc,i_147
 	ld	hl,_hotspots
 	push	hl
 	ld	hl,(_gpit)
@@ -10563,8 +10935,8 @@
 	inc	hl
 	ld	a,l
 	ld	(_gpit),a
-	jp	i_140
-.i_141
+	jp	i_146
+.i_147
 	ret
 
 
@@ -10586,11 +10958,11 @@
 	ld	h,0
 	ld	a,h
 	or	l
-	jp	nz,i_142
+	jp	nz,i_148
 	ret
 
 
-.i_142
+.i_148
 	ld	hl,(_hotspot_x)
 	ld	h,0
 	ld	a,l
@@ -10602,7 +10974,7 @@
 	call	_collide
 	ld	a,h
 	or	l
-	jp	z,i_143
+	jp	z,i_149
 	ld	a,#(1 % 256 % 256)
 	ld	(_hotspot_destroy),a
 	ld	hl,_hotspots
@@ -10618,16 +10990,16 @@
 	inc	hl
 	ld	l,(hl)
 	ld	h,0
-.i_146
+.i_152
 	ld	a,l
 	cp	#(1% 256)
-	jp	z,i_147
+	jp	z,i_153
 	cp	#(2% 256)
-	jp	z,i_148
+	jp	z,i_154
 	cp	#(3% 256)
-	jp	z,i_149
-	jp	i_145
-.i_147
+	jp	z,i_155
+	jp	i_151
+.i_153
 	ld	hl,(_p_objs)
 	ld	h,0
 	inc	hl
@@ -10637,8 +11009,8 @@
 	push	hl
 	call	_beep_fx
 	pop	bc
-	jp	i_145
-.i_148
+	jp	i_151
+.i_154
 	ld	hl,_p_keys
 	ld	a,(hl)
 	inc	(hl)
@@ -10646,8 +11018,8 @@
 	push	hl
 	call	_beep_fx
 	pop	bc
-	jp	i_145
-.i_149
+	jp	i_151
+.i_155
 	ld	hl,(_p_life)
 	ld	h,0
 	ld	bc,10
@@ -10656,20 +11028,20 @@
 	ld	a,l
 	ld	(_p_life),a
 	cp	#(99 % 256)
-	jp	z,i_150
-	jp	c,i_150
+	jp	z,i_156
+	jp	c,i_156
 	ld	hl,99 % 256	;const
 	ld	a,l
 	ld	(_p_life),a
-.i_150
+.i_156
 	ld	hl,8 % 256	;const
 	push	hl
 	call	_beep_fx
 	pop	bc
-.i_145
+.i_151
 	ld	a,(_hotspot_destroy)
 	and	a
-	jp	z,i_151
+	jp	z,i_157
 	ld	hl,_hotspots
 	push	hl
 	ld	hl,(_n_pant)
@@ -10707,14 +11079,32 @@
 	ld	hl,240 % 256	;const
 	ld	a,l
 	ld	(_hotspot_y),a
-.i_151
-.i_143
+.i_157
+.i_149
 	ret
 
 
 
 ._main
 	di
+	ld a, 0xf1
+	ld (61695), a
+	ld (61696), a
+	dec a
+	ld i, a
+	im 2
+	ld	hl,61937	;const
+	push	hl
+	call	sp_CreateGenericISR
+	pop	bc
+	ld	hl,255 % 256	;const
+	push	hl
+	ld	hl,_ISR
+	push	hl
+	call	sp_RegisterHook
+	pop	bc
+	pop	bc
+	ei
 	call	_cortina
 	ld	hl,0 % 256	;const
 	push	hl
@@ -10744,7 +11134,7 @@
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_gpit),a
-.i_154
+.i_160
 	ld	hl,(_gpit)
 	ld	h,0
 	push	hl
@@ -10760,13 +11150,13 @@
 	ld	hl,_gpit
 	ld	a,(hl)
 	inc	(hl)
-.i_152
+.i_158
 	ld	hl,(_gpit)
 	ld	h,0
 	ld	a,h
 	or	l
-	jp	nz,i_154
-.i_153
+	jp	nz,i_160
+.i_159
 	ld	hl,0 % 256	;const
 	push	hl
 	ld	hl,3 % 256	;const
@@ -10797,16 +11187,16 @@
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_gpit),a
-	jp	i_157
-.i_155
+	jp	i_163
+.i_161
 	ld	hl,_gpit
 	ld	a,(hl)
 	inc	(hl)
-.i_157
+.i_163
 	ld	a,(_gpit)
 	cp	#(3 % 256)
-	jp	z,i_156
-	jp	nc,i_156
+	jp	z,i_162
+	jp	nc,i_162
 	ld	hl,_sp_moviles
 	push	hl
 	ld	hl,(_gpit)
@@ -10880,9 +11270,9 @@
 	call	l_pint
 	pop	de
 	call	l_pint
-	jp	i_155
-.i_156
-.i_158
+	jp	i_161
+.i_162
+.i_164
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_level),a
@@ -10933,12 +11323,12 @@
 	ld	hl,255 % 256	;const
 	ld	a,l
 	ld	(_o_pant),a
-.i_160
+.i_166
 	ld	hl,(_playing)
 	ld	h,0
 	ld	a,h
 	or	l
-	jp	z,i_161
+	jp	z,i_167
 	; Makes debugging easier
 	._game_loop_do
 	ld	a,#(1 % 256 % 256)
@@ -10947,13 +11337,13 @@
 	push	hl
 	ld	hl,_keys
 	pop	de
-	ld	bc,i_162
+	ld	bc,i_168
 	push	hl
 	push	bc
 	push	de
 	ld	a,1
 	ret
-.i_162
+.i_168
 	pop	bc
 	ld	h,0
 	ld	a,l
@@ -10964,33 +11354,33 @@
 	ld	hl,(_n_pant)
 	ld	h,0
 	call	l_ne
-	jp	nc,i_163
+	jp	nc,i_169
 	call	_draw_scr
 	ld	hl,(_n_pant)
 	ld	h,0
 	ld	a,l
 	ld	(_o_pant),a
-.i_163
+.i_169
 	ld	hl,(_p_objs)
 	ld	h,0
 	ex	de,hl
 	ld	hl,(_objs_old)
 	ld	h,0
 	call	l_ne
-	jp	nc,i_164
+	jp	nc,i_170
 	call	_draw_objs
 	ld	hl,(_p_objs)
 	ld	h,0
 	ld	a,l
 	ld	(_objs_old),a
-.i_164
+.i_170
 	ld	hl,(_p_life)
 	ld	h,0
 	ex	de,hl
 	ld	hl,(_life_old)
 	ld	h,0
 	call	l_ne
-	jp	nc,i_165
+	jp	nc,i_171
 	ld	a,#(5 % 256 % 256)
 	ld	(__x),a
 	ld	a,#(0 % 256 % 256)
@@ -11004,14 +11394,14 @@
 	ld	h,0
 	ld	a,l
 	ld	(_life_old),a
-.i_165
+.i_171
 	ld	hl,(_p_keys)
 	ld	h,0
 	ex	de,hl
 	ld	hl,(_keys_old)
 	ld	h,0
 	call	l_ne
-	jp	nc,i_166
+	jp	nc,i_172
 	ld	a,#(16 % 256 % 256)
 	ld	(__x),a
 	ld	a,#(0 % 256 % 256)
@@ -11025,7 +11415,7 @@
 	ld	h,0
 	ld	a,l
 	ld	(_keys_old),a
-.i_166
+.i_172
 	ld	hl,_maincounter
 	ld	a,(hl)
 	inc	(hl)
@@ -11041,42 +11431,42 @@
 	call	_enems_move
 	ld	a,(_p_killme)
 	and	a
-	jp	z,i_167
+	jp	z,i_173
 	ld	a,(_p_life)
 	and	a
-	jp	z,i_168
+	jp	z,i_174
 	ld	hl,(_p_killme)
 	ld	h,0
 	push	hl
 	call	_player_kill
 	pop	bc
-	jp	i_169
-.i_168
+	jp	i_175
+.i_174
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_playing),a
-.i_169
-.i_167
+.i_175
+.i_173
 	ld	hl,(_o_pant)
 	ld	h,0
 	ex	de,hl
 	ld	hl,(_n_pant)
 	ld	h,0
 	call	l_eq
-	jp	nc,i_170
+	jp	nc,i_176
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_enit),a
-	jp	i_173
-.i_171
+	jp	i_179
+.i_177
 	ld	hl,_enit
 	ld	a,(hl)
 	inc	(hl)
-.i_173
+.i_179
 	ld	a,(_enit)
 	cp	#(3 % 256)
-	jp	z,i_172
-	jp	nc,i_172
+	jp	z,i_178
+	jp	nc,i_178
 	ld	hl,(_enoffs)
 	ld	h,0
 	ex	de,hl
@@ -11087,8 +11477,8 @@
 	ld	a,l
 	ld	(_enoffsmasi),a
 	call	_enems_draw_current
-	jp	i_171
-.i_172
+	jp	i_177
+.i_178
 	ld	a,(_p_estado)
 	ld	e,a
 	ld	d,0
@@ -11097,11 +11487,11 @@
 	ld	de,0	;const
 	ex	de,hl
 	call	l_eq
-	jp	c,i_175
+	jp	c,i_181
 	ld	a,(_half_life)
 	cp	#(0 % 256)
-	jp	nz,i_174
-.i_175
+	jp	nz,i_180
+.i_181
 	ld ix, (_sp_player)
 	ld iy, vpClipStruct
 	ld hl, (_p_next_frame)
@@ -11129,8 +11519,8 @@
 	and 7
 	ld e, a
 	call SPMoveSprAbs
-	jp	i_177
-.i_174
+	jp	i_183
+.i_180
 	ld ix, (_sp_player)
 	ld iy, vpClipStruct
 	ld hl, (_p_next_frame)
@@ -11142,24 +11532,41 @@
 	ld hl, 0xfefe
 	ld de, 0
 	call SPMoveSprAbs
-.i_177
+.i_183
 	ld	hl,(_p_next_frame)
 	ld	(_p_current_frame),hl
+.i_184
+	ld	a,(_isrc)
+	ld	e,a
+	ld	d,0
+	ld	hl,2	;const
+	call	l_ult
+	jp	nc,i_185
+	ld a, 1
+	out (254), a
+	halt
+	xor a
+	out (254), a
+	jp	i_184
+.i_185
+	ld	hl,0 % 256	;const
+	ld	a,l
+	ld	(_isrc),a
 	call	sp_UpdateNow
-.i_170
+.i_176
 	call	_hotspots_do
 	ld	a,(_gpx)
 	cp	#(0 % 256)
-	jp	nz,i_179
+	jp	nz,i_187
 	ld	hl,_p_vx
 	call	l_gchar
 	ld	de,0	;const
 	ex	de,hl
 	call	l_lt
-	jr	c,i_180_i_179
-.i_179
-	jp	i_178
-.i_180_i_179
+	jr	c,i_188_i_187
+.i_187
+	jp	i_186
+.i_188_i_187
 	ld	hl,(_n_pant)
 	ld	h,0
 	dec	hl
@@ -11169,19 +11576,19 @@
 	ld	(_gpx),a
 	ld	hl,3584	;const
 	ld	(_p_x),hl
-.i_178
+.i_186
 	ld	a,(_gpx)
 	cp	#(224 % 256)
-	jp	nz,i_182
+	jp	nz,i_190
 	ld	hl,_p_vx
 	call	l_gchar
 	ld	de,0	;const
 	ex	de,hl
 	call	l_gt
-	jr	c,i_183_i_182
-.i_182
-	jp	i_181
-.i_183_i_182
+	jr	c,i_191_i_190
+.i_190
+	jp	i_189
+.i_191_i_190
 	ld	hl,(_n_pant)
 	ld	h,0
 	inc	hl
@@ -11192,25 +11599,25 @@
 	ld	h,0
 	ld	a,l
 	ld	(_gpx),a
-.i_181
+.i_189
 	ld	a,(_gpy)
 	cp	#(0 % 256)
-	jp	nz,i_185
+	jp	nz,i_193
 	ld	hl,_p_vy
 	call	l_gchar
 	ld	de,0	;const
 	ex	de,hl
 	call	l_lt
-	jp	nc,i_185
+	jp	nc,i_193
 	ld	a,(_n_pant)
 	cp	#(6 % 256)
-	jr	z,i_185_uge
-	jp	c,i_185
-.i_185_uge
-	jr	i_186_i_185
-.i_185
-	jp	i_184
-.i_186_i_185
+	jr	z,i_193_uge
+	jp	c,i_193
+.i_193_uge
+	jr	i_194_i_193
+.i_193
+	jp	i_192
+.i_194_i_193
 	ld	hl,(_n_pant)
 	ld	h,0
 	ld	bc,-6
@@ -11222,23 +11629,23 @@
 	ld	(_gpy),a
 	ld	hl,2304	;const
 	ld	(_p_y),hl
-.i_184
+.i_192
 	ld	a,(_gpy)
 	cp	#(144 % 256)
-	jp	nz,i_188
+	jp	nz,i_196
 	ld	hl,_p_vy
 	call	l_gchar
 	ld	de,0	;const
 	ex	de,hl
 	call	l_gt
-	jr	c,i_189_i_188
-.i_188
-	jp	i_187
-.i_189_i_188
+	jr	c,i_197_i_196
+.i_196
+	jp	i_195
+.i_197_i_196
 	ld	a,(_n_pant)
 	cp	#(24 % 256)
-	jp	z,i_190
-	jp	nc,i_190
+	jp	z,i_198
+	jp	nc,i_198
 	ld	hl,(_n_pant)
 	ld	h,0
 	ld	bc,6
@@ -11256,47 +11663,47 @@
 	ld	de,256	;const
 	ex	de,hl
 	call	l_gt
-	jp	nc,i_191
+	jp	nc,i_199
 	ld	hl,256	;const
 	ld	a,l
 	call	l_sxt
 	ld	a,l
 	ld	(_p_vy),a
-.i_191
-.i_190
-.i_187
+.i_199
+.i_198
+.i_195
 	ld	hl,0	;const
 	ld	a,h
 	or	l
-	jp	nz,i_193
+	jp	nz,i_201
 	ld	a,(_p_objs)
 	cp	#(25 % 256)
-	jp	nz,i_192
-.i_193
+	jp	nz,i_200
+.i_201
 	ld	a,#(1 % 256 % 256)
 	ld	(_success),a
 	ld	hl,0 % 256	;const
 	ld	a,l
 	ld	(_playing),a
-.i_192
-	jp	i_160
-.i_161
+.i_200
+	jp	i_166
+.i_167
 	call	sp_UpdateNow
 	call	sp_WaitForNoKey
 	ld	hl,(_success)
 	ld	h,0
 	ld	a,h
 	or	l
-	jp	z,i_195
+	jp	z,i_203
 	call	_game_ending
-	jp	i_196
-.i_195
+	jp	i_204
+.i_203
 	call	_game_over
-.i_196
+.i_204
 	call	_cortina
 	call	_clear_sprites
-	jp	i_158
-.i_159
+	jp	i_164
+.i_165
 	ret
 
 
@@ -11911,6 +12318,8 @@
 .__t	defs	1
 .__x	defs	1
 .__y	defs	1
+.__en_an_vx	defs	2
+.__en_an_vy	defs	2
 ._life_old	defs	1
 .__gp_gen	defs	2
 ._gen_pt	defs	2
@@ -11938,11 +12347,14 @@
 ._gpcx	defs	1
 ._gpcy	defs	1
 ._gpit	defs	1
-._gpjt	defs	1
+._en_an_vx	defs	6
 ._p_keys	defs	1
+._en_an_vy	defs	6
+._gpjt	defs	1
 ._playing	defs	1
 ._gpox	defs	1
 ._seed	defs	2
+._isrc	defs	1
 ._p_tx	defs	1
 ._p_ty	defs	1
 ._asm_int_2	defs	2
@@ -11950,6 +12362,8 @@
 ._p_vy	defs	1
 ._gpxx	defs	1
 ._gpyy	defs	1
+.__en_an_x	defs	2
+.__en_an_y	defs	2
 ._objs_old	defs	1
 ._maincounter	defs	1
 ._ptx1	defs	1
@@ -11969,6 +12383,8 @@
 ._p_subframe	defs	1
 ._gpc	defs	1
 ._gpd	defs	1
+._en_an_x	defs	6
+._en_an_y	defs	6
 ._hit	defs	1
 ._rda	defs	1
 ._rdb	defs	1
@@ -12126,8 +12542,10 @@
 	XDEF	_player_hidden
 	XDEF	__x
 	XDEF	__y
-	XDEF	_life_old
+	XDEF	__en_an_vx
 	LIB	sp_Invalidate
+	XDEF	__en_an_vy
+	XDEF	_life_old
 	LIB	sp_CreateGenericISR
 	LIB	sp_JoyKeyboard
 	LIB	sp_FreeBlock
@@ -12242,8 +12660,10 @@
 	XDEF	_player_cells
 	LIB	sp_RemoveDList
 	XDEF	_gpit
-	XDEF	_gpjt
+	XDEF	_en_an_vx
 	XDEF	_p_keys
+	XDEF	_en_an_vy
+	XDEF	_gpjt
 	XDEF	_playing
 	XDEF	_bullets_move
 	XDEF	_player_calc_bounding_box
@@ -12254,6 +12674,7 @@
 	XDEF	_rand
 	LIB	sp_Swap
 	XDEF	_seed
+	XDEF	_isrc
 	XDEF	_p_tx
 	XDEF	_p_ty
 	XDEF	_print_str
@@ -12264,8 +12685,10 @@
 	XDEF	_p_vy
 	XDEF	_gpxx
 	XDEF	_gpyy
-	XDEF	_objs_old
+	XDEF	__en_an_x
+	XDEF	__en_an_y
 	LIB	sp_ListPrev
+	XDEF	_objs_old
 	XDEF	_maincounter
 	XDEF	_ptx1
 	XDEF	_ptx2
@@ -12308,6 +12731,8 @@
 	XDEF	_gpd
 	LIB	sp_HuffAccumulate
 	LIB	sp_HuffSetState
+	XDEF	_en_an_x
+	XDEF	_en_an_y
 	XDEF	_hit
 	XDEF	_hotspots_do
 	XDEF	_sprite_1_a

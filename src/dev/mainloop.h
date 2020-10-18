@@ -14,13 +14,28 @@ void main (void) {
 	
 	#ifdef MODE_128K
 		sp_InitIM2(0xf1f1);
+	#elif defined MIN_FAPS_PER_FRAME
+		// Unsafe but meh
+		#asm
+			ld  a, 0xf1 
+			ld  (61695), a
+			ld  (61696), a
+			dec a
+			ld  i, a
+			im  2
+		#endasm
+	#endif
+
+	#if defined MODE_128K || defined MIN_FAPS_PER_FRAME
 		sp_CreateGenericISR(0xf1f1);
 		sp_RegisterHook(255, ISR);
 		
 		#asm
 			ei
 		#endasm
+	#endif
 
+	#ifdef MODE_128K
 		wyz_init ();
 	#endif
 

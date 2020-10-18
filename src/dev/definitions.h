@@ -311,3 +311,5 @@ unsigned char *_gp_gen;
 #ifdef MODE_128K
 	unsigned char song_playing = 0;
 #endif
+
+unsigned char isrc;

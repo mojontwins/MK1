@@ -76,6 +76,10 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 	#include "128k.h"
 	#include "assets/ay_fx_numbers.h"
 	#include "assets/librarian.h"
+	#include "wyzplayer.h"
+#else
+	#include "48k.h"
+	#include "beeper.h"
 #endif
 
 #include "aplib.h"
@@ -94,12 +98,6 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #endif
 
 #include "my/ci/extra_vars.h"
-
-#ifdef MODE_128K
-	#include "wyzplayer.h"
-#else
-	#include "beeper.h"
-#endif
 
 #include "printer.h"
 #include "my/ci/extra_functions.h"

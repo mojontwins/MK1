@@ -215,6 +215,13 @@
 		if (o_pant == n_pant) {
 			#include "mainloop/update_sprites.h"
 
+			#ifdef MIN_FAPS_PER_FRAME
+				while (isrc < MIN_FAPS_PER_FRAME) {
+					#asm
+						halt
+					#endasm
+				} isrc = 0;
+			#endif
 			sp_UpdateNow();
 		}
 
