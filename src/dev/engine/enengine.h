@@ -411,28 +411,7 @@ void enems_move (void) {
 			#if !defined PLAYER_GENITAL && !defined DISABLE_PLATFORMS
 				// Platforms
 				if (_en_t == 4) {
-					if (pregotten) {
-
-						// Horizontal moving platforms
-						if (_en_mx) {
-							if (gpy + 17 >= _en_y && gpy + 8 <= _en_y) {
-								p_gotten = 1;
-								ptgmx = _en_mx << FIXBITS;
-								gpy = (_en_y - 16); p_y = gpy << FIXBITS;
-							}
-						}
-
-						// Vertical moving platforms
-						if (
-							(_en_my < 0 && gpy + 18 >= _en_y && gpy + 8 <= _en_y) ||
-							(_en_my > 0 && gpy + 17 + _en_my >= _en_y && gpy + 8 <= _en_y)
-						) {
-							p_gotten = 1;
-							ptgmy = _en_my << FIXBITS;
-							gpy = (_en_y - 16); p_y = gpy << FIXBITS;						
-						}
-
-					}
+					#include "engine/enem_mods/platforms.h"
 				} else
 			#endif
 			{

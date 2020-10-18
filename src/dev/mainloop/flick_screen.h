@@ -9,7 +9,7 @@
 				-- n_pant;
 				-- x_pant;
 				gpx = 224;
-				p_x = (240<<FIXBITS);
+				p_x = (224<<FIXBITS);
 			}
 
 			#if defined (COMPRESSED_LEVELS)
@@ -52,7 +52,7 @@
 		#if MAP_W > 1		
 			if (gpx == 0 && p_vx < 0) {
 				-- n_pant;
-				gpx = 224; p_x = (240<<FIXBITS);
+				gpx = 224; p_x = (224<<FIXBITS);
 			}
 			if (gpx == 224 && p_vx > 0) {		
 				++ n_pant;

@@ -3,7 +3,7 @@
 
 // mk1.c
 //#define DEBUG_KEYS
-#define TEST_DEBUG
+//#define TEST_DEBUG
 #include <spritepack.h>
 
 // We are using some stuff from splib2 directly.

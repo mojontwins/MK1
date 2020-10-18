@@ -216,20 +216,20 @@ unsigned char player_move (void) {
 						ld  c, a
 						ld  a, PLAYER_MAX_VY_CAYENDO - PLAYER_G 
 						cp  c
+						ld  a, c
 						jr  nc, _player_gravity_add 
 
 						ld  a, PLAYER_MAX_VY_CAYENDO 
 						jr  _player_gravity_vy_set
 
 					._player_gravity_add
-						ld  a, c
 						add PLAYER_G
 
 					._player_gravity_vy_set
 						ld  (_p_vy), a
 
 					#ifdef PLAYER_CUMULATIVE_JUMP
-						ld  a, (_p_jmp_on)
+						ld  a, (_p_saltando)
 						or  a
 						jr  nz, _player_gravity_p_gotten_done
 					#endif
@@ -238,9 +238,12 @@ unsigned char player_move (void) {
 						or  a
 						jr  z, _player_gravity_p_gotten_done
 
+						ld  a, (_p_vy)
+						bit 7, a
+						jr  nz, _player_gravity_p_gotten_done
+						
 						xor a
 						ld  (_p_vy), a
-
 					._player_gravity_p_gotten_done
 				#endasm
 			}	
@@ -632,82 +635,165 @@ unsigned char player_move (void) {
 	// Safe
 	
 	if (p_x < 0) p_x = 0;
-	if (p_x > (240<<FIXBITS)) p_x = (240<<FIXBITS);
+	if (p_x > (224<<FIXBITS)) p_x = (224<<FIXBITS);
 
 	gpox = gpx;
 	gpx = p_x >> FIXBITS;
 		
 	// Collision. May set hit_h
-	player_calc_bounding_box ();
+	#asm
+			call _player_calc_bounding_box
 
-	hit_h = 0;
-	cy1 = pty1; cy2 = pty2;
+			#ifndef ONLY_VERTICAL_EVIL_TILE
+				xor a 
+				ld  (_hit_h), a
+			#endif
 
-	#if defined (PLAYER_GENITAL)
-		if (p_vx < 0)
-	#else	
-		if (p_vx + ptgmx < 0)
-	#endif
-	{
-		cx1 = cx2 = ptx1;
-		cm_two_points ();
+			ld  a, (_pty1)
+			ld  (_cy1), a
+			ld  a, (_pty2)
+			ld  (_cy2), a
+			// Calculate horizontal velocity
+			
+			ld  a, (_p_vx)
+			#if !defined PLAYER_GENITAL
+				ld  c, a
+				ld  a, (_ptgmx)
+				add c
+			#endif
 
-		if ((at1 & 8) || (at2 & 8)) {
+			// Skip if not moving in the horizontal axis
+
+			or  a
+			jp  z, _ha_collision_done
+
+			// Check sign
+
+			bit 7, a
+			jp  z, _ha_collision_vx_positive
+
+		._ha_collision_vx_negative
+
+			ld  a, (_ptx1)
+			ld  (_cx1), a
+			ld  (_cx2), a
+
+			call _cm_two_points
+
+			// if ((at1 & 8) || (at2 & 8)) {
+			ld  a, (_at1)
+			and 8
+			jr  nz, _ha_col_vx_neg_do
+
+			ld  a, (_at2)
+			and 8
+			jp  z, _ha_collision_checkevil
+
+		._ha_col_vx_neg_do
+	#endasm
 			#include "my/ci/bg_collision/obstacle_left.h"
+	#asm
 
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
-				p_vx = -(p_vx / 2);
+				ld  a, (_p_vx)
+				sra a
+				neg a
 			#else
-				p_vx = 0;
-			#endif
+				xor a
+			#endif 
+			ld  (_p_vx), a
+
+			ld  a, (_ptx1)
+			inc a
+			sla a
+			sla a
+			sla a
+			sla a
 
 			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)				
-				gpx = ((ptx1 + 1) << 4) - 4;
-			#else
-				gpx = ((ptx1 + 1) << 4);
+				sub 4
 			#endif
 
-			p_x = gpx << FIXBITS;
-			wall_h = WLEFT;
-		}
-		#ifndef DEACTIVATE_EVIL_TILE
-			else hit_h = ((at1 & 1) || (at2 & 1));
-		#endif
+			ld  (_gpx), a
 
-	}
+			// p_x = gpx << FIXBITS; 16 bits shift
+			ld  d, 0
+			ld  e, a
+			ld  l, FIXBITS
+			call l_asl
+			ld  (_p_x), hl
 
-	#if defined (PLAYER_GENITAL)
-		if (p_vx > 0)
-	#else	
-		if (p_vx + ptgmx > 0)
-	#endif
-	{
-		cx1 = cx2 = ptx2; 
-		cm_two_points ();
+			ld  a, WLEFT
+			ld  (_wall_h), a
 
-		if ((at1 & 8) || (at2 & 8)) {
+			jp  _ha_collision_checkevil
+
+		._ha_collision_vx_positive
+
+			ld  a, (_ptx2)
+			ld  (_cx1), a
+			ld  (_cx2), a
+
+			call _cm_two_points
+
+			// if ((at1 & 8) || (at2 & 8)) {
+			ld  a, (_at1)
+			and 8
+			jr  nz, _ha_col_vx_pos_do
+
+			ld  a, (_at2)
+			and 8
+			jp  z, _ha_collision_checkevil
+
+		._ha_col_vx_pos_do
+	#endasm
 			#include "my/ci/bg_collision/obstacle_right.h"
+	#asm
 
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
-				p_vx = -(p_vx / 2);
+				ld  a, (_p_vx)
+				sra a
+				neg a
 			#else
-				p_vx = 0;
-			#endif
+				xor a
+			#endif 
+			ld  (_p_vx), a
+
+			ld  a, (_ptx2)
+			dec a
+			sla a
+			sla a
+			sla a
+			sla a
 
 			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)				
-				gpx = (ptx1 << 4) + 4;
-			#else
-				gpx = (ptx1 << 4);
+				add 4
 			#endif
 
-			p_x = gpx << FIXBITS;
-			wall_h = WRIGHT;
-		}
-		#ifndef DEACTIVATE_EVIL_TILE
-			else hit_h = ((at1 & 1) || (at2 & 1));
-		#endif
+			ld (_gpx), a
 
-	}
+			// p_x = gpx << FIXBITS; 16 bits shift
+			ld  d, 0
+			ld  e, a
+			ld  l, FIXBITS
+			call l_asl
+			ld  (_p_x), hl
+
+			ld  a, WRIGHT
+			ld  (_wall_h), a
+
+		._ha_collision_checkevil
+
+			#ifdef DEACTIVATE_EVIL_TILE
+				#ifndef ONLY_VERTICAL_EVIL_TILE
+					#endasm
+						hit_h = ((at1 IS_EVIL) || (at2 IS_EVIL));
+					#asm
+				#endif
+			#endif
+
+		._ha_collision_done
+	#endasm
 
 	// Priority to decide facing
 
