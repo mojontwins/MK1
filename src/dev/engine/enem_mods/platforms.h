@@ -1,4 +1,10 @@
-/*
+// MTE MK1 (la Churrera) v6
+// Copyleft 2010-2014, 2020 by the Mojon Twins
+
+// Plataformas móviles
+// Assembly version.
+
+	/*
 	if (pregotten) {
 
 		// Horizontal moving platforms
@@ -21,9 +27,13 @@
 		}
 
 	}
-*/
+	*/
 
 	#asm
+		._enems_plats_horz
+
+			// Horizontal
+
 			ld  a, (_p_saltando)
 			or  a
 			jp  nz, _enems_platforms_done
@@ -38,11 +48,11 @@
 			or  a
 			jr  z, _enems_plats_horz_done
 
-			// gpy + 17 >= _en_y
+			// gpy + 18 >= _en_y
 			ld  a, (__en_y)
 			ld  c, a
 			ld  a, (_gpy)
-			add 17
+			add 18
 			cp  c
 			jr  c, _enems_plats_horz_done
 
@@ -74,6 +84,8 @@
 		._enems_plats_horz_done
 
 			// Vertical
+
+		._enems_plats_vert
 
 			//(_en_my < 0 && gpy + 18 >= _en_y && gpy + 8 <= _en_y) ||
 			//(_en_my > 0 && gpy + 17 + _en_my >= _en_y && gpy + 8 <= _en_y)
@@ -148,6 +160,8 @@
 
 		._enems_plats_vert_done
 			jp  _enems_platforms_done
+
+		// Set player on top of the platform
 
 		._enems_plats_gpy_set
 

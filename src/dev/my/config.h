@@ -1,4 +1,4 @@
-// MTE MK1 (la Churrera) v5.0
+// MTE MK1 (la Churrera) v6
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 // Config.h
@@ -78,12 +78,12 @@
 //#define PURSUERS_MAX_V 			2		// 1, 2, 4.
 //#define PURSUERS_BASE_CELL		3		// If defined, type 7 enemies are always #
 
-#define ENABLE_FANTIES						// If defined, Fanties are enabled!
-#define FANTIES_BASE_CELL 			2		// Base sprite cell (0, 1, 2 or 3)
+//#define ENABLE_FANTIES					// If defined, Fanties are enabled!
+//#define FANTIES_BASE_CELL 		2		// Base sprite cell (0, 1, 2 or 3)
 //#define FANTIES_SIGHT_DISTANCE	64 		// Used in our type 6 enemies.
-#define FANTIES_MAX_V 				64 		// Flying enemies max speed (also for custom type 6 if you want)
-#define FANTIES_A 					4		// Flying enemies acceleration.
-#define FANTIES_LIFE_GAUGE			2		// Amount of shots needed to kill flying enemies.
+//#define FANTIES_MAX_V 			64 		// Flying enemies max speed (also for custom type 6 if you want)
+//#define FANTIES_A 				4		// Flying enemies acceleration.
+//#define FANTIES_LIFE_GAUGE		2		// Amount of shots needed to kill flying enemies.
 //#define FANTIES_TYPE_HOMING				// Unset for simple fanties.
 
 //#define ENABLE_ORTHOSHOOTERS				// If defined, orthoshooters are active
@@ -109,18 +109,18 @@
 // Shooting behaviour
 // ------------------
 
-//#define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
+#define PLAYER_CAN_FIRE 					// If defined, shooting engine is enabled.
 //#define PLAYER_CAN_FIRE_FLAG		1		// If defined, player can only fire when flag # is 1
-//#define PLAYER_BULLET_SPEED 		8		// Pixels/frame. 
-//#define MAX_BULLETS 				3		// Max number of bullets on screen. Be careful!.
-//#define PLAYER_BULLET_Y_OFFSET	6		// vertical offset from the player's top.
-//#define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
-//#define ENEMIES_LIFE_GAUGE		4		// Amount of shots needed to kill enemies.
+#define PLAYER_BULLET_SPEED 		8		// Pixels/frame. 
+#define MAX_BULLETS 				3		// Max number of bullets on screen. Be careful!.
+#define PLAYER_BULLET_Y_OFFSET	6		// vertical offset from the player's top.
+#define PLAYER_BULLET_X_OFFSET	0		// vertical offset from the player's left/right.
+#define ENEMIES_LIFE_GAUGE		4		// Amount of shots needed to kill enemies.
 //#define LIMITED_BULLETS 					// If defined, bullets die after N frames
 //#define LB_FRAMES 				4		// If defined, defines the # of frames bullets live (fixed)
 //#define LB_FRAMES_FLAG			2		// If defined, defines which flag determines the # of frames
 
-//#define RESPAWN_ON_ENTER					// Enemies respawn when entering screen
+#define RESPAWN_ON_ENTER					// Enemies respawn when entering screen
 //#define FIRE_MIN_KILLABLE			3		// If defined, only enemies >= N can be killed.
 //#define CAN_FIRE_UP 						// If defined, player can fire upwards and diagonal.
 //#define MAX_AMMO					99		// If defined, ammo is not infinite!
