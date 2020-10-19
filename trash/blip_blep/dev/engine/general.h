@@ -11,7 +11,7 @@ unsigned char collide (void) {
 	#endif
 }
 
-unsigned char cm_two_points (void) {
+unsigned char cm_hb_collision (void) {
 	/*
 	if (cx1 > 14 || cy1 > 9) at1 = 0; 
 	else at1 = map_attr [cx1 + (cy1 << 4) - cy1];
@@ -22,17 +22,17 @@ unsigned char cm_two_points (void) {
 	#asm
 			ld  a, (_cx1)
 			cp  15
-			jr  nc, _cm_two_points_at1_reset
+			jr  nc, _cm_hb_collision_at1_reset
 
 			ld  a, (_cy1)
 			cp  10
-			jr  c, _cm_two_points_at1_do
+			jr  c, _cm_hb_collision_at1_do
 
-		._cm_two_points_at1_reset
+		._cm_hb_collision_at1_reset
 			xor a
-			jr  _cm_two_points_at1_done
+			jr  _cm_hb_collision_at1_done
 
-		._cm_two_points_at1_do
+		._cm_hb_collision_at1_do
 			ld  a, (_cy1)
 			ld  b, a
 			sla a
@@ -49,22 +49,22 @@ unsigned char cm_two_points (void) {
 			add hl, de
 			ld  a, (hl)
 
-		._cm_two_points_at1_done
+		._cm_hb_collision_at1_done
 			ld (_at1), a
 
 			ld  a, (_cx2)
 			cp  15
-			jr  nc, _cm_two_points_at2_reset
+			jr  nc, _cm_hb_collision_at2_reset
 
 			ld  a, (_cy2)
 			cp  10
-			jr  c, _cm_two_points_at2_do
+			jr  c, _cm_hb_collision_at2_do
 
-		._cm_two_points_at2_reset
+		._cm_hb_collision_at2_reset
 			xor a
-			jr  _cm_two_points_at2_done
+			jr  _cm_hb_collision_at2_done
 
-		._cm_two_points_at2_do
+		._cm_hb_collision_at2_do
 			ld  a, (_cy2)
 			ld  b, a
 			sla a
@@ -81,7 +81,7 @@ unsigned char cm_two_points (void) {
 			add hl, de
 			ld  a, (hl)
 
-		._cm_two_points_at2_done
+		._cm_hb_collision_at2_done
 			ld (_at2), a
 	#endasm
 }

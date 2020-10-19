@@ -353,7 +353,7 @@ unsigned char player_move (void) {
 			ld  (_cy1), a
 			ld  (_cy2), a
 
-			call _cm_two_points
+			call _cm_hb_collision
 
 			// if ((at1 & 8) || (at2 & 8)) {
 			ld  a, (_at1)
@@ -420,7 +420,7 @@ unsigned char player_move (void) {
 			ld  (_cy1), a
 			ld  (_cy2), a
 
-			call _cm_two_points
+			call _cm_hb_collision
 
 			#ifdef PLAYER_GENITAL
 				// if ((at1 & 8) || (at2 & 8)) {
@@ -515,7 +515,7 @@ unsigned char player_move (void) {
 	#ifndef PLAYER_GENITAL
 		cy1 = cy2 = (gpy + 16) >> 4;
 		cx1 = ptx1; cx2 = ptx2;
-		cm_two_points ();
+		cm_hb_collision ();
 		possee = ((at1 & 12) || (at2 & 12)) && (gpy & 15) < 8;
 	#endif
 
@@ -678,7 +678,7 @@ unsigned char player_move (void) {
 			ld  (_cx1), a
 			ld  (_cx2), a
 
-			call _cm_two_points
+			call _cm_hb_collision
 
 			// if ((at1 & 8) || (at2 & 8)) {
 			ld  a, (_at1)
@@ -734,7 +734,7 @@ unsigned char player_move (void) {
 			ld  (_cx1), a
 			ld  (_cx2), a
 
-			call _cm_two_points
+			call _cm_hb_collision
 
 			// if ((at1 & 8) || (at2 & 8)) {
 			ld  a, (_at1)

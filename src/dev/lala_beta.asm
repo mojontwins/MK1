@@ -3,7 +3,7 @@
 ;
 ;	Reconstructed for z80 Module Assembler
 ;
-;	Module compile time: Mon Oct 19 06:35:29 2020
+;	Module compile time: Mon Oct 19 07:46:40 2020
 
 
 
@@ -8263,17 +8263,17 @@
 
 
 
-._cm_two_points
+._cm_hb_collision
 	ld a, (_cx1)
 	cp 15
-	jr nc, _cm_two_points_at1_reset
+	jr nc, _cm_hb_collision_at1_reset
 	ld a, (_cy1)
 	cp 10
-	jr c, _cm_two_points_at1_do
-	._cm_two_points_at1_reset
+	jr c, _cm_hb_collision_at1_do
+	._cm_hb_collision_at1_reset
 	xor a
-	jr _cm_two_points_at1_done
-	._cm_two_points_at1_do
+	jr _cm_hb_collision_at1_done
+	._cm_hb_collision_at1_do
 	ld a, (_cy1)
 	ld b, a
 	sla a
@@ -8289,18 +8289,18 @@
 	ld hl, _map_attr
 	add hl, de
 	ld a, (hl)
-	._cm_two_points_at1_done
+	._cm_hb_collision_at1_done
 	ld (_at1), a
 	ld a, (_cx2)
 	cp 15
-	jr nc, _cm_two_points_at2_reset
+	jr nc, _cm_hb_collision_at2_reset
 	ld a, (_cy2)
 	cp 10
-	jr c, _cm_two_points_at2_do
-	._cm_two_points_at2_reset
+	jr c, _cm_hb_collision_at2_do
+	._cm_hb_collision_at2_reset
 	xor a
-	jr _cm_two_points_at2_done
-	._cm_two_points_at2_do
+	jr _cm_hb_collision_at2_done
+	._cm_hb_collision_at2_do
 	ld a, (_cy2)
 	ld b, a
 	sla a
@@ -8316,7 +8316,7 @@
 	ld hl, _map_attr
 	add hl, de
 	ld a, (hl)
-	._cm_two_points_at2_done
+	._cm_hb_collision_at2_done
 	ld (_at2), a
 	ret
 
@@ -9483,7 +9483,7 @@
 	ld a, (_pty1)
 	ld (_cy1), a
 	ld (_cy2), a
-	call _cm_two_points
+	call _cm_hb_collision
 	ld a, (_at1)
 	and 8
 	jp nz, _va_col_vy_neg_do
@@ -9511,7 +9511,7 @@
 	ld a, (_pty2)
 	ld (_cy1), a
 	ld (_cy2), a
-	call _cm_two_points
+	call _cm_hb_collision
 	ld a, (_at1)
 	and 8
 	jr nz, _va_col_vy_pos_do
@@ -9600,7 +9600,7 @@
 	ld	h,0
 	ld	a,l
 	ld	(_cx2),a
-	call	_cm_two_points
+	call	_cm_hb_collision
 	ld	hl,_at1
 	ld	a,(hl)
 	and	#(12 % 256)
@@ -9903,7 +9903,7 @@
 	ld a, (_ptx1)
 	ld (_cx1), a
 	ld (_cx2), a
-	call _cm_two_points
+	call _cm_hb_collision
 	ld a, (_at1)
 	and 8
 	jr nz, _ha_col_vx_neg_do
@@ -9933,7 +9933,7 @@
 	ld a, (_ptx2)
 	ld (_cx1), a
 	ld (_cx2), a
-	call _cm_two_points
+	call _cm_hb_collision
 	ld a, (_at1)
 	and 8
 	jr nz, _ha_col_vx_pos_do
@@ -10888,7 +10888,7 @@
 	ld a, (__en_y)
 	ld c, a
 	ld a, (_gpy)
-	add 17
+	add 18
 	cp c
 	jr c, _enems_plats_horz_done
 	ld a, (_gpy)
@@ -12988,9 +12988,9 @@
 	XDEF	_sprite_14_a
 	XDEF	_sprite_14_b
 	XDEF	_sprite_14_c
-	XDEF	_cm_two_points
 	XDEF	_sprite_15_a
 	XDEF	_sprite_15_b
+	XDEF	_sprite_15_c
 	LIB	sp_RegisterHookLast
 	LIB	sp_IntLargeRect
 	LIB	sp_IntPtLargeRect
@@ -13004,13 +13004,12 @@
 	XDEF	_ptgmy
 	XDEF	_en_an_current_frame
 	XDEF	_warp_to_level
-	XDEF	_sprite_15_c
 	XDEF	_sprite_16_a
 	XDEF	_sprite_16_b
 	XDEF	_sprite_16_c
+	XDEF	_sprite_17_a
 	LIB	sp_MoveSprRelC
 	LIB	sp_InitIM2
-	XDEF	_sprite_17_a
 	XDEF	_sprite_18_a
 	XDEF	_sprite_19_a
 	XREF	_sprite_19_b
@@ -13053,6 +13052,7 @@
 	XDEF	_n_pant
 	LIB	sp_ListFree
 	XDEF	_bullets_init
+	XDEF	_cm_hb_collision
 	XDEF	_ISR
 	LIB	sp_IntRect
 	LIB	sp_ListLast

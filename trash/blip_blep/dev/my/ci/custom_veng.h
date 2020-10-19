@@ -24,7 +24,7 @@ if ((pad0 & sp_FIRE) == 0) {
 	if (p_vy < -P_BREAK_VELOCITY_OFFSET) {
 		cx1 = ptx1; cx2 = ptx2;
 		cy1 = cy2 = (gpy - 1) >> 4;
-		cm_two_points ();
+		cm_hb_collision ();
 
 		if (at1 & 16) {
 			_x = cx1; _y = cy1;

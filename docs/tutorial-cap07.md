@@ -715,13 +715,10 @@ Si definimos `UNPACKED_MAP` estaremos diciéndole al motor que nuestro mapa es d
 Si estamos en modo "packed" (16 tiles en tu tileset), `PACKED_MAP_ALT_TILE` es el número de tile por el que se sustituye el 0 de forma aleatoria. Si lo comentas, no se sustituirá por ninguno (ahorrando un poco de código, además).
 
 ```c
-    //#define NO_MASKS                          // Sprites are rendered using OR instead of masks.
     //#define MASKED_BULLETS                    // If needed
 ```
 
 ### Cosas de máscaras
-
-`NO_MASKS`  hace que los sprites del jugador y los enemigos se dibujen sin máscaras, con un sencillo OR. Esto funciona bien si tus fondos son planos o muy poco complejos porque el render es más rápido y ganamos algunos ciclos, lo que significa más faps de esos.
 
 `MASKED_BULLETS` hace que los sprites de las balas usen máscaras, lo que resulta más bonitor en general si usas fondos complejos.
 

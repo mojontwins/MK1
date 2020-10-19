@@ -594,7 +594,7 @@ void select_joyfunc (void) {
 	unsigned char mons_col_sc_x (void) {
 		cx1 = cx2 = (_en_mx > 0 ? _en_x + 15 : _en_x) >> 4;
 		cy1 = _en_y >> 4; cy2 = (_en_y + 15) >> 4;
-		cm_two_points ();
+		cm_hb_collision ();
 		#ifdef EVERYTHING_IS_A_WALL
 			return (at1 || at2);
 		#else
@@ -605,7 +605,7 @@ void select_joyfunc (void) {
 	unsigned char mons_col_sc_y (void) {
 		cy1 = cy2 = (_en_my > 0 ? _en_y + 15 : _en_y) >> 4;
 		cx1 = _en_x >> 4; cx2 = (_en_x + 15) >> 4;
-		cm_two_points ();
+		cm_hb_collision ();
 		#ifdef EVERYTHING_IS_A_WALL
 			return (at1 || at2);
 		#else

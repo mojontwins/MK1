@@ -27,7 +27,7 @@ void enems_move (void);
 
 // general.h
 unsigned char collide (void);
-unsigned char cm_two_points (void);
+unsigned char cm_hb_collision (void);
 unsigned char rand (void);
 unsigned int abs (int n);
 void step (void);

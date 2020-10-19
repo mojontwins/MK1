@@ -260,7 +260,7 @@ Devuelve el número del _tile_ situado en las coordenadas (`x`, `y`) de la rejil
 
 Sirve para saber si el _player_ colisiona con un ente de 16x16 píxeles situado en las coordenadas (`cx2`, `cy2`). Si se define `SMALL_COLLISION` la caja de colisión es de 8x8. Si no, es de 13x13. Devuelve `1` si hay colisión.
 
-#### `unsigned char cm_two_points (void)`
+#### `unsigned char cm_hb_collision (void)`
 
 Se emplea para hacer colisiones por caja cuando un objeto avanza en cierta dirección. Devuelve los comportamientos de los _tiles_ que tocan los puntos (`cx1`, `cy1`) y (`cx2`, `cy2`) en las variables `at1` y `at2`, respectivamente.
 
