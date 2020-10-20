@@ -37,7 +37,7 @@ End Function
 Sub usage ()
 	Print "usage: "
 	Print "$ sprncv3 sprites.png|structure "
-	Print "          [bin_prefix=./] [def_prefix=assets/] [player_size=16x16]"
+	Print "          [bin_prefix=../bin/] [def_prefix=assets/] [player_size=16x16]"
 	Print "          [enems_size=16x16] [player_frames=8] [enems_frames=8] [player_pos=0,0]"
 	Print "			 [enems_pos=0,16]"
 	Print
@@ -256,6 +256,7 @@ binPrefix = sclpGetValue ("bin_prefix")
 If Len (binPrefix) > 0 Then
 	If Right (binPrefix, 1) <> "/" And Right (binPrefix, 1) <> Chr(92) Then binPrefix = binPrefix & "/"
 End If
+If binPrefix = "" Then binPrefix = "../bin/"
 
 playerSize = sclpGetValue ("player_size"): If playerSize = "" Then playerSize = "16x16"
 enemsSize = sclpGetValue ("enems_size"): If enemsSize = "" Then enemsSize = "16x16"
@@ -273,7 +274,7 @@ If sclpGetValue ("enems_pos") <> "" Then
 	parseCoordinatesString sclpGetValue ("enems_pos"), coords ()
 	eX0 = coords (0): eY0 = coords (1)
 Else
-	eX0 = 0: eY0 = 0
+	eX0 = 0: eY0 = 16
 End If
 
 screenres 640, 480, 32, , -1

@@ -28,7 +28,7 @@ echo Convirtiendo enemigos/hotspots
 echo Importando GFX
 ..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png tileset.bin 7 >nul
 
-..\utils\sprcnv.exe ..\gfx\sprites.png assets\sprites.h > nul
+..\utils\sprcnv3.exe ..\gfx\sprites.png > nul
 
 ..\utils\sprcnvbin.exe ..\gfx\sprites_extra.png sprites_extra.bin 1 > nul
 ..\utils\sprcnvbin8.exe ..\gfx\sprites_bullet.png sprites_bullet.bin 1 > nul
