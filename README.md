@@ -1,3 +1,7 @@
+# WARNING - v6 WIP
+
+**Branch v6 WIP is completely unstable and in development. Please use the master branch for now.**
+
 # MTE MK1 (la Churrera)
 
 **MTE MK1** (más conocido como *la Churrera*) es un _framework_ compuesto por un motor modular programado en C y ensamble, y un conjunto de herramientas para hacer juegos para ZX Spectrum. **MTE MK1** compila con z88dk 1.10 (incluido) y emplea una versión modificada de la biblioteca **splib2** de Alvin Albrecht.
