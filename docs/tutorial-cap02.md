@@ -207,27 +207,27 @@ El tercer parámetro es el nombre del archivo que quieres generar (incluyendo su
 
 El cuarto parámetro es opcional, y sirve para especificar un color de tinta 0-7 que quieres que se utilice si se encuentra algún "patrón" que sea un cuadrado de color sólido como segundo color. Si sabes de Spectrum le encontrarás sentido a esto.
 
-Si abres `compile.bat` verás que los parámetros que se emplean en la llamada para obtener los patrones se corresponden con los que hemos mencionado más arriba (la fuente se llama `font.png` y el tileset `work.png`, y se ubican en `gfx`). El archivo de salida es `tileset.bin` y se emplea `7` como `defaultink`:
+Si abres `compile.bat` verás que los parámetros que se emplean en la llamada para obtener los patrones se corresponden con los que hemos mencionado más arriba (la fuente se llama `font.png` y el tileset `work.png`, y se ubican en `gfx`). El archivo de salida es `..\bin\tileset.bin` y se emplea `7` como `defaultink`:
 
 ```
-    ..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png tileset.bin 7
+    ..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png ..\bin\tileset.bin 7
 ```
 
 **Si tu juego necesita sprites de otro color sobre cuadros totalmente negros tendrás que modificar esta línea con el color que necesites**.
 
-Los `../utils/` y `../gfx` hacen referencia a que los archivos se ubican en esas carpetas que están un nivel más *abajo* de donde está `compile.bat`. El `> nul` del final hace que las mierdas que dice `ts2bin` no se muestren.
+Los `../utils/`, `../bin` y `../gfx` hacen referencia a que los archivos se ubican en esas carpetas que están un nivel más *abajo* de donde está `compile.bat`. El `> nul` del final hace que las mierdas que dice `ts2bin` no se muestren.
 
 Puedes probar a ejecutar el comando desde `dev` tal y como aparece para ver como se genera `tileset.bin`:
 
 ```
-    $ ..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png tileset.bin forcezero
+    $ ..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png ..\bin\tileset.bin forcezero
     ts2bin v0.3 20191202 ~ Reading font ~ reading metatiles ~  2304 bytes written
 
-    $ dir tileset.bin
+    $ dir ..\bin\tileset.bin
      El volumen de la unidad C es Local Disk
      El número de serie del volumen es: 6009-D6D4
 
-     Directorio de C:\git\MK1\src\dev
+     Directorio de C:\git\MK1\src\bin
 
     11/01/2020  16:06             2.304 tileset.bin
                    1 archivos          2.304 bytes

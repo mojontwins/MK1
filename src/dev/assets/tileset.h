@@ -4,5 +4,5 @@
 extern unsigned char tileset [0];
 #asm
 	._tileset
-		BINARY "tileset.bin"
+		BINARY "../bin/tileset.bin"
 #endasm

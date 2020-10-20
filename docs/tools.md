@@ -475,7 +475,7 @@ Comprimen un mapa en formato RLE 5.3 o 6.2 indexado para usar con decodificadore
 
 ## `sprcnv.exe`
 
-Utilidad de conversión de spritesets.
+Utilidad de conversión de spritesets para **MTE MK1** v5 y anteriores.
 
 ```
     $ ..\utils\sprcnv.exe
@@ -500,6 +500,51 @@ Esta utilidad funciona casi igual que `sprcnv.exe` pero permite especificar cuá
 ```
 
 Obviamente este es para cosas custom y raras que tengas que hacer y tal.
+
+## `sprcnv3.exe`
+
+Utilidad de conversión de spritesets para **MTE MK1** v6 y superiores.
+
+```
+    $ ..\utils\sprcnv3.exe
+    sprcnv3 v0.1.20201019 for MTE MK1 ZX v6
+    usage:
+    $ sprncv3 sprites.png|structure
+              [bin_prefix=../bin/] [def_prefix=assets/] [player_size=16x16]
+              [enems_size=16x16] [player_frames=8] [enems_frames=8] [player_pos=0,0]
+                             [enems_pos=0,16]
+
+    Where:
+              sprites.png   - input file with the graphics, OR
+              structure     - don't import graphics, just create the def files
+    Optional:
+              bin_prefix    - where to store sprites_enems.bin & sprites_player.bin
+              def_prefix    - where to store spritedef_enems.h & spritedef_player.h
+                              and sprites.h
+              player_size   - player sprite size, 16x16|16x24|16x32
+              enems_size    - enemies sprite size, 16x16|16x24|16x32
+              player_frames - # of player frames
+              enems_frames  - # of enemy frames
+              player_pos    - Offset x,y in png where player sprites are found
+              enems_pos     - Offset x,y in png where enemy sprites are found
+```
+
+* `sprites.png` es el nombre de archivo de entrada, una imagen con el spriteset. Puede usarse el formato de toda la vida para los spritesets básicos de siempre (en cuyo caso **ya no hay que pasar más parámetros**). Si en lugar de `sprites.png` se especifica `structure` se generarán los componentes necesarios para el funcionamiento del motor pero sin importar gráficos. Esto es util para juegos multinivel que descompriman un set de sprites diferente en cada nivel.
+
+Aparte de esto, tenemos los siguientes parámetros opcionales:
+
+* `bin_prefix` sirve para especificar dónde se crearán los binarios con los gráficos. El valor por defecto (si se omite) será `../bin/`, que, además, es el lugar donde **MTE MK1** espera encontrarlos, por lo que no es necesario añadir esta opción.
+* `def_prefix` sirve para especificar dónde se crearán los archivos con código que necesita **MTE MK1** para funcionar. El valor por defecto (si se omite) será `assets/` (dentro de `/dev/`), que es l lugar donde **MTE MK1** espera encontrarlos, por lo que no es necesario añadir esta opción.
+* `player_size` es el tamaño de sprites para el jugador, que puede ser `16x16`, `16x24` o `16x32`. Si se omite, el valor por defecto es `16x16`.
+* `enems_size`, idem pero para los enemigos.
+* `player_frames`, número de cells para el jugador. Por defecto, si se omite, son 8.
+* `enems_frames`, número de cells para los enemigos. Por defecto, si se omite, son 8.
+* `player_pos` sirve para especificar dónde en el png encontraremos la esquina superior izquierda de un rectángulo que contenga los sprites. Por defecto `0,0`.
+* `enems_pos` lo mismo, pero para los enemigos. Por defecto `0,16`.
+
+`player_pos` y `enems_pos` permiten la flexibilidad justa para permitir tener sprites de otros tamaños, o cualquier número de cells. Lo mejor es hacer que los sets ocupen varias lineas a todo lo ancho, y que la coordenada "X" de estas opciones siempre sea 0.
+
+Por ejemplo, si tuviéramos que recortar 12 cells de jugador y 20 de enemigos, podríamos colocar 8 cells por linea (como en los sets de siempre), y usar linea y media para el jugador (una con 8, la siguiente con 4) y a continuación dos lineas y media (8, 8 y 4) para los enemigos. En este caso especificaríamos `0,0` para `player_pos` (o no lo especificaríamos, pues es el valor por defecto) y `0,32` para `enems_pos`.
 
 ## `sprcnvbin.exe`
 

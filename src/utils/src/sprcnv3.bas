@@ -158,13 +158,14 @@ Sub cutSpriteSet (x0 As Integer, y0 As Integer, nFrames As Integer, spriteSize A
 
 	Print #fSpritesOut, "extern unsigned char " & ptrName & " [0];"
 	Print #fSpritesOut, "#asm"
+	Print #fSpritesOut, "		defb 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255, 0, 255"
 	Print #fSpritesOut, "	._" & ptrName
 	If structure Then
 		Print #fSpritesOut, "		defs " & (nFrames * spriteCellByteSize)
 	Else
 		Print #fSpritesOut, "		BINARY """ & binFilename & """"
 	End If
-	Print #fSpritesOut, "#end"
+	Print #fSpritesOut, "#endasm"
 	Print #fSpritesOut, ""
 	Print #fSpritesOut, "#define SPR_CELL_" & constantInfix & "_SIZE    " & spriteCellByteSize
 	Print #fSpritesOut, "#define SPR_COLUMN_" & constantInfix & "_SIZE  " & spriteColumnByteSize
@@ -176,7 +177,7 @@ Sub cutSpriteSet (x0 As Integer, y0 As Integer, nFrames As Integer, spriteSize A
 	' Write a spriteset array with pointers
 	curOffs = 0
 	For i = 0 To nFrames - 1
-		If i Mod 4 = 0 Then Print #fSpritesOut, "		";
+		If i Mod 4 = 0 Then Print #fSpritesOut, "		defw ";
 		Print #fSpritesOut, "_" & ptrName & " + 0x" & Hex (curOffs, 4);
 		If i Mod 4 = 3 Or i = nFrames - 1 Then Print #fSpritesOut, "" Else Print #fSpritesOut, ", ";
 		curOffs = curOffs + spriteCellByteSize
@@ -194,10 +195,13 @@ Sub cutSpriteSet (x0 As Integer, y0 As Integer, nFrames As Integer, spriteSize A
 	Print #fOut, "// Copyleft 2010-2014, 2020 by the Mojon Twins"
 	Print #fOut, ""
 
+	If isEnems Then
+		Print #fOut, "for (gpit = 0; gpit < MAX_ENEMS; gpit ++) {"
+	End If
 
 	Print #fOut, "	" & varName & " = sp_CreateSpr (sp_MASK_SPRITE, 3, " & ptrName & ");"
 	
-	curOffs = 0
+	curOffs = spriteColumnByteSize
 	For i = 2 To sprCols
 		Print #fOut, "	sp_AddColSpr (" & varName & ",  " & ptrName & " + " & curOffs & ");"
 		curOffs = curOffs + spriteColumnByteSize

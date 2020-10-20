@@ -368,7 +368,7 @@ En juegos multinivel, cada nivel define su propio _tileset_ (por lo general), pe
 `assets/tileset.h` espera un _charset_ completo, así que generaremos uno que contenga la fuente y un _metatileset_ "vacío". Por suerte, `ts2bin.exe` puede hacer esto por nosotros. Modificamos la llamada en `compile.bat` para que no tome ningún `work.png`; especificando `blank` se generarán caracteres y atributos a 0:
 
 ```
-    ..\utils\ts2bin.exe ..\gfx\font.png blank tileset.bin 7 >nul
+    ..\utils\ts2bin.exe ..\gfx\font.png blank ..\bin\tileset.bin 7 >nul
 ```
 
 Luego habrá que importar los tres _tilesets_ y comprimirlos. No queremos incluir ninguna fuente, por eso especificamos `none` en vez de la ruta para la fuente. Colocaremos el resultado en `/bin`. Posteriormente usaremos `apultra.exe` para comprimir. Podemos añadir estas líneas debajo de la que acabamos de modificar:

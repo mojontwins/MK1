@@ -4,3 +4,5 @@ IF !DEFINED_STACKPTR
 	defc STACKPTR = 61936
 ENDIF
 
+	DEFINE DEFINED_myzorg
+	defc myzorg = 24000

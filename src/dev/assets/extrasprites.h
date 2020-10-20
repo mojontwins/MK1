@@ -22,7 +22,7 @@ extern unsigned char sprite_18_a [];
 #if defined(PLAYER_CAN_FIRE) || defined(PLAYER_STEPS_ON_ENEMIES) || defined(ENABLE_PURSUERS) || defined (MODE_128K)
 	#asm
 	    ._sprite_17_a
-	        BINARY "sprites_extra.bin"
+	        BINARY "../bin/sprites_extra.bin"
 	#endasm
 #endif
 
@@ -55,6 +55,6 @@ extern unsigned char sprite_18_a [];
 #if defined(PLAYER_CAN_FIRE) || defined (MODE_128K)
 	#asm	              	
 		._sprite_19_a
-			BINARY "sprites_bullet.bin"
+			BINARY "../bin/sprites_bullet.bin"
 	#endasm
 #endif

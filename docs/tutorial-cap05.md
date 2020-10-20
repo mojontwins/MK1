@@ -135,7 +135,7 @@ Si abres `compile.bat` en tu editor de textos verás toda una sección dedicada 
     ..\utils\png2scr.exe ..\gfx\title.png ..\gfx\title.scr > nul
     ..\utils\png2scr.exe ..\gfx\marco.png ..\gfx\marco.scr > nul
     ..\utils\png2scr.exe ..\gfx\ending.png ..\gfx\ending.scr > nul
-    ..\utils\png2scr.exe ..\gfx\loading.png loading.bin > nul
+    ..\utils\png2scr.exe ..\gfx\loading.png ..\bin\loading.bin > nul
 ```
 
 ## Comprimiendo las pantallas
@@ -145,9 +145,9 @@ Como te habrás dado cuenta, los 6912 bytes que ocupa cada pantalla por tres (o 
 De nuevo, `compile.bat` se encargará de comprimir las pantallas de título, marco y final (la de carga va a pelo en el `.tap` ya que usaremos un sencillo cargador BASIC de toda la vida):
 
 ```
-    ..\utils\apultra.exe ..\gfx\title.scr title.bin > nul
-    ..\utils\apultra.exe ..\gfx\marco.scr marco.bin > nul
-    ..\utils\apultra.exe ..\gfx\ending.scr ending.bin > nul
+    ..\utils\apultra.exe ..\gfx\title.scr ..\bin\title.bin > nul
+    ..\utils\apultra.exe ..\gfx\marco.scr ..\bin\marco.bin > nul
+    ..\utils\apultra.exe ..\gfx\ending.scr ..\bin\ending.bin > nul
 ```
 
 ## Y ya hemos terminado

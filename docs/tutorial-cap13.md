@@ -394,8 +394,8 @@ Nos fumaremos completamente las secciones donde se convierten mapas, enemigos, s
     echo Importando GFX
     ..\..\..\src\utils\ts2bin.exe ..\gfx\font.png notiles font.bin 7 >nul
 
-    ..\..\..\src\utils\sprcnvbin.exe ..\gfx\sprites_extra.png sprites_extra.bin 1 > nul
-    ..\..\..\src\utils\sprcnvbin8.exe ..\gfx\sprites_bullet.png sprites_bullet.bin 1 > nul
+    ..\..\..\src\utils\sprcnvbin.exe ..\gfx\sprites_extra.png ..\bin\sprites_extra.bin 1 > nul
+    ..\..\..\src\utils\sprcnvbin8.exe ..\gfx\sprites_bullet.png ..\bin\sprites_bullet.bin 1 > nul
 
     if [%1]==[justassets] goto :end
 ```
@@ -431,7 +431,7 @@ Hecho esto nos tendremos que ir a `compile.bat` y sustituir toda la parte de gen
     rem cambia LOADER por el nombre que quieres que salga en Program:
     ..\..\..\src\utils\bas2tap -a10 -sDOGMOLE loader\loader.bas loader.tap > nul
     ..\..\..\src\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
-    ..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
+    ..\..\..\src\utils\bin2tap -o main.tap -a 24000 ..\bin\%game%.bin > nul
     copy /b loader.tap + screen.tap + main.tap %game%.tap > nul
 ```
 
@@ -457,7 +457,7 @@ Por esto otro:
         data                ..\bin\RAM3.bin ^
         data                ..\bin\RAM4.bin ^
         data                ..\bin\RAM6.bin ^
-        data                %game%.bin
+        data                ..\bin\%game%.bin
 ```
 
 Atención que aquí hay un poco de magias. Empezamos ejecutando `imanol.exe`, que es un programa sencillo para hacer sustituciones textuales por cosas calculadas, como la longitud de un archivo. Aquí simplemente estamos preprocesando `loaderzx.asm-orig` para generar un `loader.asm` con las longitudes correctas de cada bloque.

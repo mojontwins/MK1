@@ -6,38 +6,6 @@
 #define PLAYER_MIN_KILLABLE 0
 #endif
 
-#if defined PLAYER_GENITAL || defined PLAYER_CUSTOM_ANIMATION
-	// right: 0 + frame
-	// left: 2 + frame
-	// up: 4 + frame
-	// down: 6 + frame
-	const unsigned char *player_cells [] = {
-		sprite_1_a, sprite_2_a, sprite_3_a, sprite_4_a,
-		sprite_5_a, sprite_6_a, sprite_7_a, sprite_8_a
-	};
-#elif defined PLAYER_BOOTEE
-	// vy = 0: 0 + facing
-	// vy < 0: 1 + facing
-	// vy > 0: 2 + facing
-	const unsigned char *player_cells [] = {
-		sprite_5_a, sprite_6_a, sprite_7_a, sprite_8_a,
-		sprite_1_a, sprite_2_a, sprite_3_a, sprite_4_a
-	};
-#else
-	// Normal animation:
-	// 0 1 2 3 + facing: walk, 1 = stand. 8 + facing = jump/fall
-	const unsigned char *player_cells [] = {
-		sprite_5_a, sprite_6_a, sprite_7_a, sprite_6_a,
-		sprite_1_a, sprite_2_a, sprite_3_a, sprite_2_a,
-		sprite_8_a, sprite_4_a
-	};
-#endif
-
-const unsigned char *enem_cells [] = {
-	sprite_9_a, sprite_10_a, sprite_11_a, sprite_12_a, 
-	sprite_13_a, sprite_14_a, sprite_15_a, sprite_16_a
-};
-
 #include "my/fixed_screens.h"
 
 signed int addsign (signed int n, signed int value) {

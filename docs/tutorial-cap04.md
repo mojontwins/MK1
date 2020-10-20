@@ -20,13 +20,17 @@ Nosotros los llamamos sprites, y eso que a veces somos unos puristas de la hosti
 
 ## Sprites en **MTE MK1**
 
-**MTE MK1** maneja cuatro sprites de 16×16 píxeles para bicharracos (incluido el personaje que maneja el jugador) y generalmente hasta tres sprites para proyectiles (en los güegos de matar). Los sprites de los bicharracos se dibujan usando los gráficos que podemos definir en lo que se conoce como el spriteset. Dicho spriteset contiene 16 gráficos, de los cuales 8 se usan para animar al personaje principal y 8 para animar a los 4 tipos de enemigos (2 para cada uno, si se te dan bien las matemáticas). Un spriteset tiene esta pinta (este es el spriteset del Dogmole):
+**MTE MK1** maneja cuatro sprites para bicharracos (incluido el personaje que maneja el jugador) y generalmente hasta tres sprites para proyectiles (en los güegos de matar). Los sprites de los bicharracos se dibujan usando los gráficos que podemos definir en lo que se conoce como el spriteset. En su configuración más básica, dicho spriteset contiene 16 *cells* de 16×16 píxeles, de los cuales 8 se usan para animar al personaje principal y 8 para animar a los 4 tipos de enemigos (2 para cada uno, si se te dan bien las matemáticas). *En su configuración más básica* significa que esto puede complicarse más si es necesario, pero que lo mínimo funcional es eso. En capítulos más avanzados del tutorial hablaremos de spritesets extendidos, sprites más grandes, y otras virguerías.
+
+Un spriteset tiene esta pinta (este es el spriteset del Dogmole):
 
 ![El spriteset de Dogmole](https://raw.githubusercontent.com/mojontwins/MK1/master/docs/wiki-img/04_spriteset_dogmole.png)
 
-Como verás, siempre hay un gráfico de un muñeco y al lado hay una cosa rara justo a su derecha. Vamos a explicar qué es esa cosa rara antes de seguir. En primer lugar, no se llama cosa rara. Se llama máscara. Sí, ya sé que no se parece a una máscara ni de coña, pero se llama así. Tampoco los ratones de ordenador parecen ratones ni el gráfico de Horace parece un niño y no he visto a nadie quejarse todavía. La máscara se usa para decirle a la biblioteca gráfica (en este caso, nuestra **splib2** modificada), que es la que se encarga de mover los sprites (recordad que “esto es Spectrum y aquí hay que mamar”: no hay chip gráfico que haga estas cosas), qué píxeles del gráfico son *transparentes*, esto es, qué píxeles del gráfico NO deben sustituir los píxeles del fondo.
+Como verás, siempre hay un gráfico de un muñeco y al lado hay una cosa rara justo a su derecha. Vamos a explicar qué es esa cosa rara antes de seguir. En primer lugar, no se llama cosa rara. Se llama máscara. Sí, ya sé que no se parece a una máscara ni de coña, pero se llama así. Tampoco los ratones de ordenador parecen ratones ni el gráfico de Horace parece un niño y no he visto a nadie quejarse todavía. 
 
-Si no hubiera dicha máscara, todos los sprites serían cuadrados o rectangulares, y eso queda bastante feo.
+La máscara se usa para decirle a la biblioteca gráfica (en este caso, nuestra **splib2** modificada), que es la que se encarga de mover los sprites (recordad que “esto es Spectrum y aquí hay que mamar”: no hay chip gráfico que haga estas cosas), qué píxeles del gráfico son *transparentes*, esto es, qué píxeles del gráfico NO deben sustituir los píxeles del fondo.
+
+Si no hubiera dicha máscara, todos los sprites serían cuadrados o rectangulares, y eso queda bastante feo. O habría que mezclarlos como en los juegos viejos de Spectrum, que queda aún más feo.
 
 Nosotros hemos ordenado nuestro spriteset de forma que cada gráfico tiene su máscara correspondiente justo a la derecha. Si te fijas, las máscaras tienen píxeles negros en las zonas donde debe verse el gráfico correspondiente, y píxeles de color en las zonas donde debe verse el fondo. Es como si definiésemos la silueta.
 
@@ -35,6 +39,8 @@ Nosotros hemos ordenado nuestro spriteset de forma que cada gráfico tiene su m�
 ## Construyendo nuestro spriteset
 
 Antes de construir el spriteset es muy importante saber qué tipo de vista tendrá nuestro güego: lateral o genital. Supongo que, llegados a este punto, es algo que ya tenemos decidido (vaya, si ya hemos hecho el mapa). El orden de los gráficos en el spriteset depende del tipo de vista de nuestro güego.
+
+Reiteramos que estamos tratando de *spritesets* básicos de 16 gráficos y sus máscaras de 16×16 píxeles. Que **MK1** puede hacer más, pero que lo dejaremos para luego.
 
 ## Spritesets de vista lateral
 
@@ -136,19 +142,37 @@ Por cierto, vuelve a asegurarte que el negro que has usado es **negro PURO**. To
 
 Al igual que con todas las conversiones, la de los sprites también está incluida en `compile.bat` y no deberás preocuparte de nada más que de poner el archivo con los sprites `sprites.png` en `/gfx`.
 
-Sin embargo, para seguir con la tradición, veamos como funciona el conversor, que en este caso se llama `sprcnv` y está, como los demás, en `/utils`. Si lo ejecutamos sin parámetros también nos los chiva:
+Sin embargo, para seguir con la tradición, veamos como funciona el conversor, que en este caso se llama `sprcnv3` y está, como los demás, en `/utils`. Si lo ejecutamos sin parámetros también nos los chiva:
 
 ```
-	$ ..\utils\sprcnv.exe
-	** USO **
-	   sprcnv archivo.png archivo.h [nomask]
+    $ ..\utils\sprcnv3.exe
+    sprcnv3 v0.1.20201019 for MTE MK1 ZX v6
+    usage:
+    $ sprncv3 sprites.png|structure
+              [bin_prefix=../bin/] [def_prefix=assets/] [player_size=16x16]
+              [enems_size=16x16] [player_frames=8] [enems_frames=8] [player_pos=0,0]
+                             [enems_pos=0,16]
 
-	Convierte un Spriteset de 16 sprites
+    Where:
+              sprites.png   - input file with the graphics, OR
+              structure     - don't import graphics, just create the def files
+    Optional:
+              bin_prefix    - where to store sprites_enems.bin & sprites_player.bin
+              def_prefix    - where to store spritedef_enems.h & spritedef_player.h
+                              and sprites.h
+              player_size   - player sprite size, 16x16|16x24|16x32
+              enems_size    - enemies sprite size, 16x16|16x24|16x32
+              player_frames - # of player frames
+              enems_frames  - # of enemy frames
+              player_pos    - Offset x,y in png where player sprites are found
+              enems_pos     - Offset x,y in png where enemy sprites are found
 ```
 
-Este es mucho más sencillo. Toma dos parámetros obligatorios: el archivo de entrada (nuestro `sprites.png`), un archivo de salida, que para **MTE MK1** debe ser `sprites.h` en `/dev/assets`, y el parámetro `nomask`, que es optativo, y que generará los sprites sin máscara (algo que solo hemos usado en Zombie Calavera y que por ahora dejaremos "ahí").
+¡Hala, hala! Como hemos dicho, MK1 puede complicarse la vida a saco con el tema del spriteset (tener más de 8 caras para jugador o los enemigos, hacer sprites de 16x24 o 16x32...). Sin embargo no hay que temer: si queremos usar un *spriteset* básico como el que hemos descrito en este capítulo sólo necesitaremos pasarle un único parámetro: la ubicación de nuestro archivo `png`.
 
-Si abres `/dev/compile.bat` verás que los valores de los parámetros son, precisamente, los que hemos mencionado arriba.
+Si abres `/dev/compile.bat` verás que sólo estamos pasando el parámetro que hemos mencionado arriba.
+
+Por defecto, esto hará que se generen un par de binarios en `/bin/` y algunos archivos de código en `/dev/assets/` que **MTE MK1** usará para funcionar como debe hacerlo.
 
 ## Jodó, ¿ya?
 

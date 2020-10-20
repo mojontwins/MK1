@@ -12,17 +12,17 @@
 
 	#asm
 		._s_title
-			BINARY "title.bin"
+			BINARY "../bin/title.bin"
 		._s_marco
 	#endasm
 	#ifndef DIRECT_TO_PLAY
 		#asm
-				BINARY "marco.bin"
+				BINARY "../bin/marco.bin"
 		#endasm
 	#endif
 	#asm
 		._s_ending
-			BINARY "ending.bin"
+			BINARY "../bin/ending.bin"
 	#endasm
 #endif
 

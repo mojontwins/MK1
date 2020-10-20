@@ -83,7 +83,7 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #endif
 
 #include "aplib.h"
-#include "pantallas.h"
+#include "assets/pantallas.h"
 
 #ifdef COMPRESSED_LEVELS
 	#include "assets/levels.h"

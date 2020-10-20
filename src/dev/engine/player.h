@@ -944,27 +944,38 @@ unsigned char player_move (void) {
 		}
 		
 		p_next_frame = player_cells [p_facing + p_frame];
-	#elif defined PLAYER_BOOTEE
-		gpit = p_facing << 2;
-		if (p_vy == 0) {
-			p_next_frame = player_cells [gpit];
-		} else if (p_vy < 0) {
-			p_next_frame = player_cells [gpit + 1];
-		} else {
-			p_next_frame = player_cells [gpit + 2];
-		}
 	#else	
-		if (!possee && !p_gotten) {
-			p_next_frame = player_cells [8 + p_facing];
-		} else {
-			gpit = p_facing << 2;
-			if (p_vx == 0) {
-				rda = 1;
+		#asm
+			ld  a, (_p_facing)
+			dec a
+			jr  z, _player_cell_sel_set_rda		// if A = 1, DEC A = 0, so set 0
+			ld  a, 4							// if A = 0, DEC A = FF, so set 4
+		._player_cell_sel_set_rda
+			ld  (_rda), a
+		#endasm
+	
+		#ifdef PLAYER_BOOTEE	
+			if (p_vy == 0) {
+				rdb = 0;
+			} else if (p_vy < 0) {
+				rdb = 1;
 			} else {
-				rda = ((gpx + 4) >> 3) & 3;
+				rdb = 2;
 			}
-			p_next_frame = player_cells [gpit + rda];
-		}
+		#else	
+			if (!possee && !p_gotten) {
+				rdb = 3;
+			} else {			
+				if (p_vx == 0) {
+					rdb = 1;
+				} else {
+					rdb = ((gpx + 4) >> 3) & 3;
+					if (rdb == 3) rdb = 1;
+				}			
+			}
+		#endif
+
+		p_next_frame = player_cells [rdb + rda];
 	#endif
 }
 

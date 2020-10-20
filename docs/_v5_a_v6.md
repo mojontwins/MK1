@@ -13,3 +13,8 @@ Puedes poner un "cap" a tu juego de forma que no vaya a más de N fps, con N = 5
 Pantallas con más enemigos que tengan trayectorias horizontales, disparos y cocos son más lentas de dibujar que pantallas con menos enemigos. `MIN_FAPS_PER_FRAME` te puede ayudar a que todo el juego se *sienta* a la misma velocidad.
 
 Activar esta directiva es básicamente *gratis* en modo 128K, pero en Modo 48K cuesta algo más de 200 bytes. Para contar frames se usa un *ISR* en modo IM 2 del Z80. En modo 48K se hace de forma *maqueijan* sin la tabla de 257 valores iguales, lo cual debería funcionar en el 99% de los casos a menos que tengas cosas raras enchufadas (que no suele ser lo normal en el siglo XXI).
+
+## Spriteset
+
+El spriteset ahora es más complejo. Se ha hecho así para facilitar añadir más gráficos para jugador y enemigos de forma sencilla y para permitir otros tamaños de sprites. Para convertir los sprites ya no usaremos `sprcnv.exe` ni `sprcnvbin.exe`, sino `sprcnv3.bin` que genera los binarios y archivos de código necesarios para el nuevo formato.
+

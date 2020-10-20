@@ -62,3 +62,13 @@ Nah, no lo voy a hacer así. Voy a hacer que una llamada recorte un set y haré 
 Meh, palos patrás de nuevo. Tengo que generar código muy específico de MK1 (el nombre de los arrays y tal)
 así que volvemos al plan inicial pero con dos binarios.
 
+## 20201020
+
+Al final el conversor sólo tiene un parámetro fijo, el archivo de entrada, y todo lo demás lo rellena automáticamente para el caso más sencillo de MK1, generando los archivos binarios en `../bin/` y los de código en `assets/`.
+
+He actualizado la doc como he podido y además he reorganizado todo el proyecto para meter los binarios en `../bin/` y poder conservarlos (como en pestecé). Lala está funcionando con el sistema nuevo y lo suyo es ponerme ahora a portar todo.
+
+Lo mejor será primero portar los **Dogmoles** (ambos), luego **Goddess**, y luego lanzarme a los multinivel, donde tendré que modificar bastantes cosas. **Goku Mal** perderá los bundles, que desaparecerán por completo, así que además tendré que reescribir el capítulo 13 del tutorial.
+
+So next hito es portar `examples/dogmole` y `examples/dogmole_ci`. El método siempre será el mismo: replicaré `dev` con `dev_v5` por si acaso, haré los cambios del código, modificaré el `compile.bat`, y cruzaré los dedos muy fuertemente.
+
