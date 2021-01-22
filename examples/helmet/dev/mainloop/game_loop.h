@@ -87,9 +87,17 @@
 	o_pant = 0xff;
 	while (playing) {
 		#ifdef DEBUG_KEYS
+			/*
 			if (sp_KeyPressed (KEY_M)) { ++ p_objs; beep_fx (0); }
 			if (sp_KeyPressed (KEY_H)) { ++ n_pant; beep_fx (0); }
 			if (sp_KeyPressed (KEY_Y)) { -- n_pant; beep_fx (0); }
+			*/
+
+			if (sp_KeyPressed (KEY_Y) && sp_KeyPressed (KEY_H)) {
+				beep_fx (0);
+				success = 1;
+				playing = 0;
+			}
 		#endif
 
 		p_kill_amt = 1;

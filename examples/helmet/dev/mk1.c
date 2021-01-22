@@ -2,7 +2,7 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 // mk1.c
-//#define DEBUG_KEYS
+#define DEBUG_KEYS
 #include <spritepack.h>
 
 // We are using some stuff from splib2 directly.

@@ -4,6 +4,54 @@
 		"selected_items":
 		[
 			[
+				"is",
+				"is_dead\tabc"
+			],
+			[
+				"Z_",
+				"Z_APPEARING\tabc"
+			],
+			[
+				"benf",
+				"benfm_done\tabc"
+			],
+			[
+				"fire_b",
+				"fire_bullet_search_loop\tabc"
+			],
+			[
+				"_marr",
+				"_marrullers_select_direction\tabc"
+			],
+			[
+				"_en_bg_m",
+				"_en_bg_collision_mx_set\tabc"
+			],
+			[
+				"ENABLE",
+				"ENABLE_MARRULLERS\tabc"
+			],
+			[
+				"enoff",
+				"enoffsmasi\tabc"
+			],
+			[
+				"ENABLE_",
+				"ENABLE_CUADRATORS\tabc"
+			],
+			[
+				"_cuadrato",
+				"_cuadrators_flip_flop\tabc"
+			],
+			[
+				"_cuadrators_upda",
+				"_cuadrators_update_done\tabc"
+			],
+			[
+				"push_box_vert_",
+				"push_box_vert_done\tabc"
+			],
+			[
 				"PROCESADOE",
 				"PROCESADO_ERR_EXTENSION\tabc"
 			],
@@ -276,16 +324,8 @@
 				"ENABLE_LAME_BOSS_1"
 			],
 			[
-				"ENABLE_",
-				"ENABLE_LAME_BOSS_1"
-			],
-			[
 				"ENEMS_",
 				"ENEMS_GENERAL_HIT_FRAMES"
-			],
-			[
-				"ENABLE",
-				"ENABLE_LAME_BOSS_1"
 			],
 			[
 				"ENAB",
@@ -323,6 +363,15 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "examples/perils/dev/custom.h",
+			"settings":
+			{
+				"buffer_size": 3349,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -385,40 +434,73 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1",
+		"/D/git/MK1/docs",
 		"/D/git/MK1/examples",
-		"/D/git/MK1/examples/helmet",
-		"/D/git/MK1/examples/helmet/dev",
-		"/D/git/MK1/examples/helmet/dev/my"
+		"/D/git/MK1/examples/perils",
+		"/D/git/MK1/examples/perils/dev"
 	],
 	"file_history":
 	[
-		"/D/git/MK1/examples/helmet/dev/mk1.c",
-		"/D/git/MK1/examples/helmet/dev/mainloop/game_loop.h",
-		"/D/git/MK1/examples/helmet/dev/my/fixed_screens.h",
-		"/C/Users/jcastano/Downloads/log-2021-01-21.php",
+		"/D/git/MK1_NES/examples/05_cheril_the_goddess_v1/dev/compile.bat",
+		"/D/git/MK1/examples/perils/dev/printer.h",
+		"/D/git/MK1/examples/calavera/README.md",
+		"/D/git/MK1/examples/calavera/dev/churromain.c",
+		"/D/git/MK1/examples/calavera/dev/custom.h",
+		"/D/git/MK1/examples/calavera/dev/mainloop.h",
+		"/D/git/MK1/examples/calavera/dev/engine.h",
+		"/D/git/MK1/examples/calavera/dev/comp.bat",
+		"/D/git/MK1/wip/todo.md",
+		"/D/git/MK1/src/utils/ene2h.bas",
+		"/D/git/MK1/examples/calavera/dev/enems.h",
+		"/D/git/MK1/docs/manual.md",
+		"/D/git/MK1/src/utils/msc.bas",
+		"/D/Proyectos/2020/20200813a - Redirecciones a multidominio en filtros Webmail V3/instrucciones.txt",
+		"/C/java/applications/webmovil/src/p3s.properties",
+		"/D/git/MK1/examples/ramiro4/dev/config.h",
+		"/D/git/MK1/examples/ramiro3/dev/config.h",
+		"/D/git/MK1/examples/perils/dev/config.h",
+		"/D/git/MK1/examples/limite/dev/config.h",
+		"/D/git/MK1/examples/lalap/dev/config.h",
+		"/D/git/MK1/examples/helmet/dev/config.h",
+		"/D/git/MK1/examples/ababol2_demo/dev/config.h",
+		"/D/git/MK1/src/dev/config.h",
+		"/D/git/MK1/examples/calavera/dev/sprites.h",
+		"/D/git/MK1/examples/calavera/dev/config.h",
+		"/D/git/MK1/examples/helmet/dev/custom.h",
+		"/D/git/MK1/src/utils/ts2bin.bas",
+		"/D/git/MK1/examples/calavera/dev/definitions.h",
+		"/D/git/MK1/examples/calavera/dev/mapa.h",
+		"/D/git/MK1/src/utils/rle62map_sp.bas",
+		"/D/Google Drive/Maritrini/dev/Speccy/MK1/Calavera Prologue/dev/calavera.c",
+		"/D/Google Drive/Maritrini/dev/Speccy/MK1/Calavera Prologue/dev/engine.h",
+		"/D/git/MK1/src/utils/sprcnvbin.bas",
+		"/D/Google Drive/Maritrini/dev/Speccy/MK1/Calavera Prologue/dev/sprites.h",
+		"/D/git/MK1/src/utils/sprcnv.bas",
+		"/D/git/MK1/src/utils/sprcnv2.bas",
+		"/D/Google Drive/Maritrini/dev/Speccy/MK1/Calavera Prologue/dev/config.h",
+		"/D/Google Drive/Maritrini/dev/Speccy/MK1/Dev_Utils/SprCnv/sprcnv.bas",
+		"/D/git/MK1/src/dev/isr.h",
+		"/D/Proyectos/2019/20190626 - Actualización Reserva de Recursos/cambios.txt",
+		"/D/git/MK1/src/dev/printer.h",
+		"/D/git/MK1/src/dev/engine.h",
+		"/D/git/MK1/src/dev/definitions.h",
+		"/D/git/MK1/src/dev/enems.h",
+		"/D/git/MK1/src/dev/boxes.h",
+		"/D/git/MK1/src/dev/#ifdef PLAYER_MOGGY_STYLE",
+		"/D/git/MK1/examples/ababol2_demo/dev/boxes.h",
+		"/D/git/MK1/src/dev/cheril.asm",
 		"/D/Proyectos/CIs.txt",
-		"/D/Proyectos/remote/descon01/consigna/app/controllers/ficheros.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/config.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO883CF3C2/current4-nodo2.txt",
-		"/D/Proyectos/remote/descon01/consigna/app/views/cabecera.php",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/pheanstalk/classes/Pheanstalk.php",
-		"/D/Proyectos/remote/descon01/consigna/extra/antivirus-worker.php",
-		"/D/Proyectos/remote/descon01/consigna/app/models/antivirus.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO88342C43/current4.txt",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO883CDB75/current5.txt",
-		"/D/Proyectos/2021/20210107a - Configuración TTR de Workers AV en Consigna/instrucciones.txt",
-		"/D/Proyectos/2020/20200730a - Actualización Consigna v2.2/instrucciones.md",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/avmodules/kaspersky.php",
-		"/C/Users/jcastano/Downloads/20201130201635562 salidadeejecucioncomandoupgradev-1-5-0",
 		"/D/Proyectos/remote/descon01/consigna/app/libraries/authmodules/LDAP.php",
 		"/D/Proyectos/remote/descon01/consigna/app/config/ldap.php",
 		"/D/Proyectos/2020/20201130b - Modificación 'appbar' en Consigna (eliminación de 'mensajería')/instrucciones.txt",
 		"/D/Proyectos/2020/20201130a - Modificación 'appbar' en Webmail (eliminación de 'mensajería')/instrucciones.txt",
 		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/enigma/config.inc.php",
 		"/D/Proyectos/remote/descon01/consigna/app/libraries/Avengine.php",
+		"/D/Proyectos/remote/descon01/consigna/app/controllers/ficheros.php",
 		"/D/Proyectos/2020/20201007a - Corrección cliente javascript de subida a Consigna desde Webmail para IE/instrucciones.txt",
 		"/D/Proyectos/remote/descon01/consigna/app/views/pie.php",
 		"/C/Users/jcastano/AppData/Local/Temp/7zO8C6CC380/gfxlib015b.txt",
+		"/D/Proyectos/remote/descon01/consigna/app/config/config.php",
 		"/D/Proyectos/2020/20200917f - Banner 'MiCuenta' en Consigna/instrucciones.txt",
 		"/D/Proyectos/remote/descon01/consigna/public/accesibilidad.html",
 		"/D/Proyectos/2020/20200917d - Consigna - Declaración de Accesibilidad/instrucciones.txt",
@@ -428,6 +510,7 @@
 		"/D/Proyectos/remote/descon01/deshite.md",
 		"/D/Proyectos/copias producción/consigna-2/simplesaml/metadata/saml20-idp-remote.php",
 		"/D/Proyectos/remote/descon01/simplesaml/Configuration.php",
+		"/D/Proyectos/2020/20200730a - Actualización Consigna v2.2/instrucciones.md",
 		"/D/Proyectos/remote/descon01/simplesaml/config/authsources.php",
 		"/D/Proyectos/remote/descon01/simplesaml/config/config.php",
 		"/D/Proyectos/remote/descon01/config18.php",
@@ -485,41 +568,7 @@
 		"/D/Proyectos/remote/descon01/consigna/app/views/ver_fichero_denegado.php",
 		"/D/Proyectos/remote/descon01/consigna/app/views/antivirus/INFECTADO.php",
 		"/D/Proyectos/remote/descon01/consigna/app/views/form-envio-fichero.php",
-		"/D/Proyectos/remote/descon01/consigna/app/views/form-opciones-fichero.php",
-		"/D/Proyectos/remote/descon01/consigna/system/.htaccess",
-		"/D/Proyectos/remote/descon01/consigna/.htaccess",
-		"/D/Proyectos/remote/descon01/consigna/system/core/Exceptions.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_general.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_php.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_db.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_404.php",
-		"/C/Users/jcastano/Desktop/LDAP Browser/ldapescritura.juntadeandalucia.es - admin (2).cfg",
-		"/C/Users/jcastano/Desktop/LDAP Browser/ldap.juntadeandalucia.es - admin.cfg",
-		"/C/Users/jcastano/Downloads/20191119104404436 instrucciones.txt",
-		"/C/Users/jcastano/Downloads/20191119104404145 ficheros.php",
-		"/D/Proyectos/remote/descon01/consigna/system/core/Router.php",
-		"/D/Proyectos/remote/descon01/consigna/system/core/Controller.php",
-		"/D/Proyectos/remote/descon01/consigna/config/config.php",
-		"/D/Proyectos/2019/20191030a - Actualización configuración WSDC en Consigna/instrucciones.txt",
-		"/D/Proyectos/thunderbird/ConsignaThunderbird/thunderbird-filelink-consigna@juntadeandalucia.es/manifest.json",
-		"/D/Proyectos/thunderbird/ConsignaThunderbird/thunderbird-filelink-consigna@juntadeandalucia.es/install.rdf",
-		"/D/Proyectos/thunderbird/ConsignaThunderbird/thunderbird-filelink-consigna@juntadeandalucia.es/chrome.manifest",
-		"/D/Proyectos/thunderbird/ConsignaThunderbird/thunderbird-filelink-consigna@juntadeandalucia.es/content/chrome/fileExceeds.xul",
-		"/D/Proyectos/remote/descon01/consigna/app/views/ver_fichero.php",
-		"/D/Proyectos/2019/20190904a - Actualización Consigna, ficheros de más de 1 Gb/instrucciones.txt",
-		"/C/Users/jcastano/Desktop/Ficheros Junta_files/fixes.css",
-		"/D/git/nes_work/multicart/diario.md",
-		"/D/Proyectos/entregas/Entrega_FicherosJunta_1.4.1.0/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/consigna/system/helpers/url_helper.php",
-		"/D/git/newspectrum/MK3_OM/cheman/dev/loader/loader.asm",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/Manejoauxiliar.php",
-		"/D/Proyectos/remote/descon01/consigna/app/views/fichero-enviado-nojs.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO026D0C88/form-login.php",
-		"/D/Proyectos/2019/20190506 - Consigna v2/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/consigna/app/config/rest.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/routes.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/user_agents.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/smileys.php"
+		"/D/Proyectos/remote/descon01/consigna/app/views/form-opciones-fichero.php"
 	],
 	"find":
 	{
@@ -530,7 +579,13 @@
 		"height": 128.0,
 		"where_history":
 		[
-			"D:\\git\\MK1\\examples\\helmet"
+			"D:\\git\\MK1\\examples\\perils\\dev",
+			"D:\\git\\MK1\\examples\\perils",
+			"D:\\git\\MK1\\src\\utils",
+			"D:\\git\\MK1\\examples\\calavera\\dev",
+			"D:\\git\\MK1\\examples\\calavera",
+			"D:\\git\\MK1\\examples\\calavera\\dev",
+			"D:\\git\\MK1\\src\\dev"
 		]
 	},
 	"find_state":
@@ -538,8 +593,100 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"script_result",
-			"debug"
+			"key_1",
+			"debug",
+			"pinv",
+			"hooks",
+			"bullets",
+			"init",
+			"enems_init",
+			"ene2h",
+			"0.3.20201201",
+			"incommand",
+			"RANDOM_RESPAWN",
+			"random_respawn",
+			"can_fire",
+			"Y_OFFSET",
+			"player_can_fire",
+			"en_zombie",
+			"en_an_state",
+			"add hl, hl",
+			"pop_and",
+			"attr_enems",
+			"attr",
+			"en_an_facing",
+			"en_an_vx",
+			"en_an_state",
+			"0.5 20201216",
+			"incommand",
+			"MAPPED_TILESETS",
+			"rle",
+			"mapped_ti",
+			"unpacke",
+			"0.1.20170629",
+			"game_loop_flag",
+			"PLAYER_NUM_OBJETOS",
+			"beep",
+			"ALTERNATE_ANIMATION",
+			"en_an_fanty_activo",
+			"PLAYER_CAN_FIRE",
+			"facing",
+			"PLAYER_CAN_FIRE",
+			"init_bullets",
+			"bullets \\[([A-Za-z0-9\\_]+)\\].([A-Za-z]+)",
+			"BULLET",
+			"bullets",
+			"en_an_base_frame",
+			"enems_calc_frame",
+			"en_an_next_frame",
+			"enems_loop_continue",
+			"en_an_fanty_activo",
+			"random_respawn",
+			"bullets",
+			"sp_bullets",
+			"PLAYER_CAN_FIRE",
+			"If nomask",
+			"&&",
+			"dim",
+			"nomask",
+			"0.4 20200119",
+			"add_to_breakables",
+			"marruller",
+			"marrullers",
+			"make_ty",
+			"make_tu",
+			"11 a",
+			"rdt",
+			"enemy_animate_update_count",
+			"MARRULLERS",
+			"gpit",
+			"make_type",
+			"make_t",
+			"enable_cuadrators",
+			"cuadrators",
+			"_en_bg_collision_check",
+			"en_an_ff",
+			"(_rdt)",
+			"moving",
+			"en_an_base_frame",
+			"rdd",
+			"draw_scr",
+			"call _move_tile",
+			"down",
+			"up",
+			"vert",
+			"player_push_boxes",
+			"move_tile",
+			"player_moggy",
+			"abs",
+			"_abs",
+			"abs",
+			"_abs",
+			"abs",
+			"en_x1",
+			"_x1",
+			"en_x1",
+			"2.20201113-v4"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -547,6 +694,19 @@
 		"regex": false,
 		"replace_history":
 		[
+			"0.4.20210121",
+			"0.6.20210107",
+			"0.2.20210107",
+			"bullets_\\2 [\\1]",
+			"And",
+			"Dim",
+			"0.5 20201216",
+			"enit",
+			"(_rdd)",
+			"right",
+			"left",
+			"horz",
+			"3.20201201-v4"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -557,8 +717,41 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "examples/perils/dev/custom.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3349,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								322,
+								322
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		},
 		{
@@ -613,8 +806,12 @@
 	{
 		"height": 0.0
 	},
+	"output.sftp":
+	{
+		"height": 0.0
+	},
 	"pinned_build_system": "",
-	"project": "mk1.sublime-project",
+	"project": "MK1_v4.sublime-project",
 	"replace":
 	{
 		"height": 40.0
@@ -637,7 +834,7 @@
 		[
 			[
 				"",
-				"D:\\Proyectos\\remote\\p3sdes.sublime-project"
+				"D:\\Proyectos\\remote\\desowncl01.sublime-project"
 			]
 		],
 		"width": 380.0
@@ -651,7 +848,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -659,7 +856,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 282.0,
+	"side_bar_width": 218.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

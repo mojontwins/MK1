@@ -25,26 +25,31 @@ void game_ending (void) {
 		#endasm
 	#endif
 
+	// Custom for Helmet
+	_x = 8; _y = 7; _t = 70; _gp_gen = "CONGRATULATIONS!"; print_str ();
+	_x = 2; _y = 9; _t = 71; _gp_gen = "YOU MANAGED TO SET THE BOMBS"; print_str ();
+	_x = 4; _y = 10;         _gp_gen = "AND DESTROY THE COMPUTER"; print_str ();
+	_x = 5; _y = 11;         _gp_gen = "MISSION ACCOMPLISHED!!"; print_str ();
+	sp_UpdateNowEx (0);
+	
 	#ifdef MODE_128K
 	#else
 		rda = 7; rdb = 2;
-		lame_sound ();
+		lame_sound ();		
 	#endif
 
-	// Custom for Helmet
-	_x = 7; _y = 7; _t = 70; _gp_gen = "CONGRATULATIONS!"; print_str ();
-	_x = 1; _y = 9; _t = 71; _gp_gen = "YOU MANAGED TO SET THE BOMBS!"; print_str ();
-	_x = 3; _y = 10;         _gp_gen = "AND DESTROY THE COMPUTER"; print_str ();
-	_x = 4; _y = 11;         _gp_gen = "MISSION ACCOMPLISHED!!"; print_str ();
-	
-	espera_activa (500);
+	espera_activa (5000);
+}
+
+void dr (void) {
+	_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
+	_x = 10; _y = 12; _t = 79; _gp_gen = gen_pt; print_str ();
+	_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
+	sp_UpdateNowEx (0);
 }
 
 void game_over (void) {
-	_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
-	_x = 10; _y = 12; _t = 79; _gp_gen = " GAME OVER! "; print_str ();
-	_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
-	sp_UpdateNow ();
+	gen_pt = " GAME OVER! "; dr ();
 
 	#ifdef MODE_128K
 	#else
@@ -74,19 +79,13 @@ void game_over (void) {
 
 #ifdef PAUSE_ABORT
 	void pause_screen (void) {
-		_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
-		_x = 10; _y = 12; _t = 79; _gp_gen = "   PAUSED   "; print_str ();
-		_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
-		sp_UpdateNowEx (0);
+		gen_pt = "   PAUSED   "; dr ();
 	}
 #endif
 
 #ifdef COMPRESSED_LEVELS
 	void zone_clear (void) {
-		_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
-		_x = 10; _y = 12; _t = 79; _gp_gen = " ZONE CLEAR "; print_str ();
-		_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
-		sp_UpdateNowEx (0);
+		gen_pt = " ZONE CLEAR "; dr ();
 		espera_activa (250);			
 	}
 #endif
