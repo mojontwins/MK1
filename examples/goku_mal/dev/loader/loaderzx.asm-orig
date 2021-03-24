@@ -64,7 +64,7 @@
 	ld	de, %%%ram6_length%%%
 	call $0556
 	di
-
+	
 ; Main binary
 	ld	a, $10 		; ROM 1, RAM 0
 	ld	bc, $7ffd

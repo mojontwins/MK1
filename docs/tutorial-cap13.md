@@ -355,7 +355,9 @@ Con todo en su sitio, sólo tendremos que llamar al ensamblador `Pasmo`, incluid
 
 ```
     echo Making music
-    ..\..\..\src\utils\pasmo ..\mus\WYZproPlay47aZXc.ASM ..\bin\RAM1.bin
+    cd ..\mus
+    ..\..\..\src\utils\pasmo ..\mus\WYZproPlay47aZXc.ASM ..\bin\RAM1.bin > nul
+    cd ..\dev
 ```
 
 Finalmente me gusta chivar lo que ocupa cada archivo:
@@ -621,6 +623,8 @@ Para no hacer este capítulo enorme, vamos a poner sólo lo que activamos y conf
 ```
 
 En la configuración principal lo único reseñable es `PLAYER_NUM_OBJETOS`. En modo 128K, el array del *levelset* `levels` es la mínima expresión, como hemos visto, ya que la información de cada nivel va en la cabecera del *level bundle*. Por tanto, para hacer que el número de objetos que hay que conseguir en cada fase coincida con el que hemos configurado al crear los bundles, habrá que *apuntar* `PLAYER_NUM_OBJETOS` al campo `max_objs` de la estructura `level_data`.
+
+**Recuerda el *gotcha* que mencionamos en el anterior capítulo**: Fíjate como hemos configurado `MAP_W` y `MAP_H`. Si hubiéramos puesto 25 y 1 (por ejemplo), que también dan 25, nos estaríamos cargando el juego porque no se incluiría todo el código para cambiar de pantalla en cualquier dirección.
 
 ```c
     #define BOUNDING_BOX_8_BOTTOM               // 8x8 aligned to bottom center in 16x16

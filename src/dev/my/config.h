@@ -28,6 +28,7 @@
 //#define PER_LEVEL_SPRITESET 				// use a different spriteset for each level in 48K
 //#define MAX_LEVELS				4		// # of compressed levels
 //#define REFILL_ME 						// If defined, refill player on each level
+//#define NO_RESET_STATS 						// If defined, player stats are not reset per level
 
 // ============================================================================
 // II. Engine type
@@ -139,6 +140,7 @@
 //#define SCRIPTING_KEY_NONE 				// No action key. 
 //#define ENABLE_EXTERN_CODE				// Enables custom code to be run from the script using EXTERN n
 //#define ENABLE_FIRE_ZONE					// Allows to define a zone which auto-triggers "FIRE"
+//#define SCRIPT_PAGE 				3		// In MODE_128K & COMPRESSED_LEVELS
 
 // Timer
 // -----

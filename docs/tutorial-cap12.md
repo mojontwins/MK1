@@ -25,6 +25,8 @@ Esto activará los manejes necesarios para el multiniveleo y además indicará q
 
 Si queremos usar un spriteset diferente en cada nivel tendremos que descomentar `PER_LEVEL_SPRITESET`.
 
+Si queremos que las estadísticas (objetos, llaves) se mantengan de nivel a nivel, tendremos que definir `NO_RESET_STATS`.
+
 ## Modificando `compile.bat`
 
 Como hemos dicho, los recursos comprimidos se descomprimirán sobre "espacios" especiales para cada tipo de datos que maneja el motor. Por lo general, esto implica que no tendremos que generar enemigos o mapas desde `compile.bat`. Lo único que vamos a dejar es la generación de un tileset "vacío" (porque necesitamos la fuente), un spriteset y las pantallas fijas. De hacer hueco para el resto ya se encarga **MTE MK1** con la configuración que le hemos hecho. Por tanto abrimos en `compile.bat` y:
@@ -450,6 +452,8 @@ Sí, puedes hacer niveles de diferentes tamaños, de eso te has tenido que dar c
 En efecto, aunque la geometría del nivel de igual, tiene que caber en el buffer. Al final la geometría da lo mismo, porque un mapa o un conjunto de enemigos y hotspots no deja de estar ordenados como una tira de pantallas en memoria.
 
 Por tanto, lo que hay que hacer es ver cuál es tu nivel más grande (el que más pantallas tenga) y hacer que los valores de `MAP_W` y `MAP_H` en `my/config.h` coincidan con sus dimensiones. Con esto ya lo tienes.
+
+Pero ojaldrio con esto, porque hay un **INCREÍBLE GOTCHA**. **MK1** tiene una optimización por la cual, si se detecta que `MAP_W` o `MAP_H` valen 1, no se incluye el código correspondiente a los cambios de pantalla en el eje que mida 1 de largo. Si tu juego tiene niveles con diferentes geometrías **ten mucho cuidado con no poner 1 en ninguno de estos valores**. Calcula el máximo de pantallas de otra forma, aunque desperdices algo de memoria. Sorry but not sorry, esto se rompe muy poco pero ahorra muchos quebraderos de cabeza en el 90% de los casos.
 
 ## Y listo
 
