@@ -384,11 +384,7 @@
 	},
 	"expanded_folders":
 	[
-		"/D/git/MK1",
-		"/D/git/MK1/examples",
-		"/D/git/MK1/examples/helmet",
-		"/D/git/MK1/examples/helmet/dev",
-		"/D/git/MK1/examples/helmet/dev/my"
+		"/C/git/MK1"
 	],
 	"file_history":
 	[
@@ -523,7 +519,7 @@
 	],
 	"find":
 	{
-		"height": 48.0
+		"height": 26.0
 	},
 	"find_in_files":
 	{
@@ -569,7 +565,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 26.0
 	},
 	"input":
 	{
@@ -617,7 +613,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 40.0
+		"height": 48.0
 	},
 	"save_all_on_build": true,
 	"select_file":

@@ -25,6 +25,8 @@ echo Importando GFX
 ..\..\..\src\utils\sprcnvbin.exe ..\gfx\sprites_extra.png sprites_extra.bin 1 > nul
 ..\..\..\src\utils\sprcnvbin8.exe ..\gfx\sprites_bullet.png sprites_bullet.bin 1 > nul
 
+..\..\..\src\utils\png2scr.exe ..\gfx\loading.png loading.bin > nul
+
 if [%1]==[justassets] goto :end
 
 :compile
@@ -48,7 +50,7 @@ echo Construyendo cinta
 ..\..\..\src\utils\pasmo.exe loader\loader.asm ..\bin\loader.bin loader.txt
 
 ..\..\..\src\utils\GenTape.exe %game%.tap ^
-    basic 'GOKU_MAL' 10 ..\bin\loader.bin ^
+    basic 'MLST'     10 ..\bin\loader.bin ^
     data                loading.bin ^
     data                ..\bin\RAM1.bin ^
     data                ..\bin\RAM3.bin ^
