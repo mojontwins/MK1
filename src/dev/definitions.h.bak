@@ -258,7 +258,6 @@ unsigned char objs_old, keys_old, life_old, killed_old;
 
 #ifdef COMPRESSED_LEVELS
 	unsigned char *level_str = "LEVEL 0X";
-	unsigned char silent_level = 0;
 #endif
 
 #ifdef GET_X_MORE
@@ -311,7 +310,6 @@ unsigned char *_gp_gen;
 
 #ifdef MODE_128K
 	unsigned char song_playing = 0;
-	unsigned char player_on = 1;
 #endif
 
 unsigned char isrc;

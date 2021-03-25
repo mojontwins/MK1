@@ -15,7 +15,7 @@ void prepare_level (void) {
 		}
 
 		#ifdef ACTIVATE_SCRIPTING
-			main_script_offset = levels [level].script_offset;
+			main_script_offset = levels [level]->script_offset;
 		#endif
 	#else
 		unpack ((unsigned int) levels [level].c_map_bolts, (unsigned int) (mapa));

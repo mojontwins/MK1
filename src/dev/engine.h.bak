@@ -291,7 +291,34 @@ void draw_scr_background (void) {
 	#endif
 }
 
-void draw_scr_hotspots_locks (void) {
+void draw_scr (void) {
+	is_rendering = 1;
+
+	#ifdef ENABLE_TILANIMS
+		tilanims_reset ();
+	#endif
+
+	#ifdef ENABLE_FIRE_ZONE
+		f_zone_ac = 0;
+	#endif	
+
+	draw_scr_background ();
+
+	// Object setup
+
+	enems_load ();
+
+	#ifdef ACTIVATE_SCRIPTING
+		#if defined LINE_OF_TEXT && !defined LINE_OF_TEXT_NO_AUTOERASE
+			_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT; _t = LINE_OF_TEXT_ATTR; _gp_gen = "                              "; print_str ();
+		#endif
+		// Ejecutamos los scripts de entrar en pantalla:
+		run_script (2 * MAP_W * MAP_H + 1); 	// ENTERING ANY
+		run_script (n_pant << 1); 				// ENTERING SCREEN n
+	#endif
+
+	#include "my/ci/entering_screen.h"
+
 	/*
 	hotspot_y = 240;
 	rdx = (hotspots [n_pant].xy >> 4);
@@ -490,37 +517,6 @@ void draw_scr_hotspots_locks (void) {
 				jr  nz, _open_locks_loop
 		#endasm
 	#endif
-}
-
-void draw_scr (void) {
-	is_rendering = 1;
-
-	#ifdef ENABLE_TILANIMS
-		tilanims_reset ();
-	#endif
-
-	#ifdef ENABLE_FIRE_ZONE
-		f_zone_ac = 0;
-	#endif	
-
-	draw_scr_background ();
-
-	// Object setup
-
-	enems_load ();
-
-	#ifdef ACTIVATE_SCRIPTING
-		#if defined LINE_OF_TEXT && !defined LINE_OF_TEXT_NO_AUTOERASE
-			_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT; _t = LINE_OF_TEXT_ATTR; _gp_gen = "                              "; print_str ();
-		#endif
-		// Ejecutamos los scripts de entrar en pantalla:
-		run_script (2 * MAP_W * MAP_H + 1); 	// ENTERING ANY
-		run_script (n_pant << 1); 				// ENTERING SCREEN n
-	#endif
-
-	#include "my/ci/entering_screen.h"
-
-	draw_scr_hotspots_locks ();
 
 	#ifdef PLAYER_CAN_FIRE
 		bullets_init ();

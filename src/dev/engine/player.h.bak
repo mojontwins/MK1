@@ -28,20 +28,17 @@ void player_init (void) {
 	#if !defined(COMPRESSED_LEVELS) || defined(REFILL_ME)	
 		p_life = 		PLAYER_LIFE;
 	#endif
+	p_objs =	0;
+	p_keys = 0;
+	p_killed = 0;
 	p_disparando = 0;
-	
-	#ifndef NO_RESET_STATS
-		p_objs = 0;
-		p_keys = 0;
-		p_killed = 0;
-		#ifdef MAX_AMMO
-			#ifdef INITIAL_AMMO
-				p_ammo = INITIAL_AMMO;
-			#else
-				p_ammo = MAX_AMMO;
-			#endif
+	#ifdef MAX_AMMO
+		#ifdef INITIAL_AMMO
+			p_ammo = INITIAL_AMMO;
+		#else
+			p_ammo = MAX_AMMO;
 		#endif
-	#endif
+	#endif	
 
 	#ifdef TIMER_ENABLE
 		timer_count = 0;

@@ -74,7 +74,6 @@ char player_hidden (void);
 void run_fire_script (void);
 void process_tile (void);
 void draw_scr_background (void);
-void draw_scr_hotspots_locks (void);
 void draw_scr (void);
 void select_joyfunc (void);
 unsigned char mons_col_sc_x (void);	

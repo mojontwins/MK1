@@ -284,7 +284,8 @@
 			if (sp_KeyPressed (KEY_H)) {
 				sp_WaitForNoKey ();
 				#ifdef MODE_128K
-					player_on = 0;
+					wyz_stop_sound ();
+					wyz_play_sound (1);
 				#endif				
 				clear_sprites ();
 				pause_screen ();
@@ -292,7 +293,11 @@
 				sp_WaitForNoKey ();
 				draw_scr ();
 				#ifdef MODE_128K
-					player_on = 1;
+					#ifdef COMPRESSED_LEVELS
+						//wyz_play_music (levels [level].music_id);
+					#else
+						//wyz_play_music (1);
+					#endif
 				#endif				
 			}			
 			if (sp_KeyPressed (KEY_Y)) {
@@ -302,12 +307,7 @@
 
 		// Flick the screen ?
 			
-		#if defined ACTIVATE_SCRIPTING && defined COMPRESSED_LEVELS
-			if (script_result != 3)
-		#endif
-		{
-			#include "mainloop/flick_screen.h"
-		}
+		#include "mainloop/flick_screen.h"			
 
 		// Win game condition
 		
@@ -346,7 +346,6 @@
 
 		#include "my/ci/extra_routines.h"
 	}
-	
 	sp_UpdateNow ();
 	sp_WaitForNoKey ();
 
