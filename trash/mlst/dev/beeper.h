@@ -211,7 +211,7 @@
 		push bc
 	;.frq=$+1
 	;	ld bc,2*256+200
-		defb #01	;ld bc
+		defb 1	;ld bc
 	.frq
 		defb 200	;+200
 		defb 2	;2*256
