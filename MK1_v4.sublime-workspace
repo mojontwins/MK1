@@ -1,0 +1,1290 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"player",
+				"player.life\tabc"
+			],
+			[
+				"mapp",
+				"mappingsFn\tabc"
+			],
+			[
+				"AY_S",
+				"AY_PLAY_SOUND\t(diario.md)"
+			],
+			[
+				"__",
+				"__tile_address\tabc"
+			],
+			[
+				"mkts",
+				"mkts_om.exe\t(mkts_om.bas)"
+			],
+			[
+				"doS",
+				"doStrait2x2\tabc"
+			],
+			[
+				"patter",
+				"patternWidthInPixels\tabc"
+			],
+			[
+				"cpcMode",
+				"cpcMode0GetBitmapFrom\tabc"
+			],
+			[
+				"_s",
+				"_simple_coco_update_continue\tabc"
+			],
+			[
+				"eij_state_moving",
+				"_eij_state_moving_y"
+			],
+			[
+				"_eij_stil",
+				"_eij_state_still_appearing\tabc"
+			],
+			[
+				"eij_",
+				"_eij_state_done"
+			],
+			[
+				"enems_hotspot",
+				"enems_hotspots_0\tabc"
+			],
+			[
+				"custom",
+				"custom_animation.h\t(custom_animation.h)"
+			],
+			[
+				"BREAL",
+				"BREAKABLE_WALLS\t(bullets.h)"
+			],
+			[
+				"bullets_",
+				"bullets_update\tabc"
+			],
+			[
+				"ENABLE",
+				"ENABLE_FANTIES\tabc"
+			],
+			[
+				"FANTI",
+				"FANTIES_TYPE_HOMING\t(config.h)"
+			],
+			[
+				"invali",
+				"invalidate_tile\t(printer.h)"
+			],
+			[
+				"VIEW",
+				"VIEWPORT_Y\tabc"
+			],
+			[
+				"inval",
+				"invalidate_tile\t(printer.h)"
+			],
+			[
+				"main",
+				"maincounter\tabc"
+			],
+			[
+				"VIE",
+				"VIEWPORT_Y\t(printer.h)"
+			],
+			[
+				"draw_colou",
+				"draw_coloured_tile\t(printer.h)"
+			],
+			[
+				"invalidate",
+				"invalidate_viewport\t(printer.h)"
+			],
+			[
+				"orig",
+				"orig_tile\tabc"
+			],
+			[
+				"draw_om",
+				"draw_invalidate_coloured_tile_gamearea\t(printer.h)"
+			],
+			[
+				"draw_coloured_ti",
+				"draw_coloured_tile_gamearea\tabc"
+			],
+			[
+				"dra",
+				"draw_invalidate_coloured_tile_gamearea\tabc"
+			],
+			[
+				"draw",
+				"draw_coloured_tile_gamearea\tabc"
+			],
+			[
+				"baddies",
+				"baddiesCountGenital"
+			],
+			[
+				"baddiesCou",
+				"baddiesCountGenital\tabc"
+			],
+			[
+				"textMap",
+				"textMapH\tabc"
+			],
+			[
+				"textT",
+				"textTilesetfile\tabc"
+			],
+			[
+				"TextBox",
+				"TextBox_GetText\tabc"
+			],
+			[
+				"text",
+				"textEnemsLoadFile\tabc"
+			],
+			[
+				"textt",
+				"textTilesetfile\tabc"
+			],
+			[
+				"button",
+				"buttonTilesetfile\tabc"
+			],
+			[
+				"Button_",
+				"Button_Event\tabc"
+			],
+			[
+				"buttonC",
+				"buttonCreateNew\tabc"
+			],
+			[
+				"Text",
+				"TextBox_GetText\tabc"
+			],
+			[
+				"textScr",
+				"textScrW\tabc"
+			],
+			[
+				"Textb",
+				"TextBox_New\tabc"
+			],
+			[
+				"TILANI",
+				"TILANIMS_TYPE_SELECT_FLAG\tabc"
+			],
+			[
+				"TILANIMS_SE",
+				"TILANIMS_TYPE_SELECT_FLAG\t(config.h)"
+			],
+			[
+				"TILANIMS_TP",
+				"TILANIMS_TYPE_ONE\tabc"
+			],
+			[
+				"TILAN",
+				"TILANIMS_PERIOD\t(config.h)"
+			],
+			[
+				"_va_coll",
+				"_va_collision_done\tabc"
+			],
+			[
+				"MA",
+				"MAX_BULLETS\tabc"
+			],
+			[
+				"clausuas",
+				"clausulasUsed\tabc"
+			],
+			[
+				"CUSTOM",
+				"CUSTOM_HIT\t(player.h)"
+			],
+			[
+				"PLAY_SAM",
+				"PLAY_SAMPLE_ON_DEATH\t(config.h)"
+			],
+			[
+				"LEVEL_ENDING",
+				"LEVEL_ENDING_GOOD\t(script.spt)"
+			],
+			[
+				"LEVEL_END",
+				"LEVEL_ENDING_BAD\t(script.spt)"
+			],
+			[
+				"LEVEL_CAS",
+				"LEVEL_CASTLE_B\t(script.spt)"
+			],
+			[
+				"PLA",
+				"PLAYER_DRUNK_EXPR\t(va_genital.h)"
+			],
+			[
+				"_player_mvoe",
+				"_player_move_af_holed_set\tabc"
+			],
+			[
+				"_player_move",
+				"_player_move_af_incframe_done\tabc"
+			],
+			[
+				"p_ct",
+				"p_state_ct\tabc"
+			],
+			[
+				"EST_",
+				"EST_HOLED\tabc"
+			],
+			[
+				"_enems",
+				"_enems_move_pregotten_set\tabc"
+			],
+			[
+				"bye",
+				"byteCoordinates\tabc"
+			],
+			[
+				"sp_nana",
+				"sp_nanako_0"
+			],
+			[
+				"nanako_may",
+				"nanako_may_move_horz"
+			],
+			[
+				"sp_mar",
+				"sp_marcador_vidas_1"
+			],
+			[
+				"cwit",
+				"cwithheader"
+			],
+			[
+				"He",
+				"fOutHeader"
+			],
+			[
+				"PLAT",
+				"PLATFORM_SG1000"
+			],
+			[
+				"metaSpri",
+				"metaSpriteIndex"
+			],
+			[
+				"metasprite",
+				"metaSpriteIndex"
+			],
+			[
+				"metaSpr",
+				"metaSpriteType"
+			],
+			[
+				"wMeta",
+				"wMetaPixels"
+			],
+			[
+				"PLATFORM_",
+				"PLATFORM_CPC"
+			],
+			[
+				"PLATFORM",
+				"PLATFORM_ZX"
+			],
+			[
+				"TMS",
+				"TMS9918"
+			],
+			[
+				"TMS9918Get",
+				"TMS9918GetBitmapFrom"
+			],
+			[
+				"TMS9918",
+				"TMS9918Colour"
+			],
+			[
+				"double_hots",
+				"double_hotspots_do\t(mainloop.h)"
+			],
+			[
+				"double",
+				"double_hotspots_paint"
+			],
+			[
+				"attr",
+				"attr_table_offset"
+			],
+			[
+				"togg",
+				"toggle_switch\t(extra_vars.h)"
+			],
+			[
+				"toggle",
+				"toggle_timer\t(extra_vars.h)"
+			],
+			[
+				"HOTSPOT_TYPE_TO",
+				"HOTSPOT_TYPE_TOGGLE_OFF\t(extra_vars.h)"
+			],
+			[
+				"wate",
+				"water_strip\t(on_entering_screen.h)"
+			],
+			[
+				"PPU_CTRL",
+				"PPU_CTRL_VAR1\t(neslib.s)"
+			],
+			[
+				"frame",
+				"frame_counter"
+			],
+			[
+				"stri",
+				"strictMscNumeric"
+			],
+			[
+				"e",
+				"e24to9"
+			],
+			[
+				"ImgIn",
+				"imgIn"
+			],
+			[
+				"calcua",
+				"calculateHugePal"
+			],
+			[
+				"ig",
+				"imgIn"
+			],
+			[
+				"SPING",
+				"SPRING_SPIKE_TILE"
+			],
+			[
+				"customScr",
+				"customScriptOrder"
+			],
+			[
+				"customScir",
+				"customScriptOrder"
+			],
+			[
+				"MAX_CHAC",
+				"MAX_CHAC_CHACKS_QUEUED"
+			],
+			[
+				"chac_chacs_Q",
+				"chac_chacs_queue_read"
+			],
+			[
+				"chac_chacs_queu",
+				"chac_chacs_queue_write\t(bss.h)"
+			],
+			[
+				"chac",
+				"chac_chacs_read"
+			],
+			[
+				"inte",
+				"interactives_index"
+			],
+			[
+				"interactives",
+				"interactives_yx"
+			],
+			[
+				"MAP_",
+				"MAP_FORMAT_PACKED"
+			],
+			[
+				"RLE",
+				"MAP_FORMAT_RLE16"
+			],
+			[
+				"CHAC_CHAC",
+				"CHAC_CHAC_FROM_MAP"
+			],
+			[
+				"max_",
+				"max_chac_chacs\t(tile_chac_chac.h)"
+			],
+			[
+				"ENABLE_CH",
+				"ENABLE_TILE_CHAC_CHAC\t(map_detectors.h)"
+			],
+			[
+				"chac_chac",
+				"chac_chacs_ct\t(tile_chac_chac.h)"
+			],
+			[
+				"chac_c",
+				"chac_chacs_state\t(tile_chac_chac.h)"
+			],
+			[
+				"addressboo",
+				"addressbook_export\t(export.inc)"
+			],
+			[
+				"bedework_rec",
+				"bedework_records_starting_with\t(simple_bedework_rest_client.php)"
+			],
+			[
+				"start",
+				"start_row"
+			],
+			[
+				"bedewo",
+				"bedework_client"
+			],
+			[
+				"allow",
+				"allow_report"
+			],
+			[
+				"bedew",
+				"bedework_client"
+			],
+			[
+				"bede",
+				"bedework_client"
+			],
+			[
+				"cookie",
+				"cookie_jar"
+			],
+			[
+				"curl",
+				"curl_setup"
+			],
+			[
+				"cooke",
+				"cookie_jar"
+			],
+			[
+				"coo",
+				"cookie_jar"
+			],
+			[
+				"current",
+				"current_rule"
+			],
+			[
+				"getg",
+				"get_group\t(list.inc)"
+			],
+			[
+				"rcmail",
+				"rcmail::write_log"
+			],
+			[
+				"grou",
+				"group_id"
+			],
+			[
+				"vcard_",
+				"vcard_filename"
+			],
+			[
+				"toa",
+				"total_entries"
+			],
+			[
+				"write",
+				"write_log"
+			],
+			[
+				"webdav_abook",
+				"webdav_abook_user_url"
+			],
+			[
+				"u",
+				"uid\t(rcube_webdav_addressbook.php)"
+			],
+			[
+				"webdav_aboo",
+				"webdav_abook_dir"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "// MTE MK1 v4.8\n// Copyleft 2010-2013, 2020-2021 by The Mojon Twins\n\n// printer.h\n// Miscellaneous printing functions (tiles, status, etc).\n\nvoid draw_rectangle (unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2, unsigned char c) {\t\n\tfor (pti = y1; pti <= y2; pti ++)\n\t\tfor (ptj = x1; ptj <= x2; ptj ++)\n\t\t\tsp_PrintAtInv (pti, ptj, c, 0);\t\n}\n\nvoid attr (char x, char y) {\n\t#asm\n\t\t\tld  hl, 4\n\t\t\tadd hl, sp\n\t\t\tld  c, (hl) \t// x\n\n\t\t\tdec hl\n\t\t\tdec hl\n\t\t\tld  a, (hl) \t// y\n\t\t\t\n\t\t\t// If you put x in C and y in A you can call here\n\t\t\t\n\t\t._attr_2\n\t\t\t// A = y, C = x\n\t\t\tcp  10\n\t\t\tjr  c, _attr_1\n\n\t\t#ifdef BETTER_VERTICAL_CONNECTIONS\n\t\t\t\tcp  11\n\t\t\t\tjr  nc, _attr3\n\t\t\t\tld  hl, 0\n\t\t\t\tret\n\t\t\t\t\n\t\t\t._attr3\n\t\t\t\txor a \t \t// Negative values replicate first row\n\t\t#else\n\t\t\t\tld  hl, 0\n\t\t\t\tret\n\t\t#endif\n\n\t\t._attr_1\n\t\t\tld  b, a \t\t// save y\n\t\t\tld  a, c \t\t// x\n\t\t\tcp  15\n\t\t\tjr  c, _attr_1b\n\t\t\tld  hl, 0\n\t\t\tret\n\n\t\t\t// If you put x in C and y in A you can use this entry point for enemies\n\n\t\t._attr_enems\n\t\t\tcp  10\n\t\t\tjr  c, _attr_enems_skip_1\n\t\t\tld  hl, 8\n\t\t\tret\n\t\t._attr_enems_skip_1\n\t\t\tld  b, a\n\t\t\tld  a, c\n\t\t\tcp  15\n\t\t\tjr  c, _attr_1b\n\t\t\tld  hl, 8\n\t\t\tret\n\n\t\t._attr_1b\n\t\t\tld  a, b \t\t// restore y\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsub b\n\t\t\tadd c\n\n\t\t\tld  d, 0\n\t\t\tld  e, a\n\t\t\tld  hl, _map_attr\n\t\t\tadd hl, de\n\t\t\tld  l, (hl)\n\n\t\t._attr_end\n\t\t\tld  h, 0\n\t#endasm\n}\n\nvoid qtile (unsigned char x, unsigned char y) {\n\t#asm\n\t\t\tld  hl, 4\n\t\t\tadd hl, sp\n\t\t\tld  c, (hl) \t// x\n\t\t\n\t\t\tdec hl\n\t\t\tdec hl\n\t\t\tld  a, (hl) \t// y\n\n\t\t\t// If you put x in C and y in A you can call here\n\t\t\t\n\t\t.qtile_do\t\n\t\t\tld  b, a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsub b\n\t\t\tadd c\n\n\t\t\tld  d, 0\n\t\t\tld  e, a\n\t\t\tld  hl, _map_buff\n\t\t\tadd hl, de\n\n\t\t\tld  l, (hl)\n\t\t\tld  h, 0\n\t#endasm\n}\n\n// Draw tile tile\n\nvoid draw_coloured_tile (unsigned char x, unsigned char y, unsigned char t) {\n\t//_x = x; _y = y; _t = t;\n\t#asm\n\t\t\t; Copy params for speed & size\n\t\t\tld  hl, 6\n\t\t\tadd hl, sp\n\t\t\tld  a, (hl)\n\t\t\tld  (__x), a\n\t\t\tdec hl\n\t\t\tdec hl\n\t\t\tld  a, (hl)\n\t\t\tld  (__y), a\n\t\t\tdec hl\n\t\t\tdec hl\n\t\t\tld  a, (hl)\n\t\t\tld  (__t), a\n\t\t._draw_coloured_tile_do\n\t#endasm\n\n\t#if defined USE_AUTO_SHADOWS && !defined UNPACKED_MAP\n\t\tprxx = (_x - VIEWPORT_X) >> 1;\n\t\tpryy = (_y - VIEWPORT_Y) >> 1;\t\n\t\tif (attr (prxx, pryy) < 8 && (_t < 16 || _t == 19)) {\n\t\t\t_t = 64 + (_t << 2);\n\t\t\tgp_gen_org = (unsigned char *) &tileset [2048 + _t];\n\t\t\tsp_PrintAtInv (_y, _x, attr (prxx - 1, pryy - 1) == 8 ? (gp_gen_org[0] & 7)-1 : gp_gen_org [0], _t);\n\t\t\tsp_PrintAtInv (_y, _x + 1, attr (prxx, pryy - 1) == 8 ? (gp_gen_org[1] & 7)-1 : gp_gen_org [1], _t + 1);\n\t\t\tsp_PrintAtInv (_y + 1, _x, attr (prxx - 1, pryy) == 8 ? (gp_gen_org[2] & 7)-1 : gp_gen_org [2], _t + 2);\n\t\t\tsp_PrintAtInv (_y + 1, _x + 1, gp_gen_org [3], _t + 3);\n\t\t} else\n\t#elif defined USE_AUTO_TILE_SHADOWS && !defined UNPACKED_MAP\n\t\tprxx = (_x - VIEWPORT_X) >> 1;\n\t\tpryy = (_y - VIEWPORT_Y) >> 1;\t\n\t\tif (attr (prxx, pryy) < 4 && (_t < 16 || _t == 19)) {\n\t\t\tif (_t == 19) {\n\t\t\t\t_t = 140;\n\t\t\t\tt_alt = 192;\t\t\t\t\n\t\t\t} else {\n\t\t\t\t_t = 64 + (_t << 2);\n\t\t\t\tt_alt = 128 + _t;\n\t\t\t}\n\n\t\t\tgp_gen_org = tileset + 2048 + _t;\n\t\t\tgp_gen_alt = tileset + 2048 + t_alt;\n\t\t\t\n\t\t\tif (attr (prxx - 1, pryy - 1) >= 4) {\n\t\t\t\tsp_PrintAtInv (_y, _x, gp_gen_alt [0], t_alt);\n\t\t\t} else {\n\t\t\t\tsp_PrintAtInv (_y, _x, gp_gen_org [0], _t);\n\t\t\t}\n\t\t\tif (attr (prxx, pryy - 1) >= 4) {\n\t\t\t\tsp_PrintAtInv (_y, _x + 1, gp_gen_alt [1], t_alt + 1);\n\t\t\t} else {\n\t\t\t\tsp_PrintAtInv (_y, _x + 1, gp_gen_org [1], _t + 1);\n\t\t\t}\n\t\t\tif (attr (prxx - 1, pryy) >= 4) {\n\t\t\t\tsp_PrintAtInv (_y + 1, _x, gp_gen_alt [2], t_alt + 2);\n\t\t\t} else {\n\t\t\t\tsp_PrintAtInv (_y + 1, _x, gp_gen_org [2], _t + 2);\n\t\t\t} \n\t\t\tsp_PrintAtInv (_y + 1, _x + 1, gp_gen_org [3], _t + 3);\n\t\t} else\n\t#endif\n\t{\n\t\t/*\n\t\t_t = 64 + (_t << 2);\n\t\tgp_gen_org = (unsigned char *) &tileset [2048 + _t];\n\t\tsp_PrintAtInv (_y, _x, *gp_gen_org, _t); gp_gen_org ++; _t ++;\n\t\tsp_PrintAtInv (_y, _x + 1, *gp_gen_org, _t); gp_gen_org ++; _t ++;\n\t\tsp_PrintAtInv (_y + 1, _x, *gp_gen_org, _t); gp_gen_org ++; _t ++;\n\t\tsp_PrintAtInv (_y + 1, _x + 1, *gp_gen_org, _t);\n\t\t*/\n\t\t#asm\n\t\t\t\tld  a, (__x)\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (__y)\n\t\t\t\tcall SPCompDListAddr\n\t\t\t\tex de, hl\n\n\t\t\t\t// Now write 4 attributes and 4 chars.\n\n\t\t\t\t// Make a pointer to the metatile colour array\t\n\t\t\t\tld  a, (__t)\n\t\t\t\tsla a\n\t\t\t\tsla a \t\t\t\t// A = _t * 4\n\t\t\t\tadd 64 \t\t\t\t// A = _t * 4 + 64\n\t\t\t\t\n\t\t\t\tld  hl, _tileset + 2048\n\t\t\t\tld  b, 0\n\t\t\t\tld  c, a\n\t\t\t\tadd hl, bc \t\t\t// HL = tileset + _taux\n\t\t\t\t\n\t\t\t\tld  c, a \t\t\t// C = current pattern #\n\n\t\t\t\t// For each char: write colour, inc DE, write tile, inc DE*3\n\t\t\t\t\n\t\t\t\tld  a, (hl) \t\t// read colour\t\t\t\n\t\t\t\tld  (de), a \t\t// write colour\n\t\t\t\tinc de\n\t\t\t\tinc hl \t\t\t\t// next colour\n\n\t\t\t\tld  a, c  \t\t\t// read tile\n\t\t\t\tld  (de), a\t\t\t// write tile\n\t\t\t\tinc de\n\t\t\t\tinc a \t\t\t\t// next tile\n\t\t\t\tld  c, a \n\n\t\t\t\tinc de\n\t\t\t\tinc de \t\t\t\t// next DisplayList cell\n\n\t\t\t\tld  a, (hl) \t\t// read colour\t\t\t\n\t\t\t\tld  (de), a \t\t// write colour\n\t\t\t\tinc de\n\t\t\t\tinc hl \t\t\t\t// next colour\n\n\t\t\t\tld  a, c  \t\t\t// read tile\n\t\t\t\tld  (de), a\t\t\t// write tile\n\t\t\t\tinc a \t\t\t\t// next tile\n\t\t\t\t\n\t\t\t\tex  de, hl\n\t\t\t\tld  bc, 123\n\t\t\t\tadd hl, bc\n\t\t\t\tex  de, hl\t\t\t// next DisplayList cell\n\t\t\t\tld  c, a \n\n\t\t\t\tld  a, (hl) \t\t// read colour\t\t\t\n\t\t\t\tld  (de), a \t\t// write colour\n\t\t\t\tinc de\n\t\t\t\tinc hl \t\t\t\t// next colour\n\n\t\t\t\tld  a, c  \t\t\t// read tile\n\t\t\t\tld  (de), a\t\t\t// write tile\n\t\t\t\tinc de\n\t\t\t\tinc a \t\t\t\t// next tile\n\t\t\t\tld  c, a \n\n\t\t\t\tinc de\n\t\t\t\tinc de \t\t\t\t// next DisplayList cell\n\n\t\t\t\tld  a, (hl) \t\t// read colour\t\t\t\n\t\t\t\tld  (de), a \t\t// write colour\n\t\t\t\tinc de\n\n\t\t\t\tld  a, c  \t\t\t// read tile\n\t\t\t\tld  (de), a\t\t\t// write tile\n\n\t\t\t\tld  a, (__x)\n\t\t\t\tld  c, a\n\t\t\t\tinc a\n\t\t\t\tld  e, a\n\t\t\t\tld  a, (__y)\n\t\t\t\tld  b, a\n\t\t\t\tinc a\n\t\t\t\tld  d, a\n\t\t\t\tld  iy, fsClipStruct\n\t\t\t\tcall SPInvalidate\t\n\t\t#endasm\n\t}\t\t\n}\n\nvoid set_map_tile (unsigned char x, unsigned char y, unsigned char t, unsigned char n) {\n\t#asm\n\t\t\t; Copy params for speed & size\n\t\t\tld  hl, 8\n\t\t\tadd hl, sp\n\t\t\tld  a, (hl)\n\t\t\tld  (__x), a\n\t\t\tld  c, a\n\t\t\tdec hl\n\t\t\tdec hl\n\t\t\tld  a, (hl)\n\t\t\tld  (__y), a\n\t\t\tdec hl\n\t\t\tdec hl\n\t\t\tld  a, (hl)\n\t\t\tld  (__t), a\n\t\t\tdec hl\n\t\t\tdec hl\n\t\t\tld  a, (hl)\n\t\t\tld  (__n), a\n\n\t\t.set_map_tile_do\n\t\t\tld  a, (__y)\n\t\t\tld  b, a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsub b\n\t\t\tadd c\n\n\t\t\tld  b, 0\n\t\t\tld  c, a\n\n\t\t\tld  hl, _map_buff\n\t\t\tadd hl, bc\n\t\t\tld  a, (__t)\n\t\t\tld (hl), a\n\n\t\t\tld  hl, _map_attr\n\t\t\tadd hl, bc\n\t\t\tld  a, (__n)\n\t\t\tld (hl), a\n\t\t\t\n\t\t\tld  a, (__x)\n\t\t\tsla a\n\t\t\tadd VIEWPORT_X\n\t\t\tld  (__x), a\n\n\t\t\tld  a, (__y)\n\t\t\tsla a\n\t\t\tadd VIEWPORT_Y\n\t\t\tld  (__y), a\n\n\t\t\tjp _draw_coloured_tile_do\n\t#endasm\n}\n\nvoid draw_2_digits (unsigned char x, unsigned char y, unsigned char value) {\n\tsp_PrintAtInv (y, x, 71, 16 + (value % 100) / 10);\n\tsp_PrintAtInv (y, 1 + x, 71, 16 + value % 10);\n}\n\nvoid draw_text (unsigned char x, unsigned char y, unsigned char c, char *s) {\n\twhile (*s) {\n\t\tsp_PrintAtInv (y, x ++, c, (*s) - 32); s ++;\n\t}\n}\n\nvoid any_key (void) {\n\t#asm\n\t\t\tld  hl, 0\n\t\t\txor a\n\t\t\tin  a, (0xfe)\n\t\t\tand 0x1f\n\t\t\tcp  0x1f\t\t// Issue 2/3 safe\n\t\t\tret z\n\t\t\tld  l, 1\n\t#endasm\n}\n\n\nvoid espera_activa (int espera) {\n\t// Waits until \"espera\" halts have passed \n\t// or a key has been pressed.\n\n\tpti = any_key ();\n\twhile (espera--)  {\n\t\t#if defined MODE_128K_DUAL || defined MIN_FAPS_PER_FRAME\n\t\t\t#asm\n\t\t\t\thalt\n\t\t\t#endasm\n\t\t#else\n\t\t\trdd = 250; do { rdi = 1; } while (rdd --);\n\t\t#endif\n\n\t\tptj = any_key ();\n\t\tif (ptj && pti == 0) {\n\t\t\tbreak;\n\t\t}\n\t\tpti = ptj;\n\t}\n}\n\n#ifdef ENABLE_PERSISTENCE\n\tvoid persist (void) {\n\t\t// Marks tile _x, _y @ n_pant to be cleared next time we enter this screen\t\n\t\t// n_pant*20 + y*2 + x/8\t\n\t\tgp_gen = (unsigned char *) (PERSIST_BASE + (n_pant << 4) + (n_pant << 2) + (_y << 1) + (_x >> 3));\n\t\t*gp_gen |= bitmask [_x & 7];\t\n\t}\n\n\tvoid draw_persistent_row (void) {\n\t\tfor (gpit = 0; gpit < 8; gpit ++) {\n\t\t\tif (rdi & (bitmask [gpit]))\n\t\t\t\tset_map_tile (rdx + gpit, rdy, PERSIST_CLEAR_TILE, comportamiento_tiles [PERSIST_CLEAR_TILE]);\n\t\t}\n\t}\n\n\tvoid draw_persistent (void) {\n\t\tgp_gen = (unsigned char *) (PERSIST_BASE + (n_pant << 4) + (n_pant << 2));\n\t\tfor (rdy = 0; rdy < 10; rdy ++) {\n\t\t\trdx = 0; rdi = *gp_gen ++; draw_persistent_row ();\n\t\t\trdx = 8; rdi = *gp_gen ++; draw_persistent_row ();\n\t\t}\n\t}\n\n\tvoid clear_persistent (void) {\n\t\t#asm\n\t\t\t\tld  hl, PERSIST_BASE\n\t\t\t\tld  de, PERSIST_BASE+1\n\t\t\t\tld  bc, MAP_W*MAP_H*20-1\n\t\t\t\txor a\n\t\t\t\tld  (hl), a\n\t\t\t\tldir\n\t\t#endasm\n\t}\n#endif\n\n#ifdef DEBUG\n\tunsigned char drda, drdb;\n\tunsigned char hex_code (unsigned char n) {\n\t\tif (n < 10) return (n + 16);\n\t\telse return n + 23;\n\t}\n\n\tvoid print_hex (unsigned char x, unsigned char y, unsigned char h) {\n\t\tdrda = hex_code (h >> 4); drdb = hex_code (h & 15);\n\t\tsp_PrintAtInv (y, x, 71, drda);\n\t\tsp_PrintAtInv (y, 1 + x, 71, drdb);\n\t}\n#endif\n",
+			"file": "examples/ramiro4/dev/printer.h",
+			"file_size": 9075,
+			"file_write_time": 132637499253348911,
+			"settings":
+			{
+				"buffer_size": 8645,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "// MTE MK1 v4.8\n// Copyleft 2010-2013, 2020-2021 by The Mojon Twins\n\n// Add here your custom routines & vars\n\n#ifdef ENABLE_CODE_HOOKS\n\n\t#asm\n\t\tLIB SPPrintAtInv\n\t#endasm\n\n\t// Custom routines for Ramiro 4\n\n\t// bit 0 = which set.\n\t// bit 1 = killing eye.\n\t// bit 2 = trap!\n\t// bit 3 = trap but with coins\n\tunsigned char map_behaviours [] = {\n\t\t 0,  0,  0,  5,  0,  0, \n\t\t 0,  0,  0,  3,  1,  1,\n\t\t 0,  0,  3,  3,  5,  1,\n\t\t13,  1,  1,  3,  3,  1,\n\t\t13,  1,  3,  1,  1,  1,\n\t\t 0,  1,  1,  1,  1,  1\n\t}; \n\n\t// Evil eye things\n\n\t#define EYE_X VIEWPORT_X+7*2\n\t#define EYE_Y VIEWPORT_Y+2*2\n\n\tunsigned char evil_eye_state;\n\tunsigned char evil_eye_counter;\n\n\tunsigned char evil_eye_state_cts [] = { 30, 30, 60, 5, 5 };\n\tunsigned char evil_eye_state_tiles [] = { 29, 30, 31, 30, 29 };\n\n\tunsigned char evil_eye_screen;\n\n\t// Blocks trap\n\n\t#define MAX_TRAP_BLOCKS\t3\n\t#define TRAP_CHANCE \t7 \t\t// Power of two minus one!\n\t#define BLOCK_HIT \t\t5\n\n\tunsigned char trap_active;\n\tunsigned char trap_bx [MAX_TRAP_BLOCKS];\n\tunsigned char trap_by [MAX_TRAP_BLOCKS];\n\tunsigned char trap_bt [MAX_TRAP_BLOCKS];\n\n\tunsigned char trap_screen;\n\tunsigned char trap_coins;\n\tunsigned char _trap_bx;\n\tunsigned char _trap_by;\n\tunsigned char _trap_bt;\n\tunsigned char rda, rdb;\n\n\t// Coins trap extra stuff\n\n\t#define C_COINS_X \t\t9 \t\t// Coins count character coordinates\n\t#define C_COINS_Y\t\t23\n\t#define TRAP_COINS_MAX\t30\n\n\t// Carrying an object\n\n\tunsigned char *object_cells [] = {\n\t\t0, extra_sprite_17_a, extra_sprite_18_a, extra_sprite_19_a, extra_sprite_20_a, extra_sprite_21_a\n\t};\n\tunsigned char pinv;\n\tstruct sp_SS *sp_pinv;\n\tunsigned char *pinv_next_frame, *pinv_current_frame;\n\n\t// Offers\n\n\t#define OFRENDAS_X \t\t15\n\t#define OFRENDAS_Y \t\t23\n\tunsigned char pofrendas, pofrendas_old; \n\tunsigned char ofrendas_order [] = { 1, 2, 3, 4 };\n\tunsigned char ofrendas_idx;\n\n\t// Water trap\n\n\t#define WATER_PERIOD 22\n\tunsigned char water_level;\n\tunsigned char water_ct;\n\tunsigned char water_locks;\n\tunsigned char water_top_door_x;\n\n\tunsigned char water_pushplates [] = { 0, 0x26, 0x4D, 0x57, 0x79 };\n\n\t// Score \n\t\n\t#define PSCORE flags[16]\n\t\n\t#define SCORE_OPEN_PYRAMID \t\t5\n\t#define SCORE_CHARACTER_TALK \t2\n\t#define SCORE_OPEN_CRYPT \t\t2\n\t#define SCORE_WIN_CRYPT \t\t5\n\t#define SCORE_RAMON_EYE \t\t5\n\t#define SCORE_RAMON_WATER \t\t5\n\t#define SCORE_GET_COIN \t\t\t5\n\t#define SCORE_GET_OBJECT \t\t5\n\t#define SCORE_FALSE_OBJECT \t\t4\n\t#define SCORE_FALSE_INTERACTION\t4\n\n\t#define SCORE_X \t\t28\n\t#define SCORE_Y \t\t23\n\n\tunsigned char opscore;\n\n\t// Text\n\n\tunsigned char temp_string [] = \"                        \";\n\n\t//                        XXXXXXXXXXXXXXXXXXXXXX\n\tunsigned char text0 [] = \"POR OSIRIS Y POR APIS%\"\n\t\t\t\t\t\t\t \"MIRADME BIEN: SOY EL%\"\n\t\t\t\t\t\t\t \"ALTAR DE LAS OFRENDAS.%\"\n\t\t\t\t\t\t\t \"TE DARE COSAS SI TRAES%\"\n\t\t\t\t\t\t\t \"MONEDAS AL MENDA.\";\n\n\tunsigned char text1 [] = \"UN ROLLO DE PAPEL DEL%\"\n\t\t\t\t\t\t\t \"CULO DOBLE CAPA, QUE%\"\n\t\t\t\t\t\t\t \"TE DEJA SUAVITO Y TE%\"\n\t\t\t\t\t\t\t \"QUITA LA ZURRAPA.\";\t\t\t\t \n\n\tunsigned char text2 [] = \"UNA FLAUTA DE FAKIR%\"\n\t\t\t\t\t\t\t \"IMPORTADA DE ORIENTE%\"\n\t\t\t\t\t\t\t \"QUE TE DUERME CON SU%\"\n\t\t\t\t\t\t\t \"MUSICA O SI TE DA EN%\"\n\t\t\t\t\t\t\t \"LOS DIENTES.\";\n\n\tunsigned char text3 [] = \"UNAS BRAGAS PRINCESA%\"\n\t\t\t\t\t\t\t \"ROBADAS DE UN CAJON%\"\n\t\t\t\t\t\t\t \"DE LA LETIZIA ESA.\";\n\n\tunsigned char text4 [] = \"UN TARRO DE GRASA DE%\"\n\t\t\t\t\t\t\t \"CABALLO. PARA QUE%\"\n\t\t\t\t\t\t\t \"QUERRIAS ESTO? LOCO%\"\n\t\t\t\t\t\t\t \"ME HALLO.\";\n\n\tunsigned char text5 [] = \"TES KI YA CARAJAULA,%\"\n\t\t\t\t\t\t\t \"LLEVATE ESO!\";\n\n\tunsigned char text6 [] = \"Y ESTO QUE ES? BEBE-%\"\n\t\t\t\t\t\t\t \"CHARCOS, ESCUCHAPEOS\";\n\n\tunsigned char text7 [] = \"PARA QUE QUIERO ESTO,%\"\n\t\t\t\t\t\t\t \"BOQUIMUELLE?\";\n\n\tunsigned char text8 [] = \"PERO QUE ME TRAES?%\"\n\t\t\t\t\t\t\t \"BOTARATE TALLOCEBOLLA!\";\n\n\tunsigned char text9 [] = \"Y AY, QUE POCAS LUCES%\"\n\t\t\t\t\t\t\t \"ME DUELE LA PETACA.%\"\n\t\t\t\t\t\t\t \"COMI MUCHAS CHUCHES%\"\n\t\t\t\t\t\t\t \"Y ME HAGO MUCHA CACA.\";\n\n\tunsigned char text10 [] = \"AUNQUE SEA DENOCHE%\"\n\t\t\t\t\t\t\t  \"NO CONSIGO DORMIR.%\"\n\t\t\t\t\t\t\t  \"TENGO MUCHO INSOMNIO%\"\n\t\t\t\t\t\t\t  \"QUE PUEDO HACIR?\";\n\n\tunsigned char text11 [] = \"QUE DESPISTE TENGO%\"\n\t\t\t\t\t\t\t  \"AYER FUI LO PEOR. ME%\"\n\t\t\t\t\t\t\t  \"DESMADRE EN UN CUMPLE%\"\n\t\t\t\t\t\t\t  \"Y PERDI LA ROPA%\"\n\t\t\t\t\t\t\t  \"INTERIOR.\";\n\n\tunsigned char text12 [] = \"ESTOY SIN RECATO%\"\n\t\t\t\t\t\t\t  \"A SU SERVICIO.%\"\n\t\t\t\t\t\t\t  \"TRABAJO MUY BARATO%\"\n\t\t\t\t\t\t\t  \"PERO EL CUERO ES MI%\"\n\t\t\t\t\t\t\t  \"VICIO...\";\n\n\tunsigned char text13 [] = \"RECUPERA LOS CUATRO%\"\n\t\t\t\t\t\t\t  \"TROZOS DEL PAPIRO%\"\n\t\t\t\t\t\t\t  \"Y VUELVE AQUI PARA%\"\n\t\t\t\t\t\t\t  \"HACER EL HECHIZO\";\n\n\tunsigned char text14 [] = \"VAYA INSISTENCIA, TE%\"\n\t\t\t\t\t\t\t  \"ABRO MI PIRAMIDE,%\"\n\t\t\t\t\t\t\t  \"MONTUNO! QUE CASI PA-%\"\n\t\t\t\t\t\t\t  \"RECES EL REY DE LOS%\"\n\t\t\t\t\t\t\t  \"HUNOS!\";\n\n\tunsigned char text15 [] = \"LO CONSIGUIO AL FIN!%\"\n\t\t\t\t\t\t\t  \"ENSAMBLADO EL PAPIRO%\"\n\t\t\t\t\t\t\t  \"SE DISPONE A LEER EL%\"\n\t\t\t\t\t\t\t  \"CONJURO NUESTRO BUEN%\"\n\t\t\t\t\t\t\t  \"RAMIRO.\";\n\n\tunsigned char text16 [] = \"DICE ASI:%\"\n\t\t\t\t\t\t\t  \"- 2 CEBOLLAS%\"\n\t\t\t\t\t\t\t  \"- PAPEL DEL CULO%\"\n\t\t\t\t\t\t\t  \"- PAN%\"\n\t\t\t\t\t\t\t  \"- FAIRY\";\n\n\tunsigned char text17 [] = \"EL POBRE VAMPIRO SE%\"\n\t\t\t\t\t\t\t  \"QUEDA CON CARA MONA:%\"\n\t\t\t\t\t\t\t  \"NO ES UN CONJURO,%\"\n\t\t\t\t\t\t\t  \"ES LA LISTA DEL%\"\n\t\t\t\t\t\t\t  \"MERCADONA.\";\n\n\tunsigned char text18 [] = \"YA QUE ME TRAES UNA%\"\n\t\t\t\t\t\t\t  \"OFRENDA, YO SOLTARE%\"\n\t\t\t\t\t\t\t  \"PRENDA...\";\n\n\tunsigned char text19 [] = \"YA TIENES UN OBJETO!%\"\n\t\t\t\t\t\t\t  \"USALO ANTES, CATETO.\";\n\n\tunsigned char text20 [] = \"Y YA TE ABRI. AHORA%\"\n\t\t\t\t\t\t\t  \"JUYE... JUYE!!\";\n\n\tunsigned char text21 [] = \"OH, QUE SUAVE ES!%\"\n\t\t\t\t\t\t\t  \"Y AHORA, PORFA, VETE%\"\n\t\t\t\t\t\t\t  \"QUE HARE CACA Y ME%\"\n\t\t\t\t\t\t\t  \"LIMPIARE EL OJETE\";\n\n\tunsigned char text22 [] = \"UNA FLAUTA DE FAKIR!%\"\n\t\t\t\t\t\t\t  \"CON FEO SU SONIDO%\"\n\t\t\t\t\t\t\t  \"EN SOLO UNOS MITUTOS%\"\n\t\t\t\t\t\t\t  \"YA ESTARE DORMIDO\";\n\n\tunsigned char text23 [] = \"OH, GUAPO VAMPIRILLO,%\"\n\t\t\t\t\t\t\t  \"RECIBO CON ALBOROTO%\"\n\t\t\t\t\t\t\t  \"TU BELLO REGALO: UNAS%\"\n\t\t\t\t\t\t\t  \"BRAGAS PA MI TOTO\";\n\n\tunsigned char text24 [] = \"QUE LUSTROSO QUEDARA%\"\n\t\t\t\t\t\t\t  \"EL CUERO DE MI ARNES%\"\n\t\t\t\t\t\t\t  \"IRE VISITAR A MARISA%\"\n\t\t\t\t\t\t\t  \"A CHUPARLE LOS PIES\";\n\n\tunsigned char text25 [] = \"SI SACAS LA MONEDA%\"\n\t\t\t\t\t\t\t  \"ENFADARAS A HORUS!%\"\n\t\t\t\t\t\t\t  \"YA SOLO TE QUEDA%\"\n\t\t\t\t\t\t\t  \"RASCARLE LOS OJUS!\";\n\n\tunsigned char text26 [] = \"SOY SONIA LA MOMIA%\"\n\t\t\t\t\t\t\t  \"GUARDIANA DE LA%\"\n\t\t\t\t\t\t\t  \"TERCERA CRIPTA\";\n\n\tunsigned char text27 [] = \"SOY CLEMENTE LA%\"\n\t\t\t\t\t\t\t  \"SERPIENTE,%\"\n\t\t\t\t\t\t\t  \"GUARDIAN DE LA%\"\n\t\t\t\t\t\t\t  \"CUARTA CRIPTA\";\n\n\tunsigned char text28 [] = \"SOY MARISA LA%\"\n\t\t\t\t\t\t\t  \"SACERDOTISA,%\"\n\t\t\t\t\t\t\t  \"GUARDIANA DE LA%\"\n\t\t\t\t\t\t\t  \"SEGUNDA CRIPTA\";\n\n\tunsigned char text29 [] = \"SOY GUSTAVO EL%\"\n\t\t\t\t\t\t\t  \"ESCLAVO,%\"\n\t\t\t\t\t\t\t  \"GUARDIAN DE LA%\"\n\t\t\t\t\t\t\t  \"PRIMERA CRIPTA\";\n\n\tunsigned char text30 [] = \"LOS TROZOS ESTAN%\"\n\t\t\t\t\t\t\t  \"EN CRIPTAS CERRADAS,%\"\n\t\t\t\t\t\t\t  \"TENDRAS QUE COMPLACER%\"\n\t\t\t\t\t\t\t  \"A SUS GUARDIANES\";\n\n\tunsigned char text31 [] = \"\\\"TE PILLE, LORITO!\\\",%\"\n\t\t\t\t\t\t\t  \"OYES A ALGUIEN GRITAR%\"\n\t\t\t\t\t\t\t  \"\\\"NO PIERDAS TU PORTE%\"\n\t\t\t\t\t\t\t  \"Y VUELVE A EMPEZAR!\\\"\";\n\n\tunsigned char text32 [] = \"CUIDADO CON EL OJO!%\"\n\t\t\t\t\t\t\t  \"SE HACE LA DORMIDA%\"\n\t\t\t\t\t\t\t  \"PERO SI TE VE%\"\n\t\t\t\t\t\t\t  \"TE CHUPA LA VIDA!\";\n\n\tunsigned char text33 [] = \"RAMON EL FARAON,%\"\n\t\t\t\t\t\t\t  \"TE INVITO A SU KELI%\"\n\t\t\t\t\t\t\t  \"Y ENTRE VINOS Y HUMO%\"\n\t\t\t\t\t\t\t  \"TE CONTO SU PELI...\";\n\n\tunsigned char text34 [] = \"SI JUNTAS 4 PARTES%\"\n\t\t\t\t\t\t\t  \"EL PODEWR DEL PAPIRO%\"\n\t\t\t\t\t\t\t  \"OCULTO EN ESTE SITIO%\"\n\t\t\t\t\t\t\t  \"SERA TUYO, RAMIRO\";\n\n\tunsigned char text35 [] = \"BUSCA A RAMON Y QUE%\"\n\t\t\t\t\t\t\t  \"CON SU ABRACADABRA%\"\n\t\t\t\t\t\t\t  \"NO SE HAGA EL REMOLON%\"\n\t\t\t\t\t\t\t  \"Y LA PIRAMIDE TE ABRA\";\n\n\tunsigned char text36 [] = \"ESTE ES EL ALTAR ROTO%\"\n\t\t\t\t\t\t\t  \"QUE NO TE DISCRIMINA%\"\n\t\t\t\t\t\t\t  \"Y SI LE TOCAS EL TOTO%\"\n\t\t\t\t\t\t\t  \"TE DA PAPEL DE COCINA\";\n\n\tunsigned char text37 [] = \"QUE HACES, ALOCADO?%\"\n\t\t\t\t\t\t\t  \"ESE PAPEL DE COCINA%\"\n\t\t\t\t\t\t\t  \"A MI CULO DELICADO%\"\n\t\t\t\t\t\t\t  \"LO HARIA FOSFATINA!\";\n\n\tunsigned char text38 [] = \"EL ALTAR NO CONTESTA\";\n\n\tunsigned char *texts [] = {\n\t\ttext0, \t\t\t\t\t\t\t\t// Bienvenida altar\n\t\ttext1, text2, text3, text4, \t\t// Altar describe objetos\n\t\ttext5, text6, text7, text8, \t\t// Guardianes mosqueados\n\t\ttext9, text10, text11, text12, \t\t// Presentación guardianes\n\t\ttext13, \t\t\t\t\t\t\t// Puedes pasar\n\t\ttext14, \t\t\t\t\t\t\t// Ramón el faraón\n\t\ttext15, text16, text17,\t\t\t\t// Final\n\t\ttext18, text19,\t\t\t\t\t\t// Más mensajes del altar\n\t\ttext20, \t\t\t\t\t\t\t// Ya te abrí.\n\t\ttext21, text22, text23, text24,\t\t// Gracias por el objeto\n\t\ttext25,\t\t\t\t\t\t\t\t// Cisterna\n\t\ttext26, text27, text28, text29, \t// Guardian de...\n\t\ttext30,\t\t\t\t\t\t\t\t// Tendras que complacer\n\t\ttext31,\t\t\t\t\t\t\t\t// Te pillé!\n\t\ttext32, \t\t\t\t\t\t\t// Advertencia Ramón\n\t\ttext33, text34, text35, \t\t\t// Intro\n\t\ttext36, text37, text38\t\t\t\t// Troleo papel de cocina\n\t};\n\n\tunsigned char talk_sounds [] = { 7, 11 };\n\tunsigned char redraw_after_text = 0;\n\n\t// Admiration signs (!)\n\t// Coordiantes are screen-absolute, precalculated.\n\t#define MAX_ADMIRATION_SIGNS 9\n\tunsigned char adm_s_n_pant [] = {  0,  2,  5,  6, 10, 13, 14, 19, 25};\n\tunsigned char adm_s_x [] =      {  6, 20, 22,  8, 16, 20,  6,  6,  6};\n\tunsigned char adm_s_y [] =      { 12, 14, 16, 12, 10, 16, 16,  4,  4};\n\n\t// Aux. functions\n\n\tvoid clear_gamearea (void) {\n\t\t// Tints game area black\n\t\t#asm\n\t\t\t\tld  hl, 22528 + 64\n\t\t\t\tld  de, 22528 + 65\n\t\t\t\tld  bc, 767 - 128\n\t\t\t\txor a\n\t\t\t\tld  (hl), a\n\t\t\t\tldir\n\t\t#endasm\n\t}\n\n\tvoid paint_water_strip (void) {\n\t\t// Paints a strip of character rda at rdy\n\t\t#asm\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tcp  VIEWPORT_Y+20\n\t\t\t\tret nc \t\t\t\t\t\t// Do not paint if rdy >= 20.\n\n\t\t\t\tld  c, VIEWPORT_X+2\n\t\t\t\tcall SPCompDListAddr\n\t\t\t\t\n\t\t\t\t// Now we have to write 30 chars\n\t\t\t\tld  b, 26\n\t\t\t\tld  a, (_rdi) \t\t\t\t// Which char\n\t\t\t\tld  c, 5 \t\t\t\t\t// Colour\n\t\t\t\n\t\t\t.paint_water_strip_loop\n\t\t\t\tld  (hl), c \t\t\t\t// Paint colour\n\t\t\t\tinc hl\n\n\t\t\t\tld  (hl), a\n\t\t\t\tinc hl\n\n\t\t\t\tinc hl\n\t\t\t\tinc hl\n\n\t\t\t\tdjnz paint_water_strip_loop\n\n\t\t\t\t// Now invalidate\n\t\t\t\tld  c, VIEWPORT_X\n\t\t\t\tld  e, VIEWPORT_X + 29\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tld  b, a\n\t\t\t\tld  d, a\n\t\t\t\tld  iy, fsClipStruct\n\t\t\t\tcall SPInvalidate\n\t\t#endasm\n\t}\n\n\tvoid draw_falling_block (void) {\n\t\t//draw_coloured_tile (VIEWPORT_X + (_trap_bx << 1), VIEWPORT_Y + (_trap_by << 1), _trap_bt);\n\t\t\n\t\t#asm\n\t\t\t\tld  a, (__trap_bx)\n\t\t\t\tsla a\n\t\t\t\tadd VIEWPORT_X\n\t\t\t\tld  (__x), a\n\n\t\t\t\tld  a, (__trap_by)\n\t\t\t\tsla a\n\t\t\t\tadd VIEWPORT_Y\n\t\t\t\tld  (__y), a\n\t\t\t\n\t\t\t\tld  a, (__trap_bt)\n\t\t\t\tld  (__t), a\n\n\t\t\t\tjp _draw_coloured_tile_do\t\n\t\t#endasm\n\t}\n\n\tvoid clear_temp_string (void) {\n\t\t#asm\n\t\t\t\tld  hl, _temp_string\n\t\t\t\tld  de, _temp_string+1\n\t\t\t\tld  bc, 23\n\t\t\t\tld  a, 32\n\t\t\t\tld  (hl), a\n\t\t\t\tldir\n\t\t#endasm\n\t}\n\n\tvoid redraw_from_buffer (void) {\n\t\t#asm\n\t\t\t\tld  a, VIEWPORT_X\n\t\t\t\tld  (__x), a\n\t\t\t\tld  a, VIEWPORT_Y\n\t\t\t\tld  (__y), a\n\t\t\t\t\n\t\t\t\txor a\n\t\t\t.redraw_from_buffer_loop\n\t\t\t\tld  (_gpit), a\n\n\t\t\t\tld  bc, (_gpit)\n\t\t\t\tld  b, 0\n\t\t\t\tld  hl, _map_buff\n\t\t\t\tadd hl, bc\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (__t), a\n\n\t\t\t\tcall _draw_coloured_tile_do\n\n\t\t\t\tld  a, (__x)\n\t\t\t\tadd a, 2\n\t\t\t\tcp  VIEWPORT_X + 30\n\t\t\t\tjr  nz, redraw_from_buffer_set_x\n\t\t\t\tld  a, (__y)\n\t\t\t\tadd a, 2\n\t\t\t\tld  (__y), a\n\t\t\t\tld  a, VIEWPORT_X\n\t\t\t.redraw_from_buffer_set_x\n\t\t\t\tld  (__x), a\n\n\t\t\t\tld  a, (_gpit)\n\t\t\t\tinc a\n\t\t\t\tcp  150\n\t\t\t\tjr  nz, redraw_from_buffer_loop\n\t\t#endasm\n\t}\n\n\tvoid sprite_remove_aid (void) {\n\t\tsaca_a_todo_el_mundo_de_aqui ();\n\t\t// sp_MoveSprAbs (sp_pinv, spritesClip, 0, 20+VIEWPORT_Y, 30+VIEWPORT_X, 0, 0);\n\t\t#asm\n\t\t\t\tld  ix, (_sp_pinv)\n\t\t\t\tld  iy, vpClipStruct\n\t\t\t\tld  bc, 0\n\t\t\t\tld  hl, 0xfefe\t// -2, -2\n\t\t\t\tld  de, 0\n\t\t\t\tcall SPMoveSprAbs\n\t\t#endasm\n\t\t\n\t\t// Validate whole screen so sprites stay on next update\n\t\t#asm\n\t\t\t\tLIB SPValidate\n\t\t\t\tld  c, VIEWPORT_X\n\t\t\t\tld  b, VIEWPORT_Y\n\t\t\t\tld  d, VIEWPORT_Y+19\n\t\t\t\tld  e, VIEWPORT_X+29\n\t\t\t\tld  iy, fsClipStruct\n\t\t\t\tcall SPValidate\n\t\t#endasm\t\t\t\t\n\t}\n\n\tvoid decorate_screen (void) {\n\t\t// Admiration (!)\n\t\t\n\t\tfor (rdi = 0; rdi < MAX_ADMIRATION_SIGNS; rdi ++) {\t\t\t\n\t\t\tif (adm_s_n_pant [rdi] == n_pant) {\n\t\t\t\tdraw_coloured_tile (adm_s_x [rdi], adm_s_y [rdi], 49);\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\n\t\t// Paint evil eye\n\t\tif (evil_eye_screen) {\n\t\t\tdraw_coloured_tile (EYE_X-2, EYE_Y, 28);\n\t\t\tdraw_coloured_tile (EYE_X, EYE_Y, 29);\n\t\t}\n\t}\n\n\tvoid show_text_box (unsigned char n) {\n\t\tsprite_remove_aid ();\n\n\t\tgp_gen = texts [n];\n\n\t\t// Text renderer will read the string and\n\t\t// build substrings for draw_text.\n\n\t\t//clear_temp_string ();\n\t\tdraw_text (4, 6, 40, temp_string);\n\t\trdy = 7;\n\n\t\twhile (1) {\n\t\t\t#asm\n\t\t\t\t\t// Fill buffer\n\t\t\t\t\tld  de, _temp_string + 1\n\t\t\t\t\tld  hl, (_gp_gen)\n\n\t\t\t\t.fill_buffer_loop\n\t\t\t\t\tld  a, (hl)\n\t\t\t\t\tor  a\n\t\t\t\t\tjr  z, fill_buffer_end\n\t\t\t\t\tcp  '%'\n\t\t\t\t\tjr  z, fill_buffer_end\n\n\t\t\t\t\tld  (de), a\n\n\t\t\t\t\tinc hl\n\t\t\t\t\tinc de\n\t\t\t\t\tjr  fill_buffer_loop\n\n\t\t\t\t.fill_buffer_end\n\t\t\t\t\tld  (_gp_gen), hl\n\t\t\t#endasm\n\n\t\t\tdraw_text (4, rdy ++, 40, temp_string);\n\t\t\tclear_temp_string ();\n\t\t\tdraw_text (4, rdy ++, 40, temp_string);\n\n\t\t\tsp_UpdateNow ();\n\t\t\tplay_sfx (talk_sounds [rand () & 1]);\n\n\t\t\t#ifdef MODE_128K_DUAL\n\t\t\t\tif (is128k) {\n\t\t\t\t\t#asm\n\t\t\t\t\t\t\tld  b, 20\n\t\t\t\t\t\t.textbox_delay\n\t\t\t\t\t\t\thalt\n\t\t\t\t\t\t\tdjnz textbox_delay\n\t\t\t\t\t#endasm\n\t\t\t\t}\n\t\t\t#endif\n\t\t\n\t\t\tif (*gp_gen == 0) break;\n\t\t\tgp_gen ++;\n\t\t}\n\n\t\twhile (any_key ()); while (!any_key ()); \n\t\tif (redraw_after_text) {\n\t\t\tredraw_from_buffer ();\n\t\t\thotspot_paint ();\n\t\t\tdecorate_screen ();\n\t\t\trender_all_sprites ();\n\t\t}\n\t\tredraw_after_text = 1;\n\t}\n\n\tvoid recuadrius (void) {\t\n\t\tsprite_remove_aid ();\t\t\t\n\t\tfor (rdi = 0; rdi < 10; rdi ++) {\n\t\t\tfor (rdx = rdi; rdx < 30 - rdi; rdx ++) {\n\t\t\t\t#asm\n\t\t\t\t\t\t// sp_PrintAtInv (VIEWPORT_Y + rdi, VIEWPORT_X + rdx, 71, 0);\n\t\t\t\t\t\tld  de, 0x4700\n\t\t\t\t\t\tld  a, (_rdx)\n\t\t\t\t\t\tadd VIEWPORT_X\n\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\tld  a, (_rdi)\n\t\t\t\t\t\tadd VIEWPORT_Y\n\t\t\t\t\t\tcall SPPrintAtInv\n\t\t\t\t\t\n\t\t\t\t\t\t// sp_PrintAtInv (VIEWPORT_Y + 19 - rdi, VIEWPORT_X + rdx, 71, 0);\n\t\t\t\t\t\tld  de, 0x4700\n\t\t\t\t\t\tld  a, (_rdx)\n\t\t\t\t\t\tadd VIEWPORT_X\n\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\tld  a, (_rdi)\n\t\t\t\t\t\tld  b, a\n\t\t\t\t\t\tld  a, VIEWPORT_Y + 19\n\t\t\t\t\t\tsub b\n\t\t\t\t\t\tcall SPPrintAtInv\n\t\t\t\t#endasm\n\n\t\t\t\tif (rdx < 19 - rdi) {\n\t\t\t\t\t#asm\n\t\t\t\t\t\t\t// sp_PrintAtInv (VIEWPORT_Y + rdx, VIEWPORT_X + rdi, 71, 0);\n\t\t\t\t\t\t\tld  de, 0x4700\n\t\t\t\t\t\t\tld  a, (_rdi)\n\t\t\t\t\t\t\tadd VIEWPORT_X\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_rdx)\n\t\t\t\t\t\t\tadd VIEWPORT_Y\n\t\t\t\t\t\t\tcall SPPrintAtInv\n\n\t\t\t\t\t\t\t// sp_PrintAtInv (VIEWPORT_Y + rdx, VIEWPORT_X + 29 - rdi, 71, 0);\n\t\t\t\t\t\t\tld  de, 0x4700\n\t\t\t\t\t\t\tld  a, (_rdi)\n\t\t\t\t\t\t\tld  b, a\n\t\t\t\t\t\t\tld  a, VIEWPORT_X + 29\n\t\t\t\t\t\t\tsub b\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_rdx)\n\t\t\t\t\t\t\tadd VIEWPORT_Y\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tcall SPPrintAtInv\n\t\t\t\t\t#endasm\n\t\t\t\t}\n\t\t\t}\n\t\t\t#asm\n\t\t\t\thalt\n\t\t\t#endasm\n\t\t\tsp_UpdateNow (0);\n\t\t}\n\t}\n\n\tvoid trap_kill (void) {\n\t\tsp_UpdateNow ();\n\t\tplay_sfx (10);\n\n\t\t#ifdef MODE_128K_DUAL\n\t\t\tif (is128k) {\n\t\t\t\t#asm\n\t\t\t\t\t\tld  b, 50\n\t\t\t\t\t.trap_kill_delay\n\t\t\t\t\t\thalt\n\t\t\t\t\t\tdjnz trap_kill_delay\n\t\t\t\t#endasm\n\t\t\t}\n\t\t#endif\n\t\t\n\t\tif (is128k) arkos_play_music (5);\n\t\tshow_text_box (31);\n\t\tsp_UpdateNow ();\n\t\t\n\t\t//player.life -= BLOCK_HIT; \n\t\tplayer.estado = EST_PARP;\n\t\tplayer.ct_estado = 50;\n\t\tplayer.vy = 0;\n\t\trecuadrius ();\n\t}\n\n\tvoid water_trap_setup (void) {\n\t\trdi = n_pant / 6;\n\n\t\t// Paint top\n\t\tif (rdi > 0) {\n\t\t\twater_top_door_x = (rdi & 1) ? 11 : 2;\n\t\t\tset_map_tile (water_top_door_x, 0, 6, 8);\n\t\t\tset_map_tile (water_top_door_x + 1, 0, 7, 8);\n\n\t\t\trdx = water_pushplates [rdi];\n\t\t\tset_map_tile (rdx >> 4, 0, 19, 8);\n\t\t\tset_map_tile (rdx & 15, 0, 19, 8);\n\t\t}\n\n\t\t// Paint bottom \n\t\tif (rdi < 4) {\n\t\t\trdx = (rdi & 1) ? 2 : 11;\n\t\t\tset_map_tile (rdx, 9, 46, 4);\n\t\t\tset_map_tile (rdx + 1, 9, 46, 4);\n\t\t}\n\n\t\twater_locks = 0;\n\t}\n\n\tvoid win_crypt (void) {\n\t\tif (is128k) arkos_play_music (1);\n\t\tPSCORE += SCORE_WIN_CRYPT;\n\t\tplayer.life += 10;\n\t}\n\n\t// Hooks\n\n\tvoid hook_system_inits (void) {\n\t\tsp_pinv = sp_CreateSpr (sp_MASK_SPRITE, 3, sprite_2_a, 3);\n\t\tsp_AddColSpr (sp_pinv, sprite_2_b);\n\t\tsp_AddColSpr (sp_pinv, sprite_2_c);\n\t\tpinv_current_frame = pinv_next_frame = sprite_2_a;\n\t}\n\n\tvoid hook_init_game (void) {\n\t\t/*\n\t\twater_level = 0; \n\t\tpinv = 0;\n\t\tofrendas_idx = 0;\n\t\tpofrendas = 0;\n\t\tpofrendas_old = 0xff;\n\t\topscore = 0xff;\n\t\t*/\n\n\t\t#asm\n\t\t\t\txor a\n\t\t\t\tld  (_water_level), a\n\t\t\t\tld  (_pinv), a \n\t\t\t\tld  (_ofrendas_idx), a \n\t\t\t\tld  (_pofrendas), a \n\t\t\t\tdec a \n\t\t\t\tld  (_pofrendas_old), a \n\t\t\t\tld  (_opscore), a\n\t\t#endasm\n\n\t\tPSCORE = 0;\n\t\t\n\t\t/*\n\t\tgpx = 160; player.x = 160<<6;\n\t\tn_pant = 13;\t\n\t\tpinv = 4; pinv_next_frame = object_cells [pinv];\n\t\tflags [6] = 1;\n\t\t*/\n\n\t\t#asm\n\t\t\t\tld b, 8\n\t\t\t\tld a, r \n\t\t\t\tld (_seed), a\n\n\t\t\t.shuffle_loop\n\t\t\t\tpush bc\n\t\t\t\tcall _rand\n\t\t\t\tpop  bc\n\t\t\t\tld  a, l\n\t\t\t\tand 3\n\t\t\t\tld  c, a\n\t\t\t\tpush bc\n\t\t\t\tcall _rand\n\t\t\t\tpop  bc\n\t\t\t\tld  a, l\n\t\t\t\tand 3\n\t\t\t\tld  d, 0\n\t\t\t\tld  e, a\n\t\t\t\tld  hl, _ofrendas_order\n\t\t\t\tadd hl, de\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (_rdi), a\n\t\t\t\tld  e, c\n\t\t\t\tpush hl\n\t\t\t\tld  hl, _ofrendas_order\n\t\t\t\tadd hl, de\n\t\t\t\tld  a, (hl)\n\t\t\t\tpop hl\n\t\t\t\tld  (hl), a\n\t\t\t\tld  a, (_rdi)\n\t\t\t\tld  hl, _ofrendas_order\n\t\t\t\tadd hl, de\n\t\t\t\tld  (hl), a\n\t\t\t\t\n\t\t\t\tdjnz shuffle_loop\n\t\t#endasm\n\n\t\tif (is128k) arkos_play_music (1);\n\t}\n\n\tvoid hook_init_mainloop (void) {\n\t}\n\n\tvoid hook_mainloop (void) {\n\t\tif (player.life > 99) player.life = 99;\n\n\t\t// Eye of horus\n\n\t\t/*\n\t\tif (evil_eye_screen) {\n\t\t\tif (evil_eye_counter) {\n\t\t\t\tevil_eye_counter --;\n\t\t\t} else {\n\t\t\t\tevil_eye_state ++; if (evil_eye_state == 5) evil_eye_state = 0;\n\t\t\t\tevil_eye_counter = evil_eye_state_cts [evil_eye_state];\n\t\t\t\tdraw_coloured_tile (EYE_X, EYE_Y, evil_eye_state_tiles [evil_eye_state]);\n\t\t\t\tscenery_info.evil_zone_active = (evil_eye_state == 2);\n\t\t\t}\n\t\t}\n\t\t*/\n\n\t\t#asm\n\t\t\t\tld  a, (_evil_eye_screen)\n\t\t\t\tor  a\n\t\t\t\tjr  z, eoh_done\n\n\t\t\t\tld  a, (_evil_eye_counter)\n\t\t\t\tor  a\n\t\t\t\tjr  z, eoh_counter_done\n\n\t\t\t\tdec a\n\t\t\t\tld  (_evil_eye_counter), a\n\t\t\t\tjr  eoh_done\n\n\t\t\t.eoh_counter_done\n\t\t\t\t// evil_eye_state ++; if (evil_eye_state == 5) evil_eye_state = 0;\n\n\t\t\t\tld  a, (_evil_eye_state)\n\t\t\t\tinc a\n\t\t\t\tcp  5\n\t\t\t\tjr  nz, eoh_reset_state_done\n\n\t\t\t\txor a\n\t\t\t.eoh_reset_state_done\n\t\t\t\tld  (_evil_eye_state), a\n\n\t\t\t\t// evil_eye_counter = evil_eye_state_cts [evil_eye_state];\n\n\t\t\t\tld  c, a\n\t\t\t\tld  b, 0\n\t\t\t\tld  hl, _evil_eye_state_cts\n\t\t\t\tadd hl, bc\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (_evil_eye_counter), a\n\n\t\t\t\t// draw_coloured_tile (EYE_X, EYE_Y, evil_eye_state_tiles [evil_eye_state]);\n\t\t\t\tld  a, EYE_X\n\t\t\t\tld  (__x), a\n\t\t\t\tld  a, EYE_Y\n\t\t\t\tld  (__y), a\n\t\t\t\tld  bc, (_evil_eye_state)\n\t\t\t\tld  b, 0\n\t\t\t\tld  hl, _evil_eye_state_tiles\n\t\t\t\tadd hl, bc\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (__t), a\n\t\t\t\tcall _draw_coloured_tile_do\n\n\t\t\t\tld  a, (_evil_eye_state)\n\t\t\t\tcp  2\n\t\t\t\tjr  z, eoh_ez_set1\n\n\t\t\t\txor a\n\t\t\t\tjr  eoh_ez_set\n\n\t\t\t.eoh_ez_set1\n\t\t\t\tld  a, 1\n\n\t\t\t.eoh_ez_set\n\t\t\t\tld  (_scenery_info+2), a \t\t// scenery_info.evil_zone_active\n\n\t\t\t.eoh_done\n\t\t#endasm\t\t\n\n\t\tsp_Border ((scenery_info.evil_zone_active & half_life) ? 2 : 0);\n\n\t\t// Block trap\n\n\t\t// To make trap active, we detect the player got a new obj.\n\t\tif (trap_screen && player.objs != objs_old) {\n\t\t\tif (is128k) arkos_stop_sound ();\n\t\t\tflags [10 + flags [15]] = 1;\n\t\t\ttrap_active = 1;\n\t\t\tseed = n_pant + 1;\n\t\t\t//player.life += BLOCK_HIT;\n\t\t\tscenery_info.allow_type_6 = 1;\n\t\t\tflags [COIN_FLAG] = 0;\n\t\t\t#asm\n\t\t\t\t\tld  hl, _trap_by\n\t\t\t\t\tld  de, _trap_by + 1\n\t\t\t\t\tld  bc, MAX_TRAP_BLOCKS - 1\n\t\t\t\t\tld  a, 0xff\n\t\t\t\t\tld  (hl), a\n\t\t\t\t\tldir\n\t\t\t#endasm\n\t\t\tif (trap_coins) {\n\t\t\t\tset_map_tile (13, 5, 0, 0);\n\t\t\t\tsp_UpdateNow ();\n\t\t\t\tplay_sfx (10);\n\t\t\t}\n\t\t\tif (is128k) arkos_play_music (2);\n\t\t}\n\n\t\tif (trap_active) {\t\t\t\n\t\t\t// throw a new block\n\t\t\tif ((rand () & TRAP_CHANCE) == 1) { \n\t\t\t\t#asm\n\t\t\t\t\t\tld  bc, MAX_TRAP_BLOCKS\n\t\t\t\t\t.trap_block_find_loop\n\t\t\t\t\t\tdec c\n\t\t\t\t\t\tld  hl, _trap_by\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\tcp  0xff\n\t\t\t\t\t\tjr  z, trap_block_create_new\n\n\t\t\t\t\t\txor a\n\t\t\t\t\t\tor  c\n\t\t\t\t\t\tjr  z, trap_block_find_done\n\t\t\t\t\t\tjr  trap_block_find_loop\n\n\t\t\t\t\t.trap_block_create_new\n\t\t\t\t\t\txor a\n\t\t\t\t\t\tld  (hl), a\n\n\t\t\t\t\t\tpush bc\n\t\t\t\t\t.trap_block_select_x\n\t\t\t\t\t\tcall _rand\n\n\t\t\t\t\t\tld  a, l\n\t\t\t\t\t\tand 0xf\n\t\t\t\t\t\tjr  z, trap_block_select_x\n\t\t\t\t\t\tcp  14\n\t\t\t\t\t\tjr  nc, trap_block_select_x\n\t\t\t\t\t\tpop bc\n\n\t\t\t\t\t\tld  hl, _trap_bx\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  (hl), a\n\n\t\t\t\t\t\tld  a, (_trap_coins)\n\t\t\t\t\t\tor  a\n\t\t\t\t\t\tjr  nz, trap_block_set_coins\n\n\t\t\t\t\t\tpush bc\n\t\t\t\t\t\tcall _rand\n\t\t\t\t\t\tpop bc\n\t\t\t\t\t\t\n\t\t\t\t\t\tld  a, l\n\t\t\t\t\t\tand 1\n\t\t\t\t\t\tadd 6\n\t\t\t\t\t\tjr  trap_block_write\n\n\t\t\t\t\t.trap_block_set_coins\n\t\t\t\t\t\tld  a, 50\n\n\t\t\t\t\t.trap_block_write\n\t\t\t\t\t\tld  hl, _trap_bt\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  (hl), a\n\n\t\t\t\t\t.trap_block_find_done\n\t\t\t\t#endasm\n\t\t\t}\n\n\t\t\t// Animate\n\t\t\tif (half_life) {\n\t\t\t\tfor (gpit = 0; gpit < MAX_TRAP_BLOCKS; gpit ++) {\n\n\t\t\t\t\t#asm\n\t\t\t\t\t\t\tld  bc, (_gpit)\n\t\t\t\t\t\t\tld  b, 0\n\n\t\t\t\t\t\t\tld  hl, _trap_by\n\t\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\t\tld  (__trap_by), a\n\n\t\t\t\t\t\t\tld  hl, _trap_bx\n\t\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\t\tld  (__trap_bx), a\n\n\t\t\t\t\t\t\tld  hl, _trap_bt\n\t\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\t\tld  (__trap_bt), a\n\t\t\t\t\t#endasm\n\t\t\t\t\t\n\t\t\t\t\tif (_trap_by != 0xff) {\n\t\t\t\t\t\trda = _trap_bx + (_trap_by << 4) - _trap_by;\n\n\t\t\t\t\t\t// Make fall\n\t\t\t\t\t\tif (_trap_by)\t\t\t\t\n\t\t\t\t\t\t\tset_map_tile (_trap_bx, _trap_by, map_buff [rda], 0);\n\t\t\t\t\t\t\n\t\t\t\t\t\t_trap_by ++; rda += 15;\n\n\t\t\t\t\t\trdx = (gpx + 8) >> 4; rdy = (gpy + 8) >> 4;\n\n\t\t\t\t\t\tif (rdx == _trap_bx && rdy == _trap_by && trap_coins) {\n\t\t\t\t\t\t\tflags [COIN_FLAG] ++;\n\t\t\t\t\t\t\tplay_sfx (5);\n\t\t\t\t\t\t\tplayer.life += COINS_REFILL;\n\t\t\t\t\t\t\t_trap_by = 0xff;\n\t\t\t\t\t\t} else if (map_attr [rda] == 1) {\n\t\t\t\t\t\t\t_trap_by = 0xff;\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\tdraw_falling_block ();\n\t\t\t\t\t\t\n\t\t\t\t\t\t\tif (map_attr [rda + 15] & 12) {\n\t\t\t\t\t\t\t\tif (rdx == _trap_bx && rdy == _trap_by) {\n\t\t\t\t\t\t\t\t\t//if (player.estado != EST_PARP) {\n\t\t\t\t\t\t\t\t\t\t// Crushed!\n\t\t\t\t\t\t\t\t\t\ttrap_kill ();\n\n\t\t\t\t\t\t\t\t\t\t// Reenter & reset\n\t\t\t\t\t\t\t\t\t\thotspots [n_pant].act = 1;\n\t\t\t\t\t\t\t\t\t\tplayer.objs --;\n\t\t\t\t\t\t\t\t\t\ton_pant = 0xff;\n\t\t\t\t\t\t\t\t\t\tflags [10 + flags [15]] = 0;\n\t\t\t\t\t\t\t\t\t\ttrap_active = 0;\n\t\t\t\t\t\t\t\t\t\tbreak;\n\t\t\t\t\t\t\t\t\t/*\n\t\t\t\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\t\t\t\tplayer.y -= 16<<6;\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t*/\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\tmap_attr [rda] = comportamiento_tiles [_trap_bt];\n\t\t\t\t\t\t\t\tmap_buff [rda] = _trap_bt;\n\t\t\t\t\t\t\t\t_trap_by = 0xff; \n\t\t\t\t\t\t\t}\n\n\t\t\t\t\t\t}\n\n\t\t\t\t\t\ttrap_by [gpit] = _trap_by;\n\n\t\t\t\t\t\t// Finally\n\t\t\t\t\t\tif (flags [COIN_FLAG] == TRAP_COINS_MAX) {\n\t\t\t\t\t\t\t// Deativate trap!\n\t\t\t\t\t\t\tscenery_info.allow_type_6 = 0;\n\t\t\t\t\t\t\tplay_sfx (8);\n\t\t\t\t\t\t\ttrap_active = 0;\n\t\t\t\t\t\t\tif (is128k) arkos_stop_sound ();\n\t\t\t\t\t\t\tdraw_scr_background ();\n\t\t\t\t\t\t\twin_crypt ();\n\t\t\t\t\t\t} \n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t// Carrying object\n\t\trdy = gpy - 4;\n\t\tif (pinv) {\n\t\t\tif (player.facing) rdx = gpx - 4; else rdx = gpx + 4;\n\t\t} else rdx = 240;\n\n\t\t/*\n\t\tsp_MoveSprAbs (sp_pinv, spritesClip, pinv_next_frame - pinv_current_frame, \n\t\t\tVIEWPORT_Y + (rdy >> 3), VIEWPORT_X + (rdx >> 3), rdx & 7, rdy & 7);\n\t\t*/\n\t\t#asm\n\t\t\t\tld  ix, (_sp_pinv)\n\t\t\t\tld  iy, vpClipStruct\n\n\t\t\t\tld  hl, (_pinv_next_frame)\t\t\t// player.next_frame\n\t\t\t\tld  de, (_pinv_current_frame) \t\t\t// player.current_frame\n\t\t\t\tor  a\n\t\t\t\tsbc hl, de\n\t\t\t\tld  b, h\n\t\t\t\tld  c, l\n\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tadd VIEWPORT_Y\n\t\t\t\tld  h, a \n\n\t\t\t\tld  a, (_rdx)\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tadd VIEWPORT_X\n\t\t\t\tld  l, a \n\t\t\t\t\n\t\t\t\tld  a, (_rdx)\n\t\t\t\tand 7\n\t\t\t\tld  d, a\n\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tand 7\n\t\t\t\tld  e, a\n\n\t\t\t\tcall SPMoveSprAbs\n\t\t#endasm\n\n\t\tpinv_current_frame = pinv_next_frame;\n\n\t\t// Offers\n\t\tif (latest_hotspot == 2) {\n\t\t\tpofrendas ++;\n\t\t\tplay_sfx (5);\n\t\t\t\n\t\t\t// Activate water trap\n\t\t\tif (n_pant == 29) {\n\t\t\t\twater_level = 25;\n\t\t\t\twater_trap_setup ();\n\t\t\t\tif (is128k) arkos_play_music (2);\n\t\t\t}\n\n\t\t\tPSCORE += SCORE_GET_COIN;\n\t\t}\n\n\t\tif (pofrendas != pofrendas_old) {\n\t\t\tdraw_2_digits (OFRENDAS_X, OFRENDAS_Y, pofrendas);\n\t\t\tpofrendas_old = pofrendas;\n\t\t}\n\n\t\tif (flags [COIN_FLAG] != coins_old && trap_coins) {\n\t\t\tdraw_2_digits (C_COINS_X, C_COINS_Y, TRAP_COINS_MAX - flags [COIN_FLAG]);\n\t\t\tcoins_old = flags [COIN_FLAG];\n\t\t}\n\n\t\tif (PSCORE != opscore) {\n\t\t\tdraw_2_digits (SCORE_X, SCORE_Y, PSCORE);\n\t\t\topscore = PSCORE;\n\t\t}\n\n\t\t// Water level\n\t\tif (water_level) {\n\n\t\t\t// Move water\n\t\t\tif (water_ct) water_ct --; else {\n\t\t\t\twater_level --;\n\t\t\t\trdy = water_level + VIEWPORT_Y; rdi = 62; paint_water_strip ();\n\t\t\t\trdy ++; rdi = 63; paint_water_strip ();\n\t\t\t\twater_ct = WATER_PERIOD;\n\t\t\t}\n\n\t\t\t// Detect collision\n\t\t\tif (gpy <= 144 && (water_level << 3) <= gpy) {\n\t\t\t\ttrap_kill ();\n\n\t\t\t\t// Reset trap!\n\t\t\t\twater_level = 0;\n\t\t\t\thotspots [29].act = 1;\n\t\t\t\tpofrendas --;\n\t\t\t\tPSCORE -= SCORE_GET_COIN;\n\t\t\t\tn_pant = 5;\n\t\t\t\tgpy = player.y = 0;\n\t\t\t\tgpx = 120; player.x = 120<<6;\n\t\t\t\tif (is128k) arkos_play_music (1);\t\t\t\t\n\t\t\t}\n\n\t\t\t// Detect horus tiles\n\t\t\trdx = (gpx + 8) >> 4; rdy = (gpy - 2) >> 4;\n\t\t\tif (player.ceiling && qtile (rdx, rdy) == 19) {\n\t\t\t\twater_locks ++;\n\t\t\t\tset_map_tile (rdx, rdy, 11, 8);\n\t\t\t\tsp_UpdateNow ();\n\t\t\t\tplay_sfx (5);\n\t\t\t\tif (water_locks == 2) {\n\t\t\t\t\t// Open trap!\n\t\t\t\t\tset_map_tile (water_top_door_x, 0, 0, 0);\n\t\t\t\t\tset_map_tile (water_top_door_x + 1, 0, 0, 0);\n\t\t\t\t\tsp_UpdateNow ();\n\t\t\t\t\tplay_sfx (8);\n\t\t\t\t}\n\t\t\t}\n\t\t}\n\n\t\t// Intro \n\t\tif (n_pant == 12 && flags [5] == 0 && player.possee) {\n\t\t\tflags [5] = 1;\n\t\t\trender_all_sprites (); \n\t\t\tsp_UpdateNow ();\n\t\t\tdo_extern_action (2);\n\t\t}\n\t}\n\n\tvoid hook_entering (void) {\t\t\n\t\t/*\n\t\tevil_eye_screen = map_behaviours [n_pant] & 2;\n\t\ttrap_screen = map_behaviours [n_pant] & 4;\n\t\ttrap_coins = map_behaviours [n_pant] & 8;\n\t\t*/\n\t\t#asm\n\t\t\t\tld  bc, (_n_pant)\n\t\t\t\tld  b, 0\n\t\t\t\tld  hl, _map_behaviours\n\t\t\t\tadd hl, bc\n\t\t\t\tld  c, (hl)\n\n\t\t\t\tld  a, c\n\t\t\t\tand 2\n\t\t\t\tld  (_evil_eye_screen), a\n\n\t\t\t\tld  a, c\n\t\t\t\tand 4\n\t\t\t\tld  (_trap_screen), a\n\n\t\t\t\tld  a, c\n\t\t\t\tand 8\n\t\t\t\tld  (_trap_coins), a\t\t\n\t\t#endasm\n\n\t\t/*\n\t\tscenery_info.evil_zone_active = 0;\n\t\tscenery_info.allow_type_6 = 0;\n\t\tevil_eye_counter = 0;\n\t\tevil_eye_state = 2;\n\t\t*/\n\n\t\t#asm\n\t\t\t\txor a\n\t\t\t\tld  (_scenery_info+2), a \t\t// scenery_info.evil_zone_active\n\t\t\t\tld  (_scenery_info+3), a \t\t// scenery_info.allow_type_6\n\t\t\t\tld  (_evil_eye_counter), a \n\t\t\t\tld  a, 2\n\t\t\t\tld  (_evil_eye_state), a\n\t\t#endasm\n\n\t\t// Paint eye and admiration bubbles\n\t\tdecorate_screen ();\n\n\t\tif (trap_active) win_crypt ();\n\t\ttrap_active = 0;\n\n\t\t// Water level:\n\t\tif (water_level) {\n\t\t\tplayer.vy = -PLAYER_MAX_VY_SALTANDO;\n\t\t\tplayer.y = 136<<6; gpy = 136;\n\t\t\twater_trap_setup ();\n\t\t\t\n\t\t\tif (n_pant == 5) {\n\t\t\t\twater_level = 0;\n\t\t\t\tif (is128k) arkos_play_music (1);\n\t\t\t} else water_level = 25;\n\t\t}\n\t}\n#endif\n\n#ifdef ENABLE_CUSTOM_ENEMS\n\n\tvoid extra_enems_init (void) {\n\t}\n\n\tvoid extra_enems_move (void) {\t\t\n\t}\n\n\tvoid extra_enems_checks (void) {\n\t}\n\n\tvoid extra_enems_killed (void) {\n\t}\n\t\n#endif\n",
+			"file": "examples/ramiro4/dev/custom.h",
+			"file_size": 27150,
+			"file_write_time": 132637499994733462,
+			"settings":
+			{
+				"buffer_size": 25920,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "// MTE MK1 v4.8\n// Copyleft 2010-2013, 2020-2021 by The Mojon Twins\n\n// definitions.h\n// Contains type definitions and global variables\n\n#define EST_NORMAL \t\t\t\t0\n#define EST_PARP \t\t\t\t2\n#define EST_MUR \t\t\t\t4\n#define EST_DIZZY\t\t\t\t8\n#define EST_FRIGOABABOL \t\t16\n#define sgni(n)\t\t\t\t\t((n) < 0 ? -1 : 1)\n#define min(a,b)\t\t\t\t((a) < (b) ? (a) : (b))\n#define ctileoff(n) \t\t\t((n)>0) //(n > 0 ? 1 : 0)\n#define saturate(n)\t\t\t\t((n) < 0 ? 0 : (n))\n\n#define TYPE_6_IDLE \t\t\t0\n#define TYPE_6_PURSUING\t\t\t1\n#define TYPE_6_RETREATING\t\t2\n\n#define ENEM_PARALYZED \t\t\t32\n\n#define SWORD_TYPE_RIGHT \t\t0\n#define SWORD_TYPE_LEFT \t\t1\n#define SWORD_TYPE_UP \t\t\t2\n#define SWORD_TYPE_DOWN \t\t3\n\n#define MAX_FALLING_BOXES \t\t8\n#define MAX_BREAKABLE \t\t\t4\n\n#define WALL_LEFT \t\t\t\t1\n#define WALL_RIGHT \t\t\t\t2\n\n#define GENITAL_FACING_RIGHT \t0\n#define GENITAL_FACING_LEFT\t\t1\n#define GENITAL_FACING_UP \t\t2\n#define GENITAL_FACING_DOWN \t3\n\n#define HOTSPOT_TYPE_OBJECT \t1\n#define HOTSPOT_TYPE_KEY \t\t2\n#define HOTSPOT_TYPE_REFILL \t3\n\ntypedef struct {\n\tint x, y, cx;\t\t\t\t\t\t\t\t\t\t// 0, 2, 4\n\tint vx, vy; \t\t\t\t\t\t\t\t\t\t// 6, 8\n\tchar g, ax, rx; \t\t\t\t\t\t\t\t\t// 10, 11, 12\n\tunsigned char salto, cont_salto; \t\t\t\t\t// 13, 14\n\tunsigned char *current_frame, *next_frame; \t\t\t// 15, 17\n\tunsigned char saltando; \t\t\t\t\t\t\t// 19\n\tunsigned char frame, subframe, facing; \t\t\t\t// 20, 21, 22\n\tunsigned char estado; \t\t\t\t\t\t\t\t// 23\n\tunsigned char ct_estado; \t\t\t\t\t\t\t// 24\n\tunsigned char gotten; \t\t\t\t\t\t\t\t// 25\n\tunsigned char possee; \t\t\t\t\t\t\t\t// 26\n\tchar objs, keys; \t\t\t\t\t\t\t\t\t// 27, 28\n\tint life; \t\t\t\t\t\t\t\t\t\t\t// 29\n\tunsigned char fuel; \t\t\t\t\t\t\t\t// 31\n\tunsigned char killed; \t\t\t\t\t\t\t\t// 32\n\tunsigned char disparando; \t\t\t\t\t\t\t// 33\n\tunsigned char killingzone_framecount; \t\t\t\t// 34\n\tunsigned char killingzone_beepcount; \t\t\t\t// 35\n\tunsigned char is_dead; \t\t\t\t\t\t\t\t// 36\n\tunsigned char ceiling; \t\t\t\t\t\t\t\t// 37\n\tunsigned char grab_block; \t\t\t\t\t\t\t// 38\n\tsigned int max_vx; \t\t\t\t\t\t\t\t\t// 39\n\tunsigned char hovering; \t\t\t\t\t\t\t// 41\n\tunsigned char just_hovered; \t\t\t\t\t\t// 42\n\tunsigned char just_jumped;\t\t\t\t\t\t\t// 43\n} INERCIA;\n\ntypedef struct {\n\tunsigned char show_coins;\t\n\tunsigned char evil_kills_slowly;\n\tunsigned char evil_zone_active;\n\tunsigned char allow_type_6;\n\t#ifdef MAKE_TYPE_6\n\t\tunsigned char make_type_6;\n\t#endif\n} SCENERY_INFO;\n\ntypedef struct {\n\tunsigned char act, x, y;\n} FALLINGBOX;\n\n// Controller\n\nstruct sp_UDK keys = {\n\t0x017f, // .fire\n\t0x01df, // .right\n\t0x02df, // .left\n\t0x01fd, // .down\n\t0x01fb\t// .up\n};\nvoid *joyfunc;\n\n#ifdef SCRIPTING_KEY_M\n\tint key_m = 0x047f;\n#endif\n\n#ifdef USE_SUICIDE_KEY\n\tint key_s = 0x02fd;\n#endif\n\nunsigned int key_1 = 0x01f7;\nunsigned int key_2 = 0x02f7;\nunsigned int key_3 = 0x04f7;\n\n// System\n\nvoid *my_malloc(uint bytes) { return sp_BlockAlloc(0); }\nvoid *u_malloc = my_malloc;\nvoid *u_free = sp_FreeBlock;\n\n// Sprite structs\n\nstruct sp_SS *sp_player;\nstruct sp_SS *sp_moviles [MAX_ENEMS];\n#ifdef PLAYER_CAN_FIRE\n\tstruct sp_SS *sp_bullets [MAX_BULLETS];\n#endif\n#ifdef ENABLE_SWORD\n\tstruct sp_SS *sp_sword;\n#endif\n\nstruct sp_Rect spritesClipValues = { VIEWPORT_Y, VIEWPORT_X, 20, 30 };\nstruct sp_Rect *spritesClip;\n\n#asm\n\t.fsClipStruct defb 0, 24, 0, 32\n\t.vpClipStruct defb VIEWPORT_Y, VIEWPORT_Y + 20, VIEWPORT_X, VIEWPORT_X + 30\n#endasm\n\n// Player\n\nINERCIA player;\n#ifdef PLAYER_CAN_FIRE\n\tunsigned char bullets_x [MAX_BULLETS];\n\tunsigned char bullets_y [MAX_BULLETS];\n\tsigned char bullets_mx [MAX_BULLETS];\n\tunsigned char bullets_estado [MAX_BULLETS];\n#endif\nsigned int ptgmx, ptgmy;\n\n// Enemies\n\nunsigned char en_an_frame [MAX_ENEMS]\t\t\t\t@ 23600;\nunsigned char en_an_count [MAX_ENEMS]\t\t\t\t@ (23600 + MAX_ENEMS);\nunsigned char *en_an_current_frame [MAX_ENEMS]\t\t@ (23600 + MAX_ENEMS*2);\nunsigned char *en_an_next_frame [MAX_ENEMS]\t\t\t@ (23600 + MAX_ENEMS*4);\nunsigned char en_an_morido [MAX_ENEMS] \t\t\t\t@ (23600 + MAX_ENEMS*6);\nsigned int en_an_x [MAX_ENEMS] \t\t\t\t\t\t@ (23600 + MAX_ENEMS*7);\nsigned int en_an_y [MAX_ENEMS]\t\t\t\t\t\t@ (23600 + MAX_ENEMS*9);\nsigned int en_an_vx [MAX_ENEMS]\t\t\t\t\t\t@ (23600 + MAX_ENEMS*11);\nsigned int en_an_vy [MAX_ENEMS]\t \t\t\t\t\t@ (23600 + MAX_ENEMS*13);\nunsigned char en_an_fanty_activo [MAX_ENEMS] \t\t@ (23600 + MAX_ENEMS*15);\nunsigned char en_an_state [MAX_ENEMS]\t\t\t\t@ (23600 + MAX_ENEMS*16);\nunsigned char en_an_ff [MAX_ENEMS] \t\t\t\t\t@ (23600 + MAX_ENEMS*17);\nunsigned char en_an_base_frame [MAX_ENEMS] \t\t\t@ (23600 + MAX_ENEMS*18);\n\nunsigned char enoffs;\nunsigned char en_j, enoffsmasi, en_x, en_y, en_xx, en_yy;\nunsigned char en_cx, en_cy;\nunsigned char en_ccx, en_ccy;\n// Only one enemy may hurt the player at once, so we need this flag:\nunsigned char en_tocado = 0; \nunsigned char _en_x, _en_y, _en_x1, _en_y1, _en_x2, _en_y2;\nsigned char _en_mx, _en_my;\nunsigned char _en_t, _en_life;\nunsigned char *_baddies_pointer;\n\n#if defined ENABLE_CODE_HOOKS\n\tunsigned char enemy_died;\n\tunsigned char enemy_killer;\n\tunsigned char game_loop_flag;\n#endif\n\n// Tile behaviour array and tile array for the current screen\n\nunsigned char map_attr [150] @ 23300;\nunsigned char map_buff [150] @ 23450;\n\n// Hotspot related shortcut variables. hotspot_x and hotspot_y contain\n// the pixel coordinates of the current screen hotspot.\n// If hotspot is empty / deactivated, they are set to (240, 240),\n// which is always out of the screen.\n\nunsigned char hotspot_x;\nunsigned char hotspot_y;\nunsigned char hotspot_t;\nunsigned char orig_tile;\t// Original background tile\n\n#ifdef ENABLE_CODE_HOOKS\n\tunsigned char latest_hotspot;\t\n#endif\n\n// Game flow\n\n#ifdef MODE_128K_DUAL\n\tunsigned char is128k;\n#endif\n\nunsigned char isrc           @ 23296;\nunsigned char ay_player_on   @ 23297;\n\n#ifndef WIN_ON_SCRIPTING\n\t#ifdef SCR_FIN\n\t\tunsigned char pant_final = SCR_FIN;\n\t#endif\n#endif\nunsigned char n_pant, on_pant;\n\nunsigned char f_zone_ac;\nunsigned char fzx1, fzx2, fzy1, fzy2;\n\n// Scenery status\n\n#if (defined(USE_COINS) && defined(COINS_DEACTIVABLE)) || defined (USE_TYPE_6) || !defined (DEACTIVATE_EVIL_ZONE)\n\tSCENERY_INFO scenery_info; \n#endif\t\n#define MAX_SCREENS (MAP_W*MAP_H)\n\n// Flags are now in the main engine\n\nunsigned char flags [MAX_FLAGS];\n\n// Boxes\n\n#ifdef PLAYER_PUSH_BOXES\n\tunsigned char x0, y0, x1, y1;\n\tunsigned char boxx, boyy;\n#endif\n\n// Falling boxes\n\n#if defined(FALLING_BOXES) && defined(PLAYER_PUSH_BOXES)\n\tFALLINGBOX fallingboxbuffer [MAX_FALLING_BOXES];\n\tunsigned char fall_frame_counter;\n#endif\n\n// Sword\n\n#ifdef ENABLE_SWORD\n\tunsigned char *s_current_frame, *s_next_frame;\n\tunsigned char s_on, s_type;\n\tunsigned char s_x, s_y, s_frame;\n\tunsigned char s_hit_x, s_hit_y;\n\n\tunsigned char swoffs_x [] = {8, 10, 12, 14, 16, 16, 14, 13, 10};\n\t#ifndef SWORD_STAB\n\t\tunsigned char swoffs_y [] = {2,  2,  2, 3,  4,  4,  5,  6,  7};\n\t#endif\n#endif\n\n// Breakable\n\n#ifdef ENABLE_BREAKABLE\n\tunsigned char process_breakable;\n\tunsigned char b_f [MAX_BREAKABLE];\n\tunsigned char b_x [MAX_BREAKABLE];\n\tunsigned char b_y [MAX_BREAKABLE];\n#endif\n\n// Aux\n\nunsigned int asm_int;\nunsigned int seed;\nunsigned char half_life;\nunsigned char jetpac_frame_counter;\nunsigned char playing;\nunsigned char maincounter;\nunsigned char objs_old, keys_old, life_old, killed_old, item_old, ezg_old;\nunsigned char coins_old;\n#ifdef REENTER_ON_ALL_OBJECTS\n\tunsigned char reentered;\n#endif\nunsigned char success;\nunsigned char rdi;\nsigned int rdj;\nunsigned char rdx, rdy;\nunsigned char gpit, enit, pad0, pad1, pad_this_frame;\nunsigned char gpx, gpy, gpxx, gpyy;\nint gpcx, gpcy;\nunsigned char rdd, rdt1, rdt2;\nunsigned int idx;\nunsigned char _x, _y, _t, _n;\nunsigned char wall;\n\n#if defined RLE_MAP\n\tunsigned char rdc, rdn;\n#endif\n\n#if defined TWO_SETS || defined TWO_SETS_REAL\n\tunsigned char tileoffset;\n#endif\n\n#ifdef MAPPED_TILESETS\n\tunsigned char *tileset_mappings;\n#endif\n\n#ifdef RANDOM_RESPAWN\n\tsigned char rds;\n#endif\n\nunsigned char ptx1, ptx2, pty1, pty2;\n\t\nunsigned char pti, ptj;\nunsigned char *gp_gen, *gp_gen_org, *gp_gen_alt;\nunsigned char t_alt;\nunsigned char prxx, pryy;\n\n#ifdef ENABLE_ANIMATED_TILES\n\tunsigned char *animated_ptr;\n#endif\n\nunsigned char bitmask [] = {\n\t1, 2, 4, 8, 16, 32, 64, 128\n};\n\n#ifndef PLAYER_MOGGY_STYLE\n\tunsigned char button_jump;\n#endif\n\n// Prototypes\n\nvoid fall_box (void);\nvoid move_tile (unsigned char act);\nvoid init_falling_box_buffer (void);\nunsigned char can_move_box (void);\nvoid do_extern_action (unsigned char n);\nvoid saca_a_todo_el_mundo_de_aqui (void);\nvoid render_all_sprites (void);\nvoid hotspot_paint (void);\nvoid draw_scr_background (void);\nvoid draw_scr (void);\nvoid init_player_values (void); \nunsigned char rand (void);\nunsigned char player_hidden (void);\nvoid espera_activa (int espera);\n",
+			"file": "examples/ramiro4/dev/definitions.h",
+			"file_size": 8809,
+			"file_write_time": 132630252091462808,
+			"settings":
+			{
+				"buffer_size": 8471,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 31 files for \"pti\"\n\nC:\\git\\MK1\\examples\\ramiro4\\dev\\aplib.h:\n   10  ; original source by dwedit\n   11  ; very slightly adapted by utopian\n   12: ; optimized by Metalbrain\n   13  \n   14  ;hl = source\n\nC:\\git\\MK1\\examples\\ramiro4\\dev\\boxes.h:\n  209  \t\t\t\t\t\t\t\t\t\t\tplayer.killed ++;\n  210  \n  211: \t\t\t\t\t\t\t\t\t\t\t#ifdef ACTIVATE_SCRIPTING\n  212  \t\t\t\t\t\t\t\t\t\t\t\tscript = f_scripts [max_screens + 2];\n  213  \t\t\t\t\t\t\t\t\t\t\t\trun_script ();\n\nC:\\git\\MK1\\examples\\ramiro4\\dev\\churromain.c:\n   11  \t\tLIB SPCompDListAddr\n   12  \t\tLIB SPMoveSprAbs\n   13: \t\tLIB SPTileArray\t\n   14  #endasm\n   15  \n   ..\n   74  \t#endif\n   75  #endif\n   76: #ifdef ACTIVATE_SCRIPTING\n   77  \t#include \"msc-config.h\"\n   78  #endif\n   ..\n   86  #include \"printer.h\"\n   87  #include \"custom.h\"\n   88: #ifdef ACTIVATE_SCRIPTING\n   89  \t#include \"msc.h\"\n   90  #endif\n\nC:\\git\\MK1\\examples\\ramiro4\\dev\\config.h:\n   69  #define DEACTIVATE_REFILLS\t\t\t\t\t// If defined, no refills.\n   70  //#define LEGACY_REFILLS \t\t\t\t\t// Legacy mode: refills appear in place of collected items/keys\n   71: #define MAX_FLAGS\t\t\t\t\t21\t\t// Number of flags. For scripting and stuff.\n   72  //#define PLAYER_DIZZY \t\t\t\t\t\t// The Hobbit\n   73  #define ENEMIES_LIFE_GAUGE\t\t\t1\t\t// Amount of shots/hits needed to kill enemies.\n   ..\n   87  //#define COIN_TILE_DEACT_SUBS\t\t0\t\t// Substitute with this tile if coins are OFF.\n   88  //#define COINS_DEACTIVABLE\t\t\t\t\t// Coins can be hidden.\n   89: //#define COINS_SCRIPTING \t\t\t\t\t// Run script when player gets coin\n   90  //#define COINS_PERSISTENT\t \t\t\t// Turns on PERSISTENCE which takes 20*MAP_W*MAP_H bytes\n   91  \n   ..\n  209  //#define ENABLE_MARRULLERS \t\t\t\t// Enable MARRULLERS, enemy type 11-14\n  210  \n  211: // Scripting\n  212  // ---------\n  213  \n  214: #define ACTIVATE_SCRIPTING\t\t\t\t\t// Activates msc scripting and flag related stuff.\n  215: #define WIN_ON_SCRIPTING\t\t\t\t\t// Game can only be won using WIN GAME in the script\n  216: #define SCRIPTING_DOWN\t\t\t\t\t\t// Use DOWN as the action key.\n  217  //#define COUNT_KILLABLE_ON\t\t\t2\t\t// Count killable enemies on flag #N (per screen basis)\n  218: //#define SCRIPTING_KEY_M\t\t\t\t\t// Use M as the action key instead.\n  219  //#define OBJECTS_ON_VAR\t\t\t2\t\t// If defined, only show objects if var # is set.\n  220  //#define OBJECT_COUNT\t\t\t\t2\t\t// Defines which FLAG will be used to store the object count.\n  ...\n  280  // ITEM_SHOW_X, ITEM_SHOW_Y.\n  281  \n  282: //#define PLAYER_SHOW_ITEM\t\t\t\t\t// If defined, current item is shown (scripting needed)\n  283  //#define ITEM_IN_FLAG\t\t\t\t4\t\t// Which flag is used to store current item.\n  284  //#define ITEM_FIRST_TILE\t\t\t17\t\t// First tile in tileset representing an object\n\nC:\\git\\MK1\\examples\\ramiro4\\dev\\definitions.h:\n   94  void *joyfunc;\n   95  \n   96: #ifdef SCRIPTING_KEY_M\n   97  \tint key_m = 0x047f;\n   98  #endif\n   ..\n  203  unsigned char ay_player_on   @ 23297;\n  204  \n  205: #ifndef WIN_ON_SCRIPTING\n  206  \t#ifdef SCR_FIN\n  207  \t\tunsigned char pant_final = SCR_FIN;\n  ...\n  304  unsigned char ptx1, ptx2, pty1, pty2;\n  305  \t\n  306: unsigned char pti, ptj;\n  307  unsigned char *gp_gen, *gp_gen_org, *gp_gen_alt;\n  308  unsigned char t_alt;\n\nC:\\git\\MK1\\examples\\ramiro4\\dev\\engine.h:\n  838  \t\tplay_sfx (5);\n  839  \n  840: \t\t#if defined ACTIVATE_SCRIPTING && defined COINS_SCRIPTING\n  841  \t\t\t// Run f_script #MAX_SCREENS + 1\n  842  \t\t\tscript = f_scripts [MAX_SCREENS + 1];\n  ...\n 3508  \tplayer.keys = \t\t0;\n 3509  \tplayer.killed = \t0;\n 3510: \t#ifndef WIN_ON_SCRIPTING\n 3511  \t\t#ifdef SCR_FIN\n 3512  \t\t\tpant_final = SCR_FIN;\n ....\n 3642  \thotspot_t = 0;\n 3643  \tif (hotspots [n_pant].act == 1) {\n 3644: \t\t#if defined(ACTIVATE_SCRIPTING) && defined(OBJECTS_ON_VAR)\n 3645  \t\t\tif (flags [OBJECTS_ON_VAR])\n 3646  \t\t#endif\n ....\n 3698  \t\t\tjr  nz, hotspot_paint_act_skip\n 3699  \n 3700: \t\t\t#if defined(ACTIVATE_SCRIPTING) && defined(OBJECTS_ON_VAR)\n 3701  \t\t\t\tld  a, (_flags + OBJECTS_ON_VAR)\n 3702  \t\t\t\tor  a\n ....\n 4433  \t}\n 4434  \t\t\n 4435: \t#ifdef ACTIVATE_SCRIPTING\n 4436  \t\t// Delete line of text\n 4437  \t\t#asm\n ....\n 4521  \t\tplayer.killed ++;\n 4522  \n 4523: \t\t#ifdef ACTIVATE_SCRIPTING\n 4524  \t\t\tscript = f_scripts [MAX_SCREENS + 2];\n 4525  \t\t\trun_script ();\n\nC:\\git\\MK1\\examples\\ramiro4\\dev\\mainloop.h:\n   67  \t#asm\n   68  \t\t\tld  b, 0\n   69: \t\t\tld  hl, SPTileArray\n   70  \t\t\tld  de, _tileset\n   71  \t\t.load_tileset_loop\n   ..\n  182  \t\tmaincounter = 0;\n  183  \t\t\n  184: \t\t#ifdef ACTIVATE_SCRIPTING\t\t\n  185  \t\t\tscript_result = 0;\n  186  \t\t\tmsc_init_all ();\n  ...\n  289  \t\t\t#ifdef LIFE_X\n  290  \t\t\t\tif (player.life != life_old) {\n  291: \t\t\t\t\tif (player.life > 0) pti = (unsigned char) player.life; else pti = 0;\n  292  \t\t\t\t\t#ifdef DRAW_HI_DIGIT\n  293: \t\t\t\t\t\tsp_PrintAtInv (LIFE_H_Y, LIFE_H_X, 71, 16 + pti / 100);\n  294  \t\t\t\t\t#endif\n  295: \t\t\t\t\tdraw_2_digits (LIFE_X, LIFE_Y, pti);\n  296  \t\t\t\t\tlife_old = player.life;\n  297  \t\t\t\t}\n  ...\n  372  \t\t\trender_all_sprites ();\t\n  373  \t\t\t\n  374: \t\t\t#if defined ACTIVATE_SCRIPTING && !defined DEACTIVATE_FIRE_ZONE\n  375  \t\t\t\t/*\n  376  \t\t\t\tif (f_zone_ac == 1) {\n  ...\n  640  \t\t\t#endif\t\t\t\n  641  \t\t\t\n  642: \t\t\t// Flick screen checks and scripting related stuff\n  643  \t\t\n  644: \t\t\t#ifdef ACTIVATE_SCRIPTING\t\t\n  645: \t\t\t\t#ifdef SCRIPTING_KEY_M\t\t\t\n  646  \t\t\t\t\tif (sp_KeyPressed (key_m) || ((pad_this_frame & sp_FIRE) == 0))\n  647  \t\t\t\t#endif\n  648: \t\t\t\t#ifdef SCRIPTING_DOWN\n  649  \t\t\t\t\tif ((pad_this_frame & sp_DOWN) == 0)\n  650  \t\t\t\t#endif\n  ...\n  695  \t\t\t// Win game condition\n  696  \t\t\t\n  697: \t\t\t#ifdef WIN_ON_SCRIPTING\n  698  \t\t\t\tif (script_result == 1) {\n  699  \t\t\t\t\tsaca_a_todo_el_mundo_de_aqui ();\n  ...\n  710  \t\t\t\t}\n  711  \t\t\t#else\t\t\t\n  712: \t\t\t\t#ifdef ACTIVATE_SCRIPTING\n  713  \t\t\t\t\t#ifndef REENTER_ON_ALL_OBJECTS\n  714  \t\t\t\t\t\tif (player.objs == PLAYER_NUM_OBJETOS || script_result == 1 \n  ...\n  786  \n  787  \t\t\tif (player.life < 0\n  788: \t\t\t\t#ifdef ACTIVATE_SCRIPTING\n  789  \t\t\t\t\t|| script_result == 2\n  790  \t\t\t\t#endif\n\nC:\\git\\MK1\\examples\\ramiro4\\dev\\msc_extern.h:\n    1  // Extern actions.\n    2  // Add code here at your wish.\n    3: // Will be run from scripting (EXTERN n)\n    4  \n    5  unsigned char which_character;\n\nC:\\git\\MK1\\examples\\ramiro4\\dev\\printer.h:\n    6  \n    7  void draw_rectangle (unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2, unsigned char c) {\t\n    8: \tfor (pti = y1; pti <= y2; pti ++)\n    9  \t\tfor (ptj = x1; ptj <= x2; ptj ++)\n   10: \t\t\tsp_PrintAtInv (pti, ptj, c, 0);\t\n   11  }\n   12  \n\nC:\\git\\MK1\\examples\\ramiro4\\dev\\ramiro4.map:\n  646  SPNULLSPRPTR\t\t\t= DFC1, G: SPNULLSPRPTR\n  647  SPPRINTATINV\t\t\t= DFD1, G: SPPRINTATINV\n  648: SPPTINSMALLIVAL\t\t\t= DE21, G: SPINTRECT\n  649  SPQUEUETABLE\t\t\t= E37B, G: SPQUEUETABLE\n  650  SPREGISTERHOOK\t\t\t= E647, G: SPREGISTERHOOKLAST\n  ...\n  652  SPRITELOOP\t\t\t= E75E, L: SPUPDATENOW\n  653  SPTBLLOOKUP\t\t\t= DFF1, G: SPTBLLOOKUP\n  654: SPTILEARRAY\t\t\t= DFF9, G: SPTILEARRAY\n  655  SPUPDATENOW\t\t\t= E671, G: SPUPDATENOW\n  656  SPVALIDATE\t\t\t= E1F9, G: SPVALIDATE\n  ...\n  917  _PTGMX\t\t\t\t= CF73, G: CHURROMAIN\n  918  _PTGMY\t\t\t\t= CF75, G: CHURROMAIN\n  919: _PTI\t\t\t\t= CFF8, G: CHURROMAIN\n  920  _PTJ\t\t\t\t= CFF9, G: CHURROMAIN\n  921  _PTX1\t\t\t\t= CFAC, G: CHURROMAIN\n  ...\n 1998  _RDX\t\t\t\t= CFF6, G: CHURROMAIN\n 1999  _RDY\t\t\t\t= CFF7, G: CHURROMAIN\n 2000: _PTI\t\t\t\t= CFF8, G: CHURROMAIN\n 2001  _PTJ\t\t\t\t= CFF9, G: CHURROMAIN\n 2002  _TRAP_COINS\t\t\t= CFFA, G: CHURROMAIN\n ....\n 2072  SPINTSMALLIVAL\t\t\t= DDFC, G: SPINTRECT\n 2073  TRYOTHERWAY\t\t\t= DE10, L: SPINTRECT\n 2074: SPPTINSMALLIVAL\t\t\t= DE21, G: SPINTRECT\n 2075  BROKEN\t\t\t\t= DE2D, L: SPINTRECT\n 2076  SPMOVESPRABS\t\t\t= DE36, G: SPMOVESPRABS\n ....\n 2106  SPTBLLOOKUP\t\t\t= DFF1, G: SPTBLLOOKUP\n 2107  NOINC\t\t\t\t= DFF7, L: SPTBLLOOKUP\n 2108: SPTILEARRAY\t\t\t= DFF9, G: SPTILEARRAY\n 2109  SPVALIDATE\t\t\t= E1F9, G: SPVALIDATE\n 2110  SPVALIDATEP\t\t\t= E201, G: SPVALIDATE\n\n51 matches across 10 files\n",
+			"settings":
+			{
+				"buffer_size": 7736,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 132.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install",
+				"Package Control: Install Package"
+			],
+			[
+				"",
+				"Package Control: Disable Package"
+			],
+			[
+				"the",
+				"UI: Select Theme"
+			],
+			[
+				"beauti",
+				"Beautify::Beautify File"
+			],
+			[
+				"mini",
+				"Minify::Default File Settings"
+			],
+			[
+				"format",
+				"Format: Javascript"
+			],
+			[
+				"boxy",
+				"Boxy Theme: Preferences"
+			],
+			[
+				"markdow",
+				"Set Syntax: Markdown Extended"
+			],
+			[
+				"remove ",
+				"Package Control: Remove Package"
+			],
+			[
+				"instal",
+				"Package Control: Install Package"
+			],
+			[
+				"ter",
+				"Terminal: Open"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 382.0
+	},
+	"console":
+	{
+		"height": 118.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/git/MK1",
+		"/C/git/MK1/docs",
+		"/C/git/MK1/examples",
+		"/C/git/MK1/examples/ramiro4",
+		"/C/git/MK1/examples/ramiro4/dev",
+		"/C/git/MK1/lib",
+		"/C/git/MK1/lib/splib2",
+		"/C/git/MK1/lib/splib2/updater"
+	],
+	"file_history":
+	[
+		"/C/Users/na_th/Desktop/tc.txt",
+		"/C/git/MK1/lib/splib2/updater/SPUpdateNow.asm",
+		"/C/git/MK1/lib/splib2/Makefile.bat",
+		"/C/git/MK1/examples/perils/dev/config.h",
+		"/C/git/MK1/examples/perils/dev/mainloop.h",
+		"/C/git/MK1/examples/perils/dev/comp.bat",
+		"/C/git/MK1/examples/perils/dev/custom.h",
+		"/C/git/MK1/docs/manual.md",
+		"/C/git/MK1/examples/ramiro4/dev/custom.h",
+		"/C/git/MK1/examples/helmet/dev/comp.bat",
+		"/C/git/MK1/examples/helmet/dev/config.h",
+		"/C/git/MK1/examples/helmet/dev/custom.h",
+		"/C/git/MK1/examples/helmet/dev/engine.h",
+		"/C/git/MK1/examples/helmet/dev/mainloop.h",
+		"/C/git/MK1/lib/splib2/SPconfig.def",
+		"/C/git/MK1/lib/updatelib.bat",
+		"/C/git/MK1/src/utils/ts2bin.bas",
+		"/C/git/MK1/lib/splib2/sp.lst",
+		"/C/git/MK1/examples/ramiro4/dev/mtasmlib.h",
+		"/C/Users/na_th/OneDrive/Xim Repús WIP/Scumm Simulados/2004/sickly_girl.md",
+		"/C/git/MK1/examples/ramiro4/dev/engine.h",
+		"/C/git/MK1/examples/ramiro4/dev/churromain.c",
+		"/C/git/MK1/examples/ramiro4/dev/msc.h",
+		"/C/git/MK1/src/utils/msc.bas",
+		"/C/git/MK1_Pestecera/src/dev/assets/extrasprites.h",
+		"/C/git/MK1_Pestecera/src/dev/assets/spriteset_mappings.h",
+		"/C/git/MK1_Pestecera/src/dev/compile.bat",
+		"/C/git/MK1_Pestecera/diario.md",
+		"/C/git/MK1_Pestecera/src/utils/src/mkts_om.bas",
+		"/C/git/MK1_Pestecera/src/trash/mappings.h",
+		"/D/git/MK1_Pestecera/examples/helmet/dev/mainloop/game_loop.h",
+		"/D/git/MK1_Pestecera/examples/helmet/dev/my/config.h",
+		"/D/git/MK1_Pestecera/examples/helmet/dev/definitions.h",
+		"/Z/MK1_Pestecera/examples/helmet/dev/compile.bat",
+		"/Z/MK1_Pestecera/examples/helmet/README.md",
+		"/Z/MK1_Pestecera/examples/helmet/dev/oooooo.sna",
+		"/Z/MK1_Pestecera/examples/helmet/dev/my/ci/extra_vars.h",
+		"/D/git/MK1_Pestecera/examples/helmet/README.md",
+		"/D/git/MK1_Pestecera/examples/helmet/dev/engine/enem_mods/enem_type_pursuers_asm.h",
+		"/D/git/MK1_Pestecera/examples/helmet/dev/my/ci/on_tile_pushed.h",
+		"/D/git/MK1_Pestecera/src/dev/engine/enengine.h",
+		"/E/git/MK1_Pestecera/examples/helmet/dev/wyz_player.h",
+		"/E/git/MK1_Pestecera/examples/helmet/dev/engine.h",
+		"/E/git/MK1_Pestecera/examples/helmet/dev/engine/bullets.h",
+		"/E/git/MK1_Pestecera/examples/helmet/dev/my/fixed_screens.h",
+		"/E/git/MK1_Pestecera/examples/helmet/mus/compress_songs.bat",
+		"/E/git/MK1_Pestecera/diario.md",
+		"/E/git/MK1_Pestecera/examples/helmet/dev/my/wyz/songs.h",
+		"/E/git/MK1_Pestecera/examples/helmet/dev/my/levelset.h",
+		"/F/git/MK1_Pestecera/examples/helmet/mus/01_ingame.mus.bin",
+		"/F/git/MK1_Pestecera/src/dev/loader/loadercpc.asm-orig",
+		"/C/git/MK1_Pestecera/lib/cpcwyzlib/cpc_WyzPlayer.asm",
+		"/C/git/MK1_Pestecera/src/dev/mainloop.h",
+		"/C/git/MK1_Pestecera/src/dev/autodefs.h",
+		"/C/git/MK1_Pestecera/src/dev/my/sound.h",
+		"/C/git/MK1_Pestecera/lib/cpcwyzlib/cpcwyzlib.h",
+		"/C/git/MK1_Pestecera/src/dev/mk1.c",
+		"/C/git/MK1_Pestecera/src/dev/savegame.h",
+		"/C/git/MK1_Pestecera/src/dev/printer.h",
+		"/C/git/MK1_Pestecera/src/dev/my/title_screen.h",
+		"/C/git/MK1_Pestecera/src/dev/my/level_screen.h",
+		"/C/git/MK1_Pestecera/src/dev/my/fixed_screens.h",
+		"/C/git/MK1_Pestecera/src/dev/my/config.h",
+		"/C/git/MK1_Pestecera/src/dev/mainloop/update_sprites.h",
+		"/C/git/MK1_Pestecera/src/dev/mainloop/game_loop.h",
+		"/C/git/MK1_Pestecera/src/dev/engine/player.h",
+		"/C/git/MK1_Pestecera/src/dev/engine/hotspots.h",
+		"/C/git/MK1_Pestecera/src/dev/engine/enengine.h",
+		"/C/git/MK1_Pestecera/src/dev/engine/bullets.h",
+		"/C/git/MK1_Pestecera/src/dev/engine.h",
+		"/C/git/MK1_Pestecera/src/dev/definitions.h",
+		"/C/git/MK1_Pestecera/src/dev/assets/trpixlut.h",
+		"/C/git/newspectrum/MK3_OM/mega_meghan/dev/util/system_cpc.h",
+		"/C/git/MK1_Pestecera/src/dev/assets/ay_fx_numbers.h",
+		"/C/git/MK1_Pestecera/README.md",
+		"/C/git/mk1/examples/helmet/dev/engine/enengine.h",
+		"/C/git/mk1/examples/helmet/dev/helmet.map",
+		"/C/temp/left-right/dev/my/ci/enems_extra_actions.h",
+		"/C/git/mk1/docs/README.md",
+		"/C/git/mk1/docs/tutorial-cap16.md",
+		"/C/git/mk1/docs/tutorial-cap15.md",
+		"/C/git/mk1/src/utils/src/sprcnv.bas",
+		"/C/git/mk1/src/utils/src/sprcnvbin.bas",
+		"/C/git/mk1/src/dev/engine.h",
+		"/C/git/mk1/docs/tutorial-cap07.md",
+		"/C/git/mk1/src/dev/my/config.h",
+		"/C/git/mk1/docs/tutorial-cap12.md",
+		"/C/git/mk1/docs/tutorial-cap02.md",
+		"/C/git/mk1/src/dev/engine/c_levels.h",
+		"/C/git/mk1/src/dev/assets/sprites-empty.h",
+		"/C/git/mk1/src/dev/assets/levels.h",
+		"/C/git/mk1/trash/blip_blep/dev/my/ci/custom_veng.h",
+		"/C/git/mk1/trash/blip_blep/README.md",
+		"/C/git/mk1/trash/blip_blep/dev/my/config.h",
+		"/C/git/mk1/trash/blip_blep/dev/my/fixed_screens.h",
+		"/C/git/mk1/trash/blip_blep/dev/my/ci/custom_enems_player_collision.h",
+		"/C/git/mk1/trash/blip_blep/dev/engine/breakable.h",
+		"/C/git/mk1/trash/blip_blep/dev/my/map_custom_decoder.h",
+		"/C/git/mk1/trash/blip_blep/dev/engine/enengine.h",
+		"/C/git/mk1/trash/blip_blep/dev/my/ci/extra_vars.h",
+		"/C/git/mk1/docs/code_injection.md",
+		"/C/git/mk1/trash/blip_blep/dev/my/ci/on_wall_broken.cpp",
+		"/C/git/mk1/examples/goku_mal/dev/build_assets.bat",
+		"/C/git/mk1/examples/goku_mal/gfx/behs2.txt",
+		"/C/git/mk1/src/utils/src/png2scr.bas",
+		"/C/git/mk1/examples/goku_mal/dev/my/level_screen.h",
+		"/C/git/mk1/examples/goku_mal/dev/my/ci/before_entering_screen.h",
+		"/C/git/mk1/examples/goku_mal/dev/my/ci/entering_game.h",
+		"/C/git/mk1/examples/goku_mal/dev/mainloop/game_loop.h",
+		"/C/git/mk1/docs/tutorial-cap13.md",
+		"/C/git/mk1/examples/helmet/dev/mainloop/game_loop.h",
+		"/C/git/mk1/examples/helmet/dev/my/ci/entering_game.h",
+		"/C/git/mk1/src/dev/my/level_screen.h",
+		"/C/git/mk1/examples/helmet/dev/my/level_screen.h",
+		"/C/git/mk1/examples/dogmole_ci/dev/my/level_screen.h",
+		"/C/git/mk1/examples/dogmole/dev/my/level_screen.h",
+		"/C/git/mk1/contrib/nightmare_on_halloween/dev/my/level_screen.h",
+		"/C/git/mk1/contrib/misco_jones/dev/my/level_screen.h",
+		"/C/git/mk1/examples/helmet/dev/printer.h",
+		"/C/git/mk1/examples/helmet/dev/mainloop.h",
+		"/C/git/mk1/examples/helmet/dev/preproc.c",
+		"/C/git/mk1/examples/helmet/dev/engine/enem_mods/enem_type_orthoshooters.h",
+		"/C/git/mk1/examples/helmet/dev/definitions.h",
+		"/C/git/mk1/examples/helmet/dev/my/config.h",
+		"/C/git/mk1/examples/dogmole/dev/definitions.h",
+		"/C/git/mk1/examples/helmet/dev/engine/simple_cocos.h",
+		"/C/git/mk1/examples/helmet/dev/engine/enem_mods/enem_type_pursuers.h",
+		"/C/git/mk1/examples/helmet/dev/engine/enem_mods/enem_type_pursuers_asm.h"
+	],
+	"find":
+	{
+		"height": 40.0
+	},
+	"find_in_files":
+	{
+		"height": 128.0,
+		"where_history":
+		[
+			"C:\\git\\MK1\\examples\\ramiro4\\dev",
+			"C:\\git\\MK1\\examples\\perils\\dev",
+			"C:\\git\\MK1\\examples\\ramiro4\\dev"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"espera",
+			"any_jey",
+			"pti",
+			"rda",
+			"iy",
+			"exx",
+			"na_th_an",
+			"na_th",
+			"NO_MASKS",
+			"sp_alarm",
+			"flick",
+			"flashasfg",
+			" and 127",
+			";;",
+			">> 6",
+			"(player.y >> 6)",
+			"(player.x >> 6)",
+			">> 6",
+			"l_asr",
+			">> 6",
+			">> ",
+			">> 6"
+		],
+		"highlight": false,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"gpy",
+			"gpx"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "examples/ramiro4/dev/printer.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 8645,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								7352,
+								7352
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 4382.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "examples/ramiro4/dev/custom.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 25920,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								16707,
+								16668
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9568.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 2,
+					"file": "examples/ramiro4/dev/definitions.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 8471,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								413,
+								413
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3622.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7736,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										158,
+										161
+									],
+									[
+										333,
+										336
+									],
+									[
+										546,
+										549
+									],
+									[
+										643,
+										646
+									],
+									[
+										783,
+										786
+									],
+									[
+										1098,
+										1101
+									],
+									[
+										1437,
+										1440
+									],
+									[
+										1693,
+										1696
+									],
+									[
+										1755,
+										1758
+									],
+									[
+										1786,
+										1789
+									],
+									[
+										1842,
+										1845
+									],
+									[
+										1924,
+										1927
+									],
+									[
+										2088,
+										2091
+									],
+									[
+										2455,
+										2458
+									],
+									[
+										2733,
+										2736
+									],
+									[
+										2872,
+										2875
+									],
+									[
+										3027,
+										3030
+									],
+									[
+										3229,
+										3232
+									],
+									[
+										3256,
+										3259
+									],
+									[
+										3441,
+										3444
+									],
+									[
+										3608,
+										3611
+									],
+									[
+										3786,
+										3789
+									],
+									[
+										3935,
+										3938
+									],
+									[
+										4057,
+										4060
+									],
+									[
+										4232,
+										4235
+									],
+									[
+										4369,
+										4372
+									],
+									[
+										4538,
+										4541
+									],
+									[
+										4578,
+										4581
+									],
+									[
+										4677,
+										4680
+									],
+									[
+										4751,
+										4754
+									],
+									[
+										4892,
+										4895
+									],
+									[
+										5056,
+										5059
+									],
+									[
+										5116,
+										5119
+									],
+									[
+										5146,
+										5149
+									],
+									[
+										5277,
+										5280
+									],
+									[
+										5432,
+										5435
+									],
+									[
+										5589,
+										5592
+									],
+									[
+										5787,
+										5790
+									],
+									[
+										5987,
+										5990
+									],
+									[
+										6235,
+										6238
+									],
+									[
+										6245,
+										6248
+									],
+									[
+										6256,
+										6259
+									],
+									[
+										6332,
+										6335
+									],
+									[
+										6514,
+										6517
+									],
+									[
+										6752,
+										6755
+									],
+									[
+										6777,
+										6780
+									],
+									[
+										6966,
+										6969
+									],
+									[
+										7158,
+										7161
+									],
+									[
+										7369,
+										7372
+									],
+									[
+										7587,
+										7590
+									],
+									[
+										7612,
+										7615
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								6246,
+								6246
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 2418.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 26.0
+	},
+	"input":
+	{
+		"height": 43.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "MK1_v4.sublime-project",
+	"replace":
+	{
+		"height": 48.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"C:\\git\\MK1\\MK1_v4.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 154.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

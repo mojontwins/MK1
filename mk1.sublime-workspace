@@ -323,6 +323,24 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "src/mus/WYZproPlay47aZXc.ASM",
+			"settings":
+			{
+				"buffer_size": 25085,
+				"encoding": "Western (Windows 1252)",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "contrib/godkiller_2/mus/WYZproPlay47aZXc.ASM",
+			"settings":
+			{
+				"buffer_size": 25163,
+				"encoding": "Western (Windows 1252)",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -384,7 +402,11 @@
 	},
 	"expanded_folders":
 	[
-		"/C/git/MK1"
+		"/C/git/MK1",
+		"/C/git/MK1/contrib",
+		"/C/git/MK1/contrib/godkiller_2",
+		"/C/git/MK1/contrib/godkiller_2/mus",
+		"/C/git/MK1/contrib/sami_troid"
 	],
 	"file_history":
 	[
@@ -553,8 +575,67 @@
 	"groups":
 	[
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "src/mus/WYZproPlay47aZXc.ASM",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 25085,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								25021,
+								25021
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 14955.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "contrib/godkiller_2/mus/WYZproPlay47aZXc.ASM",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 25163,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 15400.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		},
 		{
@@ -655,7 +736,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 282.0,
+	"side_bar_width": 161.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
