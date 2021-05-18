@@ -209,6 +209,13 @@ void run_script (unsigned char whichs) {
                         script_result = 4;
                         return;
                         break;
+                    case 0xF4:
+                        // DECORATIONS
+                        while (0xff != (sc_x = read_byte ())) {
+                            sc_n = read_byte ();
+                            _x = sc_x >> 4; _y = sc_x & 15; _n = behs [sc_n]; _t = sc_n; update_tile ();
+                        }
+                        break;
                     case 0xFF:
                         sc_terminado = 1;
                         break;

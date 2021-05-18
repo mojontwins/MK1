@@ -14,4 +14,4 @@ extern unsigned char *script;
 #endasm
 
 #define LEVEL_BASE 0x0000
-#define LEVEL_PIRAMIDE 0x0059
+#define LEVEL_PIRAMIDE 0x0057

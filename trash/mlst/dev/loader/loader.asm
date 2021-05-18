@@ -37,7 +37,7 @@
 	scf
 	ld	a, $ff
 	ld	ix, $C000
-	ld	de, 5752
+	ld	de, 5748
 	call $0556
 	di
 
@@ -49,7 +49,7 @@
 	scf
 	ld	a, $ff
 	ld	ix, 24000
-	ld	de, 21760
+	ld	de, 21861
 	call $0556
 	di
 	
