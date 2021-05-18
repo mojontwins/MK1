@@ -2229,19 +2229,22 @@ If actionsUsed (&HF3) Then
 	print #f3, "                        break;"
 End If
 
-if actionsUsed (&HF4) Then
+If actionsUsed (&HF4) Then
 	print #f3, "                    case 0xF4:"
 	print #f3, "                        // DECORATIONS"
-	'print #f3, "                        while (0xff != (sc_x = read_byte ())) {"
-	'print #f3, "                            sc_n = read_byte ();"
-	'print #f3, "                            _x = sc_x >> 4; _y = sc_x & 15; _n = behs [sc_n]; _t = sc_n; update_tile ();"
-	'print #f3, "                        }"
-	print #f3, "                        #asm"
-	print #f3, "                               ld  hl, (_script)"
-	print #f3, "                               call _draw_decorations_loop"
-	print #f3, "                               inc hl"
-	print #f3, "                               ld  (_script), hl"
-	print #f3, "                        #endasm"
+	If rampage Then
+		print #f3, "                        while (0xff != (sc_x = read_byte ())) {"
+		print #f3, "                            sc_n = read_byte ();"
+		print #f3, "                            _x = sc_x >> 4; _y = sc_x & 15; _n = behs [sc_n]; _t = sc_n; update_tile ();"
+		print #f3, "                        }"
+	Else
+		print #f3, "                        #asm"
+		print #f3, "                               ld  hl, (_script)"
+		print #f3, "                               call _draw_decorations_loop"
+		print #f3, "                               inc hl"
+		print #f3, "                               ld  (_script), hl"
+		print #f3, "                        #endasm"
+	End If		
 	print #f3, "                        break;"
 End If
 
