@@ -45,13 +45,13 @@ unsigned char which_level (void) {
 			password [gpit] = gpjt;
 			gpit ++;
 		}
-		wyz_play_sound (0);
+		PLAY_SOUND (0);
 		sp_WaitForNoKey ();
 	}
 	
 	sp_WaitForNoKey ();
-	wyz_stop_sound ();
-	wyz_play_sound (1);
+	STOP_SOUND ();
+	PLAY_SOUND (1);
 	
 	// Check password
 	for (gpit = 0; gpit < MAX_LEVELS - 1; gpit ++) {
@@ -79,12 +79,12 @@ unsigned char simple_menu (void) {
 		gpjt = sp_GetKey ();
 		switch (gpjt) {
 			case '1':
-				wyz_stop_sound ();
-				wyz_play_sound (1);
+				STOP_SOUND ();
+				PLAY_SOUND (1);
 				return 0;
 				break;
 			case '2':
-				wyz_play_sound (0);
+				PLAY_SOUND (0);
 				return which_level ();
 				break;
 		}

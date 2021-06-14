@@ -8,6 +8,8 @@
 // ============================================================================
 
 //#define MODE_128K 						// Read the docs!
+//#define USE_ARKOS_PLAYER					// Use Arkos instead of Wyz player for 128k Music
+//#define ARKOS_SFX_CHANNEL	0				// SFX Channel (0-2)
 //#define VENG_SELECTOR 					// Very advanced!
 //#define USE_MAP_CUSTOM_DECODER
 

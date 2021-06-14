@@ -95,9 +95,13 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #include "my/ci/extra_vars.h"
 
 #ifdef MODE_128K
-	#include "wyzplayer.h"
+	#ifdef USE_ARKOS_PLAYER
+		#include "sound/arkosplayer.h"
+	#else
+		#include "sound/wyzplayer.h"
+	#endif
 #else
-	#include "beeper.h"
+	#include "sound/beeper.h"
 #endif
 
 #include "printer.h"
@@ -136,5 +140,5 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 
 #ifndef MODE_128K
 	// From beepola. Phaser engine by Shiru.
-	#include "music.h"
+	#include "sound/music.h"
 #endif

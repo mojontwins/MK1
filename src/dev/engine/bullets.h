@@ -166,7 +166,7 @@ void bullets_fire (void) {
 			#endif
 
 			#ifdef MODE_128K
-				wyz_play_sound (SFX_SHOOT);
+				PLAY_SOUND (SFX_SHOOT);
 			#else
 				beep_fx (6);
 			#endif

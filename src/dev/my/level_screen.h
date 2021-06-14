@@ -10,7 +10,7 @@
 	_x = 12; _y = 12; _t = 71; _gp_gen = level_str; print_str ();
 	sp_UpdateNow ();
 	#ifdef MODE_128K
-		wyz_play_sound (SFX_START);
+		PLAY_SOUND (SFX_START);
 	#else			
 		beep_fx (1);
 	#endif

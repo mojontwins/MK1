@@ -38,6 +38,8 @@ Por nuestra parte es posible que el motor sólo reciba correcciones, pero los _p
 * Compresor para aplib [apultra](https://github.com/emmanuel-marty/apultra) por **Emmanuel Marty**.
 * WYZ Player por WYZ, modificado por **na_th_an** (compresión) y **thEpOpE** (FX con ruido).
 * WYZ Tracker 0.5.0.2 por **Augusto Ruiz**.
+* ARKOS Player 1.0 por **Targhan/Grim/Arkos**.
+* Integración con ARKOS por **Greenweb** basada en el trabajo de **Syx**.
 * ROM-based tape loader y Gentape por **Antonio Villena**.
 * **bas2tap** por **Martijn Van Der Heide**.
 * **bin2tap** por **mike/zeroteam**.

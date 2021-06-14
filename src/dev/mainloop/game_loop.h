@@ -44,9 +44,9 @@
 	#ifdef MODE_128K
 			// Play music
 		#ifdef COMPRESSED_LEVELS		
-			wyz_play_music (levels [level].music_id);
+			PLAY_MUSIC (levels [level].music_id);
 		#else
-			wyz_play_music (1);
+			PLAY_MUSIC (1);
 		#endif		
 	#endif
 
@@ -242,7 +242,7 @@
 				if (sp_KeyPressed (KEY_Z)) {
 					if (!key_z_pressed) {
 						#ifdef MODE_128K
-							wyz_play_sound (0);
+							PLAY_SOUND (0);
 						#else
 							beep_fx (2);
 						#endif
@@ -344,7 +344,7 @@
 	sp_WaitForNoKey ();
 
 	#ifdef MODE_128K		
-		wyz_stop_sound ();
+		STOP_SOUND ();
 	#endif
 
 	#include "my/ci/after_game_loop.h"

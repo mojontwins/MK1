@@ -78,7 +78,7 @@ void draw_texts (unsigned char x, unsigned char y, unsigned char c, char *cad, u
 		y ++; 	 
 		cad += width;
 		sp_UpdateNow ();
-		wyz_play_sound (1);
+		PLAY_SOUND (1);
 		espera_activa (50);
 	}   
 }

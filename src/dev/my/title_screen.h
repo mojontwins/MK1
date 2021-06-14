@@ -9,7 +9,7 @@
 	
 	#ifdef MODE_128K
 		get_resource (TITLE_BIN, 16384);
-		wyz_play_music (0);
+		PLAY_MUSIC (0);
 	#else		
 		#asm
 			ld hl, _s_title

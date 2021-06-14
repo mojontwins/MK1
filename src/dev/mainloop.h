@@ -21,7 +21,12 @@ void main (void) {
 			ei
 		#endasm
 
-		wyz_init ();
+		#ifdef USE_ARKOS_PLAYER
+			arkos_stop();
+		#else
+			wyz_init ();
+		#endif
+
 	#endif
 
 	cortina ();
@@ -179,7 +184,7 @@ void main (void) {
 			#ifdef COMPRESSED_LEVELS
 				if (success) {
 					#ifdef MODE_128K
-						//wyz_play_music (6);
+						//PLAY_MUSIC (6);
 					#endif
 					
 					if (silent_level == 0) zone_clear ();
@@ -203,7 +208,7 @@ void main (void) {
 					}
 				} else {
 					#ifdef MODE_128K
-						//wyz_play_music (8);
+						//PLAY_MUSIC (8);
 					#endif
 
 					#if defined(TIMER_ENABLE) && defined(TIMER_GAMEOVER_0) && defined(SHOW_TIMER_OVER)
@@ -213,7 +218,7 @@ void main (void) {
 					#endif
 					
 					#ifdef MODE_128K
-						wyz_stop_sound ();
+						STOP_SOUND ();
 					#endif
 					break;
 				}
@@ -221,7 +226,7 @@ void main (void) {
 				if (success) {
 					game_ending (); 
 				} else {
-					//wyz_play_music (8);
+					//PLAY_MUSIC (8);
 					game_over ();
 				}
 			#endif

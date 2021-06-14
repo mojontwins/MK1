@@ -504,7 +504,7 @@ unsigned char player_move (void) {
 						p_saltando = 1;
 						p_cont_salto = 0;
 						#ifdef MODE_128K
-							wyz_play_sound (SFX_JUMP);
+							PLAY_SOUND (SFX_JUMP);
 						#else
 							beep_fx (3);
 						#endif
@@ -530,7 +530,7 @@ unsigned char player_move (void) {
 				p_saltando = 1;
 				p_cont_salto = 0;
 				#ifdef MODE_128K
-					wyz_play_sound (SFX_JUMP);
+					PLAY_SOUND (SFX_JUMP);
 				#else				
 					beep_fx (3);
 				#endif
@@ -860,7 +860,7 @@ void player_kill (unsigned char sound) {
 	player_deplete ();
 
 	#ifdef MODE_128K
-		wyz_play_sound (sound);
+		PLAY_SOUND (sound);
 	#else
 		beep_fx (sound);
 	#endif

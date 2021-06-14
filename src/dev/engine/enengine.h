@@ -450,7 +450,7 @@ void enems_move (void) {
 						#endif				
 						{
 							#ifdef MODE_128K
-								wyz_play_sound (SFX_KILL_ENEMY_STEP);										
+								PLAY_SOUND (SFX_KILL_ENEMY_STEP);										
 								en_an_state [enit] = GENERAL_DYING;
 								en_an_count [enit] = 12;
 								en_an_next_frame [enit] = sprite_17_a;
@@ -549,7 +549,7 @@ void enems_move (void) {
 									#ifdef MODE_128K
 										en_an_state [enit] = GENERAL_DYING;
 										en_an_count [enit] = 12;
-										wyz_play_sound (SFX_KILL_ENEMY_SHOOT);
+										PLAY_SOUND (SFX_KILL_ENEMY_SHOOT);
 									#else															
 										beep_fx (5);
 										en_an_next_frame [enit] = sprite_18_a;
@@ -563,7 +563,7 @@ void enems_move (void) {
 								}
 
 								#ifdef MODE_128K
-									wyz_play_sound (SFX_HIT_ENEMY);
+									PLAY_SOUND (SFX_HIT_ENEMY);
 								#else
 									beep_fx (1);
 								#endif
