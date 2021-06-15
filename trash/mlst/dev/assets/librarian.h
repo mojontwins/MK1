@@ -11,10 +11,10 @@ typedef struct {
 
 RESOURCE resources [] = {
     { 3, 0xC08B },
-    { 3, 0xC61E },
-    { 3, 0xCB5F },
-    { 3, 0xD09B },
-    { 3, 0xD5B3 }
+    { 3, 0xC65B },
+    { 3, 0xCB9C },
+    { 3, 0xD0D8 },
+    { 3, 0xD5F0 }
 };
 
 #define TITLE_BIN                       0

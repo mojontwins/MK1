@@ -177,7 +177,7 @@ Dim As String neededParamsArray (1 To 11) => { _
 }
 Dim As Integer errors
 Dim As Byte flag, is_packed
-Dim As integer i, j, x, y, xx, yy, f, fout, idx, byteswritten, totalsize
+Dim As integer i, j, x, y, xx, yy, f, fout, idx, byteswritten, totalsize, nEnems
 Dim As uByte d, life, numlocks
 Dim As Byte sd
 Dim As integer map_w, map_h, tile_lock, max
@@ -619,9 +619,15 @@ Puts ("    enems filename = " & sclpGetValue ("enemsfile"))
 f = freefile
 Open sclpGetValue ("enemsfile") For Binary as #f
 ' Skip header
-dummy = Input (261, f)
+dummy = Input (256, f)
+Get #f, , d
+Get #f, , d
+Get #f, , d
+Get #f, , d
+Get #f, , d: nEnems = d
+
 ' Read enems
-max = map_w * map_h * 3 
+max = map_w * map_h * nEnems
 Puts ("    reading " & max & " enemies")
 Puts ("    bin offset = " & Hex (totalsize, 4))
 For idx = 1 To max

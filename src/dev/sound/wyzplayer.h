@@ -33,6 +33,9 @@ void ISR(void) {
 			call WYZPLAYERISR
 			ld  b, 0
 			call SetRAMBank			
+
+			ld  hl, _isrc
+			inc (hl)						
 	#endasm
 }
 

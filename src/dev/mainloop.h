@@ -12,7 +12,7 @@ void main (void) {
 		di
 	#endasm
 	
-	#ifdef MODE_128K
+	#if defined MODE_128K || defined MIN_FAPS_PER_FRAME
 		sp_InitIM2(0xf1f1);
 		sp_CreateGenericISR(0xf1f1);
 		sp_RegisterHook(255, ISR);
@@ -20,7 +20,9 @@ void main (void) {
 		#asm
 			ei
 		#endasm
+	#endif
 
+	#ifdef MODE_128K		
 		#ifdef USE_ARKOS_PLAYER
 			arkos_stop();
 		#else
@@ -53,13 +55,13 @@ void main (void) {
 
 	// Sprite creation
 	#ifdef NO_MASKS
-		sp_player = sp_CreateSpr (sp_OR_SPRITE, 3, sprite_2_a);
+		sp_player = sp_CreateSpr (NO_MASKS, 3, sprite_2_a);
 		sp_AddColSpr (sp_player, sprite_2_b);
 		sp_AddColSpr (sp_player, sprite_2_c);
 		p_current_frame = p_next_frame = sprite_2_a;
 		
-		for (gpit = 0; gpit < 3; gpit ++) {
-			sp_moviles [gpit] = sp_CreateSpr(sp_OR_SPRITE, 3, sprite_9_a);
+		for (gpit = 0; gpit < MAX_ENEMS; gpit ++) {
+			sp_moviles [gpit] = sp_CreateSpr(NO_MASKS, 3, sprite_9_a);
 			sp_AddColSpr (sp_moviles [gpit], sprite_9_b);
 			sp_AddColSpr (sp_moviles [gpit], sprite_9_c);	
 			en_an_current_frame [gpit] = sprite_9_a;
@@ -83,7 +85,7 @@ void main (void) {
 			#ifdef MASKED_BULLETS
 				sp_bullets [gpit] = sp_CreateSpr (sp_MASK_SPRITE, 2, sprite_19_a);
 			#else		
-				sp_bullets [gpit] = sp_CreateSpr (sp_OR_SPRITE, 2, sprite_19_a);
+				sp_bullets [gpit] = sp_CreateSpr (NO_MASKS, 2, sprite_19_a);
 			#endif
 			sp_AddColSpr (sp_bullets [gpit], sprite_19_a+32);
 		}
@@ -94,7 +96,7 @@ void main (void) {
 			#ifdef MASKED_BULLETS
 				sp_cocos [gpit] = sp_CreateSpr (sp_MASK_SPRITE, 2, sprite_19_a);
 			#else		
-				sp_cocos [gpit] = sp_CreateSpr (sp_OR_SPRITE, 2, sprite_19_a);
+				sp_cocos [gpit] = sp_CreateSpr (NO_MASKS, 2, sprite_19_a);
 			#endif
 			sp_AddColSpr (sp_cocos [gpit], sprite_19_a+32);
 		}

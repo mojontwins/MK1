@@ -8,6 +8,7 @@
 // ============================================================================
 
 //#define MODE_128K 						// Read the docs!
+//#define MIN_FAPS_PER_FRAME		2		// Limits the max # of fps to 50/N
 //#define USE_ARKOS_PLAYER					// Use Arkos instead of Wyz player for 128k Music
 //#define ARKOS_SFX_CHANNEL	0				// SFX Channel (0-2)
 //#define VENG_SELECTOR 					// Very advanced!

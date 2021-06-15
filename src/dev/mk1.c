@@ -59,7 +59,7 @@
 	#endif
 #endif
 
-#define NUMBLOCKS (40 + (MAX_PROJECTILES * 5))
+#define NUMBLOCKS (((1 + MAX_ENEMS) * 10) + (MAX_PROJECTILES * 5))
 
 unsigned char AD_FREE [NUMBLOCKS * 15];
 
@@ -102,6 +102,9 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 	#endif
 #else
 	#include "sound/beeper.h"
+	#ifdef MIN_FAPS_PER_FRAME
+		#include "engine/isr.h"
+	#endif
 #endif
 
 #include "printer.h"

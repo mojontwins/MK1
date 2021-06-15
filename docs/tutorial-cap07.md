@@ -46,6 +46,8 @@ Tomemos aire y empecemos.
 
 Esta sección empieza con un `#define MODE_128K` que está desactivado y que por ahora ignoraremos amablemente. Sin aspavientos.
 
+La siguiente, `MIN_FAPS_PER_FRAME`, sirve para limitar la velocidad máxima del juego. El valor N que pongamos hará que el juego se limite a 50/N fps. Por ahora la dejaremos también.
+
 En este apartado se configuran los valores generales de güego: el tamaño del mapa, el número de objetos (si aplica), y cosas por el estilo:
 
 ### Tamaño del mapa

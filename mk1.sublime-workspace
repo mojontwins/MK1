@@ -324,20 +324,39 @@
 	"buffers":
 	[
 		{
-			"file": "src/mus/WYZproPlay47aZXc.ASM",
+			"file": "src/dev/mk1.c",
 			"settings":
 			{
-				"buffer_size": 25085,
+				"buffer_size": 2748,
 				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "contrib/godkiller_2/mus/WYZproPlay47aZXc.ASM",
+			"file": "src/dev/definitions.h",
 			"settings":
 			{
-				"buffer_size": 25163,
+				"buffer_size": 7271,
 				"encoding": "Western (Windows 1252)",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 90 files for \"en_an_base_frame\" (whole word)\n\nD:\\temp\\MK1\\src\\dev\\definitions.h:\n  123  unsigned char enit;\n  124  \n  125: unsigned char en_an_base_frame [MAX_ENEMS];\n  126  unsigned char en_an_frame [MAX_ENEMS];\n  127  unsigned char en_an_count [MAX_ENEMS];\n\nD:\\temp\\MK1\\src\\dev\\engine\\enem_mods\\enem_type_pursuers.h:\n   23  \t\t\tif (!en_an_dead_row [enit]) {\n   24  \t\t\t\t#ifdef PURSUERS_BASE_CELL\n   25: \t\t\t\t\ten_an_base_frame [enit] = PURSUERS_BASE_CELL << 1;\n   26  \t\t\t\t#else\t\t\t\t\t\t\t\n   27: \t\t\t\t\ten_an_base_frame [enit] = (rand () & 3) << 1;\n   28  \t\t\t\t#endif\t\t\t\t\t\t\t\n   29  \t\t\t\ten_an_alive [enit] = 2;\n\nD:\\temp\\MK1\\src\\dev\\engine\\enengine.h:\n  151  \t\t\tcase 3:\n  152  \t\t\tcase 4:\n  153: \t\t\t\ten_an_base_frame [enit] = (malotes [enoffsmasi].t - 1) << 1;\n  154  \t\t\t\tbreak;\n  155  \n  ...\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158  \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  168  \t\t\t#ifdef ENABLE_FANTIES\n  169  \t\t\t\tcase 6:\n  170: \t\t\t\t\ten_an_base_frame [enit] = FANTIES_BASE_CELL << 1;\n  171  \t\t\t\t\ten_an_x [enit] = malotes [enoffsmasi].x1 << 6;\n  172  \t\t\t\t\ten_an_y [enit] = malotes [enoffsmasi].y1 << 6;\n  ...\n  353  \t\tif (active) {\t\t\t\n  354  \t\t\t// Animate\n  355: \t\t\tif (en_an_base_frame [enit] != 99) {\n  356  \t\t\t\t/*\n  357  \t\t\t\ten_an_count [enit] ++; \n  ...\n  359  \t\t\t\t\ten_an_count [enit] = 0;\n  360  \t\t\t\t\ten_an_frame [enit] = !en_an_frame [enit];\n  361: \t\t\t\t\ten_an_next_frame [enit] = enem_cells [en_an_base_frame [enit] + en_an_frame [enit]];\n  362  \t\t\t\t}\n  363  \t\t\t\t*/\n  ...\n  387  \t\t\t\t\t\tadd hl, bc\n  388  \t\t\t\t\t\tld  d, (hl)\n  389: \t\t\t\t\t\tadd d \t\t\t\t\t\t\t; A = en_an_base_frame [enit] + en_an_frame [enit]]\n  390  \n  391  \t\t\t\t\t\tsla c \t\t\t\t\t\t\t; Index 16 bits; it never overflows.\n  ...\n  399  \n  400  \t\t\t\t\t\tld  hl, _enem_cells\n  401: \t\t\t\t\t\tadd hl, bc \t\t\t\t\t\t; HL -> enem_cells [en_an_base_frame [enit] + en_an_frame [enit]]\n  402  \n  403  \t\t\t\t\t\tldi\n\n11 matches across 3 files\n",
+			"settings":
+			{
+				"buffer_size": 2148,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "src/dev/engine/enengine.h",
+			"settings":
+			{
+				"buffer_size": 13864,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -402,14 +421,17 @@
 	},
 	"expanded_folders":
 	[
-		"/C/git/MK1",
-		"/C/git/MK1/contrib",
-		"/C/git/MK1/contrib/godkiller_2",
-		"/C/git/MK1/contrib/godkiller_2/mus",
-		"/C/git/MK1/contrib/sami_troid"
+		"/D/temp/MK1",
+		"/D/temp/MK1/src",
+		"/D/temp/MK1/src/dev"
 	],
 	"file_history":
 	[
+		"/D/temp/MK1/src/dev/engine/enem_mods/enem_type_pursuers.h",
+		"/D/temp/MK1/README.md",
+		"/D/temp/MK1/docs/README.md",
+		"/D/temp/MK1/src/mus/WYZproPlay47aZXc.ASM",
+		"/D/temp/MK1/docs/contribs/arkos.md",
 		"/D/git/MK1/examples/helmet/dev/mk1.c",
 		"/D/git/MK1/examples/helmet/dev/mainloop/game_loop.h",
 		"/D/git/MK1/examples/helmet/dev/my/fixed_screens.h",
@@ -532,22 +554,18 @@
 		"/D/git/newspectrum/MK3_OM/cheman/dev/loader/loader.asm",
 		"/D/Proyectos/remote/descon01/consigna/app/libraries/Manejoauxiliar.php",
 		"/D/Proyectos/remote/descon01/consigna/app/views/fichero-enviado-nojs.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO026D0C88/form-login.php",
-		"/D/Proyectos/2019/20190506 - Consigna v2/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/consigna/app/config/rest.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/routes.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/user_agents.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/smileys.php"
+		"/C/Users/jcastano/AppData/Local/Temp/7zO026D0C88/form-login.php"
 	],
 	"find":
 	{
-		"height": 26.0
+		"height": 48.0
 	},
 	"find_in_files":
 	{
 		"height": 128.0,
 		"where_history":
 		[
+			"D:\\temp\\MK1\\src\\dev",
 			"D:\\git\\MK1\\examples\\helmet"
 		]
 	},
@@ -556,6 +574,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"enoffs",
+			"enit",
+			"en_an_base_frame",
+			"@",
+			"REM",
 			"script_result",
 			"debug"
 		],
@@ -565,72 +588,198 @@
 		"regex": false,
 		"replace_history":
 		[
+			"rem"
 		],
 		"reverse": false,
 		"show_context": true,
 		"use_buffer2": true,
-		"whole_word": false,
+		"whole_word": true,
 		"wrap": true
 	},
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/mus/WYZproPlay47aZXc.ASM",
+					"file": "src/dev/mk1.c",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 25085,
+						"buffer_size": 2748,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								25021,
-								25021
+								1183,
+								1249
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C Improved/C Improved.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 14955.0,
+						"translation.y": 1287.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/dev/definitions.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 7271,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2635,
+								2651
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1326.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2148,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										147,
+										163
+									],
+									[
+										418,
+										434
+									],
+									[
+										505,
+										521
+									],
+									[
+										698,
+										714
+									],
+									[
+										872,
+										888
+									],
+									[
+										1006,
+										1022
+									],
+									[
+										1212,
+										1228
+									],
+									[
+										1447,
+										1463
+									],
+									[
+										1675,
+										1691
+									],
+									[
+										1836,
+										1852
+									],
+									[
+										2050,
+										2066
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								708,
+								708
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"incomplete_sync": null,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "contrib/godkiller_2/mus/WYZproPlay47aZXc.ASM",
-					"semi_transient": true,
+					"buffer": 3,
+					"file": "src/dev/engine/enengine.h",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 25163,
+						"buffer_size": 13864,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								2744,
+								2744
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 15400.0,
+						"translation.y": 1173.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -646,7 +795,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 22.0
 	},
 	"input":
 	{
@@ -694,7 +843,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 88.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -736,7 +885,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 161.0,
+	"side_bar_width": 299.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
