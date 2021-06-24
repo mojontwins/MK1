@@ -85,7 +85,7 @@ void main (void) {
 			#ifdef MASKED_BULLETS
 				sp_bullets [gpit] = sp_CreateSpr (sp_MASK_SPRITE, 2, sprite_19_a);
 			#else		
-				sp_bullets [gpit] = sp_CreateSpr (NO_MASKS, 2, sprite_19_a);
+				sp_bullets [gpit] = sp_CreateSpr (sp_OR_SPRITE, 2, sprite_19_a);
 			#endif
 			sp_AddColSpr (sp_bullets [gpit], sprite_19_a+32);
 		}
@@ -96,7 +96,7 @@ void main (void) {
 			#ifdef MASKED_BULLETS
 				sp_cocos [gpit] = sp_CreateSpr (sp_MASK_SPRITE, 2, sprite_19_a);
 			#else		
-				sp_cocos [gpit] = sp_CreateSpr (NO_MASKS, 2, sprite_19_a);
+				sp_cocos [gpit] = sp_CreateSpr (sp_OR_SPRITE, 2, sprite_19_a);
 			#endif
 			sp_AddColSpr (sp_cocos [gpit], sprite_19_a+32);
 		}

@@ -324,38 +324,29 @@
 	"buffers":
 	[
 		{
-			"file": "trash/6baddies/dev/assets/levels.h",
+			"file": "src/utils/src/msc3_mk1.bas",
 			"settings":
 			{
-				"buffer_size": 2288,
+				"buffer_size": 80254,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "Searching 196 files for \"* 3\" (whole word)\n\n0 matches\n\nSearching 196 files for \"* 3\"\n\nD:\\temp\\MK1\\trash\\6baddies\\dev\\assets\\levels.h:\n   15  // Bolts, 32 * 4 = 128 bytes\n   16  // Tileset, 2304 bytes\n   17: // Enemies, MAP_W * MAP_H * 3 * 10 bytes\n   18: // Hotspots, MAP_W * MAP_H * 3 bytes\n   19  // Behs, 48 bytes\n   20  // Spriteset, 2312 bytes\n   ..\n   95  extern MALOTE malotes [0];\n   96  #asm\n   97: \t._malotes defs MAP_W * MAP_H * 3 * 10\n   98  #endasm\n   99  \n  100  extern HOTSPOT hotspots [0];\n  101  #asm\n  102: \t._hotspots defs MAP_W * MAP_H * 3\n  103  #endasm\n  104  \n\nD:\\temp\\MK1\\trash\\6baddies\\utils\\src\\buildlevels_MK1.bas:\n  622  dummy = Input (261, f)\n  623  ' Read enems\n  624: max = map_w * map_h * 3 \n  625  Puts (\"    reading \" & max & \" enemies\")\n  626  Puts (\"    bin offset = \" & Hex (totalsize, 4))\n\n5 matches across 2 files\n",
+			"file": "/D/Proyectos/2019/20190731a - Bajas automáticas en Ficheros Junta/instrucciones.txt",
 			"settings":
 			{
-				"buffer_size": 853,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "src/utils/src/buildlevels_MK1.bas",
-			"settings":
-			{
-				"buffer_size": 20312,
+				"buffer_size": 316,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "trash/6baddies/utils/src/ene2h.bas",
+			"file": "src/dev/definitions.h",
 			"settings":
 			{
-				"buffer_size": 3548,
+				"buffer_size": 7303,
+				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
 		}
@@ -422,17 +413,16 @@
 	[
 		"/D/temp/MK1",
 		"/D/temp/MK1/src",
-		"/D/temp/MK1/trash",
-		"/D/temp/MK1/trash/6baddies",
-		"/D/temp/MK1/trash/6baddies/dev",
-		"/D/temp/MK1/trash/6baddies/dev/assets",
-		"/D/temp/MK1/trash/6baddies/dev/engine",
-		"/D/temp/MK1/trash/6baddies/dev/sound",
-		"/D/temp/MK1/trash/6baddies/utils",
-		"/D/temp/MK1/trash/6baddies/utils/src"
+		"/D/temp/MK1/src/dev",
+		"/D/temp/MK1/src/utils",
+		"/D/temp/MK1/src/utils/src"
 	],
 	"file_history":
 	[
+		"/D/temp/MK1/src/dev/definitions.h",
+		"/D/temp/MK1/trash/6baddies/utils/src/ene2h.bas",
+		"/D/temp/MK1/trash/6baddies/dev/assets/levels.h",
+		"/D/temp/MK1/src/utils/src/buildlevels_MK1.bas",
 		"/D/temp/MK1/trash/6baddies/utils/src/buildlevels_MK1.bas",
 		"/D/temp/MK1/src/dev/engine/enengine.h",
 		"/D/temp/MK1/trash/6baddies/dev/engine/enengine.h",
@@ -556,11 +546,7 @@
 		"/D/Proyectos/remote/descon01/consigna/app/errors/error_404.php",
 		"/C/Users/jcastano/Desktop/LDAP Browser/ldapescritura.juntadeandalucia.es - admin (2).cfg",
 		"/C/Users/jcastano/Desktop/LDAP Browser/ldap.juntadeandalucia.es - admin.cfg",
-		"/C/Users/jcastano/Downloads/20191119104404436 instrucciones.txt",
-		"/C/Users/jcastano/Downloads/20191119104404145 ficheros.php",
-		"/D/Proyectos/remote/descon01/consigna/system/core/Router.php",
-		"/D/Proyectos/remote/descon01/consigna/system/core/Controller.php",
-		"/D/Proyectos/remote/descon01/consigna/config/config.php"
+		"/C/Users/jcastano/Downloads/20191119104404436 instrucciones.txt"
 	],
 	"find":
 	{
@@ -585,6 +571,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"timer_",
+			"ctimer.(on|t|frames|count|zero)",
+			"ctimer.(frames)",
+			"ctimer.t",
+			"timer",
+			"@",
 			"261",
 			"nEnems",
 			"* 3",
@@ -603,9 +595,11 @@
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": false,
+		"regex": true,
 		"replace_history":
 		[
+			"timer_\\1",
+			"timer_t",
 			"NO_MASKS",
 			"_isrc",
 			"rem"
@@ -619,119 +613,24 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "trash/6baddies/dev/assets/levels.h",
+					"file": "src/utils/src/msc3_mk1.bas",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2288,
+						"buffer_size": 80254,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								562,
-								565
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 853,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										233,
-										236
-									],
-									[
-										282,
-										285
-									],
-									[
-										438,
-										441
-									],
-									[
-										556,
-										559
-									],
-									[
-										719,
-										722
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								574,
-								574
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"incomplete_sync": null,
-							"line_numbers": false,
-							"output_tag": 2,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 39.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "src/utils/src/buildlevels_MK1.bas",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 20312,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								16434,
-								16434
+								22847,
+								22853
 							]
 						],
 						"settings":
@@ -743,7 +642,37 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 7647.0,
+						"translation.y": 8752.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/D/Proyectos/2019/20190731a - Bajas automáticas en Ficheros Junta/instrucciones.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 316,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -756,20 +685,20 @@
 			"sheets":
 			[
 				{
-					"buffer": 3,
-					"file": "trash/6baddies/utils/src/ene2h.bas",
-					"semi_transient": false,
+					"buffer": 2,
+					"file": "src/dev/definitions.h",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 3548,
+						"buffer_size": 7303,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								907,
-								1009
+								4964,
+								4969
 							]
 						],
 						"settings":
@@ -777,11 +706,11 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
+							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 156.0,
+						"translation.y": 2335.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
