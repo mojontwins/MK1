@@ -1581,14 +1581,14 @@ End If
 If clausulasUsed (&H70) Then
 	print #f3, "                case 0x70:"
 	print #f3, "                     // IF TIMER >= sc_x"
-	print #f3, "                     sc_terminado = (ctimer.t < read_vbyte ());"
+	print #f3, "                     sc_terminado = (timer_t < read_vbyte ());"
 	print #f3, "                     break;"
 End If
 
 If clausulasUsed (&H71) Then
 	print #f3, "                case 0x71:"
 	print #f3, "                     // IF TIMER <= sc_x"
-	print #f3, "                     sc_terminado = (ctimer.t > read_vbyte ());"
+	print #f3, "                     sc_terminado = (timer_t > read_vbyte ());"
 	print #f3, "                     break;"
 End If
 
@@ -1990,9 +1990,9 @@ if actionsUsed (&H70) Then
 	print #f3, "                    case 0x70:"
 	print #f3, "                        // SET_TIMER a, b"
 	print #f3, "                        // Opcode: 0x70 a b"
-	print #f3, "                        ctimer.t = read_vbyte ();"
-	print #f3, "                        ctimer.frames = read_vbyte ();"
-	print #f3, "                        ctimer.count = ctimer.zero = 0;"
+	print #f3, "                        timer_t = read_vbyte ();"
+	print #f3, "                        timer_frames = read_vbyte ();"
+	print #f3, "                        timer_count = timer_zero = 0;"
 	print #f3, "                        break;"
 End If
 
@@ -2000,7 +2000,7 @@ If actionsUsed (&H71) Then
 	print #f3, "                    case 0x71:"
 	print #f3, "                        // TIMER_START"
 	print #f3, "                        // Opcode: 0x71"
-	print #f3, "                        ctimer.on = 1;"
+	print #f3, "                        timer_on = 1;"
 	print #f3, "                        break;"
 End If
 
@@ -2008,7 +2008,7 @@ If actionsUsed (&H72) Then
 	print #f3, "                    case 0x72:"
 	print #f3, "                        // TIMER_START"
 	print #f3, "                        // Opcode: 0x72"
-	print #f3, "                        ctimer.on = 0;"
+	print #f3, "                        timer_on = 0;"
 	print #f3, "                        break;"
 End If
 

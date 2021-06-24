@@ -56,7 +56,7 @@ unsigned char enoffs;
 // Aux
 
 char asm_number;
-unsigned int asm_int;
+unsigned int asm_int 			@ 23302;
 unsigned int asm_int_2;
 unsigned int seed;
 unsigned char half_life;
