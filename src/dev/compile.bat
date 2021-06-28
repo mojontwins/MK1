@@ -66,7 +66,8 @@ rem cd ..\dev
 
 :compile
 echo Compilando guego
-zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+rem zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 ..\utils\printsize.exe %game%.bin
 ..\utils\printsize.exe scripts.bin
 

@@ -34,19 +34,21 @@
 		ld  a, 1
 		ld  (hl), a
 
-		// en_an_rawv [enit] = 1 << (rand () % 5);
+		// en_an_rawv [enit] = 1 << (rand () & 3);
 		push bc
 		call _rand		// rand -> L
-		ld  de, 5
-		ex  de, hl
-		call l_div 		// l_div :: DE / HL -> HL = cociente; DE = resto
-		ex	de, hl 		// HL = resto
+		
+		ld  a, l
+		and 3
+		ld  l, a
+		ld  h, 0
+
 		ld	de, 1
 		call l_asl 		// l_asl :: DE << HL -> HL
 		ld  a, l
 		pop bc
 
-		cp  5
+		cp  PURSUERS_MAX_V+1
 		jr  c, _eij_rawv_set
 
 		ld  a, 2

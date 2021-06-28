@@ -1,0 +1,5 @@
+sp_HashAdd.c
+sp_HashCreate.c
+sp_HashDelete.c
+sp_HashLookup.c
+sp_HashRemove.c

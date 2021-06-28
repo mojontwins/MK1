@@ -6,7 +6,8 @@
 	.fsClipStruct defb 0, 24, 0, 32
 #endasm	
 
-void *joyfunc = sp_JoyKeyboard;		// Puntero a la función de manejo seleccionada.
+//void *joyfunc = sp_JoyKeyboard;		// Puntero a la función de manejo seleccionada.
+unsigned int (*joyfunc)(struct sp_UDK *) = sp_JoyKeyboard;
 
 const void *joyfuncs [] = {
 	sp_JoyKeyboard, sp_JoyKempston, sp_JoySinclair1
@@ -118,7 +119,7 @@ unsigned char p_tx, p_ty;
 #endif
 signed int ptgmx, ptgmy;
 
-const unsigned char *spacer = "            ";
+unsigned char *spacer = "            ";
 
 unsigned char enit;
 

@@ -1,13 +1,6 @@
 // MTE MK1 (la Churrera) v5.0
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
-unsigned int ram_address;
-unsigned int ram_destination;
-
-#ifdef MODE_128K
-	unsigned char ram_page;
-#endif
-
 #asm
 
 	; aPPack decompressor

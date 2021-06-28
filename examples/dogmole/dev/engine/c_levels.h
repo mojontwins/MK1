@@ -15,7 +15,7 @@ void prepare_level (void) {
 		}
 
 		#ifdef ACTIVATE_SCRIPTING
-			main_script_offset = levels [level]->script_offset;
+			main_script_offset = levels [level].script_offset;
 		#endif
 	#else
 		unpack ((unsigned int) levels [level].c_map_bolts, (unsigned int) (mapa));
@@ -24,11 +24,11 @@ void prepare_level (void) {
 		unpack ((unsigned int) levels [level].c_behs, (unsigned int) (behs));
 
 		#ifdef PER_LEVEL_SPRITESET
-			unpack ((unsigned int) levels [level].c_sprites, (unsigned int) (sprites));
+			unpack ((unsigned int) levels [level].c_sprites, (unsigned int) (sprites + 16));
 		#endif
 
-		level_data->map_w = levels.map_w;
-		level_data->map_h = levels.map_h;
+		level_data->map_w = levels [level].map_w;
+		level_data->map_h = levels [level].map_h;
 		
 		#ifdef ACTIVATE_SCRIPTING
 			if (script_result != 3)

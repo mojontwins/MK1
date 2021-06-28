@@ -5,31 +5,31 @@
 		[
 			[
 				"PROCESADOE",
-				"PROCESADO_ERR_EXTENSION\tabc"
+				"PROCESADO_ERR_EXTENSION	abc"
 			],
 			[
 				"write",
-				"write_log\t(Common.php)"
+				"write_log	(Common.php)"
 			],
 			[
 				"margi",
-				"margin-right\tproperty"
+				"margin-right	property"
 			],
 			[
 				"fecha",
-				"fechaexp_altered\tabc"
+				"fechaexp_altered	abc"
 			],
 			[
 				"fechaexp",
-				"fechaexp_altered\tabc"
+				"fechaexp_altered	abc"
 			],
 			[
 				"bean",
-				"beanstalkd_port\tabc"
+				"beanstalkd_port	abc"
 			],
 			[
 				"get_se",
-				"get_select_sql\t(Ignitedquery.php)"
+				"get_select_sql	(Ignitedquery.php)"
 			],
 			[
 				"log_",
@@ -61,15 +61,15 @@
 			],
 			[
 				"LAST",
-				"LAST_ATTEMPT\t(ColumnNames.php)"
+				"LAST_ATTEMPT	(ColumnNames.php)"
 			],
 			[
 				"ANTIBRUTE",
-				"ANTIBRUTEFORCE_BANFOR\t(LdapConfig.php)"
+				"ANTIBRUTEFORCE_BANFOR	(LdapConfig.php)"
 			],
 			[
 				"antibrute",
-				"antibruteforce.attempts\t(Ldap.config.php)"
+				"antibruteforce.attempts	(Ldap.config.php)"
 			],
 			[
 				"GET_USER",
@@ -93,7 +93,7 @@
 			],
 			[
 				"org",
-				"organismo_id\t(Queries.php)"
+				"organismo_id	(Queries.php)"
 			],
 			[
 				"inline",
@@ -121,7 +121,7 @@
 			],
 			[
 				"ORGA",
-				"ORGANISMO_ID\t(ManageBlackoutsPage.php)"
+				"ORGANISMO_ID	(ManageBlackoutsPage.php)"
 			],
 			[
 				"organismo",
@@ -137,7 +137,7 @@
 			],
 			[
 				"fijarEs",
-				"fijarEstaSede\t(ManageBlackoutsPage.php)"
+				"fijarEstaSede	(ManageBlackoutsPage.php)"
 			],
 			[
 				"locatio",
@@ -173,7 +173,7 @@
 			],
 			[
 				"collapseSM",
-				"collapseSMFaqs1\t(seguimiento_faqs_panel.html)"
+				"collapseSMFaqs1	(seguimiento_faqs_panel.html)"
 			],
 			[
 				"RESOURCE_TYP",
@@ -221,7 +221,7 @@
 			],
 			[
 				"PLAYER_PU",
-				"PLAYER_HAS_PUNCH\t(definitions.h)"
+				"PLAYER_HAS_PUNCH	(definitions.h)"
 			],
 			[
 				"sclp",
@@ -324,42 +324,18 @@
 	"buffers":
 	[
 		{
-			"file": "src/utils/src/msc3_mk1.bas",
+			"file": "/Y/MK2/examples/Tokimal/dev/minimal.asm",
 			"settings":
 			{
-				"buffer_size": 80254,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/Proyectos/2019/20190731a - Bajas automáticas en Ficheros Junta/instrucciones.txt",
-			"settings":
-			{
-				"buffer_size": 316,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/dev/definitions.h",
-			"settings":
-			{
-				"buffer_size": 7303,
-				"encoding": "Western (Windows 1252)",
+				"buffer_size": 986,
 				"line_ending": "Windows"
 			}
 		}
 	],
 	"build_system": "",
-	"build_system_choices":
-	[
-	],
-	"build_varint": "",
 	"command_palette":
 	{
 		"height": 79.0,
-		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -395,10 +371,7 @@
 	},
 	"console":
 	{
-		"height": 184.0,
-		"history":
-		[
-		]
+		"height": 184.0
 	},
 	"distraction_free":
 	{
@@ -409,16 +382,26 @@
 		"side_bar_visible": false,
 		"status_bar_visible": false
 	},
-	"expanded_folders":
-	[
-		"/D/temp/MK1",
-		"/D/temp/MK1/src",
-		"/D/temp/MK1/src/dev",
-		"/D/temp/MK1/src/utils",
-		"/D/temp/MK1/src/utils/src"
-	],
 	"file_history":
 	[
+		"/W/MK1/src/dev/lala_beta.asm",
+		"/W/MK1/src/dev/engine/player.h",
+		"/W/MK1/src/dev/my/fixed_screens.h",
+		"/Y/MK1_Pestecera/examples/jetpaco/dev/crt.asm",
+		"/W/MK1/src/dev/crt.asm",
+		"/W/MK1/src/dev/definitions.h",
+		"/W/MK1/src/dev/compile.bat",
+		"/W/MK1/src/dev/pantallas.h",
+		"/C/z88dk10/lib/spec_crt0.asm",
+		"/W/MK1/lib/splib2/setenv.bat",
+		"/W/MK1/lib/splib2/Makefile.bat",
+		"/W/MK1/lib/splib2/backgroundtiles/SPPrintString.asm",
+		"/W/MK1/lib/splib2/sp.lst",
+		"/W/MK1/lib/splib2/updater/SPUpdateNow.asm",
+		"/W/MK1/lib/splib2/cwrapper/GenCompile.c",
+		"/D/temp/MK1/src/utils/src/msc3_mk1.bas",
+		"/D/Proyectos/2019/20190731a - Bajas automáticas en Ficheros Junta/instrucciones.txt",
+		"/D/temp/MK1/src/dev/mainloop.h",
 		"/D/temp/MK1/src/dev/definitions.h",
 		"/D/temp/MK1/trash/6baddies/utils/src/ene2h.bas",
 		"/D/temp/MK1/trash/6baddies/dev/assets/levels.h",
@@ -528,25 +511,7 @@
 		"/D/Proyectos/remote/descon01/consigna/public/js/pwdmeter.js",
 		"/D/Proyectos/remote/desbuz02/sftp-config.json",
 		"/D/Proyectos/remote/descon01/consigna/system/core/Common.php",
-		"/D/Proyectos/remote/descon01/consigna/system/libraries/Form_validation.php",
-		"/D/Proyectos/remote/descon01/consigna/public/js/interfaz.js",
-		"/D/Proyectos/remote/descon01/consigna/app/config/avanzadas.php",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/MY_Form_validation.php",
-		"/D/Proyectos/remote/descon01/consigna/app/controllers/api_v1/api.php",
-		"/D/Proyectos/remote/descon01/consigna/app/views/ver_fichero_denegado.php",
-		"/D/Proyectos/remote/descon01/consigna/app/views/antivirus/INFECTADO.php",
-		"/D/Proyectos/remote/descon01/consigna/app/views/form-envio-fichero.php",
-		"/D/Proyectos/remote/descon01/consigna/app/views/form-opciones-fichero.php",
-		"/D/Proyectos/remote/descon01/consigna/system/.htaccess",
-		"/D/Proyectos/remote/descon01/consigna/.htaccess",
-		"/D/Proyectos/remote/descon01/consigna/system/core/Exceptions.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_general.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_php.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_db.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_404.php",
-		"/C/Users/jcastano/Desktop/LDAP Browser/ldapescritura.juntadeandalucia.es - admin (2).cfg",
-		"/C/Users/jcastano/Desktop/LDAP Browser/ldap.juntadeandalucia.es - admin.cfg",
-		"/C/Users/jcastano/Downloads/20191119104404436 instrucciones.txt"
+		"/D/Proyectos/remote/descon01/consigna/system/libraries/Form_validation.php"
 	],
 	"find":
 	{
@@ -554,7 +519,7 @@
 	},
 	"find_in_files":
 	{
-		"height": 128.0,
+		"height": 0.0,
 		"where_history":
 		[
 			"D:\\temp\\MK1\\trash\\6baddies",
@@ -571,6 +536,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"spacer",
+			"0ch",
+			"p_next_frame",
+			"computepos",
+			"NO_MASKS",
 			"timer_",
 			"ctimer.(on|t|frames|count|zero)",
 			"ctimer.(frames)",
@@ -613,109 +583,41 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/utils/src/msc3_mk1.bas",
-					"semi_transient": false,
+					"file": "/Y/MK2/examples/Tokimal/dev/minimal.asm",
 					"settings":
 					{
-						"buffer_size": 80254,
+						"buffer_size": 986,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22847,
-								22853
+								517,
+								517
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
+							"syntax": "Packages/Text/Plain text.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 8752.0,
+						"translation.y": 56.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/D/Proyectos/2019/20190731a - Bajas automáticas en Ficheros Junta/instrucciones.txt",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 316,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 2,
-					"file": "src/dev/definitions.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 7303,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4964,
-								4969
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2335.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
 			]
 		}
 	],
@@ -747,7 +649,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.523501762632,
 			1.0
 		],
 		"rows":
@@ -765,8 +667,6 @@
 	{
 		"height": 0.0
 	},
-	"pinned_build_system": "",
-	"project": "mk1.sublime-project",
 	"replace":
 	{
 		"height": 88.0
@@ -775,7 +675,6 @@
 	"select_file":
 	{
 		"height": 0.0,
-		"last_filter": "",
 		"selected_items":
 		[
 		],
@@ -784,7 +683,6 @@
 	"select_project":
 	{
 		"height": 500.0,
-		"last_filter": "",
 		"selected_items":
 		[
 			[
@@ -794,26 +692,10 @@
 		],
 		"width": 380.0
 	},
-	"select_symbol":
-	{
-		"height": 0.0,
-		"last_filter": "",
-		"selected_items":
-		[
-		],
-		"width": 0.0
-	},
-	"selected_group": 0,
-	"settings":
-	{
-	},
 	"show_minimap": true,
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 299.0,
-	"status_bar_visible": true,
-	"template_settings":
-	{
-	}
+	"side_bar_width": 212.0,
+	"status_bar_visible": true
 }

@@ -28,17 +28,20 @@ void player_init (void) {
 	#if !defined(COMPRESSED_LEVELS) || defined(REFILL_ME)	
 		p_life = 		PLAYER_LIFE;
 	#endif
-	p_objs =	0;
-	p_keys = 0;
-	p_killed = 0;
 	p_disparando = 0;
-	#ifdef MAX_AMMO
-		#ifdef INITIAL_AMMO
-			p_ammo = INITIAL_AMMO;
-		#else
-			p_ammo = MAX_AMMO;
+	
+	#ifndef NO_RESET_STATS
+		p_objs = 0;
+		p_keys = 0;
+		p_killed = 0;
+		#ifdef MAX_AMMO
+			#ifdef INITIAL_AMMO
+				p_ammo = INITIAL_AMMO;
+			#else
+				p_ammo = MAX_AMMO;
+			#endif
 		#endif
-	#endif	
+	#endif
 
 	#ifdef TIMER_ENABLE
 		timer_count = 0;
@@ -283,6 +286,7 @@ unsigned char player_move (void) {
 
 	// Collision, may set possee, hit_v
 
+			// Velocity positive (going downwards)
 	player_calc_bounding_box ();
 
 	hit_v = 0;
@@ -400,7 +404,7 @@ unsigned char player_move (void) {
 						p_saltando = 1;
 						p_cont_salto = 0;
 						#ifdef MODE_128K
-							wyz_play_sound (SFX_JUMP);
+							PLAY_SOUND (SFX_JUMP);
 						#else
 							beep_fx (3);
 						#endif
@@ -426,7 +430,7 @@ unsigned char player_move (void) {
 				p_saltando = 1;
 				p_cont_salto = 0;
 				#ifdef MODE_128K
-					wyz_play_sound (SFX_JUMP);
+					PLAY_SOUND (SFX_JUMP);
 				#else				
 					beep_fx (3);
 				#endif
@@ -446,43 +450,47 @@ unsigned char player_move (void) {
 	//  MOVEMENT IN THE HORIZONTAL AXIS
 	// ***************************************************************************
 
-	if ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {
-		#ifdef PLAYER_GENITAL		
-			p_facing_h = 0xff;
-		#endif
-		if (p_vx > 0) {
-			p_vx -= PLAYER_RX;
-			if (p_vx < 0) p_vx = 0;
-		} else if (p_vx < 0) {
-			p_vx += PLAYER_RX;
-			if (p_vx > 0) p_vx = 0;
-		}
-		wall_h = 0;
-	}
-
-	if ((pad0 & sp_LEFT) == 0) {
-		#ifdef PLAYER_GENITAL
-			p_facing_h = FACING_LEFT;
-		#endif
-		if (p_vx > -PLAYER_MAX_VX) {
-			#ifndef PLAYER_GENITAL			
-				p_facing = 0;
+	#ifndef PLAYER_DISABLE_DEFAULT_HENG
+		if ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {
+			#ifdef PLAYER_GENITAL		
+				p_facing_h = 0xff;
 			#endif
-			p_vx -= PLAYER_AX;
+			if (p_vx > 0) {
+				p_vx -= PLAYER_RX;
+				if (p_vx < 0) p_vx = 0;
+			} else if (p_vx < 0) {
+				p_vx += PLAYER_RX;
+				if (p_vx > 0) p_vx = 0;
+			}
+			wall_h = 0;
 		}
-	}
 
-	if ((pad0 & sp_RIGHT) == 0) {
-		#ifdef PLAYER_GENITAL	
-			p_facing_h = FACING_RIGHT;
-		#endif
-		if (p_vx < PLAYER_MAX_VX) {
-			p_vx += PLAYER_AX;
-			#ifndef PLAYER_GENITAL						
-				p_facing = 1;
+		if ((pad0 & sp_LEFT) == 0) {
+			#ifdef PLAYER_GENITAL
+				p_facing_h = FACING_LEFT;
 			#endif
+			if (p_vx > -PLAYER_MAX_VX) {
+				#ifndef PLAYER_GENITAL			
+					p_facing = 0;
+				#endif
+				p_vx -= PLAYER_AX;
+			}
 		}
-	}
+
+		if ((pad0 & sp_RIGHT) == 0) {
+			#ifdef PLAYER_GENITAL	
+				p_facing_h = FACING_RIGHT;
+			#endif
+			if (p_vx < PLAYER_MAX_VX) {
+				p_vx += PLAYER_AX;
+				#ifndef PLAYER_GENITAL						
+					p_facing = 1;
+				#endif
+			}
+		}
+	#endif
+
+	#include "my/ci/custom_heng.h"
 
 	p_x = p_x + p_vx;
 	#ifndef PLAYER_GENITAL
@@ -606,7 +614,7 @@ unsigned char player_move (void) {
 				#elif defined (BOUNDING_BOX_8_CENTERED)
 					cy1 = (gpy + 3) >> 4;
 				#else
-					cy1 = gpy >> 3;		
+					cy1 = (gpy - 1) >> 3;		
 				#endif
 
 				if (attr (cx1, cy1) == 10) {
@@ -636,7 +644,7 @@ unsigned char player_move (void) {
 			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED)
 				cx1 = (gpx + 3) >> 4;
 			#else
-				cx1 = gpx >> 4;		
+				cx1 = (gpx - 1) >> 4;		
 			#endif		
 
 			if (attr (cx1, cy1) == 10) {
@@ -717,19 +725,19 @@ unsigned char player_move (void) {
 			}
 		}
 		
-		p_next_frame = player_cells [p_facing + p_frame];
+		p_next_frame = (unsigned char *) (player_cells [p_facing + p_frame]);
 	#elif defined PLAYER_BOOTEE
 		gpit = p_facing << 2;
 		if (p_vy == 0) {
-			p_next_frame = player_cells [gpit];
+			p_next_frame = (unsigned char *) (player_cells [gpit]);
 		} else if (p_vy < 0) {
-			p_next_frame = player_cells [gpit + 1];
+			p_next_frame = (unsigned char *) (player_cells [gpit + 1]);
 		} else {
-			p_next_frame = player_cells [gpit + 2];
+			p_next_frame = (unsigned char *) (player_cells [gpit + 2]);
 		}
 	#else	
 		if (!possee && !p_gotten) {
-			p_next_frame = player_cells [8 + p_facing];
+			p_next_frame = (unsigned char *) (player_cells [8 + p_facing]);
 		} else {
 			gpit = p_facing << 2;
 			if (p_vx == 0) {
@@ -737,7 +745,7 @@ unsigned char player_move (void) {
 			} else {
 				rda = ((gpx + 4) >> 3) & 3;
 			}
-			p_next_frame = player_cells [gpit + rda];
+			p_next_frame = (unsigned char *) (player_cells [gpit + rda]);
 		}
 	#endif
 }
@@ -752,7 +760,7 @@ void player_kill (unsigned char sound) {
 	player_deplete ();
 
 	#ifdef MODE_128K
-		wyz_play_sound (sound);
+		PLAY_SOUND (sound);
 	#else
 		beep_fx (sound);
 	#endif

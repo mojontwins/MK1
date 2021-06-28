@@ -100,7 +100,71 @@ void simple_coco_update (void) {
 			
 				// Check collision (player)	
 
-				// Check collision (BG)	
+			#ifdef PLAYER_FLICKERS
+				ld  a, (_p_estado)
+				or  a 
+				jr  nz, _simple_coco_update_continue
+			#endif
+
+				// rdx + 3 >= gpx && rdx + 3 <= gpx + 15 &&
+				// rdx + 3 >= gpx && rdx <= gpx + 12
+
+				// rdx + 3 >= gpx
+				ld  a, (_gpx)
+				ld  c, a
+				ld  a, (_rdx)
+				add 3
+				cp  c 
+				jr  c, _simple_coco_update_collpl_done
+
+				// gpx + 12 >= rdx
+				ld  a, (_rdx)
+				ld  c, a
+				ld  a, (_gpx)
+				add 12
+				cp  c 
+				jr  c, _simple_coco_update_collpl_done
+
+				// rdy + 3 >= gpy && rdy + 3 <= gpy + 15
+				// rdy + 3 >= gpy && rdy <= gpy + 12
+
+				// rdy + 3 >= gpy
+				ld  a, (_gpy)
+				ld  c, a
+				ld  a, (_rdy)
+				add 3
+				cp  c 
+				jr  c, _simple_coco_update_collpl_done
+
+				// gpy + 12 >= rdy
+				ld  a, (_rdy)
+				ld  c, a
+				ld  a, (_gpy)
+				add 12
+				cp  c 
+				jr  c, _simple_coco_update_collpl_done
+
+				// Kill player
+				ld  a, 0xff
+				ld  (_rdy), a 			// This effectively marks the coco for destruction
+
+			#ifdef MODE_128K
+				ld  a, SFX_ENEMY_HIT
+			#else
+				ld  a, 4
+			#endif
+				ld  (_p_killme), a
+
+				jr  _simple_coco_update_continue
+
+			._simple_coco_update_collpl_done
+
+		#endasm
+			
+		// Check collision (BG)	
+		if (attr ((rdx + 3) >> 4, (rdy + 3) >> 4) & 12) rdy = 0xff;
+
+		#asm
 
 			._simple_coco_update_continue
 				// And update arrays 
