@@ -2,7 +2,7 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 rda = templos_mataos ^ 1;
-_gp_gen = simple_decorations + (rda ? 4 : 0);
+_gp_gen = (unsigned char *) (simple_decorations + (rda ? 4 : 0));
 for (gpit = rda; gpit < 6; gpit ++) {
 	if (*_gp_gen == n_pant) {
 		++ _gp_gen;

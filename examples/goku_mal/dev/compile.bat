@@ -31,7 +31,7 @@ if [%1]==[justassets] goto :end
 
 :compile
 echo Compilando guego
-zcc +zx -vn -m mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+zcc +zx -vn -m mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 ..\..\..\src\utils\printsize.exe %game%.bin
 ..\..\..\src\utils\printsize.exe scripts.bin
 

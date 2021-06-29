@@ -3,8 +3,17 @@
 
 // game_loop.h - Da game loop.
 
+	#asm
+		; Makes debugging easier
+		._game_loop_init
+	#endasm
+
 	playing = 1;
 	player_init ();
+
+	#ifdef OBJECT_COUNT
+		flags [OBJECT_COUNT] = p_objs;
+	#endif
 
 	#ifndef COMPRESSED_LEVELS		
 		hotspots_init ();
@@ -35,9 +44,9 @@
 	#ifdef MODE_128K
 			// Play music
 		#ifdef COMPRESSED_LEVELS		
-			wyz_play_music (levels [level].music_id);
+			PLAY_MUSIC (levels [level].music_id);
 		#else
-			wyz_play_music (1);
+			PLAY_MUSIC (1);
 		#endif		
 	#endif
 
@@ -67,8 +76,8 @@
 
 	#ifdef PLAYER_CHECK_MAP_BOUNDARIES		
 		#ifdef COMPRESSED_LEVELS
-			x_pant = n_pant % level_data->map_w;
-			y_pant = n_pant / level_data->map_w;
+			x_pant = n_pant % level_data.map_w;
+			y_pant = n_pant / level_data.map_w;
 		#else
 			x_pant = n_pant % MAP_W; y_pant = n_pant / MAP_W;
 		#endif
@@ -86,6 +95,11 @@
 
 	o_pant = 0xff;
 	while (playing) {
+		#asm
+			; Makes debugging easier
+			._game_loop_do
+		#endasm
+
 		#ifdef DEBUG_KEYS
 			if (sp_KeyPressed (KEY_M)) { ++ p_objs; beep_fx (0); }
 			if (sp_KeyPressed (KEY_H)) { ++ n_pant; beep_fx (0); }
@@ -176,7 +190,12 @@
 			simple_coco_update ();
 		#endif
 
-		if (p_killme) player_kill (p_killme);
+		if (p_killme) {
+			if (p_life) {
+			player_kill (p_killme);
+			#include "my/ci/on_player_killed.h"
+			} else playing = 0;
+		}
 
 		#ifdef PLAYER_CAN_FIRE
 			// Move bullets 			
@@ -184,7 +203,7 @@
 		#endif
 
 		#ifdef ENABLE_TILANIMS
-			do_tilanims ();
+			tilanims_do ();
 		#endif
 
 		// Detect fire zone
@@ -199,6 +218,23 @@
 		// Render
 		if (o_pant == n_pant) {
 			#include "mainloop/update_sprites.h"
+
+			// Limit frame rate
+			
+			#ifdef MIN_FAPS_PER_FRAME
+				#asm
+					.ml_min_faps_loop
+						ld  a, (_isrc)
+						cp  MIN_FAPS_PER_FRAME
+						jr  nc, ml_min_faps_loop_end
+						halt
+						jr  ml_min_faps_loop
+
+					.ml_min_faps_loop_end
+						xor a
+						ld  (_isrc), a
+				#endasm
+			#endif
 
 			sp_UpdateNow();
 		}
@@ -223,7 +259,7 @@
 				if (sp_KeyPressed (KEY_Z)) {
 					if (!key_z_pressed) {
 						#ifdef MODE_128K
-							wyz_play_sound (0);
+							PLAY_SOUND (0);
 						#else
 							beep_fx (2);
 						#endif
@@ -258,8 +294,7 @@
 			if (sp_KeyPressed (KEY_H)) {
 				sp_WaitForNoKey ();
 				#ifdef MODE_128K
-					wyz_stop_sound ();
-					wyz_play_sound (1);
+					player_on = 0;
 				#endif				
 				clear_sprites ();
 				pause_screen ();
@@ -267,11 +302,7 @@
 				sp_WaitForNoKey ();
 				draw_scr ();
 				#ifdef MODE_128K
-					#ifdef COMPRESSED_LEVELS
-						//wyz_play_music (levels [level].music_id);
-					#else
-						//wyz_play_music (1);
-					#endif
+					player_on = 1;
 				#endif				
 			}			
 			if (sp_KeyPressed (KEY_Y)) {
@@ -281,7 +312,12 @@
 
 		// Flick the screen ?
 			
-		#include "mainloop/flick_screen.h"			
+		#if defined ACTIVATE_SCRIPTING && defined COMPRESSED_LEVELS
+			if (script_result != 3)
+		#endif
+		{
+			#include "mainloop/flick_screen.h"
+		}
 
 		// Win game condition
 		
@@ -305,7 +341,8 @@
 		}
 		
 		// Game over condition
-		if (p_life == 0
+		#if defined ACTIVATE_SCRIPTING || (defined(TIMER_ENABLE) && defined(TIMER_GAMEOVER_0)) 
+			if (0
 			#ifdef ACTIVATE_SCRIPTING
 				|| (script_result == 2)
 			#endif
@@ -315,14 +352,16 @@
 		) {
 			playing = 0;				
 		}
+		#endif
 
 		#include "my/ci/extra_routines.h"
 	}
+	
 	sp_UpdateNow ();
 	sp_WaitForNoKey ();
 
 	#ifdef MODE_128K		
-		wyz_stop_sound ();
+		STOP_SOUND ();
 	#endif
 
 	#include "my/ci/after_game_loop.h"

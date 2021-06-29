@@ -118,7 +118,22 @@ Ah, que se me olvidaba. También hicimos un dibujo de la Meemaid. Es ésta:
 
 ## Metiendo la cara en el barro
 
-Vamos a empezar a montar cosas. En primer lugar, necesitarás **z88dk**, que es un compilador de C, y **splib2**, que es la biblioteca de gráficos y demás E/S que usamos. Como no tenemos ganas de que te compliques instalando cosas (sobre todo porque la splib2 es muy vieja y es complicado compilarla usando un z88dk moderno, y porque la splib2 que usamos en el motor está modificada por Elías, el mono modificalibrerías), hemos preparado, para los usuarios de Windows, un paquete `z88dk10-stripped.zip` que encontrarás en el directorio `env` de este repositorio y que deberás descomprimir en C:.
+Vamos a empezar a montar cosas. En primer lugar, necesitarás **z88dk**, que es un compilador de C, y **splib2**, que es la biblioteca de gráficos y demás E/S que usamos. Hasta ahora habíamos venido usando la versión 1.10 de **z88dk** y una versión modificada de **splib2** con un par de cambios. Sin embargo, a partir de 5.9, **MTE MK1** utiliza la versión más reciente de **z88dk**.
+
+Lo primero que tienes que hacer es instalar **z88dk**. Por lo general, valdrá con que vayas a https://github.com/z88dk/z88dk, descargues la última *nightly build* (que debería estar siempre disponible en [este enlace](http://nightly.z88dk.org/z88dk-win32-latest.zip)), y la descomprimas en `c:\`.
+
+Lo siguiente sería instalar **splib2**. Puedes:
+
+* O bien *construir e instalar splib2* : Para ello entraríamos en `lib/splib2` y ejecutaríamos, en una ventana de linea de comandos, que recompilará toda splib2 con la versión que acabas de instalar de **z88dk** y posteriormente la instalará:
+
+```
+	$ setenv.bat
+	$ Makefile.bat
+```
+
+* O bien, simplemente **instalar la versión ya compilada** que hay en `env/splib2_mk2.zip`. En el `zip` encontrarás dos archivos: `spritepack.h` que deberás copiar a `c:/z88dk/include` y `splib2_mk2.lib` que deberás copiar en `c:/z88dk/lib/clibs`. 
+
+Si todo esto te parece un dolor, puedes coger la versión de **z88dk** con **splib2** preinstalado que hay en `env/z88dk_mt.7z`, que corresponde con la versión `v18462-8d70c5a-20210624` del 25 de Junio de 2021. Sin embargo, pienso que es mejor estar "a la última" y realizar este proceso manualmente, y es lo que deberías hacer si tienes un mínimo de experiencia.
 
 También vamos a necesitar un editor de textos. Si eres programador ya tendrás uno que te guste de la hostia. Si no lo eres, por favor, no utilices el Bloc de Notas de Windows.
 

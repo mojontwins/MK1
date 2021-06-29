@@ -6,7 +6,8 @@
 	.fsClipStruct defb 0, 24, 0, 32
 #endasm	
 
-void *joyfunc = sp_JoyKeyboard;		// Puntero a la función de manejo seleccionada.
+//void *joyfunc = sp_JoyKeyboard;		// Puntero a la función de manejo seleccionada.
+unsigned int (*joyfunc)(struct sp_UDK *) = sp_JoyKeyboard;
 
 const void *joyfuncs [] = {
 	sp_JoyKeyboard, sp_JoyKempston, sp_JoySinclair1
@@ -31,8 +32,15 @@ void *u_free = sp_FreeBlock;
 
 // Safe stuff in low(est) RAM
 
-unsigned char safe_byte @ 23296;
+unsigned char safe_byte 		@ 23296;
 
+unsigned int ram_address 		@ 23297;
+unsigned int ram_destination 	@ 23299;
+
+#ifdef MODE_128K
+	unsigned char ram_page 		@ 23301;
+#endif
+	
 // Globales muy globalizadas
 
 struct sp_SS *sp_player;
@@ -49,7 +57,7 @@ unsigned char enoffs;
 // Aux
 
 char asm_number;
-unsigned int asm_int;
+unsigned int asm_int 			@ 23302;
 unsigned int asm_int_2;
 unsigned int seed;
 unsigned char half_life;
@@ -111,7 +119,7 @@ unsigned char p_tx, p_ty;
 #endif
 signed int ptgmx, ptgmy;
 
-const unsigned char *spacer = "            ";
+unsigned char *spacer = "            ";
 
 unsigned char enit;
 
@@ -173,7 +181,7 @@ unsigned char map_attr [150];
 unsigned char map_buff [150] @ FREEPOOL;
 // Breakable walls/etc
 #ifdef BREAKABLE_WALLS
-	unsigned char brk_buff [150] @ 23297;
+	unsigned char brk_buff [150] @ 23296+16;
 #endif
 
 // posición del objeto (hotspot). Para no objeto,
@@ -187,7 +195,7 @@ unsigned char orig_tile;	// Tile que había originalmente bajo el objeto
 #ifndef MAX_FLAGS
 	#define MAX_FLAGS 16
 #endif
-unsigned char flags[MAX_FLAGS];
+unsigned char flags[MAX_FLAGS];	
 
 // Globalized
 unsigned char o_pant;
@@ -251,6 +259,7 @@ unsigned char objs_old, keys_old, life_old, killed_old;
 
 #ifdef COMPRESSED_LEVELS
 	unsigned char *level_str = "LEVEL 0X";
+	unsigned char silent_level = 0;
 #endif
 
 #ifdef GET_X_MORE
@@ -271,12 +280,24 @@ unsigned char x0, y0, x1, y1;
 unsigned char ptx1, pty1, ptx2, pty2;
 unsigned char *_gp_gen;
 
+#ifdef ENABLE_TILANIMS
+	unsigned char tait;
+	unsigned char max_tilanims;
+	unsigned char tacount;
+	unsigned char tilanims_xy [MAX_TILANIMS];
+	unsigned char tilanims_ft [MAX_TILANIMS];
+#endif
+
+#if defined USE_AUTO_TILE_SHADOWS || defined USE_AUTO_SHADOWS || defined ENABLE_TILANIMS
+	unsigned char xx, yy;
+#endif
+
 #if defined USE_AUTO_TILE_SHADOWS || defined USE_AUTO_SHADOWS
 	unsigned char c1, c2, c3, c4;
 	unsigned char t1, t2, t3, t4;
 	unsigned char nocast, _ta;
-	unsigned char xx, yy;
 #endif
+
 #ifdef USE_AUTO_TILE_SHADOWS
 	unsigned a1, a2, a3;
 	unsigned char *gen_pt_alt;
@@ -291,4 +312,7 @@ unsigned char *_gp_gen;
 
 #ifdef MODE_128K
 	unsigned char song_playing = 0;
+	unsigned char player_on = 1;
 #endif
+
+unsigned char isrc;

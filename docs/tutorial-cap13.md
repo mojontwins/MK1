@@ -579,7 +579,7 @@ Cuando se descomprime un *level bundle*, los primeros 16 bytes del binario corre
 Accediendo a los datos en `level_data` podremos leer las dimensiones del nivel actual o donde vamos a empezar, el número máximo de objetos o la vida de los enemigos. Como `level_data` es un puntero a una estructura `extern`, tendremos que usar `->` para acceder a los valores de sus campos, por ejemplo:
 
 ```c
-    rda = level_data->max_objs;
+    rda = level_data.max_objs;
 ```
 
 ## Configurando el motor
@@ -754,7 +754,7 @@ Antes hemos visto la fullería que hemos hecho con `PLAYER_NUM_OBJETOS` para pod
 
 ### Número de objetos
 
-Como ya hemos visto, se trata de configurar `PLAYER_NUM_OBJETOS` al valor de la cabecera `level_data->max_objs`:
+Como ya hemos visto, se trata de configurar `PLAYER_NUM_OBJETOS` al valor de la cabecera `level_data.max_objs`:
 
 ```c
     #define PLAYER_NUM_OBJETOS          (level_lata->max_objs)
@@ -1149,12 +1149,12 @@ El código que saca la pantalla, toca la música de nuevo nivel y saca el numer�
 
 Una cosa que suele ayudar mucho al _gameplay_, sobre todo cuando el juego es más de avanzar que de explorar, es dar un pequeño boost al jugador al subir a la pantalla de arriba. Vamos a detectar que estemos cambiando de pantalla hacia arriba para dar a la VY el máximo valor negativo, lo que hará más fácil dirigir a Goku Mal a una plataforma en lugar de fallar y volver a la pantalla de abajo.
 
-Si recordamos, `my/ci/before_entering_screen.h` se inyecta justo al ir a cambiar pantalla, cuando `n_pant` y `o_pant` son distintas. Justo ahí podremos detectar que `n_pant == (o_pant - level_data->map_w)` y en ese caso aplicar el boost:
+Si recordamos, `my/ci/before_entering_screen.h` se inyecta justo al ir a cambiar pantalla, cuando `n_pant` y `o_pant` son distintas. Justo ahí podremos detectar que `n_pant == (o_pant - level_data.map_w)` y en ese caso aplicar el boost:
 
 ```c
     // before_entering_screen.h
 
-    if (n_pant == (o_pant - level_data->map_w)) p_vy = -PLAYER_MAX_VY_SALTANDO;
+    if (n_pant == (o_pant - level_data.map_w)) p_vy = -PLAYER_MAX_VY_SALTANDO;
 ```
 
 ## Fin!

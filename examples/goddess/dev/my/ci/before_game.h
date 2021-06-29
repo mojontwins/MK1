@@ -2,7 +2,7 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 _x = 4; _y = 20; _t = 71;
-_gp_gen = "A EASY  B MEDIUM  C HARD";
+_gp_gen = (unsigned char *) ("A EASY  B MEDIUM  C HARD");
 print_str ();
 sp_UpdateNow ();
 

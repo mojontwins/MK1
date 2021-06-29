@@ -1,0 +1,90 @@
+;
+; Sprite Pack V2.2 Configuration File
+; Alvin Albrecht 07.2003
+;
+; Customize the following options prior to compiling the library.
+;
+;
+; * DISPLAY RESOLUTION
+;
+;   Define exactly one of these as true:
+;
+    DEFC DISP_SPECTRUM = 1
+;     for a 256x192 pixel, 32x24 colour Spectrum display
+;
+    DEFC DISP_HICOLOUR = 0
+;     for a 256x192 pixel, 32x192 colour hi-colour display (Timex only)
+;
+    DEFC DISP_HIRES    = 0
+;     for a 512x192 pixel monochrome hi-res display (Timex only)
+;
+    DEFC DISP_TMXDUAL  = 0
+;     for spectrum display using double buffering (Timex dual screen mode).
+;     also set DISP_SPECTRUM to 1 and NOFLICKER to 0
+;
+;
+; * DISPLAY SIZE
+;
+;   Specify what rows of the display Sprite Pack will manage:
+;
+    DEFC SP_ROWSTART = 0     ; inclusive
+    DEFC SP_ROWEND   = 24    ; non-inclusive
+;
+;
+; * SPECIFY SCREEN DRAW METHODS & VARIABLES
+;
+    DEFC NOFLICKER   = 1
+;     for no-flicker mode where a character is completely drawn
+;     in a buffer before being copied to the screen
+;
+    DEFC SCROLLER    = 0
+;     to activate scroller mode where the first sprite in each
+;     character is drawn as load-type regardless of its actual type
+;
+    DEFC COMPRESS    = 0
+;     to compress sprite graphics so that xor, or and load sprites
+;     do not need an (unused) mask byte in their definitions; this means
+;     that xor, or and load sprites can share graphic definitions but mask
+;     sprite graphics (which require the mask byte) must have an
+;     independent definition with the mask byte present.  BUGGED!
+;
+    DEFC SProtatetbl = $f000
+;     the base address of the horizontal rotate table must be a
+;     multiple of $1000; actual memory occupied is SProtatetbl+$200
+;     to SProtatetbl+$fff
+;
+    DEFC USEPLANES   = 0
+;     If set, use sprite planes.
+;
+;
+; * IM2 INTERRUPT VECTOR TABLE
+;
+    DEFC IM2TABLE    = $f000 ; LSB = $00
+;     the base address of the im 2 interrupt vector table;
+;     occupies 257 bytes if EVENVECTORS is false, 256 otherwise
+;
+    DEFC EVENVECTORS = 0
+;     if devices will only place even vectors on the data bus,
+;     define this variable as true
+;
+;
+; * DYNAMIC BLOCK MEMORY ALLOCATOR
+;
+    DEFC NUMQUEUES = 1
+;     the number of memory queues managed by the dynamic block
+;     memory allocator
+;
+;
+; * AY-3-89xx SOUND CHIP PORT ASSIGNMENTS
+;
+    DEFC AYREG_2068    = $f5
+    DEFC AYDAT_2068    = $f6
+    DEFC AYREG_128     = $fffd
+    DEFC AYDAT_128     = $bffd
+    DEFC AYREG_FULLER  = $3f
+    DEFC AYDAT_FULLER  = $5f
+;
+    DEFC AYREG_DEFAULT = AYREG_128
+    DEFC AYDAT_DEFAULT = AYDAT_128
+;
+;

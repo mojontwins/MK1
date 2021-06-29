@@ -1,0 +1,7 @@
+sp_HuffCreate.c
+sp_HuffDecode.c
+sp_HuffDelete.c
+sp_HuffEncode.c
+sp_HuffExtract.c
+sp_HuffGetState.c
+sp_HuffSetState.c

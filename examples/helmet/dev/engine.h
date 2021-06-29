@@ -153,7 +153,7 @@ void espera_activa (int espera) {
 					
 					// Sonido
 					#ifdef MODE_128K
-						wyz_play_sound (SFX_PUSH_BOX);
+						PLAY_SOUND (SFX_PUSH_BOX);
 					#else			
 						beep_fx (2);	
 					#endif
@@ -182,7 +182,7 @@ void espera_activa (int espera) {
 				-- p_keys;
 		
 				#ifdef MODE_128K
-					wyz_play_sound (SFX_OPEN_LOCK);
+					PLAY_SOUND (SFX_OPEN_LOCK);
 				#else
 					beep_fx (8);
 				#endif
@@ -329,15 +329,15 @@ void draw_scr_background (void) {
 				#endasm
 			#endif
 
-			draw_coloured_tile ();
-			
-			#if defined ENABLE_TILANIMS && defined UNPACKED_MAP
-				// Detect tilanims
+			#ifdef ENABLE_TILANIMS
 				if (_t >= ENABLE_TILANIMS) {
-					add_tilanim ((_x - VIEWPORT_X) >> 1, (_y - VIEWPORT_Y) >> 1, _t);	
+					_n = (((_x - VIEWPORT_X) << 3) & 0xf0) | ((_y - VIEWPORT_Y) >> 1);
+					tilanims_add ();	
 				}
 			#endif
-				
+
+			draw_coloured_tile ();
+
 			//_x += 2; if (_x == VIEWPORT_X + 30) { _x = VIEWPORT_X; _y += 2; }
 			#asm
 					ld  a, (__x)
@@ -358,34 +358,7 @@ void draw_scr_background (void) {
 	#endif
 }
 
-void draw_scr (void) {
-	is_rendering = 1;
-
-	#ifdef ENABLE_TILANIMS
-		max_tilanims = 0;
-	#endif
-
-	#ifdef ENABLE_FIRE_ZONE
-		f_zone_ac = 0;
-	#endif	
-
-	draw_scr_background ();
-
-	// Object setup
-
-	enems_load ();
-
-	#ifdef ACTIVATE_SCRIPTING
-		#if defined LINE_OF_TEXT && !defined LINE_OF_TEXT_NO_AUTOERASE
-			_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT; _t = LINE_OF_TEXT_ATTR; _gp_gen = "                              "; print_str ();
-		#endif
-		// Ejecutamos los scripts de entrar en pantalla:
-		run_script (2 * MAP_W * MAP_H + 1); 	// ENTERING ANY
-		run_script (n_pant << 1); 				// ENTERING SCREEN n
-	#endif
-
-	#include "my/ci/entering_screen.h"
-
+void draw_scr_hotspots_locks (void) {
 	/*
 	hotspot_y = 240;
 	rdx = (hotspots [n_pant].xy >> 4);
@@ -537,6 +510,14 @@ void draw_scr (void) {
 				cp  c
 				jr  nz, _open_locks_done
 				
+			// Remove x=y=np=0 pseudobug in multilevel games
+			#ifdef COMPRESSED_LEVELS
+				ld  a, b
+				or  d
+				or  e
+				jr  z, _open_locks_done				
+			#endif
+
 			._open_locks_do
 				ld  a, d
 				ld  (__x), a
@@ -576,6 +557,37 @@ void draw_scr (void) {
 				jr  nz, _open_locks_loop
 		#endasm
 	#endif
+}
+
+void draw_scr (void) {
+	is_rendering = 1;
+
+	#ifdef ENABLE_TILANIMS
+		tilanims_reset ();
+	#endif
+
+	#ifdef ENABLE_FIRE_ZONE
+		f_zone_ac = 0;
+	#endif	
+
+	draw_scr_background ();
+
+	// Object setup
+
+	enems_load ();
+
+	#ifdef ACTIVATE_SCRIPTING
+		#if defined LINE_OF_TEXT && !defined LINE_OF_TEXT_NO_AUTOERASE
+			_x = LINE_OF_TEXT_X; _y = LINE_OF_TEXT; _t = LINE_OF_TEXT_ATTR; _gp_gen = "                              "; print_str ();
+		#endif
+		// Ejecutamos los scripts de entrar en pantalla:
+		run_script (2 * MAP_W * MAP_H + 1); 	// ENTERING ANY
+		run_script (n_pant << 1); 				// ENTERING SCREEN n
+	#endif
+
+	#include "my/ci/entering_screen.h"
+
+	draw_scr_hotspots_locks ();
 
 	#ifdef PLAYER_CAN_FIRE
 		bullets_init ();
@@ -612,7 +624,8 @@ void select_joyfunc (void) {
 	}
 
 	#ifdef MODE_128K
-		wyz_play_sound (SFX_START);
+		STOP_SOUND ();
+		PLAY_SOUND (SFX_START);
 		sp_WaitForNoKey ();
 	#endif
 }

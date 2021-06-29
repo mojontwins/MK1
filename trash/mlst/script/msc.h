@@ -135,7 +135,7 @@ void run_script (unsigned char whichs) {
                     // readxy ();
                     // sc_terminado = (flags [sc_x] != sc_y);
                     #asm
-                            call _read_two_bytes_d_e
+                            call _read_two_bytes_D_E
                             // Set sc_terminado if flags [C] != E
                             ld  b, 0
                             ld  c, d
@@ -199,9 +199,9 @@ void run_script (unsigned char whichs) {
                         // MUSIC n
                         sc_n = read_vbyte ();
                         if (sc_n == 0xff) {
-                            wyz_stop_sound ();
+                            STOP_SOUND ();
                         } else {
-                            wyz_play_music (sc_n);
+                            PLAY_MUSIC (sc_n);
                         }
                         break;
                     case 0xF3:

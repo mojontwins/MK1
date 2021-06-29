@@ -16,14 +16,14 @@ void break_wall (void) {
 	} else {
 		_n = _t = 0; update_tile ();
 		#ifdef MODE_128K
-			gpix = SFX_BREAKABLE_BREAK
+			gpit = SFX_BREAKABLE_BREAK;
 		#else
 			gpit = 0;
 		#endif
 		#include "my/ci/on_wall_broken.h"
 	}
 	#ifdef MODE_128K
-		wyz_play_sound (gpit);
+		PLAY_SOUND (gpit);
 	#else			
 		// Show what just happened before the sound interrupts the action
 		sp_UpdateNow ();

@@ -14,46 +14,46 @@ unsigned char qtile (unsigned char x, unsigned char y) {
 
 #if defined (USE_AUTO_TILE_SHADOWS) || defined (USE_AUTO_SHADOWS)
 	unsigned char attr_mk2 (void) {
-	// x + 15 * y = x + (16 - 1) * y = x + 16 * y - y = x + (y << 4) - y.
-	// if (cx1 < 0 || cy1 < 0 || cx1 > 14 || cy1 > 9) return 0;
-	// return map_attr [cx1 + (cy1 << 4) - cy1];
-	#asm
-			ld  a, (_cx1)
-			cp  15
-			jr  nc, _attr_reset
-
-			ld  a, (_cy1)
-			cp  10
-			jr  c, _attr_do
-
-		._attr_reset
-			ld  hl, 0
-			ret
-
-		._attr_do
-			ld  a, (_cy1)
-			ld  b, a
-			sla a
-			sla a
-			sla a
-			sla a
-			sub b
-			ld  b, a
-			ld  a, (_cx1)
-			add b
-			ld  e, a
-			ld  d, 0
-			ld  hl, _map_attr
-			add hl, de
-			ld  a, (hl)
-
-			ld  h, 0
-			ld  l, a
-			ret
-	#endasm
+		// x + 15 * y = x + (16 - 1) * y = x + 16 * y - y = x + (y << 4) - y.
+		// if (cx1 < 0 || cy1 < 0 || cx1 > 14 || cy1 > 9) return 0;
+		// return map_attr [cx1 + (cy1 << 4) - cy1];
+		#asm
+				ld  a, (_cx1)
+				cp  15
+				jr  nc, _attr_reset
+	
+				ld  a, (_cy1)
+				cp  10
+				jr  c, _attr_do
+	
+			._attr_reset
+				ld  hl, 0
+				ret
+	
+			._attr_do
+				ld  a, (_cy1)
+				ld  b, a
+				sla a
+				sla a
+				sla a
+				sla a
+				sub b
+				ld  b, a
+				ld  a, (_cx1)
+				add b
+				ld  e, a
+				ld  d, 0
+				ld  hl, _map_attr
+				add hl, de
+				ld  a, (hl)
+	
+				ld  h, 0
+				ld  l, a
+				ret
+		#endasm
 	}
 #endif
-
+	
 #ifdef COMPRESSED_LEVELS
 	#define ATTR_OFFSET 1536
 #else
@@ -609,7 +609,8 @@ void update_tile (void) {
 	#ifdef ENABLE_TILANIMS
 		// Detect tilanims
 		if (_t >= ENABLE_TILANIMS) {
-			add_tilanim (_x, _y, _t);	
+			_n = (_x << 4) | _y;
+			tilanims_add ();	
 		}
 	#endif
 

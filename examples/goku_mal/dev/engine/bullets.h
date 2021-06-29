@@ -54,10 +54,11 @@ void bullets_fire (void) {
 	#ifdef PLAYER_CAN_FIRE_FLAG 
 		if (flags [PLAYER_CAN_FIRE_FLAG] == 0) return;
 	#endif
+
 	#ifdef MAX_AMMO
 		if (!p_ammo) return;
-		-- p_ammo;
 	#endif
+	
 	// Buscamos una bala libre
 	for (b_it = 0; b_it < MAX_BULLETS; ++ b_it) {
 		if (bullets_estado [b_it] == 0) {
@@ -165,7 +166,7 @@ void bullets_fire (void) {
 			#endif
 
 			#ifdef MODE_128K
-				wyz_play_sound (SFX_SHOOT);
+				PLAY_SOUND (SFX_SHOOT);
 			#else
 				beep_fx (6);
 			#endif
@@ -180,8 +181,12 @@ void bullets_fire (void) {
 
 			#include "my/ci/on_player_fires.h"
 
-			bullets_update ();			
+			bullets_update ();
 
+			#ifdef MAX_AMMO
+				-- p_ammo;
+			#endif
+			
 			break;
 		}
 	}

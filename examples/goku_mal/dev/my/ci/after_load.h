@@ -15,8 +15,8 @@
 
 	// Select lang
 
-	_x = 11; _y = 11; _t = 71; _gp_gen = "1. ENGLISH"; print_str ();
-	_x = 11; _y = 12; _t = 71; _gp_gen = "2. SPANISH"; print_str ();
+	_x = 11; _y = 11; _t = 71; _gp_gen = (unsigned char *) ("1. ENGLISH"); print_str ();
+	_x = 11; _y = 12; _t = 71; _gp_gen = (unsigned char *) ("2. SPANISH"); print_str ();
 	sp_UpdateNow ();
 
 	while (lang == 99) {

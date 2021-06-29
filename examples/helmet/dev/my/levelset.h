@@ -12,7 +12,9 @@
 	typedef struct {
 		unsigned char resource_id;
 		unsigned char music_id;
+		#ifdef ACTIVATE_SCRIPTING
 		unsigned int script_offset;
+		#endif
 	} LEVEL;
 #else
 	// 48K format:

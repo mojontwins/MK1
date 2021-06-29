@@ -111,7 +111,7 @@ void run_script (unsigned char whichs) {
                     // readxy ();
                     // sc_terminado = (flags [sc_x] != sc_y);
                     #asm
-                            call _read_two_bytes_d_e
+                            call _read_two_bytes_D_E
                             // Set sc_terminado if flags [C] != E
                             ld  b, 0
                             ld  c, d

@@ -31,8 +31,8 @@ void halts_delay (unsigned char n) {
 unsigned char check_password (void) {
 	wyz_play_sound (SFX_START);
 
-	_x = MENU_X; _y = MENU_Y    ; _t = 7; _gp_gen = " PASSWORD "; print_str ();
-	_x = MENU_X; _y = MENU_Y + 1;       ; _gp_gen = "          "; print_str ();
+	_x = MENU_X; _y = MENU_Y    ; _t = 7; _gp_gen = (unsigned char *) (" PASSWORD "); print_str ();
+	_x = MENU_X; _y = MENU_Y + 1;       ; _gp_gen = (unsigned char *) ("          "); print_str ();
 	_x = MENU_X; _y = MENU_Y + 2;       ;                         print_str ();
 
 	for (gpit = 0; gpit < PASSWORD_LENGTH; ++ gpit) password [gpit] = '.';

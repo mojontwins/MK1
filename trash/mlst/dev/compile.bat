@@ -34,7 +34,8 @@ echo Running The Librarian
 ..\..\..\src\utils\librarian2.exe list=..\bin\list.txt index=assets\librarian.h bins_prefix=..\bin\ rams_prefix=..\bin\ > nul
 
 echo Compilando guego
-zcc +zx -vn -m mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+rem zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 ..\..\..\src\utils\printsize.exe %game%.bin
 ..\..\..\src\utils\printsize.exe ..\script\scripts.bin
 

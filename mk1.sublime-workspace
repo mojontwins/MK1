@@ -324,29 +324,38 @@
 	"buffers":
 	[
 		{
-			"file": "src/utils/src/msc3_mk1.bas",
+			"file": "README.md",
 			"settings":
 			{
-				"buffer_size": 80254,
+				"buffer_size": 3871,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "/D/Proyectos/2019/20190731a - Bajas automáticas en Ficheros Junta/instrucciones.txt",
+			"file": "docs/tutorial-cap01.md",
 			"settings":
 			{
-				"buffer_size": 316,
+				"buffer_size": 20511,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/dev/definitions.h",
+			"file": "lib/splib2/setenv.bat",
 			"settings":
 			{
-				"buffer_size": 7303,
-				"encoding": "Western (Windows 1252)",
+				"buffer_size": 141,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/setenv.bat",
+			"settings":
+			{
+				"buffer_size": 141,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -411,14 +420,62 @@
 	},
 	"expanded_folders":
 	[
-		"/D/temp/MK1",
-		"/D/temp/MK1/src",
-		"/D/temp/MK1/src/dev",
-		"/D/temp/MK1/src/utils",
-		"/D/temp/MK1/src/utils/src"
+		"/D/temp/vmware_shared/MK1",
+		"/D/temp/vmware_shared/MK1/docs",
+		"/D/temp/vmware_shared/MK1/env",
+		"/D/temp/vmware_shared/MK1/lib",
+		"/D/temp/vmware_shared/MK1/src",
+		"/D/temp/vmware_shared/MK1/src/dev"
 	],
 	"file_history":
 	[
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/extra_functions.h",
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/fixed_screens.h",
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/config.h",
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/levelset.h",
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/entering_game.h",
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/engine/c_levels.h",
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/compile.bat",
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/after_load.h",
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/title_screen.h",
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/level_screen.h",
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/mainloop/game_loop.h",
+		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/before_entering_screen.h",
+		"/D/Proyectos/2021/20210629a - Cambio de password desde SSOWeb en miCuenta/instrucciones.txt",
+		"/D/temp/vmware_shared/MK1/docs/tutorial-cap13.md",
+		"/D/temp/vmware_shared/MK1/examples/helmet/dev/engine/c_levels.h",
+		"/D/temp/vmware_shared/MK1/examples/helmet/dev/assets/levels.h",
+		"/D/temp/vmware_shared/MK1/examples/helmet/dev/compile.bat",
+		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/config.h",
+		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/fixed_screens.h",
+		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/ci/entering_screen.h",
+		"/D/temp/vmware_shared/MK1/examples/helmet/dev/mainloop.h",
+		"/D/temp/vmware_shared/MK1/examples/helmet/dev/mainloop/flick_screen.h",
+		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/ci/extra_routines.h",
+		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/ci/after_game_loop.h",
+		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/entering_screen.h",
+		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/hotspots_custom.h",
+		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/before_game.h",
+		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/entering_game.h",
+		"/Y/MK2/examples/Tokimal/dev/minimal.asm",
+		"/W/MK1/src/dev/lala_beta.asm",
+		"/W/MK1/src/dev/engine/player.h",
+		"/W/MK1/src/dev/my/fixed_screens.h",
+		"/Y/MK1_Pestecera/examples/jetpaco/dev/crt.asm",
+		"/W/MK1/src/dev/crt.asm",
+		"/W/MK1/src/dev/definitions.h",
+		"/W/MK1/src/dev/compile.bat",
+		"/W/MK1/src/dev/pantallas.h",
+		"/C/z88dk10/lib/spec_crt0.asm",
+		"/W/MK1/lib/splib2/setenv.bat",
+		"/W/MK1/lib/splib2/Makefile.bat",
+		"/W/MK1/lib/splib2/backgroundtiles/SPPrintString.asm",
+		"/W/MK1/lib/splib2/sp.lst",
+		"/W/MK1/lib/splib2/updater/SPUpdateNow.asm",
+		"/W/MK1/lib/splib2/cwrapper/GenCompile.c",
+		"/D/temp/MK1/src/utils/src/msc3_mk1.bas",
+		"/D/Proyectos/2019/20190731a - Bajas automáticas en Ficheros Junta/instrucciones.txt",
+		"/D/temp/MK1/src/dev/mainloop.h",
 		"/D/temp/MK1/src/dev/definitions.h",
 		"/D/temp/MK1/trash/6baddies/utils/src/ene2h.bas",
 		"/D/temp/MK1/trash/6baddies/dev/assets/levels.h",
@@ -499,54 +556,7 @@
 		"/D/temp/mw1311ws/makefilewithlua",
 		"/C/Users/jcastano/AppData/Local/Temp/7zO0E105AB9/readsrc.txt",
 		"/D/Proyectos/remote/descon01/consigna/LICENSE",
-		"/D/Proyectos/remote/descon01/consigna/saml-desarrollo.pem",
-		"/D/Proyectos/remote/descon01/consigna/public/robots.txt",
-		"/D/Proyectos/remote/descon01/consigna/saml.pem_antiguo",
-		"/D/temp/mw1311ws/readsrc.txt",
-		"/D/Proyectos/remote/descon01/consigna/public/license.txt",
-		"/D/Proyectos/remote/descon01/consigna/TODO",
-		"/D/Proyectos/remote/descon01/consigna/UPDATE-CodeIgniter",
-		"/D/Proyectos/remote/descon01/consigna/readme.certificate",
-		"/D/Proyectos/remote/descon01/consigna/README",
-		"/D/Proyectos/remote/descon01/consigna/INSTALL.SELinux",
-		"/D/Proyectos/remote/descon01/consigna/INSTALL",
-		"/D/Proyectos/remote/descon01/consigna/HEAD",
-		"/D/Proyectos/remote/descon01/consigna/description",
-		"/D/Proyectos/remote/descon01/consigna/BUGS",
-		"/D/Proyectos/remote/descon01/consigna/public/js/jquery.blockUI_2.31.js",
-		"/D/Proyectos/remote/descon01/consigna/public/js/configtest.js",
-		"/D/Proyectos/remote/descon01/consigna/public/js/iepngfix.htc",
-		"/D/Proyectos/remote/descon01/consigna/app/views/form-login.php",
-		"/D/Proyectos/remote/descon01/consigna/system/core/Input.php",
-		"/D/Proyectos/remote/descon01/consigna/system/core/Security.php",
-		"/D/Proyectos/remote/descon01/consigna/app/controllers/ficheros.php-deprecated",
-		"/D/Proyectos/remote/descon01/consigna/public/js/jquery.cluetip.js",
-		"/D/Proyectos/remote/descon01/consigna/public/js/jquery.dimensions.pack.js",
-		"/D/Proyectos/remote/descon01/consigna/public/js/jquery.overlay-1.2.3.pack.js",
-		"/D/Proyectos/remote/descon01/consigna/public/js/jquery.overlay-1.2.3.src.js",
-		"/D/Proyectos/remote/descon01/consigna/public/js/jquery.timers.js",
-		"/D/Proyectos/remote/descon01/consigna/public/js/pwdmeter.js",
-		"/D/Proyectos/remote/desbuz02/sftp-config.json",
-		"/D/Proyectos/remote/descon01/consigna/system/core/Common.php",
-		"/D/Proyectos/remote/descon01/consigna/system/libraries/Form_validation.php",
-		"/D/Proyectos/remote/descon01/consigna/public/js/interfaz.js",
-		"/D/Proyectos/remote/descon01/consigna/app/config/avanzadas.php",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/MY_Form_validation.php",
-		"/D/Proyectos/remote/descon01/consigna/app/controllers/api_v1/api.php",
-		"/D/Proyectos/remote/descon01/consigna/app/views/ver_fichero_denegado.php",
-		"/D/Proyectos/remote/descon01/consigna/app/views/antivirus/INFECTADO.php",
-		"/D/Proyectos/remote/descon01/consigna/app/views/form-envio-fichero.php",
-		"/D/Proyectos/remote/descon01/consigna/app/views/form-opciones-fichero.php",
-		"/D/Proyectos/remote/descon01/consigna/system/.htaccess",
-		"/D/Proyectos/remote/descon01/consigna/.htaccess",
-		"/D/Proyectos/remote/descon01/consigna/system/core/Exceptions.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_general.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_php.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_db.php",
-		"/D/Proyectos/remote/descon01/consigna/app/errors/error_404.php",
-		"/C/Users/jcastano/Desktop/LDAP Browser/ldapescritura.juntadeandalucia.es - admin (2).cfg",
-		"/C/Users/jcastano/Desktop/LDAP Browser/ldap.juntadeandalucia.es - admin.cfg",
-		"/C/Users/jcastano/Downloads/20191119104404436 instrucciones.txt"
+		"/D/Proyectos/remote/descon01/consigna/saml-desarrollo.pem"
 	],
 	"find":
 	{
@@ -557,6 +567,7 @@
 		"height": 128.0,
 		"where_history":
 		[
+			"D:\\temp\\vmware_shared\\MK1\\docs",
 			"D:\\temp\\MK1\\trash\\6baddies",
 			"D:\\temp\\MK1\\src",
 			"D:\\temp\\MK1\\trash\\6baddies\\dev",
@@ -571,6 +582,17 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"level_data",
+			"level_data->",
+			"pursuers_max_v",
+			"font",
+			"font.bin",
+			"level_data->",
+			"spacer",
+			"0ch",
+			"p_next_frame",
+			"computepos",
+			"NO_MASKS",
 			"timer_",
 			"ctimer.(on|t|frames|count|zero)",
 			"ctimer.(frames)",
@@ -598,6 +620,7 @@
 		"regex": true,
 		"replace_history":
 		[
+			"level_data.",
 			"timer_\\1",
 			"timer_t",
 			"NO_MASKS",
@@ -618,19 +641,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "src/utils/src/msc3_mk1.bas",
+					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 80254,
+						"buffer_size": 3871,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								22847,
-								22853
+								1341,
+								1341
 							]
 						],
 						"settings":
@@ -638,67 +661,92 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 8752.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "docs/tutorial-cap01.md",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 20511,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								17030,
+								17030
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 3276.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "lib/splib2/setenv.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 141,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10,
+								10
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 1,
-					"file": "/D/Proyectos/2019/20190731a - Bajas automáticas en Ficheros Junta/instrucciones.txt",
+					"buffer": 3,
+					"file": "src/dev/setenv.bat",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 316,
+						"buffer_size": 141,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 0,
-			"sheets":
-			[
-				{
-					"buffer": 2,
-					"file": "src/dev/definitions.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 7303,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4964,
-								4969
+								140,
+								140
 							]
 						],
 						"settings":
@@ -706,16 +754,20 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2335.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
@@ -747,7 +799,7 @@
 		"cols":
 		[
 			0.0,
-			0.5,
+			0.523501762632,
 			1.0
 		],
 		"rows":
@@ -803,7 +855,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -811,7 +863,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 299.0,
+	"side_bar_width": 273.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

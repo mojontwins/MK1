@@ -44,9 +44,9 @@
 	#ifdef MODE_128K
 			// Play music
 		#ifdef COMPRESSED_LEVELS		
-			wyz_play_music (levels [level].music_id);
+			PLAY_MUSIC (levels [level].music_id);
 		#else
-			wyz_play_music (1);
+			PLAY_MUSIC (1);
 		#endif		
 	#endif
 
@@ -76,8 +76,8 @@
 
 	#ifdef PLAYER_CHECK_MAP_BOUNDARIES		
 		#ifdef COMPRESSED_LEVELS
-			x_pant = n_pant % level_data->map_w;
-			y_pant = n_pant / level_data->map_w;
+			x_pant = n_pant % level_data.map_w;
+			y_pant = n_pant / level_data.map_w;
 		#else
 			x_pant = n_pant % MAP_W; y_pant = n_pant / MAP_W;
 		#endif
@@ -219,6 +219,23 @@
 		if (o_pant == n_pant) {
 			#include "mainloop/update_sprites.h"
 
+			// Limit frame rate
+			
+			#ifdef MIN_FAPS_PER_FRAME
+				#asm
+					.ml_min_faps_loop
+						ld  a, (_isrc)
+						cp  MIN_FAPS_PER_FRAME
+						jr  nc, ml_min_faps_loop_end
+						halt
+						jr  ml_min_faps_loop
+
+					.ml_min_faps_loop_end
+						xor a
+						ld  (_isrc), a
+				#endasm
+			#endif
+
 			sp_UpdateNow();
 		}
 
@@ -242,7 +259,7 @@
 				if (sp_KeyPressed (KEY_Z)) {
 					if (!key_z_pressed) {
 						#ifdef MODE_128K
-							wyz_play_sound (0);
+							PLAY_SOUND (0);
 						#else
 							beep_fx (2);
 						#endif
@@ -344,7 +361,7 @@
 	sp_WaitForNoKey ();
 
 	#ifdef MODE_128K		
-		wyz_stop_sound ();
+		STOP_SOUND ();
 	#endif
 
 	#include "my/ci/after_game_loop.h"

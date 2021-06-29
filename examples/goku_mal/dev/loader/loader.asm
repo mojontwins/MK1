@@ -64,7 +64,7 @@
 	ld	de, 2217
 	call $0556
 	di
-
+	
 ; Main binary
 	ld	a, $10 		; ROM 1, RAM 0
 	ld	bc, $7ffd
@@ -73,7 +73,7 @@
 	scf
 	ld	a, $ff
 	ld	ix, 24000
-	ld	de, 30454
+	ld	de, 29633
 	call $0556
 	di
 	

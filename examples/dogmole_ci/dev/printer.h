@@ -4,7 +4,7 @@
 // Printing functions
 
 unsigned char attr (unsigned char x, unsigned char y) {
-	if (x >= 14 || y >= 10) return 0;
+	if (x >= 15 || y >= 10) return 0;
 	return map_attr [x + (y << 4) - y];
 }
 
@@ -12,6 +12,48 @@ unsigned char qtile (unsigned char x, unsigned char y) {
 	return map_buff [x + (y << 4) - y];
 }
 
+#if defined (USE_AUTO_TILE_SHADOWS) || defined (USE_AUTO_SHADOWS)
+	unsigned char attr_mk2 (void) {
+		// x + 15 * y = x + (16 - 1) * y = x + 16 * y - y = x + (y << 4) - y.
+		// if (cx1 < 0 || cy1 < 0 || cx1 > 14 || cy1 > 9) return 0;
+		// return map_attr [cx1 + (cy1 << 4) - cy1];
+		#asm
+				ld  a, (_cx1)
+				cp  15
+				jr  nc, _attr_reset
+	
+				ld  a, (_cy1)
+				cp  10
+				jr  c, _attr_do
+	
+			._attr_reset
+				ld  hl, 0
+				ret
+	
+			._attr_do
+				ld  a, (_cy1)
+				ld  b, a
+				sla a
+				sla a
+				sla a
+				sla a
+				sub b
+				ld  b, a
+				ld  a, (_cx1)
+				add b
+				ld  e, a
+				ld  d, 0
+				ld  hl, _map_attr
+				add hl, de
+				ld  a, (hl)
+	
+				ld  h, 0
+				ld  l, a
+				ret
+		#endasm
+	}
+#endif
+	
 #ifdef COMPRESSED_LEVELS
 	#define ATTR_OFFSET 1536
 #else
@@ -53,9 +95,9 @@ void draw_coloured_tile (void) {
 
 		// Fill up c1, c2, c3, c4 then use them
 		#ifdef USE_AUTO_SHADOWS			
-			cx1 = xx - 1; cy1 = yy - 1; rda = *gen_pt; c1 = (nocast && (attr () & 8)) ? (rda & 7) - 1 : rda; t1 = _ta; ++ gen_pt; ++ _ta;
-			cx1 = xx    ; cy1 = yy - 1; rda = *gen_pt; c2 = (nocast && (attr () & 8)) ? (rda & 7) - 1 : rda; t2 = _ta; ++ gen_pt; ++ _ta;
-			cx1 = xx - 1; cy1 = yy    ; rda = *gen_pt; c3 = (nocast && (attr () & 8)) ? (rda & 7) - 1 : rda; t3 = _ta; ++ gen_pt; ++ _ta;			
+			cx1 = xx - 1; cy1 = yy - 1; rda = *gen_pt; c1 = (nocast && (attr_mk2 () & 8)) ? (rda & 7) - 1 : rda; t1 = _ta; ++ gen_pt; ++ _ta;
+			cx1 = xx    ; cy1 = yy - 1; rda = *gen_pt; c2 = (nocast && (attr_mk2 () & 8)) ? (rda & 7) - 1 : rda; t2 = _ta; ++ gen_pt; ++ _ta;
+			cx1 = xx - 1; cy1 = yy    ; rda = *gen_pt; c3 = (nocast && (attr_mk2 () & 8)) ? (rda & 7) - 1 : rda; t3 = _ta; ++ gen_pt; ++ _ta;			
 		#endif
 		#ifdef USE_AUTO_TILE_SHADOWS
 			// Precalc
@@ -79,7 +121,7 @@ void draw_coloured_tile (void) {
 			
 			gen_pt_alt = tileset + ATTR_OFFSET + t_alt;
 
-			// cx1 = xx - 1; cy1 = yy ? yy - 1 : 0; a1 = (nocast && (attr () & 8));
+			// cx1 = xx - 1; cy1 = yy ? yy - 1 : 0; a1 = (nocast && (attr_mk2 () & 8));
 			#asm
 				// cx1 = xx - 1; 
 					ld  a, (_xx)
@@ -94,12 +136,12 @@ void draw_coloured_tile (void) {
 				._dct_1_set_yy
 					ld  (_cy1), a
 
-				// a1 = (nocast && (attr () & 8));
+				// a1 = (nocast && (attr_mk2 () & 8));
 					ld  a, (_nocast)
 					or  a
 					jr  z, _dct_a1_set
 
-					call _attr
+					call _attr_mk2
 					ld  a, l
 					and 8
 					jr  z, _dct_a1_set
@@ -110,7 +152,7 @@ void draw_coloured_tile (void) {
 					ld  (_a1), a
 			#endasm			
 
-			// cx1 = xx    ; cy1 = yy ? yy - 1 : 0; a2 = (nocast && (attr () & 8));
+			// cx1 = xx    ; cy1 = yy ? yy - 1 : 0; a2 = (nocast && (attr_mk2 () & 8));
 			#asm
 									// cx1 = xx; 
 					ld  a, (_xx)					
@@ -124,12 +166,12 @@ void draw_coloured_tile (void) {
 				._dct_2_set_yy
 					ld  (_cy1), a
 
-				// a2 = (nocast && (attr () & 8))
+				// a2 = (nocast && (attr_mk2 () & 8))
 					ld  a, (_nocast)
 					or  a
 					jr  z, _dct_a2_set
 
-					call _attr
+					call _attr_mk2
 					ld  a, l
 					and 8
 					jr  z, _dct_a2_set
@@ -140,7 +182,7 @@ void draw_coloured_tile (void) {
 					ld  (_a2), a
 			#endasm
 
-			// cx1 = xx - 1; cy1 = yy             ; a3 = (nocast && (attr () & 8));
+			// cx1 = xx - 1; cy1 = yy             ; a3 = (nocast && (attr_mk2 () & 8));
 			#asm
 					// cx1 = xx - 1; 
 					ld  a, (_xx)
@@ -151,12 +193,12 @@ void draw_coloured_tile (void) {
 					ld  a, (_yy)					
 					ld  (_cy1), a
 
-				// a3 = (nocast && (attr () & 8));
+				// a3 = (nocast && (attr_mk2 () & 8));
 					ld  a, (_nocast)
 					or  a
 					jr  z, _dct_a3_set
 
-					call _attr
+					call _attr_mk2
 					ld  a, l
 					and 8
 					jr  z, _dct_a3_set
@@ -567,7 +609,8 @@ void update_tile (void) {
 	#ifdef ENABLE_TILANIMS
 		// Detect tilanims
 		if (_t >= ENABLE_TILANIMS) {
-			add_tilanim (_x, _y, _t);	
+			_n = (_x << 4) | _y;
+			tilanims_add ();	
 		}
 	#endif
 

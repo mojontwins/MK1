@@ -14,8 +14,8 @@
 	#if defined(PLAYER_STEPS_ON_ENEMIES) || defined (PLAYER_CAN_FIRE)
 		void enems_init (void) {
 			enit = 0;
-			while (enit < MAP_W * MAP_H * 3) {
-				malotes [enit].t = malotes [enit].t & 15;	
+			while (enit < MAP_W * MAP_H * MAX_ENEMS) {
+				malotes [enit].t = malotes [enit].t & 0xEF;	// Clear bit 4
 				#ifdef PLAYER_CAN_FIRE
 					malotes [enit].life = ENEMIES_LIFE_GAUGE;
 				#endif
@@ -121,7 +121,7 @@ void enems_draw_current (void) {
 
 void enems_load (void) {
 	// Movemos y cambiamos a los enemigos según el tipo que tengan
-	enoffs = n_pant * 3;
+	enoffs = n_pant * MAX_ENEMS;
 	
 	for (enit = 0; enit < MAX_ENEMS; ++ enit) {
 		en_an_frame [enit] = 0;
@@ -140,6 +140,10 @@ void enems_load (void) {
 				#endif
 			#endif
 		#endif
+
+		#include "my/ci/enems_custom_respawn.h"
+
+		en_an_next_frame [enit] = sprite_18_a;
 
 		switch (malotes [enoffsmasi].t & 0x1f) {
 			case 1:
@@ -184,12 +188,7 @@ void enems_load (void) {
 			#endif
 
 				#include "my/ci/enems_load.h"
-
-			default:
-				en_an_next_frame [enit] = sprite_18_a;
 		}
-
-		malotes [enoffsmasi].t &= 0x1f;
 
 		#include "my/ci/enems_extra_mods.h"
 	}
@@ -227,7 +226,7 @@ void enems_move (void) {
 				ld 	hl, (_enoffsmasi)
 				ld  h, 0
 
-			#ifdef PLAYER_CAN_FIRE
+			#if defined PLAYER_CAN_FIRE || defined COMPRESSED_LEVELS
 				add hl, hl 				// x2
 				ld  d, h
 				ld  e, l 				// DE = x2
@@ -284,6 +283,8 @@ void enems_move (void) {
 
 				ld  a, (hl)
 				ld  (__en_t), a
+				and 0x1f
+				ld  (_rdt), a
 
 			#ifdef PLAYER_CAN_FIRE
 				inc hl 
@@ -316,7 +317,7 @@ void enems_move (void) {
 			#endif
 		#endif
 
-		switch (_en_t) {
+		switch (rdt) {
 			case 1:
 			case 2:
 			case 3:
@@ -326,7 +327,7 @@ void enems_move (void) {
 			#endif
 				#include "engine/enem_mods/enem_type_lineal.h"
 				#ifdef ENABLE_ORTHOSHOOTERS
-					if (_en_t == 5) {
+					if (rdt == 5) {
 						#include "engine/enem_mods/enem_type_orthoshooters.h"
 					}
 				#endif
@@ -443,13 +444,13 @@ void enems_move (void) {
 					// Step over enemy		
 						#ifdef PLAYER_CAN_STEP_ON_FLAG
 							if (flags [PLAYER_CAN_STEP_ON_FLAG] != 0 && 
-								gpy < _en_y - 2 && p_vy >= 0 && _en_t >= PLAYER_MIN_KILLABLE)
+								gpy < _en_y - 2 && p_vy >= 0 && rdt >= PLAYER_MIN_KILLABLE)
 						#else
-							if (gpy < _en_y - 2 && p_vy >= 0 && _en_t >= PLAYER_MIN_KILLABLE)
+							if (gpy < _en_y - 2 && p_vy >= 0 && rdt >= PLAYER_MIN_KILLABLE)
 						#endif				
 						{
 							#ifdef MODE_128K
-								wyz_play_sound (SFX_KILL_ENEMY_STEP);										
+								PLAY_SOUND (SFX_KILL_ENEMY_STEP);										
 								en_an_state [enit] = GENERAL_DYING;
 								en_an_count [enit] = 12;
 								en_an_next_frame [enit] = sprite_17_a;
@@ -519,7 +520,7 @@ void enems_move (void) {
 			#ifdef PLAYER_CAN_FIRE
 				// Collide with bullets
 				#ifdef FIRE_MIN_KILLABLE
-					if (_en_t >= FIRE_MIN_KILLABLE)
+					if (rdt >= FIRE_MIN_KILLABLE)
 				#endif				
 				{
 					for (gpjt = 0; gpjt < MAX_BULLETS; gpjt ++) {
@@ -548,7 +549,7 @@ void enems_move (void) {
 									#ifdef MODE_128K
 										en_an_state [enit] = GENERAL_DYING;
 										en_an_count [enit] = 12;
-										wyz_play_sound (SFX_KILL_ENEMY_SHOOT);
+										PLAY_SOUND (SFX_KILL_ENEMY_SHOOT);
 									#else															
 										beep_fx (5);
 										en_an_next_frame [enit] = sprite_18_a;
@@ -562,7 +563,7 @@ void enems_move (void) {
 								}
 
 								#ifdef MODE_128K
-									wyz_play_sound (SFX_HIT_ENEMY);
+									PLAY_SOUND (SFX_HIT_ENEMY);
 								#else
 									beep_fx (1);
 								#endif

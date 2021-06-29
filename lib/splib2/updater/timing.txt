@@ -1,0 +1,50 @@
+update loop:
+  HIRES:  85 + 14.1875C + 364.5D
+  ELSE :  85 + 14.1875C + 316.5D
+
+
+                    NOROTATE/NOFLICKER         ROTATE/NOFLICKER
+load spec               555 / +9                 915 / +9
+load hires              474 / +9                 834 / +9
+load hiclr              914 / +23               1333 / +23
+
+(x)or spec              653 / +9                1069 / +9
+(x)or hires             572 / +9                 988 / +9
+(x)or hiclr            1012 / +23               1485 / +23
+
+mask spec               747 / +9                1629 / +9
+mask hires              666 / +9                1523 / +9
+mask hiclr             1100 / +23               2017 / +23
+
+C = number chars = 32*24
+D = num dirty areas, max(C/8)
+N = num chars needing update
+S = num dirty chars with sprites
+L = num dirty chars with sprite with 1st char load or SCROLLER mode
+
+
+SPECTRUM:
+
+85 + 14.1875C + 316.5D
++ 393N + (32N NOFLICKER)
++ 152S + (202S NOFLICKER)
+- 210L
++ sprites
+
+
+HIRES:
+
+85 + 14.1875C + 364.5D
++ 320N + (32N NOFLICKER)
++ 205S + (202S NOFLICKER)
+- 210L
++ sprites
+
+
+HICLR:
+
+85 + 14.1875C + 316.5D
++ 526N + (32N NOFLICKER)
++ 4S + (398S NOFLICKER)
+- 206L
++ sprites

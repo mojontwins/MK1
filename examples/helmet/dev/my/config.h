@@ -8,6 +8,9 @@
 // ============================================================================
 
 //#define MODE_128K 						// Read the docs!
+//#define MIN_FAPS_PER_FRAME		2		// Limits the max # of fps to 50/N
+//#define USE_ARKOS_PLAYER					// Use Arkos instead of Wyz player for 128k Music
+//#define ARKOS_SFX_CHANNEL	0				// SFX Channel (0-2)
 //#define VENG_SELECTOR 					// Very advanced!
 //#define USE_MAP_CUSTOM_DECODER
 
@@ -28,6 +31,7 @@
 //#define PER_LEVEL_SPRITESET 				// use a different spriteset for each level in 48K
 #define MAX_LEVELS					3		// # of compressed levels
 //#define REFILL_ME 						// If defined, refill player on each level
+//#define NO_RESET_STATS 						// If defined, player stats are not reset per level
 
 // ============================================================================
 // II. Engine type
@@ -74,6 +78,8 @@
 #define DEATH_COUNT_AND 			7
 #define DEATH_COUNT_ADD 			11 		// Frames to wait = ADD + (rand & AND)
 #define PURSUERS_BASE_CELL			3		// If defined, type 7 enemies are always #
+//#define PURSUERS_BASE_CELL		3		// If defined, type 7 enemies are always #
+#define PURSUERS_MAX_V 				2		// 1, 2, 4.
 
 //#define ENABLE_FANTIES					// If defined, Fanties are enabled!
 //#define FANTIES_BASE_CELL 		2		// Base sprite cell (0, 1, 2 or 3)
@@ -138,6 +144,7 @@
 #define SCRIPTING_KEY_NONE 					// No action key. 
 //#define ENABLE_EXTERN_CODE				// Enables custom code to be run from the script using EXTERN n
 //#define ENABLE_FIRE_ZONE					// Allows to define a zone which auto-triggers "FIRE"
+//#define SCRIPT_PAGE 				3		// In MODE_128K & COMPRESSED_LEVELS
 
 // Timer
 // -----
