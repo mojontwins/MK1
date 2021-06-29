@@ -35,7 +35,7 @@ case 8:
 		) {
 			templos_mataos = 1;
 			_x = 1; _y = 23; _t = 71;
-			_gp_gen = "A BOLT APPEARED ELSEWHERE...  ";
+			_gp_gen = (unsigned char *) ("A BOLT APPEARED ELSEWHERE...  ");
 			print_str ();
 			beep_fx (0);
 		}

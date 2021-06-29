@@ -8,6 +8,9 @@
 // ============================================================================
 
 //#define MODE_128K 						// Read the docs!
+//#define MIN_FAPS_PER_FRAME		2		// Limits the max # of fps to 50/N
+//#define USE_ARKOS_PLAYER					// Use Arkos instead of Wyz player for 128k Music
+//#define ARKOS_SFX_CHANNEL	0				// SFX Channel (0-2)
 //#define VENG_SELECTOR 					// Very advanced!
 //#define USE_MAP_CUSTOM_DECODER
 
@@ -25,8 +28,10 @@
 #define PLAYER_LIFE 				99		// Max and starting life gauge.
 #define PLAYER_REFILL				25		// Life recharge
 //#define COMPRESSED_LEVELS 				// use levels.h instead of mapa.h and enems.h (!)
+//#define PER_LEVEL_SPRITESET 				// use a different spriteset for each level in 48K
 //#define MAX_LEVELS				2		// # of compressed levels
 //#define REFILL_ME 						// If defined, refill player on each level
+//#define NO_RESET_STATS 						// If defined, player stats are not reset per level
 
 // ============================================================================
 // II. Engine type
@@ -72,6 +77,7 @@
 //#define ENABLE_PURSUERS					// If defined, type 7 enemies are active
 //#define DEATH_COUNT_AND 			7
 //#define DEATH_COUNT_ADD 			11 		// Frames to wait = ADD + (rand & AND)
+//#define PURSUERS_MAX_V 			2		// 1, 2, 4.
 //#define PURSUERS_BASE_CELL		3		// If defined, type 7 enemies are always #
 
 #define ENABLE_FANTIES						// If defined, Fanties are enabled!
@@ -137,6 +143,7 @@
 //#define SCRIPTING_KEY_NONE 				// No action key. 
 //#define ENABLE_EXTERN_CODE				// Enables custom code to be run from the script using EXTERN n
 //#define ENABLE_FIRE_ZONE					// Allows to define a zone which auto-triggers "FIRE"
+//#define SCRIPT_PAGE 				3		// In MODE_128K & COMPRESSED_LEVELS
 
 // Timer
 // -----
@@ -181,6 +188,8 @@
 //#define PLAYER_CAN_STEP_ON_FLAG	1		// If defined, player can only kill when flag # is "1"
 //#define PLAYER_MIN_KILLABLE 		3		// Only kill enemies with id >= PLAYER_MIN_KILLABLE
 //#define PLAYER_STEP_SOUND 				// Sound while walking. No effect in the BOOTEE engine.
+
+//#define PLAYER_DISABLE_DEFAULT_HENG 		// To disble default horizontal engine (keyrs)
 
 // Configure keyboard
 
@@ -261,6 +270,7 @@
 //#define USE_AUTO_SHADOWS					// Automatic shadows made of darker attributes
 //#define USE_AUTO_TILE_SHADOWS 			// Automatic shadows using specially defined tiles 32-47.
 //#define UNPACKED_MAP						// Full, uncompressed maps. Shadows settings are ignored.
+#define PACKED_MAP_ALT_TILE 		19		// If defined, in 16 tiles mode, alt tile (default 19)
 //#define NO_MASKS							// Sprites are rendered using OR instead of masks.
 //#define MASKED_BULLETS					// If needed
 //#define PLAYER_CUSTOM_ANIMATION 			// Code your own animation in my/custom_animation.h

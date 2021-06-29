@@ -15,7 +15,7 @@ if (n_pant == 0 && flags [1] == 0 && gpy < 96 && p_objs == 5) {
 	}
 
 	_x = 1; _y = 0; _t = 71; 
-	_gp_gen = "  DONE! NOW GO BACK TO BASE!  ";
+	_gp_gen = (unsigned char *) ("  DONE! NOW GO BACK TO BASE!  ");
 	print_str ();
 }
 
@@ -24,7 +24,7 @@ if (flags [0]) {
 		flags [0] = 0;
 		beep_fx (9);
 		_x = 1; _y = 0; _t = 71; 
-		_gp_gen = " HALF NEW MOTORBIKE FOR SALE! ";
+		_gp_gen = (unsigned char *) (" HALF NEW MOTORBIKE FOR SALE! ");
 		print_str ();
 	}
 }

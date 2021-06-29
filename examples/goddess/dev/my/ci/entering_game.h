@@ -10,5 +10,5 @@ op_inv = 0;   // Forces update
 templos_mataos = puerta_abierta = 0;
 
 _x = 1; _y = 23; _t = 71;
-_gp_gen = "ONCE UPON A TIME IN BADAJOZ...";
+_gp_gen = (unsigned char *) ("ONCE UPON A TIME IN BADAJOZ...");
 print_str ();

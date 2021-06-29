@@ -26,10 +26,10 @@ void game_ending (void) {
 	#endif
 
 	// Custom for Helmet
-	_x = 8; _y = 7; _t = 70; _gp_gen = "CONGRATULATIONS!"; print_str ();
-	_x = 2; _y = 9; _t = 71; _gp_gen = "YOU MANAGED TO SET THE BOMBS"; print_str ();
-	_x = 4; _y = 10;         _gp_gen = "AND DESTROY THE COMPUTER"; print_str ();
-	_x = 5; _y = 11;         _gp_gen = "MISSION ACCOMPLISHED!!"; print_str ();
+	_x = 8; _y = 7; _t = 70; _gp_gen = (unsigned char *) ("CONGRATULATIONS!"); print_str ();
+	_x = 2; _y = 9; _t = 71; _gp_gen = (unsigned char *) ("YOU MANAGED TO SET THE BOMBS"); print_str ();
+	_x = 4; _y = 10;         _gp_gen = (unsigned char *) ("AND DESTROY THE COMPUTER"); print_str ();
+	_x = 5; _y = 11;         _gp_gen = (unsigned char *) ("MISSION ACCOMPLISHED!!"); print_str ();
 	sp_UpdateNowEx (0);
 	
 	#ifdef MODE_128K
@@ -49,7 +49,7 @@ void dr (void) {
 }
 
 void game_over (void) {
-	gen_pt = " GAME OVER! "; dr ();
+	gen_pt = (unsigned char *) (" GAME OVER! "); dr ();
 
 	#ifdef MODE_128K
 	#else
@@ -63,7 +63,7 @@ void game_over (void) {
 #if defined(TIMER_ENABLE) && defined(SHOW_TIMER_OVER)
 	void time_over (void) {
 		_x = 10; _y = 11; _t = 79; _gp_gen = spacer; print_str ();
-		_x = 10; _y = 12; _t = 79; _gp_gen = " TIME'S UP! "; print_str ();
+		_x = 10; _y = 12; _t = 79; _gp_gen = (unsigned char *)(" TIME'S UP! "); print_str ();
 		_x = 10; _y = 13; _t = 79; _gp_gen = spacer; print_str ();
 		sp_UpdateNowEx (0);
 			
@@ -79,13 +79,13 @@ void game_over (void) {
 
 #ifdef PAUSE_ABORT
 	void pause_screen (void) {
-		gen_pt = "   PAUSED   "; dr ();
+		gen_pt = (unsigned char *) ("   PAUSED   "); dr ();
 	}
 #endif
 
 #ifdef COMPRESSED_LEVELS
 	void zone_clear (void) {
-		gen_pt = " ZONE CLEAR "; dr ();
+		gen_pt = (unsigned char *) (" ZONE CLEAR "); dr ();
 		espera_activa (250);			
 	}
 #endif

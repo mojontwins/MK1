@@ -6,9 +6,9 @@
 // General text
 
 if (flags [1]) {
-	_gp_gen = "BOMBS ARE SET! RETURN TO BASE!";
+	_gp_gen = (unsigned char *) ("BOMBS ARE SET! RETURN TO BASE!");
 } else {
-	_gp_gen = " SET 5 BOMBS IN EVIL COMPUTER";	
+	_gp_gen = (unsigned char *) (" SET 5 BOMBS IN EVIL COMPUTER");	
 }
 _x = 1; _y = 0; _t = 71;
 print_str ();
@@ -21,7 +21,7 @@ if (n_pant == 0) {
 	if (flags [1]) {
 		_gp_gen = decos_bombs; draw_decorations ();
 	} else {
-		_gp_gen = " SET BOMBS IN EVIL COMPUTER ";
+		_gp_gen = (unsigned char *) (" SET BOMBS IN EVIL COMPUTER ");
 		_x = 1; _y = 0; _t = 71;
 		print_str ();
 	}

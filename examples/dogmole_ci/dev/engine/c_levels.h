@@ -10,8 +10,8 @@ void prepare_level (void) {
 		#endif
 		{
 			n_pant = level_data.scr_ini;
-			gpx = level_data->ini_x << 4; p_x = gpx << 6;
-			gpy = level_data->ini_y << 4; p_y = gpy << 6;
+			gpx = level_data.ini_x << 4; p_x = gpx << 6;
+			gpy = level_data.ini_y << 4; p_y = gpy << 6;
 		}
 
 		#ifdef ACTIVATE_SCRIPTING
@@ -27,8 +27,8 @@ void prepare_level (void) {
 			unpack ((unsigned int) levels [level].c_sprites, (unsigned int) (sprites + 16));
 		#endif
 
-		level_data->map_w = levels [level].map_w;
-		level_data->map_h = levels [level].map_h;
+		level_data.map_w = levels [level].map_w;
+		level_data.map_h = levels [level].map_h;
 		
 		#ifdef ACTIVATE_SCRIPTING
 			if (script_result != 3)

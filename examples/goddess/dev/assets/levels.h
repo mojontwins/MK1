@@ -14,7 +14,7 @@
 // Map data, 75 or 150 * (MAP_W*MAP_H) bytes
 // Bolts, 32 * 4 = 128 bytes
 // Tileset, 2304 bytes
-// Enemies, MAP_W * MAP_H * 3 * 10 bytes
+// Enemies, MAP_W * MAP_H * MAX_ENEMS * 10 bytes
 // Hotspots, MAP_W * MAP_H * 3 bytes
 // Behs, 48 bytes
 // Spriteset, 2312 bytes
@@ -64,7 +64,7 @@ extern unsigned char font [0];
 	._font BINARY "font.bin"
 #endasm
 
-extern LEVELHEADER level_data [0];
+extern LEVELHEADER level_data;
 #asm
 	._level_data defs 16
 #endasm
@@ -94,7 +94,7 @@ extern unsigned char tileset [0];
 
 extern MALOTE malotes [0];
 #asm
-	._malotes defs MAP_W * MAP_H * 3 * 10
+	._malotes defs MAP_W * MAP_H * MAX_ENEMS * 10
 #endasm
 
 extern HOTSPOT hotspots [0];

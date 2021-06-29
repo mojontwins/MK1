@@ -37,24 +37,65 @@ echo Importando GFX
 ..\..\..\src\utils\png2scr.exe ..\gfx\marco.png ..\gfx\marco.scr > nul
 ..\..\..\src\utils\png2scr.exe ..\gfx\ending.png ..\gfx\ending.scr > nul
 ..\..\..\src\utils\png2scr.exe ..\gfx\loading.png loading.bin > nul
-..\..\..\src\utils\apultra.exe ..\gfx\title.scr title.bin > nul
-..\..\..\src\utils\apultra.exe ..\gfx\marco.scr marco.bin > nul
-..\..\..\src\utils\apultra.exe ..\gfx\ending.scr ending.bin > nul
+..\..\..\src\utils\apultra.exe ..\gfx\title.scr ..\bin\title.bin > nul
+..\..\..\src\utils\apultra.exe ..\gfx\marco.scr ..\bin\marco.bin > nul
+..\..\..\src\utils\apultra.exe ..\gfx\ending.scr ..\bin\ending.bin > nul
 
 if [%1]==[justassets] goto :end
 
+rem echo Running The Librarian
+rem ..\utils\librarian2.exe list=..\bin\list.txt index=assets\librarian.h bins_prefix=..\bin\ rams_prefix=..\bin\ > nul
+
+rem *** Música AY: Descomenta el player que vayas a usar (Wyz o Arkos) ***
+
+rem echo Compilando musica 128k - Wyz Player
+rem cd ..\mus
+rem ..\utils\apultra.exe menu.mus menu.bin
+rem ..\utils\apultra.exe level1.mus level1.bin
+rem ..\utils\pasmo WYZproPlay47aZXc.ASM ..\bin\RAM1.bin 
+rem cd ..\dev
+
+rem echo Compilando musica 128k - Arkos Player
+rem cd ..\mus_arkos
+rem if [%1]==[nomus] goto :nomus
+rem ..\utils\build_mus_bin.exe ram1.bin > nul
+rem :nomus
+rem copy ram1.bin ..\bin
+rem copy arkos-addresses.h ..\dev\sound
+rem cd ..\dev
+
 :compile
 echo Compilando guego
-zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+rem zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 ..\..\..\src\utils\printsize.exe %game%.bin
 ..\..\..\src\utils\printsize.exe scripts.bin
 
+rem *** Tipo de cargador ***
+
 echo Construyendo cinta
 rem cambia LOADER por el nombre que quieres que salga en Program:
-..\..\..\src\utils\bas2tap -a10 -sCHERIL3v3 loader\loader.bas loader.tap > nul
+..\..\..\src\utils\bas2tap -a10 -sDOGMOLE loader\loader.bas loader.tap > nul
 ..\..\..\src\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
 ..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
 copy /b loader.tap + screen.tap + main.tap %game%.tap > nul
+rem echo Construyendo cinta 128k
+rem ..\..\..\src\utils\imanol.exe ^
+rem in=loader\loaderzx.asm-orig ^
+rem out=loader\loader.asm ^
+rem ram1_length=?..\bin\RAM1.bin ^
+rem ram3_length=?..\bin\RAM3.bin ^
+rem mb_length=?%game%.bin  > nul
+
+rem ..\utils\pasmo.exe loader\loader.asm ..\bin\loader.bin loader.txt
+
+rem cambia LOADER por el nombre que quieres que salga en Program:
+rem ..\..\..\src\utils\GenTape.exe %game%.tap ^
+rem basic 'LOADER' 10 ..\bin\loader.bin ^
+rem data                loading.bin ^
+rem data                ..\bin\RAM1.bin ^
+rem data                ..\bin\RAM3.bin ^
+rem data                %game%.bin
 
 if [%1]==[justcompile] goto :end
 if [%1]==[noclean] goto :end

@@ -21,6 +21,10 @@
 #define FIXBITS 		6	
 #define MAX_ENEMS 		3			
 
+// Fiddle if you need
+#define MAX_TILANIMS	16
+#define TILANIMS_PRIME	7
+
 /* splib2 memory map
 61440 - 61696 IM2 vector table
 61697 - 61936 FREEPOOL (240 bytes)
@@ -55,7 +59,7 @@
 	#endif
 #endif
 
-#define NUMBLOCKS (40 + (MAX_PROJECTILES * 5))
+#define NUMBLOCKS (((1 + MAX_ENEMS) * 10) + (MAX_PROJECTILES * 5))
 
 unsigned char AD_FREE [NUMBLOCKS * 15];
 
@@ -73,8 +77,6 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 	#include "assets/librarian.h"
 #endif
 
-#include "my/ci/extra_vars.h"
-
 #include "aplib.h"
 #include "pantallas.h"
 
@@ -90,10 +92,19 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 	#include "assets/extrasprites.h"
 #endif
 
+#include "my/ci/extra_vars.h"
+
 #ifdef MODE_128K
-	#include "wyzplayer.h"
+	#ifdef USE_ARKOS_PLAYER
+		#include "sound/arkosplayer.h"
+	#else
+		#include "sound/wyzplayer.h"
+	#endif
 #else
-	#include "beeper.h"
+	#include "sound/beeper.h"
+	#ifdef MIN_FAPS_PER_FRAME
+		#include "engine/isr.h"
+	#endif
 #endif
 
 #include "printer.h"
@@ -132,5 +143,5 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 
 #ifndef MODE_128K
 	// From beepola. Phaser engine by Shiru.
-	#include "music.h"
+	#include "sound/music.h"
 #endif

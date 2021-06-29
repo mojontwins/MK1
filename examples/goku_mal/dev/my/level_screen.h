@@ -24,7 +24,7 @@
 
 	// Show password
 	if (level) {
-		_x = 7; _y = 18; _t = 70; _gp_gen = " PASSWORD "; print_str ();
+		_x = 7; _y = 18; _t = 70; _gp_gen = (unsigned char *) (" PASSWORD "); print_str ();
 		_gp_gen = passwords + ((level - 1) * PASSWORD_LENGTH);
 		gpx = 9; for (gpit = 0; gpit < PASSWORD_LENGTH; ++ gpit) {
 			#asm

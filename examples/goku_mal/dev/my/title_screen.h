@@ -20,13 +20,13 @@
 
 	select_joyfunc ();
 
-	_x = 11; _y = 16; _t = 7; _gp_gen = lang ? "-= MENU =-" : "-=SELECT=-";
+	_x = 11; _y = 16; _t = 7; _gp_gen = (unsigned char *) (lang ? "-= MENU =-" : "-=SELECT=-");
 	print_str ();
 
-	_x = 11; _y = 17;         _gp_gen = lang ? "1 JUGAR   " : "1 PLAY    ";
+	_x = 11; _y = 17;         _gp_gen = (unsigned char *) (lang ? "1 JUGAR   " : "1 PLAY    ");
 	print_str ();	
 
-	_x = 11; _y = 18;         _gp_gen =        "2 PASSWORD";
+	_x = 11; _y = 18;         _gp_gen = (unsigned char *) ("2 PASSWORD");
 	print_str ();
 
 	sp_UpdateNow ();

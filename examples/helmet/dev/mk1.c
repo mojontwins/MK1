@@ -2,7 +2,7 @@
 // Copyleft 2010-2014, 2020 by the Mojon Twins
 
 // mk1.c
-#define DEBUG_KEYS
+//#define DEBUG_KEYS
 #include <spritepack.h>
 
 // We are using some stuff from splib2 directly.
@@ -20,6 +20,10 @@
 // DON'T touch these
 #define FIXBITS 		6	
 #define MAX_ENEMS 		3			
+
+// Fiddle if you need
+#define MAX_TILANIMS	16
+#define TILANIMS_PRIME	7
 
 /* splib2 memory map
 61440 - 61696 IM2 vector table
@@ -55,7 +59,7 @@
 	#endif
 #endif
 
-#define NUMBLOCKS (40 + (MAX_PROJECTILES * 5))
+#define NUMBLOCKS (((1 + MAX_ENEMS) * 10) + (MAX_PROJECTILES * 5))
 
 unsigned char AD_FREE [NUMBLOCKS * 15];
 
@@ -91,9 +95,16 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 #include "my/ci/extra_vars.h"
 
 #ifdef MODE_128K
-	#include "wyzplayer.h"
+	#ifdef USE_ARKOS_PLAYER
+		#include "sound/arkosplayer.h"
+	#else
+		#include "sound/wyzplayer.h"
+	#endif
 #else
-	#include "beeper.h"
+	#include "sound/beeper.h"
+	#ifdef MIN_FAPS_PER_FRAME
+		#include "engine/isr.h"
+	#endif
 #endif
 
 #include "printer.h"
@@ -132,5 +143,5 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 
 #ifndef MODE_128K
 	// From beepola. Phaser engine by Shiru.
-	#include "music.h"
+	#include "sound/music.h"
 #endif

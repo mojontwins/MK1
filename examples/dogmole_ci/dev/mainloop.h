@@ -161,7 +161,7 @@ void main (void) {
 				}
 				silent_level = 0;
 			
-				prepare_level (level);				
+				prepare_level ();				
 			#endif
 					
 			#ifndef DIRECT_TO_PLAY
