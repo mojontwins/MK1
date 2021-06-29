@@ -12,7 +12,7 @@ void main (void) {
 		di
 	#endasm
 	
-	#ifdef MODE_128K
+	#if defined MODE_128K || defined MIN_FAPS_PER_FRAME
 		sp_InitIM2(0xf1f1);
 		sp_CreateGenericISR(0xf1f1);
 		sp_RegisterHook(255, ISR);
@@ -20,8 +20,15 @@ void main (void) {
 		#asm
 			ei
 		#endasm
+	#endif
 
-		wyz_init ();
+	#ifdef MODE_128K		
+		#ifdef USE_ARKOS_PLAYER
+			arkos_stop();
+		#else
+			wyz_init ();
+		#endif
+
 	#endif
 
 	cortina ();
@@ -48,13 +55,13 @@ void main (void) {
 
 	// Sprite creation
 	#ifdef NO_MASKS
-		sp_player = sp_CreateSpr (sp_OR_SPRITE, 3, sprite_2_a);
+		sp_player = sp_CreateSpr (NO_MASKS, 3, sprite_2_a);
 		sp_AddColSpr (sp_player, sprite_2_b);
 		sp_AddColSpr (sp_player, sprite_2_c);
 		p_current_frame = p_next_frame = sprite_2_a;
 		
-		for (gpit = 0; gpit < 3; gpit ++) {
-			sp_moviles [gpit] = sp_CreateSpr(sp_OR_SPRITE, 3, sprite_9_a);
+		for (gpit = 0; gpit < MAX_ENEMS; gpit ++) {
+			sp_moviles [gpit] = sp_CreateSpr(NO_MASKS, 3, sprite_9_a);
 			sp_AddColSpr (sp_moviles [gpit], sprite_9_b);
 			sp_AddColSpr (sp_moviles [gpit], sprite_9_c);	
 			en_an_current_frame [gpit] = sprite_9_a;
@@ -154,7 +161,7 @@ void main (void) {
 				}
 				silent_level = 0;
 			
-				prepare_level (level);				
+				prepare_level ();				
 			#endif
 					
 			#ifndef DIRECT_TO_PLAY
@@ -179,7 +186,7 @@ void main (void) {
 			#ifdef COMPRESSED_LEVELS
 				if (success) {
 					#ifdef MODE_128K
-						//wyz_play_music (6);
+						//PLAY_MUSIC (6);
 					#endif
 					
 					if (silent_level == 0) zone_clear ();
@@ -203,7 +210,7 @@ void main (void) {
 					}
 				} else {
 					#ifdef MODE_128K
-						//wyz_play_music (8);
+						//PLAY_MUSIC (8);
 					#endif
 
 					#if defined(TIMER_ENABLE) && defined(TIMER_GAMEOVER_0) && defined(SHOW_TIMER_OVER)
@@ -213,7 +220,7 @@ void main (void) {
 					#endif
 					
 					#ifdef MODE_128K
-						wyz_stop_sound ();
+						STOP_SOUND ();
 					#endif
 					break;
 				}
@@ -221,7 +228,7 @@ void main (void) {
 				if (success) {
 					game_ending (); 
 				} else {
-					//wyz_play_music (8);
+					//PLAY_MUSIC (8);
 					game_over ();
 				}
 			#endif

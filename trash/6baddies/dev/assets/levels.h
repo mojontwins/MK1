@@ -64,7 +64,7 @@ extern unsigned char font [0];
 	._font BINARY "font.bin"
 #endasm
 
-extern LEVELHEADER level_data [0];
+extern LEVELHEADER level_data;
 #asm
 	._level_data defs 16
 #endasm

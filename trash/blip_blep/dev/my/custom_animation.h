@@ -21,4 +21,4 @@ if (fire_pressed) {
 	}
 }
 
-p_next_frame = player_cells [rda];
+p_next_frame = (unsigned char *) (player_cells [rda]);

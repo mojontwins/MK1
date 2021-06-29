@@ -25,61 +25,67 @@
 
 void ISR(void) {	
 	#asm
-		ld b, 1
-		call SetRAMBank
-		call WYZPLAYERISR
-		ld b, 0
-		call SetRAMBank			
+			ld  a, (_player_on)
+			or  a 
+			ret z
+			ld  b, 1
+			call SetRAMBank
+			call WYZPLAYERISR
+			ld  b, 0
+			call SetRAMBank			
+
+			ld  hl, _isrc
+			inc (hl)						
 	#endasm
 }
 
 void wyz_init (void) {
 	#asm
-		ld b,1
-		call SetRAMBank
-		call WYZPLAYERINIT	
-		ld b,0
-		call SetRAMBank
+			ld  b,1
+			call SetRAMBank
+			call WYZPLAYERINIT	
+			ld  b,0
+			call SetRAMBank
 	#endasm
 }
 
 void __FASTCALL__ wyz_play_sound (unsigned char fx_number) {
 	#asm
-		di
-		ld b, 1
-		call SetRAMBank
-		; __FASTCALL__ -> fx_number is in l!
-		ld b, l
-		call INICIAEFECTO
-		ld b, 0
-		call SetRAMBank
-		ei
+			di
+			ld  b, 1
+			call SetRAMBank
+			; __FASTCALL__ -> fx_number is in l!
+			ld  b, l
+			call INICIAEFECTO
+			ld  b, 0
+			call SetRAMBank
+			ei
 	#endasm
 }
 
 void __FASTCALL__ wyz_play_music (unsigned char song_number) {
 	#asm
-		di
-		ld b, 1
-		call SetRAMBank
-		; __FASTCALL__ -> song_number is in l!
-		ld a, l
-		call CARGA_CANCION
-		ld b, 0
-		call SetRAMBank
-		ei
+			di
+			ld  b, 1
+			call SetRAMBank
+			; __FASTCALL__ -> song_number is in l!
+			ld  a, l
+			call CARGA_CANCION
+			ld  b, 0
+			call SetRAMBank
+			ei
 	#endasm
 	song_playing = song_number;
 }
 
 void wyz_stop_sound (void) {
 	#asm
-		di
-		ld b,1
-		call SetRAMBank
-		call SILENCIA_PLAYER
-		ld b,0
-		call SetRAMBank
-		ei
+			di
+			ld  b,1
+			call SetRAMBank
+			call SILENCIA_PLAYER
+			ld  b,0
+			call SetRAMBank
+			ei
 	#endasm
 }

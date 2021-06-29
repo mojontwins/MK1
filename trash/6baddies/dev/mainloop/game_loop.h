@@ -76,8 +76,8 @@
 
 	#ifdef PLAYER_CHECK_MAP_BOUNDARIES		
 		#ifdef COMPRESSED_LEVELS
-			x_pant = n_pant % level_data->map_w;
-			y_pant = n_pant / level_data->map_w;
+			x_pant = n_pant % level_data.map_w;
+			y_pant = n_pant / level_data.map_w;
 		#else
 			x_pant = n_pant % MAP_W; y_pant = n_pant / MAP_W;
 		#endif

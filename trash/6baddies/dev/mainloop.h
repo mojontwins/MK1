@@ -11,7 +11,7 @@ void main (void) {
 	#asm
 		di
 	#endasm
-
+	
 	#if defined MODE_128K || defined MIN_FAPS_PER_FRAME
 		sp_InitIM2(0xf1f1);
 		sp_CreateGenericISR(0xf1f1);
@@ -21,13 +21,14 @@ void main (void) {
 			ei
 		#endasm
 	#endif
-	
+
 	#ifdef MODE_128K		
 		#ifdef USE_ARKOS_PLAYER
 			arkos_stop();
 		#else
 			wyz_init ();
 		#endif
+
 	#endif
 
 	cortina ();
@@ -84,7 +85,7 @@ void main (void) {
 			#ifdef MASKED_BULLETS
 				sp_bullets [gpit] = sp_CreateSpr (sp_MASK_SPRITE, 2, sprite_19_a);
 			#else		
-				sp_bullets [gpit] = sp_CreateSpr (NO_MASKS, 2, sprite_19_a);
+				sp_bullets [gpit] = sp_CreateSpr (sp_OR_SPRITE, 2, sprite_19_a);
 			#endif
 			sp_AddColSpr (sp_bullets [gpit], sprite_19_a+32);
 		}
@@ -95,7 +96,7 @@ void main (void) {
 			#ifdef MASKED_BULLETS
 				sp_cocos [gpit] = sp_CreateSpr (sp_MASK_SPRITE, 2, sprite_19_a);
 			#else		
-				sp_cocos [gpit] = sp_CreateSpr (NO_MASKS, 2, sprite_19_a);
+				sp_cocos [gpit] = sp_CreateSpr (sp_OR_SPRITE, 2, sprite_19_a);
 			#endif
 			sp_AddColSpr (sp_cocos [gpit], sprite_19_a+32);
 		}
@@ -160,7 +161,7 @@ void main (void) {
 				}
 				silent_level = 0;
 			
-				prepare_level (level);				
+				prepare_level ();				
 			#endif
 					
 			#ifndef DIRECT_TO_PLAY

@@ -14,7 +14,7 @@
 	#if defined(PLAYER_STEPS_ON_ENEMIES) || defined (PLAYER_CAN_FIRE)
 		void enems_init (void) {
 			enit = 0;
-			while (enit < MAP_W * MAP_H * 3) {
+			while (enit < MAP_W * MAP_H * MAX_ENEMS) {
 				malotes [enit].t = malotes [enit].t & 0xEF;	// Clear bit 4
 				#ifdef PLAYER_CAN_FIRE
 					malotes [enit].life = ENEMIES_LIFE_GAUGE;
@@ -121,7 +121,7 @@ void enems_draw_current (void) {
 
 void enems_load (void) {
 	// Movemos y cambiamos a los enemigos según el tipo que tengan
-	enoffs = n_pant * 3;
+	enoffs = n_pant * MAX_ENEMS;
 	
 	for (enit = 0; enit < MAX_ENEMS; ++ enit) {
 		en_an_frame [enit] = 0;
@@ -450,7 +450,7 @@ void enems_move (void) {
 						#endif				
 						{
 							#ifdef MODE_128K
-								wyz_play_sound (SFX_KILL_ENEMY_STEP);										
+								PLAY_SOUND (SFX_KILL_ENEMY_STEP);										
 								en_an_state [enit] = GENERAL_DYING;
 								en_an_count [enit] = 12;
 								en_an_next_frame [enit] = sprite_17_a;
@@ -549,7 +549,7 @@ void enems_move (void) {
 									#ifdef MODE_128K
 										en_an_state [enit] = GENERAL_DYING;
 										en_an_count [enit] = 12;
-										wyz_play_sound (SFX_KILL_ENEMY_SHOOT);
+										PLAY_SOUND (SFX_KILL_ENEMY_SHOOT);
 									#else															
 										beep_fx (5);
 										en_an_next_frame [enit] = sprite_18_a;
@@ -563,7 +563,7 @@ void enems_move (void) {
 								}
 
 								#ifdef MODE_128K
-									wyz_play_sound (SFX_HIT_ENEMY);
+									PLAY_SOUND (SFX_HIT_ENEMY);
 								#else
 									beep_fx (1);
 								#endif

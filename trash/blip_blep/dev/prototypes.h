@@ -7,6 +7,18 @@
 	#define ENABLE_SIMPLE_COCOS
 #endif
 
+#ifdef MODE_128K
+	#ifdef USE_ARKOS_PLAYER
+		#define PLAY_MUSIC arkos_play_music
+		#define PLAY_SOUND arkos_play_sound
+		#define STOP_SOUND arkos_stop_sound
+	#else
+		#define PLAY_MUSIC wyz_play_music
+		#define PLAY_SOUND wyz_play_sound
+		#define STOP_SOUND wyz_stop_sound
+	#endif
+#endif
+
 // Engine
 
 // breakable.h
@@ -74,6 +86,7 @@ char player_hidden (void);
 void run_fire_script (void);
 void process_tile (void);
 void draw_scr_background (void);
+void draw_scr_hotspots_locks (void);
 void draw_scr (void);
 void select_joyfunc (void);
 unsigned char mons_col_sc_x (void);	
@@ -108,12 +121,15 @@ void tape_load (void);// TODO!
 void sg_submenu (void);
 
 // tilanim.h
-void add_tilanim (unsigned char x, unsigned char y, unsigned char t);
-void do_tilanims (void);
+void tilanims_add (void);
+void tilanims_do (void);
+void tilanims_reset (void);
 
-// wyzplayer.h
+#ifdef MODE_128K
+// wyzplayer.h / arcos_player.h
 void ISR (void);
-void wyz_init (void);
-void wyz_play_sound (unsigned char fx_number);
-void wyz_play_music (unsigned char song_number);
-void wyz_stop_sound (void);
+void INIT_PLAYER (void);
+void PLAY_SOUND (unsigned char fx_number);
+void PLAY_MUSIC (unsigned char song_number);
+void STOP_SOUND (void);
+#endif

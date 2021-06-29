@@ -1,0 +1,9 @@
+#define SFXS_SONG 0xd10c
+#define ATINIT 0xc68c
+#define ATPLAY 0xc000
+#define ATSFXINIT 0xc6f0
+#define ATSFXPLAY 0xc704
+#define ATSFXSTOP 0xc745
+#define ATSFXSTOPALL 0xc6f7
+#define ATSTOP 0xc6e1
+#define SONG_LIST 0xd5b7

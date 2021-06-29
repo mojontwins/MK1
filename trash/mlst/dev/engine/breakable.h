@@ -23,7 +23,7 @@ void break_wall (void) {
 		#include "my/ci/on_wall_broken.h"
 	}
 	#ifdef MODE_128K
-		wyz_play_sound (gpit);
+		PLAY_SOUND (gpit);
 	#else			
 		// Show what just happened before the sound interrupts the action
 		sp_UpdateNow ();
