@@ -59,8 +59,8 @@ rem copy arkos-addresses.h ..\dev\sound
 rem cd ..\dev
 
 :compile
-echo Compilando guego
-zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+echo Compilando guego (EN)
+zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2.lib -zorg=24000 -DCHEAT > nul
 rem zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 ..\..\..\src\utils\printsize.exe %game%.bin
 ..\..\..\src\utils\printsize.exe scripts.bin
@@ -69,10 +69,27 @@ rem *** Tipo de cargador ***
 
 echo Construyendo cinta
 rem cambia LOADER por el nombre que quieres que salga en Program:
-..\..\..\src\utils\bas2tap -a10 -sDOGMOLE loader\loader.bas loader.tap > nul
+..\..\..\src\utils\bas2tap -a10 -sHELMET_EN loader\loader.bas loader.tap > nul
 ..\..\..\src\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
 ..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
-copy /b loader.tap + screen.tap + main.tap %game%.tap > nul
+copy /b loader.tap + screen.tap + main.tap %game%_en.tap > nul
+
+echo Compilando guego (ES)
+zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2.lib -zorg=24000 -DLANG_ES -DCHEAT > nul
+rem zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
+..\..\..\src\utils\printsize.exe %game%.bin
+..\..\..\src\utils\printsize.exe scripts.bin
+
+rem *** Tipo de cargador ***
+
+echo Construyendo cinta
+rem cambia LOADER por el nombre que quieres que salga en Program:
+..\..\..\src\utils\bas2tap -a10 -sHELMET_ES loader\loader.bas loader.tap > nul
+..\..\..\src\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
+..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
+copy /b loader.tap + screen.tap + main.tap %game%_es.tap > nul
+
+
 rem echo Construyendo cinta 128k
 rem ..\..\..\src\utils\imanol.exe ^
 rem in=loader\loaderzx.asm-orig ^

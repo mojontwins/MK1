@@ -28,3 +28,9 @@ if (flags [0]) {
 		print_str ();
 	}
 }
+
+#ifdef CHEAT
+	if (sp_KeyPressed (KEY_M) && sp_KeyPressed (KEY_Z)) { 
+		o_pant = 99; n_pant = 23; flags [1] = 1;
+	}
+#endif
