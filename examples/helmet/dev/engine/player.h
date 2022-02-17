@@ -123,6 +123,37 @@ void player_calc_bounding_box (void) {
 			srl a
 			ld  (_pty2), a
 		#endasm
+	#elif defined (BOUNDING_BOX_8X2_CENTERED)
+		#asm
+			ld  a, (_gpx)
+			add 4
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_ptx1), a
+			ld  a, (_gpx)
+			add 11
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_ptx2), a
+			ld  a, (_gpy)
+			add 7
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_pty1), a
+			ld  a, (_gpy)
+			add 8
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_pty2), a
+		#endasm
 	#else
 		#asm
 			ld  a, (_gpx)
@@ -313,6 +344,8 @@ unsigned char player_move (void) {
 				gpy = ((pty1 + 1) << 4) - 8;
 			#elif defined (BOUNDING_BOX_8_CENTERED)
 				gpy = ((pty1 + 1) << 4) - 4;
+			#elif defined (BOUNDING_BOX_8X2_CENTERED)
+				gpy = ((pty1 + 1) << 4) - 7;
 			#elif defined (BOUNDING_BOX_TINY_BOTTOM)
 				gpy = ((pty1 + 1) << 4) - 14;
 			#else
@@ -355,6 +388,8 @@ unsigned char player_move (void) {
 				
 			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_TINY_BOTTOM)
 				gpy = (pty2 - 1) << 4;
+			#elif defined (BOUNDING_BOX_8X2_CENTERED)
+				gpy = ((pty2 - 1) << 4) + 7;
 			#elif defined (BOUNDING_BOX_8_CENTERED)				
 				gpy = ((pty2 - 1) << 4) + 4;
 			#else
@@ -529,7 +564,7 @@ unsigned char player_move (void) {
 				p_vx = 0;
 			#endif
 
-			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)				
+			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_8X2_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)
 				gpx = ((ptx1 + 1) << 4) - 4;
 			#else
 				gpx = ((ptx1 + 1) << 4);
@@ -562,7 +597,7 @@ unsigned char player_move (void) {
 				p_vx = 0;
 			#endif
 
-			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)				
+			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_8X2_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)
 				gpx = (ptx1 << 4) + 4;
 			#else
 				gpx = (ptx1 << 4);

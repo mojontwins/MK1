@@ -60,7 +60,7 @@ rem cd ..\dev
 
 :compile
 echo Compilando guego (EN)
-zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2.lib -zorg=24000 -DCHEAT > nul
+zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2_bg.lib -zorg=24000 -DCHEAT > nul
 rem zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 ..\..\..\src\utils\printsize.exe %game%.bin
 ..\..\..\src\utils\printsize.exe scripts.bin
@@ -75,7 +75,7 @@ rem cambia LOADER por el nombre que quieres que salga en Program:
 copy /b loader.tap + screen.tap + main.tap %game%_en.tap > nul
 
 echo Compilando guego (ES)
-zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2.lib -zorg=24000 -DLANG_ES -DCHEAT > nul
+zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2_bg.lib -zorg=24000 -DLANG_ES -DCHEAT > nul
 rem zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
 ..\..\..\src\utils\printsize.exe %game%.bin
 ..\..\..\src\utils\printsize.exe scripts.bin

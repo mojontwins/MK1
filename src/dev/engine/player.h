@@ -123,6 +123,37 @@ void player_calc_bounding_box (void) {
 			srl a
 			ld  (_pty2), a
 		#endasm
+	#elif defined (BOUNDING_BOX_8X2_CENTERED)
+		#asm
+			ld  a, (_gpx)
+			add 4
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_ptx1), a
+			ld  a, (_gpx)
+			add 11
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_ptx2), a
+			ld  a, (_gpy)
+			add 7
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_pty1), a
+			ld  a, (_gpy)
+			add 8
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_pty2), a
+		#endasm
 	#else
 		#asm
 			ld  a, (_gpx)

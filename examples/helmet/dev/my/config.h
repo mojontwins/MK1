@@ -45,8 +45,9 @@
 // Bounding box size
 // -----------------
 											// Comment both for normal 16x16 bounding box
-#define BOUNDING_BOX_8_BOTTOM				// 8x8 aligned to bottom center in 16x16
+//#define BOUNDING_BOX_8_BOTTOM				// 8x8 aligned to bottom center in 16x16
 //#define BOUNDING_BOX_8_CENTERED			// 8x8 aligned to center in 16x16
+#define BOUNDING_BOX_8X2_CENTERED 			// 8x2 aligned to center in 16x16
 //#define SMALL_COLLISION					// 8x8 centered collision instead of 12x12
 
 // General directives:
