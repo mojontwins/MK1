@@ -632,8 +632,56 @@ void select_joyfunc (void) {
 
 #ifdef WALLS_STOP_ENEMIES
 	unsigned char mons_col_sc_x (void) {
-		cx1 = cx2 = (_en_mx > 0 ? _en_x + 15 : _en_x) >> 4;
-		cy1 = _en_y >> 4; cy2 = (_en_y + 15) >> 4;
+		#ifdef BOUNDING_BOX_12X2_CENTERED
+			// cx1 = cx2 = (_en_mx > 0 ? _en_x + 13 : _en_x + 2) >> 4;
+			#asm
+					ld  a, (__en_mx)
+					and 7
+					ld  a, (__en_x)
+					jr  z, _mons_col_sc_x_horz_positive
+
+				._mons_col_sc_x_horz_negative_zero
+					add 2
+					jr  _mons_col_sc_x_horz_set
+
+				._mons_col_sc_x_horz_positive
+					add 13					
+
+				._mons_col_sc_x_horz_set
+					srl a 
+					srl a 
+					srl a  
+					srl a
+
+					ld  (_cx1), a
+					ld  (_cx2), a
+			#endasm
+
+			// cy1 = (_en_y + 7) >> 4; cy2 = (_en_y + 8) >> 4;
+			#asm
+					ld  a, (__en_y)
+					add 7 
+					ld  b, a
+
+					srl a
+					srl a
+					srl a
+					srl a
+					ld  (_cy1), a
+
+					ld  a, b
+					inc a
+
+					srl a
+					srl a
+					srl a
+					srl a
+					ld  (_cy2), a
+			#endasm
+		#else
+			cx1 = cx2 = (_en_mx > 0 ? _en_x + 15 : _en_x) >> 4;
+			cy1 = _en_y >> 4; cy2 = (_en_y + 15) >> 4;
+		#endif
 		cm_two_points ();
 		#ifdef EVERYTHING_IS_A_WALL
 			return (at1 || at2);
@@ -643,8 +691,56 @@ void select_joyfunc (void) {
 	}
 		
 	unsigned char mons_col_sc_y (void) {
-		cy1 = cy2 = (_en_my > 0 ? _en_y + 15 : _en_y) >> 4;
-		cx1 = _en_x >> 4; cx2 = (_en_x + 15) >> 4;
+		#ifdef BOUNDING_BOX_12X2_CENTERED
+			// cy1 = cy2 = (_en_my > 0 ? _en_y + 8 : _en_y + 7) >> 4;
+			#asm
+					ld  a, (__en_my)
+					and 7
+					ld  a, (__en_y)
+					jr  z, _mons_col_sc_y_vert_positive
+
+				._mons_col_sc_y_vert_negative_zero
+					add 7
+					jr  _mons_col_sc_y_vert_set
+
+				._mons_col_sc_y_vert_positive
+					add 8					
+
+				._mons_col_sc_y_vert_set
+					srl a 
+					srl a 
+					srl a  
+					srl a
+
+					ld  (_cy1), a
+					ld  (_cy2), a
+			#endasm		
+
+			// cx1 = (_en_x + 2) >> 4; cx2 = (_en_x + 13) >> 4;
+			#asm
+					ld  a, (__en_x)
+					ld  b, a
+					add 2 
+
+					srl a
+					srl a
+					srl a
+					srl a
+					ld  (_cx1), a
+
+					ld  a, b
+					add 13
+
+					srl a
+					srl a
+					srl a
+					srl a
+					ld  (_cx2), a
+			#endasm
+		#else
+			cy1 = cy2 = (_en_my > 0 ? _en_y + 15 : _en_y) >> 4;
+			cx1 = _en_x >> 4; cx2 = (_en_x + 15) >> 4;
+		#endif
 		cm_two_points ();
 		#ifdef EVERYTHING_IS_A_WALL
 			return (at1 || at2);

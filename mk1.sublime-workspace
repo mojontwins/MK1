@@ -4,6 +4,10 @@
 		"selected_items":
 		[
 			[
+				"BOUNDI",
+				"BOUNDING_BOX_12X2_CENTERED\tabc"
+			],
+			[
 				"PROCESADOE",
 				"PROCESADO_ERR_EXTENSION\tabc"
 			],
@@ -324,56 +328,28 @@
 	"buffers":
 	[
 		{
-			"file": "README.md",
+			"file": "examples/helmet/dev/engine.h",
 			"settings":
 			{
-				"buffer_size": 3871,
+				"buffer_size": 13510,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "docs/tutorial-cap01.md",
+			"file": "examples/helmet/dev/helmet.asm",
 			"settings":
 			{
-				"buffer_size": 20511,
+				"buffer_size": 589911,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "lib/splib2/setenv.bat",
+			"file": "examples/helmet/dev/my/config.h",
 			"settings":
 			{
-				"buffer_size": 141,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/dev/setenv.bat",
-			"settings":
-			{
-				"buffer_size": 141,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Searching 2227 files for \"ORTHO\" (regex)\n\nD:\\temp\\MK1\\contrib\\godkiller_2\\dev\\definitions.h:\n   41  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   42  #endif\n   43: #ifdef ENABLE_ORTHOSHOOTERS\n   44  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   45  #endif\n\nD:\\temp\\MK1\\contrib\\godkiller_2\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\contrib\\godkiller_2\\dev\\engine\\enengine.h:\n  150  \t\t\t\tbreak;\n  151  \n  152: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  153  \t\t\t\tcase 5:\t\t\t\t\t\n  154: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  155: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  156  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  157  \t\t\t\t\t#else\n  158: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  159  \t\t\t\t\t#endif\n  160  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  322  \t\t\tcase 3:\n  323  \t\t\tcase 4:\n  324: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  325  \t\t\t\tcase 5:\n  326  \t\t\t#endif\n  327  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  328: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  329  \t\t\t\t\tif (_en_t == 5) {\n  330: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  331  \t\t\t\t\t}\n  332  \t\t\t\t#endif\n\nD:\\temp\\MK1\\contrib\\godkiller_2\\dev\\my\\config.h:\n   83  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   84  \n   85: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   86: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   87: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   88  \n   89  // Cocos\n\nD:\\temp\\MK1\\contrib\\godkiller_2\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\contrib\\misco_jones\\dev\\definitions.h:\n   41  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   42  #endif\n   43: #ifdef ENABLE_ORTHOSHOOTERS\n   44  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   45  #endif\n\nD:\\temp\\MK1\\contrib\\misco_jones\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\contrib\\misco_jones\\dev\\engine\\enengine.h:\n  150  \t\t\t\tbreak;\n  151  \n  152: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  153  \t\t\t\tcase 5:\t\t\t\t\t\n  154: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  155: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  156  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  157  \t\t\t\t\t#else\n  158: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  159  \t\t\t\t\t#endif\n  160  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  322  \t\t\tcase 3:\n  323  \t\t\tcase 4:\n  324: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  325  \t\t\t\tcase 5:\n  326  \t\t\t#endif\n  327  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  328: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  329  \t\t\t\t\tif (_en_t == 5) {\n  330: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  331  \t\t\t\t\t}\n  332  \t\t\t\t#endif\n\nD:\\temp\\MK1\\contrib\\misco_jones\\dev\\my\\config.h:\n   83  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   84  \n   85: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   86: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   87: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   88  \n   89  // Cocos\n\nD:\\temp\\MK1\\contrib\\misco_jones\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\contrib\\nightmare_on_halloween\\dev\\definitions.h:\n   41  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   42  #endif\n   43: #ifdef ENABLE_ORTHOSHOOTERS\n   44  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   45  #endif\n\nD:\\temp\\MK1\\contrib\\nightmare_on_halloween\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\contrib\\nightmare_on_halloween\\dev\\engine\\enengine.h:\n  150  \t\t\t\tbreak;\n  151  \n  152: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  153  \t\t\t\tcase 5:\t\t\t\t\t\n  154: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  155: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  156  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  157  \t\t\t\t\t#else\n  158: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  159  \t\t\t\t\t#endif\n  160  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  322  \t\t\tcase 3:\n  323  \t\t\tcase 4:\n  324: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  325  \t\t\t\tcase 5:\n  326  \t\t\t#endif\n  327  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  328: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  329  \t\t\t\t\tif (_en_t == 5) {\n  330: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  331  \t\t\t\t\t}\n  332  \t\t\t\t#endif\n\nD:\\temp\\MK1\\contrib\\nightmare_on_halloween\\dev\\my\\config.h:\n   83  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   84  \n   85: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   86: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   87: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   88  \n   89  // Cocos\n\nD:\\temp\\MK1\\contrib\\nightmare_on_halloween\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\contrib\\sami_troid\\dev\\definitions.h:\n   41  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   42  #endif\n   43: #ifdef ENABLE_ORTHOSHOOTERS\n   44  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   45  #endif\n\nD:\\temp\\MK1\\contrib\\sami_troid\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\contrib\\sami_troid\\dev\\engine\\enengine.h:\n  150  \t\t\t\tbreak;\n  151  \n  152: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  153  \t\t\t\tcase 5:\t\t\t\t\t\n  154: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  155: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  156  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  157  \t\t\t\t\t#else\n  158: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  159  \t\t\t\t\t#endif\n  160  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  322  \t\t\tcase 3:\n  323  \t\t\tcase 4:\n  324: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  325  \t\t\t\tcase 5:\n  326  \t\t\t#endif\n  327  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  328: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  329  \t\t\t\t\tif (_en_t == 5) {\n  330: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  331  \t\t\t\t\t}\n  332  \t\t\t\t#endif\n\nD:\\temp\\MK1\\contrib\\sami_troid\\dev\\my\\config.h:\n   83  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   84  \n   85: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   86: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   87: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   88  \n   89  // Cocos\n\nD:\\temp\\MK1\\contrib\\sami_troid\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\contrib\\sami_troid\\map\\sami.tmx:\n    1  <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n    2: <map version=\"1.0\" orientation=\"orthogonal\" width=\"127\" height=\"98\" tilewidth=\"16\" tileheight=\"16\">\n    3   <properties>\n    4    <property name=\"lock\" value=\"15\"/>\n\nD:\\temp\\MK1\\examples\\dogmole\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\examples\\dogmole\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\examples\\dogmole\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\examples\\dogmole\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\examples\\dogmole\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\examples\\dogmole_ci\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\examples\\dogmole_ci\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\examples\\dogmole_ci\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\examples\\dogmole_ci\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\examples\\dogmole_ci\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\examples\\goddess\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\examples\\goddess\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\examples\\goddess\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\examples\\goddess\\dev\\my\\config.h:\n   89  #define FANTIES_TYPE_HOMING\t\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\examples\\goddess\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\examples\\goku_mal\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\examples\\goku_mal\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\examples\\goku_mal\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\examples\\goku_mal\\dev\\my\\config.h:\n   89  #define FANTIES_TYPE_HOMING\t\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\examples\\goku_mal\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\my\\config.h:\n   90  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   91  \n   92: #define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   93: #define ORTHOSHOOTERS_FREQ \t\t\t(rand()&15)\n   94: #define ORTHOSHOOTERS_BASE_CELL \t3 \t\t// 99 means DONT SHOW!\n   95  \n   96  // Cocos\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\examples\\helmet\\diario.md:\n   20  ~~ \n   21  \n   22: Necesito hacer enemigos disparadores. Pero en plan hiper sencillo. Voy a hacer unos *orthogonal cocos*. Si un enemigo tiene levantado el bit 5 (& 0x20) disparará su coco en la direccion que digan los bits 6 y 7 según se cumpla `(rand () & COCO_FREQ) == 1`. Tengo que hacerlo en modo super ahorro así que les meteré candela en ensamble directamente.\n   23  \n   24  ~~ \n\nD:\\temp\\MK1\\src\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\src\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\src\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\src\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\src\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\trash\\6baddies\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\trash\\6baddies\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\trash\\6baddies\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\trash\\6baddies\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\trash\\6baddies\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\trash\\blip_blep\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\trash\\blip_blep\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\trash\\blip_blep\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\trash\\blip_blep\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\trash\\blip_blep\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\trash\\mlst\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\trash\\mlst\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\trash\\mlst\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\trash\\mlst\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\trash\\mlst\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\n184 matches across 67 files\n",
-			"settings":
-			{
-				"buffer_size": 24028,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
-			}
-		},
-		{
-			"file": "examples/helmet/diario.md",
-			"settings":
-			{
-				"buffer_size": 1732,
+				"buffer_size": 15215,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -439,10 +415,39 @@
 	},
 	"expanded_folders":
 	[
-		"/D/temp/MK1"
+		"/D/temp/MK1",
+		"/D/temp/MK1/examples",
+		"/D/temp/MK1/examples/helmet",
+		"/D/temp/MK1/examples/helmet/dev"
 	],
 	"file_history":
 	[
+		"/D/temp/MK1/lib/splib2/Makefile.bat",
+		"/D/temp/MK1/examples/helmet/dev/compile.bat",
+		"/D/temp/MK1/lib/splib2/updater/SPUpdateNow.asm",
+		"/D/temp/MK1/lib/splib2/SPconfig.def",
+		"/D/temp/MK1/lib/splib2/setenv.bat",
+		"/D/temp/MK1/examples/helmet/dev/my/config.h",
+		"/D/temp/MK1/examples/helmet/dev/engine/player.h",
+		"/D/temp/MK1/src/dev/engine/player.h",
+		"/D/temp/MK1/docs/tutorial-cap07.md",
+		"/D/temp/MK1/examples/helmet/dev/mainloop/game_loop.h",
+		"/D/temp/MK1/examples/helmet/dev/my/ci/extra_routines.h",
+		"/D/temp/MK1/examples/helmet/dev/mainloop.h",
+		"/D/temp/MK1/examples/helmet/dev/my/level_screen.h",
+		"/D/temp/MK1/examples/helmet/dev/savegame.h",
+		"/D/temp/MK1/examples/helmet/dev/my/ci/entering_game.h",
+		"/D/temp/MK1/examples/helmet/dev/my/ci/on_wall_hit.h",
+		"/D/temp/MK1/examples/helmet/dev/my/fixed_screens.h",
+		"/D/temp/MK1/examples/helmet/dev/my/title_screen.h",
+		"/D/temp/MK1/examples/helmet/dev/my/ci/extra_vars.h",
+		"/D/git/MK1/games_zx/ramiro3/dev/custom.h",
+		"/D/temp/MK1/examples/helmet/dev/engine.h",
+		"/D/temp/MK1/contrib/godkiller_2/dev/printer.h",
+		"/D/temp/MK1/examples/helmet/diario.md",
+		"/D/temp/MK1/README.md",
+		"/D/temp/MK1/docs/tutorial-cap01.md",
+		"/D/temp/MK1/src/dev/setenv.bat",
 		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/extra_functions.h",
 		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/fixed_screens.h",
 		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/config.h",
@@ -505,12 +510,10 @@
 		"/D/temp/MK1/trash/6baddies/dev/engine/isr.h",
 		"/D/temp/MK1/trash/6baddies/dev/sound/arkosplayer.h",
 		"/D/temp/MK1/trash/6baddies/dev/sound/wyzplayer.h",
-		"/D/temp/MK1/docs/tutorial-cap07.md",
 		"/D/temp/MK1/trash/README.md",
 		"/D/temp/MK1/trash/6baddies/dev/compile.bat",
 		"/D/temp/MK1/src/dev/mk1.c",
 		"/D/temp/MK1/src/dev/engine/enem_mods/enem_type_pursuers.h",
-		"/D/temp/MK1/README.md",
 		"/D/temp/MK1/docs/README.md",
 		"/D/temp/MK1/src/mus/WYZproPlay47aZXc.ASM",
 		"/D/temp/MK1/docs/contribs/arkos.md",
@@ -546,31 +549,7 @@
 		"/D/Proyectos/2020/20200917d - Consigna - Declaración de Accesibilidad/instrucciones.txt",
 		"/D/Proyectos/2020/20200813b - Corrección CSS Consigna/instrucciones.txt",
 		"/D/Proyectos/remote/descon01/consigna/public/css/estilo.css",
-		"/D/Proyectos/2020/20200903a - Revisión de configuraciones de seguridad de Consigna/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/deshite.md",
-		"/D/Proyectos/copias producción/consigna-2/simplesaml/metadata/saml20-idp-remote.php",
-		"/D/Proyectos/remote/descon01/simplesaml/Configuration.php",
-		"/D/Proyectos/remote/descon01/simplesaml/config/authsources.php",
-		"/D/Proyectos/remote/descon01/simplesaml/config/config.php",
-		"/D/Proyectos/remote/descon01/config18.php",
-		"/D/Proyectos/copias producción/consigna-2/simplesaml/config/config.php",
-		"/D/Proyectos/copias producción/consigna-2/simplesaml/config/authsources.php",
-		"/D/Proyectos/copias producción/consigna-2/etc/httpd/conf.d/consigna.conf",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/Auth.php",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/authmodules/SamlSSO.php",
-		"/D/Proyectos/remote/descon01/config11.php",
-		"/D/Proyectos/remote/descon01/consigna/app/controllers/usuario.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/auth.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/subredes.php",
-		"/D/Proyectos/remote/descon01/sftp-config.json",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO81C3925E/saml20-idp-remote.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zOC8F1EC2A/readme.txt",
-		"/D/Proyectos/documentación/Integración php WebSSO/SimpleSAMLPHP_JDA/config/authsources.php",
-		"/D/Proyectos/remote/descon01/consigna/app/models/trabajoficheros.php",
-		"/D/temp/mw1311ws/makefilewithlua",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO0E105AB9/readsrc.txt",
-		"/D/Proyectos/remote/descon01/consigna/LICENSE",
-		"/D/Proyectos/remote/descon01/consigna/saml-desarrollo.pem"
+		"/D/Proyectos/2020/20200903a - Revisión de configuraciones de seguridad de Consigna/instrucciones.txt"
 	],
 	"find":
 	{
@@ -581,6 +560,10 @@
 		"height": 128.0,
 		"where_history":
 		[
+			"D:\\temp\\MK1\\examples\\helmet\\dev",
+			"D:\\temp\\MK1\\examples\\helmet\\dev\\engine",
+			"D:\\temp\\MK1\\docs",
+			"D:\\temp\\MK1\\examples\\helmet\\dev\\my",
 			"D:\\temp\\MK1",
 			"D:\\temp\\vmware_shared\\MK1\\docs",
 			"D:\\temp\\MK1\\trash\\6baddies",
@@ -597,6 +580,12 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"mons_col_sc_x",
+			"mons_col_sc_y",
+			"pursuers",
+			"8_CENTERED",
+			"flags [",
+			"player_init",
 			"ORTHO",
 			"level_data",
 			"level_data->",
@@ -633,7 +622,7 @@
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
 			"level_data.",
@@ -652,24 +641,24 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "README.md",
+					"file": "examples/helmet/dev/engine.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3871,
+						"buffer_size": 13510,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1341,
-								1341
+								12132,
+								12145
 							]
 						],
 						"settings":
@@ -677,30 +666,37 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false,
+							"typescript_plugin_format_options":
+							{
+								"convertTabsToSpaces": false,
+								"indentSize": 4,
+								"tabSize": 4
+							}
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 7922.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 0,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "docs/tutorial-cap01.md",
+					"file": "examples/helmet/dev/helmet.asm",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 20511,
+						"buffer_size": 589911,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								17030,
-								17030
+								336858,
+								336858
 							]
 						],
 						"settings":
@@ -708,877 +704,37 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 3276.0,
+						"translation.y": 139654.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "lib/splib2/setenv.bat",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 141,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								10,
-								10
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/dev/setenv.bat",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 141,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								140,
-								140
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
-					"buffer": 4,
+					"buffer": 2,
+					"file": "examples/helmet/dev/my/config.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 24028,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										176,
-										181
-									],
-									[
-										420,
-										425
-									],
-									[
-										619,
-										624
-									],
-									[
-										673,
-										678
-									],
-									[
-										740,
-										745
-									],
-									[
-										874,
-										879
-									],
-									[
-										1051,
-										1056
-									],
-									[
-										1184,
-										1189
-									],
-									[
-										1278,
-										1283
-									],
-									[
-										1478,
-										1483
-									],
-									[
-										1510,
-										1515
-									],
-									[
-										1552,
-										1557
-									],
-									[
-										1602,
-										1607
-									],
-									[
-										1782,
-										1787
-									],
-									[
-										1981,
-										1986
-									],
-									[
-										2225,
-										2230
-									],
-									[
-										2424,
-										2429
-									],
-									[
-										2478,
-										2483
-									],
-									[
-										2545,
-										2550
-									],
-									[
-										2679,
-										2684
-									],
-									[
-										2856,
-										2861
-									],
-									[
-										2989,
-										2994
-									],
-									[
-										3083,
-										3088
-									],
-									[
-										3283,
-										3288
-									],
-									[
-										3315,
-										3320
-									],
-									[
-										3357,
-										3362
-									],
-									[
-										3407,
-										3412
-									],
-									[
-										3587,
-										3592
-									],
-									[
-										3797,
-										3802
-									],
-									[
-										4052,
-										4057
-									],
-									[
-										4262,
-										4267
-									],
-									[
-										4316,
-										4321
-									],
-									[
-										4383,
-										4388
-									],
-									[
-										4517,
-										4522
-									],
-									[
-										4694,
-										4699
-									],
-									[
-										4827,
-										4832
-									],
-									[
-										4921,
-										4926
-									],
-									[
-										5132,
-										5137
-									],
-									[
-										5164,
-										5169
-									],
-									[
-										5206,
-										5211
-									],
-									[
-										5256,
-										5261
-									],
-									[
-										5447,
-										5452
-									],
-									[
-										5645,
-										5650
-									],
-									[
-										5888,
-										5893
-									],
-									[
-										6086,
-										6091
-									],
-									[
-										6140,
-										6145
-									],
-									[
-										6207,
-										6212
-									],
-									[
-										6341,
-										6346
-									],
-									[
-										6518,
-										6523
-									],
-									[
-										6651,
-										6656
-									],
-									[
-										6745,
-										6750
-									],
-									[
-										6944,
-										6949
-									],
-									[
-										6976,
-										6981
-									],
-									[
-										7018,
-										7023
-									],
-									[
-										7068,
-										7073
-									],
-									[
-										7247,
-										7252
-									],
-									[
-										7442,
-										7447
-									],
-									[
-										7707,
-										7712
-									],
-									[
-										7948,
-										7953
-									],
-									[
-										8144,
-										8149
-									],
-									[
-										8198,
-										8203
-									],
-									[
-										8265,
-										8270
-									],
-									[
-										8399,
-										8404
-									],
-									[
-										8576,
-										8581
-									],
-									[
-										8709,
-										8714
-									],
-									[
-										8801,
-										8806
-									],
-									[
-										8998,
-										9003
-									],
-									[
-										9030,
-										9035
-									],
-									[
-										9072,
-										9077
-									],
-									[
-										9122,
-										9127
-									],
-									[
-										9299,
-										9304
-									],
-									[
-										9498,
-										9503
-									],
-									[
-										9742,
-										9747
-									],
-									[
-										9941,
-										9946
-									],
-									[
-										9995,
-										10000
-									],
-									[
-										10062,
-										10067
-									],
-									[
-										10196,
-										10201
-									],
-									[
-										10373,
-										10378
-									],
-									[
-										10506,
-										10511
-									],
-									[
-										10598,
-										10603
-									],
-									[
-										10798,
-										10803
-									],
-									[
-										10830,
-										10835
-									],
-									[
-										10872,
-										10877
-									],
-									[
-										10922,
-										10927
-									],
-									[
-										11102,
-										11107
-									],
-									[
-										11298,
-										11303
-									],
-									[
-										11539,
-										11544
-									],
-									[
-										11735,
-										11740
-									],
-									[
-										11789,
-										11794
-									],
-									[
-										11856,
-										11861
-									],
-									[
-										11990,
-										11995
-									],
-									[
-										12167,
-										12172
-									],
-									[
-										12300,
-										12305
-									],
-									[
-										12392,
-										12397
-									],
-									[
-										12588,
-										12593
-									],
-									[
-										12620,
-										12625
-									],
-									[
-										12662,
-										12667
-									],
-									[
-										12712,
-										12717
-									],
-									[
-										12889,
-										12894
-									],
-									[
-										13086,
-										13091
-									],
-									[
-										13328,
-										13333
-									],
-									[
-										13525,
-										13530
-									],
-									[
-										13579,
-										13584
-									],
-									[
-										13646,
-										13651
-									],
-									[
-										13780,
-										13785
-									],
-									[
-										13957,
-										13962
-									],
-									[
-										14090,
-										14095
-									],
-									[
-										14182,
-										14187
-									],
-									[
-										14379,
-										14384
-									],
-									[
-										14411,
-										14416
-									],
-									[
-										14453,
-										14458
-									],
-									[
-										14503,
-										14508
-									],
-									[
-										14681,
-										14686
-									],
-									[
-										14876,
-										14881
-									],
-									[
-										15116,
-										15121
-									],
-									[
-										15311,
-										15316
-									],
-									[
-										15365,
-										15370
-									],
-									[
-										15432,
-										15437
-									],
-									[
-										15566,
-										15571
-									],
-									[
-										15743,
-										15748
-									],
-									[
-										15876,
-										15881
-									],
-									[
-										15968,
-										15973
-									],
-									[
-										16162,
-										16167
-									],
-									[
-										16194,
-										16199
-									],
-									[
-										16234,
-										16239
-									],
-									[
-										16283,
-										16288
-									],
-									[
-										16459,
-										16464
-									],
-									[
-										16674,
-										16679
-									],
-									[
-										17076,
-										17081
-									],
-									[
-										17304,
-										17309
-									],
-									[
-										17487,
-										17492
-									],
-									[
-										17541,
-										17546
-									],
-									[
-										17608,
-										17613
-									],
-									[
-										17742,
-										17747
-									],
-									[
-										17919,
-										17924
-									],
-									[
-										18052,
-										18057
-									],
-									[
-										18144,
-										18149
-									],
-									[
-										18328,
-										18333
-									],
-									[
-										18360,
-										18365
-									],
-									[
-										18402,
-										18407
-									],
-									[
-										18452,
-										18457
-									],
-									[
-										18616,
-										18621
-									],
-									[
-										18810,
-										18815
-									],
-									[
-										19049,
-										19054
-									],
-									[
-										19243,
-										19248
-									],
-									[
-										19297,
-										19302
-									],
-									[
-										19364,
-										19369
-									],
-									[
-										19498,
-										19503
-									],
-									[
-										19675,
-										19680
-									],
-									[
-										19808,
-										19813
-									],
-									[
-										19900,
-										19905
-									],
-									[
-										20095,
-										20100
-									],
-									[
-										20127,
-										20132
-									],
-									[
-										20169,
-										20174
-									],
-									[
-										20219,
-										20224
-									],
-									[
-										20394,
-										20399
-									],
-									[
-										20589,
-										20594
-									],
-									[
-										20829,
-										20834
-									],
-									[
-										21024,
-										21029
-									],
-									[
-										21078,
-										21083
-									],
-									[
-										21145,
-										21150
-									],
-									[
-										21279,
-										21284
-									],
-									[
-										21456,
-										21461
-									],
-									[
-										21589,
-										21594
-									],
-									[
-										21681,
-										21686
-									],
-									[
-										21877,
-										21882
-									],
-									[
-										21909,
-										21914
-									],
-									[
-										21951,
-										21956
-									],
-									[
-										22001,
-										22006
-									],
-									[
-										22177,
-										22182
-									],
-									[
-										22367,
-										22372
-									],
-									[
-										22602,
-										22607
-									],
-									[
-										22792,
-										22797
-									],
-									[
-										22846,
-										22851
-									],
-									[
-										22913,
-										22918
-									],
-									[
-										23047,
-										23052
-									],
-									[
-										23224,
-										23229
-									],
-									[
-										23357,
-										23362
-									],
-									[
-										23449,
-										23454
-									],
-									[
-										23640,
-										23645
-									],
-									[
-										23672,
-										23677
-									],
-									[
-										23714,
-										23719
-									],
-									[
-										23764,
-										23769
-									],
-									[
-										23935,
-										23940
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								16677,
-								16677
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"incomplete_sync": null,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 6747.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "examples/helmet/diario.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1732,
+						"buffer_size": 15215,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1006,
-								1006
+								506,
+								506
 							]
 						],
 						"settings":
@@ -1586,13 +742,14 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -1648,7 +805,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 88.0
+		"height": 40.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1682,7 +839,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -1690,7 +847,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 273.0,
+	"side_bar_width": 226.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
