@@ -636,7 +636,7 @@ void select_joyfunc (void) {
 			// cx1 = cx2 = (_en_mx > 0 ? _en_x + 13 : _en_x + 2) >> 4;
 			#asm
 					ld  a, (__en_mx)
-					and 7
+					and 0x80
 					ld  a, (__en_x)
 					jr  z, _mons_col_sc_x_horz_positive
 
@@ -695,7 +695,7 @@ void select_joyfunc (void) {
 			// cy1 = cy2 = (_en_my > 0 ? _en_y + 8 : _en_y + 7) >> 4;
 			#asm
 					ld  a, (__en_my)
-					and 7
+					and 0x80
 					ld  a, (__en_y)
 					jr  z, _mons_col_sc_y_vert_positive
 
