@@ -1,0 +1,81 @@
+		#ifdef PLAYER_PUSH_BOXES
+			#asm
+				.push_boxes
+			#endasm
+
+			#ifdef FIRE_TO_PUSH
+				#asm
+						// if ((pad0 & sp_FIRE) == 0)
+						ld  a, (_pad0)
+						and sp_FIRE
+						jr  nz, push_boxes_end
+
+						// p_disparando = 1;
+						ld  a, 1
+						ld  (_p_disparando), a
+				#endasm
+			#endif
+
+			// if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 < 15 && y1 < 10) {
+			#asm
+					// if (qtile (x0, y0) == 14
+					ld  a, (_x0)
+					ld  c, 
+					ld  a, (_y0)
+					call qtile_do
+					ld  a, l
+					cp  14
+					jr  nz, push_boxes_end
+
+					// && attr (x1, y1) == 0
+					ld  a, (_x1)
+					ld  c, 
+					ld  a, (_y1)
+					call _attr_1b
+					xor a
+					or  l
+					jr  nz, push_boxes_end
+
+					// && x1 < 15
+					ld  a, (_x1)
+					cp  15
+					jr  nc, push_boxes_end
+
+					// && y1 < 10
+					ld  a, (_y1)
+					cp  10
+					jr  nc, push_boxes_end
+			#endasm
+
+			#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
+				rda = map_buff [COORDS(x1,y1)];
+				flags [MOVED_TILE_FLAG] = rda; 
+				flags [MOVED_X_FLAG] = x1;
+				flags [MOVED_Y_FLAG] = y1;
+			#endif	
+
+			// Pintar
+			#asm
+					ld  a, (_x0)
+					ld  (__x), a
+					ld  a, (_y0)
+					ld  (__y), a
+					xor a
+					ld  (__t), a
+					ld  (__n), a
+					call _update_tile
+
+					ld  a, (_x1)
+					ld  (__x), a
+					ld  a, (_y1)
+					ld  (__y), a
+					ld  a, 14
+					ld  (__t), a
+					ld  a, 10
+					ld  (__n), a
+					call _update_tile
+			#endasm
+
+			#asm
+				.push_boxes_end
+			#endif

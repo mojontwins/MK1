@@ -5,9 +5,24 @@
 
 #ifndef COMPRESSED_LEVELS
 	void hotspots_init (void) {
+		/*
 		gpit = 0; while (gpit < MAP_W * MAP_H) {
 			hotspots [gpit].act = 1; ++ gpit;
 		}
+		*/
+		#asm
+				// iterate MAP_W*MAP_H times
+				// start with _hotspots + 2
+				// set to 1, increment pointer by 3
+				ld  b, MAP_W * MAP_H
+				ld  hl, _hotspots + 2
+				ld  de, 3
+				ld  a, 1
+			.init_hotspots_loop
+				ld  (hl), a
+				add hl, de
+				djnz init_hotspots_loop
+		#endasm		
 	}
 #endif
 

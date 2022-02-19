@@ -405,7 +405,9 @@ unsigned char player_move (void) {
 	}
 
 	#ifndef DEACTIVATE_EVIL_TILE
-		if (p_vy) hit_v = ((at1 & 1) || (at2 & 1));
+		#ifndef CUSTOM_EVIL_TILE_CHECK
+			if (p_vy) hit_v = ((at1 & 1) || (at2 & 1));
+		#endif
 	#endif
 	
 	gpxx = gpx >> 4;
@@ -576,9 +578,10 @@ unsigned char player_move (void) {
 			wall_h = WLEFT;
 		}
 		#ifndef DEACTIVATE_EVIL_TILE
-			else hit_h = ((at1 & 1) || (at2 & 1));
+			#ifndef CUSTOM_EVIL_TILE_CHECK
+				else hit_h = ((at1 & 1) || (at2 & 1));
+			#endif
 		#endif
-
 	}
 
 	#if defined (PLAYER_GENITAL)
@@ -729,16 +732,20 @@ unsigned char player_move (void) {
 	#endif
 
 	#ifndef DEACTIVATE_EVIL_TILE
-		// Tiles que te matan. 
-		// hit_v tiene preferencia sobre hit_h
-		hit = 0;
-		if (hit_v) {
-			hit = 1;
-				p_vy = addsign (-p_vy, PLAYER_MAX_VX);
-		} else if (hit_h) {
-			hit = 1;
-				p_vx = addsign (-p_vx, PLAYER_MAX_VX);
-		}
+		#ifdef CUSTOM_EVIL_TILE_CHECK
+			#include "my/ci/custom_evil_tile_check.h"
+		#else
+			// Tiles que te matan. 
+			// hit_v tiene preferencia sobre hit_h
+			hit = 0;
+			if (hit_v) {
+				hit = 1;
+					p_vy = addsign (-p_vy, PLAYER_MAX_VX);
+			} else if (hit_h) {
+				hit = 1;
+					p_vx = addsign (-p_vx, PLAYER_MAX_VX);
+			}
+		#endif
 		
 		if (hit) {
 			#ifdef PLAYER_FLICKERS

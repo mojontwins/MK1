@@ -4,41 +4,51 @@
 // bullets.h
 
 void bullets_init (void) {
+	/*
 	b_it = 0; while (b_it < MAX_BULLETS) { 
 		bullets_estado [b_it] = 0; ++ b_it;
-	}	
+	}
+	*/
+	#asm
+			ld  hl, _bullets_estado
+			ld  de, _bullets_estado + 1
+			ld  bc, MAX_BULLETS - 1
+			xor a
+			ld  (hl), a
+			ldir
+	#endasm	
 }
 
 void bullets_update (void) {
 	// Copies _b_? to the bullets_? [b_it] arrays
 	#asm
-		ld  de, (_b_it)
-		ld  d, 0
+			ld  de, (_b_it)
+			ld  d, 0
 
-		ld  hl, _bullets_estado
-		add hl, de
-		ld  a, (__b_estado)
-		ld  (hl), a
+			ld  hl, _bullets_estado
+			add hl, de
+			ld  a, (__b_estado)
+			ld  (hl), a
 
-		ld  hl, _bullets_x
-		add hl, de
-		ld  a, (__b_x)
-		ld  (hl), a
+			ld  hl, _bullets_x
+			add hl, de
+			ld  a, (__b_x)
+			ld  (hl), a
 
-		ld  hl, _bullets_y
-		add hl, de
-		ld  a, (__b_y)
-		ld  (hl), a
+			ld  hl, _bullets_y
+			add hl, de
+			ld  a, (__b_y)
+			ld  (hl), a
 
-		ld  hl, _bullets_mx
-		add hl, de
-		ld  a, (__b_mx)
-		ld  (hl), a
+			ld  hl, _bullets_mx
+			add hl, de
+			ld  a, (__b_mx)
+			ld  (hl), a
 
-		ld  hl, _bullets_my
-		add hl, de
-		ld  a, (__b_my)
-		ld  (hl), a
+			ld  hl, _bullets_my
+			add hl, de
+			ld  a, (__b_my)
+			ld  (hl), a
 	#endasm
 }
 

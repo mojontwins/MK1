@@ -100,7 +100,20 @@ void espera_activa (int espera) {
 #ifndef COMPRESSED_LEVELS
 	#if !defined DEACTIVATE_KEYS && MAX_CERROJOS > 0
 		void locks_init (void) {
-			for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) cerrojos [gpit].st = 1;	
+			// for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) cerrojos [gpit].st = 1;	
+			#asm
+					// Iterate MAX_CERROJOS time
+					// Start with _cerrojos + 3
+					// Set to 1 and add 4
+					ld  b, MAX_CERROJOS
+					ld  hl, _cerrojos + 3
+					ld  de, 4
+					ld  a, 1
+				.init_cerrojos_loop
+					ld  (hl), a
+					add hl, de
+					djnz init_cerrojos_loop
+			#endasm	
 		}
 	#endif
 #endif
@@ -127,6 +140,7 @@ void espera_activa (int espera) {
 
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
 	void process_tile (void) {
+		/*
 		#ifdef PLAYER_PUSH_BOXES
 			#ifdef FIRE_TO_PUSH
 				if ((pad0 & sp_FIRE) == 0)				
@@ -139,9 +153,9 @@ void espera_activa (int espera) {
 				#endif
 
 				if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 < 15 && y1 < 10) {
-					rda = map_buff [COORDS(x1,y1)];
 					
 					#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
+						rda = map_buff [COORDS(x1,y1)];
 						flags [MOVED_TILE_FLAG] = rda; 
 						flags [MOVED_X_FLAG] = x1;
 						flags [MOVED_Y_FLAG] = y1;
@@ -169,7 +183,110 @@ void espera_activa (int espera) {
 				} 
 			}			
 		#endif
+		*/
+		#ifdef PLAYER_PUSH_BOXES
+			#asm
+				.push_boxes
+			#endasm
 
+			#ifdef FIRE_TO_PUSH
+				#asm
+						// if ((pad0 & sp_FIRE) == 0)
+						ld  a, (_pad0)
+						and sp_FIRE
+						jp  nz, push_boxes_end
+
+						// p_disparando = 1;
+						ld  a, 1
+						ld  (_p_disparando), a
+				#endasm
+			#endif
+
+			// if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 < 15 && y1 < 10) {
+			#asm
+					// if (qtile (x0, y0) == 14
+					ld  a, (_x0)
+					ld  c, a
+					ld  a, (_y0)
+					call qtile_do
+					ld  a, l
+					cp  14
+					jp  nz, push_boxes_end
+
+					// && attr (x1, y1) == 0
+					ld  a, (_x1)
+					ld  c, a
+					ld  a, (_y1)
+					ld  b, a
+					call _attr_1b
+					xor a
+					or  l
+					jp  nz, push_boxes_end
+
+					// && x1 < 15
+					ld  a, (_x1)
+					cp  15
+					jp  nc, push_boxes_end
+
+					// && y1 < 10
+					ld  a, (_y1)
+					cp  10
+					jp  nc, push_boxes_end
+			#endasm
+
+			#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
+				rda = map_buff [COORDS(x1,y1)];
+				flags [MOVED_TILE_FLAG] = rda; 
+				flags [MOVED_X_FLAG] = x1;
+				flags [MOVED_Y_FLAG] = y1;
+			#endif	
+
+			// Pintar
+			#asm
+					//_x = x0; _y = y0; _t = 0; _n = 0; update_tile ();
+					ld  a, (_x0)
+					ld  (__x), a
+					ld  a, (_y0)
+					ld  (__y), a
+					xor a
+					ld  (__t), a
+					ld  (__n), a
+					call _update_tile
+
+					// _x = x1; _y = y1; _t = 14; _n = 10; update_tile ();
+					ld  a, (_x1)
+					ld  (__x), a
+					ld  a, (_y1)
+					ld  (__y), a
+					ld  a, 14
+					ld  (__t), a
+					ld  a, 10
+					ld  (__n), a
+					call _update_tile
+			#endasm
+
+			// Sonido
+			#ifdef MODE_128K
+				PLAY_SOUND (SFX_PUSH_BOX);
+			#else			
+				beep_fx (2);	
+			#endif			
+
+			#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING) && defined(PUSHING_ACTION)
+				// Call scripting
+				just_pushed = 1;
+				run_fire_script ();
+				just_pushed = 0;
+			#endif
+
+			#include "my/ci/on_tile_pushed.h"
+
+			#asm
+				.push_boxes_end
+			#endasm
+		#endif
+
+		/*
 		#if !defined DEACTIVATE_KEYS && MAX_CERROJOS > 0
 			if (qtile (x0, y0) == 15 && p_keys) {
 				for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) {
@@ -190,6 +307,103 @@ void espera_activa (int espera) {
 				#include "my/ci/on_unlocked_bolt.h"
 			}
 		#endif
+		*/
+
+		#if !defined DEACTIVATE_KEYS && MAX_CERROJOS > 0
+			#asm
+				.open_lock
+			#endasm
+
+			// if (qtile (x0, y0) == 15 && p_keys) {
+			#asm
+					ld  a, (_x0)
+					ld  c, a
+					ld  a, (_y0)
+					call qtile_do
+					ld  a, l
+					cp  15
+					jp  nz, open_lock_end
+
+					ld  a, (_p_keys)
+					or  a
+					jr  z, open_lock_end
+			#endasm
+
+			/*
+			for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) {
+				if (cerrojos [gpit].x == x0 && cerrojos [gpit].y == y0 && cerrojos [gpit].np == n_pant) {
+					cerrojos [gpit].st = 0;
+					break;
+				}
+			}
+			*/
+			#asm
+					// The cerrojos struct is db np, x, y st
+					ld  b, MAX_CERROJOS
+					ld  hl, _cerrojos
+				.clear_cerrojo_loop
+					ld  c, (hl) 		// np
+					inc hl
+					ld  d, (hl) 		// x
+					inc hl 
+					ld  e, (hl) 		// y
+					inc hl
+										// HL->st
+
+					ld  a, (_n_pant)
+					cp  c
+					jr  nz, clear_cerrojo_loop_continue
+
+					ld  a, (_x0)
+					cp  d 
+					jr  nz, clear_cerrojo_loop_continue
+
+					ld  a, (_y0)
+					cp  e 
+					jr  nz, clear_cerrojo_loop_continue
+
+					xor a 
+					ld  (hl), a
+					jr  clear_cerrojo_end
+
+				.clear_cerrojo_loop_continue
+					inc hl
+					djnz clear_cerrojo_loop
+
+				.clear_cerrojo_end
+			#endasm
+
+			// _x = x0; _y = y0; _t = 0; _n = 0; update_tile ();
+
+			#asm
+					ld  a, (_x0)
+					ld  (__x), a
+					ld  a, (_y0)
+					ld  (__y), a
+					xor a
+					ld  (__t), a
+					ld  (__n), a
+					call _update_tile
+			#endasm
+
+			// -- p_keys
+			#asm
+					ld  hl, _p_keys
+					dec (hl)
+			#endasm
+
+			#ifdef MODE_128K
+				PLAY_SOUND (SFX_OPEN_LOCK);
+			#else
+				beep_fx (8);
+			#endif
+
+			#include "my/ci/on_unlocked_bolt.h"
+
+			#asm
+				.open_lock_end
+			#endasm
+		#endif				
 	}
 #endif
 
@@ -220,6 +434,9 @@ void draw_scr_background (void) {
 				#asm
 						ld  hl, (_map_pointer)
 						ld  a, (hl)
+				#endasm
+				#include "my/ci/on_map_tile_decoded.h"
+				#asm
 						ld  (__t), a
 						inc hl
 						ld  (_map_pointer), hl
@@ -276,6 +493,9 @@ void draw_scr_background (void) {
 						and 15
 
 					._draw_scr_packed_done
+				#endasm
+				#include "my/ci/on_map_tile_decoded.h"
+				#asm
 						ld  (__t), a
 						
 						ld  b, 0

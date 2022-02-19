@@ -177,7 +177,7 @@ unsigned char *_baddies_pointer;
 
 // atributos de la pantalla: Contiene información
 // sobre qué tipo de tile hay en cada casilla
-unsigned char map_attr [150];
+unsigned char map_attr [150] @ 23296+16+150;
 unsigned char map_buff [150] @ FREEPOOL;
 // Breakable walls/etc
 #ifdef BREAKABLE_WALLS
