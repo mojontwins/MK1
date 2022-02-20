@@ -721,24 +721,83 @@ unsigned char player_move (void) {
 
 	#ifdef PLAYER_GENITAL
 		#ifdef TOP_OVER_SIDE
+			/*
 			if (p_facing_v != 0xff) {
 				p_facing = p_facing_v;
 			} else if (p_facing_h != 0xff) {
 				p_facing = p_facing_h;
 			}
+			*/
+			#asm
+				.genital_decide_facing
+					ld  a, (_p_facing_v)
+					cp  0xff
+					jr  z, genital_decide_facing_h
+				.genital_decide_facing_v
+					ld  (_p_facing), a
+					jr  genital_decide_facing_done
+				.genital_decide_facing_h
+					ld  a, (_p_facing_h)
+					cp  0xff
+					jr  z, genital_decide_facing_done
+					ld  (_p_facing), a
+				.genital_decide_facing_done
+			#endasm
 		#else
+			/*
 			if (p_facing_h != 0xff) {
 				p_facing = p_facing_h;
 			} else if (p_facing_v != 0xff) {
 				p_facing = p_facing_v;
 			}
+			*/
+			#asm
+				.genital_decide_facing
+					ld  a, (_p_facing_h)
+					cp  0xff
+					jr  z, genital_decide_facing_v
+				.genital_decide_facing_h
+					ld  (_p_facing), a
+					jr  genital_decide_facing_done
+				.genital_decide_facing_v
+					ld  a, (_p_facing_v)
+					cp  0xff
+					jr  z, genital_decide_facing_done
+					ld  (_p_facing), a
+				.genital_decide_facing_done
+			#endasm	
 		#endif	
 	#endif
 
+	/*
 	cx1 = p_tx = (gpx + 8) >> 4;
 	cy1 = p_ty = (gpy + 8) >> 4;
 
 	rdb = attr (cx1, cy1);
+	*/
+	#asm
+			ld  a, (_gpx)
+			add 8
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_p_tx), a 
+			ld  (_cx1), a
+			ld  c, a
+
+			ld  a, (_gpy)
+			add 8
+			srl a
+			srl a
+			srl a
+			srl a
+			ld  (_p_ty), a 
+			ld  (_cy1), a
+
+			call _attr_2
+			ld  (_rdb), a
+	#endasm
 
 	// Special tiles
 	if (rdb & 128) {
