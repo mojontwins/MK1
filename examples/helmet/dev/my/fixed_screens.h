@@ -41,9 +41,9 @@ void game_ending (void) {
 	// Custom for Helmet
 	#ifdef LANG_ES
 		_x = 10; _y = 7; _t = 70; _gp_gen = (unsigned char *) ("ENHORABUENA!"); print_str ();
-		_x = 2; _y = 9; _t = 71; _gp_gen = (unsigned char *) ("CONSEGUISTE PONER LAS BOMBAS"); print_str ();
-		_x = 4; _y = 10;         _gp_gen = (unsigned char *) ("Y DESTRUIR EL ORDENADOR!"); print_str ();
-		_x = 8; _y = 11;         _gp_gen = (unsigned char *) ("MISION CUMPLIDA!!"); print_str ();
+		_x =  2; _y = 9; _t = 71; _gp_gen = (unsigned char *) ("CONSEGUISTE PONER LAS BOMBAS"); print_str ();
+		_x =  4; _y = 10;         _gp_gen = (unsigned char *) ("Y DESTRUIR EL ORDENADOR!"); print_str ();
+		_x =  8; _y = 11;         _gp_gen = (unsigned char *) ("MISION CUMPLIDA!!"); print_str ();
 	#else
 		_x = 8; _y = 7; _t = 70; _gp_gen = (unsigned char *) ("CONGRATULATIONS!"); print_str ();
 		_x = 2; _y = 9; _t = 71; _gp_gen = (unsigned char *) ("YOU MANAGED TO SET THE BOMBS"); print_str ();

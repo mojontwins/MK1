@@ -17,21 +17,17 @@
 		#endif
 	} LEVEL;
 #else
-	// 48K format:
+	// 48K format struct is 18 bytes wide
 	typedef struct {
-		unsigned char map_w, map_h;
-		unsigned char scr_ini, ini_x, ini_y;
-		unsigned char max_objs;
-		unsigned char *c_map_bolts;
-		unsigned char *c_tileset;
-		unsigned char *c_enems_hotspots;
-		unsigned char *c_behs;
-		#ifdef PER_LEVEL_SPRITESET
-			unsigned char *c_sprites;
-		#endif
-		#ifdef ACTIVATE_SCRIPTING
-			unsigned int script_offset;
-		#endif
+		unsigned char map_w, map_h;				// 0, 1
+		unsigned char scr_ini, ini_x, ini_y;	// 2, 3, 4
+		unsigned char max_objs; 				// 5
+		unsigned char *c_map_bolts; 			// 6
+		unsigned char *c_tileset; 				// 8
+		unsigned char *c_enems_hotspots; 		// 10
+		unsigned char *c_behs; 					// 12
+		unsigned char *c_sprites; 				// 14
+		unsigned int script_offset; 			// 16
 	} LEVEL;
 #endif
 

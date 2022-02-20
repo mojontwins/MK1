@@ -129,11 +129,12 @@
 #define FIRE_MIN_KILLABLE 			3		// If defined, only enemies >= N can be killed.
 //#define CAN_FIRE_UP						// If defined, player can fire upwards and diagonal.
 #define MAX_AMMO					99		// If defined, ammo is not infinite!
-#define AMMO_REFILL					50		// ammo refill, using tile 20 (hotspot #4)
+#define AMMO_REFILL					40		// ammo refill, using tile 20 (hotspot #4)
 //#define INITIAL_AMMO				0		// If defined, ammo = X when entering game.
 
 #define BREAKABLE_WALLS						// Breakable walls
 #define BREAKABLE_WALLS_LIFE		1		// Amount of hits to break wall
+#define BREAKABLE_WALLS_BREAKING	30 		// If defined, use this tile as "breaking"
 
 // Scripting
 // ---------
