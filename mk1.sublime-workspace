@@ -331,8 +331,35 @@
 			"file": "examples/helmet/dev/engine.h",
 			"settings":
 			{
-				"buffer_size": 13510,
+				"buffer_size": 18723,
 				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/jcastano/AppData/Local/Temp/7zO4B28BD96/LOXSRC.TXT",
+			"settings":
+			{
+				"buffer_size": 466694,
+				"encoding": "UTF-8",
+				"line_ending": "CR"
+			}
+		},
+		{
+			"file": "examples/helmet/dev/my/fixed_screens.h",
+			"settings":
+			{
+				"buffer_size": 3530,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/C/Users/jcastano/AppData/Local/Temp/7zO4B20D1CB/Loxley - Instrucciones Español.txt",
+			"settings":
+			{
+				"buffer_size": 4646,
+				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
 		},
@@ -349,8 +376,16 @@
 			"file": "examples/helmet/dev/my/config.h",
 			"settings":
 			{
-				"buffer_size": 15215,
+				"buffer_size": 15340,
 				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/helmet/dev/engine/enem_mods/enem_type_pursuers_asm.h",
+			"settings":
+			{
+				"buffer_size": 3115,
 				"line_ending": "Windows"
 			}
 		}
@@ -416,12 +451,15 @@
 	"expanded_folders":
 	[
 		"/D/temp/MK1",
+		"/D/temp/MK1/docs",
 		"/D/temp/MK1/examples",
 		"/D/temp/MK1/examples/helmet",
-		"/D/temp/MK1/examples/helmet/dev"
+		"/D/temp/MK1/examples/helmet/dev",
+		"/D/temp/MK1/examples/helmet/dev/my"
 	],
 	"file_history":
 	[
+		"/D/Proyectos/2022/20220221a - Integración de Webmail con adAS/instrucciones.txt",
 		"/D/temp/MK1/lib/splib2/Makefile.bat",
 		"/D/temp/MK1/examples/helmet/dev/compile.bat",
 		"/D/temp/MK1/lib/splib2/updater/SPUpdateNow.asm",
@@ -548,8 +586,7 @@
 		"/D/Proyectos/remote/descon01/consigna/public/accesibilidad.html",
 		"/D/Proyectos/2020/20200917d - Consigna - Declaración de Accesibilidad/instrucciones.txt",
 		"/D/Proyectos/2020/20200813b - Corrección CSS Consigna/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/consigna/public/css/estilo.css",
-		"/D/Proyectos/2020/20200903a - Revisión de configuraciones de seguridad de Consigna/instrucciones.txt"
+		"/D/Proyectos/remote/descon01/consigna/public/css/estilo.css"
 	],
 	"find":
 	{
@@ -580,6 +617,21 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"TABLAJP",
+			"LX_LDIR",
+			"lx_ldir: equ",
+			"LX_LDIR",
+			"LX_SCRLE",
+			"LX_TILE",
+			"190",
+			"B2BE",
+			"BEB2",
+			"LX_TILE",
+			"WORD   $0B0D",
+			"$9C16",
+			"LX_LDIR",
+			"LSE",
+			"LX_SPRITE_OO",
 			"mons_col_sc_x",
 			"mons_col_sc_y",
 			"pursuers",
@@ -641,7 +693,7 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -650,15 +702,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 13510,
+						"buffer_size": 18723,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								12132,
-								12145
+								13909,
+								13909
 							]
 						],
 						"settings":
@@ -676,7 +728,70 @@
 							}
 						},
 						"translation.x": 0.0,
-						"translation.y": 7922.0,
+						"translation.y": 8912.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "/C/Users/jcastano/AppData/Local/Temp/7zO4B28BD96/LOXSRC.TXT",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 466694,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								228880,
+								228887
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 97079.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/helmet/dev/my/fixed_screens.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3530,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1386,
+								1386
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -684,6 +799,70 @@
 				},
 				{
 					"buffer": 1,
+					"file": "/C/Users/jcastano/AppData/Local/Temp/7zO4B28BD96/LOXSRC.TXT",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 466694,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								248484,
+								248484
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 105997.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/jcastano/AppData/Local/Temp/7zO4B20D1CB/Loxley - Instrucciones Español.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4646,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 585.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
 					"file": "examples/helmet/dev/helmet.asm",
 					"semi_transient": false,
 					"settings":
@@ -711,30 +890,30 @@
 						"translation.y": 139654.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 7,
 					"type": "text"
 				}
 			]
 		},
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
-					"buffer": 2,
+					"buffer": 5,
 					"file": "examples/helmet/dev/my/config.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15215,
+						"buffer_size": 15340,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								506,
-								506
+								637,
+								637
 							]
 						],
 						"settings":
@@ -747,6 +926,38 @@
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "examples/helmet/dev/engine/enem_mods/enem_type_pursuers_asm.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3115,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2684,
+								2684
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1521.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -847,7 +1058,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 226.0,
+	"side_bar_width": 348.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
