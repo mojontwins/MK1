@@ -27,10 +27,10 @@
 // Types:
 
 typedef struct {
-	unsigned char map_w, map_h;
-	unsigned char scr_ini, ini_x, ini_y;
-	unsigned char max_objs;
-	unsigned char enems_life;
+	unsigned char map_w, map_h; 			// 0, 1
+	unsigned char scr_ini, ini_x, ini_y; 	// 2, 3, 4
+	unsigned char max_objs; 				// 5
+	unsigned char enems_life; 				// 6
 	unsigned char d01;	// Reserved
 	unsigned char d02;
 	unsigned char d03;

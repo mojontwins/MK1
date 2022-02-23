@@ -136,8 +136,11 @@
 
 		ld  a, (__en_x)
 		ld  d, a
+		and 0xfe 		;; Remove jitter!
+		ld  e, a
 		ld  a, (_gpx)
-		cp  d
+		and 0xfe 		;; Remove jitter!
+		cp  e
 		jr  z, _eij_state_moving_y
 
 		jr  c, _eij_state_moving_x_left
@@ -172,8 +175,11 @@
 
 		ld  a, (__en_y)
 		ld  d, a
+		and 0xfe 		;; Remove jitter!
+		ld  e, a
 		ld  a, (_gpy)
-		cp  d
+		and 0xfe 		;; Remove jitter!
+		cp  e
 		jr  z, _eij_state_done
 
 		jr  c, _eij_state_moving_y_up

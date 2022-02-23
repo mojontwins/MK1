@@ -13,6 +13,9 @@ void break_wall (void) {
 			gpit = 1;
 		#endif
 		#include "my/ci/on_wall_hit.h"
+		#ifdef BREAKABLE_WALLS_BREAKING
+			_n = rda; _t = BREAKABLE_WALLS_BREAKING; update_tile ();
+		#endif
 	} else {
 		_n = _t = 0; update_tile ();
 		#ifdef MODE_128K

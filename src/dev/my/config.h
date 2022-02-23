@@ -47,6 +47,7 @@
 											// Comment both for normal 16x16 bounding box
 #define BOUNDING_BOX_8_BOTTOM				// 8x8 aligned to bottom center in 16x16
 //#define BOUNDING_BOX_8_CENTERED			// 8x8 aligned to center in 16x16
+//#define BOUNDING_BOX_12X2_CENTERED 			// 8x2 aligned to center in 16x16
 #define SMALL_COLLISION 					// 8x8 centered collision instead of 12x12
 
 // General directives:
@@ -61,6 +62,7 @@
 //#define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
 //#define REVERSE_OBJECTS_COUNT 			// Counts from PLAYER_NUM_OBJETOS to 0
 //#define DEACTIVATE_EVIL_TILE				// If defined, no killing tiles (behaviour 1) are detected.
+//#define CUSTOM_EVIL_TILE_CHECK			// 
 #define PLAYER_BOUNCES						// If defined, collisions make player bounce
 //#define FULL_BOUNCE 						// If defined, evil tile bounces equal MAX_VX, otherwise v/2
 //#define SLOW_DRAIN						// Works with bounces. Drain is 4 times slower
@@ -79,6 +81,7 @@
 //#define DEATH_COUNT_ADD 			11 		// Frames to wait = ADD + (rand & AND)
 //#define PURSUERS_MAX_V 			2		// 1, 2, 4.
 //#define PURSUERS_BASE_CELL		3		// If defined, type 7 enemies are always #
+//#define PURSUERS_MAX_V 			2		// 1, 2, 4.
 
 //#define ENABLE_FANTIES					// If defined, Fanties are enabled!
 //#define FANTIES_BASE_CELL 		2		// Base sprite cell (0, 1, 2 or 3)
@@ -131,6 +134,7 @@
 
 //#define BREAKABLE_WALLS 					// Breakable walls
 //#define BREAKABLE_WALLS_LIFE	1			// Amount of hits to break wall
+//#define BREAKABLE_WALLS_BREAKING	30 		// If defined, use this tile as "breaking"
 
 // Scripting
 // ---------

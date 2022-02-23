@@ -4,9 +4,19 @@
 // bullets.h
 
 void bullets_init (void) {
+	/*
 	b_it = 0; while (b_it < MAX_BULLETS) { 
 		bullets_estado [b_it] = 0; ++ b_it;
 	}	
+	*/
+	#asm
+			ld  hl, _bullets_estado
+			ld  de, _bullets_estado + 1
+			ld  bc, MAX_BULLETS - 1
+			xor a
+			ld  (hl), a
+			ldir
+	#endasm	
 }
 
 void bullets_update (void) {
