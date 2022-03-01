@@ -4,6 +4,18 @@
 		"selected_items":
 		[
 			[
+				"rel",
+				"relocate_player_done\tabc"
+			],
+			[
+				"tiles",
+				"tile_subst_done\tabc"
+			],
+			[
+				"clearc",
+				"clear_cerrojo_end\tabc"
+			],
+			[
 				"BOUNDI",
 				"BOUNDING_BOX_12X2_CENTERED\tabc"
 			],
@@ -328,46 +340,10 @@
 	"buffers":
 	[
 		{
-			"file": "examples/helmet/dev/engine.h",
+			"file": "examples/helmet/dev/engine/breakable.h",
 			"settings":
 			{
-				"buffer_size": 18723,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/jcastano/AppData/Local/Temp/7zO4B28BD96/LOXSRC.TXT",
-			"settings":
-			{
-				"buffer_size": 466694,
-				"encoding": "UTF-8",
-				"line_ending": "CR"
-			}
-		},
-		{
-			"file": "examples/helmet/dev/my/fixed_screens.h",
-			"settings":
-			{
-				"buffer_size": 3530,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/jcastano/AppData/Local/Temp/7zO4B20D1CB/Loxley - Instrucciones Español.txt",
-			"settings":
-			{
-				"buffer_size": 4646,
-				"encoding": "Western (Windows 1252)",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/helmet/dev/helmet.asm",
-			"settings":
-			{
-				"buffer_size": 589911,
+				"buffer_size": 757,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -376,16 +352,42 @@
 			"file": "examples/helmet/dev/my/config.h",
 			"settings":
 			{
-				"buffer_size": 15340,
+				"buffer_size": 15335,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/helmet/dev/engine/player.h",
+			"settings":
+			{
+				"buffer_size": 19011,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "examples/helmet/dev/engine/enem_mods/enem_type_pursuers_asm.h",
+			"file": "/C/Users/na_th/AppData/Roaming/.minecraft/versions/version_manifest_v2.json",
 			"settings":
 			{
-				"buffer_size": 3115,
+				"buffer_size": 184901,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 107 files for \"break_wall\"\n\nC:\\Temp\\mk1\\examples\\helmet\\dev\\engine\\breakable.h:\n    4  // breakable.h\n    5  \n    6: void break_wall (void) {\n    7  \t#ifdef BREAKABLE_WALLS_BREAKING\n    8  \t#endif\n\nC:\\Temp\\mk1\\examples\\helmet\\dev\\engine\\bullets.h:\n  252  \t\t\trda = attr (_x, _y);\n  253  \t\t\t#ifdef BREAKABLE_WALLS\t\t\t\n  254: \t\t\t\tif (rda & 16) break_wall ();\n  255  \t\t\t#endif\n  256  \t\t\tif (rda > 7) _b_estado = 0;\n\nC:\\Temp\\mk1\\examples\\helmet\\dev\\helmet.asm:\n 1166  ; \n 1167  \tC_LINE\t24,\"prototypes.h\"\n 1168: ;void break_wall (void);\n 1169  \tC_LINE\t25,\"prototypes.h\"\n 1170  \tC_LINE\t25,\"prototypes.h\"\n ....\n 7441  ; \n 7442  \tC_LINE\t4,\"engine/breakable.h::cortina::0::23\"\n 7443: ;void break_wall (void) {\n 7444  \tC_LINE\t6,\"engine/breakable.h::cortina::0::23\"\n 7445  \tC_LINE\t6,\"engine/breakable.h::cortina::0::23\"\n 7446  \n 7447: ; Function break_wall flags 0x00000200 __smallc \n 7448: ; void break_wall()\n 7449: \tC_LINE\t6,\"engine/breakable.h::break_wall::0::23\"\n 7450: ._break_wall\n 7451: \tC_LINE\t6,\"engine/breakable.h::break_wall::0::23\"\n 7452  ;\tgpaux =  (( _x )+( _y <<4)-( _y )) ;\n 7453: \tC_LINE\t7,\"engine/breakable.h::break_wall::1::24\"\n 7454: \tC_LINE\t7,\"engine/breakable.h::break_wall::1::24\"\n 7455  \tld\thl,(__x)\n 7456  \tld\th,0\n ....\n 7474  \tld\t(_gpaux),a\n 7475  ;\tif (brk_buff [gpaux] <  1 ) {\n 7476: \tC_LINE\t8,\"engine/breakable.h::break_wall::1::24\"\n 7477: \tC_LINE\t8,\"engine/breakable.h::break_wall::1::24\"\n 7478  \tld\tde,_brk_buff\n 7479  \tld\thl,(_gpaux)\n ....\n 7484  \tjp\tnc,i_27\t;\n 7485  ;\t\t++ brk_buff [gpaux];\n 7486: \tC_LINE\t9,\"engine/breakable.h::break_wall::2::25\"\n 7487: \tC_LINE\t9,\"engine/breakable.h::break_wall::2::25\"\n 7488  \tld\tde,_brk_buff\n 7489  \tld\thl,(_gpaux)\n ....\n 7494  \tld\th,0\n 7495  ;\t\t\n 7496: \tC_LINE\t10,\"engine/breakable.h::break_wall::2::25\"\n 7497  ;\t\t\tgpit = 1;\n 7498: \tC_LINE\t13,\"engine/breakable.h::break_wall::2::25\"\n 7499: \tC_LINE\t13,\"engine/breakable.h::break_wall::2::25\"\n 7500  \tld\thl,1\t;const\n 7501  \tld\ta,l\n 7502  \tld\t(_gpit),a\n 7503  ;\t\t\n 7504: \tC_LINE\t14,\"engine/breakable.h::break_wall::2::25\"\n 7505  ;\t\t#line 1 \"./my/ci/on_wall_hit.h\"\n 7506: \tC_LINE\t15,\"engine/breakable.h::break_wall::2::25\"\n 7507: \tC_LINE\t0,\"./my/ci/on_wall_hit.h::break_wall::2::25\"\n 7508  ; \n 7509: \tC_LINE\t1,\"./my/ci/on_wall_hit.h::break_wall::2::25\"\n 7510  ; \n 7511: \tC_LINE\t2,\"./my/ci/on_wall_hit.h::break_wall::2::25\"\n 7512  ;#line 16 \"engine/breakable.h\"\n 7513: \tC_LINE\t4,\"./my/ci/on_wall_hit.h::break_wall::2::25\"\n 7514: \tC_LINE\t15,\"engine/breakable.h::break_wall::2::25\"\n 7515  ;\t} else {\n 7516: \tC_LINE\t16,\"engine/breakable.h::break_wall::2::25\"\n 7517  \tjp\ti_28\t;EOS\n 7518  .i_27\n 7519: \tC_LINE\t16,\"engine/breakable.h::break_wall::1::25\"\n 7520  ;\t\t_n = _t = 0; update_tile ();\n 7521: \tC_LINE\t17,\"engine/breakable.h::break_wall::2::26\"\n 7522: \tC_LINE\t17,\"engine/breakable.h::break_wall::2::26\"\n 7523  \tld\thl,0\t;const\n 7524  \tld\ta,l\n ....\n 7527  \tcall\t_update_tile\n 7528  ;\t\t\n 7529: \tC_LINE\t18,\"engine/breakable.h::break_wall::2::26\"\n 7530  ;\t\t\tgpit = 0;\n 7531: \tC_LINE\t21,\"engine/breakable.h::break_wall::2::26\"\n 7532: \tC_LINE\t21,\"engine/breakable.h::break_wall::2::26\"\n 7533  \tld\thl,0\t;const\n 7534  \tld\ta,l\n 7535  \tld\t(_gpit),a\n 7536  ;\t\t\n 7537: \tC_LINE\t22,\"engine/breakable.h::break_wall::2::26\"\n 7538  ;\t\t#line 1 \"./my/ci/on_wall_broken.h\"\n 7539: \tC_LINE\t23,\"engine/breakable.h::break_wall::2::26\"\n 7540: \tC_LINE\t0,\"./my/ci/on_wall_broken.h::break_wall::2::26\"\n 7541  ; \n 7542: \tC_LINE\t1,\"./my/ci/on_wall_broken.h::break_wall::2::26\"\n 7543  ; \n 7544: \tC_LINE\t2,\"./my/ci/on_wall_broken.h::break_wall::2::26\"\n 7545  ;#line 24 \"engine/breakable.h\"\n 7546: \tC_LINE\t4,\"./my/ci/on_wall_broken.h::break_wall::2::26\"\n 7547: \tC_LINE\t23,\"engine/breakable.h::break_wall::2::26\"\n 7548  ;\t}\n 7549: \tC_LINE\t24,\"engine/breakable.h::break_wall::2::26\"\n 7550  .i_28\n 7551  ;\t\n 7552: \tC_LINE\t25,\"engine/breakable.h::break_wall::1::26\"\n 7553  ;\t\t \n 7554: \tC_LINE\t28,\"engine/breakable.h::break_wall::1::26\"\n 7555  ;\t\tsp_UpdateNow ();\n 7556: \tC_LINE\t29,\"engine/breakable.h::break_wall::1::26\"\n 7557: \tC_LINE\t29,\"engine/breakable.h::break_wall::1::26\"\n 7558  \tcall\tsp_UpdateNow\n 7559  ;\t\tbeep_fx (gpit);\n 7560: \tC_LINE\t30,\"engine/breakable.h::break_wall::1::26\"\n 7561: \tC_LINE\t30,\"engine/breakable.h::break_wall::1::26\"\n 7562  ;gpit;\n 7563: \tC_LINE\t31,\"engine/breakable.h::break_wall::1::26\"\n 7564  \tld\thl,(_gpit)\n 7565  \tld\th,0\n ....\n 7568  \tpop\tbc\n 7569  ;\t\n 7570: \tC_LINE\t31,\"engine/breakable.h::break_wall::1::26\"\n 7571  ;}\n 7572: \tC_LINE\t32,\"engine/breakable.h::break_wall::1::26\"\n 7573  \tret\n 7574  \n 7575  \n 7576  ;#line 123 \"mk1.c\"\n 7577: \tC_LINE\t33,\"engine/breakable.h::break_wall::0::26\"\n 7578: \tC_LINE\t122,\"mk1.c::break_wall::0::26\"\n 7579  ;\t#line 1 \"engine/bullets.h\"\n 7580: \tC_LINE\t125,\"mk1.c::break_wall::0::26\"\n 7581: \tC_LINE\t0,\"engine/bullets.h::break_wall::0::26\"\n 7582  ; \n 7583: \tC_LINE\t1,\"engine/bullets.h::break_wall::0::26\"\n 7584  ; \n 7585: \tC_LINE\t2,\"engine/bullets.h::break_wall::0::26\"\n 7586  ; \n 7587: \tC_LINE\t4,\"engine/bullets.h::break_wall::0::26\"\n 7588  ;void bullets_init (void) {\n 7589: \tC_LINE\t6,\"engine/bullets.h::break_wall::0::26\"\n 7590: \tC_LINE\t6,\"engine/bullets.h::break_wall::0::26\"\n 7591  \n 7592  ; Function bullets_init flags 0x00000200 __smallc \n ....\n 8134  ;\t\t\t\n 8135  \tC_LINE\t243,\"engine/bullets.h::bullets_move::4::39\"\n 8136: ;\t\t\t\tif (rda & 16) break_wall ();\n 8137  \tC_LINE\t244,\"engine/bullets.h::bullets_move::4::39\"\n 8138  \tC_LINE\t244,\"engine/bullets.h::bullets_move::4::39\"\n ....\n 8145  \tor\tl\n 8146  \tjp\tz,i_48\t;\n 8147: \tcall\t_break_wall\n 8148  ;\t\t\t\n 8149  \tC_LINE\t245,\"engine/bullets.h::bullets_move::4::39\"\n ....\n 19737  \tGLOBAL\tsp_HuffEncode\n 19738  \tGLOBAL\t_keys\n 19739: \tGLOBAL\t_break_wall\n 19740  \tGLOBAL\t_bullets_init\n 19741  \tGLOBAL\t_bullets_update\n\nC:\\Temp\\mk1\\examples\\helmet\\dev\\helmet.map:\n  671  _BLX\t\t\t\t= D10B, G: MK1\n  672  _BLY\t\t\t\t= D10C, G: MK1\n  673: _BREAK_WALL\t\t\t= A5E7, G: MK1\n  674  _BULLETS_ESTADO\t\t\t= D09F, G: MK1\n  675  _BULLETS_FIRE\t\t\t= A6BF, G: MK1\n  ...\n 1202  BUCLE1\t\t\t\t= A5D0, L: MK1\n 1203  BUCLE2\t\t\t\t= A5D8, L: MK1\n 1204: _BREAK_WALL\t\t\t= A5E7, G: MK1\n 1205  I_25\t\t\t\t= A630, L: MK1\n 1206  I_26\t\t\t\t= A647, L: MK1\n\nC:\\Temp\\mk1\\examples\\helmet\\dev\\prototypes.h:\n   23  \n   24  // breakable.h\n   25: void break_wall (void);\n   26  \n   27  // bullets.h\n\n64 matches across 5 files\n",
+			"settings":
+			{
+				"buffer_size": 6258,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "examples/helmet/dev/engine/bullets.h",
+			"settings":
+			{
+				"buffer_size": 5083,
 				"line_ending": "Windows"
 			}
 		}
@@ -450,16 +452,44 @@
 	},
 	"expanded_folders":
 	[
-		"/D/temp/MK1",
-		"/D/temp/MK1/docs",
-		"/D/temp/MK1/examples",
-		"/D/temp/MK1/examples/helmet",
-		"/D/temp/MK1/examples/helmet/dev",
-		"/D/temp/MK1/examples/helmet/dev/my"
+		"/C/Temp/mk1",
+		"/C/Temp/mk1/examples",
+		"/C/Temp/mk1/examples/helmet",
+		"/C/Temp/mk1/examples/helmet/dev",
+		"/C/Temp/mk1/examples/helmet/dev/engine",
+		"/C/Temp/mk1/examples/helmet/dev/engine/enem_mods",
+		"/C/Temp/mk1/examples/helmet/dev/my",
+		"/C/Temp/mk1/src",
+		"/C/Temp/mk1/src/dev",
+		"/C/Temp/mk1/src/dev/engine"
 	],
 	"file_history":
 	[
-		"/D/Proyectos/2022/20220221a - Integración de Webmail con adAS/instrucciones.txt",
+		"/C/Temp/mk1/src/dev/engine/player.h",
+		"/C/Temp/mk1/examples/helmet/dev/engine.h",
+		"/C/Temp/mk1/examples/helmet/dev/engine/player.h",
+		"/C/Temp/mk1/examples/helmet/dev/mtasmlib.h",
+		"/C/Temp/mk1/examples/helmet/dev/definitions.h",
+		"/C/Temp/mk1/examples/helmet/dev/engine/enengine.h",
+		"/C/Temp/mk1/examples/helmet/dev/helmet.asm",
+		"/C/Temp/mk1/examples/helmet/dev/my/levelset.h",
+		"/C/Temp/mk1/examples/helmet/dev/assets/levels.h",
+		"/C/Temp/mk1/examples/helmet/dev/engine/breakable.h",
+		"/C/Temp/mk1/examples/helmet/dev/engine/c_levels.h",
+		"/C/Temp/mk1/examples/helmet/dev/mk1.c",
+		"/C/Temp/mk1/examples/helmet/dev/my/ci/extra_routines.h",
+		"/C/Temp/mk1/examples/helmet/dev/my/ci/entering_screen.h",
+		"/C/Temp/mk1/examples/helmet/dev/my/fixed_screens.h",
+		"/C/Temp/mk1/examples/helmet/dev/my/config.h",
+		"/C/Temp/mk1/examples/helmet/dev/engine/enem_mods/enem_type_pursuers_asm.h",
+		"/C/Temp/mk1/examples/helmet/dev/my/ci/custom_evil_tile_check.h",
+		"/C/Temp/mk1/examples/helmet/dev/my/ci/on_map_tile_decoded.h",
+		"/C/Temp/mk1/examples/helmet/dev/printer.h",
+		"/C/Temp/mk1/examples/helmet/dev/#ifdef PLAYER_PUSH_BOXES",
+		"/C/Temp/mk1/examples/helmet/dev/engine/enem_mods/enem_type_lineal.h",
+		"/C/Temp/mk1/examples/helmet/dev/engine/enem_mods/enem_type_orthoshooters.h",
+		"/C/Temp/mk1/examples/helmet/dev/engine/hotspots.h",
+		"/C/Temp/mk1/examples/helmet/dev/engine/bullets.h",
 		"/D/temp/MK1/lib/splib2/Makefile.bat",
 		"/D/temp/MK1/examples/helmet/dev/compile.bat",
 		"/D/temp/MK1/lib/splib2/updater/SPUpdateNow.asm",
@@ -562,41 +592,22 @@
 		"/D/Proyectos/CIs.txt",
 		"/D/Proyectos/remote/descon01/consigna/app/controllers/ficheros.php",
 		"/D/Proyectos/remote/descon01/consigna/app/config/config.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO883CF3C2/current4-nodo2.txt",
-		"/D/Proyectos/remote/descon01/consigna/app/views/cabecera.php",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/pheanstalk/classes/Pheanstalk.php",
-		"/D/Proyectos/remote/descon01/consigna/extra/antivirus-worker.php",
-		"/D/Proyectos/remote/descon01/consigna/app/models/antivirus.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO88342C43/current4.txt",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO883CDB75/current5.txt",
-		"/D/Proyectos/2021/20210107a - Configuración TTR de Workers AV en Consigna/instrucciones.txt",
-		"/D/Proyectos/2020/20200730a - Actualización Consigna v2.2/instrucciones.md",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/avmodules/kaspersky.php",
-		"/C/Users/jcastano/Downloads/20201130201635562 salidadeejecucioncomandoupgradev-1-5-0",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/authmodules/LDAP.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/ldap.php",
-		"/D/Proyectos/2020/20201130b - Modificación 'appbar' en Consigna (eliminación de 'mensajería')/instrucciones.txt",
-		"/D/Proyectos/2020/20201130a - Modificación 'appbar' en Webmail (eliminación de 'mensajería')/instrucciones.txt",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/enigma/config.inc.php",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/Avengine.php",
-		"/D/Proyectos/2020/20201007a - Corrección cliente javascript de subida a Consigna desde Webmail para IE/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/consigna/app/views/pie.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO8C6CC380/gfxlib015b.txt",
-		"/D/Proyectos/2020/20200917f - Banner 'MiCuenta' en Consigna/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/consigna/public/accesibilidad.html",
-		"/D/Proyectos/2020/20200917d - Consigna - Declaración de Accesibilidad/instrucciones.txt",
-		"/D/Proyectos/2020/20200813b - Corrección CSS Consigna/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/consigna/public/css/estilo.css"
+		"/C/Users/jcastano/AppData/Local/Temp/7zO883CF3C2/current4-nodo2.txt"
 	],
 	"find":
 	{
-		"height": 48.0
+		"height": 54.0
 	},
 	"find_in_files":
 	{
-		"height": 128.0,
+		"height": 134.0,
 		"where_history":
 		[
+			"C:\\Temp\\mk1\\examples\\helmet\\dev",
+			"C:\\Temp\\mk1\\examples\\helmet\\dev\\my\\ci",
+			"C:\\Temp\\mk1\\examples\\helmet\\dev",
+			"C:\\Temp\\mk1\\examples\\helmet",
+			"C:\\Temp\\mk1\\examples\\helmet\\dev",
 			"D:\\temp\\MK1\\examples\\helmet\\dev",
 			"D:\\temp\\MK1\\examples\\helmet\\dev\\engine",
 			"D:\\temp\\MK1\\docs",
@@ -617,21 +628,31 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"TABLAJP",
-			"LX_LDIR",
-			"lx_ldir: equ",
-			"LX_LDIR",
-			"LX_SCRLE",
-			"LX_TILE",
-			"190",
-			"B2BE",
-			"BEB2",
-			"LX_TILE",
-			"WORD   $0B0D",
-			"$9C16",
-			"LX_LDIR",
-			"LSE",
-			"LX_SPRITE_OO",
+			"fabric",
+			"break_wall",
+			"breakable",
+			"<< 6",
+			">> 6",
+			"hit_v",
+			"<< 6",
+			"asl",
+			"level_data",
+			"levels",
+			"prepare_level",
+			"breakable",
+			"level_str",
+			"addsign",
+			"TEST_DEBUG",
+			"abs",
+			"deactivat",
+			"15",
+			"deactivate_evil_tile",
+			"jr",
+			"rda",
+			"<",
+			"a",
+			"init",
+			"@",
 			"mons_col_sc_x",
 			"mons_col_sc_y",
 			"pursuers",
@@ -677,6 +698,8 @@
 		"regex": false,
 		"replace_history":
 		[
+			"sla",
+			"jp",
 			"level_data.",
 			"timer_\\1",
 			"timer_t",
@@ -693,100 +716,28 @@
 	"groups":
 	[
 		{
-			"selected": 2,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/helmet/dev/engine.h",
+					"file": "examples/helmet/dev/engine/breakable.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18723,
+						"buffer_size": 757,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								13909,
-								13909
+								367,
+								367
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false,
-							"typescript_plugin_format_options":
-							{
-								"convertTabsToSpaces": false,
-								"indentSize": 4,
-								"tabSize": 4
-							}
-						},
-						"translation.x": 0.0,
-						"translation.y": 8912.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 6,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/jcastano/AppData/Local/Temp/7zO4B28BD96/LOXSRC.TXT",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 466694,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								228880,
-								228887
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 97079.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "examples/helmet/dev/my/fixed_screens.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3530,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1386,
-								1386
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
@@ -794,47 +745,22 @@
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "/C/Users/jcastano/AppData/Local/Temp/7zO4B28BD96/LOXSRC.TXT",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 466694,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								248484,
-								248484
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 105997.0,
-						"zoom_level": 1.0
-					},
 					"stack_index": 3,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
 				{
-					"buffer": 3,
-					"file": "/C/Users/jcastano/AppData/Local/Temp/7zO4B20D1CB/Loxley - Instrucciones Español.txt",
+					"buffer": 1,
+					"file": "examples/helmet/dev/my/config.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4646,
+						"buffer_size": 15335,
 						"regions":
 						{
 						},
@@ -847,120 +773,398 @@
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"tab_size": 2,
-							"translate_tabs_to_spaces": true
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 585.0,
+						"translation.y": 1456.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/helmet/dev/engine/player.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19011,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14755,
+								14755
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 10153.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/na_th/AppData/Roaming/.minecraft/versions/version_manifest_v2.json",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 184901,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								4444,
+								4447
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 25894.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 6258,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										132,
+										142
+									],
+									[
+										350,
+										360
+									],
+									[
+										521,
+										531
+									],
+									[
+										689,
+										699
+									],
+									[
+										843,
+										853
+									],
+									[
+										895,
+										905
+									],
+									[
+										946,
+										956
+									],
+									[
+										974,
+										984
+									],
+									[
+										1023,
+										1033
+									],
+									[
+										1126,
+										1136
+									],
+									[
+										1183,
+										1193
+									],
+									[
+										1342,
+										1352
+									],
+									[
+										1399,
+										1409
+									],
+									[
+										1561,
+										1571
+									],
+									[
+										1618,
+										1628
+									],
+									[
+										1755,
+										1765
+									],
+									[
+										1834,
+										1844
+									],
+									[
+										1892,
+										1902
+									],
+									[
+										2020,
+										2030
+									],
+									[
+										2120,
+										2130
+									],
+									[
+										2180,
+										2190
+									],
+									[
+										2250,
+										2260
+									],
+									[
+										2320,
+										2330
+									],
+									[
+										2418,
+										2428
+									],
+									[
+										2476,
+										2486
+									],
+									[
+										2552,
+										2562
+									],
+									[
+										2644,
+										2654
+									],
+									[
+										2741,
+										2751
+									],
+									[
+										2799,
+										2809
+									],
+									[
+										2938,
+										2948
+									],
+									[
+										3017,
+										3027
+									],
+									[
+										3075,
+										3085
+									],
+									[
+										3203,
+										3213
+									],
+									[
+										3306,
+										3316
+									],
+									[
+										3369,
+										3379
+									],
+									[
+										3442,
+										3452
+									],
+									[
+										3515,
+										3525
+									],
+									[
+										3616,
+										3626
+									],
+									[
+										3674,
+										3684
+									],
+									[
+										3743,
+										3753
+									],
+									[
+										3824,
+										3834
+									],
+									[
+										3894,
+										3904
+									],
+									[
+										3979,
+										3989
+									],
+									[
+										4037,
+										4047
+									],
+									[
+										4147,
+										4157
+									],
+									[
+										4205,
+										4215
+									],
+									[
+										4277,
+										4287
+									],
+									[
+										4403,
+										4413
+									],
+									[
+										4471,
+										4481
+									],
+									[
+										4583,
+										4593
+									],
+									[
+										4629,
+										4639
+									],
+									[
+										4711,
+										4721
+									],
+									[
+										4766,
+										4776
+									],
+									[
+										4831,
+										4841
+									],
+									[
+										4896,
+										4906
+									],
+									[
+										4961,
+										4971
+									],
+									[
+										5051,
+										5061
+									],
+									[
+										5106,
+										5116
+									],
+									[
+										5294,
+										5304
+									],
+									[
+										5480,
+										5490
+									],
+									[
+										5637,
+										5647
+									],
+									[
+										5823,
+										5833
+									],
+									[
+										6007,
+										6017
+									],
+									[
+										6184,
+										6194
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								355,
+								355
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 5,
 					"type": "text"
 				},
 				{
-					"buffer": 4,
-					"file": "examples/helmet/dev/helmet.asm",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 589911,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								336858,
-								336858
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 139654.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 7,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
 					"buffer": 5,
-					"file": "examples/helmet/dev/my/config.h",
+					"file": "examples/helmet/dev/engine/bullets.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15340,
+						"buffer_size": 5083,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								637,
-								637
+								4829,
+								4829
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2976.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 6,
-					"file": "examples/helmet/dev/engine/enem_mods/enem_type_pursuers_asm.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3115,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								2684,
-								2684
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1521.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -968,7 +1172,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 24.0
 	},
 	"input":
 	{
@@ -994,7 +1198,7 @@
 		"cols":
 		[
 			0.0,
-			0.523501762632,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -1016,7 +1220,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 40.0
+		"height": 44.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1050,7 +1254,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -1058,7 +1262,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 348.0,
+	"side_bar_width": 226.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

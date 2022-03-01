@@ -797,6 +797,7 @@ unsigned char player_move (void) {
 			ld  (_cy1), a
 
 			call _attr_2
+			ld  a, l
 			ld  (_rdb), a
 	#endasm
 
