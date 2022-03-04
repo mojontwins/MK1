@@ -340,54 +340,28 @@
 	"buffers":
 	[
 		{
-			"file": "examples/helmet/dev/engine/breakable.h",
+			"contents": "Searching 97 files for \"pad0 =\"\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\helmet.asm:\n 16325  \tld\ta,l\n 16326  \tld\t(_p_kill_amt),a\n 16327: ;\t\tpad0 = (joyfunc) (&keys);\n 16328  \tC_LINE\t110,\"mainloop/game_loop.h::main::4::164\"\n 16329  \tC_LINE\t110,\"mainloop/game_loop.h::main::4::164\"\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\mainloop\\game_loop.h:\n  108  \n  109  \t\tp_kill_amt = 1;\n  110: \t\tpad0 = (joyfunc) (&keys);\n  111  \n  112  \t\tif (o_pant != n_pant) {\n\n2 matches across 2 files\n\n\nSearching 97 files for \"espera_activa\"\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\engine.h:\n   19  \t\t#endasm\n   20  \t\tsp_UpdateNow ();\n   21: \t\tespera_activa (50);\n   22  \t\t#asm\n   23  \t\t\t\tld  ix, (_sp_player)\n   ..\n   84  #endif\n   85  \n   86: void espera_activa (int espera) {\n   87  \twhile (sp_GetKey ());\n   88  \tdo {\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\engine\\hotspots.h:\n   74  \t\t\t\t\t\t\t\tsp_UpdateNow ();\n   75  \t\t\t\t\t\t\t\tsp_WaitForNoKey ();\n   76: \t\t\t\t\t\t\t\tespera_activa (100);\n   77  \t\t\t\t\t\t\t\tdraw_scr_background ();\n   78  \t\t\t\t\t\t\t}\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\helmet.asm:\n 1296  \tC_LINE\t82,\"prototypes.h\"\n 1297  \tC_LINE\t82,\"prototypes.h\"\n 1298: ;void espera_activa (int espera);\n 1299  \tC_LINE\t83,\"prototypes.h\"\n 1300  \tC_LINE\t83,\"prototypes.h\"\n ....\n 9161  ;\t\n 9162  \tC_LINE\t59,\"my/fixed_screens.h::game_ending::1::49\"\n 9163: ;\tespera_activa (5000);\n 9164  \tC_LINE\t61,\"my/fixed_screens.h::game_ending::1::49\"\n 9165  \tC_LINE\t61,\"my/fixed_screens.h::game_ending::1::49\"\n ....\n 9168  \tld\thl,5000\t;const\n 9169  \tpush\thl\n 9170: \tcall\t_espera_activa\n 9171  \tpop\tbc\n 9172  ;}\n ....\n 9413  ;\t\t\n 9414  \tC_LINE\t137,\"my/fixed_screens.h::zone_clear::1::55\"\n 9415: ;\t\tespera_activa (250);\t\t\t\n 9416  \tC_LINE\t138,\"my/fixed_screens.h::zone_clear::1::55\"\n 9417  \tC_LINE\t138,\"my/fixed_screens.h::zone_clear::1::55\"\n ....\n 9420  \tld\thl,250\t;const\n 9421  \tpush\thl\n 9422: \tcall\t_espera_activa\n 9423  \tpop\tbc\n 9424  ;\t}\n ....\n 9472  \n 9473  \n 9474: ;void espera_activa (int espera) {\n 9475  \tC_LINE\t86,\"engine.h::addsign::0::56\"\n 9476  \tC_LINE\t86,\"engine.h::addsign::0::56\"\n 9477  \n 9478: ; Function espera_activa flags 0x00000200 __smallc \n 9479: ; void espera_activa(int espera)\n 9480  ; parameter 'int espera' at sp+2 size(2)\n 9481: \tC_LINE\t86,\"engine.h::espera_activa::0::56\"\n 9482: ._espera_activa\n 9483: \tC_LINE\t86,\"engine.h::espera_activa::0::56\"\n 9484  ;\twhile (sp_GetKey ());\n 9485: \tC_LINE\t87,\"engine.h::espera_activa::1::57\"\n 9486: \tC_LINE\t87,\"engine.h::espera_activa::1::57\"\n 9487  .i_71\n 9488  \tcall\tsp_GetKey\n ....\n 9492  .i_72\n 9493  ;\tdo {\n 9494: \tC_LINE\t88,\"engine.h::espera_activa::1::57\"\n 9495: \tC_LINE\t88,\"engine.h::espera_activa::1::57\"\n 9496  .i_75\n 9497  ;\t\t\n 9498: \tC_LINE\t89,\"engine.h::espera_activa::2::58\"\n 9499  ;\t\t\tgpjt = 250; do { gpit = 1; } while (--gpjt);\n 9500: \tC_LINE\t90,\"engine.h::espera_activa::2::58\"\n 9501: \tC_LINE\t90,\"engine.h::espera_activa::2::58\"\n 9502  \tld\ta,250\n 9503  \tld\t(_gpjt),a\n ....\n 9514  .i_77\n 9515  ;\t\t\n 9516: \tC_LINE\t91,\"engine.h::espera_activa::2::59\"\n 9517  ;\t\tif (sp_GetKey ()) break;\n 9518: \tC_LINE\t96,\"engine.h::espera_activa::2::59\"\n 9519: \tC_LINE\t96,\"engine.h::espera_activa::2::59\"\n 9520  \tcall\tsp_GetKey\n 9521  \tld\ta,h\n ....\n 9524  \tjp\ti_74\t;EOS\n 9525  ;\t} while (--espera);\n 9526: \tC_LINE\t97,\"engine.h::espera_activa::2::59\"\n 9527  .i_79\n 9528  .i_73\n ....\n 9537  .i_74\n 9538  ;}\n 9539: \tC_LINE\t98,\"engine.h::espera_activa::1::59\"\n 9540  \tret\n 9541  \n 9542  \n 9543  ; \n 9544: \tC_LINE\t123,\"engine.h::espera_activa::0::59\"\n 9545  ; \n 9546: \tC_LINE\t124,\"engine.h::espera_activa::0::59\"\n 9547  ;\tvoid process_tile (void) {\n 9548: \tC_LINE\t129,\"engine.h::espera_activa::0::59\"\n 9549: \tC_LINE\t129,\"engine.h::espera_activa::0::59\"\n 9550  \n 9551  ; Function process_tile flags 0x00000200 __smallc \n ....\n 16110  ;\t\n 16111  \tC_LINE\t16,\"my/level_screen.h::main::5::163\"\n 16112: ;\tespera_activa (100);\n 16113  \tC_LINE\t18,\"my/level_screen.h::main::5::163\"\n 16114  \tC_LINE\t18,\"my/level_screen.h::main::5::163\"\n .....\n 16117  \tld\thl,100\t;const\n 16118  \tpush\thl\n 16119: \tcall\t_espera_activa\n 16120  \tpop\tbc\n 16121  ;}\n .....\n 19773  \tGLOBAL\t_pause_screen\n 19774  \tGLOBAL\t_addsign\n 19775: \tGLOBAL\t_espera_activa\n 19776  \tGLOBAL\t_locks_init\n 19777  \tGLOBAL\t_player_hidden\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\helmet.map:\n  760  _EN_AN_RAWV\t\t\t= D0C4, G: MK1\n  761  _EN_AN_STATE\t\t\t= CFEF, G: MK1\n  762: _ESPERA_ACTIVA\t\t\t= AC5D, G: MK1\n  763  _FLAGS\t\t\t\t= CFF2, G: MK1\n  764  _FONT\t\t\t\t= 67CC, G: MK1\n  ...\n 1261  I_62\t\t\t\t= AC54, L: MK1\n 1262  I_63\t\t\t\t= AC5C, L: MK1\n 1263: _ESPERA_ACTIVA\t\t\t= AC5D, G: MK1\n 1264  I_64\t\t\t\t= AC5D, L: MK1\n 1265  I_68\t\t\t\t= AC65, L: MK1\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\my\\fixed_screens.h:\n   59  \t#endif\n   60  \n   61: \tespera_activa (5000);\n   62  }\n   63  \n   ..\n  118  \t\t#endif\n  119  \t\t\n  120: \t\tespera_activa (250);\n  121  \t}\n  122  #endif\n  ...\n  136  \t\t\tgen_pt = (unsigned char *) (\" ZONE CLEAR \"); dr ();\n  137  \t\t#endif\n  138: \t\tespera_activa (250);\t\t\t\n  139  \t}\n  140  #endif\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\my\\level_screen.h:\n   16  \t#endif\n   17  \n   18: \tespera_activa (100);\n   19  }\n   20  \n\nD:\\temp\\MK1\\examples\\helmet\\dev\\prototypes.h:\n   82  void pause_screen (void);\n   83  signed int addsign (signed int n, signed int value);\n   84: void espera_activa (int espera);\n   85  void locks_init (void);\n   86  char player_hidden (void);\n\n40 matches across 7 files\n",
 			"settings":
 			{
-				"buffer_size": 757,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/helmet/dev/my/config.h",
-			"settings":
-			{
-				"buffer_size": 15335,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/helmet/dev/engine/player.h",
-			"settings":
-			{
-				"buffer_size": 19011,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/C/Users/na_th/AppData/Roaming/.minecraft/versions/version_manifest_v2.json",
-			"settings":
-			{
-				"buffer_size": 184901,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Searching 107 files for \"break_wall\"\n\nC:\\Temp\\mk1\\examples\\helmet\\dev\\engine\\breakable.h:\n    4  // breakable.h\n    5  \n    6: void break_wall (void) {\n    7  \t#ifdef BREAKABLE_WALLS_BREAKING\n    8  \t#endif\n\nC:\\Temp\\mk1\\examples\\helmet\\dev\\engine\\bullets.h:\n  252  \t\t\trda = attr (_x, _y);\n  253  \t\t\t#ifdef BREAKABLE_WALLS\t\t\t\n  254: \t\t\t\tif (rda & 16) break_wall ();\n  255  \t\t\t#endif\n  256  \t\t\tif (rda > 7) _b_estado = 0;\n\nC:\\Temp\\mk1\\examples\\helmet\\dev\\helmet.asm:\n 1166  ; \n 1167  \tC_LINE\t24,\"prototypes.h\"\n 1168: ;void break_wall (void);\n 1169  \tC_LINE\t25,\"prototypes.h\"\n 1170  \tC_LINE\t25,\"prototypes.h\"\n ....\n 7441  ; \n 7442  \tC_LINE\t4,\"engine/breakable.h::cortina::0::23\"\n 7443: ;void break_wall (void) {\n 7444  \tC_LINE\t6,\"engine/breakable.h::cortina::0::23\"\n 7445  \tC_LINE\t6,\"engine/breakable.h::cortina::0::23\"\n 7446  \n 7447: ; Function break_wall flags 0x00000200 __smallc \n 7448: ; void break_wall()\n 7449: \tC_LINE\t6,\"engine/breakable.h::break_wall::0::23\"\n 7450: ._break_wall\n 7451: \tC_LINE\t6,\"engine/breakable.h::break_wall::0::23\"\n 7452  ;\tgpaux =  (( _x )+( _y <<4)-( _y )) ;\n 7453: \tC_LINE\t7,\"engine/breakable.h::break_wall::1::24\"\n 7454: \tC_LINE\t7,\"engine/breakable.h::break_wall::1::24\"\n 7455  \tld\thl,(__x)\n 7456  \tld\th,0\n ....\n 7474  \tld\t(_gpaux),a\n 7475  ;\tif (brk_buff [gpaux] <  1 ) {\n 7476: \tC_LINE\t8,\"engine/breakable.h::break_wall::1::24\"\n 7477: \tC_LINE\t8,\"engine/breakable.h::break_wall::1::24\"\n 7478  \tld\tde,_brk_buff\n 7479  \tld\thl,(_gpaux)\n ....\n 7484  \tjp\tnc,i_27\t;\n 7485  ;\t\t++ brk_buff [gpaux];\n 7486: \tC_LINE\t9,\"engine/breakable.h::break_wall::2::25\"\n 7487: \tC_LINE\t9,\"engine/breakable.h::break_wall::2::25\"\n 7488  \tld\tde,_brk_buff\n 7489  \tld\thl,(_gpaux)\n ....\n 7494  \tld\th,0\n 7495  ;\t\t\n 7496: \tC_LINE\t10,\"engine/breakable.h::break_wall::2::25\"\n 7497  ;\t\t\tgpit = 1;\n 7498: \tC_LINE\t13,\"engine/breakable.h::break_wall::2::25\"\n 7499: \tC_LINE\t13,\"engine/breakable.h::break_wall::2::25\"\n 7500  \tld\thl,1\t;const\n 7501  \tld\ta,l\n 7502  \tld\t(_gpit),a\n 7503  ;\t\t\n 7504: \tC_LINE\t14,\"engine/breakable.h::break_wall::2::25\"\n 7505  ;\t\t#line 1 \"./my/ci/on_wall_hit.h\"\n 7506: \tC_LINE\t15,\"engine/breakable.h::break_wall::2::25\"\n 7507: \tC_LINE\t0,\"./my/ci/on_wall_hit.h::break_wall::2::25\"\n 7508  ; \n 7509: \tC_LINE\t1,\"./my/ci/on_wall_hit.h::break_wall::2::25\"\n 7510  ; \n 7511: \tC_LINE\t2,\"./my/ci/on_wall_hit.h::break_wall::2::25\"\n 7512  ;#line 16 \"engine/breakable.h\"\n 7513: \tC_LINE\t4,\"./my/ci/on_wall_hit.h::break_wall::2::25\"\n 7514: \tC_LINE\t15,\"engine/breakable.h::break_wall::2::25\"\n 7515  ;\t} else {\n 7516: \tC_LINE\t16,\"engine/breakable.h::break_wall::2::25\"\n 7517  \tjp\ti_28\t;EOS\n 7518  .i_27\n 7519: \tC_LINE\t16,\"engine/breakable.h::break_wall::1::25\"\n 7520  ;\t\t_n = _t = 0; update_tile ();\n 7521: \tC_LINE\t17,\"engine/breakable.h::break_wall::2::26\"\n 7522: \tC_LINE\t17,\"engine/breakable.h::break_wall::2::26\"\n 7523  \tld\thl,0\t;const\n 7524  \tld\ta,l\n ....\n 7527  \tcall\t_update_tile\n 7528  ;\t\t\n 7529: \tC_LINE\t18,\"engine/breakable.h::break_wall::2::26\"\n 7530  ;\t\t\tgpit = 0;\n 7531: \tC_LINE\t21,\"engine/breakable.h::break_wall::2::26\"\n 7532: \tC_LINE\t21,\"engine/breakable.h::break_wall::2::26\"\n 7533  \tld\thl,0\t;const\n 7534  \tld\ta,l\n 7535  \tld\t(_gpit),a\n 7536  ;\t\t\n 7537: \tC_LINE\t22,\"engine/breakable.h::break_wall::2::26\"\n 7538  ;\t\t#line 1 \"./my/ci/on_wall_broken.h\"\n 7539: \tC_LINE\t23,\"engine/breakable.h::break_wall::2::26\"\n 7540: \tC_LINE\t0,\"./my/ci/on_wall_broken.h::break_wall::2::26\"\n 7541  ; \n 7542: \tC_LINE\t1,\"./my/ci/on_wall_broken.h::break_wall::2::26\"\n 7543  ; \n 7544: \tC_LINE\t2,\"./my/ci/on_wall_broken.h::break_wall::2::26\"\n 7545  ;#line 24 \"engine/breakable.h\"\n 7546: \tC_LINE\t4,\"./my/ci/on_wall_broken.h::break_wall::2::26\"\n 7547: \tC_LINE\t23,\"engine/breakable.h::break_wall::2::26\"\n 7548  ;\t}\n 7549: \tC_LINE\t24,\"engine/breakable.h::break_wall::2::26\"\n 7550  .i_28\n 7551  ;\t\n 7552: \tC_LINE\t25,\"engine/breakable.h::break_wall::1::26\"\n 7553  ;\t\t \n 7554: \tC_LINE\t28,\"engine/breakable.h::break_wall::1::26\"\n 7555  ;\t\tsp_UpdateNow ();\n 7556: \tC_LINE\t29,\"engine/breakable.h::break_wall::1::26\"\n 7557: \tC_LINE\t29,\"engine/breakable.h::break_wall::1::26\"\n 7558  \tcall\tsp_UpdateNow\n 7559  ;\t\tbeep_fx (gpit);\n 7560: \tC_LINE\t30,\"engine/breakable.h::break_wall::1::26\"\n 7561: \tC_LINE\t30,\"engine/breakable.h::break_wall::1::26\"\n 7562  ;gpit;\n 7563: \tC_LINE\t31,\"engine/breakable.h::break_wall::1::26\"\n 7564  \tld\thl,(_gpit)\n 7565  \tld\th,0\n ....\n 7568  \tpop\tbc\n 7569  ;\t\n 7570: \tC_LINE\t31,\"engine/breakable.h::break_wall::1::26\"\n 7571  ;}\n 7572: \tC_LINE\t32,\"engine/breakable.h::break_wall::1::26\"\n 7573  \tret\n 7574  \n 7575  \n 7576  ;#line 123 \"mk1.c\"\n 7577: \tC_LINE\t33,\"engine/breakable.h::break_wall::0::26\"\n 7578: \tC_LINE\t122,\"mk1.c::break_wall::0::26\"\n 7579  ;\t#line 1 \"engine/bullets.h\"\n 7580: \tC_LINE\t125,\"mk1.c::break_wall::0::26\"\n 7581: \tC_LINE\t0,\"engine/bullets.h::break_wall::0::26\"\n 7582  ; \n 7583: \tC_LINE\t1,\"engine/bullets.h::break_wall::0::26\"\n 7584  ; \n 7585: \tC_LINE\t2,\"engine/bullets.h::break_wall::0::26\"\n 7586  ; \n 7587: \tC_LINE\t4,\"engine/bullets.h::break_wall::0::26\"\n 7588  ;void bullets_init (void) {\n 7589: \tC_LINE\t6,\"engine/bullets.h::break_wall::0::26\"\n 7590: \tC_LINE\t6,\"engine/bullets.h::break_wall::0::26\"\n 7591  \n 7592  ; Function bullets_init flags 0x00000200 __smallc \n ....\n 8134  ;\t\t\t\n 8135  \tC_LINE\t243,\"engine/bullets.h::bullets_move::4::39\"\n 8136: ;\t\t\t\tif (rda & 16) break_wall ();\n 8137  \tC_LINE\t244,\"engine/bullets.h::bullets_move::4::39\"\n 8138  \tC_LINE\t244,\"engine/bullets.h::bullets_move::4::39\"\n ....\n 8145  \tor\tl\n 8146  \tjp\tz,i_48\t;\n 8147: \tcall\t_break_wall\n 8148  ;\t\t\t\n 8149  \tC_LINE\t245,\"engine/bullets.h::bullets_move::4::39\"\n ....\n 19737  \tGLOBAL\tsp_HuffEncode\n 19738  \tGLOBAL\t_keys\n 19739: \tGLOBAL\t_break_wall\n 19740  \tGLOBAL\t_bullets_init\n 19741  \tGLOBAL\t_bullets_update\n\nC:\\Temp\\mk1\\examples\\helmet\\dev\\helmet.map:\n  671  _BLX\t\t\t\t= D10B, G: MK1\n  672  _BLY\t\t\t\t= D10C, G: MK1\n  673: _BREAK_WALL\t\t\t= A5E7, G: MK1\n  674  _BULLETS_ESTADO\t\t\t= D09F, G: MK1\n  675  _BULLETS_FIRE\t\t\t= A6BF, G: MK1\n  ...\n 1202  BUCLE1\t\t\t\t= A5D0, L: MK1\n 1203  BUCLE2\t\t\t\t= A5D8, L: MK1\n 1204: _BREAK_WALL\t\t\t= A5E7, G: MK1\n 1205  I_25\t\t\t\t= A630, L: MK1\n 1206  I_26\t\t\t\t= A647, L: MK1\n\nC:\\Temp\\mk1\\examples\\helmet\\dev\\prototypes.h:\n   23  \n   24  // breakable.h\n   25: void break_wall (void);\n   26  \n   27  // bullets.h\n\n64 matches across 5 files\n",
-			"settings":
-			{
-				"buffer_size": 6258,
+				"buffer_size": 5287,
 				"line_ending": "Windows",
 				"name": "Find Results",
 				"scratch": true
 			}
 		},
 		{
-			"file": "examples/helmet/dev/engine/bullets.h",
+			"file": "examples/helmet/dev/engine.h",
 			"settings":
 			{
-				"buffer_size": 5083,
+				"buffer_size": 18723,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/helmet/dev/mainloop/game_loop.h",
+			"settings":
+			{
+				"buffer_size": 7041,
 				"line_ending": "Windows"
 			}
 		}
@@ -452,19 +426,22 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Temp/mk1",
-		"/C/Temp/mk1/examples",
-		"/C/Temp/mk1/examples/helmet",
-		"/C/Temp/mk1/examples/helmet/dev",
-		"/C/Temp/mk1/examples/helmet/dev/engine",
-		"/C/Temp/mk1/examples/helmet/dev/engine/enem_mods",
-		"/C/Temp/mk1/examples/helmet/dev/my",
-		"/C/Temp/mk1/src",
-		"/C/Temp/mk1/src/dev",
-		"/C/Temp/mk1/src/dev/engine"
+		"/D/temp/MK1",
+		"/D/temp/MK1/examples",
+		"/D/temp/MK1/examples/helmet",
+		"/D/temp/MK1/examples/helmet/dev"
 	],
 	"file_history":
 	[
+		"/D/temp/MK1/examples/helmet/dev/assets/levels.h",
+		"/D/temp/MK1/examples/helmet/dev/definitions.h",
+		"/D/temp/MK1/examples/helmet/dev/engine.h",
+		"/D/temp/MK1/examples/helmet/dev/helmet.asm",
+		"/D/temp/MK1/examples/helmet/dev/my/config.h",
+		"/D/temp/MK1/examples/helmet/dev/engine/player.h",
+		"/D/temp/MK1/examples/helmet/dev/engine/bullets.h",
+		"/D/temp/MK1/examples/helmet/dev/engine/breakable.h",
+		"/C/Users/na_th/AppData/Roaming/.minecraft/versions/version_manifest_v2.json",
 		"/C/Temp/mk1/src/dev/engine/player.h",
 		"/C/Temp/mk1/examples/helmet/dev/engine.h",
 		"/C/Temp/mk1/examples/helmet/dev/engine/player.h",
@@ -495,8 +472,6 @@
 		"/D/temp/MK1/lib/splib2/updater/SPUpdateNow.asm",
 		"/D/temp/MK1/lib/splib2/SPconfig.def",
 		"/D/temp/MK1/lib/splib2/setenv.bat",
-		"/D/temp/MK1/examples/helmet/dev/my/config.h",
-		"/D/temp/MK1/examples/helmet/dev/engine/player.h",
 		"/D/temp/MK1/src/dev/engine/player.h",
 		"/D/temp/MK1/docs/tutorial-cap07.md",
 		"/D/temp/MK1/examples/helmet/dev/mainloop/game_loop.h",
@@ -510,7 +485,6 @@
 		"/D/temp/MK1/examples/helmet/dev/my/title_screen.h",
 		"/D/temp/MK1/examples/helmet/dev/my/ci/extra_vars.h",
 		"/D/git/MK1/games_zx/ramiro3/dev/custom.h",
-		"/D/temp/MK1/examples/helmet/dev/engine.h",
 		"/D/temp/MK1/contrib/godkiller_2/dev/printer.h",
 		"/D/temp/MK1/examples/helmet/diario.md",
 		"/D/temp/MK1/README.md",
@@ -586,23 +560,21 @@
 		"/D/temp/MK1/src/mus/WYZproPlay47aZXc.ASM",
 		"/D/temp/MK1/docs/contribs/arkos.md",
 		"/D/git/MK1/examples/helmet/dev/mk1.c",
-		"/D/git/MK1/examples/helmet/dev/mainloop/game_loop.h",
-		"/D/git/MK1/examples/helmet/dev/my/fixed_screens.h",
-		"/C/Users/jcastano/Downloads/log-2021-01-21.php",
-		"/D/Proyectos/CIs.txt",
-		"/D/Proyectos/remote/descon01/consigna/app/controllers/ficheros.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/config.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO883CF3C2/current4-nodo2.txt"
+		"/D/git/MK1/examples/helmet/dev/mainloop/game_loop.h"
 	],
 	"find":
 	{
-		"height": 54.0
+		"height": 48.0
 	},
 	"find_in_files":
 	{
 		"height": 134.0,
 		"where_history":
 		[
+			"D:\\temp\\MK1\\examples\\helmet\\dev",
+			"D:\\temp\\MK1\\examples\\helmet",
+			"D:\\temp\\MK1\\examples\\helmet\\dev",
+			"D:\\temp\\MK1\\examples\\helmet",
 			"C:\\Temp\\mk1\\examples\\helmet\\dev",
 			"C:\\Temp\\mk1\\examples\\helmet\\dev\\my\\ci",
 			"C:\\Temp\\mk1\\examples\\helmet\\dev",
@@ -628,6 +600,11 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"espera_activa",
+			"pad0 =",
+			"level_data",
+			"joyfunc",
+			"pad0 =",
 			"fabric",
 			"break_wall",
 			"breakable",
@@ -716,136 +693,15 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/helmet/dev/engine/breakable.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 757,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								367,
-								367
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 2,
-			"sheets":
-			[
-				{
-					"buffer": 1,
-					"file": "examples/helmet/dev/my/config.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 15335,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 1456.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "examples/helmet/dev/engine/player.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 19011,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								14755,
-								14755
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 10153.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "/C/Users/na_th/AppData/Roaming/.minecraft/versions/version_manifest_v2.json",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 184901,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4444,
-								4447
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
-						},
-						"translation.x": 25894.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6258,
+						"buffer_size": 5287,
 						"regions":
 						{
 							"match":
@@ -855,259 +711,171 @@
 								[
 									[
 										132,
-										142
+										138
 									],
 									[
-										350,
-										360
+										369,
+										375
 									],
 									[
-										521,
-										531
+										598,
+										611
 									],
 									[
-										689,
-										699
+										704,
+										717
 									],
 									[
-										843,
-										853
+										910,
+										923
 									],
 									[
-										895,
-										905
+										1110,
+										1123
 									],
 									[
-										946,
-										956
+										1288,
+										1301
 									],
 									[
-										974,
-										984
+										1490,
+										1503
 									],
 									[
-										1023,
-										1033
-									],
-									[
-										1126,
-										1136
-									],
-									[
-										1183,
-										1193
-									],
-									[
-										1342,
-										1352
-									],
-									[
-										1399,
-										1409
-									],
-									[
-										1561,
-										1571
-									],
-									[
-										1618,
+										1615,
 										1628
 									],
 									[
-										1755,
-										1765
+										1818,
+										1831
 									],
 									[
-										1834,
-										1844
+										1893,
+										1906
 									],
 									[
-										1892,
-										1902
+										2038,
+										2051
 									],
 									[
-										2020,
-										2030
+										2093,
+										2106
 									],
 									[
-										2120,
-										2130
+										2196,
+										2209
 									],
 									[
-										2180,
-										2190
+										2227,
+										2240
 									],
 									[
-										2250,
-										2260
+										2270,
+										2283
 									],
 									[
-										2320,
-										2330
+										2352,
+										2365
 									],
 									[
-										2418,
-										2428
+										2403,
+										2416
 									],
 									[
-										2476,
-										2486
+										2523,
+										2536
 									],
 									[
-										2552,
-										2562
+										2574,
+										2587
 									],
 									[
-										2644,
-										2654
+										2649,
+										2662
 									],
 									[
-										2741,
-										2751
+										2756,
+										2769
 									],
 									[
-										2799,
-										2809
+										2807,
+										2820
 									],
 									[
-										2938,
-										2948
+										2926,
+										2939
 									],
 									[
-										3017,
-										3027
+										3012,
+										3025
 									],
 									[
-										3075,
-										3085
+										3063,
+										3076
 									],
 									[
-										3203,
-										3213
+										3208,
+										3221
 									],
 									[
-										3306,
-										3316
+										3314,
+										3327
 									],
 									[
-										3369,
-										3379
+										3404,
+										3417
 									],
 									[
-										3442,
-										3452
+										3466,
+										3479
 									],
 									[
-										3515,
-										3525
+										3554,
+										3567
 									],
 									[
-										3616,
-										3626
+										3606,
+										3619
 									],
 									[
-										3674,
-										3684
+										3774,
+										3787
 									],
 									[
-										3743,
-										3753
+										3966,
+										3979
 									],
 									[
-										3824,
-										3834
+										4086,
+										4099
 									],
 									[
-										3894,
-										3904
+										4285,
+										4298
 									],
 									[
-										3979,
-										3989
+										4453,
+										4466
 									],
 									[
-										4037,
-										4047
+										4628,
+										4641
 									],
 									[
-										4147,
-										4157
-									],
-									[
-										4205,
-										4215
-									],
-									[
-										4277,
-										4287
-									],
-									[
-										4403,
-										4413
-									],
-									[
-										4471,
-										4481
-									],
-									[
-										4583,
-										4593
-									],
-									[
-										4629,
-										4639
-									],
-									[
-										4711,
+										4708,
 										4721
 									],
 									[
-										4766,
-										4776
+										4846,
+										4859
 									],
 									[
-										4831,
-										4841
+										4977,
+										4990
 									],
 									[
-										4896,
-										4906
-									],
-									[
-										4961,
-										4971
-									],
-									[
-										5051,
-										5061
-									],
-									[
-										5106,
-										5116
-									],
-									[
-										5294,
-										5304
-									],
-									[
-										5480,
-										5490
-									],
-									[
-										5637,
-										5647
-									],
-									[
-										5823,
-										5833
-									],
-									[
-										6007,
-										6017
-									],
-									[
-										6184,
-										6194
+										5167,
+										5180
 									]
 								],
 								"scope": ""
@@ -1116,15 +884,16 @@
 						"selection":
 						[
 							[
-								355,
-								355
+								711,
+								711
 							]
 						],
 						"settings":
 						{
 							"detect_indentation": false,
+							"incomplete_sync": null,
 							"line_numbers": false,
-							"output_tag": 1,
+							"output_tag": 2,
 							"result_base_dir": "",
 							"result_file_regex": "^([^ \t].*):$",
 							"result_line_regex": "^ +([0-9]+):",
@@ -1132,47 +901,87 @@
 							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 234.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 5,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
-					"buffer": 5,
-					"file": "examples/helmet/dev/engine/bullets.h",
+					"buffer": 1,
+					"file": "examples/helmet/dev/engine.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 5083,
+						"buffer_size": 18723,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4829,
-								4829
+								1980,
+								1980
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 2976.0,
+						"translation.y": 12222.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 4,
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/helmet/dev/mainloop/game_loop.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7041,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2080,
+								2080
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 959.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
+			]
+		},
+		{
+			"sheets":
+			[
 			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 24.0
+		"height": 22.0
 	},
 	"input":
 	{
@@ -1220,7 +1029,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 44.0
+		"height": 40.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1254,7 +1063,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},

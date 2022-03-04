@@ -10,10 +10,21 @@ Descarga la última release estable de la v5 de la carpeta "releases".
 
 El motor/_framework_ reside en [/src](./src). El código, tal y como está, genera un juego mínimo por defecto que debes *reemplazar* con el tuyo. Para compilarlo, sigue los siguientes pasos:
 
+## Instalación de z88dk
+
+### Nightly Build
+
 1. Obtén la última versión de **z88dk** (nightly build) desde https://github.com/z88dk/z88dk e instálala.
 2. Descomprime la versión de splib2 que encontrarás en `env/` en una ubicación temporal, y posteriormente mueve `spritepack.h` al subdirectorio `include` de **z88dk**  (por ejemplo, `c:/z88dk/include`) y `splib2_mk2.lib` al subdirectorio `lib/clibs` de **z88dk**  (por ejemplo, `c:/z88dk/lib/clibs/`).
-3. Si has instalado **z88dk** en una ubicación diferente de `c:/z88dk/` tendrás que modificar `src/dev/setenv.bat`.
-4. Desde una ventana de línea de comandos, entra en `src/dev` y ejecuta los siguientes comandos:
+
+### Versión incluida
+
+Si lo prefieres, puedes usar el **z88dk** incluid en `env/`, que ya viene con **splib2** instalada. Para ello, descomprime el contenido de `env/z88dk_mt.7z` en `C:\`.
+
+## Construyendo el proyecto por defecto
+
+1. Si has instalado **z88dk** en una ubicación diferente de `c:/z88dk/` tendrás que modificar `src/dev/setenv.bat`.
+2. Desde una ventana de línea de comandos, entra en `src/dev` y ejecuta los siguientes comandos:
 
 ```
 	$ setenv.bat
