@@ -339,6 +339,23 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "examples/helmet/dev/engine/player.h",
+			"settings":
+			{
+				"buffer_size": 27121,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/helmet/dev/printer.h",
+			"settings":
+			{
+				"buffer_size": 17278,
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -401,10 +418,22 @@
 	"expanded_folders":
 	[
 		"/D/temp/MK1",
-		"/D/temp/MK1/env"
+		"/D/temp/MK1/contrib",
+		"/D/temp/MK1/env",
+		"/D/temp/MK1/examples",
+		"/D/temp/MK1/examples/helmet",
+		"/D/temp/MK1/examples/helmet/dev",
+		"/D/temp/MK1/examples/helmet/dev/engine"
 	],
 	"file_history":
 	[
+		"/D/temp/MK1/examples/helmet/dev/my/ci/extra_functions.h",
+		"/D/temp/MK1/examples/helmet/dev/my/ci/on_tile_pushed.h",
+		"/D/temp/MK1/examples/helmet/dev/my/ci/entering_screen.h",
+		"/D/temp/MK1/examples/helmet/dev/my/ci/on_wall_broken.h",
+		"/D/temp/MK1/examples/helmet/dev/my/config.h",
+		"/D/temp/MK1/examples/helmet/dev/engine/breakable.h",
+		"/D/temp/MK1/examples/helmet/dev/my/ci/extra_vars.h",
 		"/D/temp/espadewr/dev/extern.h",
 		"/D/temp/MK1/examples/helmet/dev/engine.h",
 		"/D/temp/MK1/README.md",
@@ -412,10 +441,8 @@
 		"/D/temp/MK1/examples/helmet/dev/assets/levels.h",
 		"/D/temp/MK1/examples/helmet/dev/definitions.h",
 		"/D/temp/MK1/examples/helmet/dev/helmet.asm",
-		"/D/temp/MK1/examples/helmet/dev/my/config.h",
 		"/D/temp/MK1/examples/helmet/dev/engine/player.h",
 		"/D/temp/MK1/examples/helmet/dev/engine/bullets.h",
-		"/D/temp/MK1/examples/helmet/dev/engine/breakable.h",
 		"/C/Users/na_th/AppData/Roaming/.minecraft/versions/version_manifest_v2.json",
 		"/C/Temp/mk1/src/dev/engine/player.h",
 		"/C/Temp/mk1/examples/helmet/dev/engine.h",
@@ -457,7 +484,6 @@
 		"/D/temp/MK1/examples/helmet/dev/my/ci/on_wall_hit.h",
 		"/D/temp/MK1/examples/helmet/dev/my/fixed_screens.h",
 		"/D/temp/MK1/examples/helmet/dev/my/title_screen.h",
-		"/D/temp/MK1/examples/helmet/dev/my/ci/extra_vars.h",
 		"/D/git/MK1/games_zx/ramiro3/dev/custom.h",
 		"/D/temp/MK1/contrib/godkiller_2/dev/printer.h",
 		"/D/temp/MK1/examples/helmet/diario.md",
@@ -528,15 +554,11 @@
 		"/D/temp/MK1/trash/README.md",
 		"/D/temp/MK1/trash/6baddies/dev/compile.bat",
 		"/D/temp/MK1/src/dev/mk1.c",
-		"/D/temp/MK1/src/dev/engine/enem_mods/enem_type_pursuers.h",
-		"/D/temp/MK1/docs/README.md",
-		"/D/temp/MK1/src/mus/WYZproPlay47aZXc.ASM",
-		"/D/temp/MK1/docs/contribs/arkos.md",
-		"/D/git/MK1/examples/helmet/dev/mk1.c"
+		"/D/temp/MK1/src/dev/engine/enem_mods/enem_type_pursuers.h"
 	],
 	"find":
 	{
-		"height": 22.0
+		"height": 48.0
 	},
 	"find_in_files":
 	{
@@ -572,6 +594,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"enems_kill",
+			"__en_t",
 			"espera_activa",
 			"pad0 =",
 			"level_data",
@@ -665,13 +689,78 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "examples/helmet/dev/engine/player.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 27121,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								23130,
+								23130
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 16582.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 1,
+					"file": "examples/helmet/dev/printer.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 17278,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								115,
+								115
+							]
+						],
+						"settings":
+						{
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -767,7 +856,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 226.0,
+	"side_bar_width": 314.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

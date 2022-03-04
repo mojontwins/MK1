@@ -3,6 +3,11 @@
 
 // For all screens
 
+// Precalc this address which will be used with broken tile 
+// persistence.
+
+c_screen_address = mapa + n_pant * 75;
+
 // General text
 
 if (flags [1]) {
