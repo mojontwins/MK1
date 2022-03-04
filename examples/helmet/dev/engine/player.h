@@ -126,14 +126,14 @@ void player_calc_bounding_box (void) {
 	#elif defined (BOUNDING_BOX_12X2_CENTERED)
 		#asm
 			ld  a, (_gpx)
-			add 2
+			add 3
 			srl a
 			srl a
 			srl a
 			srl a
 			ld  (_ptx1), a
 			ld  a, (_gpx)
-			add 13
+			add 12
 			srl a
 			srl a
 			srl a
@@ -919,7 +919,7 @@ unsigned char player_move (void) {
 				#if defined BOUNDING_BOX_8_BOTTOM || defined BOUNDING_BOX_8_CENTERED || defined BOUNDING_BOX_TINY_BOTTOM
 					sub 4
 				#elif defined BOUNDING_BOX_12X2_CENTERED
-					sub 2
+					sub 3
 				#endif
 					ld  (_gpx), a
 			#endasm
@@ -993,7 +993,7 @@ unsigned char player_move (void) {
 				#if defined BOUNDING_BOX_8_BOTTOM || defined BOUNDING_BOX_8_CENTERED || defined BOUNDING_BOX_TINY_BOTTOM
 					add 4
 				#elif defined BOUNDING_BOX_12X2_CENTERED
-					add 2
+					add 3
 				#endif
 					ld  (_gpx), a
 			#endasm
@@ -1158,7 +1158,7 @@ unsigned char player_move (void) {
 						call _attr_2 
 						ld  a, l 
 						cp  10
-						jr  z, p_int_up_no
+						jr  nz, p_int_up_no
 
 						ld  a, (_cx1)
 						ld  (_x0), a
@@ -1212,7 +1212,7 @@ unsigned char player_move (void) {
 						call _attr_2 
 						ld  a, l 
 						cp  10
-						jr  z, p_int_down_no
+						jr  nz, p_int_down_no
 
 						ld  a, (_cx1)
 						ld  (_x0), a
@@ -1266,7 +1266,7 @@ unsigned char player_move (void) {
 					call _attr_2 
 					ld  a, l 
 					cp  10
-					jr  z, p_int_left_no
+					jr  nz, p_int_left_no
 	
 					ld  a, (_cy1)
 					ld  (_y0), a
@@ -1316,7 +1316,7 @@ unsigned char player_move (void) {
 					call _attr_2 
 					ld  a, l 
 					cp  10
-					jr  z, p_int_right_no
+					jr  nz, p_int_right_no
 
 					ld  a, (_cy1)
 					ld  (_y0), a
