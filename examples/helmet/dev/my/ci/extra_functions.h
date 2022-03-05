@@ -52,7 +52,7 @@ void persist_tile (void) {
 			sla e 
 			
 			ld  a, c
-			and 0xf0 
+			and 0x0f
 			or  e
 
 		.persist_write

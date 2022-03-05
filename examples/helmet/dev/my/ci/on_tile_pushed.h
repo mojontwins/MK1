@@ -260,6 +260,7 @@ for (enit = 0; enit < 3; ++ enit) {
 	#endasm
 
 	en_an_next_frame [enit] = sprite_17_a;
+	enems_draw_current ();
 	sp_UpdateNow ();
 
 	#ifdef MODE_128K

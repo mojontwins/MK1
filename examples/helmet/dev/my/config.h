@@ -82,6 +82,7 @@
 #define PURSUERS_BASE_CELL			3		// If defined, type 7 enemies are always #
 //#define PURSUERS_BASE_CELL		3		// If defined, type 7 enemies are always #
 #define PURSUERS_MAX_V 				2		// 1, 2, 4.
+#define PURSUERS_DONT_SPAWN_IN_OBSTACLE 	// This
 
 //#define ENABLE_FANTIES					// If defined, Fanties are enabled!
 //#define FANTIES_BASE_CELL 		2		// Base sprite cell (0, 1, 2 or 3)

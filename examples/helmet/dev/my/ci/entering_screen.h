@@ -49,7 +49,7 @@ if (n_pant == 0) {
 if (n_pant == 21 && level == 0) {
 	_gp_gen = decos_moto; draw_decorations ();
 	flags [0] = 1;
-}
+} else flags [0] = 0;
 
 // Ending condition
 
