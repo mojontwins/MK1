@@ -17,7 +17,7 @@ void break_wall (void) {
 			_n = rda; _t = BREAKABLE_WALLS_BREAKING; update_tile ();
 		#endif
 	} else {
-		_n = _t = 0; update_tile ();
+		_n = 0; _t = BREAKABLE_WALLS_BROKEN; update_tile ();
 		#ifdef MODE_128K
 			gpit = SFX_BREAKABLE_BREAK;
 		#else

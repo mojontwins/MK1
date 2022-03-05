@@ -126,14 +126,14 @@ void player_calc_bounding_box (void) {
 	#elif defined (BOUNDING_BOX_12X2_CENTERED)
 		#asm
 			ld  a, (_gpx)
-			add 2
+			add 3
 			srl a
 			srl a
 			srl a
 			srl a
 			ld  (_ptx1), a
 			ld  a, (_gpx)
-			add 13
+			add 12
 			srl a
 			srl a
 			srl a
@@ -260,6 +260,7 @@ unsigned char player_move (void) {
 		{
 			// Pad do
 
+			/*
 			if ( ! ((pad0 & sp_UP) == 0 || (pad0 & sp_DOWN) == 0)) {
 				p_facing_v = 0xff;
 				wall_v = 0;
@@ -281,6 +282,114 @@ unsigned char player_move (void) {
 				p_facing_v = FACING_DOWN;
 				if (p_vy < PLAYER_MAX_VX) p_vy += PLAYER_AX;
 			}
+			*/
+
+			#asm
+				// ( ! ((pad0 & sp_UP) == 0 || (pad0 & sp_DOWN) == 0)) 
+				// ( ! (pad0 & sp_UP == 0) && ! (pad0 & sp_DOWN) == 0))
+				// ( (pad0 & sp_UP) != 0 && (pad0 & sp_DOWN) != 0)
+
+				ld  a, (_pad0)
+				ld  c, a
+				and sp_UP
+				or  a
+				jr  z, v_decelerate_done
+
+				ld  a, c
+				and sp_DOWN
+				or  a
+				jr  z, v_decelerate_done
+
+				xor a
+				ld  (_wall_v), a
+				dec a 					; 0 - 1 = 0xff
+				ld  (_p_facing_v), a
+
+				// Check sign of p_vy (unsigned int)
+				ld  hl, (_p_vy)
+				bit 7, h 				; bit 7 of H = 1 : negative (up)
+				jr  z, decelerate_down
+
+			.decelerate_up
+				// p_vy < 0, so add RX
+				ld  de, PLAYER_RX
+				add hl, de
+
+				// Zero if it became positive
+				bit 7, h
+				jr  nz, v_acceleration_set				
+
+				ld  hl, 0
+
+			.v_acceleration_set
+				ld  (_p_vy), hl
+				jr  v_acceleration_done
+
+			.decelerate_down
+				// Check that p_vy is NOT zero
+				ld  a, l
+				or  h
+				jr  z, v_acceleration_done	
+
+				// p_vy > 0 , so add RX
+				ld  de, -PLAYER_RX
+				add hl, de
+				
+				// Zero if it became negative
+				bit 7, h
+				jr  z, v_acceleration_set
+
+
+				ld  hl, 0
+				jr  v_acceleration_set
+			.v_decelerate_done
+
+			.accelerate_up
+				// if ((pad0 & sp_UP) == 0) 
+				ld  a, c
+				and sp_UP
+				jr  nz, accelerate_up_done
+
+				ld  a, FACING_UP
+				ld  (_p_facing_v), a
+
+				// if (p_vy > -PLAYER_MAX_VX)
+				ld  de, (_p_vy)
+				ld  hl, -PLAYER_MAX_VX
+				call l_gt				; Int signed de > hl
+				jr  nc, accelerate_up_done
+
+				ld  hl, (_p_vy)
+				ld  de, -PLAYER_AX
+				add hl, de
+				jr  v_acceleration_set
+			.accelerate_up_done
+
+			.accelerate_down
+				// if ((pad0 & sp_DOWN) == 0)
+				ld  a, c
+				and sp_DOWN
+				jr  nz, accelerate_down_done
+
+				ld  a, FACING_DOWN
+				ld  (_p_facing_v), a
+
+				// if (p_vy < PLAYER_MAX_VX)
+				ld  de, (_p_vy)
+				ld  hl, PLAYER_MAX_VX
+				call l_lt 				; Int signed de < hl
+				jr  nc, accelerate_down_done
+
+				ld  hl, (_p_vy)
+				ld  de, PLAYER_AX
+				add hl, de
+				jr  v_acceleration_set
+
+			.accelerate_down_done
+
+
+			.v_acceleration_done
+		#endasm
 		}
 	#endif
 
@@ -322,7 +431,7 @@ unsigned char player_move (void) {
 
 	// Collision, may set possee, hit_v
 
-			// Velocity positive (going downwards)
+	// Velocity positive (going downwards)
 	player_calc_bounding_box ();
 
 	hit_v = 0;
@@ -345,6 +454,7 @@ unsigned char player_move (void) {
 				p_vy = 0;
 			#endif
 
+			/*
 			#if defined (BOUNDING_BOX_8_BOTTOM)			
 				gpy = ((pty1 + 1) << 4) - 8;
 			#elif defined (BOUNDING_BOX_8_CENTERED)
@@ -356,6 +466,27 @@ unsigned char player_move (void) {
 			#else
 				gpy = ((pty1 + 1) << 4);
 			#endif
+			*/
+
+			// KISS mod
+			#asm
+					ld  a, (_pty1)
+					inc a 
+					sla a
+					sla a
+					sla a
+					sla a
+				#ifdef BOUNDING_BOX_8_BOTTOM
+					sub 8
+				#elif defined BOUNDING_BOX_8_CENTERED
+					sub 4
+				#elif defined BOUNDING_BOX_12X2_CENTERED
+					sub 7
+				#elif defined BOUNDING_BOX_TINY_BOTTOM
+					sub 14
+				#endif
+					ld  (_gpy), a
+			#endasm
 
 			//p_y = gpy << 6;
 			#asm
@@ -396,6 +527,7 @@ unsigned char player_move (void) {
 				p_vy = 0;
 			#endif
 				
+			/*
 			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_TINY_BOTTOM)
 				gpy = (pty2 - 1) << 4;
 			#elif defined (BOUNDING_BOX_12X2_CENTERED)
@@ -405,6 +537,23 @@ unsigned char player_move (void) {
 			#else
 				gpy = (pty2 - 1) << 4;				
 			#endif
+			*/
+
+			// KISS mod
+			#asm
+					ld  a, (_pty2)
+					dec a 
+					sla a
+					sla a
+					sla a
+					sla a
+				#ifdef BOUNDING_BOX_12X2_CENTERED
+					add 7
+				#elif defined BOUNDING_BOX_8_CENTERED
+					add 4
+				#endif
+					ld  (_gpy), a
+			#endasm
 
 			//p_y = gpy << 6;
 			#asm
@@ -412,7 +561,7 @@ unsigned char player_move (void) {
 					call Ashl16_HL
 					ld  (_p_y), hl
 			#endasm
-			
+
 			#if defined PLAYER_GENITAL || defined LOCKS_CHECK_VERTICAL
 				wall_v = WBOTTOM;
 			#endif
@@ -537,6 +686,7 @@ unsigned char player_move (void) {
 	// ***************************************************************************
 
 	#ifndef PLAYER_DISABLE_DEFAULT_HENG
+		/*
 		if ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {
 			#ifdef PLAYER_GENITAL		
 				p_facing_h = 0xff;
@@ -574,6 +724,129 @@ unsigned char player_move (void) {
 				#endif
 			}
 		}
+		*/
+
+		#asm
+				// ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) 
+				// ( ! (pad0 & sp_LEFT == 0) && ! (pad0 & sp_RIGHT) == 0))
+				// ( (pad0 & sp_LEFT) != 0 && (pad0 & sp_RIGHT) != 0)
+
+				ld  a, (_pad0)
+				ld  c, a
+				and sp_LEFT
+				or  a
+				jr  z, h_decelerate_done
+
+				ld  a, c
+				and sp_RIGHT
+				or  a
+				jr  z, h_decelerate_done
+
+				xor a
+				ld  (_wall_h), a
+			#ifdef PLAYER_GENITAL
+					dec a 					; 0 - 1 = 0xff
+					ld  (_p_facing_h), a
+			#endif
+
+				// Check sign of p_vx (unsigned int)
+				ld  hl, (_p_vx)
+				bit 7, h 				; bit 7 of H = 1 : negative (left)
+				jr  z, decelerate_right
+
+			.decelerate_left
+				// p_vx < 0, so add RX
+				ld  de, PLAYER_RX
+				add hl, de
+
+				// Zero if it became positive
+				bit 7, h
+				jr  nz, h_acceleration_set				
+
+				ld  hl, 0
+
+			.h_acceleration_set
+				ld  (_p_vx), hl
+				jr  h_acceleration_done
+
+			.decelerate_right
+				// Check that p_vx is NOT zero
+				ld  a, l
+				or  h
+				jr  z, h_acceleration_done	
+
+				// p_vx > 0 , so add RX
+				ld  de, -PLAYER_RX
+				add hl, de
+				
+				// Zero if it became negative
+				bit 7, h
+				jr  z, h_acceleration_set
+
+
+				ld  hl, 0
+				jr  h_acceleration_set
+			.h_decelerate_done
+
+			.accelerate_left
+				// if ((pad0 & sp_LEFT) == 0) 
+				ld  a, c
+				and sp_LEFT
+				jr  nz, accelerate_left_done
+
+				#ifdef PLAYER_GENITAL
+					ld  a, FACING_LEFT
+					ld  (_p_facing_h), a
+				#endif
+
+				// if (p_vx > -PLAYER_MAX_VX)
+				ld  de, (_p_vx)
+				ld  hl, -PLAYER_MAX_VX
+				call l_gt				; Int signed de > hl
+				jr  nc, accelerate_left_done
+
+				#ifndef PLAYER_GENITAL
+					xor a
+					ld  (_p_facing), a
+				#endif
+
+				ld  hl, (_p_vx)
+				ld  de, -PLAYER_AX
+				add hl, de
+				jr  h_acceleration_set
+			.accelerate_left_done
+
+			.accelerate_right
+				// if ((pad0 & sp_RIGHT) == 0)
+				ld  a, c
+				and sp_RIGHT
+				jr  nz, accelerate_right_done
+
+				#ifdef PLAYER_GENITAL
+					ld  a, FACING_RIGHT
+					ld  (_p_facing_h), a
+				#endif
+
+				// if (p_vx < PLAYER_MAX_VX)
+				ld  de, (_p_vx)
+				ld  hl, PLAYER_MAX_VX
+				call l_lt 				; Int signed de < hl
+				jr  nc, accelerate_right_done
+
+				#ifndef PLAYER_GENITAL
+					ld  a, 1
+					ld  (_p_facing), a
+				#endif
+
+				ld  hl, (_p_vx)
+				ld  de, PLAYER_AX
+				add hl, de
+				jr  h_acceleration_set
+
+			.accelerate_right_done
+
+			.h_acceleration_done
+		#endasm
 	#endif
 
 	#include "my/ci/custom_heng.h"
@@ -589,8 +862,8 @@ unsigned char player_move (void) {
 	if (p_x > 14336) p_x = 14336;
 
 	/*
-	gpox = gpx;
-	gpx = p_x >> 6;
+		gpox = gpx;
+		gpx = p_x >> 6;
 	*/
 	#asm
 			ld  a, (_gpx)
@@ -624,17 +897,36 @@ unsigned char player_move (void) {
 				p_vx = 0;
 			#endif
 
-			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)				
+			/*
+			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)
 				gpx = ((ptx1 + 1) << 4) - 4;
 			#elif defined (BOUNDING_BOX_12X2_CENTERED)	
 				gpx = ((ptx1 + 1) << 4) - 2;
 			#else
 				gpx = ((ptx1 + 1) << 4);
 			#endif
+			*/
+
+			// KISS mod
+
+			#asm
+					ld  a, (_ptx1)
+					inc a 
+					sla a 
+					sla a 
+					sla a 
+					sla a 
+				#if defined BOUNDING_BOX_8_BOTTOM || defined BOUNDING_BOX_8_CENTERED || defined BOUNDING_BOX_TINY_BOTTOM
+					sub 4
+				#elif defined BOUNDING_BOX_12X2_CENTERED
+					sub 3
+				#endif
+					ld  (_gpx), a
+			#endasm
 
 			/*
-			p_x = gpx << 6;
-			wall_h = WLEFT;
+				p_x = gpx << 6;
+				wall_h = WLEFT;
 			*/
 			#asm
 					ld  a, (_gpx)
@@ -660,7 +952,6 @@ unsigned char player_move (void) {
 				}
 			#endif
 		#endif
-
 	}
 
 	#if defined (PLAYER_GENITAL)
@@ -681,17 +972,36 @@ unsigned char player_move (void) {
 				p_vx = 0;
 			#endif
 
-			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)				
+			/*
+			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_TINY_BOTTOM)
 				gpx = (ptx1 << 4) + 4;
 			#elif defined (BOUNDING_BOX_12X2_CENTERED)	
 				gpx = (ptx1 << 4) + 2;
 			#else
 				gpx = (ptx1 << 4);
 			#endif
+			*/
+
+			// KISS mod
+
+			#asm
+					ld  a, (_ptx1)
+					sla a 
+					sla a 
+					sla a 
+					sla a 
+				#if defined BOUNDING_BOX_8_BOTTOM || defined BOUNDING_BOX_8_CENTERED || defined BOUNDING_BOX_TINY_BOTTOM
+					add 4
+				#elif defined BOUNDING_BOX_12X2_CENTERED
+					add 3
+				#endif
+					ld  (_gpx), a
+			#endasm
+
 
 			/*		
-			p_x = gpx << 6;
-			wall_h = WRIGHT;
+				p_x = gpx << 6;
+				wall_h = WRIGHT;
 			*/
 			#asm
 					ld  a, (_gpx)
@@ -809,22 +1119,61 @@ unsigned char player_move (void) {
 	#if defined (PLAYER_PUSH_BOXES) || !defined (DEACTIVATE_KEYS)
 		#if defined PLAYER_GENITAL || defined LOCKS_CHECK_VERTICAL
 			if (wall_v == WTOP) {
-				// interact up			
+				// interact up		
+				/*	
 				#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_12X2_CENTERED)
 					cy1 = (gpy + 6) >> 4;
 				#elif defined (BOUNDING_BOX_8_CENTERED)
 					cy1 = (gpy + 3) >> 4;
 				#else
-					cy1 = (gpy - 1) >> 3;		
+					cy1 = (gpy - 1) >> 4;
 				#endif
 
 				if (attr (cx1, cy1) == 10) {
 					x0 = x1 = cx1; y0 = cy1; y1 = cy1 - 1;
-					process_tile ();
+					process_tile ();					
 				}
+				*/
+
+				// KISS mod
+
+				#asm
+						ld  a, (_gpy)
+					#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_12X2_CENTERED)
+						add 6
+					#elif defined (BOUNDING_BOX_8_CENTERED)
+						add 3
+					#else
+						dec a 
+					#endif
+						srl a
+						srl a
+						srl a
+						srl a
+						ld  (_cy1), a
+				
+						ld  a, (_cx1)
+						ld  c, a
+						ld  a, (_cy1)
+						call _attr_2 
+						ld  a, l 
+						cp  10
+						jr  nz, p_int_up_no
+
+						ld  a, (_cx1)
+						ld  (_x0), a
+						ld  (_x1), a
+						ld  a, (_cy1)
+						ld  (_y0), a 
+						dec a 
+						ld  (_y1), a 
+						call _process_tile
+					.p_int_up_no
+				#endasm
 
 			} else if (wall_v == WBOTTOM) {
 				// interact down
+				/*
 				#if defined (BOUNDING_BOX_8_BOTTOM)
 					cy1 = (gpy + 16) >> 4;
 				#elif defined (BOUNDING_BOX_12X2_CENTERED)
@@ -837,13 +1186,50 @@ unsigned char player_move (void) {
 			
 				if (attr (cx1, cy1) == 10) {
 					x0 = x1 = cx1; y0 = cy1; y1 = cy1 + 1;
-					process_tile ();
+					process_tile ();				
 				}
+				*/
+
+				// KISS mod
+				#asm
+						ld  a, (_gpy)
+					#if defined (BOUNDING_BOX_12X2_CENTERED)
+						add 9
+					#elif defined (BOUNDING_BOX_8_CENTERED)
+						add 12
+					#else
+						add 16
+					#endif
+						srl a
+						srl a
+						srl a
+						srl a
+						ld  (_cy1), a
+
+						ld  a, (_cx1)
+						ld  c, a
+						ld  a, (_cy1)
+						call _attr_2 
+						ld  a, l 
+						cp  10
+						jr  nz, p_int_down_no
+
+						ld  a, (_cx1)
+						ld  (_x0), a
+						ld  (_x1), a
+						ld  a, (_cy1)
+						ld  (_y0), a 
+						inc a 
+						ld  (_y1), a 
+						call _process_tile		
+					.p_int_down_no	
+				#endasm
 			} else
 		#endif	
 		
 		if (wall_h == WLEFT) {		
 			// interact left
+			/*
 			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED)
 				cx1 = (gpx + 3) >> 4;
 			#elif defined (BOUNDING_BOX_12X2_CENTERED)
@@ -856,8 +1242,45 @@ unsigned char player_move (void) {
 				y0 = y1 = cy1; x0 = cx1; x1 = cx1 - 1;
 				process_tile ();
 			}
+			*/
+
+			// KISS mod
+			#asm
+					ld  a, (_gpx)
+				#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED)
+					add 3
+				#elif defined (BOUNDING_BOX_12X2_CENTERED)
+					inc a
+				#else
+					dec a
+				#endif
+					srl a
+					srl a
+					srl a
+					srl a
+					ld  (_cx1), a				
+
+					// ld  a, (_cx1)
+					ld  c, a
+					ld  a, (_cy1)
+					call _attr_2 
+					ld  a, l 
+					cp  10
+					jr  nz, p_int_left_no
+	
+					ld  a, (_cy1)
+					ld  (_y0), a
+					ld  (_y1), a
+					ld  a, (_cx1)
+					ld  (_x0), a 
+					dec a 
+					ld  (_x1), a 
+					call _process_tile
+				.p_int_left_no
+			#endasm
 		} else if (wall_h == WRIGHT) {
 			// interact right
+			/*
 			#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED)
 				cx1 = (gpx + 12) >> 4;
 			#elif defined (BOUNDING_BOX_12X2_CENTERED)
@@ -865,10 +1288,46 @@ unsigned char player_move (void) {
 			#else
 				cx1 = (gpx + 16) >> 4;		
 			#endif		
-			if (attr (cx1, cy1) == 10) {
+
+			if (attr (cx1, cy1) == 10) {				
 				y0 = y1 = cy1; x0 = cx1; x1 = cx1 + 1;
 				process_tile ();
 			}
+			*/
+
+			#asm
+					ld  a, (_gpx)
+				#if defined (BOUNDING_BOX_8_BOTTOM) || defined (BOUNDING_BOX_8_CENTERED)
+					add 12
+				#elif defined (BOUNDING_BOX_12X2_CENTERED)
+					add 14
+				#else
+					add 16
+				#endif
+					srl a
+					srl a
+					srl a
+					srl a
+					ld  (_cx1), a				
+					
+					// ld  a, (_cx1)
+					ld  c, a
+					ld  a, (_cy1)
+					call _attr_2 
+					ld  a, l 
+					cp  10
+					jr  nz, p_int_right_no
+
+					ld  a, (_cy1)
+					ld  (_y0), a
+					ld  (_y1), a
+					ld  a, (_cx1)
+					ld  (_x0), a 
+					inc a 
+					ld  (_x1), a 
+					call _process_tile
+				.p_int_right_no
+			#endasm
 		}
 	#endif
 
@@ -894,16 +1353,16 @@ unsigned char player_move (void) {
 		#ifdef CUSTOM_EVIL_TILE_CHECK
 			#include "my/ci/custom_evil_tile_check.h"
 		#else
-		// Tiles que te matan. 
-		// hit_v tiene preferencia sobre hit_h
-		hit = 0;
-		if (hit_v) {
-			hit = 1;
-				p_vy = addsign (-p_vy, PLAYER_MAX_VX);
-		} else if (hit_h) {
-			hit = 1;
-				p_vx = addsign (-p_vx, PLAYER_MAX_VX);
-		}
+			// Tiles que te matan. 
+			// hit_v tiene preferencia sobre hit_h
+			hit = 0;
+			if (hit_v) {
+				hit = 1;
+					p_vy = addsign (-p_vy, PLAYER_MAX_VX);
+			} else if (hit_h) {
+				hit = 1;
+					p_vx = addsign (-p_vx, PLAYER_MAX_VX);
+			}
 		#endif
 		
 		if (hit) {
