@@ -28,11 +28,13 @@
 	push de
 	pop ix			;put it into ix
 
-	ld a,(23624)	;get border color from BASIC vars to keep it unchanged
-	rra
-	rra
-	rra
-	and 7
+	;ld a,(23624)	;get border color from BASIC vars to keep it unchanged
+	;rra
+	;rra
+	;rra
+	;and 7
+	xor a
+
 	ld (sfxRoutineToneBorder  +1),a
 	ld (sfxRoutineNoiseBorder +1),a
 	ld (sfxRoutineSampleBorder+1),a

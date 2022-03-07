@@ -38,7 +38,7 @@ if (flags [0]) {
 }
 
 #ifdef CHEAT
-	if (sp_KeyPressed (KEY_M) && sp_KeyPressed (KEY_Z)) { 
+	if (sp_KeyPressed (KEY_M) && sp_KeyPressed (KEY_Z) && sp_KeyPressed (KEY_1)) { 
 		o_pant = 99; n_pant = 23; flags [1] = 1;
 	}
 #endif

@@ -60,9 +60,9 @@ rem cd ..\dev
 
 :compile
 echo Compilando guego (EN)
-zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2_bg.lib -zorg=24000 -DCHEAT > nul
+zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%_en.bin -lsplib2_mk2_bg.lib -zorg=24000 -DCHEAT > nul
 rem zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
-..\..\..\src\utils\printsize.exe %game%.bin
+..\..\..\src\utils\printsize.exe %game%_en.bin
 ..\..\..\src\utils\printsize.exe scripts.bin
 
 rem *** Tipo de cargador ***
@@ -71,13 +71,13 @@ echo Construyendo cinta
 rem cambia LOADER por el nombre que quieres que salga en Program:
 ..\..\..\src\utils\bas2tap -a10 -sHELMET_EN loader\loader.bas loader.tap > nul
 ..\..\..\src\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
-..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
+..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%_en.bin > nul
 copy /b loader.tap + screen.tap + main.tap %game%_en.tap > nul
 
 echo Compilando guego (ES)
-zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%.bin -lsplib2_mk2_bg.lib -zorg=24000 -DLANG_ES -DCHEAT > nul
+zcc +zx -vn mk1.c -O3 -crt0=crt.asm -o %game%_es.bin -lsplib2_mk2_bg.lib -zorg=24000 -DLANG_ES -DCHEAT > nul
 rem zcc +zx -vn mk1.c -o %game%.bin -lsplib2_mk2.lib -zorg=24000 > nul
-..\..\..\src\utils\printsize.exe %game%.bin
+..\..\..\src\utils\printsize.exe %game%_es.bin
 ..\..\..\src\utils\printsize.exe scripts.bin
 
 rem *** Tipo de cargador ***
@@ -86,7 +86,7 @@ echo Construyendo cinta
 rem cambia LOADER por el nombre que quieres que salga en Program:
 ..\..\..\src\utils\bas2tap -a10 -sHELMET_ES loader\loader.bas loader.tap > nul
 ..\..\..\src\utils\bin2tap -o screen.tap -a 16384 loading.bin > nul
-..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%.bin > nul
+..\..\..\src\utils\bin2tap -o main.tap -a 24000 %game%_es.bin > nul
 copy /b loader.tap + screen.tap + main.tap %game%_es.tap > nul
 
 
@@ -108,6 +108,11 @@ rem data                ..\bin\RAM1.bin ^
 rem data                ..\bin\RAM3.bin ^
 rem data                %game%.bin
 
+if [%1]==[andtape] goto :tape
+if [%2]==[andtape] goto :tape
+
+
+:tapedone
 if [%1]==[justcompile] goto :end
 if [%1]==[noclean] goto :end
 
@@ -121,8 +126,57 @@ del *.bin > nul
 
 goto :end 
 
+:tape
+echo Construyendo cintas definitivas en ..\show
+
+..\..\..\src\utils\png2scr.exe ..\gfx\preloading.png preloading.bin > nul
+
+..\..\..\src\utils\apultra.exe preloading.bin ..\bin\pre_scrc.bin
+..\..\..\src\utils\apultra.exe loading.bin ..\bin\scrc.bin
+rem ..\..\..\src\utils\apultra.exe %game%_en.bin ..\bin\game_enc.bin
+rem ..\..\..\src\utils\apultra.exe %game%_es.bin ..\bin\game_esc.bin
+
+..\..\..\src\utils\imanol.exe ^
+    in=loader\loaderzx48_2scr.asm-orig ^
+    out=loader\loader.asm ^
+    preloadingcompstart=?65000-..\bin\pre_scrc.bin ^
+    preloadingcomplength=?..\bin\pre_scrc.bin ^
+    loadingcompstart=?65000-..\bin\scrc.bin ^
+    loadingcomplength=?..\bin\scrc.bin ^
+    mainbincomplength=?%game%_en.bin
+
+..\..\..\src\utils\pasmo.exe loader\loader.asm ..\bin\loader.bin loader.txt
+
+..\..\..\src\utils\GenTape.exe ..\show\mojon_twins--sgt-helmet-definitivaw--EN.tap ^
+    basic 'SGT.HELMET' 10 ..\bin\loader.bin ^
+    data              ..\bin\pre_scrc.bin ^
+    data              ..\bin\scrc.bin ^
+    data              %game%_en.bin
+
+..\..\..\src\utils\imanol.exe ^
+    in=loader\loaderzx48_2scr.asm-orig ^
+    out=loader\loader.asm ^
+    preloadingcompstart=?65000-..\bin\pre_scrc.bin ^
+    preloadingcomplength=?..\bin\pre_scrc.bin ^
+    loadingcompstart=?65000-..\bin\scrc.bin ^
+    loadingcomplength=?..\bin\scrc.bin ^
+    mainbincomplength=?%game%_es.bin
+
+..\..\..\src\utils\pasmo.exe loader\loader.asm ..\bin\loader.bin loader.txt
+
+..\..\..\src\utils\GenTape.exe ..\show\mojon_twins--sgt-helmet-definitivaw--ES.tap ^
+    basic 'SGT.HELMET' 10 ..\bin\loader.bin ^
+    data              ..\bin\pre_scrc.bin ^
+    data              ..\bin\scrc.bin ^
+    data              %game%_es.bin
+
+del loader\loader.asm > nul
+del loader.txt > nul
+
+goto :tapedone
+
 :help
-echo "compile.bat help|justcompile|clean|justscripts|justassets|noclean"
+echo "compile.bat [help|justcompile|clean|justscripts|justassets|noclean] [andtape]"
 
 :end
 echo Hecho!
