@@ -852,7 +852,6 @@ void select_joyfunc (void) {
 
 #ifdef WALLS_STOP_ENEMIES
 	unsigned char mons_col_sc_x (void) {
-
 		// Si BOUNDING_BOX_12x2_CENTERED ->
 		// D = 2, E = 13; D = 0, E = 15 si _lineal
 		// H = 7, L = 8;  H = 0, L = 15 si _lineal
@@ -871,18 +870,21 @@ void select_joyfunc (void) {
 
 			._mons_col_sc_x_compare
 
+		
+		#ifdef BOUNDING_BOX_12X2_CENTERED
 			// cx1 = cx2 = (_en_mx > 0 ? _en_x + 13 : _en_x + 2) >> 4;
+			#asm
 					ld  a, (__en_mx)
 					and 0x80
 					ld  a, (__en_x)
 					jr  z, _mons_col_sc_x_horz_positive
 
 				._mons_col_sc_x_horz_negative_zero
-				add d
+					add 2
 					jr  _mons_col_sc_x_horz_set
 
 				._mons_col_sc_x_horz_positive
-				add e				
+					add 13					
 
 				._mons_col_sc_x_horz_set
 					srl a 
@@ -892,11 +894,13 @@ void select_joyfunc (void) {
 
 					ld  (_cx1), a
 					ld  (_cx2), a
+			#endasm
 
 			// cy1 = (_en_y + 7) >> 4; cy2 = (_en_y + 8) >> 4;
-	
+			#asm
 					ld  a, (__en_y)
-				add h
+					add 7 
+					ld  b, a
 
 					srl a
 					srl a
@@ -904,8 +908,8 @@ void select_joyfunc (void) {
 					srl a
 					ld  (_cy1), a
 
-				ld  a, (__en_y)
-				add l
+					ld  a, b
+					inc a
 
 					srl a
 					srl a
@@ -913,7 +917,10 @@ void select_joyfunc (void) {
 					srl a
 					ld  (_cy2), a
 			#endasm
-
+		#else
+			cx1 = cx2 = (_en_mx > 0 ? _en_x + 15 : _en_x) >> 4;
+			cy1 = _en_y >> 4; cy2 = (_en_y + 15) >> 4;
+		#endif
 		cm_two_points ();
 		#ifdef EVERYTHING_IS_A_WALL
 			return (at1 || at2);
@@ -923,37 +930,20 @@ void select_joyfunc (void) {
 	}
 		
 	unsigned char mons_col_sc_y (void) {
-
-		// Si BOUNDING_BOX_12x2_CENTERED ->
-		// D = 2, E = 13; D = 0, E = 15 si _lineal
-		// H = 7, L = 8;  H = 0, L = 15 si _lineal
-		// else D = 0, E = 15; H = 0, L = 15
-
-		#asm
-			#ifdef BOUNDING_BOX_12x2_CENTERED
-					ld  de, 0x020D
-					ld  hl, 0x0708
-					jr  _mons_col_sc_x_compare
-			#endif
-
-			._mons_col_sc_y_lineal
-				ld  de, 0x000f
-				ld  hl, 0x000f
-
-			._mons_col_sc_y_compare
-
+		#ifdef BOUNDING_BOX_12X2_CENTERED
 			// cy1 = cy2 = (_en_my > 0 ? _en_y + 8 : _en_y + 7) >> 4;
+			#asm
 					ld  a, (__en_my)
 					and 0x80
 					ld  a, (__en_y)
 					jr  z, _mons_col_sc_y_vert_positive
 
 				._mons_col_sc_y_vert_negative_zero
-				add h
+					add 7
 					jr  _mons_col_sc_y_vert_set
 
 				._mons_col_sc_y_vert_positive
-				add l					
+					add 8					
 
 				._mons_col_sc_y_vert_set
 					srl a 
@@ -963,10 +953,13 @@ void select_joyfunc (void) {
 
 					ld  (_cy1), a
 					ld  (_cy2), a
+			#endasm		
 
 			// cx1 = (_en_x + 2) >> 4; cx2 = (_en_x + 13) >> 4;
+			#asm
 					ld  a, (__en_x)
-				add d
+					ld  b, a
+					add 2 
 
 					srl a
 					srl a
@@ -974,8 +967,8 @@ void select_joyfunc (void) {
 					srl a
 					ld  (_cx1), a
 
-				ld  a, (__en_x)
-				add e
+					ld  a, b
+					add 13
 
 					srl a
 					srl a
@@ -983,7 +976,10 @@ void select_joyfunc (void) {
 					srl a
 					ld  (_cx2), a
 			#endasm
-
+		#else
+			cy1 = cy2 = (_en_my > 0 ? _en_y + 15 : _en_y) >> 4;
+			cx1 = _en_x >> 4; cx2 = (_en_x + 15) >> 4;
+		#endif
 		cm_two_points ();
 		#ifdef EVERYTHING_IS_A_WALL
 			return (at1 || at2);

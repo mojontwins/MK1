@@ -37,7 +37,7 @@ _en_y += _en_my;
 	#ifdef WALLS_STOP_ENEMIES
 		jr  z, _enems_lm_change_axis_x
 		
-		call _mons_col_sc_x_lineal
+		call _mons_col_sc_x
 		xor a
 		or l
 
@@ -69,7 +69,7 @@ _en_y += _en_my;
 	#ifdef WALLS_STOP_ENEMIES
 		jr  z, _enems_lm_change_axis_y
 		
-		call _mons_col_sc_y_lineal
+		call _mons_col_sc_y
 		xor a
 		or l
 
