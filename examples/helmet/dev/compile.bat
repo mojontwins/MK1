@@ -131,19 +131,21 @@ echo Construyendo cintas definitivas en ..\show
 
 ..\..\..\src\utils\png2scr.exe ..\gfx\preloading.png preloading.bin > nul
 
-..\..\..\src\utils\apultra.exe preloading.bin ..\bin\pre_scrc.bin
-..\..\..\src\utils\apultra.exe loading.bin ..\bin\scrc.bin
-rem ..\..\..\src\utils\apultra.exe %game%_en.bin ..\bin\game_enc.bin
-rem ..\..\..\src\utils\apultra.exe %game%_es.bin ..\bin\game_esc.bin
+del ..\bin\pre_scrc.bin > nul
+..\..\..\src\utils\zx7.exe preloading.bin ..\bin\pre_scrc.bin
+del ..\bin\scrc.bin > nul
+..\..\..\src\utils\zx7.exe loading.bin ..\bin\scrc.bin
+del ..\bin\game_enc.bin > nul
+..\..\..\src\utils\zx7.exe %game%_en.bin ..\bin\game_enc.bin
+del ..\bin\game_esc.bin > nul
+..\..\..\src\utils\zx7.exe %game%_es.bin ..\bin\game_esc.bin
 
 ..\..\..\src\utils\imanol.exe ^
-    in=loader\loaderzx48_2scr.asm-orig ^
+    in=loader\loaderzx48_2scr_zx7.asm-orig ^
     out=loader\loader.asm ^
-    preloadingcompstart=?65000-..\bin\pre_scrc.bin ^
     preloadingcomplength=?..\bin\pre_scrc.bin ^
-    loadingcompstart=?65000-..\bin\scrc.bin ^
     loadingcomplength=?..\bin\scrc.bin ^
-    mainbincomplength=?%game%_en.bin
+    mainbincomplength=?..\bin\game_enc.bin
 
 ..\..\..\src\utils\pasmo.exe loader\loader.asm ..\bin\loader.bin loader.txt
 
@@ -151,16 +153,14 @@ rem ..\..\..\src\utils\apultra.exe %game%_es.bin ..\bin\game_esc.bin
     basic 'SGT.HELMET' 10 ..\bin\loader.bin ^
     data              ..\bin\pre_scrc.bin ^
     data              ..\bin\scrc.bin ^
-    data              %game%_en.bin
+    data              ..\bin\game_enc.bin
 
 ..\..\..\src\utils\imanol.exe ^
-    in=loader\loaderzx48_2scr.asm-orig ^
+    in=loader\loaderzx48_2scr_zx7.asm-orig ^
     out=loader\loader.asm ^
-    preloadingcompstart=?65000-..\bin\pre_scrc.bin ^
     preloadingcomplength=?..\bin\pre_scrc.bin ^
-    loadingcompstart=?65000-..\bin\scrc.bin ^
     loadingcomplength=?..\bin\scrc.bin ^
-    mainbincomplength=?%game%_es.bin
+    mainbincomplength=?..\bin\game_esc.bin
 
 ..\..\..\src\utils\pasmo.exe loader\loader.asm ..\bin\loader.bin loader.txt
 
@@ -168,7 +168,7 @@ rem ..\..\..\src\utils\apultra.exe %game%_es.bin ..\bin\game_esc.bin
     basic 'SGT.HELMET' 10 ..\bin\loader.bin ^
     data              ..\bin\pre_scrc.bin ^
     data              ..\bin\scrc.bin ^
-    data              %game%_es.bin
+    data              ..\bin\game_esc.bin
 
 del loader\loader.asm > nul
 del loader.txt > nul

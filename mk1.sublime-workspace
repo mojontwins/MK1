@@ -340,10 +340,10 @@
 	"buffers":
 	[
 		{
-			"file": "examples/helmet/dev/loader/loaderzx48_2scr.asm-orig",
+			"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
 			"settings":
 			{
-				"buffer_size": 2772,
+				"buffer_size": 3438,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
@@ -352,35 +352,8 @@
 			"file": "examples/helmet/dev/compile.bat",
 			"settings":
 			{
-				"buffer_size": 6124,
+				"buffer_size": 6050,
 				"encoding": "Western (Windows 1252)",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "; loader.asm\n; loads the loader\n; by na_th_an - Thanks to Antonio Villena for his tutorials and utilities.\n\n\torg $5ccb\n\tld  sp, 23999\n\tdi\n\tdb\t$de, $c0, $37, $0e, $8f, $39, $96 ;OVER USR 7 ($5ccb)\n\t\n\tcall blackout\n\n; load screen\n\tscf\n\tld\ta, $ff\n\tld\tix, 64444\n\tld\tde, 556\n\tcall $0556\n\tdi\n\n; Decompress\n\tld  hl, 64444\n\tld  de, 16384\n\tcall depack\t\n\n; load screen\n\tscf\n\tld\ta, $ff\n\tld\tix, 61512\n\tld\tde, 3488\n\tcall $0556\n\tdi\n\n\tcall blackout\n\n; Decompress\n\tld  hl, 61512\n\tld  de, 16384\n\tcall depack\t\n\n; Main binary\n\tscf\n\tld\ta, $ff\n\tld\tix, 45233\n\tld\tde, 19767\n\tcall $0556\n\tdi\n\n; Decompress\n\tld  hl, 45233\n\tld  de, 24050\n\tcall depack\t\n\t\n; run game!\n\tjp 24000\n\nblackout:\n\t; screen 0\n\t\tld  bc, 767\n\t\tld\thl, $5800\n\t\tld\tde, $5801\n\t\tld\t(hl), l\n\t\tldir\n\t\tret\n\t\t\n; aPPack decompressor\n; original source by dwedit\n; very slightly adapted by utopian\n; optimized by Metalbrain\n\n;hl = source\n;de = dest\n\ndepack:\t\tld\tixl,128\napbranch1:\tldi\naploop0:\tld\tixh,1\t\t;LWM = 0\naploop:\t\tcall \tap_getbit\n\t\tjr \tnc,apbranch1\n\t\tcall \tap_getbit\n\t\tjr \tnc,apbranch2\n\t\tld \tb,0\n\t\tcall \tap_getbit\n\t\tjr \tnc,apbranch3\n\t\tld\tc,16\t\t;get an offset\napget4bits:\tcall \tap_getbit\n\t\trl \tc\n\t\tjr\tnc,apget4bits\n\t\tjr \tnz,apbranch4\n\t\tld \ta,b\napwritebyte:\tld \t(de),a\t\t;write a 0\n\t\tinc \tde\n\t\tjr\taploop0\napbranch4:\tand\ta\n\t\tex \tde,hl \t\t;write a previous byte (1-15 away from dest)\n\t\tsbc \thl,bc\n\t\tld \ta,(hl)\n\t\tadd\thl,bc\n\t\tex \tde,hl\n\t\tjr\tapwritebyte\napbranch3:\tld \tc,(hl)\t\t;use 7 bit offset, length = 2 or 3\n\t\tinc \thl\n\t\trr \tc\n\t\tret \tz\t\t;if a zero is encountered here, it is EOF\n\t\tld\ta,2\n\t\tadc\ta,b\n\t\tpush \thl\n\t\tld\tiyh,b\n\t\tld\tiyl,c\n\t\tld \th,d\n\t\tld \tl,e\n\t\tsbc \thl,bc\n\t\tld \tc,a\n\t\tjr\tap_finishup2\napbranch2:\tcall \tap_getgamma\t;use a gamma code * 256 for offset, another gamma code for length\n\t\tdec \tc\n\t\tld\ta,c\n\t\tsub\tixh\n\t\tjr \tz,ap_r0_gamma\t\t;if gamma code is 2, use old r0 offset,\n\t\tdec \ta\n\t\t;do I even need this code?\n\t\t;bc=bc*256+(hl), lazy 16bit way\n\t\tld \tb,a\n\t\tld \tc,(hl)\n\t\tinc \thl\n\t\tld\tiyh,b\n\t\tld\tiyl,c\n\n\t\tpush \tbc\n\t\t\n\t\tcall \tap_getgamma\n\n\t\tex \t(sp),hl\t\t;bc = len, hl=offs\n\t\tpush \tde\n\t\tex \tde,hl\n\n\t\tld\ta,4\n\t\tcp\td\n\t\tjr \tnc,apskip2\n\t\tinc \tbc\n\t\tor\ta\napskip2:\tld \thl,127\n\t\tsbc \thl,de\n\t\tjr \tc,apskip3\n\t\tinc \tbc\n\t\tinc \tbc\napskip3:\t\tpop \thl\t\t;bc = len, de = offs, hl=junk\n\t\tpush \thl\n\t\tor \ta\nap_finishup:\tsbc \thl,de\n\t\tpop \tde\t\t;hl=dest-offs, bc=len, de = dest\nap_finishup2:\tldir\n\t\tpop \thl\n\t\tld\tixh,b\n\t\tjr \taploop\n\nap_r0_gamma:\tcall \tap_getgamma\t\t;and a new gamma code for length\n\t\tpush \thl\n\t\tpush \tde\n\t\tex\tde,hl\n\n\t\tld\td,iyh\n\t\tld\te,iyl\n\t\tjr \tap_finishup\n\n\nap_getbit:\tld\ta,ixl\n\t\tadd\ta,a\n\t\tld\tixl,a\n\t\tret\tnz\n\t\tld\ta,(hl)\n\t\tinc\thl\n\t\trla\n\t\tld\tixl,a\n\t\tret\n\nap_getgamma:\tld \tbc,1\nap_getgammaloop:\tcall \tap_getbit\n\t\trl \tc\n\t\trl \tb\n\t\tcall \tap_getbit\n\t\tjr \tc,ap_getgammaloop\n\t\tret\n",
-			"file": "examples/helmet/dev/loader/loader.asm",
-			"file_size": 2876,
-			"file_write_time": 132911108219692494,
-			"settings":
-			{
-				"buffer_size": 2695,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/git/cheman/cpc_zx/src/dev/loader/loaderzx.asm-orig",
-			"settings":
-			{
-				"buffer_size": 2860,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "/D/git/cheman/cpc_zx/src/dev/compile_zx.bat",
-			"settings":
-			{
-				"buffer_size": 1609,
 				"line_ending": "Windows"
 			}
 		}
@@ -445,16 +418,19 @@
 	},
 	"expanded_folders":
 	[
-		"/D/temp/MK1",
-		"/D/temp/MK1/examples",
-		"/D/temp/MK1/examples/helmet",
-		"/D/temp/MK1/examples/helmet/bin",
-		"/D/temp/MK1/examples/helmet/dev",
-		"/D/temp/MK1/examples/helmet/dev/loader",
-		"/D/temp/MK1/examples/helmet/gfx"
+		"/D/Temp/MK1",
+		"/D/Temp/MK1/examples",
+		"/D/Temp/MK1/examples/helmet",
+		"/D/Temp/MK1/examples/helmet/dev",
+		"/D/Temp/MK1/examples/helmet/dev/loader"
 	],
 	"file_history":
 	[
+		"/D/Temp/MK1/examples/helmet/dev/loader/loader.asm",
+		"/D/Temp/MK1/examples/helmet/dev/loader/loaderzx48_2scr.asm-orig",
+		"/D/Temp/MK1/examples/helmet/dev/compile.bat",
+		"/D/git/cheman/cpc_zx/src/dev/loader/loaderzx.asm-orig",
+		"/D/git/cheman/cpc_zx/src/dev/compile_zx.bat",
 		"/D/Proyectos/2022/20220222a - Actualizar CCOTOMXX a Java8 y Tomcat9/instrucciones.txt",
 		"/D/temp/MK1/examples/helmet/dev/engine/player.h",
 		"/D/temp/MK1/examples/helmet/dev/printer.h",
@@ -577,16 +553,11 @@
 		"/D/temp/MK1/trash/6baddies/dev/mk1.c",
 		"/D/temp/MK1/trash/6baddies/dev/mainloop/game_loop.h",
 		"/D/temp/MK1/trash/6baddies/dev/mainloop.h",
-		"/D/temp/MK1/trash/6baddies/dev/my/config.h",
-		"/D/temp/MK1/trash/6baddies/dev/engine/isr.h",
-		"/D/temp/MK1/trash/6baddies/dev/sound/arkosplayer.h",
-		"/D/temp/MK1/trash/6baddies/dev/sound/wyzplayer.h",
-		"/D/temp/MK1/trash/README.md",
-		"/D/temp/MK1/trash/6baddies/dev/compile.bat"
+		"/D/temp/MK1/trash/6baddies/dev/my/config.h"
 	],
 	"find":
 	{
-		"height": 22.0
+		"height": 24.0
 	},
 	"find_in_files":
 	{
@@ -719,172 +690,72 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 0,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "examples/helmet/dev/loader/loaderzx48_2scr.asm-orig",
+					"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2772,
+						"buffer_size": 3438,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								701,
-								701
+								772,
+								772
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
 							"syntax": "Packages/Text/Plain text.tmLanguage",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 390.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
-				},
+				}
+			]
+		},
+		{
+			"selected": 0,
+			"sheets":
+			[
 				{
 					"buffer": 1,
 					"file": "examples/helmet/dev/compile.bat",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 6124,
+						"buffer_size": 6050,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								5284,
-								5284
+								4794,
+								4794
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
 							"syntax": "Packages/Batch File/Batch File.sublime-syntax",
+							"tab_size": 4,
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1427.0,
+						"translation.y": 1677.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "examples/helmet/dev/loader/loader.asm",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2695,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								133,
-								133
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 3,
-					"file": "/D/git/cheman/cpc_zx/src/dev/loader/loaderzx.asm-orig",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 2860,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								607,
-								607
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"file": "/D/git/cheman/cpc_zx/src/dev/compile_zx.bat",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1609,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1114,
-								897
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -892,7 +763,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 24.0
 	},
 	"input":
 	{
@@ -940,7 +811,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 88.0
+		"height": 44.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -982,7 +853,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 314.0,
+	"side_bar_width": 180.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
