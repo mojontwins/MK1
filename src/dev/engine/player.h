@@ -3,6 +3,13 @@
 
 // player.h
 
+#ifndef BOUNCE_EXPRESSION_Y
+	#define BOUNCE_EXPRESSION_Y (-(p_vy >> 1))
+#endif
+#ifndef BOUNCE_EXPRESSION_X
+	#define BOUNCE_EXPRESSION_X (-(p_vx >> 1))
+#endif
+
 void player_init (void) {
 	// Inicializa player con los valores iniciales
 	// (de ahí lo de inicializar).
@@ -234,7 +241,7 @@ unsigned char player_move (void) {
 					._player_gravity_done
 
 					#ifdef PLAYER_CUMULATIVE_JUMP
-						ld  a, (_p_jmp_on)
+						ld  a, (_p_saltando)
 						or  a
 						jr  nz, _player_gravity_p_gotten_done
 					#endif
@@ -243,8 +250,8 @@ unsigned char player_move (void) {
 						or  a
 						jr  z, _player_gravity_p_gotten_done
 
-						xor a
-						ld  (_p_vy), a
+						ld  hl, 0
+						ld  (_p_vy), hl
 
 					._player_gravity_p_gotten_done
 				#endasm
@@ -449,7 +456,7 @@ unsigned char player_move (void) {
 			#include "my/ci/bg_collision/obstacle_up.h"
 
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
-				p_vy = -(p_vy / 2);
+				p_vy = BOUNCE_EXPRESSION_Y;
 			#else
 				p_vy = 0;
 			#endif
@@ -522,8 +529,11 @@ unsigned char player_move (void) {
 			#include "my/ci/bg_collision/obstacle_down.h"
 
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
-				p_vy = -(p_vy / 2);
+				p_vy = BOUNCE_EXPRESSION_Y;
 			#else
+				#ifdef PLAYER_CUMULATIVE_JUMP
+					if (p_saltando == 0)
+				#endif				
 				p_vy = 0;
 			#endif
 				
@@ -634,22 +644,32 @@ unsigned char player_move (void) {
 			#endif
 
 			if (rda) {
-				if (p_saltando == 0) {
+				#ifdef PLAYER_CUMULATIVE_JUMP
 					if (possee || p_gotten || hit_v) {
+						p_vy = -p_vy - PLAYER_VY_INICIAL_SALTO;
+						if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
 						p_saltando = 1;
 						p_cont_salto = 0;
-						#ifdef MODE_128K
-							PLAY_SOUND (SFX_JUMP);
-						#else
-							beep_fx (3);
-						#endif
+						AY_PLAY_SOUND (SFX_JUMP);
 					}
-				} else {
-					p_vy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (p_cont_salto >> 1));
-					if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
-					++ p_cont_salto;
-					if (p_cont_salto == 9) p_saltando = 0;
-				}
+				#else
+					if (p_saltando == 0) {
+						if (possee || p_gotten || hit_v) {
+							p_saltando = 1;
+							p_cont_salto = 0;
+							#ifdef MODE_128K
+								PLAY_SOUND (SFX_JUMP);
+							#else
+								beep_fx (3);
+							#endif
+						}
+					} else {
+						p_vy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (p_cont_salto >> 1));
+						if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
+						++ p_cont_salto;
+						if (p_cont_salto == 9) p_saltando = 0;
+					}
+				#endif
 			} else p_saltando = 0;
 		}
 	#endif
@@ -892,7 +912,7 @@ unsigned char player_move (void) {
 			#include "my/ci/bg_collision/obstacle_left.h"
 
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
-				p_vx = -(p_vx / 2);
+				p_vx = BOUNCE_EXPRESSION_X;
 			#else
 				p_vx = 0;
 			#endif
@@ -967,7 +987,7 @@ unsigned char player_move (void) {
 			#include "my/ci/bg_collision/obstacle_right.h"
 
 			#ifdef PLAYER_BOUNCE_WITH_WALLS
-				p_vx = -(p_vx / 2);
+				p_vx = BOUNCE_EXPRESSION_X;
 			#else
 				p_vx = 0;
 			#endif

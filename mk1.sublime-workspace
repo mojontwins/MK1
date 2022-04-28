@@ -340,19 +340,10 @@
 	"buffers":
 	[
 		{
-			"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
+			"file": "examples/old/Lala Lah/dev/config.h",
 			"settings":
 			{
-				"buffer_size": 3438,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/helmet/dev/compile.bat",
-			"settings":
-			{
-				"buffer_size": 6050,
+				"buffer_size": 8206,
 				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
@@ -418,14 +409,16 @@
 	},
 	"expanded_folders":
 	[
-		"/D/Temp/MK1",
-		"/D/Temp/MK1/examples",
-		"/D/Temp/MK1/examples/helmet",
-		"/D/Temp/MK1/examples/helmet/dev",
-		"/D/Temp/MK1/examples/helmet/dev/loader"
+		"/D/temp/MK1",
+		"/D/temp/MK1/examples",
+		"/D/temp/MK1/examples/old",
+		"/D/temp/MK1/examples/old/Lala Lah",
+		"/D/temp/MK1/examples/old/Lala Lah/dev"
 	],
 	"file_history":
 	[
+		"/D/temp/MK1/examples/helmet/dev/compile.bat",
+		"/D/temp/MK1/examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
 		"/D/Temp/MK1/examples/helmet/dev/loader/loader.asm",
 		"/D/Temp/MK1/examples/helmet/dev/loader/loaderzx48_2scr.asm-orig",
 		"/D/Temp/MK1/examples/helmet/dev/compile.bat",
@@ -476,7 +469,6 @@
 		"/C/Temp/mk1/examples/helmet/dev/engine/hotspots.h",
 		"/C/Temp/mk1/examples/helmet/dev/engine/bullets.h",
 		"/D/temp/MK1/lib/splib2/Makefile.bat",
-		"/D/temp/MK1/examples/helmet/dev/compile.bat",
 		"/D/temp/MK1/lib/splib2/updater/SPUpdateNow.asm",
 		"/D/temp/MK1/lib/splib2/SPconfig.def",
 		"/D/temp/MK1/lib/splib2/setenv.bat",
@@ -552,8 +544,7 @@
 		"/D/temp/MK1/trash/6baddies/dev/definitions.h",
 		"/D/temp/MK1/trash/6baddies/dev/mk1.c",
 		"/D/temp/MK1/trash/6baddies/dev/mainloop/game_loop.h",
-		"/D/temp/MK1/trash/6baddies/dev/mainloop.h",
-		"/D/temp/MK1/trash/6baddies/dev/my/config.h"
+		"/D/temp/MK1/trash/6baddies/dev/mainloop.h"
 	],
 	"find":
 	{
@@ -695,28 +686,30 @@
 			[
 				{
 					"buffer": 0,
-					"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
-					"semi_transient": false,
+					"file": "examples/old/Lala Lah/dev/config.h",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 3438,
+						"buffer_size": 8206,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								772,
-								772
+								0,
+								0
 							]
 						],
 						"settings":
 						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax"
 						},
 						"translation.x": 0.0,
-						"translation.y": 390.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -725,39 +718,8 @@
 			]
 		},
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 1,
-					"file": "examples/helmet/dev/compile.bat",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 6050,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								4794,
-								4794
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax",
-							"tab_size": 4,
-							"translate_tabs_to_spaces": true
-						},
-						"translation.x": 0.0,
-						"translation.y": 1677.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				}
 			]
 		}
 	],
