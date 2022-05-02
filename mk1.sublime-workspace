@@ -340,10 +340,21 @@
 	"buffers":
 	[
 		{
-			"file": "examples/old/Lala Lah/dev/config.h",
+			"contents": "; loader.asm\n; loads the loader\n; by na_th_an - Thanks to Antonio Villena for his tutorials and utilities.\n\n\torg $5ccb\n\tld  sp, $ffff\n\tdi\n\tdb\t$de, $c0, $37, $0e, $8f, $39, $96 ;OVER USR 7 ($5ccb)\n\t\n\tcall blackout\n\n; load screen\n\tscf\n\tld\ta, $ff\n\tld\tix, 65368 - %%%loadingcomplength%%%\n\tld\tde, %%%loadingcomplength%%%\n\tcall $0556\n\tdi\n\n\tcall blackout\n\n; Decompress\n\tld  hl, 65368 - %%%loadingcomplength%%%\n\tld  de, 16384\n\tcall depack\t\n\n; Main binary\n\tscf\n\tld\ta, $ff\n\tld\tix, 65368 - %%%mainbincomplength%%%\n\tld\tde, %%%mainbincomplength%%%\n\tcall $0556\n\tdi\n\n\txor a\n\tout (254), a\n\n; Decompress\n\tld  hl, 65368 - %%%mainbincomplength%%%\n\tld  de, 24000\n\tcall depack\t\n\t\n; run game!\n\tjp 24000\n\nblackout:\n\t; screen 0\n\t\tld  bc, 767\n\t\tld\thl, $5800\n\t\tld\tde, $5801\n\t\tld\t(hl), l\n\t\tldir\n\t\txor a\n\t\tout (254), a\n\t\tret\n\t\n; -----------------------------------------------------------------------------\n; ZX7 decoder by Einar Saukas, Antonio Villena & Metalbrain\n; \"Standard\" version (69 bytes only)\n; -----------------------------------------------------------------------------\n; Parameters:\n;   HL: source address (compressed data)\n;   DE: destination address (decompressing)\n; -----------------------------------------------------------------------------\n\ndepack:\ndzx7_standard:\n\t\tld      a, $80\ndzx7s_copy_byte_loop:\n\t\tldi                             ; copy literal byte\ndzx7s_main_loop:\n\t\tcall    dzx7s_next_bit\n\t\tjr      nc, dzx7s_copy_byte_loop ; next bit indicates either literal or sequence\n\n; determine number of bits used for length (Elias gamma coding)\n\t\tpush    de\n\t\tld      bc, 0\n\t\tld      d, b\ndzx7s_len_size_loop:\n\t\tinc     d\n\t\tcall    dzx7s_next_bit\n\t\tjr      nc, dzx7s_len_size_loop\n\n; determine length\ndzx7s_len_value_loop:\n\t\tcall    nc, dzx7s_next_bit\n\t\trl      c\n\t\trl      b\n\t\tjr      c, dzx7s_exit           ; check end marker\n\t\tdec     d\n\t\tjr      nz, dzx7s_len_value_loop\n\t\tinc     bc                      ; adjust length\n\n; determine offset\n\t\tld      e, (hl)                 ; load offset flag (1 bit) + offset value (7 bits)\n\t\tinc     hl\n\t\tdefb    $cb, $33                ; opcode for undocumented instruction \"SLL E\" aka \"SLS E\"\n\t\tjr      nc, dzx7s_offset_end    ; if offset flag is set, load 4 extra bits\n\t\tld      d, $10                  ; bit marker to load 4 bits\ndzx7s_rld_next_bit:\n\t\tcall    dzx7s_next_bit\n\t\trl      d                       ; insert next bit into D\n\t\tjr      nc, dzx7s_rld_next_bit  ; repeat 4 times, until bit marker is out\n\t\tinc     d                       ; add 128 to DE\n\t\tsrl\td\t\t\t; retrieve fourth bit from D\ndzx7s_offset_end:\n\t\trr      e                       ; insert fourth bit into E\n\n; copy previous sequence\n\t\tex      (sp), hl                ; store source, restore destination\n\t\tpush    hl                      ; store destination\n\t\tsbc     hl, de                  ; HL = destination - offset - 1\n\t\tpop     de                      ; DE = destination\n\t\tldir\ndzx7s_exit:\n\t\tpop     hl                      ; restore source address (compressed data)\n\t\tjr      nc, dzx7s_main_loop\ndzx7s_next_bit:\n\t\tadd     a, a                    ; check next bit\n\t\tret     nz                      ; no more bits left?\n\t\tld      a, (hl)                 ; load another group of 8 bits\n\t\tinc     hl\n\t\trla\n\t\tret",
+			"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
+			"file_size": 3574,
+			"file_write_time": 132920885244381421,
 			"settings":
 			{
-				"buffer_size": 8206,
+				"buffer_size": 3226,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/helmet/dev/compile.bat",
+			"settings":
+			{
+				"buffer_size": 6050,
 				"encoding": "Western (Windows 1252)",
 				"line_ending": "Windows"
 			}
@@ -409,11 +420,7 @@
 	},
 	"expanded_folders":
 	[
-		"/D/temp/MK1",
-		"/D/temp/MK1/examples",
-		"/D/temp/MK1/examples/old",
-		"/D/temp/MK1/examples/old/Lala Lah",
-		"/D/temp/MK1/examples/old/Lala Lah/dev"
+		"/D/Temp/MK1"
 	],
 	"file_history":
 	[
@@ -686,11 +693,11 @@
 			[
 				{
 					"buffer": 0,
-					"file": "examples/old/Lala Lah/dev/config.h",
-					"semi_transient": true,
+					"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 8206,
+						"buffer_size": 3226,
 						"regions":
 						{
 						},
@@ -698,28 +705,57 @@
 						[
 							[
 								0,
-								0
+								3226
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax"
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 1,
+					"file": "examples/helmet/dev/compile.bat",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 6050,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5242,
+								5242
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1641.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -807,7 +843,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -815,7 +851,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 180.0,
+	"side_bar_width": 255.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
