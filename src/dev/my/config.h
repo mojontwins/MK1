@@ -72,6 +72,7 @@
 //#define EVERYTHING_IS_A_WALL				// If defined, any tile <> type 0 is a wall, otherwise just 8.
 //#define BODY_COUNT_ON 			2		// If defined, count enemies on flag #
 //#define DISABLE_PLATFORMS 				// Disables platforms in side-view
+//#define CUSTOM_LOCK_CLEAR 				// use `custom_lock_clear.h` to remove a lock from screen
 
 // Extra enemy types
 // -----------------

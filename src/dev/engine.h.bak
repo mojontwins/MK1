@@ -748,21 +748,34 @@ void draw_scr_hotspots_locks (void) {
 			#endif
 
 			._open_locks_do
-				push hl 			// Save for later.
-			
 				ld  a, d
 				ld  (__x), a
 				ld  a, e
 				ld  (__y), a
 				
-				#ifdef CUSTOM_LOCK_CLEAR
-					call _custom_lock_clear
-				#else
-					xor a
-					ld  (__t), a
-					ld  (__n), a
-					call _update_tile
-				#endif
+				sla a
+				sla a
+				sla a
+				sla a
+				sub e
+				add d
+
+				ld  b, 0
+				ld  c, a
+				xor a
+				
+				push hl 			// Save for later.
+				
+				ld  hl, _map_attr
+				add hl, bc
+				ld  (hl), a
+				ld  hl, _map_buff
+				add hl, bc
+				ld  (hl), a
+
+				ld  (__t), a
+
+				call _draw_coloured_tile_gamearea
 
 				pop hl
 
