@@ -118,6 +118,12 @@ unsigned char p_tx, p_ty;
 	unsigned char p_jetpac_on;
 #endif
 signed int ptgmx, ptgmy;
+#ifdef DIE_AND_RESPAWN
+	unsigned char safe_n_pant, safe_gpx, safe_gpy;
+	#ifndef PLAYER_GENITAL
+		unsigned char was_possee;
+	#endif
+#endif
 
 unsigned char *spacer = "            ";
 
@@ -281,7 +287,7 @@ unsigned char success;
 unsigned char _x, _y, _n, _t;
 unsigned char cx1, cy1, cx2, cy2, at1, at2;
 unsigned char x0, y0, x1, y1;
-unsigned char ptx1, pty1, ptx2, pty2;
+unsigned char ptx1, pty1, ptx2, pty2, pty2b;
 unsigned char *_gp_gen;
 
 #ifdef ENABLE_TILANIMS

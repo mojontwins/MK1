@@ -414,6 +414,8 @@ void enems_move (void) {
 			#endif
 		#endif
 
+		#include "my/ci/enems_before_move.h"
+
 		switch (rdt) {
 			case 1:
 			case 2:
@@ -446,6 +448,10 @@ void enems_move (void) {
 				if (en_an_state [enit] != GENERAL_DYING) en_an_next_frame [enit] = sprite_18_a;
 			*/
 		}
+		
+		#asm
+			.enems_just_moved
+		#endasm
 		
 		if (active) {			
 			// Animate

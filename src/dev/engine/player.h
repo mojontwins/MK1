@@ -18,20 +18,24 @@ void player_init (void) {
 		gpx = PLAYER_INI_X << 4; p_x = gpx << 6;
 		gpy = PLAYER_INI_Y << 4; p_y = gpy << 6;
 	#endif	
+
 	p_vy = 0;
 	p_vx = 0;
 	p_cont_salto = 1;
 	p_saltando = 0;
 	p_frame = 0;
 	p_subframe = 0;
+
 	#ifdef PLAYER_GENITAL
 		p_facing = FACING_DOWN;
 		p_facing_v = p_facing_h = 0xff;
 	#else
 		p_facing = 1;
 	#endif	
+
 	p_estado = 	EST_NORMAL;
 	p_ct_estado = 0;
+
 	#if !defined(COMPRESSED_LEVELS) || defined(REFILL_ME)	
 		p_life = 		PLAYER_LIFE;
 	#endif
@@ -93,11 +97,23 @@ void player_calc_bounding_box (void) {
 			ld  (_pty1), a
 			ld  a, (_gpy)
 			add 15
+			#ifndef PLAYER_GENITAL
+				ld  c, a
+			#endif
 			srl a
 			srl a
 			srl a
 			srl a
 			ld  (_pty2), a
+			#ifndef PLAYER_GENITAL
+				ld  a, c 
+				inc a
+				srl a
+				srl a
+				srl a
+				srl a
+				ld  (_pty2b), a
+			#endif
 		#endasm
 	#elif defined (BOUNDING_BOX_8_CENTERED)
 		#asm
@@ -124,11 +140,23 @@ void player_calc_bounding_box (void) {
 			ld  (_pty1), a
 			ld  a, (_gpy)
 			add 11
+			#ifndef PLAYER_GENITAL
+				ld  c, a
+			#endif
 			srl a
 			srl a
 			srl a
 			srl a
 			ld  (_pty2), a
+			#ifndef PLAYER_GENITAL
+				ld  a, c 
+				inc a
+				srl a
+				srl a
+				srl a
+				srl a
+				ld  (_pty2b), a
+			#endif
 		#endasm
 	#elif defined (BOUNDING_BOX_12X2_CENTERED)
 		#asm
@@ -155,11 +183,23 @@ void player_calc_bounding_box (void) {
 			ld  (_pty1), a
 			ld  a, (_gpy)
 			add 8
+			#ifndef PLAYER_GENITAL
+				ld  c, a
+			#endif
 			srl a
 			srl a
 			srl a
 			srl a
 			ld  (_pty2), a
+			#ifndef PLAYER_GENITAL
+				ld  a, c 
+				inc a
+				srl a
+				srl a
+				srl a
+				srl a
+				ld  (_pty2b), a
+			#endif
 		#endasm
 	#else
 		#asm
@@ -184,11 +224,23 @@ void player_calc_bounding_box (void) {
 			ld  (_pty1), a
 			ld  a, (_gpy)
 			add 15
+			#ifndef PLAYER_GENITAL
+				ld  c, a
+			#endif
 			srl a
 			srl a
 			srl a
 			srl a
 			ld  (_pty2), a
+			#ifndef PLAYER_GENITAL
+				ld  a, c 
+				inc a
+				srl a
+				srl a
+				srl a
+				srl a
+				ld  (_pty2b), a
+			#endif
 		#endasm
 	#endif
 }
@@ -214,7 +266,7 @@ unsigned char player_move (void) {
 
 						; We are going to take a shortcut.
 						; If p_vy < 0, just add PLAYER_G.
-						; If p_vy > 0, we can use unsigned comparition anyway.
+						; If p_vy > 0, we can use unsigned comparison anyway.
 
 						ld  hl, (_p_vy)
 						bit 7, h
@@ -437,6 +489,7 @@ unsigned char player_move (void) {
 	#endasm
 
 	// Collision, may set possee, hit_v
+	possee = 0;
 
 	// Velocity positive (going downwards)
 	player_calc_bounding_box ();
@@ -511,10 +564,14 @@ unsigned char player_move (void) {
 	#if defined (PLAYER_GENITAL)
 		if (p_vy > 0)
 	#else	
-		if (p_vy + ptgmy > 0)
+		if (p_vy + ptgmy >= 0)
 	#endif
 	{
+		#ifdef PLAYER_GENITAL
 		cy1 = cy2 = pty2;
+		#else
+			cy1 = cy2 = pty2b;
+		#endif
 		cm_two_points ();
 
 		#ifdef PLAYER_GENITAL
@@ -522,7 +579,7 @@ unsigned char player_move (void) {
 		#else
 			// Greed Optimization tip! Remove this line and uncomment the next one:
 			// (As long as you don't have type 8 blocks over type 4 blocks in your game, the short line is fine)
-			if ((at1 & 8) || (at2 & 8) || (((gpy - 1) & 15) < 8 && ((at1 & 4) || (at2 & 4))))
+			if ((at1 & 8) || (at2 & 8) || ((gpy & 15) < 8 && ((at1 & 4) || (at2 & 4))))
 			//if (((gpy - 1) & 15) < 7 && ((at1 & 12) || (at2 & 12))) {
 		#endif			
 		{
@@ -551,7 +608,11 @@ unsigned char player_move (void) {
 
 			// KISS mod
 			#asm
+				#ifdef PLAYER_GENITAL
 					ld  a, (_pty2)
+				#else
+						ld  a, (_pty2b)
+				#endif
 					dec a 
 					sla a
 					sla a
@@ -572,11 +633,37 @@ unsigned char player_move (void) {
 					ld  (_p_y), hl
 			#endasm
 
+			// Finally
+
 			#if defined PLAYER_GENITAL || defined LOCKS_CHECK_VERTICAL
 				wall_v = WBOTTOM;
 			#endif
+
+			#ifndef PLAYER_GENITAL
+				#ifdef DIE_AND_RESPAWN
+					if (
+						#ifdef SAFE_SPOT_ON_ENTERING
+							safe_n_pant != n_pant
+						#else
+							was_possee == 0
+						#endif
+					) {
+						safe_n_pant = n_pant;
+						safe_gpx = gpx; safe_gpy = gpy;						
+					}
+				#endif
+				possee = 1;
+			#endif
 		}
 	}
+
+	#if defined DIE_AND_RESPAWN && !defined PLAYER_GENITAL
+		was_possee = possee;
+	#endif
+
+	#ifndef PLAYER_GENITAL
+		cy1 = cy2 = pty2;
+	#endif
 
 	#ifndef DEACTIVATE_EVIL_TILE
 		#ifndef CUSTOM_EVIL_TILE_CHECK
@@ -620,13 +707,14 @@ unsigned char player_move (void) {
 			ld  (_gpyy), a
 	#endasm
 
-
+	/*
 	#ifndef PLAYER_GENITAL
 		cy1 = cy2 = (gpy + 16) >> 4;
 		cx1 = ptx1; cx2 = ptx2;
 		cm_two_points ();
-		possee = ((at1 & 12) || (at2 & 12)) && (gpy & 15) < 8;
+		possee |= ((at1 & 12) || (at2 & 12)) && (gpy & 15) < 8;
 	#endif
+	*/
 
 	// Jump
 
@@ -645,12 +733,14 @@ unsigned char player_move (void) {
 
 			if (rda) {
 				#ifdef PLAYER_CUMULATIVE_JUMP
-					if (possee || p_gotten || hit_v) {
-						p_vy = -p_vy - PLAYER_VY_INICIAL_SALTO;
-						if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
-						p_saltando = 1;
-						p_cont_salto = 0;
-						AY_PLAY_SOUND (SFX_JUMP);
+					if (p_vy >= 0) {
+						if (possee || p_gotten || hit_v) {
+							p_vy = -p_vy - (p_saltando ? PLAYER_INCR_SALTO : PLAYER_VY_INICIAL_SALTO + PLAYER_G);
+							if (p_vy < -PLAYER_MAX_VY_SALTANDO) p_vy = -PLAYER_MAX_VY_SALTANDO;
+							p_saltando = 1;
+	
+							AY_PLAY_SOUND (SFX_JUMP);
+						}
 					}
 				#else
 					if (p_saltando == 0) {
@@ -1370,12 +1460,12 @@ unsigned char player_move (void) {
 	#endif
 
 	#ifndef DEACTIVATE_EVIL_TILE
+		hit = 0;
 		#ifdef CUSTOM_EVIL_TILE_CHECK
 			#include "my/ci/custom_evil_tile_check.h"
 		#else
 			// Tiles que te matan. 
 			// hit_v tiene preferencia sobre hit_h
-			hit = 0;
 			if (hit_v) {
 				hit = 1;
 					p_vy = addsign (-p_vy, PLAYER_MAX_VX);
@@ -1469,6 +1559,28 @@ void player_kill (unsigned char sound) {
 	#ifdef PLAYER_FLICKERS
 		p_estado = EST_PARP;
 		p_ct_estado = 50;
+	#endif
+
+	#ifdef DIE_AND_RESPAWN
+		#asm
+				ld  a, (_safe_n_pant)
+				ld  (_n_pant), a 
+
+				ld  a, (_safe_gpx)
+				ld  (_gpx), a				
+				call Ashl16_HL
+				ld  (_p_x), hl
+
+				ld  a, (_safe_gpy)
+				ld  (_gpy), a
+				call Ashl16_HL
+				ld  (_p_y), hl
+
+				ld  hl, 0
+				ld  (_p_vx), hl 
+				ld  (_p_vy), hl				
+		#endasm
+		#include "my/ci/on_player_respawned.h"
 	#endif
 }
 
