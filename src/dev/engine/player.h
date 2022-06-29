@@ -302,6 +302,10 @@ unsigned char player_move (void) {
 						or  a
 						jr  z, _player_gravity_p_gotten_done
 
+						; If HL = pvy > 0
+						bit 7, h 
+						jr  nz, _player_gravity_p_gotten_done
+
 						ld  hl, 0
 						ld  (_p_vy), hl
 
