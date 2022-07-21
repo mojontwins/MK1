@@ -340,11 +340,10 @@
 	"buffers":
 	[
 		{
-			"file": "src/dev/my/config.h",
+			"file": "src/dev/sound/beeper.h",
 			"settings":
 			{
-				"buffer_size": 15652,
-				"encoding": "UTF-8",
+				"buffer_size": 3390,
 				"line_ending": "Windows"
 			}
 		}
@@ -409,14 +408,15 @@
 	},
 	"expanded_folders":
 	[
-		"/C/temp/mk1",
-		"/C/temp/mk1/src",
-		"/C/temp/mk1/src/dev",
-		"/C/temp/mk1/src/dev/mainloop",
-		"/C/temp/mk1/src/dev/my"
+		"/D/temp/MK1",
+		"/D/temp/MK1/src",
+		"/D/temp/MK1/src/dev",
+		"/D/temp/MK1/src/dev/assets",
+		"/D/temp/MK1/src/dev/sound"
 	],
 	"file_history":
 	[
+		"/D/temp/MK1/src/dev/my/config.h",
 		"/C/temp/mk1/examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
 		"/D/temp/MK1/examples/helmet/dev/compile.bat",
 		"/D/temp/MK1/examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
@@ -543,12 +543,11 @@
 		"/D/temp/MK1/src/dev/engine/enengine.h",
 		"/D/temp/MK1/trash/6baddies/dev/engine/enengine.h",
 		"/D/temp/MK1/trash/6baddies/dev/definitions.h",
-		"/D/temp/MK1/trash/6baddies/dev/mk1.c",
-		"/D/temp/MK1/trash/6baddies/dev/mainloop/game_loop.h"
+		"/D/temp/MK1/trash/6baddies/dev/mk1.c"
 	],
 	"find":
 	{
-		"height": 40.0
+		"height": 24.0
 	},
 	"find_in_files":
 	{
@@ -686,28 +685,31 @@
 			[
 				{
 					"buffer": 0,
-					"file": "src/dev/my/config.h",
-					"semi_transient": false,
+					"file": "src/dev/sound/beeper.h",
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 15652,
+						"buffer_size": 3390,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								4065,
-								4065
+								3260,
+								3060
 							]
 						],
 						"settings":
 						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 730.0,
+						"translation.y": 2581.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -723,7 +725,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 26.0
+		"height": 24.0
 	},
 	"input":
 	{
@@ -771,7 +773,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 48.0
+		"height": 44.0
 	},
 	"save_all_on_build": true,
 	"select_file":

@@ -1,0 +1,13 @@
+# Script mínimo que no hace nada
+# MTE MK1 v5.0
+
+# flags:
+# 1	- 
+
+ENTERING GAME
+	IF TRUE
+	THEN
+		SET FLAG 1 = 0
+	END
+END
+
