@@ -355,6 +355,23 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "trash/textbox/dev/engine.h",
+			"settings":
+			{
+				"buffer_size": 18761,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "trash/textbox/dev/plugins/textbox.h",
+			"settings":
+			{
+				"buffer_size": 3904,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -420,6 +437,10 @@
 		"/D/temp/MK1/trash",
 		"/D/temp/MK1/trash/textbox",
 		"/D/temp/MK1/trash/textbox/dev",
+		"/D/temp/MK1/trash/textbox/dev/mainloop",
+		"/D/temp/MK1/trash/textbox/dev/my",
+		"/D/temp/MK1/trash/textbox/dev/plugins",
+		"/D/temp/MK1/trash/textbox/dev/sound",
 		"/D/temp/MK1/trash/textbox/gfx",
 		"/D/temp/MK1/trash/textbox/texts"
 	],
@@ -700,13 +721,79 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "trash/textbox/dev/engine.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 18761,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								8431,
+								8435
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9844.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		},
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 1,
+					"file": "trash/textbox/dev/plugins/textbox.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 3904,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3847,
+								3847
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1645.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
@@ -760,7 +847,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 94.0
+		"height": 44.0
 	},
 	"save_all_on_build": true,
 	"select_file":
