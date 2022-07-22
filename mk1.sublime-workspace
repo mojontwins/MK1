@@ -4,6 +4,22 @@
 		"selected_items":
 		[
 			[
+				"text",
+				"textbox\t(README.md)"
+			],
+			[
+				"texb",
+				"text_box\t(textbox.h)"
+			],
+			[
+				"espera",
+				"espera_activa\t(extern.h)"
+			],
+			[
+				"texto",
+				"textos_load\t(extern.h)"
+			],
+			[
 				"rel",
 				"relocate_player_done\tabc"
 			],
@@ -339,14 +355,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "src/dev/sound/beeper.h",
-			"settings":
-			{
-				"buffer_size": 3390,
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -409,13 +417,32 @@
 	"expanded_folders":
 	[
 		"/D/temp/MK1",
-		"/D/temp/MK1/src",
-		"/D/temp/MK1/src/dev",
-		"/D/temp/MK1/src/dev/assets",
-		"/D/temp/MK1/src/dev/sound"
+		"/D/temp/MK1/trash",
+		"/D/temp/MK1/trash/textbox",
+		"/D/temp/MK1/trash/textbox/dev",
+		"/D/temp/MK1/trash/textbox/gfx",
+		"/D/temp/MK1/trash/textbox/texts"
 	],
 	"file_history":
 	[
+		"/D/temp/leovigildo/Leovigildo III/dev/extern.h",
+		"/D/temp/MK1/trash/textbox/dev/my/ci/extra_vars.h",
+		"/D/temp/MK1/trash/textbox/README.md",
+		"/D/temp/MK1/trash/textbox/dev/plugins/textbox.h",
+		"/D/git/MK1_Tostadera/trash/sounds_murcia/README.md",
+		"/D/git/MK1_Tostadera/src/ogt/make_ogt.bat",
+		"/D/temp/MK1/plugins/README.md",
+		"/D/temp/leovigildo/Leovigildo III/texts/texts.txt",
+		"/C/Users/jcastano/Desktop/pikapika.txt",
+		"/D/temp/MK1/trash/textbox/dev/mainloop/game_loop.h",
+		"/D/temp/MK1/trash/textbox/dev/my/ci/entering_game.h",
+		"/D/temp/MK1/trash/textbox/dev/my/ci/extra_routines.h",
+		"/D/temp/MK1/trash/textbox/texts/texts.txt",
+		"/D/temp/MK1/trash/textbox/dev/compile.bat",
+		"/D/temp/leovigildo/Leovigildo III/dev/make.bat",
+		"/D/temp/leovigildo/Leovigildo III/dev/engine/printer.h",
+		"/D/temp/leovigildo/Leovigildo III/dev/engine.h",
+		"/D/temp/MK1/trash/mlst/README.md",
 		"/D/temp/MK1/src/dev/my/config.h",
 		"/C/temp/mk1/examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
 		"/D/temp/MK1/examples/helmet/dev/compile.bat",
@@ -525,35 +552,18 @@
 		"/W/MK1/src/dev/definitions.h",
 		"/W/MK1/src/dev/compile.bat",
 		"/W/MK1/src/dev/pantallas.h",
-		"/C/z88dk10/lib/spec_crt0.asm",
-		"/W/MK1/lib/splib2/setenv.bat",
-		"/W/MK1/lib/splib2/Makefile.bat",
-		"/W/MK1/lib/splib2/backgroundtiles/SPPrintString.asm",
-		"/W/MK1/lib/splib2/sp.lst",
-		"/W/MK1/lib/splib2/updater/SPUpdateNow.asm",
-		"/W/MK1/lib/splib2/cwrapper/GenCompile.c",
-		"/D/temp/MK1/src/utils/src/msc3_mk1.bas",
-		"/D/Proyectos/2019/20190731a - Bajas automáticas en Ficheros Junta/instrucciones.txt",
-		"/D/temp/MK1/src/dev/mainloop.h",
-		"/D/temp/MK1/src/dev/definitions.h",
-		"/D/temp/MK1/trash/6baddies/utils/src/ene2h.bas",
-		"/D/temp/MK1/trash/6baddies/dev/assets/levels.h",
-		"/D/temp/MK1/src/utils/src/buildlevels_MK1.bas",
-		"/D/temp/MK1/trash/6baddies/utils/src/buildlevels_MK1.bas",
-		"/D/temp/MK1/src/dev/engine/enengine.h",
-		"/D/temp/MK1/trash/6baddies/dev/engine/enengine.h",
-		"/D/temp/MK1/trash/6baddies/dev/definitions.h",
-		"/D/temp/MK1/trash/6baddies/dev/mk1.c"
+		"/C/z88dk10/lib/spec_crt0.asm"
 	],
 	"find":
 	{
-		"height": 24.0
+		"height": 54.0
 	},
 	"find_in_files":
 	{
 		"height": 134.0,
 		"where_history":
 		[
+			"D:\\temp\\MK1\\trash\\textbox\\dev",
 			"D:\\temp\\MK1\\examples\\helmet\\dev",
 			"D:\\temp\\MK1\\examples\\helmet",
 			"D:\\temp\\MK1\\examples\\helmet\\dev",
@@ -583,6 +593,15 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"validate",
+			"sp_UpdateNow",
+			"..\\utils\\",
+			"pad0",
+			"pad_read",
+			"button_pressed",
+			"button",
+			"stepbystep",
+			"asm_int",
 			"65536",
 			"enems_kill",
 			"__en_t",
@@ -661,6 +680,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"..\\..\\..\\src\\utils\\",
 			"65368",
 			"sla",
 			"jp",
@@ -680,41 +700,8 @@
 	"groups":
 	[
 		{
-			"selected": 0,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "src/dev/sound/beeper.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 3390,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3260,
-								3060
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 2581.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		},
 		{
@@ -729,7 +716,7 @@
 	},
 	"input":
 	{
-		"height": 37.0
+		"height": 46.0
 	},
 	"layout":
 	{
@@ -773,7 +760,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 44.0
+		"height": 94.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -807,7 +794,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 0,
+	"selected_group": 1,
 	"settings":
 	{
 	},
@@ -815,7 +802,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 146.0,
+	"side_bar_width": 194.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

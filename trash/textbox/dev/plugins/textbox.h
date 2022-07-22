@@ -1,7 +1,15 @@
-// Textbox MK1 en forma de plugin
-// Llámese desde donde más convenga.
+// Textbox plugin for MTE MK1 v5 
+// Copyleft 2014, 2022 by The Mojon Twins
 
-// Los textos bla bla
+// Text must be encoded using `textstuffer.exe` from a plain text file
+// calling textbox (N) will display line N-1 in text.txt.
+
+// Text box is printed with symbols # $ % & ' ( ) * and can contain lines
+// 24 characters wide, so you must use 24 as the line width when encoding
+// text with textstuffer. Output file must be test.bin
+
+// ..\utils\textstuffer.exe ..\texts\texts.txt texts.bin 24
+
 
 #define TEXT_BUFF_SIZE 			256 		// Max. characters in text box
 unsigned char text_buff [TEXT_BUFF_SIZE];	// Text will be unpacked to this buffer,
@@ -20,6 +28,19 @@ unsigned char button_pressed (void) {
 }
 
 void textbox (unsigned char n) {
+	// This will the logical sprites from update list, but their graphics will stay
+	// to be covered by new tiles printed:
+	clear_sprites ();
+	#asm
+			LIB SPValidate
+			ld  c, VIEWPORT_X
+			ld  b, VIEWPORT_Y
+			ld  d, VIEWPORT_Y+19
+			ld  e, VIEWPORT_X+29
+			ld  iy, fsClipStruct
+			call SPValidate
+	#endasm	
+
 	asm_int = n << 1;
 	#asm
 			; First we get where to look for the packed string			
@@ -124,6 +145,10 @@ void textbox (unsigned char n) {
 
 					ld  a, (_rda)
 					sub 32
+					cp  59 				; Undo ] = SPACE encoding
+					jr  nz, tb_st_sk
+					xor a
+				tb_st_sk:
 					ld  e, a
 
 					ld  d, 71
@@ -151,4 +176,9 @@ void textbox (unsigned char n) {
 	sp_UpdateNow ();
 	while (button_pressed ());
 	espera_activa (5000);
+
+	// Redraw current screen
+	draw_scr_background ();
+	draw_scr_hotspots_locks ();
+	invalidate_viewport ();
 }
