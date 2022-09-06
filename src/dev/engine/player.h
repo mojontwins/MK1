@@ -584,7 +584,7 @@ unsigned char player_move (void) {
 			// Greed Optimization tip! Remove this line and uncomment the next one:
 			// (As long as you don't have type 8 blocks over type 4 blocks in your game, the short line is fine)
 			if ((at1 & 8) || (at2 & 8) || ((gpy & 15) < 8 && ((at1 & 4) || (at2 & 4))))
-			//if (((gpy - 1) & 15) < 7 && ((at1 & 12) || (at2 & 12))) {
+			//if (((gpy - 1) & 15) < 7 && ((at1 & 12) || (at2 & 12))) 
 		#endif			
 		{
 			#include "my/ci/bg_collision/obstacle_down.h"

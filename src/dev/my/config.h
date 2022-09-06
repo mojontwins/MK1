@@ -135,7 +135,7 @@
 //#define INITIAL_AMMO				0		// If defined, ammo = X when entering game.
 
 //#define BREAKABLE_WALLS 					// Breakable walls
-//#define BREAKABLE_WALLS_LIFE	1			// Amount of hits to break wall
+//#define BREAKABLE_WALLS_LIFE	1			// Amount of hits to break wall minus one
 //#define BREAKABLE_WALLS_BREAKING	30 		// If defined, use this tile as "breaking"
 //#define BREAKABLE_WALLS_BROKEN 	0 		// Susbtitute with this
 

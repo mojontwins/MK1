@@ -356,19 +356,30 @@
 	"buffers":
 	[
 		{
-			"file": "trash/textbox/dev/engine.h",
+			"contents": "// MTE MK1 (la Churrera) v5.0\n// Copyleft 2010-2014, 2020 by the Mojon Twins\n\n// In case you wanna do your own.\n\n// This screen renderer decodes a RLE62 map and was created for a revamped version of Tenebra Macabre.\n#define RLE_FORMAT 62\n\t#asm\n\t\t// Get screen address from index.\n\t\t// RLE format\n\n\t\t._draw_scr_get_scr_address\n\t\t\tld  a, (_n_pant)\n\t\t\tsla a\n\t\t\tld  d, 0\n\t\t\tld  e, a\n\t\t\tld  hl, _mapa\n\t\t\tadd hl, de \t\t; HL = map + (n_pant << 1)\n\t\t\tld  e, (hl)\n\t\t\tinc hl\n\t\t\tld  d, (hl) \t; DE = index\n\t\t\tld  hl, _mapa\n\t\t\tadd hl, de      ; HL = map + index\n\t\t\tld  (_map_pointer), hl\n\n\t\t// Now decode & render the current screen \n\n\t\t._draw_scr_rle\n\t\t\txor a\n\t\t\tld  (_gpit), a\n\t\t\tld  a, VIEWPORT_X\n\t\t\tld  (__x), a\n\t\t\tld  a, VIEWPORT_Y\n\t\t\tld  (__y), a\n\n\t\t._draw_scr_loop\n\t\t\tld  a, (_gpit)\n\t\t\tcp  150\n\t\t\tjr  z, _draw_scr_loop_done\n\n\t\t\tld  hl, (_map_pointer)\n\t\t\tld  a, (hl)\n\t\t\tinc hl\n\t\t\tld  (_map_pointer), hl\n\t\t\t\n\t\t\tld  c, a\n\t\t#if RLE_FORMAT == 44\n\t\t\tand 0x0f\n\t\t#elif RLE_FORMAT == 53\n\t\t\tand 0x1f\n\t\t#else\n\t\t\tand 0x3f\n\t\t#endif\t\t\t\n\t\t\tld  (_rdc), a\n\n\t\t\tld  a, c\n\t\t\tld  (_rdn), a\n\n\t\t._draw_scr_advance_loop\n\t\t\tld  a, (_rdn)\n\t\t#if RLE_FORMAT == 44\n\t\t\tcp  0x10\n\t\t#elif RLE_FORMAT == 53\t\t\t\n\t\t\tcp  0x20\n\t\t#else\n\t\t\tcp  0x40\n\t\t#endif\n\n\t\t\tjr  c, _draw_scr_advance_loop_done\n\n\t\t#if RLE_FORMAT == 44\n\t\t\tsub 0x10\n\t\t#elif RLE_FORMAT == 53\n\t\t\tsub 0x20\n\t\t#else\n\t\t\tsub 0x40\n\t\t#endif\n\t\t\tld  (_rdn), a\n\n\t\t\tcall _advance_worm\n\n\t\t\t// That's it!\n\n\t\t\tjr _draw_scr_advance_loop\n\n\t\t._draw_scr_advance_loop_done\n\t\t\tcall _advance_worm\n\n\t\t\tjr _draw_scr_loop\n\n\t\t._advance_worm\n\t\t\t// Fill buffers\n\t\t\tld  bc, (_gpit)\n\t\t\tld  b, 0\n\t\t\t\n\t\t\tld  de, (_rdc)\n\t\t\tld  d, 0\n\t\t\tld  hl, _behs\n\t\t\tadd hl, de\n\t\t\tld  a, (hl)\n\n\t\t\tld  hl, _map_attr\n\t\t\tadd hl, bc\n\t\t\tld  (hl), a\n\n\t\t\tld  a, (_rdc)\n\t\t\tld  hl, _map_buff\n\t\t\tadd hl, bc\n\t\t\tld  (hl), a\n\n\t\t\t// Draw a tile\n\t\t\t// _x, _y are set; set _t (which happens to be on A)\n\t\t\tld  (__t), a\n\t\t\tcall _draw_coloured_tile\n\n\t\t\t// Advance cursor\n\t\t\tld  a, (__x)\n\t\t\tadd a, 2\n\t\t\tcp  VIEWPORT_X + 30\n\t\t\tjr  c, _advance_worm_continue\n\n\t\t\tld  a, (__y)\n\t\t\tadd a, 2\n\t\t\tld  (__y), a\n\t\t\t\n\t\t\tld  a, VIEWPORT_X\n\t\t\t\t\t\n\t\t._advance_worm_continue\n\t\t\tld  (__x), a\n\n\t\t\tld  hl, _gpit\n\t\t\tinc (hl)\n\t\t\tret\n\n\t\t._draw_scr_loop_done\t\t\t\n\t#endasm\t\n",
+			"file": "contrib/sami_troid/dev/my/map_custom_decoder.h",
+			"file_size": 2337,
+			"file_write_time": 132983729791677055,
 			"settings":
 			{
-				"buffer_size": 18761,
+				"buffer_size": 2199,
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "trash/textbox/dev/plugins/textbox.h",
+			"file": "src/dev/compile.bat",
 			"settings":
 			{
-				"buffer_size": 3904,
-				"encoding": "UTF-8",
+				"buffer_size": 3550,
+				"encoding": "Western (Windows 1252)",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "\n            // Draw a tile\n            // _x, _y are set; set _t (which happens to be on A)\n            ld  (__t), a\n\n// -- INSERTO\n            // gpit está en bc, en realidad en c.\n\n            // Si gpit < paint_y1 OR gpit >= paint_y2 => _t = 0\n            \n            // gpit >= paint_y2 ?\n            ld  a, (_pant_y2)                   \n            ld  b, a                            ; B = paint_y2\n            ld  a, c                            ; A = gpit\n            cp  b                               ; A comp B\n            jr  nc, _advance_worm_zero          ; Si A < B (gpit < paint_y2) -> sigue\n                                                ; Si A >= B (gpit >= paint_y2) -> GOTO advance_worm_zero\n\n\n            // gpit < paint_y1 ?\n            ld  a, (_paint_y1)                      \n            ld  b, a                            ; B = paint_y1\n            ld  a, c                            ; A = gpit\n            cp  b                               ; A comp B\n            jr  nc, _advance_worm_draw          ; Si A >= B (gpit >= paint_y1) -> GOTO advance_worm_draw\n                                                ; Si A < B (gpiy < paint_y1) -> sigue (advance_worm_zero)\n          \n        ._advance_worm_zero\n            xor a\n            ld  (__t), a                        ; ponemos un 0\n\n        ._advance_worm_draw\n// --INSERTO\n\n            call _draw_coloured_tile",
+			"settings":
+			{
+				"buffer_size": 1395,
 				"line_ending": "Windows"
 			}
 		}
@@ -434,22 +445,19 @@
 	"expanded_folders":
 	[
 		"/D/temp/MK1",
-		"/D/temp/MK1/trash",
-		"/D/temp/MK1/trash/textbox",
-		"/D/temp/MK1/trash/textbox/dev",
-		"/D/temp/MK1/trash/textbox/dev/mainloop",
-		"/D/temp/MK1/trash/textbox/dev/my",
-		"/D/temp/MK1/trash/textbox/dev/plugins",
-		"/D/temp/MK1/trash/textbox/dev/sound",
-		"/D/temp/MK1/trash/textbox/gfx",
-		"/D/temp/MK1/trash/textbox/texts"
+		"/D/temp/MK1/src",
+		"/D/temp/MK1/src/dev",
+		"/D/temp/MK1/src/dev/my",
+		"/D/temp/MK1/src/dev/my/ci",
+		"/D/temp/MK1/trash"
 	],
 	"file_history":
 	[
+		"/D/temp/MK1/src/dev/my/ci/on_map_tile_decoded.h",
+		"/D/temp/MK1/trash/textbox/dev/plugins/textbox.h",
 		"/D/temp/leovigildo/Leovigildo III/dev/extern.h",
 		"/D/temp/MK1/trash/textbox/dev/my/ci/extra_vars.h",
 		"/D/temp/MK1/trash/textbox/README.md",
-		"/D/temp/MK1/trash/textbox/dev/plugins/textbox.h",
 		"/D/git/MK1_Tostadera/trash/sounds_murcia/README.md",
 		"/D/git/MK1_Tostadera/src/ogt/make_ogt.bat",
 		"/D/temp/MK1/plugins/README.md",
@@ -572,12 +580,11 @@
 		"/W/MK1/src/dev/crt.asm",
 		"/W/MK1/src/dev/definitions.h",
 		"/W/MK1/src/dev/compile.bat",
-		"/W/MK1/src/dev/pantallas.h",
-		"/C/z88dk10/lib/spec_crt0.asm"
+		"/W/MK1/src/dev/pantallas.h"
 	],
 	"find":
 	{
-		"height": 54.0
+		"height": 24.0
 	},
 	"find_in_files":
 	{
@@ -614,6 +621,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"@",
 			"validate",
 			"sp_UpdateNow",
 			"..\\utils\\",
@@ -726,19 +734,19 @@
 			[
 				{
 					"buffer": 0,
-					"file": "trash/textbox/dev/engine.h",
-					"semi_transient": true,
+					"file": "contrib/sami_troid/dev/my/map_custom_decoder.h",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 18761,
+						"buffer_size": 2199,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								8431,
-								8435
+								2051,
+								2051
 							]
 						],
 						"settings":
@@ -750,10 +758,41 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 9844.0,
+						"translation.y": 1014.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/dev/compile.bat",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3550,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 273.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
 					"type": "text"
 				}
 			]
@@ -763,32 +802,30 @@
 			"sheets":
 			[
 				{
-					"buffer": 1,
-					"file": "trash/textbox/dev/plugins/textbox.h",
+					"buffer": 2,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3904,
+						"buffer_size": 1395,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								3847,
-								3847
+								1395,
+								0
 							]
 						],
 						"settings":
 						{
+							"auto_name": "",
 							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 1645.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
@@ -889,7 +926,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 194.0,
+	"side_bar_width": 350.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
