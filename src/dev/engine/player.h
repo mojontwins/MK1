@@ -317,143 +317,146 @@ unsigned char player_move (void) {
 
 	#if defined PLAYER_GENITAL || (defined VENG_SELECTOR && defined PLAYER_VKEYS)
 
-		#if defined (VENG_SELECTOR)
-			if (veng_selector == VENG_KEYS )
-		#endif
-		{
-			// Pad do
+		#ifndef PLAYER_DISABLE_DEFAULT_VENG
 
-			/*
-			if ( ! ((pad0 & sp_UP) == 0 || (pad0 & sp_DOWN) == 0)) {
-				p_facing_v = 0xff;
-				wall_v = 0;
-				if (p_vy > 0) {
-					p_vy -= PLAYER_RX;
-					if (p_vy < 0) p_vy = 0;
-				} else if (p_vy < 0) {
-					p_vy += PLAYER_RX;
-					if (p_vy > 0) p_vy = 0;
+			#if defined (VENG_SELECTOR)
+				if (veng_selector == VENG_KEYS )
+			#endif
+			{
+				// Pad do
+
+				/*
+				if ( ! ((pad0 & sp_UP) == 0 || (pad0 & sp_DOWN) == 0)) {
+					p_facing_v = 0xff;
+					wall_v = 0;
+					if (p_vy > 0) {
+						p_vy -= PLAYER_RX;
+						if (p_vy < 0) p_vy = 0;
+					} else if (p_vy < 0) {
+						p_vy += PLAYER_RX;
+						if (p_vy > 0) p_vy = 0;
+					}
 				}
+
+				if ((pad0 & sp_UP) == 0) {
+					p_facing_v = FACING_UP;
+					if (p_vy > -PLAYER_MAX_VX) p_vy -= PLAYER_AX;
+				}
+
+				if ((pad0 & sp_DOWN) == 0) {
+					p_facing_v = FACING_DOWN;
+					if (p_vy < PLAYER_MAX_VX) p_vy += PLAYER_AX;
+				}
+				*/
+
+				#asm
+					// ( ! ((pad0 & sp_UP) == 0 || (pad0 & sp_DOWN) == 0)) 
+					// ( ! (pad0 & sp_UP == 0) && ! (pad0 & sp_DOWN) == 0))
+					// ( (pad0 & sp_UP) != 0 && (pad0 & sp_DOWN) != 0)
+
+					ld  a, (_pad0)
+					ld  c, a
+					and sp_UP
+					or  a
+					jr  z, v_decelerate_done
+
+					ld  a, c
+					and sp_DOWN
+					or  a
+					jr  z, v_decelerate_done
+
+					xor a
+					ld  (_wall_v), a
+					dec a 					; 0 - 1 = 0xff
+					ld  (_p_facing_v), a
+
+					// Check sign of p_vy (unsigned int)
+					ld  hl, (_p_vy)
+					bit 7, h 				; bit 7 of H = 1 : negative (up)
+					jr  z, decelerate_down
+
+				.decelerate_up
+					// p_vy < 0, so add RX
+					ld  de, PLAYER_RX
+					add hl, de
+
+					// Zero if it became positive
+					bit 7, h
+					jr  nz, v_acceleration_set				
+
+					ld  hl, 0
+
+				.v_acceleration_set
+					ld  (_p_vy), hl
+					jr  v_acceleration_done
+
+				.decelerate_down
+					// Check that p_vy is NOT zero
+					ld  a, l
+					or  h
+					jr  z, v_acceleration_done	
+
+					// p_vy > 0 , so add RX
+					ld  de, -PLAYER_RX
+					add hl, de
+					
+					// Zero if it became negative
+					bit 7, h
+					jr  z, v_acceleration_set
+
+
+					ld  hl, 0
+					jr  v_acceleration_set
+				.v_decelerate_done
+
+				.accelerate_up
+					// if ((pad0 & sp_UP) == 0) 
+					ld  a, c
+					and sp_UP
+					jr  nz, accelerate_up_done
+
+					ld  a, FACING_UP
+					ld  (_p_facing_v), a
+
+					// if (p_vy > -PLAYER_MAX_VX)
+					ld  de, (_p_vy)
+					ld  hl, -PLAYER_MAX_VX
+					call l_gt				; Int signed de > hl
+					jr  nc, accelerate_up_done
+
+					ld  hl, (_p_vy)
+					ld  de, -PLAYER_AX
+					add hl, de
+					jr  v_acceleration_set
+				.accelerate_up_done
+
+				.accelerate_down
+					// if ((pad0 & sp_DOWN) == 0)
+					ld  a, c
+					and sp_DOWN
+					jr  nz, accelerate_down_done
+
+					ld  a, FACING_DOWN
+					ld  (_p_facing_v), a
+
+					// if (p_vy < PLAYER_MAX_VX)
+					ld  de, (_p_vy)
+					ld  hl, PLAYER_MAX_VX
+					call l_lt 				; Int signed de < hl
+					jr  nc, accelerate_down_done
+
+					ld  hl, (_p_vy)
+					ld  de, PLAYER_AX
+					add hl, de
+					jr  v_acceleration_set
+
+				.accelerate_down_done
+
+
+				.v_acceleration_done
+			#endasm
 			}
-
-			if ((pad0 & sp_UP) == 0) {
-				p_facing_v = FACING_UP;
-				if (p_vy > -PLAYER_MAX_VX) p_vy -= PLAYER_AX;
-			}
-
-			if ((pad0 & sp_DOWN) == 0) {
-				p_facing_v = FACING_DOWN;
-				if (p_vy < PLAYER_MAX_VX) p_vy += PLAYER_AX;
-			}
-			*/
-
-			#asm
-				// ( ! ((pad0 & sp_UP) == 0 || (pad0 & sp_DOWN) == 0)) 
-				// ( ! (pad0 & sp_UP == 0) && ! (pad0 & sp_DOWN) == 0))
-				// ( (pad0 & sp_UP) != 0 && (pad0 & sp_DOWN) != 0)
-
-				ld  a, (_pad0)
-				ld  c, a
-				and sp_UP
-				or  a
-				jr  z, v_decelerate_done
-
-				ld  a, c
-				and sp_DOWN
-				or  a
-				jr  z, v_decelerate_done
-
-				xor a
-				ld  (_wall_v), a
-				dec a 					; 0 - 1 = 0xff
-				ld  (_p_facing_v), a
-
-				// Check sign of p_vy (unsigned int)
-				ld  hl, (_p_vy)
-				bit 7, h 				; bit 7 of H = 1 : negative (up)
-				jr  z, decelerate_down
-
-			.decelerate_up
-				// p_vy < 0, so add RX
-				ld  de, PLAYER_RX
-				add hl, de
-
-				// Zero if it became positive
-				bit 7, h
-				jr  nz, v_acceleration_set				
-
-				ld  hl, 0
-
-			.v_acceleration_set
-				ld  (_p_vy), hl
-				jr  v_acceleration_done
-
-			.decelerate_down
-				// Check that p_vy is NOT zero
-				ld  a, l
-				or  h
-				jr  z, v_acceleration_done	
-
-				// p_vy > 0 , so add RX
-				ld  de, -PLAYER_RX
-				add hl, de
-				
-				// Zero if it became negative
-				bit 7, h
-				jr  z, v_acceleration_set
-
-
-				ld  hl, 0
-				jr  v_acceleration_set
-			.v_decelerate_done
-
-			.accelerate_up
-				// if ((pad0 & sp_UP) == 0) 
-				ld  a, c
-				and sp_UP
-				jr  nz, accelerate_up_done
-
-				ld  a, FACING_UP
-				ld  (_p_facing_v), a
-
-				// if (p_vy > -PLAYER_MAX_VX)
-				ld  de, (_p_vy)
-				ld  hl, -PLAYER_MAX_VX
-				call l_gt				; Int signed de > hl
-				jr  nc, accelerate_up_done
-
-				ld  hl, (_p_vy)
-				ld  de, -PLAYER_AX
-				add hl, de
-				jr  v_acceleration_set
-			.accelerate_up_done
-
-			.accelerate_down
-				// if ((pad0 & sp_DOWN) == 0)
-				ld  a, c
-				and sp_DOWN
-				jr  nz, accelerate_down_done
-
-				ld  a, FACING_DOWN
-				ld  (_p_facing_v), a
-
-				// if (p_vy < PLAYER_MAX_VX)
-				ld  de, (_p_vy)
-				ld  hl, PLAYER_MAX_VX
-				call l_lt 				; Int signed de < hl
-				jr  nc, accelerate_down_done
-
-				ld  hl, (_p_vy)
-				ld  de, PLAYER_AX
-				add hl, de
-				jr  v_acceleration_set
-
-			.accelerate_down_done
-
-
-			.v_acceleration_done
-		#endasm
-		}
+		#endif
 	#endif
 
 	#ifdef PLAYER_HAS_JETPAC

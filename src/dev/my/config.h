@@ -199,7 +199,8 @@
 //#define PLAYER_MIN_KILLABLE		3		// Only kill enemies with id >= PLAYER_MIN_KILLABLE
 #define PLAYER_STEP_SOUND					// Sound while walking. No effect in the BOOTEE engine.
 
-//#define PLAYER_DISABLE_DEFAULT_HENG 		// To disble default horizontal engine (keyrs)
+//#define PLAYER_DISABLE_DEFAULT_HENG 		// To disble default horizontal engine (genital / side)
+//#define PLAYER_DISABLE_DEFAULT_VENG 		// To disble default vertical engine (genital)
 
 // Configure keyboard
 

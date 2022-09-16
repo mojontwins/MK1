@@ -363,6 +363,30 @@
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
+		},
+		{
+			"file": "src/dev/printer.h",
+			"settings":
+			{
+				"buffer_size": 17278,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "void print_number_wan (void) {\n\trda = 16 + (_t / 10); rdb = 16 + (_t % 10);\n\t#asm\n\t\t\t; enter:  A = row position (0..23)\n\t\t\t;         C = col position (0..31/63)\n\t\t\t;         D = pallette #\n\t\t\t;         E = graphic #\n\n\t\t\tld  a, (_rda)\n\t\t\tld  e, a\n\n\t\t\tld  a, (__n)\n\t\t\tld  d, a\n\t\t\t\n\t\t\tld  a, (__x)\n\t\t\tld  c, a\n\n\t\t\tld  a, (__y)\n\n\t\t\tcall SPPrintAtInv\n\n\t\t\tld  a, (_rdb)\n\t\t\tld  e, a\n\n\t\t\tld  d, HUD_INK\n\t\t\t\n\t\t\tld  a, (__x)\n\t\t\tinc a\n\t\t\tld  c, a\n\n\t\t\tld  a, (__y)\n\n\t\t\tcall SPPrintAtInv\n\t#endasm\n}",
+			"settings":
+			{
+				"buffer_size": 485,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/my/ci/extra_functions.h",
+			"settings":
+			{
+				"buffer_size": 77,
+				"line_ending": "Windows"
+			}
 		}
 	],
 	"build_system": "",
@@ -564,7 +588,7 @@
 	],
 	"find":
 	{
-		"height": 24.0
+		"height": 54.0
 	},
 	"find_in_files":
 	{
@@ -725,8 +749,8 @@
 						"selection":
 						[
 							[
-								4174,
-								4174
+								1716,
+								1716
 							]
 						],
 						"settings":
@@ -738,17 +762,110 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 585.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "src/dev/printer.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 17278,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								13713,
+								13241
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9272.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
 					"type": "text"
 				}
 			]
 		},
 		{
+			"selected": 1,
 			"sheets":
 			[
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 485,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								485,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/dev/my/ci/extra_functions.h",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 77,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				}
 			]
 		}
 	],
