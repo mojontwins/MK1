@@ -359,32 +359,27 @@
 			"file": "src/dev/my/config.h",
 			"settings":
 			{
-				"buffer_size": 15820,
+				"buffer_size": 15916,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/dev/printer.h",
+			"contents": "Searching 98 files for \"heng\"\n\nD:\\temp\\MK1\\src\\dev\\engine\\player.h:\n  800  \t// ***************************************************************************\n  801  \n  802: \t#ifndef PLAYER_DISABLE_DEFAULT_HENG\n  803  \t\t/*\n  804  \t\tif ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {\n  ...\n  964  \t#endif\n  965  \n  966: \t#include \"my/ci/custom_heng.h\"\n  967  \n  968  \tp_x = p_x + p_vx;\n\nD:\\temp\\MK1\\src\\dev\\engine\\player_wip.h:\n  551  \t// ***************************************************************************\n  552  \n  553: \t#ifndef PLAYER_DISABLE_DEFAULT_HENG\n  554  \t\tif ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {\n  555  \t\t\t#ifdef PLAYER_GENITAL\t\t\n  ...\n  591  \t#endif\n  592  \n  593: \t#include \"my/ci/custom_heng.h\"\n  594  \n  595  \tp_x = p_x + p_vx;\n\nD:\\temp\\MK1\\src\\dev\\my\\config.h:\n  200  #define PLAYER_STEP_SOUND\t\t\t\t\t// Sound while walking. No effect in the BOOTEE engine.\n  201  \n  202: //#define PLAYER_DISABLE_DEFAULT_HENG \t\t// To disble default horizontal engine (keyrs)\n  203  \n  204  // Configure keyboard\n\n5 matches across 3 files\n",
 			"settings":
 			{
-				"buffer_size": 17278,
-				"line_ending": "Windows"
+				"buffer_size": 1068,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
 			}
 		},
 		{
-			"contents": "void print_number_wan (void) {\n\trda = 16 + (_t / 10); rdb = 16 + (_t % 10);\n\t#asm\n\t\t\t; enter:  A = row position (0..23)\n\t\t\t;         C = col position (0..31/63)\n\t\t\t;         D = pallette #\n\t\t\t;         E = graphic #\n\n\t\t\tld  a, (_rda)\n\t\t\tld  e, a\n\n\t\t\tld  a, (__n)\n\t\t\tld  d, a\n\t\t\t\n\t\t\tld  a, (__x)\n\t\t\tld  c, a\n\n\t\t\tld  a, (__y)\n\n\t\t\tcall SPPrintAtInv\n\n\t\t\tld  a, (_rdb)\n\t\t\tld  e, a\n\n\t\t\tld  d, HUD_INK\n\t\t\t\n\t\t\tld  a, (__x)\n\t\t\tinc a\n\t\t\tld  c, a\n\n\t\t\tld  a, (__y)\n\n\t\t\tcall SPPrintAtInv\n\t#endasm\n}",
+			"file": "src/dev/engine/player.h",
 			"settings":
 			{
-				"buffer_size": 485,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/dev/my/ci/extra_functions.h",
-			"settings":
-			{
-				"buffer_size": 77,
+				"buffer_size": 29661,
+				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		}
@@ -457,6 +452,7 @@
 	],
 	"file_history":
 	[
+		"/D/temp/MK1/src/dev/my/config.h",
 		"/D/temp/MK1/contrib/sami_troid/dev/my/map_custom_decoder.h",
 		"/D/temp/MK1/src/dev/my/ci/on_map_tile_decoded.h",
 		"/D/temp/MK1/trash/textbox/dev/plugins/textbox.h",
@@ -477,7 +473,6 @@
 		"/D/temp/leovigildo/Leovigildo III/dev/engine/printer.h",
 		"/D/temp/leovigildo/Leovigildo III/dev/engine.h",
 		"/D/temp/MK1/trash/mlst/README.md",
-		"/D/temp/MK1/src/dev/my/config.h",
 		"/C/temp/mk1/examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
 		"/D/temp/MK1/examples/helmet/dev/compile.bat",
 		"/D/temp/MK1/examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
@@ -595,6 +590,7 @@
 		"height": 134.0,
 		"where_history":
 		[
+			"D:\\temp\\MK1\\src\\dev",
 			"D:\\temp\\MK1\\trash\\textbox\\dev",
 			"D:\\temp\\MK1\\examples\\helmet\\dev",
 			"D:\\temp\\MK1\\examples\\helmet",
@@ -625,6 +621,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"heng",
 			"@",
 			"validate",
 			"sp_UpdateNow",
@@ -733,7 +730,12 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"sheets":
+			[
+			]
+		},
+		{
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -742,15 +744,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15820,
+						"buffer_size": 15916,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								1716,
-								1716
+								10486,
+								10486
 							]
 						],
 						"settings":
@@ -762,71 +764,67 @@
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 2304.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
-					"file": "src/dev/printer.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 17278,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								13713,
-								13241
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 9272.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 3,
-					"type": "text"
-				}
-			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 2,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 485,
+						"buffer_size": 1068,
 						"regions":
 						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										202,
+										206
+									],
+									[
+										348,
+										352
+									],
+									[
+										566,
+										570
+									],
+									[
+										734,
+										738
+									],
+									[
+										951,
+										955
+									]
+								],
+								"scope": ""
+							}
 						},
 						"selection":
 						[
 							[
-								485,
-								0
+								203,
+								203
 							]
 						],
 						"settings":
 						{
+							"detect_indentation": false,
 							"incomplete_sync": null,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"line_numbers": false,
+							"output_tag": 1,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -836,20 +834,32 @@
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "src/dev/my/ci/extra_functions.h",
-					"semi_transient": true,
+					"buffer": 2,
+					"file": "src/dev/engine/player.h",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 77,
+						"buffer_size": 29661,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								17561,
+								17560
+							],
+							[
+								17586,
+								17585
+							],
+							[
+								17615,
+								17614
+							],
+							[
+								17627,
+								17626
 							]
 						],
 						"settings":
@@ -857,13 +867,14 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax"
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 12366.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
