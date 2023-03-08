@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 #ifdef CUSTOM_LOCK_CLEAR
 	#include "my/ci/custom_lock_clear.h"
@@ -7,36 +7,6 @@
 
 #ifdef TEST_DEBUG
 	void test_debug (void) {
-		sp_UpdateNow ();
-		sp_PrintAtInv (5, 5, 71, 69);
-		sp_PrintAtInv (6, 6, 15, 70);
-		#asm
-				ld  ix, (_sp_player)
-				ld  iy, vpClipStruct
-
-				ld  bc, 0
-
-				ld  hl, 0x0707 
-				ld  de, 0x0000
-
-				call SPMoveSprAbs
-		#endasm
-		sp_UpdateNow ();
-		espera_activa (50);
-		#asm
-				ld  ix, (_sp_player)
-				ld  iy, vpClipStruct
-
-				ld  bc, 0
-
-				ld  hl, 0x0404 
-				ld  de, 0x0000
-
-				call SPMoveSprAbs
-		#endasm
-		sp_UpdateNow ();
-		while (sp_GetKey ());
-		while (!sp_GetKey ());
 	}
 #endif
 
@@ -214,6 +184,9 @@ void espera_activa (int espera) {
 					ld  a, (_y0)
 					call qtile_do
 					ld  a, l
+				#ifndef UNPACKED_MAP
+					and 15
+				#endif
 					cp  14
 					jp  nz, push_boxes_end
 
@@ -225,6 +198,7 @@ void espera_activa (int espera) {
 					call _attr_1b
 					xor a
 					or  l
+					and 0x7f
 					jp  nz, push_boxes_end
 
 					// && x1 < 15
@@ -325,6 +299,9 @@ void espera_activa (int espera) {
 					ld  a, (_y0)
 					call qtile_do
 					ld  a, l
+					#ifndef UNPACKED_MAP
+						and 15
+					#endif
 					cp  15
 					jp  nz, open_lock_end
 
@@ -519,8 +496,8 @@ void draw_scr_background (void) {
 						add hl, bc
 						ld  (hl), a
 
-				#ifdef PACKED_MAP_ALT_TILE
 						ld  a, (__t)
+				#ifdef PACKED_MAP_ALT_TILE
 						or  a
 						jr  nz, _draw_scr_packed_noalt
 
@@ -540,7 +517,9 @@ void draw_scr_background (void) {
 
 					._draw_scr_packed_noalt
 				#endif
-
+				#endasm
+				#include "my/ci/map_renderer_t_modification.h"
+				#asm
 						ld  hl, _map_buff
 						add hl, bc
 						
@@ -559,10 +538,12 @@ void draw_scr_background (void) {
 			#endif
 
 			#ifdef ENABLE_TILANIMS
+				#if ENABLE_TILANIMS != 99
 				if (_t >= ENABLE_TILANIMS) {
 					_n = (((_x - VIEWPORT_X) << 3) & 0xf0) | ((_y - VIEWPORT_Y) >> 1);
 					tilanims_add ();	
 				}
+			#endif
 			#endif
 
 			draw_coloured_tile ();
@@ -605,16 +586,28 @@ void draw_scr_hotspots_locks (void) {
 			ld  a, 240
 			ld  (_hotspot_y), a
 
-			// Hotspots are 3-byte wide structs. No game will have more than 85 screens
-			// in the same map so we can do the math in 8 bits:
-
-			ld  a, (_n_pant)
-			ld  b, a
-			sla a
-			add b
-
-			ld  c, a
-			ld  b, 0
+			#if (MAP_W*MAP_H) < 86
+				// Hotspots are 3-byte wide structs. No game will have more than 85 screens
+				// in the same map so we can do the math in 8 bits:
+	
+				ld  a, (_n_pant)
+				ld  b, a
+				sla a
+				add b
+	
+				ld  c, a
+				ld  b, 0
+			#else
+				// More than 85 screens need 16 bits math
+				ld  hl, (_n_pant)
+				ld  h, 0
+				ld  d, h 
+				ld  e, l 
+				add hl, de 
+				add hl, de 
+				ld  b, h 
+				ld  c, l
+			#endif
 
 			// BC = Index to the hotspots struct, which happens to be {xy, type, act}
 
@@ -689,6 +682,9 @@ void draw_scr_hotspots_locks (void) {
 			xor a
 		._hotspots_setup_set
 			add 16
+	#endasm
+	#include "my/ci/hotspot_setup_t_modification.h"
+	#asm
 			ld  (__t), a		
 
 			call _draw_coloured_tile_gamearea
@@ -848,79 +844,118 @@ void select_joyfunc (void) {
 
 #ifdef WALLS_STOP_ENEMIES
 	unsigned char mons_col_sc_x (void) {
-		#ifdef BOUNDING_BOX_12X2_CENTERED
+
+		// Si BOUNDING_BOX_12x2_CENTERED ->
+		// D = 2, E = 13; D = 0, E = 15 si _lineal
+		// H = 7, L = 8;  H = 0, L = 15 si _lineal
+		// else D = 0, E = 15; H = 0, L = 15
+
+		#asm
+			#ifdef BOUNDING_BOX_12x2_CENTERED
+					ld  de, 0x020D
+					ld  hl, 0x0708
+					jr  _mons_col_sc_x_compare
+			#endif
+
+			._mons_col_sc_x_lineal
+				ld  de, 0x000f
+				ld  hl, 0x000f
+
+			._mons_col_sc_x_compare
+
 			// cx1 = cx2 = (_en_mx > 0 ? _en_x + 13 : _en_x + 2) >> 4;
-			#asm
-					ld  a, (__en_mx)
-					and 0x80
-					ld  a, (__en_x)
-					jr  z, _mons_col_sc_x_horz_positive
+				ld  a, (__en_mx)
+				and 0x80
+				ld  a, (__en_x)
+				jr  z, _mons_col_sc_x_horz_positive
 
-				._mons_col_sc_x_horz_negative_zero
-					add 2
-					jr  _mons_col_sc_x_horz_set
+			._mons_col_sc_x_horz_negative_zero
+				add d
+				jr  _mons_col_sc_x_horz_set
 
-				._mons_col_sc_x_horz_positive
-					add 13					
+			._mons_col_sc_x_horz_positive
+				add e				
 
-				._mons_col_sc_x_horz_set
-					srl a 
-					srl a 
-					srl a  
-					srl a
+			._mons_col_sc_x_horz_set
+				srl a 
+				srl a 
+				srl a  
+				srl a
 
-					ld  (_cx1), a
-					ld  (_cx2), a
-			#endasm
+				ld  (_cx1), a
+				ld  (_cx2), a
 
 			// cy1 = (_en_y + 7) >> 4; cy2 = (_en_y + 8) >> 4;
-			#asm
-					ld  a, (__en_y)
-					add 7 
-					ld  b, a
 
-					srl a
-					srl a
-					srl a
-					srl a
-					ld  (_cy1), a
+				ld  a, (__en_y)
+				add h
 
-					ld  a, b
-					inc a
+				srl a
+				srl a
+				srl a
+				srl a
+				ld  (_cy1), a
 
-					srl a
-					srl a
-					srl a
-					srl a
-					ld  (_cy2), a
-			#endasm
-		#else
-		cx1 = cx2 = (_en_mx > 0 ? _en_x + 15 : _en_x) >> 4;
-		cy1 = _en_y >> 4; cy2 = (_en_y + 15) >> 4;
-		#endif
+				ld  a, (__en_y)
+				add l
+
+				srl a
+				srl a
+				srl a
+				srl a
+				ld  (_cy2), a
+		#endasm
+
 		cm_two_points ();
+
+		#asm
+				ld  a, (_at1)
+				and 0x7F
+				ld  (_at1), a
+				ld  a, (_at2)
+				and 0x7F
+				ld  (_at2), a
+		#endasm
+
 		#ifdef EVERYTHING_IS_A_WALL
 			return (at1 || at2);
 		#else
 			return ((at1 & 8) || (at2 & 8));
 		#endif
 	}
-		
+
 	unsigned char mons_col_sc_y (void) {
-		#ifdef BOUNDING_BOX_12X2_CENTERED
+
+		// Si BOUNDING_BOX_12x2_CENTERED ->
+		// D = 2, E = 13; D = 0, E = 15 si _lineal
+		// H = 7, L = 8;  H = 0, L = 15 si _lineal
+		// else D = 0, E = 15; H = 0, L = 15
+
+		#asm
+			#ifdef BOUNDING_BOX_12x2_CENTERED
+					ld  de, 0x020D
+					ld  hl, 0x0708
+					jr  _mons_col_sc_x_compare
+			#endif
+
+			._mons_col_sc_y_lineal
+				ld  de, 0x000f
+				ld  hl, 0x000f
+
+			._mons_col_sc_y_compare
+
 			// cy1 = cy2 = (_en_my > 0 ? _en_y + 8 : _en_y + 7) >> 4;
-			#asm
 					ld  a, (__en_my)
 					and 0x80
 					ld  a, (__en_y)
 					jr  z, _mons_col_sc_y_vert_positive
 
 				._mons_col_sc_y_vert_negative_zero
-					add 7
+				add h
 					jr  _mons_col_sc_y_vert_set
 
 				._mons_col_sc_y_vert_positive
-					add 8					
+				add l					
 
 				._mons_col_sc_y_vert_set
 					srl a 
@@ -930,13 +965,10 @@ void select_joyfunc (void) {
 
 					ld  (_cy1), a
 					ld  (_cy2), a
-			#endasm		
 
 			// cx1 = (_en_x + 2) >> 4; cx2 = (_en_x + 13) >> 4;
-			#asm
 					ld  a, (__en_x)
-					ld  b, a
-					add 2 
+				add d
 
 					srl a
 					srl a
@@ -944,8 +976,8 @@ void select_joyfunc (void) {
 					srl a
 					ld  (_cx1), a
 
-					ld  a, b
-					add 13
+				ld  a, (__en_x)
+				add e
 
 					srl a
 					srl a
@@ -953,10 +985,7 @@ void select_joyfunc (void) {
 					srl a
 					ld  (_cx2), a
 			#endasm
-		#else
-		cy1 = cy2 = (_en_my > 0 ? _en_y + 15 : _en_y) >> 4;
-		cx1 = _en_x >> 4; cx2 = (_en_x + 15) >> 4;
-		#endif
+
 		cm_two_points ();
 		#ifdef EVERYTHING_IS_A_WALL
 			return (at1 || at2);
@@ -981,7 +1010,7 @@ void select_joyfunc (void) {
 #endif
 
 #if defined(ENABLE_FANTIES)
-	int limit (int val, int min, int max) {
+	signed int limit (signed int val, signed int min, signed int max) {
 		if (val < min) return min;
 		if (val > max) return max;
 		return val;

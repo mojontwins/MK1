@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 #asm
 	.vpClipStruct defb VIEWPORT_Y, VIEWPORT_Y + 20, VIEWPORT_X, VIEWPORT_X + 30
@@ -52,7 +52,7 @@ struct sp_SS *sp_moviles [MAX_ENEMS];
 	struct sp_SS *sp_cocos [MAX_ENEMS];
 #endif
 
-unsigned char enoffs;
+unsigned int enoffs;
 
 // Aux
 
@@ -239,7 +239,7 @@ unsigned char possee, hit_v, hit_h, hit, wall_h, wall_v;
 unsigned char gpen_x, gpen_y, gpen_cx, gpen_cy, gpaux;
 unsigned char tocado, active;
 unsigned char gpit, gpjt;
-unsigned char enoffsmasi;
+unsigned int enoffsmasi;
 unsigned char *map_pointer;
 #ifdef PLAYER_CAN_FIRE
 	unsigned char blx, bly;

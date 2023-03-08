@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // player.h
 
@@ -739,6 +739,8 @@ unsigned char player_move (void) {
 			#endif
 
 			if (rda) {
+				#include "my/ci/on_controller_pressed/up.h"
+					
 				#ifdef PLAYER_CUMULATIVE_JUMP
 					if (p_vy >= 0) {
 						if (possee || p_gotten || hit_v) {
@@ -911,6 +913,10 @@ unsigned char player_move (void) {
 				and sp_LEFT
 				jr  nz, accelerate_left_done
 
+				#endasm
+				#include "my/ci/on_controller_pressed/left.h"
+				#asm
+				
 				#ifdef PLAYER_GENITAL
 					ld  a, FACING_LEFT
 					ld  (_p_facing_h), a
@@ -938,6 +944,10 @@ unsigned char player_move (void) {
 				ld  a, c
 				and sp_RIGHT
 				jr  nz, accelerate_right_done
+
+				#endasm
+				#include "my/ci/on_controller_pressed/right.h"
+				#asm
 
 				#ifdef PLAYER_GENITAL
 					ld  a, FACING_RIGHT
@@ -1227,6 +1237,8 @@ unsigned char player_move (void) {
 			ld  a, l
 			ld  (_rdb), a
 	#endasm
+
+	#include "my/ci/player_center_checks.h"
 
 	// Special tiles
 	if (rdb & 128) {

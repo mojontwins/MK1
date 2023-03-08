@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // game_loop.h - Da game loop.
 
@@ -119,6 +119,9 @@
 			#include "my/ci/before_entering_screen.h"
 			draw_scr ();
 			o_pant = n_pant;
+			#if defined DIE_AND_RESPAWN && defined PLAYER_GENITAL
+				safe_gpx = gpx; safe_gpy = gpy;
+			#endif
 		}
 
 		#ifdef TIMER_ENABLE
@@ -180,11 +183,20 @@
 			}
 		#endif
 
-		#include "mainloop/hud.h"
+		draw_hud ();
 
+	/*
 		maincounter ++;
 		half_life = !half_life;
-		
+		*/
+		#asm
+				ld  hl, _maincounter
+				inc (hl)
+				ld  a, (_half_life)
+				xor 1
+				ld  (_half_life), a
+		#endasm
+				
 		// Move player
 		player_move ();
 		

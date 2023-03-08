@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // Pantallas.h
 // Carga las pantallas fijas
@@ -12,17 +12,17 @@
 
 	#asm
 		._s_title
-			BINARY "..\bin\title.bin"
+			BINARY "../bin/title.bin"
 		._s_marco
 	#endasm
 	#ifndef DIRECT_TO_PLAY
 		#asm
-				BINARY "..\bin\marco.bin"
+				BINARY "../bin/marco.bin"
 		#endasm
 	#endif
 	#asm
 		._s_ending
-			BINARY "..\bin\ending.bin"
+			BINARY "../bin/ending.bin"
 	#endasm
 #endif
 

@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // hotspots.h
 
@@ -95,7 +95,9 @@ void hotspots_do (void) {
 			#ifndef DEACTIVATE_REFILLS
 				case 3:
 					p_life += PLAYER_REFILL;
-					if (p_life > PLAYER_LIFE)
+					#ifndef PLAYER_DONT_LIMIT_LIFE
+						if (p_life > PLAYER_LIFE)
+					#endif
 						p_life = PLAYER_LIFE;
 					#ifdef MODE_128K
 						PLAY_SOUND (SFX_REFILL_GET);

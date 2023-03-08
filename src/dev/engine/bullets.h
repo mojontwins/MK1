@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // bullets.h
 
@@ -247,6 +247,7 @@ void bullets_move (void) {
 					}
 				}
 			#endif
+
 			_x = (_b_x + 3) >> 4;
 			_y = (_b_y + 3) >> 4;
 			rda = attr (_x, _y);

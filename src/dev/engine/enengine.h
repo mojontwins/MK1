@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // enengine.h
 
@@ -8,7 +8,7 @@
 		// Point HL to baddies [enoffsmasi]. The struct is 9 or 10 bytes long
 		// so this is baddies + enoffsmasi*(9|10) depending on PLAYER_CAN_FIRE
 		ld 	hl, (_enoffsmasi)
-		ld  h, 0
+		// ld  h, 0 	// Now enoffsmasi is 16 bits
 
 		#if defined PLAYER_CAN_FIRE || defined COMPRESSED_LEVELS
 			add hl, hl 				// x2
@@ -179,8 +179,6 @@ void enems_load (void) {
 		en_an_frame [enit] = 0;
 		en_an_state [enit] = 0;
 		en_an_count [enit] = 3;
-		
-		enoffsmasi = enoffs + enit;
 		*/
 		#asm
 				ld  bc, (_enit)
@@ -199,13 +197,9 @@ void enems_load (void) {
 				add hl, bc
 				ld  a, 3
 				ld  (hl), a
-
-				ld  a, (_enit)
-				ld  c, a 
-				ld  a, (_enoffs)
-				add c 
-				ld  (_enoffsmasi), a
 		#endasm
+
+		enoffsmasi = enoffs + enit;				
 
 		#ifdef RESPAWN_ON_ENTER
 			// Back to life!
@@ -301,7 +295,7 @@ void enems_kill (void) {
 			ld  (__en_t), a
 
 		.enems_kill_noflag
-			ld  hl, (_p_killed)
+			ld  hl, _p_killed
 			inc (hl)
 	#endasm
 
@@ -320,21 +314,9 @@ void enems_move (void) {
 	tocado = p_gotten = ptgmx = ptgmy = 0;
 
 	for (enit = 0; enit < MAX_ENEMS; enit ++) {
-		/*
+		
 		active = 0;
 		enoffsmasi = enoffs + enit;
-		*/
-
-		#asm
-				xor a 
-				ld  (_active), a 
-
-				ld  a, (_enit)
-				ld  c, a 
-				ld  a, (_enoffs)
-				add c 
-				ld  (_enoffsmasi), a
-		#endasm
 
 		// Copy array values to temporary variables as fast as possible
 		
@@ -407,11 +389,41 @@ void enems_move (void) {
 		#endif
 
 		#ifndef PLAYER_GENITAL
+			// if (gpx + W >= _en_x && _en_x + W >= gpx) pregotten = 1; else pregotten = 0;
+			#asm
+				._pregotten_calc
+					ld  a, (__en_x)
+					ld  c, a 
+					ld  a, (_gpx)
 			#if defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_8_BOTTOM)
-				pregotten = (gpx + 12 >= _en_x && gpx <= _en_x + 12);
+						add 12
 			#else
-				pregotten = (gpx + 15 >= _en_x && gpx <= _en_x + 15);
+						add 15
+				#endif
+					cp  c 
+					jr  c, _pregotten_reset 
+
+					ld  a, (_gpx) 
+					ld  c, a 
+					ld  a, (__en_x)
+				#if defined (BOUNDING_BOX_8_CENTERED) || defined (BOUNDING_BOX_8_BOTTOM)
+						add 12
+				#else
+						add 15
 			#endif
+					cp  c
+					jr  c, _pregotten_reset
+
+				._pregotten_set
+					ld  a, 1
+					jr  _pregotten_write
+
+				._pregotten_reset
+					xor a
+
+				._pregotten_write
+					ld (_pregotten), a
+			#endasm
 		#endif
 
 		#include "my/ci/enems_before_move.h"
@@ -443,10 +455,7 @@ void enems_move (void) {
 					break;	
 			#endif
 			#include "my/ci/enems_move.h"
-			/*
-			default:
-				if (en_an_state [enit] != GENERAL_DYING) en_an_next_frame [enit] = sprite_18_a;
-			*/
+
 		}
 		
 		#asm
@@ -521,7 +530,12 @@ void enems_move (void) {
 							if (gpy + 17 >= _en_y && gpy + 8 <= _en_y) {
 								p_gotten = 1;
 								ptgmx = _en_mx << 6;
-								gpy = (_en_y - 16); p_y = gpy << 6;
+								#ifdef PLAYER_CUMULATIVE_JUMP
+									if (p_vy > 0) 
+								#endif
+								{
+									gpy = (_en_y - 16); p_y = gpy << 6;
+								}
 							}
 						}
 
@@ -532,7 +546,12 @@ void enems_move (void) {
 						) {
 							p_gotten = 1;
 							ptgmy = _en_my << 6;
-							gpy = (_en_y - 16); p_y = gpy << 6;						
+							#ifdef PLAYER_CUMULATIVE_JUMP
+								if (p_vy > 0) 
+							#endif
+							{
+								gpy = (_en_y - 16); p_y = gpy << 6;					
+							}
 						}
 
 					}

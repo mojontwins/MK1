@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // flick_screen.h - Flicks the screen
 
@@ -37,10 +37,10 @@
 			}
 
 			#if defined (COMPRESSED_LEVELS)
-				if (gpy == 144 && p_vy > 0 && y_pant < (level_data.map_h - 1)) {
+				if (gpy >= 144 && p_vy > 0 && y_pant < (level_data.map_h - 1)) {
 					n_pant += level_data.map_w;
 			#else			
-				if (gpy == 144 && p_vy > 0 && y_pant < (MAP_H - 1)) {
+				if (gpy >= 144 && p_vy > 0 && y_pant < (MAP_H - 1)) {
 					n_pant += MAP_W;
 			#endif
 				++ y_pant;					
@@ -72,7 +72,7 @@
 				p_y = 9216;	
 			}
 
-			if (gpy == 144 && p_vy > 0) {				// 9216 = 144 * 64
+			if (gpy >= 144 && p_vy > 0) {				// 9216 = 144 * 64
 				#if defined (COMPRESSED_LEVELS)
 					if (n_pant < level_data.map_w * (level_data.map_h - 1)) {
 						n_pant += level_data.map_w;

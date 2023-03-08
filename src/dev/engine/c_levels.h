@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // c_levels.h
 
@@ -23,7 +23,9 @@ void prepare_level (void) {
 		#endif
 	#else
 		unpack ((unsigned int) levels [level].c_map_bolts, (unsigned int) (mapa));
-		unpack ((unsigned int) levels [level].c_tileset, (unsigned int) (tileset));
+		#ifdef PER_LEVEL_TILESET		
+			unpack ((unsigned int) levels [level].c_tileset, (unsigned int) (tileset));
+		#endif
 		unpack ((unsigned int) levels [level].c_enems_hotspots, (unsigned int) (malotes));
 		unpack ((unsigned int) levels [level].c_behs, (unsigned int) (behs));
 

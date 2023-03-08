@@ -1,0 +1,1311 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"tall",
+				"tallMain\tabc"
+			],
+			[
+				"MUS_",
+				"MUS_TITLE\t(custom.h)"
+			],
+			[
+				"version",
+				"version_corrected\tabc"
+			],
+			[
+				"vers",
+				"version_corrected\tabc"
+			],
+			[
+				"_patroller_set_fra",
+				"_patroller_set_frame_idle\tabc"
+			],
+			[
+				"LA",
+				"LANG_EN\tabc"
+			],
+			[
+				"draw_scr_bo",
+				"draw_scr_bolts_continue\tabc"
+			],
+			[
+				"BOL",
+				"BASE_BOLTS\tabc"
+			],
+			[
+				"VIEW",
+				"VIEWPORT_Y\tabc"
+			],
+			[
+				"V",
+				"VIEWPORT_X\tabc"
+			],
+			[
+				"paint_wat",
+				"paint_water_strip_loop\tabc"
+			],
+			[
+				"FIXED_",
+				"FIXED_ENEMS_LIMITS\tabc"
+			],
+			[
+				"FIXED",
+				"FIXED_ENEMS_LIMITS\t(config.h)"
+			],
+			[
+				"PACKED",
+				"PACKED_ENEMS\tabc"
+			],
+			[
+				"SPR",
+				"SPRFR_EMPTY\tabc"
+			],
+			[
+				"clear",
+				"clear_sprites_loop\tabc"
+			],
+			[
+				"VIE",
+				"VIEWPORT_X*8\tabc"
+			],
+			[
+				"draw_rec",
+				"draw_rectangle_it1\tabc"
+			],
+			[
+				"ENEMS_CO",
+				"ENEMS_COLLIDE_MASK\tabc"
+			],
+			[
+				"GYR",
+				"GYROSAW_SPRITE_CELL\tabc"
+			],
+			[
+				"gyrosaw_ad",
+				"gyrosaw_advance_done\tabc"
+			],
+			[
+				"gyro",
+				"gyrosaw_rdd_set2\tabc"
+			],
+			[
+				"VI",
+				"VIEWPORT_Y\tabc"
+			],
+			[
+				"VIEWPO",
+				"VIEWPORT_X\tabc"
+			],
+			[
+				"select_pw",
+				"select_power_up_set\tabc"
+			],
+			[
+				"select_power_up",
+				"select_power_up_dec\tabc"
+			],
+			[
+				"select_",
+				"select_power_up\tabc"
+			],
+			[
+				"_reson",
+				"_resonators_frames\tabc"
+			],
+			[
+				"RESONATOR",
+				"RESONATORS_FRAMES\tabc"
+			],
+			[
+				"power_",
+				"power_name0\tabc"
+			],
+			[
+				"le",
+				"level_finished\tabc"
+			],
+			[
+				"sp_U",
+				"sp_UpdateNow\tabc"
+			],
+			[
+				"_enoffs",
+				"_enoffsmasi"
+			],
+			[
+				"activa",
+				"activate_resonator_done\tabc"
+			],
+			[
+				"activate",
+				"activate_resonator\tabc"
+			],
+			[
+				"_draw_coloure",
+				"_draw_coloured_tile_do\t(printer.h)"
+			],
+			[
+				"VIRE",
+				"VIEWPORT_X\tabc"
+			],
+			[
+				"_resonat",
+				"_resonators_ct\tabc"
+			],
+			[
+				"acti",
+				"activate_resonator_done\tabc"
+			],
+			[
+				"paraly",
+				"paralyze_do\tabc"
+			],
+			[
+				"resonat",
+				"resonators_ct\t(README.md)"
+			],
+			[
+				"convye",
+				"conveyor_add_to_rdj\tabc"
+			],
+			[
+				"slipper",
+				"slippery_check_done\tabc"
+			],
+			[
+				"disa",
+				"disable_slippery\t(config.h)"
+			],
+			[
+				"System",
+				"System.out.println\tabc"
+			],
+			[
+				"c_colec",
+				"c_colectivo_act\tabc"
+			],
+			[
+				"SQL",
+				"SQLException\tabc"
+			],
+			[
+				"r_enti",
+				"r_entidadesSirhus\tabc"
+			],
+			[
+				"dato",
+				"datoAuxiliar\tabc"
+			],
+			[
+				"JAconsigna",
+				"JAconsignaLimitesMax\tabc"
+			],
+			[
+				"JAconsi",
+				"JAconsignaLimitesMax\tabc"
+			],
+			[
+				"JAcons",
+				"JAconsignaLimitesMax\tabc"
+			],
+			[
+				"JAconsignaLimte",
+				"JAconsignaLimitesSoft\tabc"
+			],
+			[
+				"JAconsign",
+				"JAconsignaLimitesTime\twarning"
+			],
+			[
+				"juntadena",
+				"juntadeandalucia.es\t(DirectorioCorporativo.properties)"
+			],
+			[
+				"t_",
+				"t_mail\tabc"
+			],
+			[
+				"DN_RESER",
+				"DN_RESERVADOS_GUIA"
+			],
+			[
+				"ponestaod",
+				"ponEstadoBaja"
+			],
+			[
+				"Hash",
+				"HashMap"
+			],
+			[
+				"dir",
+				"dirEscritura"
+			],
+			[
+				"modificaAtribu",
+				"modificaAtributoGUIA"
+			],
+			[
+				"modificaAtri",
+				"modificaAtributoGUIA"
+			],
+			[
+				"ExcepcionConex",
+				"ExcepcionConexionYaAbierta"
+			],
+			[
+				"codi",
+				"codides"
+			],
+			[
+				"marcaGUIa",
+				"marcaGUIAformateaSalida"
+			],
+			[
+				"ape",
+				"apellido2"
+			],
+			[
+				"usuariosEncontradosReservad",
+				"usuariosEncontradosReservadosDeMiTipo"
+			],
+			[
+				"usuariosEnco",
+				"usuariosEncontradosReservadosGUIA"
+			],
+			[
+				"usuariosEncontradosGUIA",
+				"usuariosEncontradosReservadosGUIA"
+			],
+			[
+				"usuarioEncontradosRe",
+				"usuariosEncontradosReservadosGUIA"
+			],
+			[
+				"codide",
+				"codide"
+			],
+			[
+				"trasladaUsuario",
+				"trasladaUsuarioLDAPdn"
+			],
+			[
+				"Baja",
+				"quitaEstadoBaja"
+			],
+			[
+				"usuariosEn",
+				"usuariosEncontradosReservadosGUIA"
+			],
+			[
+				"usuariosEncontradosReser",
+				"usuariosEncontradosReservadosGUIA"
+			],
+			[
+				"marcaUid",
+				"marcarUidGUIA"
+			],
+			[
+				"fadeout",
+				"fade_out_bucle"
+			],
+			[
+				"in",
+				"in_KeyPressed"
+			],
+			[
+				"use_pla",
+				"use_placement_x"
+			],
+			[
+				"music",
+				"music_play"
+			],
+			[
+				"PLA",
+				"PLAYER_VX_MIN"
+			],
+			[
+				"pobjs",
+				"pobjs_starter"
+			],
+			[
+				"ppu",
+				"ppu_wait_nmi"
+			],
+			[
+				"gp",
+				"gp_addr"
+			],
+			[
+				"PLAYER",
+				"PLAYER_VY_JUMP_MAX"
+			],
+			[
+				"PLAY",
+				"PLAYER_VY_FALLING_MAX"
+			],
+			[
+				"sp_",
+				"sp_PrintAtInv"
+			],
+			[
+				"TWO_SETS",
+				"TWO_SETS_MAPPED"
+			],
+			[
+				"TWO_SET",
+				"TWO_SETS_SEL"
+			],
+			[
+				"PSGSFX",
+				"PSGSFXPlay"
+			],
+			[
+				"PSG",
+				"PSGSFXPlay"
+			],
+			[
+				"MS_TYPE_",
+				"MS_TYPE_SINGLE"
+			],
+			[
+				"SG",
+				"SG_setTile"
+			],
+			[
+				"SG_",
+				"SG_setNextTileatXY"
+			],
+			[
+				"MS",
+				"MS_MAX"
+			],
+			[
+				"UNSA",
+				"UNSAFE_SG_copySpritestoSAT"
+			],
+			[
+				"UNS",
+				"UNSAFE_SG_copySpritestoSAT"
+			],
+			[
+				"MS_",
+				"MS_TYPE_EMPTY"
+			],
+			[
+				"pgo",
+				"pgotten_uwol"
+			],
+			[
+				"pgt",
+				"pgtmx_meemaid"
+			],
+			[
+				"PSTAT_",
+				"PSTATE_NAKED"
+			],
+			[
+				"draw_",
+				"draw_game_tile"
+			],
+			[
+				"FAN",
+				"FANTY_MAXV"
+			],
+			[
+				"show_",
+				"show_coins_vs"
+			],
+			[
+				"GP_",
+				"GM_2P_VS"
+			],
+			[
+				"PSTATE",
+				"PSTATE_DEAD"
+			],
+			[
+				"pf",
+				"pflickering"
+			],
+			[
+				"PF",
+				"PFACING_LEFT"
+			],
+			[
+				"A",
+				"TOP_ADJUST"
+			],
+			[
+				"TI_B",
+				"TI_BACKGROUNDS"
+			],
+			[
+				"update",
+				"update_list_index"
+			],
+			[
+				"SMS_setTile",
+				"SMS_setTileatXY"
+			],
+			[
+				"VDPS",
+				"VDPStatusPort"
+			],
+			[
+				"overfl",
+				"VDPSpriteOverflow"
+			],
+			[
+				"fra",
+				"frame_counter"
+			],
+			[
+				"PLAYER_",
+				"PLAYER_GENITAL"
+			],
+			[
+				"PLAYER_HA",
+				"PLAYER_HAS_JUMP"
+			]
+		]
+	},
+	"buffers":
+	[
+		{
+			"contents": "// MTE MK1 v4.8\n// Copyleft 2010-2013, 2020-2021 by The Mojon Twins\n\n// engine.h\n// Cointains engine functions (movement, colliding, rendering... )\n\n#if defined ENEMIES_COLLIDE && !defined ENEMIES_COLLIDE_MASK\n\t#define ENEMIES_COLLIDE_MASK 9\n#endif\n\n#if defined RAMIRO_HOVER_ON_VAR && !defined RAMIRO_HOVER\n\t#define RAMIRO_HOVER\n#endif\n\n#ifndef MIN_SWORD_HIT_FRAME\n\t#define MIN_SWORD_HIT_FRAME 3\n#endif\n\n#ifndef MAX_SWORD_HIT_FRAME\n\t#define MAX_SWORD_HIT_FRAME 6\n#endif\n\nunsigned char line_of_text_clear [] = \"                                \";\n\n#ifdef PLAYER_CUSTOM_CELLS\n\t#include \"custom_player_cells.h\"\n#else\n\tunsigned char *player_cells [] = {\n\t\tsprite_1_a, sprite_2_a, sprite_3_a, sprite_4_a,\n\t\tsprite_5_a, sprite_6_a, sprite_7_a, sprite_8_a,\n\t\t#ifdef ENABLE_FRIGOABABOL\n\t\t\tsprite_frigo,\n\t\t#else \n\t\t\t0,\n\t\t#endif\n\t\t#if defined ENABLE_SWORD && defined PLAYER_MOGGY_STYLE && defined GENITAL_HIT_FRAMES\n\t\t\textra_sprite_17_a, extra_sprite_18_a, extra_sprite_19_a, extra_sprite_20_a,\n\t\t#endif\n\t};\n#endif\n\n#ifdef ENEMS_CUSTOM_CELLS\n\t#include \"custom_enem_cells.h\"\n#else\n\tunsigned char *enem_cells [] = {\n\t\tsprite_9_a, sprite_10_a, sprite_11_a, sprite_12_a,\n\t\tsprite_13_a, sprite_14_a, sprite_15_a, sprite_16_a\n\t};\n#endif\n\n#ifdef ENABLE_SWORD\n\textern unsigned char *sword_cells [0];\n\t#asm \n\t\t._sword_cells\n\t\t\tdefw _sprite_sword, _sprite_sword + 64, _sprite_sword + 128, _sprite_sword + 192\n\t#endasm\n#endif\n\nvoid abs_a (void) {\n\t#asm\n\t\tbit 7, a\n\t\tret z\n\t\tneg\n\t#endasm\n}\n\nvoid saca_a_todo_el_mundo_de_aqui (void) {\n\t// ¡Saca a todo el mundo de aquí!\n\t#asm\n\t\t\tld  ix, (_sp_player)\n\t\t\tld  iy, vpClipStruct\n\t\t\tld  bc, 0\n\t\t\tld  hl, 0xfefe\t// -2, -2\n\t\t\tld  de, 0\n\t\t\tcall SPMoveSprAbs\n\t\n\t\t\txor a\n\t\t.hide_sprites_enems_loop\n\t\t\tld  (_gpit), a\n\n\t\t\tsla a\n\t\t\tld  c, a\n\t\t\tld  b, 0\n\t\t\tld  hl, _sp_moviles\n\t\t\tadd hl, bc\n\t\t\tld  e, (hl)\n\t\t\tinc hl\n\t\t\tld  d, (hl)\n\t\t\tpush de\n\t\t\tpop ix\n\n\t\t\tld  iy, vpClipStruct\n\t\t\tld  bc, 0\n\t\t\tld  hl, 0xfefe\t// -2, -2\n\t\t\tld  de, 0\n\n\t\t\tcall SPMoveSprAbs\n\n\t\t\tld  a, (_gpit)\n\t\t\tinc a\n\t\t\tcp  MAX_ENEMS\n\t\t\tjr  nz, hide_sprites_enems_loop\n\n\t\t#ifdef ENABLE_SWORD\n\t\t\tld  ix, (_sp_sword)\n\t\t\tld  iy, vpClipStruct\n\t\t\tld  bc, 0\n\t\t\tld  hl, 0xfefe\t// -2, -2\n\t\t\tld  de, 0\n\t\t\tcall SPMoveSprAbs\t\t\t\n\t\t#endif\n\t#endasm\n}\n\nvoid render_this_enemy (void) {\n\t/*\n\tsp_MoveSprAbs (\n\t\tsp_moviles [enit], \n\t\tspritesClip, \n\t\ten_an_next_frame [enit] - en_an_current_frame [enit], \n\t\tVIEWPORT_Y + (rdy >> 3), VIEWPORT_X + (rdx >> 3),rdx & 7, rdy & 7\n\t);\n\n\ten_an_current_frame [enit] = en_an_next_frame [enit];\n\t*/\n\t#asm\n\t\t\t// sp_moviles [enit] = sp_moviles + enit*2\n\t\t\tld  a, (_enit)\n\t\t\tsla a\n\t\t\tld  c, a\n\t\t\tld  b, 0 \t\t\t\t// BC = offset to [enit] in 16bit arrays\n\t\t\tld  hl, _sp_moviles\n\t\t\tadd hl, bc\n\t\t\tld  e, (hl)\n\t\t\tinc hl \n\t\t\tld  d, (hl)\n\t\t\tpush de\t\t\t\t\t\t\n\t\t\tpop ix\n\n\t\t\t// Clipping rectangle\n\t\t\tld  iy, vpClipStruct\n\n\t\t\t// Animation\n\t\t\t// en_an_next_frame [enit] - en_an_current_frame [enit]\n\t\t\tld  hl, _en_an_current_frame\n\t\t\tadd hl, bc \t\t\t\t// HL -> en_an_current_frame [enit]\n\t\t\tld  e, (hl)\n\t\t\tinc hl \n\t\t\tld  d, (hl) \t\t\t// DE = en_an_current_frame [enit]\n\n\t\t\tld  hl, _en_an_next_frame\n\t\t\tadd hl, bc \t\t\t\t// HL -> en_an_next_frame [enit]\n\t\t\tld  a, (hl)\n\t\t\tinc hl\n\t\t\tld  h, (hl)\n\t\t\tld  l, a \t\t\t\t// HL = en_an_next_frame [enit]\n\n\t\t\tor  a \t\t\t\t\t// clear carry\n\t\t\tsbc hl, de \t\t\t\t// en_an_next_frame [enit] - en_an_current_frame [enit]\n\n\t\t\tpush bc \t\t\t\t// Save for later\n\n\t\t\tld  b, h\n\t\t\tld  c, l \t\t\t\t// ** BC = animate bitdef **\t\n\n\t\t\t//VIEWPORT_Y + (rdy >> 3), VIEWPORT_X + (rdx >> 3)\n\t\t\tld  a, (_rdy)\t\t\t\t\t\n\t\t\tsrl a\n\t\t\tsrl a\n\t\t\tsrl a\n\t\t\tadd VIEWPORT_Y\n\t\t\tld h, a\n\n\t\t\tld  a, (_rdx)\n\t\t\tsrl a\n\t\t\tsrl a\n\t\t\tsrl a\n\t\t\tadd VIEWPORT_X\n\t\t\tld  l, a\n\n\t\t\t// rdx & 7, rdy & 7\n\t\t\tld  a, (_rdx)\n\t\t\tand 7\n\t\t\tld  d, a\n\n\t\t\tld  a, (_rdy)\n\t\t\tand 7\n\t\t\tld  e, a\n\n\t\t\tcall SPMoveSprAbs\n\n\t\t\t// en_an_current_frame [enit] = en_an_next_frame [enit];\n\n\t\t\tpop bc \t\t\t\t\t// Retrieve index\n\n\t\t\tld  hl, _en_an_current_frame\n\t\t\tadd hl, bc\n\t\t\tex  de, hl \t\t\t\t// DE -> en_an_current_frame [enit]\t\n\n\t\t\tld  hl, _en_an_next_frame\n\t\t\tadd hl, bc \t\t\t\t// HL -> en_an_next_frame [enit]\n\n\t\t\tldi\n\t\t\tldi\n\t#endasm\n}\n\nvoid calc_baddies_pointer (void) {\n\t#asm\n\t\t#if defined PACKED_ENEMS\n\t\t\t#if defined PLAYER_CAN_FIRE || defined ENABLE_SWORD\t\t\t\t\n\t\t\t\tadd hl, hl \t\t\t\t// x2\n\t\t\t\tadd hl, hl \t\t\t\t// x4\n\t\t\t\tadd hl, hl \t\t\t\t// HL = x8\n\t\t\t#else\n\t\t\t\tld  d, h\n\t\t\t\tld  e, l \t\t\t\t// DE = x1\n\t\t\t\tadd hl, hl \t\t\t\t// x2\t\t\n\t\t\t\tadd hl, hl \t\t\t\t// x4\n\t\t\t\tadd hl, hl \t\t\t\t// x8\n\t\t\t\tor  a\n\t\t\t\tsbc hl, de \t\t\t\t// HL = x8 - x1 = x7\n\t\t\t#endif\n\t\t#else\n\t\t\t#if defined PLAYER_CAN_FIRE || defined ENABLE_SWORD\n\t\t\t\tadd hl, hl \t\t\t\t// x2\n\t\t\t\tld  d, h\n\t\t\t\tld  e, l \t\t\t\t// DE = x2\n\t\t\t\tadd hl, hl \t\t\t\t// x4\n\t\t\t\tadd hl, hl \t\t\t\t// x8\n\t\n\t\t\t\tadd hl, de \t\t\t\t// HL = x8 + x2 = x10\n\t\t\t#else\n\t\t\t\tld  d, h\n\t\t\t\tld  e, l \t\t\t\t// DE = x1\n\t\t\t\tadd hl, hl \t\t\t\t// x2\n\t\t\t\tadd hl, hl \t\t\t\t// x4\n\t\t\t\tadd hl, hl \t\t\t\t// x8\n\t\n\t\t\t\tadd hl, de \t\t\t\t// HL = x8 + x1 = x9\n\t\t\t#endif\n\t\t#endif\n\n\t\tld  de, _malotes\n\t\tadd hl, de\t\t\t\n\t#endasm\n}\n\nvoid render_all_sprites (void) {\n\tfor (enit = 0; enit < MAX_ENEMS; enit ++) {\n\t\t#if defined(RANDOM_RESPAWN) || defined(USE_TYPE_6)\n\t\t\t#ifdef RANDOM_RESPAWN\n\t\t\t\tif (en_an_fanty_activo [enit])\n\t\t\t#else\n\t\t\t\tif (malotes [enoffs + enit].t == 6 || malotes [enoffs + enit].t == 0)\n\t\t\t#endif\n\t\t\t{\n\t\t\t\t/*\n\t\t\t\trdx = en_an_x [enit] >> 6;\n\t\t\t\trdy = en_an_y [enit] >> 6;\n\t\t\t\t*/\n\t\t\t\t#asm\n\t\t\t\t\t\tld  a, (_enit)\n\t\t\t\t\t\tsla a\n\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\tld  b, 0\n\n\t\t\t\t\t\tld  hl, _en_an_x\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\tinc hl\n\t\t\t\t\t\tld  h, (hl)\n\t\t\t\t\t\tld  l, a \n\n\t\t\t\t\t\tcall HLshr6_A\n\t\t\t\t\t\tld  (_rdx), a\n\n\t\t\t\t\t\tld  hl, _en_an_y\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\tinc hl\n\t\t\t\t\t\tld  h, (hl)\n\t\t\t\t\t\tld  l, a \n\n\t\t\t\t\t\tcall HLshr6_A\n\t\t\t\t\t\tld  (_rdy), a\n\t\t\t\t#endasm\n\t\t\t} else \n\t\t#endif\n\t\t{\n\t\t\t/*\n\t\t\trdx = malotes [enoffs + enit].x;\n\t\t\trdy = malotes [enoffs + enit].y;\n\t\t\t*/\n\t\t\t#asm\n\t\t\t\t\tld  hl, (_enoffs)\n\t\t\t\t\tld  bc, (_enit)\n\t\t\t\t\tld  b, 0\n\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\n\t\t\t\t\tcall _calc_baddies_pointer\n\n\t\t\t\t\t// malotes struct is:\n\t\t\t\t\t// x, y, x1, y1, x2, y2, mx, my, t[, life]\n\n\t\t\t\t\tld  a, (hl)\n\t\t\t\t\tld  (_rdx), a \n\t\t\t\t\tinc hl \n\n\t\t\t\t\tld  a, (hl)\n\t\t\t\t\tld  (_rdy), a \n\t\t\t#endasm\n\t\t}\n\n\t\t#asm\n\t\t\t\tcall _render_this_enemy\n\t\t#endasm\n\t}\n\n\t#ifdef TALL_PLAYER\n\t\trdy = gpy - 8;\n\t#else\n\t\trdy = gpy; \n\t#endif\n\n\tif ( 0 == (player.estado & EST_PARP) || half_life ) { rdx = gpx; } else { rdx = 240;\t}\n\t#if defined BETTER_VERTICAL_CONNECTIONS || defined TALL_PLAYER\n\t\t/*\n\t\tif (rdy >= 248) rdi = VIEWPORT_Y - 1; else rdi = VIEWPORT_Y + (rdy >> 3);\n\t\tsp_MoveSprAbs (\n\t\t\tsp_player, spritesClip, player.next_frame - player.current_frame, \n\t\t\trdi, VIEWPORT_X + (rdx >> 3), rdx & 7, rdy & 7\n\t\t);\n\t\t*/\n\t\t#asm\n\t\t\t\tld  ix, (_sp_player)\n\t\t\t\tld  iy, vpClipStruct\n\n\t\t\t\tld  hl, (_player + 17)\t\t\t// player.next_frame\n\t\t\t\tld  de, (_player + 15) \t\t\t// player.current_frame\n\t\t\t\tor  a\n\t\t\t\tsbc hl, de\n\t\t\t\tld  b, h\n\t\t\t\tld  c, l\n\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tcp  248\n\t\t\t\tjr  c, ras_player_on_screen\n\n\t\t\t\tld  a, VIEWPORT_Y-1\n\t\t\t\tjr  ras_rdi_calc_done\n\n\t\t\t.ras_player_on_screen\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tsrl a \n\t\t\t\tsrl a \n\t\t\t\tsrl a \n\t\t\t\tadd VIEWPORT_Y\n\n\t\t\t.ras_rdi_calc_done\n\t\t\t\tld  h, a \n\n\t\t\t\tld  a, (_rdx)\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tadd VIEWPORT_X\n\t\t\t\tld  l, a \n\t\t\t\t\n\t\t\t\tld  a, (_rdx)\n\t\t\t\tand 7\n\t\t\t\tld  d, a\n\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tand 7\n\t\t\t\tld  e, a\n\n\t\t\t\tcall SPMoveSprAbs\n\t\t#endasm\t\t\n\t#else\n\t\t/*\n\t\tsp_MoveSprAbs (\n\t\t\tsp_player, spritesClip, player.next_frame - player.current_frame, \n\t\t\tVIEWPORT_Y + (rdy >> 3), VIEWPORT_X + (rdx >> 3), rdx & 7, rdy & 7\n\t\t);\n\t\t*/\n\t\t#asm\n\t\t\t\tld  ix, (_sp_player)\n\t\t\t\tld  iy, vpClipStruct\n\n\t\t\t\tld  hl, (_player + 17)\t\t\t// player.next_frame\n\t\t\t\tld  de, (_player + 15) \t\t\t// player.current_frame\n\t\t\t\tor  a\n\t\t\t\tsbc hl, de\n\t\t\t\tld  b, h\n\t\t\t\tld  c, l\n\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tadd VIEWPORT_Y\n\t\t\t\tld  h, a \n\n\t\t\t\tld  a, (_rdx)\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tadd VIEWPORT_X\n\t\t\t\tld  l, a \n\t\t\t\t\n\t\t\t\tld  a, (_rdx)\n\t\t\t\tand 7\n\t\t\t\tld  d, a\n\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tand 7\n\t\t\t\tld  e, a\n\n\t\t\t\tcall SPMoveSprAbs\n\t\t#endasm\n\t#endif\n\tplayer.current_frame = player.next_frame;\n\t\n\t#ifdef PLAYER_CAN_FIRE\n\t\tfor (rdi = 0; rdi < MAX_BULLETS; rdi ++) {\n\t\t\tif (bullets_estado [rdi]) {\n\t\t\t\trdx = bullets_x [rdi]; rdy = bullets_y [rdi];\n\t\t\t\t/*\n\t\t\t\tsp_MoveSprAbs (\n\t\t\t\t\tsp_bullets [rdi], spritesClip, 0, \n\t\t\t\t\tVIEWPORT_Y + (rdy >> 3), VIEWPORT_X + (rdx >> 3), rdx & 7, rdy & 7\n\t\t\t\t);\n\t\t\t\t*/\n\t\t\t\t#asm\n\t\t\t\t\t\tld  a, (_rdi)\n\t\t\t\t\t\tsla a\n\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\tld  b, 0 \t\t\t\t// BC = offset to [gpit] in 16bit arrays\n\t\t\t\t\t\tld  hl, _sp_bullets\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  e, (hl)\n\t\t\t\t\t\tinc hl \n\t\t\t\t\t\tld  d, (hl)\n\t\t\t\t\t\tpush de\t\t\t\t\t\t\n\t\t\t\t\t\tpop ix\n\n\t\t\t\t\t\tld  iy, vpClipStruct\n\t\t\t\t\t\tld  bc, 0\n\n\t\t\t\t\t\tld  a, (_rdy)\n\t\t\t\t\t\tsrl a\n\t\t\t\t\t\tsrl a\n\t\t\t\t\t\tsrl a\n\t\t\t\t\t\tadd VIEWPORT_Y\n\t\t\t\t\t\tld  h, a\n\n\t\t\t\t\t\tld  a, (_rdx)\n\t\t\t\t\t\tsrl a\n\t\t\t\t\t\tsrl a\n\t\t\t\t\t\tsrl a\n\t\t\t\t\t\tadd VIEWPORT_X\n\t\t\t\t\t\tld  l, a\n\n\t\t\t\t\t\tld  a, (_rdx)\n\t\t\t\t\t\tand 7\n\t\t\t\t\t\tld  d, a \n\n\t\t\t\t\t\tld  a, (_rdy)\n\t\t\t\t\t\tand 7\n\t\t\t\t\t\tld  e, a \n\t\t\t\t\t\t\n\t\t\t\t\t\tcall SPMoveSprAbs\n\t\t\t\t#endasm\t\t\t\t\n\t\t\t} else {\n\t\t\t\t//sp_MoveSprAbs (sp_bullets [rdi], spritesClip, 0, -2, -2, 0, 0);\n\t\t\t\t#asm\n\t\t\t\t\t\tld  a, (_rdi)\n\t\t\t\t\t\tsla a\n\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\tld  b, 0 \t\t\t\t// BC = offset to [gpit] in 16bit arrays\n\t\t\t\t\t\tld  hl, _sp_bullets\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  e, (hl)\n\t\t\t\t\t\tinc hl \n\t\t\t\t\t\tld  d, (hl)\n\t\t\t\t\t\tpush de\t\t\t\t\t\t\n\t\t\t\t\t\tpop ix\n\n\t\t\t\t\t\tld  iy, vpClipStruct\n\t\t\t\t\t\tld  bc, 0\n\n\t\t\t\t\t\tld  hl, 0xfefe\n\t\t\t\t\t\tld  de, 0 \n\t\t\t\t\t\t\n\t\t\t\t\t\tcall SPMoveSprAbs\n\t\t\t\t#endasm\n\t\t\t}\n\t\t}\n\t#endif\n}\n\n#if defined PLAYER_MOGGY_STYLE || !defined TIGHT_BOUNDING_BOX\n\t#define BOUNDING_WIDTH 12\n#else\n\t#define BOUNDING_WIDTH 8\n#endif\n\nunsigned char collide_enem (void) {\n\t#asm\n\t\t\tld  hl, 0\n\t\t\t// (en_ccx + 12 >= gpx && en_ccx <= gpx + 12 && en_ccy + 12 >= gpy && en_ccy <= gpy + 12)\n\n\t\t\t// en_ccx + 12 >= gpx\n\t\t\tld  a, (_gpx)\n\t\t\tld  c, a\n\t\t\tld  a, (_en_ccx)\n\t\t\t\n\t\t\tadd BOUNDING_WIDTH\n\t\t\t\n\t\t\tcp  c\n\t\t\tret c\n\n\t\t\t// en_ccx <= gpx + 12; gpx + 12 >= en_ccx\n\t\t\tld  a, (_en_ccx)\n\t\t\tld  c, a\n\t\t\tld  a, (_gpx)\n\t\t\t\n\t\t\tadd BOUNDING_WIDTH\n\t\t\t\n\t\t\tcp  c\n\t\t\tret c\n\n\t\t\t// en_ccy + 12 >= gpy\n\t\t\tld  a, (_gpy)\n\t\t\tld  c, a\n\t\t\tld  a, (_en_ccy)\n\t\t\t\n\t\t\tadd 12\n\t\t\t\n\t\t\tcp  c\n\t\t\tret c\n\n\t\t\t// en_ccy <= gpy + 12; gpy + 12 >= en_ccy\n\t\t\tld  a, (_en_ccy)\n\t\t\tld  c, a\n\t\t\tld  a, (_gpy)\n\t\t\t\n\t\t\tadd 12\n\t\t\t\n\t\t\tcp  c\n\t\t\tret c\n\n\t\t\tld  l, 1\n\t#endasm\n}\n\nunsigned char rand (void) {\n\t#asm\n\t\t.rand16\n\t\t\tld\thl, _seed\n\t\t\tld\ta, (hl)\n\t\t\tld\te, a\n\t\t\tinc\thl\n\t\t\tld\ta, (hl)\n\t\t\tld\td, a\n\t\t\t\n\t\t\t;; Ahora DE = [SEED]\n\t\t\t\t\t\t\n\t\t\tld\ta,\td\n\t\t\tld\th,\te\n\t\t\tld\tl,\t253\n\t\t\tor\ta\n\t\t\tsbc\thl,\tde\n\t\t\tsbc\ta, \t0\n\t\t\tsbc\thl,\tde\n\t\t\tld\td, \t0\n\t\t\tsbc\ta, \td\n\t\t\tld\te,\ta\n\t\t\tsbc\thl,\tde\n\t\t\tjr\tnc,\tnextrand\n\t\t\tinc\thl\n\t\t.nextrand\n\t\t\tld\td,\th\n\t\t\tld\te,\tl\n\t\t\tld\thl, _seed\n\t\t\tld\ta,\te\n\t\t\tld\t(hl), a\n\t\t\tinc\thl\n\t\t\tld\ta,\td\n\t\t\tld\t(hl), a\n\t\t\t\n\t\t\t;; Ahora [SEED] = HL\n\t\t\n\t\t\tld  l, e \n\t\t\tld  h, 0\t\t\n\t\t\t;; Return 8 bit\n\t#endasm\n\n}\n\nunsigned int __FASTCALL__ abs (int n) {\n\t#asm\n\t\t// HL = n\n\t\tbit 7, h\n\t\tret z\n\n\t\t// neg HL\n\t\tcall l_neg\n\t#endasm\n}\n\nvoid step (void) {\n\t#asm\n\t\t\tld a, 16\n\t\t\tout (254), a\n\t\t\tnop\n\t\t\tnop\n\t\t\tnop\n\t\t\tnop\n\t\t\tnop\n\t\t\tnop\n\t\t\tnop\n\t\t\tnop\n\t\t\tnop\n\t\t\txor 16\n\t\t\tout (254), a\n\t#endasm\t\n}\n\nvoid cortina (void) {\n\t#asm\n\t\t\t;; Antes que nada vamos a limpiar el PAPER de toda la pantalla\n\t\t\t;; para que no queden artefactos feos\n\t\t\t\n\t\t\tld\tde, 22528\t\t\t; Apuntamos con DE a la zona de atributos\n\t\t\tld\tb,\t3\t\t\t\t; Procesamos 3 tercios\n\t\t.clearb1\n\t\t\tpush bc\n\t\t\t\n\t\t\tld\tb, 255\t\t\t\t; Procesamos los 256 atributos de cada tercio\n\t\t.clearb2\n\t\t\n\t\t\tld\ta, (de)\t\t\t\t; Nos traemos un atributo\n\t\t\tand\t199\t\t\t\t\t; Le hacemos la máscara 11000111 y dejamos PAPER a 0\n\t\t\tld\t(de), a\t\t\t\t; Y lo volvemos a poner\n\t\t\t\n\t\t\tinc de\t\t\t\t\t; Siguiente atributo\n\t\t\n\t\t\tdjnz clearb2\n\t\t\t\n\t\t\tpop bc\n\t\t\tdjnz clearb1\n\t\t\t\n\t\t\t;; Y ahora el código original que escribí para UWOL:\t\n\t\t\n\t\t\tld\ta,\t8\n\t\t\n\t\t.repitatodo\n\t\t\tld\tc,\ta\t\t\t; Salvamos el contador de \"repitatodo\" en 'c'\n\t\t\n\t\t\tld\thl, 16384\n\t\t\tld\ta,\t12\n\t\t\n\t\t.bucle\n\t\t\tld\tb,\ta\t\t\t; Salvamos el contador de \"bucle\" en 'b'\n\t\t\txor a ; ld\ta,\t255\n\t\t\n\t\t.bucle1\n\t\t\tsla (hl)\n\t\t\tinc hl\n\t\t\tdec a\n\t\t\tjr\tnz, bucle1\n\t\t\t\t\n\t\t\txor a ; ld\ta,\t255\n\t\t.bucle2\n\t\t\tsrl (hl)\n\t\t\tinc hl\n\t\t\tdec a\n\t\t\tjr\tnz, bucle2\n\t\t\t\t\n\t\t\tld\ta,\tb\t\t\t; Restituimos el contador de \"bucle\" a 'a'\n\t\t\tdec a\n\t\t\tjr\tnz, bucle\n\t\t\n\t\t\tld\ta,\tc\t\t\t; Restituimos el contador de \"repitatodo\" a 'a'\n\t\t\tdec a\n\t\t\tjr\tnz, repitatodo\n\t#endasm\n}\n\n// Game\n\n#ifndef DEACTIVATE_KEYS\n\tvoid clear_cerrojo (unsigned char x, unsigned char y) {\n\t\t// search & toggle\n\t\t\n\t\t/*\n\t\tset_map_tile (x, y, 0, comportamiento_tiles [0]);\n\t\t_x = x; _y = y;\n\t\t*/\n\t\t#asm\n\t\t\t\tld  hl, 4\n\t\t\t\tadd hl, sp\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (__x), a\n\t\t\t\tld  (_rdx), a\n\t\t\t\tld  c, a\n\t\t\t\tdec hl\n\t\t\t\tdec hl\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (__y), a\n\t\t\t\tld  (_rdy), a\n\t\t\t\txor a\n\t\t\t\tld  (__t), a\n\t\t\t\tld  a, (_comportamiento_tiles)\t;; beh [0]\n\t\t\t\tld  (__n), a\n\n\t\t\t\tcall set_map_tile_do\n\n\t\t\t\tld  a, (_rdx)\n\t\t\t\tld  (__x), a\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tld  (__y), a\n\t\t#endasm\n\n\t\t/*\t\n\t\tfor (gpit = 0; gpit < MAX_CERROJOS; gpit ++) \n\t\t\tif (cerrojos [gpit].x == x && cerrojos [gpit].y == y && cerrojos [gpit].np == n_pant)\n\t\t\t\tcerrojos [gpit].st = 0;\n\t\t*/\n\t\t#asm\n\t\t\t\t// The cerrojos struct is db np, x, y st\n\t\t\t\tld  b, MAX_CERROJOS\n\t\t\t\tld  hl, _cerrojos\n\t\t\t.clear_cerrojo_loop\n\t\t\t\tld  c, (hl) \t\t// np\n\t\t\t\tinc hl\n\t\t\t\tld  d, (hl) \t\t// x\n\t\t\t\tinc hl \n\t\t\t\tld  e, (hl) \t\t// y\n\t\t\t\tinc hl\n\n\t\t\t\tld  a, (_n_pant)\n\t\t\t\tcp  c\n\t\t\t\tjr  nz, clear_cerrojo_loop_continue\n\n\t\t\t\tld  a, (__x)\n\t\t\t\tcp  d \n\t\t\t\tjr  nz, clear_cerrojo_loop_continue\n\n\t\t\t\tld  a, (__y)\n\t\t\t\tcp  e \n\t\t\t\tjr  nz, clear_cerrojo_loop_continue\n\n\t\t\t\txor a \n\t\t\t\tld  (hl), a\n\t\t\t\tret\n\n\t\t\t.clear_cerrojo_loop_continue\n\t\t\t\tinc hl\n\t\t\t\tdjnz clear_cerrojo_loop\n\t\t#endasm\n\t}\n\n\tvoid init_cerrojos (void) {\n\t\t// Activate all bolts.\n\t\t\n\t\t/*\n\t\tfor (gpit = 0; gpit < MAX_CERROJOS; gpit ++)\n\t\t\tcerrojos [gpit].st = 1;\t\n\t\t*/\n\t\t#asm\n\t\t\t\t// Iterate MAX_CERROJOS time\n\t\t\t\t// Start with _cerrojos + 3\n\t\t\t\t// Set to 1 and add 4\n\t\t\t\tld  b, MAX_CERROJOS\n\t\t\t\tld  hl, _cerrojos + 3\n\t\t\t\tld  de, 4\n\t\t\t\tld  a, 1\n\t\t\t.init_cerrojos_loop\n\t\t\t\tld  (hl), a\n\t\t\t\tadd hl, de\n\t\t\t\tdjnz init_cerrojos_loop\n\t\t#endasm\t\n\t}\n#endif\n\n#ifdef PLAYER_CAN_FIRE\n\tvoid init_bullets (void) {\n\t\t// Initialize bullets\n\t\t\n\t\t//for (gpit = 0; gpit < MAX_BULLETS; gpit ++)\tbullets_estado [gpit] = 0;\n\t\t#asm\n\t\t\t\tld  hl, _bullets_estado\n\t\t\t\tld  de, _bullets_estado + 1\n\t\t\t\tld  bc, MAX_BULLETS - 1\n\t\t\t\txor a\n\t\t\t\tld  (hl), a\n\t\t\t\tldir\n\t\t#endasm\n\t}\n#endif\n\n#ifdef ENABLE_BREAKABLE\n\tvoid init_breakable (void) {\n\t\t// Initialize breakable\n\n\t\t#asm\n\t\t\t\tld  hl, _b_f\n\t\t\t\tld  de, _b_f + 1\n\t\t\t\tld  bc, MAX_BREAKABLE - 1\n\t\t\t\txor a\n\t\t\t\tld  (hl), a\n\t\t\t\tldir\n\t\t#endasm\n\n\t\tprocess_breakable = 0;\n\t}\n#endif\n\n#ifdef ENEMIES_MAY_DIE\n\tvoid init_malotes (void) {\n\t\t/*\n\t\tfor (gpit = 0; gpit < MAP_W * MAP_H * MAX_ENEMS; gpit ++) {\n\t\t\tmalotes [gpit].t = malotes [gpit].t & 15;\t\n\t\t\t#if defined PLAYER_CAN_FIRE || defined ENABLE_SWORD\n\t\t\t\tmalotes [gpit].life = ENEMIES_LIFE_GAUGE;\n\t\t\t\t#ifdef RANDOM_RESPAWN\n\t\t\t\t\tif (malotes [gpit].t == 5) malotes [gpit].t |= 16;\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t}\n\t\t*/\n\t\t#asm\n\t\t\t// 0  1  2   3   4   5   6   7   8   9\n\t\t\t// x, y, x1, y1, x2, y2, mx, my, t[, life]\n\n\t\t\t// 0  1  2    3    4   5   6   7\n\t\t\t// x, y, xy1, xy2, mx, my, t[, life]\n\n\t\t\tld  bc, MAP_W * MAP_H * MAX_ENEMS\n\t\t\t#if defined PACKED_ENEMS\n\t\t\t\t#if defined PLAYER_CAN_FIRE || defined ENABLE_SWORD\n\t\t\t\t\tld  de, 8\n\t\t\t\t#else\n\t\t\t\t\tld  de, 7\n\t\t\t\t#endif\n\t\t\t#else\n\t\t\t\t#if defined PLAYER_CAN_FIRE || defined ENABLE_SWORD\n\t\t\t\t\tld  de, 10\n\t\t\t\t#else\n\t\t\t\t\tld  de, 9\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t\tld  ix, _malotes\n\t\t\t\n\t\t\t.init_malotes_loop\n\t\t\t\t//malotes [gpit].t = malotes [gpit].t & 15;\n\t\t\t#if defined PACKED_ENEMS\n\t\t\t\t\tld  a, (ix+6) \t// .t\n\t\t\t#else\n\t\t\t\t\tld  a, (ix+8) \t// .t\n\t\t\t#endif\n\t\t\t\tand 15\n\t\t\t\t\n\t\t\t#ifdef RANDOM_RESPAWN\n\t\t\t\t\tcp  5\n\t\t\t\t\tjr  nz, init_malotes_not_5\t\n\n\t\t\t\t\tor  16\n\t\t\t\t.init_malotes_not_5\n\t\t\t#endif\n\n\t\t\t#if defined PACKED_ENEMS\n\t\t\t\t\tld  (ix+6), a \t// .t\n\t\t\t#else\n\t\t\t\t\tld  (ix+8), a \t// .t\n\t\t\t#endif\n\n\t\t\t#if defined PLAYER_CAN_FIRE || defined ENABLE_SWORD\n\t\t\t\t\tld  a, ENEMIES_LIFE_GAUGE\n\t\t\t\t#if defined PACKED_ENEMS\n\t\t\t\t\t\tld  (ix+7), a \t// .life\n\t\t\t\t#else\n\t\t\t\t\t\tld  (ix+9), a \t// .life\n\t\t\t\t#endif\n\t\t\t#endif\n\n\t\t\t\tadd ix, de\n\n\t\t\t\tdec bc\n\t\t\t\tld  a, b \n\t\t\t\tor  c\n\t\t\t\tjr  nz, init_malotes_loop\n\t\t#endasm\n\t}\n#endif\n\n#ifdef PLAYER_CAN_FIRE\n\tvoid fire_bullet (void) {\n\t\t\n\t\t// Search a free bullet slot...\n\t\t/*\n\t\tfor (gpit = 0; gpit < MAX_BULLETS; gpit ++) {\n\t\t\tif (bullets_estado [gpit] == 0) {\n\t\t\t\tbullets_estado [gpit] = 1;\n\t\t\t\tif (player.facing) {\n\t\t\t\t\tbullets_x [gpit] = (player.x >> 6) - 4;\n\t\t\t\t\tbullets_mx [gpit] = -PLAYER_BULLET_SPEED;\n\t\t\t\t} else {\n\t\t\t\t\tbullets_x [gpit] = (player.x >> 6) + 12;\n\t\t\t\t\tbullets_mx [gpit] = PLAYER_BULLET_SPEED;\n\t\t\t\t}\n\t\t\t\tbullets_y [gpit] = (player.y >> 6) + PLAYER_BULLET_Y_OFFSET;\n\t\t\t\tplay_sfx (9);\n\t\t\t\t#ifdef FIRING_DRAINS_LIFE\n\t\t\t\t\tplayer.life -= FIRING_DRAIN_AMOUNT;\n\t\t\t\t#endif\t\t\t\t\n\t\t\t\tbreak;\t\n\t\t\t}\t\n\t\t}\t\n\t\t*/\n\t\t#asm\n\t\t\t\tld  bc, 0\n\t\t\t.fire_bullet_search_loop\n\t\t\t\tld  hl, _bullets_estado\n\t\t\t\tadd hl, bc\n\t\t\t\tld  a, (hl)\n\t\t\t\tor  a\n\t\t\t\tjr  z, fire_bullet_found\n\t\t\t\tinc c\n\t\t\t\tld  a, c\n\t\t\t\tcp  MAX_BULLETS\n\t\t\t\tjr  nz, fire_bullet_search_loop\n\t\t\t\tret\n\n\t\t\t.fire_bullet_found\n\t\t\t\tinc a\n\t\t\t\tld  (hl), a \t\t\t// bullets_estado [gpit] = 1;\n\n\t\t\t\tld  a, (_player + 22)\t// player.facing\n\t\t\t\tor  a\n\t\t\t\tld  a, (_gpx)\n\t\t\t\tjr  z, fire_bullet_right\n\n\t\t\t.fire_bullet_left\n\t\t\t\tsub 4\n\t\t\t\tld  hl, _bullets_x\n\t\t\t\tadd hl, bc\n\t\t\t\tld  (hl), a \t\t\t// bullets_x [gpit] = (player.x >> 6) - 4;\n\n\t\t\t\tld  a, -PLAYER_BULLET_SPEED\n\t\t\t\tld  hl, _bullets_mx\n\t\t\t\tadd hl, bc\n\t\t\t\tld  (hl), a \t\t\t// bullets_mx [gpit] = -PLAYER_BULLET_SPEED;\n\n\t\t\t\tjr  fire_bullet_facing_done\n\n\t\t\t.fire_bullet_right\n\t\t\t\tadd 12\n\t\t\t\tld  hl, _bullets_x\n\t\t\t\tadd hl, bc\n\t\t\t\tld  (hl), a \t\t\t// bullets_x [gpit] = (player.x >> 6) + 12;\n\n\t\t\t\tld  a, PLAYER_BULLET_SPEED\n\t\t\t\tld  hl, _bullets_mx\n\t\t\t\tadd hl, bc\n\t\t\t\tld  (hl), a \t\t\t// bullets_mx [gpit] = PLAYER_BULLET_SPEED;\n\n\t\t\t.fire_bullet_facing_done\n\t\t\t\tld  a, (_gpy)\n\t\t\t\tadd PLAYER_BULLET_Y_OFFSET\n\t\t\t\tld  hl, _bullets_y\n\t\t\t\tadd hl, bc\n\t\t\t\tld  (hl), a \t\t\t// bullets_y [gpit] = (player.y >> 6) + PLAYER_BULLET_Y_OFFSET;\t\t\t\t\n\t\t#endasm\n\n\t\tplay_sfx (9);\n\t\t#ifdef FIRING_DRAINS_LIFE\n\t\t\tplayer.life -= FIRING_DRAIN_AMOUNT;\n\t\t\tplayer_just_died = PLAYER_KILLED_BY_SELF;\n\t\t#endif\n\n\t\t#ifdef PLAYER_AX_RECOIL\n\t\t\tplayer.vx += (player.facing ? PLAYER_AX_RECOIL : -PLAYER_AX_RECOIL);\n\t\t#endif\n\t}\n#endif\n\n#if defined PLAYER_CAN_HIDE\n\tunsigned char player_hidden (void) {\n\t\t#ifndef HIDDEN_CAN_MOVE\n\t\t\tif ( player.possee && player.vx == 0 )\n\t\t#endif\n\t\t{\n\t\t\t//if (attr (gpxx, gpyy) == 2 || (attr (1 + gpxx, gpyy) == 2 && (gpx & 15) != 0) )\t\n\t\t\tif (attr ((gpx + 8) >> 4, gpyy) & 2)\n\t\t\t\treturn 1;\n\t\t}\n\t\treturn 0;\n\t}\n#endif\n\n#ifdef USE_COINS\n\tvoid get_coin (void) {\n\t\t#ifdef ENABLE_PERSISTENCE\n\t\t\tpersist ();\n\t\t#endif\n\n\t\tflags [COIN_FLAG] ++;\n\t\t\n\t\tset_map_tile (_x, _y, 0, 0);\n\t\tplay_sfx (5);\n\n\t\t#if defined ACTIVATE_SCRIPTING && defined COINS_SCRIPTING\n\t\t\t// Run f_script #MAX_SCREENS + 1\n\t\t\tscript = f_scripts [MAX_SCREENS + 1];\n\t\t\trun_script ();\n\t\t#endif\n\n\t\t#ifdef COINS_REFILL\n\t\t\tplayer.life += COINS_REFILL;\n\t\t#endif\n\t}\n#endif\n\n#if defined RESPAWN_REENTER || defined BOXES_KILL_PLAYER\n\tvoid explode_player (void) {\n\t\tplayer.next_frame = sprite_17_a;\n\t\tsp_MoveSprAbs (sp_player, spritesClip, player.next_frame - player.current_frame, VIEWPORT_Y + (gpy >> 3), VIEWPORT_X + (gpx >> 3), gpx & 7, gpy & 7);\n\t\tplayer.current_frame = player.next_frame;\n\t\t#asm \n\t\t\tcall SPUpdateNow\n\t\t#endasm\n\t\tplay_sfx (10);\t\n\t}\n#endif\n\nvoid adjust_to_tile_x (void) {\n\t// gpx = gpxx << 4; player.x = gpx << 6;\n\t#asm\n\t\t\tld  a, (_gpxx)\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tld  (_gpx), a\n\t\t\tcall Ashl16_HL\n\t\t\tld  (_player), hl\n\t#endasm\n}\n\nvoid adjust_to_tile_y (void) {\n\t// gpy = gpyy << 4; player.y = gpy << 6;\n\t#asm\n\t\t\tld a, (_gpyy)\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tld  (_gpy), a\n\t\t\tcall Ashl16_HL\n\t\t\tld  (_player+2), hl\n\t#endasm\n}\n\n#ifdef PLAYER_FLICKERS\n\tvoid player_flicker (void) {\n\t\tplayer.estado = EST_PARP;\n\t\tplayer.ct_estado = PLAYER_FLICKERS;\n\t}\n#endif\n\n#ifdef ENABLE_BREAKABLE\n\tvoid actualiza_breakables (void) {\n\t\tprocess_breakable = 0;\n\t\tfor (gpit = 0; gpit < MAX_BREAKABLE; gpit ++) {\n\t\t\tif (b_f [gpit]) {\n\t\t\t\tb_f [gpit] --;\n\t\t\t\tif (b_f [gpit] == 0) {\n\t\t\t\t\t#ifdef BREAKABLE_SPAWN_CHANCE\n\t\t\t\t\t\trdi = ((rand () & BREAKABLE_SPAWN_CHANCE) == 1) ? BREAKABLE_SPAWN_TILE : BREAKABLE_ERASE_TILE;\n\t\t\t\t\t\tset_map_tile (b_x [gpit], b_y [gpit], rdi, comportamiento_tiles [rdi]);\n\t\t\t\t\t#else\n\t\t\t\t\t\tset_map_tile (b_x [gpit], b_y [gpit], BREAKABLE_ERASE_TILE, comportamiento_tiles [BREAKABLE_ERASE_TILE]);\n\t\t\t\t\t#endif\n\t\t\t\t} else process_breakable = -1;\n\t\t\t}\n\t\t}\n\t}\n\n\tvoid add_to_breakables (void) {\n\t\tfor (gpit = 0; gpit < MAX_BREAKABLE; gpit ++) {\n\t\t\tif (b_f [gpit] == 0) {\n\t\t\t\t#ifdef ENABLE_PERSISTENCE\n\t\t\t\t\tpersist ();\n\t\t\t\t#endif\t\t\t\t\t\n\t\t\t\tb_x [gpit] = _x;\n\t\t\t\tb_y [gpit] = _y;\n\t\t\t\tb_f [gpit] = MAX_BREAKABLE_FRAMES;\n\t\t\t\tset_map_tile (b_x [gpit], b_y [gpit], BREAKABLE_BREAKING_TILE, comportamiento_tiles [BREAKABLE_BREAKING_TILE]);\n\t\t\t\t#asm \n\t\t\t\t\tcall SPUpdateNow\n\t\t\t\t#endasm\n\t\t\t\tplay_sfx (9);\n\t\t\t\tprocess_breakable = 1;\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\t}\n#endif\n\n#ifdef ENABLE_SWORD\n\tvoid swing_sword (void) {\n\t\t#asm\n\t\t\t\tld  a, (_s_on)\n\t\t\t\tor  a\n\t\t\t\tjp  z, swing_sword_off\n\n\t\t\t.sword_check\n\n\t\t\t#ifdef PLAYER_MOGGY_STYLE\n\n\t\t\t\t\tld  bc, (_s_frame)\n\t\t\t\t\tld  b, 0\n\n\t\t\t\t\t// In genital mode, every swing direction is different, so \n\t\t\t\t\tld  a, (_s_type)\n\t\t\t\t\tcp  SWORD_TYPE_LEFT\n\t\t\t\t\tjr  z, sword_left\n\t\t\t\t\tcp  SWORD_TYPE_RIGHT\n\t\t\t\t\tjr  z, sword_right\n\t\t\t\t\tcp  SWORD_TYPE_UP\n\t\t\t\t\tjr  z, sword_up\t\t\t\t\n\t\t\t\t\t;cp  SWORD_TYPE_DOWN\n\t\t\t\t\t;jr  z, sword_down\n\n\t\t\t\t.sword_down\n\t\t\t\t\t// s_y = gpy + swoffs_x [s_frame]; s_x = gpx + 8 - swoffs_y [s_frame]|SWORD_STAB;\n\t\t\t\t\t// s_hit_y = s_y + 8; s_hit_x = s_x + 3;\n\t\t\t\t\t#ifdef SWORD_STAB\n\t\t\t\t\t\tld  d, SWORD_STAB\n\t\t\t\t\t#else\n\t\t\t\t\t\tld  hl, _swoffs_x\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  d, (hl)\n\t\t\t\t\t#endif\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tadd d\n\t\t\t\t\tld  (_s_y), a\n\t\t\t\t\tadd 7\n\t\t\t\t\tld  (_s_hit_y), a\n\n\t\t\t\t\tld  hl, _swoffs_y\n\t\t\t\t\tadd hl, bc \n\t\t\t\t\tld  d, (hl)\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tadd 8\n\t\t\t\t\tsub d \n\t\t\t\t\tld  (_s_x), a\n\t\t\t\t\tadd 3\n\t\t\t\t\tld  (_s_hit_x), a\n\n\t\t\t\t\tjr  sword_check_done\n\n\t\t\t\t.sword_up\n\t\t\t\t\t// s_y = gpy + 8 - swoffs_x [s_frame]; s_x = gpx + swoffs_y [s_frame]|SWORD_STAB;\n\t\t\t\t\t// s_hit_y = s_y; s_hit_x = s_x + 4;\n\t\t\t\t\t#ifdef SWORD_STAB\n\t\t\t\t\t\tld  d, SWORD_STAB\n\t\t\t\t\t#else\n\t\t\t\t\t\tld  hl, _swoffs_x\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  d, (hl)\n\t\t\t\t\t#endif\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tadd 8\n\t\t\t\t\tsub d\n\t\t\t\t\tld  (_s_y), a\n\t\t\t\t\tld  (_s_hit_y), a\n\n\t\t\t\t\tld  hl, _swoffs_y\n\t\t\t\t\tadd hl, bc \n\t\t\t\t\tld  d, (hl)\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tadd d \n\t\t\t\t\tld  (_s_x), a\n\t\t\t\t\tadd 4\n\t\t\t\t\tld  (_s_hit_x), a\n\n\t\t\t\t\tjr  sword_check_done\n\n\t\t\t\t.sword_left\n\t\t\t\t\t// s_y = gpy + 12 - swoffs_y [s_frame]|SWORD_STAB; s_x = gpx + 8 - swoffs_x [s_frame];\n\t\t\t\t\t// s_hit_y = s_y + 3; s_hit_x = s_x;\n\t\t\t\t\t#ifdef SWORD_STAB\n\t\t\t\t\t\tld  d, SWORD_STAB\n\t\t\t\t\t#else\n\t\t\t\t\t\tld  hl, _swoffs_y\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  d, (hl)\n\t\t\t\t\t#endif\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tadd 12\n\t\t\t\t\tsub d\n\t\t\t\t\tld  (_s_y), a\n\t\t\t\t\tadd 3\n\t\t\t\t\tld  (_s_hit_y), a\n\n\t\t\t\t\tld  hl, _swoffs_x\n\t\t\t\t\tadd hl, bc \n\t\t\t\t\tld  d, (hl)\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tadd 8\n\t\t\t\t\tsub d \n\t\t\t\t\tld  (_s_x), a\n\t\t\t\t\tld  (_s_hit_x), a\n\n\t\t\t\t\tjr  sword_check_done\n\n\t\t\t\t.sword_right\n\t\t\t\t\t// s_y = gpy + swoffs_y [s_frame]|SWORD_STAB; s_x = gpx + swoffs_x [s_frame];\n\t\t\t\t\t// s_hit_y = s_y + 4; s_hit_x = s_x + 7;\n\t\t\t\t\t#ifdef SWORD_STAB\n\t\t\t\t\t\tld  d, SWORD_STAB\n\t\t\t\t\t#else\n\t\t\t\t\t\tld  hl, _swoffs_y\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  d, (hl)\n\t\t\t\t\t#endif\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tadd d\n\t\t\t\t\tld  (_s_y), a\n\t\t\t\t\tadd 4\n\t\t\t\t\tld  (_s_hit_y), a\n\n\t\t\t\t\tld  hl, _swoffs_x\n\t\t\t\t\tadd hl, bc \n\t\t\t\t\tld  d, (hl)\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tadd d \n\t\t\t\t\tld  (_s_x), a\n\t\t\t\t\tadd 7\n\t\t\t\t\tld  (_s_hit_x), a\n\n\t\t\t\t\t;jr  sword_check_done\n\t\t\t#else\n\t\t\t\t#ifdef SWORD_UP\n\t\t\t\t\t.sword_check_up\n\t\t\t\t\t\tld  a, (_s_type)\n\t\t\t\t\t\tcp  SWORD_TYPE_UP\n\t\t\t\t\t\tjr  nz, sword_up_done\n\n\t\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\t\t#ifdef SWORD_STAB\n\t\t\t\t\t\t\tadd SWORD_STAB\n\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tld  bc, (_s_frame)\n\t\t\t\t\t\t\tld  b, 0\n\t\t\t\t\t\t\tld  hl, _swoffs_y\n\t\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\t\tld  c, (hl)\n\t\t\t\t\t\t\tadd c\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\tld  (_s_x), a\n\n\t\t\t\t\t\tadd 4\n\t\t\t\t\t\tld  (_s_hit_x), a\n\n\t\t\t\t\t\tld  bc, (_s_frame)\n\t\t\t\t\t\tld  b, 0\n\t\t\t\t\t\tld  hl, _swoffs_x\n\t\t\t\t\t\tadd hl, bc \n\t\t\t\t\t\tld  c, (hl)\n\n\t\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\t\tadd 8\n\t\t\t\t\t\tsub c \n\t\t\t\t\t\tld  (_s_y), a\n\n\t\t\t\t\t\tld  (_s_hit_y), a\n\t\t\t\t\t\tjp  sword_check_done\n\n\t\t\t\t\t.sword_up_done\n\t\t\t\t#endif\n\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\t#ifdef SWORD_STAB \n\t\t\t\t\t\tadd SWORD_STAB\n\t\t\t\t\t#else\n\t\t\t\t\t\tld  bc, (_s_frame)\n\t\t\t\t\t\tld  b, 0\n\t\t\t\t\t\tld  hl, _swoffs_y\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  c, (hl)\n\t\t\t\t\t\tadd c \n\t\t\t\t\t#endif\n\t\t\t\t\tld  (_s_y), a\n\t\t\t\t\tadd 4\n\t\t\t\t\tld  (_s_hit_y), a\n\n\t\t\t\t\tld  bc, (_s_frame)\n\t\t\t\t\tld  b, 0\n\t\t\t\t\tld  hl, _swoffs_x\n\t\t\t\t\tadd hl, bc\n\t\t\t\t\tld  c, (hl) \n\n\t\t\t\t\tld  a, (_s_type)\n\t\t\t\t\tcp  SWORD_TYPE_LEFT\n\t\t\t\t\tjr  nz, sword_right\n\n\t\t\t\t.sword_left \n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tadd 8\n\t\t\t\t\tsub c \n\t\t\t\t\tld  (_s_x), a\n\t\t\t\t\tld  (_s_hit_x), a\n\t\t\t\t\tjr  sword_check_done\n\n\t\t\t\t.sword_right\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tadd c\n\t\t\t\t\tld  (_s_x), a\n\t\t\t\t\tadd 7\n\t\t\t\t\tld  (_s_hit_x), a\n\t\t\t#endif\n\n\t\t\t.sword_check_done\n\n\t\t\t// Detect breakable\n\t\t\t#ifdef ENABLE_BREAKABLE\n\t\t\t\t// if (s_frame > 2 -> >= 3\n\t\t\t\t\tld  a, (_s_frame)\n\t\t\t\t\tcp  MIN_SWORD_HIT_FRAME\n\t\t\t\t\tjr  c, sword_breakable_done\n\n\t\t\t\t// && s_frame < 6)\n\t\t\t\t\tcp  MAX_SWORD_HIT_FRAME\n\t\t\t\t\tjr  nc, sword_breakable_done\n\n\t\t\t\t\tld  h, 0\n\n\t\t\t\t\tld  a, (_s_hit_x)\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tld  (__x), a\n\t\t\t\t\tld  l, a\n\t\t\t\t\tpush hl\n\n\t\t\t\t\tld  a, (_s_hit_y)\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tld  (__y), a\n\t\t\t\t\tld  l, a\n\t\t\t\t\tpush hl\n\n\t\t\t\t\tcall _attr\n\n\t\t\t\t\tpop bc\n\t\t\t\t\tpop bc\n\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand 32\n\t\t\t\t\tjr  z, sword_breakable_done\n\n\t\t\t\t\tcall _add_to_breakables\n\n\t\t\t\t.sword_breakable_done\t\t\t\t\n\t\t\t#endif\n\n\t\t\t\tld  a, (_s_frame)\n\t\t\t\tinc a\n\t\t\t\tld  (_s_frame), a\n\t\t\t\tcp  9\n\t\t\t\tjr  nz, swing_sword_goon\n\n\t\t\t\txor a\n\t\t\t\tld  (_s_on), a\n\n\t\t\t.swing_sword_goon\n\t\t\t\tld  a, (_s_x)\n\t\t\t\tjr swing_sword_done\n\n\t\t\t.swing_sword_off\n\t\t\t\tld  a, 240\n\t\t\t\t\n\t\t\t.swing_sword_done\n\t\t\t\tld  (_rdx), a\n\t\t#endasm\n\n\t\tsp_MoveSprAbs (sp_sword, spritesClip, s_next_frame - s_current_frame, VIEWPORT_Y + (s_y >> 3), VIEWPORT_X + (rdx >> 3), rdx & 7, s_y & 7);\n\t\ts_current_frame = s_next_frame;\t\t\n\t}\n#endif\n\n#if defined QUICKSAND_TILES || defined SLIPPERY_TILES || defined CONVEYOR_TILES\n\tvoid two_points_attr (void) {\n\t\t#asm\n\t\t\t\tld  a, (_gpx)\n\t\t\t\tadd 4\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_pty1)\n\t\t\t\tcall _attr_2\n\t\t\t\tld  a, l\n\t\t\t\tld  (_rdt1), a\n\n\t\t\t\tld  a, (_gpx)\n\t\t\t\tadd 11\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_pty1)\n\t\t\t\tcall _attr_2\n\t\t\t\tld  a, l\n\t\t\t\tld  (_rdt2), a\n\t\t#endasm\n\t}\n#endif\n\n// player_move\nvoid move (void) {\n\tgpcx = player.x;\n\tgpcy = player.y;\n\n\t// Read device (keyboard, joystick ...)\n\tpad_read ();\n\n\t// Jump button\n\t#ifndef PLAYER_MOGGY_STYLE\n\t\t#if defined BOTH_KEYS_JUMP\n\t\t\tbutton_jump = (pad0 & (sp_UP|sp_FIRE)) != (sp_UP|sp_FIRE);\n\t\t#elif defined PLAYER_CAN_FIRE || !defined FIRE_TO_JUMP\n\t\t\tbutton_jump = ((pad0 & sp_UP) == 0); \n\t\t#else\n\t\t\tbutton_jump = ((pad0 & sp_FIRE) == 0);\n\t\t#endif\n\t#endif\n\n\t#ifdef ENABLE_FRIGOABABOL\n\t\tif (player.estado == EST_FRIGOABABOL) {\n\t\t\tpad0 |= (sp_LEFT | sp_RIGHT | sp_UP | sp_DOWN);\n\n\t\t\t#ifdef FRIGO_UNFREEZE_TIME\n\t\t\t\tplayer.ct_estado --;\n\t\t\t#endif\n\n\t\t\t#ifdef FRIGO_UNFREEZE_FIRE\n\t\t\t\tif ((pad0 & sp_FIRE) == 0) {\n\t\t\t\t\tplayer.ct_estado --;\n\n\t\t\t\t\t#ifdef FRIGO_FIGHT\n\t\t\t\t\t\tplayer.vx += ((rand () % 3) << 6) - 64;\n\t\t\t\t\t\tplayer.vy += ((rand () % 3) << 6) - 64;\n\t\t\t\t\t#endif\n\t\t\t\t}\n\t\t\t#endif\n\n\t\t\t#ifdef FRIGO_NO_FIRE\n\t\t\t\t#ifdef PLAYER_CAN_FIRE\n\t\t\t\t\tpad0 |= sp_FIRE;\n\t\t\t\t#endif\n\n\t\t\t\t#ifdef ENABLE_SWORD\n\t\t\t\t\tpad_this_frame |= sp_FIRE;\n\t\t\t\t#endif\n\t\t\t#endif\n\n\t\t\tif (player.ct_estado == 0) {\n\t\t\t\t#ifdef PLAYER_FLICKERS\n\t\t\t\t\tplayer_flicker ();\n\t\t\t\t#else\n\t\t\t\t\tplayer.estado = EST_NORMAL;\n\t\t\t\t#endif\n\t\t\t}\n\t\t}\n\t#endif\n\n\t/* Vertical movement. The ecuations used are:\n\n\t   1.- vy = vy + g\n\t   2.- y = y + vy\n\n\t*/\n\n\t#ifdef PLAYER_CUSTOM_VERT_AXIS\n\t\t#include \"custom_vert_axis.h\"\n\t#else\n\n\t\t/* Jump: Jumping is as easy as giving vy a negative value. Nevertheless, we want\n\t\t   a somewhat more controllable jump, so we use the \"mario bros\" kind of controls:\n\t\t   the longer you press jump, the higher you reach.\n\t\t*/\n\n\t\t#ifdef PLAYER_HAS_JUMP\n\t\t\t#ifdef RAMIRO_HOP\n\t\t\t\t#ifdef TIGHT_BOUNDING_BOX\n\t\t\t\t\trdi = ((attr ((gpx + 4) >> 4, gpyy + 1) & 12) || (attr ((gpx + 11) >> 4, gpyy + 1) & 12));\n\t\t\t\t#else\n\t\t\t\t\trdi = (attr (gpxx, gpyy + 1) & 12 || ((gpx & 15) != 0 && attr (gpxx + 1, gpyy + 1) & 12));\n\t\t\t\t#endif\n\t\t\t#endif\n\n\t\t\tif (button_jump) {\n\t\t\t\tif (player.saltando == 0\n\t\t\t\t\t#ifdef RAMIRO_HOVER\n\t\t\t\t\t\t&& player.just_hovered == 0\n\t\t\t\t\t#endif\n\t\t\t\t) {\n\t\t\t\t\tif (\n\t\t\t\t\t#ifdef RAMIRO_HOP\n\t\t\t\t\t\trdi\n\t\t\t\t\t#else\n\t\t\t\t\t\tplayer.possee \n\t\t\t\t\t#endif\n\t\t\t\t\t\t|| player.gotten\n\t\t\t\t\t) {\n\t\t\t\t\t\tplayer.saltando = 1;\n\t\t\t\t\t\tplayer.just_jumped = 1;\n\t\t\t\t\t\tplayer.cont_salto = 0;\n\t\t\t\t\t\tplay_sfx (1);\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\tif (player.saltando) {\n\t\t\t\t\tplayer.vy -= (PLAYER_VY_INICIAL_SALTO + PLAYER_INCR_SALTO - (player.cont_salto>>1));\n\t\t\t\t\tif (player.vy < -PLAYER_MAX_VY_SALTANDO) player.vy = -PLAYER_MAX_VY_SALTANDO;\n\t\t\t\t\tplayer.cont_salto ++;\n\t\t\t\t\tif (player.cont_salto == 8)\n\t\t\t\t\t\tplayer.saltando = 0;\n\t\t\t\t} \n\t\t\t} else {\n\t\t\t\tplayer.saltando = 0;\n\t\t\t\tplayer.just_jumped = 0;\n\t\t\t}\n\t\t#endif\n\n\t\t#ifdef PLAYER_HAS_JETPAC\n\t\t\tif ((pad0 & sp_UP) == 0) {\n\t\t\t\tplayer.vy -= PLAYER_INCR_JETPAC;\n\t\t\t\tif (player.vy < -PLAYER_MAX_VY_JETPAC) player.vy = -PLAYER_MAX_VY_JETPAC;\n\t\t\t\t#ifdef JETPAC_DRAINS_LIFE\n\t\t\t\t\tjetpac_frame_counter ++;\n\t\t\t\t\tif (jetpac_frame_counter == JETPAC_DRAIN_OFFSET + JETPAC_DRAIN_RATIO) {\n\t\t\t\t\t\tjetpac_frame_counter = JETPAC_DRAIN_OFFSET;\n\t\t\t\t\t\tplayer.life --;\n\t\t\t\t\t\tplayer_just_died = PLAYER_KILLED_BY_SELF;\n\t\t\t\t\t}\n\t\t\t\t#endif\n\t\t\t} else {\n\t\t\t\tjetpac_frame_counter = 0;\n\t\t\t}\n\t\t#endif\n\n\t\t#ifdef PLAYER_NO_INERTIA\n\t\t\tif ((pad0 & sp_UP) == 0) { player.vy = -PLAYER_CONST_V; player.facing = GENITAL_FACING_UP; }\n\t\t\tif ((pad0 & sp_DOWN) == 0) { player.vy = PLAYER_CONST_V; player.facing = GENITAL_FACING_DOWN; }\n\t\t\tif ( ! ((pad0 & sp_UP) == 0 || (pad0 & sp_DOWN) == 0)) player.vy = 0;\n\t\t#else\t\n\t\t\t#ifndef PLAYER_MOGGY_STYLE\n\t\t\t\t// If side view, get affected by gravity:\n\t\t\t\t\n\t\t\t\t#ifdef RAMIRO_HOVER\n\t\t\t\t\t#ifdef MODE_128K_DUAL\n\t\t\t\t\t\trda = player.hovering;\n\t\t\t\t\t#endif\n\t\t\t\t\tplayer.hovering = 0;\n\t\t\t\t\tif (((pad0 & sp_DOWN) == 0 \n\t\t\t\t\t\t#ifdef HOVER_WITH_JUMP_ALSO\n\t\t\t\t\t\t\t|| (button_jump && player.just_jumped == 0)\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t)\n\t\t\t\t\t\t#ifdef RAMIRO_HOVER_ON_VAR\n\t\t\t\t\t\t\t&& ramiro_hover \n\t\t\t\t\t\t#endif\n\t\t\t\t\t) {\n\t\t\t\t\t\tplayer.just_hovered = 1;\n\t\t\t\t\t\tif (player.vy > 0) {\n\t\t\t\t\t\t\t#ifdef MODE_128K_DUAL\n\t\t\t\t\t\t\t\tif (rda == 0 && is128k) play_sfx (12);\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\tplayer.hovering = 1;\n\t\t\t\t\t\t\t#asm\n\t\t\t\t\t\t\t\t._player_hover\n\t\t\t\t\t\t\t\t\tld  a, (_pad0)\n\t\t\t\t\t\t\t\t\tor  sp_DOWN\n\t\t\t\t\t\t\t\t\tld  (_pad0), a\n\n\t\t\t\t\t\t\t\t\tld  hl, (_player + 8) \t\t// player.vy\n\t\t\t\t\t\t\t\t\tld  de, PLAYER_MAX_VY_CAYENDO_H - PLAYER_G_HOVER\n\t\t\t\t\t\t\t\t\tor  a\n\t\t\t\t\t\t\t\t\tpush hl \n\t\t\t\t\t\t\t\t\tsbc hl, de \n\t\t\t\t\t\t\t\t\tpop hl \n\t\t\t\t\t\t\t\t\tjr  nc, player_hover_maximum\n\n\t\t\t\t\t\t\t\t\tld  de, PLAYER_G_HOVER\n\t\t\t\t\t\t\t\t\tadd hl, de \n\t\t\t\t\t\t\t\t\tjr  player_hover_set\n\n\t\t\t\t\t\t\t\t.player_hover_maximum\n\t\t\t\t\t\t\t\t\tld  hl, PLAYER_MAX_VY_CAYENDO_H\n\n\t\t\t\t\t\t\t\t.player_hover_set\n\t\t\t\t\t\t\t\t\tld  (_player + 8), hl\n\t\t\t\t\t\t\t#endasm\n\t\t\t\t\t\t} \n\t\t\t\t\t} else player.just_hovered = 0;\n\n\t\t\t\t\tif (player.hovering == 0)\n\t\t\t\t#endif\n\t\t\t\t{\n\t\t\t\t\t#asm\n\t\t\t\t\t\t._player_gravity\n\t\t\t\t\t\t\t// Signed comparison shortcut by my picha\n\t\t\t\t\t\t\t// If player.vy < 0 add PLAYER_G\n\t\t\t\t\t\t\t// If player.vy > 0 do a signed comparison\n\t\t\t\t\t\t\tld  hl, (_player + 8) \t\t// player.vy\n\t\t\t\t\t\t\tbit 7, h\n\t\t\t\t\t\t\tjr  nz, player_gravity_add  // < 0\n\n\t\t\t\t\t\t\tld  de, PLAYER_MAX_VY_CAYENDO - PLAYER_G\n\t\t\t\t\t\t\tor  a\n\t\t\t\t\t\t\tpush hl \n\t\t\t\t\t\t\tsbc hl, de \n\t\t\t\t\t\t\tpop hl \n\t\t\t\t\t\t\tjr  nc, player_gravity_maximum\n\n\t\t\t\t\t\t.player_gravity_add\n\t\t\t\t\t\t\tld  de, PLAYER_G\n\t\t\t\t\t\t\tadd hl, de \n\t\t\t\t\t\t\tjr  player_gravity_vy_set\n\n\t\t\t\t\t\t.player_gravity_maximum\n\t\t\t\t\t\t\tld  hl, PLAYER_MAX_VY_CAYENDO\n\n\t\t\t\t\t\t.player_gravity_vy_set\n\t\t\t\t\t\t\tld  (_player + 8), hl \n\n\t\t\t\t\t\t.player_gravity_done\n\t\t\t\t\t#endasm\n\t\t\t\t}\n\n\t\t\t\tif (player.gotten) player.vy = 0;\t\t\n\t\t\t#else\n\t\t\t\t// If top-down view, vertical movement = horizontal movement.\n\t\t\t\t#if defined ENABLE_FRIGOABABOL && defined FRIGO_FROZEN_NO_RX\n\t\t\t\t\tif (player.estado != EST_FRIGOABABOL)\n\t\t\t\t#endif\n\t\t\t\tif ( ((pad0 & sp_UP) != 0 && (pad0 & sp_DOWN) != 0)) {\n\t\t\t\t\tif (player.vy > 0) {\n\t\t\t\t\t\tplayer.vy -= player.rx;\n\t\t\t\t\t\tif (player.vy < 0)\n\t\t\t\t\t\t\tplayer.vy = 0;\n\t\t\t\t\t} else if (player.vy < 0) {\n\t\t\t\t\t\tplayer.vy += player.rx;\n\t\t\t\t\t\tif (player.vy > 0)\n\t\t\t\t\t\t\tplayer.vy = 0;\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\tif ((pad0 & sp_UP) == 0) {\n\t\t\t\t\tif (player.vy > -player.max_vx) {\n\t\t\t\t\t\tplayer.vy -= player.ax;\t\t\t\t\t\n\t\t\t\t\t}\n\t\t\t\t\tplayer.facing = GENITAL_FACING_UP;\n\t\t\t\t}\n\n\t\t\t\tif ((pad0 & sp_DOWN) == 0) {\n\t\t\t\t\tif (player.vy < player.max_vx) {\n\t\t\t\t\t\tplayer.vy += player.ax;\n\t\t\t\t\t}\n\t\t\t\t\tplayer.facing = GENITAL_FACING_DOWN;\n\t\t\t\t}\n\t\t\t#endif\n\t\t#endif\t\n\n\t\t#ifdef PLAYER_DIZZY\n\t\t\tif (player.estado & EST_DIZZY) { player.vy >>= 1; player.vy += (rand () & (PLAYER_CONST_V - 1)) - (PLAYER_CONST_V >> 1); }\n\t\t#endif\n\t#endif\n\n\tplayer.y += player.vy;\n\n\t// Safe\n\t#ifdef BETTER_VERTICAL_CONNECTIONS\n\t\tif (player.y < -512)\n\t\t\tplayer.y = -512;\n\t#else\t\n\t\tif (player.y < 0)\n\t\t\tplayer.y = 0;\n\t#endif\n\t\t\t\n\tif (player.y > 9216)\n\t\tplayer.y = 9216;\n\n\t/* \n\t\tCheck for collisions with obstacles. If so, we have to move\n\t\tback until the edge of the tile.\n\t*/\n\n\t/*\n\tgpx = player.x >> 6;\t\t\t\t// Divide / 64 for pixels, then / 16 for tiles.\n\tgpy = player.y >> 6;\n\tgpxx = gpx >> 4;\n\tgpyy = gpy >> 4;\n\t*/\n\n\t#asm\n\t\t\tld  hl, (_player + 0) \t\t// player.x\n\t\t\tcall HLshr6_A\n\t\t\tld  (_gpx), a\n\t\t\tsrl a\n\t\t\tsrl a \n\t\t\tsrl a \n\t\t\tsrl a\n\t\t\tld  (_gpxx), a\n\n\t\t\tld  hl, (_player + 2) \t\t// player.y\n\t\t\tcall HLshr6_A\n\t\t\tld  (_gpy), a \n\t\t\tsrl a \n\t\t\tsrl a \n\t\t\tsrl a \n\t\t\tsrl a\n\t\t\tld  (_gpyy), a\n\t#endasm\n\t\n\t// Cool\n\n\t/*\n\twall = 0;\n\tplayer.possee = 0;\n\tplayer.ceiling = 0;\n\trdj = (player.vy + ptgmy);\n\tif (rdj) {\n\t\tif (rdj < 0) { \t\t\t// Going up\n\t\t\t#if defined PLAYER_MOGGY_STYLE || !defined TIGHT_BOUNDING_BOX\n\t\t\t\tif (attr (gpxx, gpyy) & 8 || ((gpx & 15) != 0 && attr (gpxx + 1, gpyy) & 8)) {\n\t\t\t\t\tplayer.vy = 0; gpyy ++;\tadjust_to_tile_y ();\n\t\t\t\t\tplayer.ceiling = 1;\n\t\t\t\t}\n\t\t\t#else\n\t\t\t\tif ((gpy & 15) < 12)\n\t\t\t\t\tif (((gpx & 15) < 12 && attr (gpxx, gpyy) & 8) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy) & 8)) {\n\t\t\t\t\t\tplayer.vy = 0; gpy = (gpyy << 4) + 12; player.y = gpy << 6;\n\t\t\t\t\t\tplayer.ceiling = 1;\n\t\t\t\t\t}\n\t\t\t#endif\n\t\t} else if ((gpy & 15) <= (player.vy >> 6)) { \t// Going down\n\t\t\t#if defined PLAYER_MOGGY_STYLE || !defined TIGHT_BOUNDING_BOX\n\t\t\t\tif (attr (gpxx, gpyy + 1) & 12 || ((gpx & 15) != 0 && attr (gpxx + 1, gpyy + 1) & 12))\n\t\t\t#else\n\t\t\t\tif (((gpx & 15) < 12 && (attr (gpxx, gpyy + 1) & 12)) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 12))\n\t\t\t#endif\n\t\t\t{\n\t\t\t\tplayer.vy = 0; adjust_to_tile_y ();\n\t\t\t\tplayer.possee = 1;\n\t\t\t}\n\t\t}\n\t}\n\t*/\n\n\t#asm\n\t\t\t.vert_collision\n\t\t\txor a\n\t\t\tld  (_player + 26), a \t\t\t// possee\n\t\t\tld  (_player + 37), a \t\t\t// ceiling\n\t\t\tld  (_wall), a\n\n\n\t\t\tld  de, (_player + 8)\n\t\t\tld  hl, (_ptgmy)\n\t\t\tadd hl, de\n\t\t\tld  (_rdj), hl\n\n\t\t\t// if (rdj)\n\t\t\tld  a, h\n\t\t\tor  l\n\t\t\tjp  z, vert_collision_done\n\n\t\t\t// check sign of rdj. If bit 7 of h is 1, negative.\n\t\t\tbit 7, h\n\t\t\tjr  z, vert_collision_positive\n\n\t\t.vert_collision_negative\n\t\t\t// rdj < 0\n\n\t\t\t#if !defined TIGHT_BOUNDING_BOX\n\t\t\t\t// if (attr (gpxx, gpyy) & 8 || ((gpx & 15) != 0 && attr (gpxx + 1, gpyy) & 8)) {\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand 8\n\n\t\t\t\t\tjr  nz, vert_collision_up\n\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tjp  z, vert_collision_done\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand 8\n\t\t\t\t\tjp  z, vert_collision_done\n\n\t\t\t\t.vert_collision_up\n\t\t\t\t\t// player.vy = 0; gpyy ++; adjust_to_tile_y (); player.ceiling = 1;\n\t\t\t\t\tld  hl, 0\n\t\t\t\t\tld  (_player + 8), hl\t// player.vy\n\n\t\t\t\t\tld  hl, _gpyy\n\t\t\t\t\tinc (hl)\n\n\t\t\t\t\tcall _adjust_to_tile_y\n\n\t\t\t\t\tld  a, 1\n\t\t\t\t\tld  (_player + 37), a \t// player.ceiling\n\n\t\t\t\t\tld  a, WALL_UP\n\t\t\t\t\tld  (_wall), a \n\n\t\t\t\t\tjp  vert_collision_done\n\t\t\t#else\n\t\t\t\t#ifndef TALL_PLAYER\n\t\t\t\t// if ((gpy & 15) < 12)\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tand 15\n\t\t\t\t\tcp  12\n\t\t\t\t\tjp  nc, vert_collision_done\n\t\t\t\t#endif\n\n\t\t\t\t// if (((gpx & 15) < 12 && attr (gpxx, gpyy) & 8) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy) & 8)) {\n\n\t\t\t\t.vert_collision_if1\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tcp  12\n\t\t\t\t\tjr  nc, vert_collision_if2\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand 8\n\n\t\t\t\t\tjr  nz, vert_collision_up\n\n\t\t\t\t.vert_collision_if2\n\t\t\t\t\t// (gpx & 15) > 4 => (gpx & 15) >= 5\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tcp  5\n\t\t\t\t\tjp  c, vert_collision_done\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand 8\n\t\t\t\t\tjp  z, vert_collision_done\n\n\t\t\t\t.vert_collision_up\n\t\t\t\t\t// player.vy = 0;\n\t\t\t\t\tld  hl, 0\n\t\t\t\t\tld  (_player + 8), hl\t// player.vy\n\n\t\t\t\t#ifdef TALL_PLAYER\n\t\t\t\t\t\t// gpyy ++; adjust_to_tile_y ();\n\n\t\t\t\t\t\tld  hl, _gpyy\n\t\t\t\t\t\tinc (hl)\n\n\t\t\t\t\t\tcall _adjust_to_tile_y\n\t\t\t\t#else\n\t\t\t\t\t\t// gpy = (gpyy << 4) + 12; player.y = gpy << 6;\n\n\t\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\t\tsla a\n\t\t\t\t\t\tsla a\n\t\t\t\t\t\tsla a\n\t\t\t\t\t\tsla a\n\t\t\t\t\t\tadd 12\n\t\t\t\t\t\tld  (_gpy), a\n\n\t\t\t\t\t\t/*\n\t\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\t\tld  e, a\n\t\t\t\t\t\tld  d, 0\n\t\t\t\t\t\tld  l, 6\n\t\t\t\t\t\tcall l_asl\n\t\t\t\t\t\t*/\n\t\t\t\t\t\tcall Ashl16_HL\n\t\t\t\t\t\tld  (_player + 2), hl \t// player.y\n\t\t\t\t#endif\n\t\t\t\t\t// player.ceiling = 1;\n\n\t\t\t\t\tld  a, 1\n\t\t\t\t\tld  (_player + 37), a \t// player.ceiling\n\n\t\t\t\t\tld  a, WALL_UP\n\t\t\t\t\tld  (_wall), a \n\t\t\t\t\t\n\t\t\t\t\tjr  vert_collision_done\n\t\t\t#endif\n\n\t\t.vert_collision_positive\n\t\t\t// rdj > 0\n\t\t\t// else if ((gpy & 15) <= (player.vy >> 6) -> (player.vy >> 6) >= (gpy & 16)\n\t\t\tld  a, (_gpy)\n\t\t\tand 15\n\t\t\tld  c, a\n\n\t\t\t/*\n\t\t\tld  de, (_player + 8) \t// player.vy\n\t\t\tld  l, 6\n\t\t\tcall l_asr\n\t\t\tld  a, l\n\t\t\t*/\n\t\t\tld  hl, (_player + 8) \t// player.vy\n\t\t\tcall HLshr6_A\n\n\t\t\tcp  c\n\t\t\tjr  c, vert_collision_done\n\n\t\t\t#if !defined TIGHT_BOUNDING_BOX\n\t\t\t\t// if (attr (gpxx, gpyy + 1) & 12 || ((gpx & 15) != 0 && attr (gpxx + 1, gpyy + 1) & 12))\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tinc a \n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand 12\n\n\t\t\t\t\tjr  nz, vert_collision_down\n\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tjr  z, vert_collision_done\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tinc a \n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand 12\n\t\t\t\t\tjr  z, vert_collision_done\n\t\t\t#else\n\t\t\t\t// if (((gpx & 15) < 12 && (attr (gpxx, gpyy + 1) & 12)) || ((gpx & 15) > 4 && attr (gpxx + 1, gpyy + 1) & 12))\n\t\t\t\t.vert_collision_if3\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tcp  12\n\t\t\t\t\tjr  nc, vert_collision_if4\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tinc a \n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand 12\n\n\t\t\t\t\tjr  nz, vert_collision_down\n\n\t\t\t\t.vert_collision_if4\n\t\t\t\t\t// (gpx & 15) > 4 => (gpx & 15) >= 5\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tcp  5\n\t\t\t\t\tjr  c, vert_collision_done\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tinc a \n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand 12\n\t\t\t\t\tjr  z, vert_collision_done\n\t\t\t#endif\n\n\t\t.vert_collision_down\n\t\t\tld  hl, 0\n\t\t\tld  (_player + 8), hl\t// player.vy\n\t\t\t\n\t\t\tcall _adjust_to_tile_y\n\n\t\t\tld  a, 1\n\t\t\tld  (_player + 26), a \t// player.possee\n\n\t\t.vert_collision_done\n\t#endasm\n\n\t#if defined QUICKSAND_TILES || defined SLIPPERY_TILES\n\t\tplayer.ax = PLAYER_AX; player.rx = PLAYER_RX;\n\t#endif\n\n\t#if defined QUICKSAND_TILES\n\t\tplayer.max_vx = PLAYER_MAX_VX;\n\t\t/*\n\t\tpty1 = (gpy + 15) >> 4;\n\t\ttwo_points_attr ();\n\t\t*/\n\t\t#asm\n\t\t\t\tld  a, (_gpy)\n\t\t\t\t#ifdef PLAYER_MOGGY_STYLE\n\t\t\t\t\tadd 15\n\t\t\t\t#else\n\t\t\t\t\tadd 16\n\t\t\t\t#endif\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tld  (_pty1), a\n\t\t\t\tcall _two_points_attr\n\t\t#endasm\n\n\t\tif ((rdt1 & 64) || (rdt2 & 64)) {\n\t\t\tif (rdj < 0) player.saltando = 0;\n\t\t\telse {\n\t\t\t\tplayer.vy = PLAYER_VY_SINKING;\n\t\t\t\tplayer.possee = 1;\n\t\t\t\tplayer.ax = PLAYER_AX_QUICKSANDS;\n\t\t\t\tplayer.rx = PLAYER_RX_QUICKSANDS;\n\t\t\t\tplayer.max_vx = PLAYER_MAX_VX_QUICKSANDS;\t\n\t\t\t}\n\t\t}\n\t#endif\n\n\t#if defined SLIPPERY_TILES || defined CONVEYOR_TILES\n\t\t/*\n\t\t#ifdef PLAYER_MOGGY_STYLE\n\t\t\tpty1 = (gpy + 15) >> 4;\n\t\t#else\n\t\t\tpty1 = (gpy + 16) >> 4;\n\t\t#endif\n\t\ttwo_points_attr ();\n\t\t*/\n\n\t\t#asm\n\t\t\t\tld  a, (_gpy)\n\t\t\t\t#ifdef PLAYER_MOGGY_STYLE\n\t\t\t\t\tadd 15\n\t\t\t\t#else\n\t\t\t\t\tadd 16\n\t\t\t\t#endif\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tld  (_pty1), a\n\t\t\t\tcall _two_points_attr\t\t\t\t\n\t\t#endasm\n\t#endif\n\n\t#if defined SLIPPERY_TILES || defined CONVEYOR_TILES\n\t\tif (player.possee) \n\t#endif\n\t{\n\t\t#ifdef SLIPPERY_TILES\n\t\t\t/*\n\t\t\tif ((rdt1 & 16) || (rdt2 & 16)) {\n\t\t\t\t#ifdef DISABLE_SLIPPERY_ON_VAR\n\t\t\t\t\tif (disable_slippery == 0)\n\t\t\t\t#endif\n\t\t\t\t{\n\t\t\t\t\tplayer.ax = PLAYER_AX_SLIPPERY; player.rx = PLAYER_RX_SLIPPERY;\n\t\t\t\t}\n\t\t\t}\n\t\t\t*/\n\n\t\t\t#asm\n\t\t\t\t\tld  a, (_rdt1)\n\t\t\t\t\tand 16\n\t\t\t\t\tjr  nz, slippery_check_do\n\n\t\t\t\t\tld  a, (_rdt2)\n\t\t\t\t\tand 16\n\t\t\t\t\tjr  z, slippery_check_done\n\n\t\t\t\t.slippery_check_do\n\n\t\t\t\t\t#ifdef DISABLE_SLIPPERY_ON_VAR\n\t\t\t\t\t\tld  a, (_disable_slippery)\n\t\t\t\t\t\tor  a\n\t\t\t\t\t\tjr  nz, slippery_check_done\n\t\t\t\t\t#endif\n\n\t\t\t\t\tld  a, PLAYER_AX_SLIPPERY\n\t\t\t\t\tld  (_player+11), a \t\t\t// player.ax\n\n\t\t\t\t\tld  a, PLAYER_RX_SLIPPERY\n\t\t\t\t\tld  (_player+12), a \t\t\t// player.rx\n\n\t\t\t\t.slippery_check_done\n\t\t\t#endasm\n\t\t#endif\n\n\t\t#ifdef CONVEYOR_TILES\n\t\t\t#ifdef PLAYER_MOGGY_STYLE\n\n\t\t\t#else\n\t\t\t\t/*\n\t\t\t\trdj = 0;\n\t\t\t\tif (rdt1 & 2) { rdj = (rdt1 & 1) ? 1 : -1; }\n\t\t\t\tif (rdt2 & 2) { rdj += (rdt2 & 1) ? 1 : -1; }\n\t\t\t\tif (rdj < 0) ptgmx = -PLAYER_VX_CONVEYORS;\n\t\t\t\telse if (rdj > 0) ptgmx = PLAYER_VX_CONVEYORS;\n\t\t\t\t*/\n\t\t\t\t#asm\n\t\t\t\t\t\t// c ~ rdj in this rewrite\n\t\t\t\t\t\tld  c, 0\n\n\t\t\t\t\t\tld  a, (_rdt1)\n\t\t\t\t\t\tbit 1, a \t\t\t// rdt1 & 2\n\t\t\t\t\t\tcall nz, conveyor_add_to_rdj\n\n\t\t\t\t\t\tld  a, (_rdt2)\n\t\t\t\t\t\tbit 1, a\n\t\t\t\t\t\tcall nz, conveyor_add_to_rdj\n\n\t\t\t\t\t\t// check rdj 0, <0 or >0...\n\t\t\t\t\t\txor a\n\t\t\t\t\t\tor  c\n\t\t\t\t\t\tjr  z, conveyor_check_done\n\n\t\t\t\t\t\tbit 7, a \t\t\t// Positive or negative?\n\t\t\t\t\t\tld  hl, (_ptgmx)\n\t\t\t\t\t\tld  bc, PLAYER_VX_CONVEYORS\n\t\t\t\t\t\tjr  z, conveyor_right\n\n\t\t\t\t\t.conveyor_left\n\t\t\t\t\t\tsbc hl, bc\n\t\t\t\t\t\tjr  conveyor_set_ptgmx\n\n\t\t\t\t\t.conveyor_add_to_rdj\n\t\t\t\t\t\tand 1\n\t\t\t\t\t\tsla a\n\t\t\t\t\t\tdec a\n\t\t\t\t\t\tadd c\n\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\tret\n\n\t\t\t\t\t.conveyor_right\n\t\t\t\t\t\tadd hl, bc\n\n\t\t\t\t\t.conveyor_set_ptgmx\n\t\t\t\t\t\tld  (_ptgmx), hl\n\n\t\t\t\t\t.conveyor_check_done\n\t\t\t\t#endasm\n\t\t\t#endif\n\t\t#endif\n\t}\n\n\n\t// Done with vertical movement.\n\n\t/* Horizontal movement. Equations are:\n\n\t   Direction key pressed:\n\t   \n\t   x = x + vx\n\t   vx = vx + ax\n\n\t   Direction key not pressed:\n\n\t   x = x + vx\n\t   vx = vx - rx\n\t*/\n\n\t// Push / pull boxes\n\n\t#if defined PLAYER_PUSH_BOXES && defined PUSH_AND_PULL && !defined PLAYER_MOGGY_STYLE\n\t\tplayer.grab_block = 0;\n\n\t\t#if !defined TIGHT_BOUNDING_BOX\n\t\t\t/*\n\t\t\tif ((pad0 & sp_FIRE) == 0 && player.possee) {\n\t\t\t\trdx = gpxx;\tx0 = x1 = gpxx;\ty0 = y1 = gpyy;\n\t\t\t\tif (player.facing) {\t\t\t\t// Looking left\n\t\t\t\t\tif ((gpx & 15) == 0 && qtile (gpxx - 1, gpyy) == 14) {\n\t\t\t\t\t\tplayer.grab_block = 1;\n\t\t\t\t\t\tif ((pad_this_frame & sp_LEFT) == 0) {\n\t\t\t\t\t\t\tx0 = gpxx - 1; x1 = gpxx - 2;\n\t\t\t\t\t\t} else if ((pad_this_frame & sp_RIGHT) == 0 && attr (gpxx + 1, gpyy) < 8) {\n\t\t\t\t\t\t\tx0 = gpxx - 1; x1 = gpxx; \n\t\t\t\t\t\t\tgpxx ++; gpx += 16; player.x += (16<<6); \n\t\t\t\t\t\t}\n\t\t\t\t\t\tpad_this_frame = pad0 |= (sp_FIRE|sp_LEFT|sp_RIGHT);\n\t\t\t\t\t}\n\t\t\t\t} else {\t\t\t\t\t\t\t\t// Looking right\n\t\t\t\t\tif ((gpx & 15) == 0 && qtile (gpxx + 1, gpyy) == 14) {\n\t\t\t\t\t\tplayer.grab_block = 1;\n\t\t\t\t\t\tif ((pad_this_frame & sp_LEFT) == 0 && attr (gpxx - 1, gpyy) < 0) {\n\t\t\t\t\t\t\tx0 = gpxx + 1; x1 = gpxx;\n\t\t\t\t\t\t\tgpxx --; gpx -= 16; player.x -= (16<<6); \n\t\t\t\t\t\t} else if ((pad_this_frame & sp_RIGHT) == 0) {\n\t\t\t\t\t\t\tx0 = gpxx + 1; x1 = gpxx + 2; \n\t\t\t\t\t\t}\n\t\t\t\t\t\tpad_this_frame = pad0 |= (sp_FIRE|sp_LEFT|sp_RIGHT);\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\tif (x0 != x1) {\n\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\telse { gpx = rdx << 4; player.x = gpx << 6;\t}\n\t\t\t\t}\n\t\t\t}\n\t\t\t*/\n\t\t\t#asm\n\t\t\t\t.push_pull\n\t\t\t\t\tld  a, (_pad0)\n\t\t\t\t\tand sp_FIRE\n\t\t\t\t\tjp  nz, push_pull_done\n\n\t\t\t\t\t#ifdef PUSH_ON_FLOOR\n\t\t\t\t\tld  a, (_player + 26) \t// player.possee\n\t\t\t\t\tor  a\n\t\t\t\t\tjp  z, push_pull_done\n\t\t\t\t\t#endif\n\n\t\t\t\t.push_pull_do \n\n\t\t\t\t\t// rdx = gpx;\tx0 = 0xff;\ty0 = y1 = gpyy;\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tld  (_rdx), a\n\n\t\t\t\t\tld  a, 0xff\n\t\t\t\t\tld  (_x0), a\n\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tld  (_y0), a\n\t\t\t\t\tld  (_y1), a\n\n\t\t\t\t\t// if (player.facing) {\n\t\t\t\t\tld  a, (_player + 22) \t// player.facing\n\t\t\t\t\tor  a\n\t\t\t\t\tjr  z, push_pull_facing_right\n\n\t\t\t\t.push_pull_facing_left\n\t\t\t\t\t// Facing left\n\n\t\t\t\t\t//if ((gpx & 15) == 0 && qtile (gpxx - 1, gpyy) == 14) {\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tjp  nz, push_pull_done\n\n\t\t\t\t\tld  hl, (_gpxx)\n\t\t\t\t\tld  h, 0\n\t\t\t\t\tdec hl\n\t\t\t\t\tpush hl\n\t\t\t\t\tld  hl, (_gpyy)\n\t\t\t\t\tld  h, 0\n\t\t\t\t\tpush hl\n\t\t\t\t\tcall _qtile\n\t\t\t\t\tpop bc \n\t\t\t\t\tpop bc \n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  14\n\t\t\t\t\tjp  nz, push_pull_done\n\n\t\t\t\t.push_pull_facing_left_do\n\n\t\t\t\t\tld  a, 1\n\t\t\t\t\tld  (_player + 38), a\t// player.grab_block\n\n\t\t\t\t\t// if ((pad_this_frame & sp_LEFT) == 0) {\n\t\t\t\t\tld  a, (_pad_this_frame)\n\t\t\t\t\tand sp_LEFT\n\t\t\t\t\tjr  nz, push_pull_facing_left_do_not_left\n\n\t\t\t\t.push_pull_facing_left_do_left\n\t\t\t\t\t// x0 = gpxx - 1; x1 = gpxx - 2;\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tdec a\n\t\t\t\t\tld  (_x0), a\n\t\t\t\t\tdec a\n\t\t\t\t\tld  (_x1), a\n\t\t\t\t\tjp push_pull_invalidate_keys\n\n\t\t\t\t.push_pull_facing_left_do_not_left\n\t\t\t\t\tld  a, (_pad_this_frame)\n\t\t\t\t\tand sp_RIGHT\n\t\t\t\t\tjp  nz, push_pull_invalidate_keys\n\n\t\t\t\t\t// attr (gpxx + 1, gpyy) < 8\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\t\n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  8\n\t\t\t\t\tjp  nc, push_pull_invalidate_keys\n\n\t\t\t\t.push_pull_facing_left_do_right\n\t\t\t\t\t// x0 = gpxx; x1 = gpxx + 1; \n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tdec a\n\t\t\t\t\tld  (_x0), a\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (_x1), a\n\t\t\t\t\tinc a\n\n\t\t\t\t\t// gpxx ++; gpx += 16; player.x += (16<<6); \n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tadd 16\n\t\t\t\t\tld  (_gpx), a\n\n\t\t\t\t\tld  hl, (_player) \t\t// player.x\n\t\t\t\t\tld  bc, 1024 \t\t\t// 16<<6\n\t\t\t\t\tadd hl, bc\n\t\t\t\t\tld  (_player), hl \t\t// player.x\n\t\t\t\t\tjp  nc, push_pull_invalidate_keys\n\n\t\t\t\t.push_pull_facing_right\n\t\t\t\t\t// Facing right\n\n\t\t\t\t\t// if ((gpx & 15) == 0 && qtile (gpxx + 1, gpyy) == 14)\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\t\n\t\t\t\t\tjp  nz, push_pull_done\n\n\t\t\t\t\tld  hl, (_gpxx)\n\t\t\t\t\tld  h, 0\n\t\t\t\t\tinc hl\n\t\t\t\t\tpush hl\n\t\t\t\t\tld  hl, (_gpyy)\n\t\t\t\t\tld  h, 0\n\t\t\t\t\tpush hl\n\t\t\t\t\tcall _qtile\n\t\t\t\t\tpop bc \n\t\t\t\t\tpop bc \n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  14\n\t\t\t\t\tjp  nz, push_pull_done\n\n\t\t\t\t.push_pull_facing_right_do\t\n\n\t\t\t\t\tld  a, 1\n\t\t\t\t\tld  (_player + 38), a\t// player.grab_block\n\n\t\t\t\t\t// if ((pad_this_frame & sp_LEFT) == 0 && attr (gpxx - 1, gpyy) < 8) {\n\t\t\t\t\tld  a, (_pad_this_frame)\n\t\t\t\t\tand sp_LEFT\n\t\t\t\t\tjr  nz, push_pull_facing_right_do_not_left\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tdec a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  8\n\t\t\t\t\tjr  nc, push_pull_facing_right_do_not_left\n\n\t\t\t\t.push_pull_facing_right_do_left\n\t\t\t\t\t// x0 = gpxx + 1; x1 = gpxx;\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  (_x1), a\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (_x0), a\n\n\t\t\t\t\t// gpxx --; gpx -= 16; player.x -= (16<<6); \n\t\t\t\t\tld  a, c\n\t\t\t\t\tdec a\n\t\t\t\t\tld  (_gpxx), a\n\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tsub a, 16\n\t\t\t\t\tld  (_gpx), a \n\n\t\t\t\t\tld  hl, (_player) \t\t// player.x\n\t\t\t\t\tld  bc, 1024\t\t\t// 16 << 6\n\t\t\t\t\tsbc hl, bc \n\t\t\t\t\tld  (_player), hl, \t\t// player.x\n\t\t\t\t\tjr  push_pull_invalidate_keys\n\n\t\t\t\t.push_pull_facing_right_do_not_left\n\t\t\t\t\t// else if ((pad_this_frame & sp_RIGHT) == 0) {\n\t\t\t\t\tld  a, (_pad_this_frame)\n\t\t\t\t\tand sp_RIGHT\n\t\t\t\t\tjr  nz, push_pull_invalidate_keys\n\n\t\t\t\t.push_pull_facing_right_do_right\n\t\t\t\t\t// \tx0 = gpxx + 1; x1 = gpxx + 2;\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (_x0), a\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (_x1), a\n\n\t\t\t\t.push_pull_invalidate_keys\n\t\t\t\t\tld  a, (_pad0)\n\t\t\t\t\tor  sp_FIRE|sp_LEFT|sp_RIGHT\n\t\t\t\t\tld  (_pad0), a\n\t\t\t\t\tld  (_pad_this_frame), a\n\n\t\t\t\t.push_pull_move\n\t\t\t\t\t// if (x0 != 0xff) {\n\t\t\t\t\tld  a, (_x0)\n\t\t\t\t\tcp  0xff\n\t\t\t\t\tjr  z, push_pull_done\n\n\t\t\t\t\tcall _can_move_box\n\t\t\t\t\txor a\n\t\t\t\t\tor  l\n\t\t\t\t\tjr  z, push_pull_undo\n\n\t\t\t\t#ifdef PUSH_AND_PULL_PILES \n\t\t\t\t\t\tld  a, (_y1)\n\t\t\t\t\t\tld  (_y0), a\n\t\t\t\t#endif\n\t\t\t\t\tld  hl, 1\n\t\t\t\t\tcall _move_tile\n\t\t\t\t\tjp  push_pull_done \n\n\t\t\t\t.push_pull_undo\n\t\t\t\t\t//  gpxx = rdx >> 4; gpx = rdx; player.x = gpx << 6; \n\t\t\t\t\n\t\t\t\t\tld  a, (_rdx)\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  (_gpx), a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tld  (_gpxx), a\n\n\t\t\t\t\t/*\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tld  e, a\n\t\t\t\t\tld  d, 0\n\t\t\t\t\tld  l, 6\n\t\t\t\t\tcall l_asl\n\t\t\t\t\t*/\n\t\t\t\t\tld  a, c\n\t\t\t\t\tcall Ashl16_HL\n\t\t\t\t\tld  (_player), hl \t\t// player.x\n\n\t\t\t\t.push_pull_done\n\n\t\t\t#endasm\n\n\t\t#else\n\t\t\t/*\n\t\t\tif ((pad0 & sp_FIRE) == 0 && player.possee) {\t\t\t\t\n\t\t\t\trdx = gpx;\tx0 = 0xff;\ty0 = y1 = gpyy;\n\t\t\t\tif (player.facing) {\t\t\t\t// Looking left\n\t\t\t\t\tif ((gpx & 15) == 12 && qtile (gpxx, gpyy) == 14) {\n\t\t\t\t\t\tplayer.grab_block = 1;\n\t\t\t\t\t\tif ((pad_this_frame & sp_LEFT) == 0) {\n\t\t\t\t\t\t\tx0 = gpxx; x1 = gpxx - 1;\n\t\t\t\t\t\t} else if ((pad_this_frame & sp_RIGHT) == 0 && attr (gpxx + 2, gpyy) < 4) {\n\t\t\t\t\t\t\tx0 = gpxx; x1 = gpxx + 1; \n\t\t\t\t\t\t\tgpxx ++; gpx += 16; player.x += (16<<6); \n\t\t\t\t\t\t}\n\t\t\t\t\t\tpad_this_frame = pad0 |= (sp_FIRE|sp_LEFT|sp_RIGHT);\n\t\t\t\t\t}\n\t\t\t\t} else {\t\t\t\t\t\t\t\t// Looking right\n\t\t\t\t\tif ((gpx & 15) == 4 && qtile (gpxx + 1, gpyy) == 14) {\n\t\t\t\t\t\tplayer.grab_block = 1;\n\t\t\t\t\t\tif ((pad_this_frame & sp_LEFT) == 0 && attr (gpxx - 1, gpyy) < 4) {\n\t\t\t\t\t\t\tx0 = gpxx + 1; x1 = gpxx;\n\t\t\t\t\t\t\tgpxx --; gpx -= 16; player.x -= (16<<6); \n\t\t\t\t\t\t} else if ((pad_this_frame & sp_RIGHT) == 0) {\n\t\t\t\t\t\t\tx0 = gpxx + 1; x1 = gpxx + 2; \n\t\t\t\t\t\t}\t\t\t\t\t\t\n\t\t\t\t\t\tpad_this_frame = pad0 |= (sp_FIRE|sp_LEFT|sp_RIGHT);\n\t\t\t\t\t}\n\t\t\t\t}\n\n\t\t\t\tif (x0 != 0xff) {\n\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\telse { gpxx = rdx >> 4; gpx = rdx; player.x = gpx << 6; }\n\t\t\t\t}\n\t\t\t}\n\t\t\t*/\n\n\t\t\t#asm\n\t\t\t\t.push_pull\n\t\t\t\t\tld  a, (_pad0)\n\t\t\t\t\tand sp_FIRE\n\t\t\t\t\tjp  nz, push_pull_done\n\n\t\t\t\t\t#ifdef PUSH_ON_FLOOR\n\t\t\t\t\t\tld  a, (_player + 26) \t// player.possee\n\t\t\t\t\t\tor  a\n\t\t\t\t\t\tjp  z, push_pull_done\n\t\t\t\t\t#endif\n\n\t\t\t\t.push_pull_do \n\n\t\t\t\t\t// rdx = gpx;\tx0 = 0xff;\ty0 = y1 = gpyy;\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tld  (_rdx), a\n\n\t\t\t\t\tld  a, 0xff\n\t\t\t\t\tld  (_x0), a\n\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tld  (_y0), a\n\t\t\t\t\tld  (_y1), a\n\n\t\t\t\t\t// if (player.facing) {\n\t\t\t\t\tld  a, (_player + 22) \t// player.facing\n\t\t\t\t\tor  a\n\t\t\t\t\tjr  z, push_pull_facing_right\n\n\t\t\t\t.push_pull_facing_left\n\t\t\t\t\t// Facing left\n\n\t\t\t\t\t// if ((gpx & 15) == 12 && qtile (gpxx, gpyy) == 14) {\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tcp  12\n\t\t\t\t\tjp  nz, push_pull_done\n\n\t\t\t\t\tld  hl, (_gpxx)\n\t\t\t\t\tld  h, 0\n\t\t\t\t\tpush hl\n\t\t\t\t\tld  hl, (_gpyy)\n\t\t\t\t\tld  h, 0\n\t\t\t\t\tpush hl\n\t\t\t\t\tcall _qtile\n\t\t\t\t\tpop bc \n\t\t\t\t\tpop bc \n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  14\n\t\t\t\t\tjp  nz, push_pull_done\n\n\t\t\t\t.push_pull_facing_left_do\n\n\t\t\t\t\tld  a, 1\n\t\t\t\t\tld  (_player + 38), a\t// player.grab_block\n\n\t\t\t\t\t// if ((pad_this_frame & sp_LEFT) == 0) {\n\t\t\t\t\tld  a, (_pad_this_frame)\n\t\t\t\t\tand sp_LEFT\n\t\t\t\t\tjr  nz, push_pull_facing_left_do_not_left\n\n\t\t\t\t.push_pull_facing_left_do_left\n\t\t\t\t\t// x0 = gpxx; x1 = gpxx - 1;\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  (_x0), a\n\t\t\t\t\tdec a\n\t\t\t\t\tld  (_x1), a\n\t\t\t\t\tjp push_pull_invalidate_keys\n\n\t\t\t\t.push_pull_facing_left_do_not_left\n\t\t\t\t\tld  a, (_pad_this_frame)\n\t\t\t\t\tand sp_RIGHT\n\t\t\t\t\tjp  nz, push_pull_invalidate_keys\n\n\t\t\t\t\t// attr (gpxx + 2, gpyy) < 8\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tadd 2\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tcall _attr_2\n\n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  8\n\t\t\t\t\tjp  nc, push_pull_invalidate_keys\n\n\t\t\t\t.push_pull_facing_left_do_right\n\t\t\t\t\t// x0 = gpxx; x1 = gpxx + 1; \n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  (_x0), a\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (_x1), a\n\n\t\t\t\t\t// gpxx ++; gpx += 16; player.x += (16<<6); \n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tadd 16\n\t\t\t\t\tld  (_gpx), a\n\n\t\t\t\t\tld  hl, (_player) \t\t// player.x\n\t\t\t\t\tld  bc, 1024 \t\t\t// 16<<6\n\t\t\t\t\tadd hl, bc\n\t\t\t\t\tld  (_player), hl \t\t// player.x\n\t\t\t\t\tjp  nc, push_pull_invalidate_keys\n\n\t\t\t\t.push_pull_facing_right\n\t\t\t\t\t// Facing right\n\n\t\t\t\t\t// if ((gpx & 15) == 4 && qtile (gpxx + 1, gpyy) == 14)\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tcp  4\n\t\t\t\t\tjp  nz, push_pull_done\n\n\t\t\t\t\tld  hl, (_gpxx)\n\t\t\t\t\tld  h, 0\n\t\t\t\t\tinc hl\n\t\t\t\t\tpush hl\n\t\t\t\t\tld  hl, (_gpyy)\n\t\t\t\t\tld  h, 0\n\t\t\t\t\tpush hl\n\t\t\t\t\tcall _qtile\n\t\t\t\t\tpop bc \n\t\t\t\t\tpop bc \n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  14\n\t\t\t\t\tjp  nz, push_pull_done\n\n\t\t\t\t.push_pull_facing_right_do\t\n\n\t\t\t\t\tld  a, 1\n\t\t\t\t\tld  (_player + 38), a\t// player.grab_block\n\n\t\t\t\t\t// if ((pad_this_frame & sp_LEFT) == 0 && attr (gpxx - 1, gpyy) < 8) {\n\t\t\t\t\tld  a, (_pad_this_frame)\n\t\t\t\t\tand sp_LEFT\n\t\t\t\t\tjr  nz, push_pull_facing_right_do_not_left\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tdec a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  8\n\t\t\t\t\tjr  nc, push_pull_facing_right_do_not_left\n\n\t\t\t\t.push_pull_facing_right_do_left\n\t\t\t\t\t// x0 = gpxx + 1; x1 = gpxx;\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  (_x1), a\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (_x0), a\n\n\t\t\t\t\t// gpxx --; gpx -= 16; player.x -= (16<<6); \n\t\t\t\t\tld  a, c\n\t\t\t\t\tdec a\n\t\t\t\t\tld  (_gpxx), a\n\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tsub a, 16\n\t\t\t\t\tld  (_gpx), a \n\n\t\t\t\t\tld  hl, (_player) \t\t// player.x\n\t\t\t\t\tld  bc, 1024\t\t\t// 16 << 6\n\t\t\t\t\tsbc hl, bc \n\t\t\t\t\tld  (_player), hl, \t\t// player.x\n\t\t\t\t\tjr  push_pull_invalidate_keys\n\n\t\t\t\t.push_pull_facing_right_do_not_left\n\t\t\t\t\t// else if ((pad_this_frame & sp_RIGHT) == 0) {\n\t\t\t\t\tld  a, (_pad_this_frame)\n\t\t\t\t\tand sp_RIGHT\n\t\t\t\t\tjr  nz, push_pull_invalidate_keys\n\n\t\t\t\t.push_pull_facing_right_do_right\n\t\t\t\t\t// \tx0 = gpxx + 1; x1 = gpxx + 2;\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (_x0), a\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (_x1), a\n\n\t\t\t\t.push_pull_invalidate_keys\n\t\t\t\t\tld  a, (_pad0)\n\t\t\t\t\tor  sp_FIRE|sp_LEFT|sp_RIGHT\n\t\t\t\t\tld  (_pad0), a\n\t\t\t\t\tld  (_pad_this_frame), a\n\n\t\t\t\t.push_pull_move\n\t\t\t\t\t// if (x0 != 0xff) {\n\t\t\t\t\tld  a, (_x0)\n\t\t\t\t\tcp  0xff\n\t\t\t\t\tjr  z, push_pull_done\n\n\t\t\t\t\tcall _can_move_box\n\t\t\t\t\txor a\n\t\t\t\t\tor  l\n\t\t\t\t\tjr  z, push_pull_undo\n\n\t\t\t\t#ifdef PUSH_AND_PULL_PILES \n\t\t\t\t\t\tld  a, (_y1)\n\t\t\t\t\t\tld  (_y0), a\n\t\t\t\t#endif\n\n\t\t\t\t\tld  hl, 1\n\t\t\t\t\tcall _move_tile\n\t\t\t\t\tjp  push_pull_done \n\n\t\t\t\t.push_pull_undo\n\t\t\t\t\t//  gpxx = rdx >> 4; gpx = rdx; player.x = gpx << 6; \n\t\t\t\t\tld  a, (_rdx)\n\t\t\t\t\tld  (_gpx), a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tld  (_gpxx), a\n\n\t\t\t\t\t/*\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tld  e, a\n\t\t\t\t\tld  d, 0\n\t\t\t\t\tld  l, 6\n\t\t\t\t\tcall l_asl\n\t\t\t\t\t*/\n\t\t\t\t\tld  a, c\n\t\t\t\t\tcall Ashl16_HL\n\t\t\t\t\tld  (_player), hl \t\t// player.x\n\n\t\t\t\t.push_pull_done\n\t\t\t#endasm\n\t\t#endif\n\t#endif\n\n\t#ifdef PLAYER_CUSTOM_HORZ_AXIS\n\t\t#include \"custom_horz_axis.h\"\n\t#else\n\t\t#ifdef PLAYER_NO_INERTIA\n\t\t\tif ((pad0 & sp_LEFT) == 0) { player.vx = -PLAYER_CONST_V; player.facing = GENITAL_FACING_LEFT; }\n\t\t\tif ((pad0 & sp_RIGHT) == 0) { player.vx = PLAYER_CONST_V; player.facing = GENITAL_FACING_RIGHT; }\n\t\t\tif ((pad0 & sp_LEFT) != 0 && (pad0 & sp_RIGHT) != 0) player.vx = 0;\n\t\t#else\n\t\t\t#if defined ENABLE_FRIGOABABOL && defined FRIGO_FROZEN_NO_RX\n\t\t\t\tif (player.estado != EST_FRIGOABABOL)\n\t\t\t#endif\n\t\t\tif ((pad0 & sp_LEFT) != 0 && (pad0 & sp_RIGHT) != 0) {\n\t\t\t\t/*\n\t\t\t\tif (player.vx > 0) {\n\t\t\t\t\tplayer.vx -= player.rx;\n\t\t\t\t\tif (player.vx < 0)\n\t\t\t\t\t\tplayer.vx = 0;\n\t\t\t\t} else if (player.vx < 0) {\n\t\t\t\t\tplayer.vx += player.rx;\n\t\t\t\t\tif (player.vx > 0)\n\t\t\t\t\t\tplayer.vx = 0;\n\t\t\t\t}\n\t\t\t\t*/\n\t\t\t\t#asm\n\t\t\t\t\t\t// Check sign of p_vx (unsigned int)\n\t\t\t\t\t\tld  hl, (_player + 6)\t\t// player.vx\n\t\t\t\t\t\tbit 7, h \t\t\t\t; bit 7 of H = 1 : negative (left)\n\t\t\t\t\t\tjr  z, decelerate_right\n\t\t\n\t\t\t\t\t.decelerate_left\n\t\t\t\t\t\t// p_vx < 0, so add RX\n\t\t\t\t\t\tld  de, PLAYER_RX\n\t\t\t\t\t\tadd hl, de\n\t\t\n\t\t\t\t\t\t// Zero if it became positive\n\t\t\t\t\t\tbit 7, h\n\t\t\t\t\t\tjr  nz, h_acceleration_set\t\t\t\t\n\t\t\n\t\t\t\t\t\tld  hl, 0\n\t\t\n\t\t\t\t\t.h_acceleration_set\n\t\t\t\t\t\tld  (_player + 6), hl\n\t\t\t\t\t\tjr  h_acceleration_done\n\t\t\n\t\t\t\t\t.decelerate_right\n\t\t\t\t\t\t// Check that p_vx is NOT zero\n\t\t\t\t\t\tld  a, l\n\t\t\t\t\t\tor  h\n\t\t\t\t\t\tjr  z, h_acceleration_done\t\n\t\t\n\t\t\t\t\t\t// p_vx > 0 , so add RX\n\t\t\t\t\t\tld  de, -PLAYER_RX\n\t\t\t\t\t\tadd hl, de\n\t\t\t\t\t\t\n\t\t\t\t\t\t// Zero if it became negative\n\t\t\t\t\t\tbit 7, h\n\t\t\t\t\t\tjr  z, h_acceleration_set\n\t\t\n\t\t\n\t\t\t\t\t\tld  hl, 0\n\t\t\t\t\t\tjr  h_acceleration_set\n\t\t\t\t\t.h_decelerate_done\n\n\t\t\t\t#endasm\t\t\t\t\n\t\t\t}\n\n\t\t\tif ((pad0 & sp_LEFT) == 0) {\n\t\t\t\tif (player.vx > -player.max_vx) {\n\t\t\t\t\t#ifndef PLAYER_MOGGY_STYLE\n\t\t\t\t\t\tplayer.facing = 1;\n\t\t\t\t\t#endif\n\t\t\t\t\tplayer.vx -= player.ax;\n\t\t\t\t}\n\t\t\t\t#ifdef PLAYER_MOGGY_STYLE\n\t\t\t\t\tplayer.facing = GENITAL_FACING_LEFT;\n\t\t\t\t#endif\n\t\t\t}\n\n\t\t\tif ((pad0 & sp_RIGHT) == 0) {\n\t\t\t\tif (player.vx < player.max_vx) {\n\t\t\t\t\tplayer.vx += player.ax;\n\t\t\t\t\t#ifndef PLAYER_MOGGY_STYLE\n\t\t\t\t\t\tplayer.facing = 0;\n\t\t\t\t\t#endif\n\t\t\t\t}\n\t\t\t\t#ifdef PLAYER_MOGGY_STYLE\n\t\t\t\t\tplayer.facing = GENITAL_FACING_RIGHT;\n\t\t\t\t#endif\n\t\t\t}\n\t\t#endif\n\n\t\t#ifdef PLAYER_DIZZY\n\t\t\tif (player.estado & EST_DIZZY) { player.vx >>= 1; player.vx += (rand () & (PLAYER_CONST_V - 1)) - (PLAYER_CONST_V >> 1); }\n\t\t#endif\n\t#endif\n\n\tplayer.x += player.vx;\n\tplayer.x += ptgmx;\n\t\n\t// Safe\n\t\n\tif (player.x < 0)\n\t\tplayer.x = 0;\n\t\t\n\tif (player.x > 14336)\n\t\tplayer.x = 14336;\n\n\t/*\n\tgpx = player.x >> 6;\n\tgpxx = gpx >> 4;\n\t*/\n\t#asm\n\t\t\tld  hl, (_player + 0) \t\t// player.x\n\t\t\tcall HLshr6_A\n\t\t\tld  (_gpx), a \n\t\t\tsrl a\n\t\t\tsrl a \n\t\t\tsrl a\n\t\t\tsrl a \n\t\t\tld  (_gpxx), a\n\t#endasm\n\n\t/*\n\trdj = player.vx + ptgmx;\n\tif (rdj) {\n\t\t#if defined PLAYER_MOGGY_STYLE || !defined TIGHT_BOUNDING_BOX\n\t\t\tif (rdj < 0) {\n\t\t\t\tif (attr (gpxx, gpyy) & 8 || ((gpy & 15) != 0 && attr (gpxx, gpyy + 1) & 8)) {\n\t\t\t\t\tplayer.vx = 0; gpxx ++; adjust_to_tile_x ();\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tif (attr (gpxx + 1, gpyy) & 8 || ((gpy & 15) != 0 && attr (gpxx + 1, gpyy + 1) & 8)) {\n\t\t\t\t\tplayer.vx = 0; adjust_to_tile_x ();\n\t\t\t\t}\n\t\t\t}\n\t\t#else\n\t\t\tif (rdj < 0 && (gpx & 15) < 12) {\n\t\t\t\tif ( ((gpy & 15) < 12 && attr (gpxx, gpyy) & 8) || ((gpy & 15) && attr (gpxx, gpyy + 1) & 8)) {\n\t\t\t\t\tplayer.vx = 0; gpx = (gpxx << 4) + 12; player.x = gpx << 6;\n\t\t\t\t\twall = WALL_LEFT;\n\t\t\t\t}\n\t\t\t} else if ((gpx & 15) >= 4)\t{\n\t\t\t\tif ( ((gpy & 15) < 12 && attr (gpxx + 1, gpyy) & 8) || ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 8)) {\n\t\t\t\t\tplayer.vx = 0; gpx = (gpxx << 4) + 4; player.x = gpx << 6;\n\t\t\t\t\twall = WALL_RIGHT;\n\t\t\t\t}\n\t\t\t}\n\t\t#endif\n\t}\n\t*/\n\n\t#asm\n\t\t\tld  hl, (_player + 6)\t\t// player.vx\n\t\t\tld  de, (_ptgmx)\n\t\t\tadd hl, de\n\t\t\tld  (_rdj), hl\n\n\t\t\t// if (rdj)\n\t\t\tld  a, h\n\t\t\tor  l\n\t\t\tjp  z, horz_collision_done\n\t\t\t\n\t\t\t// if (rdj < 0)\n\t\t\tbit 7, h\n\t\t\tjp  z, horz_collision_positive\n\n\t\t#if !defined TIGHT_BOUNDING_BOX\n\n\t\t\t.horz_collision_negative\n\t\t\t\t// rdj < 0\n\n\t\t\t\t// if (attr (gpxx, gpyy) & 8 || ((gpy & 15) != 0 && attr (gpxx, gpyy + 1) & 8))\n\t\t\t\tld  a, (_gpxx)\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_gpyy)\n\t\t\t\tcall _attr_2\n\t\t\t\tld  a, l\n\t\t\t\tand 8\n\n\t\t\t\tjr  nz, horz_collision_left\n\n\t\t\t\tld  a, (_gpy)\n\t\t\t\tand 15\n\t\t\t\tjr  z, horz_collision_done\n\n\t\t\t\tld  a, (_gpxx)\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_gpyy)\n\t\t\t\tinc a\n\t\t\t\tcall _attr_2\n\t\t\t\tld  a, l\n\t\t\t\tand 8\n\t\t\t\tjp  z, horz_collision_done\n\n\t\t\t.horz_collision_left\n\t\t\t\tld  hl, 0\n\t\t\t\tld  (_player + 6), hl \t// player.vx\n\n\t\t\t\tld  hl, _gpxx\n\t\t\t\tinc (hl)\n\n\t\t\t\tcall _adjust_to_tile_x\n\t\t\t\tjr  horz_collision_done\n\n\t\t\t.horz_collision_positive\n\t\t\t\t// rdj > 0\n\n\t\t\t\t// if (attr (gpxx + 1, gpyy) & 8 || ((gpy & 15) != 0 && attr (gpxx + 1, gpyy + 1) & 8))\n\t\t\t\tld  a, (_gpxx)\n\t\t\t\tinc a\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_gpyy)\n\t\t\t\tcall _attr_2\n\t\t\t\tld  a, l\n\t\t\t\tand 8\n\n\t\t\t\tjr  nz, horz_collision_right\n\n\t\t\t\tld  a, (_gpy)\n\t\t\t\tand 15\n\t\t\t\tjr  z, horz_collision_done\n\n\t\t\t\tld  a, (_gpxx)\n\t\t\t\tinc a\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_gpyy)\n\t\t\t\tinc a\n\t\t\t\tcall _attr_2\n\t\t\t\tld  a, l\n\t\t\t\tand 8\n\t\t\t\tjp  z, horz_collision_done\n\n\t\t\t.horz_collision_right\n\t\t\t\tld  hl, 0\n\t\t\t\tld  (_player + 6), hl \t// player.vx\n\n\t\t\t\tcall _adjust_to_tile_x\n\t\t#else\n\n\t\t\t.horz_collision_negative\n\t\t\t\t// rdj < 0\n\n\t\t\t\t// if (gpx & 15) < 12\n\t\t\t\tld  a, (_gpx)\n\t\t\t\tand 15\n\t\t\t\tcp  12\n\t\t\t\tjp  nc, horz_collision_done\n\n\t\t\t\t// ((gpy & 15) < 12 && attr (gpxx, gpyy) & 8) ||\n\t\t\t\t// ((gpy & 15) && attr (gpxx, gpyy + 1) & 8))\n\n\t\t\t.horz_collision_if1\n\t\t\t\t#ifndef TALL_PLAYER\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tand 15\n\t\t\t\t\tcp  12\n\t\t\t\t\tjp  nc, horz_collision_if2\n\t\t\t\t#endif\n\n\t\t\t\tld  a, (_gpxx)\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_gpyy)\n\t\t\t\tcall _attr_2\n\t\t\t\tld  a, l\n\t\t\t\tand 8\n\n\t\t\t\tjp  nz, horz_collision_left\n\n\t\t\t.horz_collision_if2\n\t\t\t\tld  a, (_gpy)\n\t\t\t\tand 15\n\t\t\t\tjp  z, horz_collision_done\n\n\t\t\t\tld  a, (_gpxx)\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_gpyy)\n\t\t\t\tinc a\n\t\t\t\tcall _attr_2\n\t\t\t\tld  a, l\n\t\t\t\tand 8\n\n\t\t\t\tjp  z, horz_collision_done\n\n\t\t\t.horz_collision_left\n\n\t\t\t\t// player.vx = 0; gpx = (gpxx << 4) + 12; player.x = gpx << 6; wall = WALL_LEFT;\n\t\t\t\tld  hl, 0\n\t\t\t\tld  (_player + 6), hl \t// player.vx\n\n\t\t\t\tld  a, (_gpxx)\n\t\t\t\tsla a\n\t\t\t\tsla a \n\t\t\t\tsla a \n\t\t\t\tsla a \n\t\t\t\tadd 12\n\t\t\t\tld  (_gpx), a\n\n\t\t\t\t/*\n\t\t\t\tld  a, (_gpx)\n\t\t\t\tld  e, a\n\t\t\t\tld  d, 0\n\t\t\t\tld  l, 6\n\t\t\t\tcall l_asl\n\t\t\t\t*/\n\t\t\t\tcall Ashl16_HL\n\t\t\t\tld  (_player), hl \t\t// player.x\n\n\t\t\t\tld  a, WALL_LEFT\n\t\t\t\tld  (_wall), a\n\n\t\t\t\tjr  horz_collision_done\n\n\t\t\t.horz_collision_positive\n\t\t\t\t// if ((gpx & 15) >= 4)\n\t\t\t\tld  a, (_gpx)\n\t\t\t\tand 15\n\t\t\t\tcp  4\n\t\t\t\tjp  c, horz_collision_done\n\n\t\t\t\t// ((gpy & 15) < 12 && attr (gpxx + 1, gpyy) & 8) ||\n\t\t\t\t// ((gpy & 15) && attr (gpxx + 1, gpyy + 1) & 8))\n\n\t\t\t.horz_collision_if3\n\t\t\t\tld  a, (_gpy)\n\t\t\t\tand 15\n\t\t\t\tcp  12\n\t\t\t\tjp  nc, horz_collision_if4\n\n\t\t\t\tld  a, (_gpxx)\n\t\t\t\tinc a\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_gpyy)\n\t\t\t\tcall _attr_2\n\t\t\t\tld  a, l\n\t\t\t\tand 8\n\n\t\t\t\tjp  nz, horz_collision_right\t\t\t\t\n\n\t\t\t.horz_collision_if4\n\t\t\t\tld  a, (_gpy)\n\t\t\t\tand 15\n\t\t\t\tjp  z, horz_collision_done\n\n\t\t\t\tld  a, (_gpxx)\n\t\t\t\tinc a\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_gpyy)\n\t\t\t\tinc a\n\t\t\t\tcall _attr_2\n\t\t\t\tld  a, l\n\t\t\t\tand 8\n\n\t\t\t\tjp  z, horz_collision_done\n\n\t\t\t.horz_collision_right\n\n\t\t\t\t// player.vx = 0; gpx = (gpxx << 4) + 4; player.x = gpx << 6; wall = WALL_RIGHT;\n\t\t\t\tld  hl, 0\n\t\t\t\tld  (_player + 6), hl \t// player.vx\n\n\t\t\t\tld  a, (_gpxx)\n\t\t\t\tsla a\n\t\t\t\tsla a \n\t\t\t\tsla a \n\t\t\t\tsla a \n\t\t\t\tadd 4\n\t\t\t\tld  (_gpx), a\n\n\t\t\t\t/*\n\t\t\t\tld  a, (_gpx)\n\t\t\t\tld  e, a\n\t\t\t\tld  d, 0\n\t\t\t\tld  l, 6\n\t\t\t\tcall l_asl\n\t\t\t\t*/\n\t\t\t\tcall Ashl16_HL\n\t\t\t\tld  (_player), hl \t\t// player.x\n\n\t\t\t\tld  a, WALL_RIGHT\n\t\t\t\tld  (_wall), a\n\t\t#endif\n\n\t\t.horz_collision_done\n\t#endasm\t\n\t\n\t// Shooting engine:\n\t\n\t#ifdef PLAYER_CAN_FIRE\n\t\t#ifdef PLAYER_MOGGY_STYLE\n\t\t\t// TODO. Not implemented yet. \n\t\t#else\n\t\t\tif ((pad0 & sp_FIRE) == 0 && player.disparando == 0) {\n\t\t\t\tplayer.disparando = 1;\n\t\t\t\tfire_bullet ();\n\t\t\t}\n\t\t\t\n\t\t\tif ((pad0 & sp_FIRE) != 0) \n\t\t\t\tplayer.disparando = 0;\n\t\t#endif\n\t#endif\n\n\t// Sword\n\t#ifdef ENABLE_SWORD\n\t\tif (s_on == 0 && (pad_this_frame & sp_FIRE) == 0) {\n\t\t\t#if !defined PLAYER_MOGGY_STYLE && defined SWORD_UP\n\t\t\t\tif ((pad0 & sp_UP) == 0) {\n\t\t\t\t\ts_type = SWORD_TYPE_UP;\n\t\t\t\t} else \n\t\t\t#endif\n\t\t\ts_type = player.facing;\n\n\t\t\ts_on = 1;\n\t\t\ts_frame = 0;\n\t\t\ts_next_frame = sword_cells [s_type];\n\t\t}\n\t#endif\n\t\n\t// Keys / bolts engine:\n\n\t#ifndef DEACTIVATE_KEYS\n\t\tif (\n\t\t\t#if !defined TIGHT_BOUNDING_BOX\n\t\t\t\t(gpx & 15) == 0 \n\t\t\t#else\n\t\t\t\twall\n\t\t\t#endif\n\t\t\t&& (gpy & 15) == 0\n\t\t\t&& (player.keys > 0\n\t\t\t\t#ifdef MASTER_OF_KEYS\n\t\t\t\t\t|| master_of_keys\n\t\t\t\t#endif\n\t\t\t)\n\t\t) {\n\t\t\tif (qtile (gpxx + 1, gpyy) == 15) {\n\t\t\t\tclear_cerrojo (gpxx + 1, gpyy);\n\t\t\t\tplayer.keys --;\n\t\t\t\tplay_sfx (8);\n\t\t\t} else \n\t\t\t#if !defined TIGHT_BOUNDING_BOX\n\t\t\t\tif (qtile (gpxx - 1, gpyy) == 15) {\n\t\t\t\t\tclear_cerrojo (gpxx - 1, gpyy);\n\t\t\t\t\tplayer.keys --;\n\t\t\t\t\tplay_sfx (8);\n\t\t\t\t}\n\t\t\t#else\n\t\t\t\tif (qtile (gpxx, gpyy) == 15) {\n\t\t\t\t\tclear_cerrojo (gpxx, gpyy);\n\t\t\t\t\tplayer.keys --;\n\t\t\t\t\tplay_sfx (8);\n\t\t\t\t}\n\t\t\t#endif\n\t\t}\n\t#endif\n\t\n\t// Pushing boxes (tile #14) engine\n\n\t#if defined PLAYER_PUSH_BOXES && !defined PUSH_AND_PULL\n\t\t#ifdef PLAYER_MOGGY_STYLE\n\t\t\tif ((pad0 & sp_FIRE) == 0)\n\t\t#endif\n\t\t{\n\t\t\t\t\n\t\t\t\t// In side-view mode, you can't push boxes vertically.\n\t\t\t\t#ifdef PLAYER_MOGGY_STYLE\n\t\t\t\t\t/*\n\t\t\t\t\tif ((gpy & 15) == 0) {\n\t\t\t\t\t\tx0 = x1 = gpxx; \n\t\t\t\t\t\tif ((pad0 & sp_UP) == 0 && gpyy > 1) {\n\t\t\t\t\t\t\ty0 = gpyy - 1; y1 = gpyy - 2;\n\t\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tif ((gpx & 15) != 0) {\n\t\t\t\t\t\t\t\tx0 = x1 = gpxx + 1;\n\t\t\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t} else if ((pad0 & sp_DOWN) == 0 && gpyy < 8) {\n\t\t\t\t\t\t\ty0 = gpyy + 1; y1 = gpyy + 2;\n\t\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tif ((gpx & 15) != 0) {\n\t\t\t\t\t\t\t\tx0 = x1 = gpxx + 1;\n\t\t\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\t*/\n\n\t\t\t\t\t#asm\t\n\t\t\t\t\t\t.push_box_vert\t\t\t\t\n\t\t\n\n\t\t\t\t\t\t#ifdef TIGHT_BOUNDING_BOX\n\t\t\t\t\t\t\t\tld  a, (_wall)\n\t\t\t\t\t\t\t\tcp  WALL_UP\n\t\t\t\t\t\t\t\tjr  nz, push_box_vert_up_done\t\n\t\t\t\t\t\t#else\n\t\t\t\t\t\t// Vertically, only when player.y is tile-aligned.\n\t\t\t\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\t\t\t\tand 15\n\t\t\t\t\t\t\t\tjp  nz, push_box_vert_done\n\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t.push_box_vert_do\n\n\t\t\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\t\t\tld  (_x0), a\n\t\t\t\t\t\t\tld  (_x1), a \n\n\t\t\t\t\t\t\tld  a, (_pad0) \n\t\t\t\t\t\t\tand sp_UP \n\t\t\t\t\t\t\tjr  nz, push_box_vert_up_done\n\n\t\t\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\t\t\tcp  2\n\t\t\t\t\t\t\tjr  c, push_box_vert_up_done\n\n\t\t\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\t\t#ifndef TIGHT_BOUNDING_BOX\n\t\t\t\t\t\t\t\tdec a\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\tld  (_y0), a\n\t\t\t\t\t\t\tdec a \n\t\t\t\t\t\t\tld  (_y1), a\n\n\t\t\t\t\t\t\tcall _can_move_box\n\t\t\t\t\t\t\txor a\n\t\t\t\t\t\t\tor  l \n\t\t\t\t\t\t\tjr  z, push_box_vert_s1\n\n\t\t\t\t\t\t\tld  hl, 1\n\t\t\t\t\t\t\tcall _move_tile\n\n\t\t\t\t\t\t.push_box_vert_s1\n\t\t\t\t\t\t\tld  a, (_gpx) \n\t\t\t\t\t\t\tand 15 \n\t\t\t\t\t\t\tjr  z, push_box_vert_done \n\n\t\t\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\t\t\tinc a \n\t\t\t\t\t\t\tld  (_x0), a\n\t\t\t\t\t\t\tld  (_x1), a\n\n\t\t\t\t\t\t\tcall _can_move_box \n\t\t\t\t\t\t\txor a \n\t\t\t\t\t\t\tor  l\n\t\t\t\t\t\t\tjr  z, push_box_vert_done\n\n\t\t\t\t\t\t\tld  hl, 1\n\t\t\t\t\t\t\tcall _move_tile\n\n\t\t\t\t\t\t\tjr  push_box_vert_done\n\n\t\t\t\t\t\t.push_box_vert_up_done\n\n\t\t\t\t\t\t\t#ifdef TIGHT_BOUNDING_BOX\n\t\t\t\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\t\t\t\tand 15\n\t\t\t\t\t\t\t\tjp  nz, push_box_vert_done\n\t\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t\tld  a, (_pad0) \n\t\t\t\t\t\t\tand sp_DOWN\n\t\t\t\t\t\t\tjr  nz, push_box_vert_done\n\n\t\t\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\t\t\tcp  8\n\t\t\t\t\t\t\tjr  nc, push_box_vert_done\n\n\t\t\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\t\t\tinc a\n\t\t\t\t\t\t\tld  (_y0), a\n\t\t\t\t\t\t\tinc a \n\t\t\t\t\t\t\tld  (_y1), a\n\n\t\t\t\t\t\t\tcall _can_move_box\n\t\t\t\t\t\t\txor a\n\t\t\t\t\t\t\tor  l \n\t\t\t\t\t\t\tjr  z, push_box_vert_s2\n\n\t\t\t\t\t\t\tld  hl, 1\n\t\t\t\t\t\t\tcall _move_tile\n\n\t\t\t\t\t\t.push_box_vert_s2\n\t\t\t\t\t\t\tld  a, (_gpx) \n\t\t\t\t\t\t\tand 15 \n\t\t\t\t\t\t\tjr  z, push_box_vert_done \n\n\t\t\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\t\t\tinc a \n\t\t\t\t\t\t\tld  (_x0), a\n\t\t\t\t\t\t\tld  (_x1), a\n\n\t\t\t\t\t\t\tcall _can_move_box \n\t\t\t\t\t\t\txor a \n\t\t\t\t\t\t\tor  l\n\t\t\t\t\t\t\tjr  z, push_box_vert_done\n\n\t\t\t\t\t\t\tld  hl, 1\n\t\t\t\t\t\t\tcall _move_tile\n\n\t\t\t\t\t\t.push_box_vert_done\n\t\t\t\t\t#endasm\t\t\t\t\t\n\t\t\t\t#endif\n\n\t\t\t\t#if !defined TIGHT_BOUNDING_BOX\t\n\t\t\t\t\t/*\t\t\n\t\t\t\t\tif ((gpx & 15) == 0) {\n\t\t\t\t\t\ty0 = y1 = gpyy; \n\t\t\t\t\t\tif ((pad0 & sp_RIGHT) == 0 && gpxx < 14) {\n\t\t\t\t\t\t\tx0 = gpxx + 1; x1 = gpxx + 2;\n\t\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\t\n\t\t\t\t\t\t\tif ((gpy & 15) != 0) {\n\t\t\t\t\t\t\t\ty0 = y1 = gpyy + 1;\n\t\t\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t} else if ((pad0 & sp_LEFT) == 0 && gpxx > 1) {\n\t\t\t\t\t\t\tx0 = gpxx - 1; x1 = gpxx - 2;\n\t\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\tif ((gpy & 15) != 0) {\n\t\t\t\t\t\t\t\ty0 = y1 = gpyy + 1;\n\t\t\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\t\n\t\t\t\t\t}\n\t\t\t\t\t*/\n\n\t\t\t\t\t#asm\t\n\t\t\t\t\t\t.push_box_horz\t\t\t\t\n\t\t\n\t\t\t\t\t\t// Horizontally, only when player.x is tile-aligned.\n\n\t\t\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\t\t\tand 15\n\t\t\t\t\t\t\tjp  nz, push_box_horz_done\n\n\t\t\t\t\t\t.push_box_horz_do\n\n\t\t\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\t\t\tld  (_y0), a\n\t\t\t\t\t\t\tld  (_y1), a \n\n\t\t\t\t\t\t\tld  a, (_pad0) \n\t\t\t\t\t\t\tand sp_LEFT \n\t\t\t\t\t\t\tjr  nz, push_box_horz_left_done\n\n\t\t\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\t\t\tcp  2\n\t\t\t\t\t\t\tjr  c, push_box_horz_left_done\n\n\t\t\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\t\t\tdec a\n\t\t\t\t\t\t\tld  (_x0), a\n\t\t\t\t\t\t\tdec a \n\t\t\t\t\t\t\tld  (_x1), a\n\n\t\t\t\t\t\t\tcall _can_move_box\n\t\t\t\t\t\t\txor a\n\t\t\t\t\t\t\tor  l \n\t\t\t\t\t\t\tjr  z, push_box_horz_s1\n\n\t\t\t\t\t\t\tld  hl, 1\n\t\t\t\t\t\t\tcall _move_tile\n\n\t\t\t\t\t\t.push_box_horz_s1\n\t\t\t\t\t\t\tld  a, (_gpy) \n\t\t\t\t\t\t\tand 15 \n\t\t\t\t\t\t\tjr  z, push_box_horz_done \n\n\t\t\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\t\t\tinc a \n\t\t\t\t\t\t\tld  (_y0), a\n\t\t\t\t\t\t\tld  (_y1), a\n\n\t\t\t\t\t\t\tcall _can_move_box \n\t\t\t\t\t\t\txor a \n\t\t\t\t\t\t\tor  l\n\t\t\t\t\t\t\tjr  z, push_box_horz_done\n\n\t\t\t\t\t\t\tld  hl, 1\n\t\t\t\t\t\t\tcall _move_tile\n\n\t\t\t\t\t\t\tjr  push_box_horz_done\n\n\t\t\t\t\t\t.push_box_horz_left_done\n\n\t\t\t\t\t\t\tld  a, (_pad0) \n\t\t\t\t\t\t\tand sp_RIGHT\n\t\t\t\t\t\t\tjr  nz, push_box_horz_done\n\n\t\t\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\t\t\tcp  14\n\t\t\t\t\t\t\tjr  nc, push_box_horz_done\n\n\t\t\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\t\t\tinc a\n\t\t\t\t\t\t\tld  (_x0), a\n\t\t\t\t\t\t\tinc a \n\t\t\t\t\t\t\tld  (_x1), a\n\n\t\t\t\t\t\t\tcall _can_move_box\n\t\t\t\t\t\t\txor a\n\t\t\t\t\t\t\tor  l \n\t\t\t\t\t\t\tjr  z, push_box_horz_s2\n\n\t\t\t\t\t\t\tld  hl, 1\n\t\t\t\t\t\t\tcall _move_tile\n\n\t\t\t\t\t\t.push_box_horz_s2\n\t\t\t\t\t\t\tld  a, (_gpy) \n\t\t\t\t\t\t\tand 15 \n\t\t\t\t\t\t\tjr  z, push_box_horz_done \n\n\t\t\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\t\t\tinc a \n\t\t\t\t\t\t\tld  (_y0), a\n\t\t\t\t\t\t\tld  (_y1), a\n\n\t\t\t\t\t\t\tcall _can_move_box \n\t\t\t\t\t\t\txor a \n\t\t\t\t\t\t\tor  l\n\t\t\t\t\t\t\tjr  z, push_box_horz_done\n\n\t\t\t\t\t\t\tld  hl, 1\n\t\t\t\t\t\t\tcall _move_tile\n\n\t\t\t\t\t\t.push_box_horz_done\n\t\t\t\t\t#endasm\t\t\t\t\t\t\t\n\t\t\t\t#else\n\t\t\t\t\t// TODO: This into assembly (probably won't)\n\n\t\t\t\t\ty0 = y1 = gpyy;\n\n\t\t\t\t\tif (wall == WALL_RIGHT && (pad0 & sp_RIGHT) == 0 && gpxx < 14) {\n\t\t\t\t\t\tx0 = gpxx + 1; x1 = gpxx + 2;\n\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\n\t\t\t\t\t\tif ((gpy & 15) != 0) {\n\t\t\t\t\t\t\ty0 = y1 = gpyy + 1;\n\t\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\t\t}\n\t\t\t\t\t} else if (wall == WALL_LEFT && (pad0 & sp_LEFT) == 0 && gpxx > 0) {\n\t\t\t\t\t\tx0 = gpxx; x1 = gpxx - 1;\n\n\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\n\t\t\t\t\t\tif ((gpy & 15) != 0) {\n\t\t\t\t\t\t\ty0 = y1 = gpyy + 1;\n\t\t\t\t\t\t\tif (can_move_box ()) move_tile (1);\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t#endif\n\t\t}\n\t#endif\n\n\t#ifndef DEACTIVATE_EVIL_TILE\t\n\t\t// Evil tile engine\n\n\t\t#asm\n\t\t\t#ifdef EVIL_TILE_SIMPLE\n\t\t\t\t//if (attr ((gpx + 8) >> 4, (gpy + 14) >> 4) == 1)\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tadd 8\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\t\n\t\t\t\t\tld  c, a\n\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tadd 14\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a \n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\n\t\t\t\t\tcall _attr_2\n\n\t\t\t\t\tld a, l\n\t\t\t\t\tdec a\n\n\t\t\t\t\tjr nz, evil_tile_collision_done\n\t\t\t#else\n\t\t\t\t/*\n\t\t\t\tif (attr (gpxx, gpyy) == 1 || \n\t\t\t\t\t((gpx & 15) != 0 && attr (gpxx + 1, gpyy) == 1) ||\n\t\t\t\t\t((gpy & 15) != 0 && attr (gpxx, gpyy + 1) == 1) ||\n\t\t\t\t\t((gpx & 15) != 0 && (gpy & 15) != 0 && attr (gpxx + 1, gpyy + 1) == 1)) \n\t\t\t\t*/\t\t\t\t\n\t\t\t\t// Rewrite: use 4 points from a smaller bounding box.\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tld  b, a\n\t\t\t\t\tadd 4\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tld  (_ptx1), a\n\t\t\t\t\tld  a, b\n\t\t\t\t\tadd 11\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tld  (_ptx2), a\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tld  b, a\n\t\t\t\t\tadd 4\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tld  (_pty1), a\n\t\t\t\t\tld  a, b\n\t\t\t\t\tadd 11\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tld  (_pty2), a\n\n\t\t\t\t\t//\n\t\t\t\t\tld  a, (_ptx1)\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_pty1)\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tdec a \t\t// CP 1\n\t\t\t\t\tjr  z, evil_tile_collision\n\n\t\t\t\t\tld  a, (_ptx2)\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_pty1)\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tdec a \t\t// CP 1\n\t\t\t\t\tjr  z, evil_tile_collision\n\n\t\t\t\t\tld  a, (_ptx2)\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_pty1)\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tdec a \t\t// CP 1\n\t\t\t\t\tjr  z, evil_tile_collision\n\n\t\t\t\t\tld  a, (_ptx2)\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_pty2)\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tdec a \t\t// CP 1\n\t\t\t\t\tjr  nz, evil_tile_collision_done\n\t\t\t#endif\n\n\t\t\t.evil_tile_collision\t\t\t\t\n\t\t#endasm\n\t\t{\t\t\n\t\t\tif (player.estado == EST_NORMAL) {\n\t\t\t\tplay_sfx (2);\n\t\t\t\tplayer.life -= LINEAR_ENEMY_HIT;\t\n\t\t\t\t#ifdef PLAYER_FLICKERS\n\t\t\t\t\t// Flickers. People seem to like this more than the bouncing behaviour.\n\t\t\t\t\tplayer_flicker ();\n\t\t\t\t#endif\n\t\t\t\tplayer_just_died = PLAYER_KILLED_BY_BG;\n\t\t\t}\t\t\t\n\t\t\tplayer.x = gpcx;\n\t\t\tplayer.y = gpcy;\n\t\t\t#ifdef PLAYER_MOGGY_STYLE\n\t\t\t\tif (abs (player.vx) > abs (player.vy)) player.vx = -player.vx;\n\t\t\t\telse player.vy = -player.vy;\n\t\t\t#else\n\t\t\t\t#ifdef EVIL_TILE_SIMPLE\n\t\t\t\t\tplayer.vy = -abs (player.vy);\n\t\t\t\t\tif (player.vy > -(PLAYER_G*9)) player.vy = -(PLAYER_G*9);\n\t\t\t\t#else\n\t\t\t\t\tplayer.vy = -player.vy;\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t}\n\t\t#asm\n\t\t\t.evil_tile_collision_done\n\t\t#endasm\n\t#endif\n\n\t#ifndef DEACTIVATE_EVIL_ZONE\n\t\t// Evil zone engine\n\n\t\tif (attr ((gpx + 4) >> 4, (gpy + 4) >> 4) == 3\n\t\t\t#ifdef EVIL_ZONE_CONDITIONAL\n\t\t\t\t&& scenery_info.evil_zone_active\n\t\t\t#endif\n\t\t) {\n\t\t\tif (player.killingzone_beepcount >= EVIL_ZONE_BEEPS_COUNT || 0 == scenery_info.evil_kills_slowly) {\n\t\t\t\tif (0 == (player.estado & EST_PARP)\n\t\t\t\t\t#ifdef EVIL_ZONE_FREQ\n\t\t\t\t\t\t&& 0 == (maincounter & EVIL_ZONE_FREQ)\n\t\t\t\t\t#endif\n\t\t\t\t) {\n\t\t\t\t\tplayer.killingzone_framecount = (player.killingzone_framecount + 1) & 3;\n\t\t\t\t\tif (\n\t\t\t\t\t\t0 == player.killingzone_framecount\n\t\t\t\t\t\t#ifdef MODE_128K_DUAL\n\t\t\t\t\t\t\t|| is128k\n\t\t\t\t\t\t#endif\n\t\t\t\t\t) play_sfx (3);\n\t\t\t\t\tplayer.life --;\t\n\t\t\t\t\tplayer_just_died = PLAYER_KILLED_BY_EZ;\n\t\t\t\t}\n\t\t\t} else {\n\t\t\t\tif (player.killingzone_framecount > EVIL_ZONE_FRAME_COUNT) {\n\t\t\t\t\tplayer.killingzone_framecount = 0;\n\t\t\t\t\tplayer.killingzone_beepcount ++;\n\t\t\t\t\tsp_Border (2);\n\t\t\t\t\tplay_sfx (4);\n\t\t\t\t\t#ifdef MODE_128K_DUAL\n\t\t\t\t\t\t#asm\n\t\t\t\t\t\t\t\thalt\n\t\t\t\t\t\t#endasm\n\t\t\t\t\t\tsp_Border (0);\n\t\t\t\t\t#endif\n\t\t\t\t} else {\n\t\t\t\t\tplayer.killingzone_framecount ++;\n\t\t\t\t}\n\t\t\t}\n\t\t} else {\n\t\t\tif (player.killingzone_beepcount > 0)\n\t\t\t\tplayer.killingzone_beepcount --;\n\t\t}\n\t#endif\n\n\t#ifdef USE_COINS\n\t\t// Coins interaction\n\t\t#asm\n\t\t\t.player_get_coin\n\t\t#endasm\n\t\t\n\t\t#ifdef COIN_BEH\n\t\t\t/*\n\t\t\t_x = gpxx; _y = gpyy; if (attr (_x, _y) & COIN_BEH) get_coin ();\n\n\t\t\tif (gpx & 15) {\n\t\t\t\t_x = gpxx + 1; _y = gpyy; if (attr (_x, _y) & COIN_BEH) get_coin ();\n\t\t\t} \n\n\t\t\tif (gpy & 15) {\n\t\t\t\t_x = gpxx; _y = gpyy + 1; if (attr (_x, _y) & COIN_BEH) get_coin ();\n\t\t\t}\n\n\t\t\tif ((gpx & 15) && (gpy & 15)) {\n\t\t\t\t_x = gpxx + 1; _y = gpyy + 1; if (attr (_x, _y) & COIN_BEH) get_coin ();\n\t\t\t}\n\t\t\t*/\n\t\t\t#asm\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  (__x), a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tld  (__y), a\n\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand COIN_BEH\n\t\t\t\t\tjr  nz, player_get_coin_A_done\n\n\t\t\t\t\tcall _get_coin\n\t\t\t\t.player_get_coin_A_done\n\n\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tjr  z, player_get_coin_B_done\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (__x), a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tld  (__y), a\n\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand COIN_BEH\n\t\t\t\t\tjr  nz, player_get_coin_B_done\n\n\t\t\t\t\tcall _get_coin\n\t\t\t\t.player_get_coin_B_done\n\n\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tand 15\n\t\t\t\t\tjr  z, player_get_coin_C_done\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  (__x), a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (__y), a\n\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand COIN_BEH\n\t\t\t\t\tjr  nz, player_get_coin_C_done\n\n\t\t\t\t\tcall _get_coin\n\t\t\t\t.player_get_coin_C_done\n\n\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tjr  z, player_get_coin_D_done\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tand 15\n\t\t\t\t\tjr  z, player_get_coin_D_done\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (__x), a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (__y), a\n\n\t\t\t\t\tcall _attr_2\n\t\t\t\t\tld  a, l\n\t\t\t\t\tand COIN_BEH\n\t\t\t\t\tjr  nz, player_get_coin_D_done\n\n\t\t\t\t\tcall _get_coin\n\t\t\t\t.player_get_coin_D_done\n\n\t\t\t#endasm\n\t\t#else\n\t\t\t/*\n\t\t\t_x = gpxx; _y = gpyy; if (qtile (_x, _y) == COIN_TILE) get_coin ();\n\n\t\t\tif (gpx & 15) {\n\t\t\t\t_x = gpxx + 1; _y = gpyy; if (qtile (_x, _y) == COIN_TILE) get_coin ();\n\t\t\t} \n\n\t\t\tif (gpy & 15) {\n\t\t\t\t_x = gpxx; _y = gpyy + 1; if (qtile (_x, _y) == COIN_TILE) get_coin ();\n\t\t\t}\n\n\t\t\tif ((gpx & 15) && (gpy & 15)) {\n\t\t\t\t_x = gpxx + 1; _y = gpyy + 1; if (qtile (_x, _y) == COIN_TILE) get_coin ();\n\t\t\t}\n\t\t\t*/\n\t\t\t#asm\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  (__x), a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tld  (__y), a\n\n\t\t\t\t\tcall qtile_do\n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  COIN_TILE\n\t\t\t\t\tjr  nz, player_get_coin_A_done\n\n\t\t\t\t\tcall _get_coin\n\t\t\t\t.player_get_coin_A_done\n\n\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tjr  z, player_get_coin_B_done\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (__x), a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tld  (__y), a\n\n\t\t\t\t\tcall qtile_do\n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  COIN_TILE\n\t\t\t\t\tjr  nz, player_get_coin_B_done\n\n\t\t\t\t\tcall _get_coin\n\t\t\t\t.player_get_coin_B_done\n\n\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tand 15\n\t\t\t\t\tjr  z, player_get_coin_C_done\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tld  (__x), a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (__y), a\n\n\t\t\t\t\tcall qtile_do\n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  COIN_TILE\n\t\t\t\t\tjr  nz, player_get_coin_C_done\n\n\t\t\t\t\tcall _get_coin\n\t\t\t\t.player_get_coin_C_done\n\n\n\t\t\t\t\tld  a, (_gpx)\n\t\t\t\t\tand 15\n\t\t\t\t\tjr  z, player_get_coin_D_done\n\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\tand 15\n\t\t\t\t\tjr  z, player_get_coin_D_done\n\n\t\t\t\t\tld  a, (_gpxx)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (__x), a\n\t\t\t\t\tld  c, a\n\t\t\t\t\tld  a, (_gpyy)\n\t\t\t\t\tinc a\n\t\t\t\t\tld  (__y), a\n\n\t\t\t\t\tcall qtile_do\n\t\t\t\t\tld  a, l\n\t\t\t\t\tcp  COIN_TILE\n\t\t\t\t\tjr  nz, player_get_coin_D_done\n\n\t\t\t\t\tcall _get_coin\n\t\t\t\t.player_get_coin_D_done\n\n\t\t\t#endasm\n\t#endif\n\t#endif\n\n\t// Select next frame to paint...\n\n\t#ifdef PLAYER_CUSTOM_ANIMATION\n\t\t#include \"custom_animation.h\"\n\t#else\n\t\t#ifndef PLAYER_MOGGY_STYLE\n\t\t\t// In this case, the spriteset is:\n\t\t\t// 1  2  3  4  5  6  7  8\n\t\t\t// R1 R2 R3 RJ L1 L2 L3 LJ\n\n\t\t\t#ifdef ENABLE_FRIGOABABOL\n\t\t\t\tif (player.estado == EST_FRIGOABABOL) {\n\t\t\t\t\trdd = 8; rdi = 0;\n\t\t\t\t} else\n\t\t\t#endif\n\n\t\t\t{\n\t\t\t\t#asm\n\t\t\t\t\tld  a, (_player+22)\t\t\t\t\t// player.facing\n\t\t\t\t\tor  a\n\t\t\t\t\tjr  z, _player_cell_sel_set_rdi\t\t// if A = 0 set 0\n\t\t\t\t\tld  a, 4\t\t\t\t\t\t\t// ELSE     set 4\n\t\t\t\t._player_cell_sel_set_rdi\n\t\t\t\t\tld  (_rdi), a\n\t\t\t\t#endasm\n\n\t\t\t\t#ifdef PUSH_AND_PULL\n\t\t\t\t\tif (player.grab_block) rdd = PLAYER_GRAB_FRAME; else\n\t\t\t\t#endif\n\t\t\t\t#ifdef ENABLE_SWORD\n\t\t\t\t\tif (s_on) rdd = SWORD_HIT_FRAME; else\n\t\t\t\t#endif\n\t\t\t\tif (0 == player.possee && 0 == player.gotten) {\n\t\t\t\t\trdd = 3;\n\t\t\t\t} else {\n\t\t\t\t\tif (\n\t\t\t\t\t\t#ifdef SLIPPERY_TILES\n\t\t\t\t\t\t\t((pad0 & sp_LEFT) != 0 && (pad0 & sp_RIGHT) != 0)\n\t\t\t\t\t\t#else\n\t\t\t\t\t\t\tplayer.vx == 0\n\t\t\t\t\t\t#endif\n\t\t\t\t\t)\n\t\t\t\t\t#ifdef PLAYER_ALTERNATE_ANIMATION\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\trdd = player.facing ? 2 : 0;\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\trdd = ((gpx + 4) >> 3) % 3;\n\t\t\t\t\t\t}\n\t\t\t\t\t#else \n\t\t\t\t\t\t{\n\t\t\t\t\t\t\trdd = 1;\n\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\trdd = ((gpx + 4) >> 3) & 3;\n\t\t\t\t\t\t\tif (rdd == 3) rdd = 1;\n\t\t\t\t\t\t}\n\t\t\t\t\t#endif\n\t\t\t\t}\n\t\t\t}\n\n\t\t\tplayer.next_frame = player_cells [rdi + rdd];\n\t\t#else\n\t\t\t// In this case, the spriteset is\n\t\t\t// 1  2  3  4  5  6  7  8\n\t\t\t// R1 R2 L1 L2 U1 U2 D1 D2\n\t\t\t\n\t\t\t#ifdef ENABLE_FRIGOABABOL\n\t\t\t\tif (player.estado == EST_FRIGOABABOL) {\n\t\t\t\t\tplayer.next_frame = sprite_frigo;\n\t\t\t\t} else\n\t\t\t#endif\n\t\t\t{\n\t\t\t\t#if defined ENABLE_SWORD && defined GENITAL_HIT_FRAMES\n\t\t\t\t\tif (s_on) {\n\t\t\t\t\t\trdd = 9 + player.facing;\n\t\t\t\t\t} else\n\t\t\t\t#endif\n\t\t\t\t{\n\t\t\t\t\tif ((pad0 ^ (sp_LEFT|sp_RIGHT|sp_UP|sp_DOWN)) & (sp_LEFT|sp_RIGHT|sp_UP|sp_DOWN)) {\n\t\t\t\t\t\tplayer.subframe ++;\n\t\t\t\t\t\tif (player.subframe == 4) {\n\t\t\t\t\t\t\tplayer.subframe = 0;\n\t\t\t\t\t\t\tplayer.frame = !player.frame;\n\t\t\t\t\t\t\tstep (); \n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\t\n\t\t\t\t\t#ifdef LOOK_AT_THE_CAMERA\t\t\t\t\n\t\t\t\t\t\trdd = player.frame;\n\t\t\t\t\t\tif (player.vx == 0) {\t\t\n\t\t\t\t\t\t\tif (player.vy < 0) rdd += 4;\n\t\t\t\t\t\t\telse rdd += 6; \n\t\t\t\t\t\t} else if (player.vx < 0) rdd += 2;\n\t\t\t\t\t#else\n\t\t\t\t\t\trdd = player.frame + (player.facing << 1);\n\t\t\t\t\t#endif\n\t\t\t\t}\n\t\t\t\tplayer.next_frame = player_cells [rdd];\n\t\t\t}\n\n\t\t#endif\n\t#endif\n}\n\nvoid init_player_values (void) {\n\tgpx = \t\tPLAYER_INI_X << 4;\n\tgpy =\t\tPLAYER_INI_Y << 4;\n\t\n\t#asm\n\t\t\tld  a, (_gpx)\n\t\t\tcall Ashl16_HL\n\t\t\tld  (_player), hl\n\n\t\t\tld  a, (_gpy)\n\t\t\tcall Ashl16_HL\n\t\t\tld  (_player + 2), hl\n\n\t#ifndef SLIPPERY_TILES\n\t\t\t\tld  a, PLAYER_AX\n\t\t\t\tld  (_player+11), a \t\t\t// .ax\n\n\t\t\t\tld  a, PLAYER_RX\n\t\t\t\tld  (_player+12), a \t\t\t// .rx\n\t#endif\n\t#ifndef QUICKSAND_TILES\n\t\t\t\tld  hl, PLAYER_MAX_VX\n\t\t\t\tld  (_player+39), hl \t\t\t// .max_vx\n\t#endif\n\n\t\t\tld  hl, 0\n\t\t\tld  (_player+6), hl \t\t\t\t// .vx\n\t\t\tld  (_player+8), hl \t\t\t\t// .vy\n\n\t\t\txor a\n\t\t\tld  (_player+19),a \t\t\t\t\t// .saltando\n\t\t\tld  (_player+20),a \t\t\t\t\t// .frame\n\t\t\tld  (_player+21),a \t\t\t\t\t// .subframe\n\t\t\tld  (_player+23), a \t\t\t\t// .estado\n\t\t\tld  (_player+24),a \t\t\t\t\t// .ct_estado\n\t\t\tld  (_player+33),a \t\t\t\t\t// .disparando\n\t\t\tld  (_player+34),a \t\t\t\t\t// .killingzone_framecount\n\t\t\tld  (_player+35),a \t\t\t\t\t// .killingzone_beepcount\n\t\t\tld  (_player+36),a \t\t\t\t\t// .is_dead\n\n\t#ifdef PLAYER_MOGGY_STYLE\n\t\t\t\tld  a, GENITAL_FACING_DOWN\n\t#endif\n\n\t\t\tld (_player+22),a \t\t\t\t\t// .facing\n\t#endasm\n}\n\nvoid init_player (void) {\n\t// Initialize player with initial values.\n\t// (hence the initialize thing)\n\tinit_player_values ();\n\t\n\t/*\n\tplayer.life = \t\tPLAYER_LIFE;\n\tplayer.objs =\t\t0;\n\tplayer.keys = \t\t0;\n\tplayer.killed = \t0;\n\t*/\n\t#asm\n\t\t\tld  hl, PLAYER_LIFE\n\t\t\tld  (_player+29), hl \t\t\t\t// .life\n\t\t\txor a\n\t\t\tld  (_player+27), a \t\t\t\t// .objs\n\t\t\tld  (_player+28), a \t\t\t\t// .keys\n\t\t\tld  (_player+32), a \t\t\t\t// .killed\n\t#endasm\n}\n\nvoid init_hotspots (void) {\n\t/*\n\tfor (gpit = 0; gpit < MAP_W * MAP_H; gpit ++)\n\t\thotspots [gpit].act = 1;\n\t*/\n\t#asm\n\t\t\t// iterate MAP_W*MAP_H times\n\t\t\t// start with _hotspots + 2\n\t\t\t// set to 1, increment pointer by 3\n\t\t\tld  b, MAP_W * MAP_H\n\t\t\tld  hl, _hotspots + 2\n\t\t\tld  de, 3\n\t\t\tld  a, 1\n\t\t.init_hotspots_loop\n\t\t\tld  (hl), a\n\t\t\tadd hl, de\n\t\t\tdjnz init_hotspots_loop\n\t#endasm\n}\n\n#if !defined TWO_SETS && !defined UNPACKED_MAP\n\tvoid draw_and_advance (void) {\n\t\t/*\n\t\tmap_attr [rdi] = comportamiento_tiles [_n];\n\t\tmap_buff [rdi] = _n;\n\t\tdraw_coloured_tile (VIEWPORT_X + rdx, VIEWPORT_Y + rdy, _n);\n\t\trdx += 2;\n\t\tif (rdx == 30) {\n\t\t\trdx = 0;\n\t\t\trdy += 2;\n\t\t}\n\t\trdi ++;\n\t\t*/\n\n\t\t#asm\n\t\t\t#ifdef ENABLE_ANIMATED_TILES\n\t\t\t\t\tld  a, (__n)\n\t\t\t\t\tcp  ANIMATED_TILE\n\t\t\t\t\tjr  nz, _animated_tiles_add_done\n\n\t\t\t\t\tld  hl, (_animated_ptr)\n\t\t\t\t\t\n\t\t\t\t\t// Encode Y, X in nibbles\n\t\t\t\t\tld  a, (_rdx)\n\t\t\t\t\tsrl a \t\t\t\t\n\t\t\t\t\tld  b, a \t\t\t// b = X / 2 = 0000XXXX\n\t\t\t\t\tld  a, (_rdy)\n\t\t\t\t\t;and 0xfe            // xxxYYYY0\n\t\t\t\t\tsla a\n\t\t\t\t\tsla a\n\t\t\t\t\tsla a \t\t\t\t// YYYY0000\n\t\t\t\t\tor  b \t\t\t\t// YYYYXXXX\n\n\t\t\t\t\tld  (hl), a\n\t\t\t\t\tinc hl\n\t\t\t\t\tld  (_animated_ptr), hl\n\n\t\t\t\t._animated_tiles_add_done\n\t\t\t#endif\n\n\t\t\t\tld  bc, (__n)\n\t\t\t\tld  b, 0\n\t\t\t\tld  hl, _comportamiento_tiles\n\t\t\t\tadd hl, bc\n\t\t\t\tld  a, (hl)\n\n\t\t\t\tld  bc, (_rdi)\n\t\t\t\tld  b, 0\n\n\t\t\t\tld  hl, _map_attr\n\t\t\t\tadd hl, bc\n\t\t\t\tld  (hl), a\n\n\t\t\t\tld  hl, _map_buff\n\t\t\t\tadd hl, bc\n\t\t\t\tld  a, (__n)\n\t\t\t\tld  (hl), a\n\n\t\t\t\tld  a, (_rdx)\n\t\t\t\tadd VIEWPORT_X\n\t\t\t\tld  h, 0\n\t\t\t\tld  l, a\n\t\t\t\tpush hl\n\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tadd VIEWPORT_Y\n\t\t\t\tld  h, 0\n\t\t\t\tld  l, a\n\t\t\t\tpush hl\n\n\t\t\t\tld  hl, (__n)\n\t\t\t\tld  h, 0\n\t\t\t\tpush hl\n\n\t\t\t\tcall _draw_coloured_tile\n\n\t\t\t\tpop bc\n\t\t\t\tpop bc\n\t\t\t\tpop bc\n\n\t\t\t\tld  a, (_rdx)\n\t\t\t\tadd 2\n\t\t\t\tcp  30\n\t\t\t\tjr  nz, draw_and_advance_x_set\n\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tadd 2\n\t\t\t\tld  (_rdy), a\n\n\t\t\t\txor a\n\t\t\t\n\t\t\t.draw_and_advance_x_set\n\t\t\t\tld  (_rdx), a\n\n\t\t\t\tld  hl, _rdi\n\t\t\t\tinc (hl)\n\t\t#endasm\n\t}\n#endif\n\n#ifdef TWO_SETS\n\tvoid draw_and_advance (void) {\n\t\t/*\n\t\tmap_attr [rdi] = comportamiento_tiles [_n];\n\t\tmap_buff [rdi] = _t;\n\t\tdraw_coloured_tile (VIEWPORT_X + rdx, VIEWPORT_Y + rdy, _n);\n\t\trdx += 2;\n\t\tif (rdx == 30) {\n\t\t\trdx = 0;\n\t\t\trdy += 2;\n\t\t}\n\t\trdi ++;\n\t\t*/\n\n\t\t#asm\n\t\t\t#ifdef ENABLE_ANIMATED_TILES\n\t\t\t\t\tld  a, (__n)\n\t\t\t\t\tcp  ANIMATED_TILE\n\t\t\t\t\tjr  nz, _animated_tiles_add_done\n\n\t\t\t\t\tld  hl, (_animated_ptr)\n\t\t\t\t\t\n\t\t\t\t\t// Encode Y, X in nibbles\n\t\t\t\t\tld  a, (_rdx)\n\t\t\t\t\tsrl a \t\t\t\t\n\t\t\t\t\tld  b, a \t\t\t// b = X / 2 = 0000XXXX\n\t\t\t\t\tld  a, (_rdy)\n\t\t\t\t\t;and 0xfe            // xxxYYYY0\n\t\t\t\t\tsla a\n\t\t\t\t\tsla a\n\t\t\t\t\tsla a \t\t\t\t// YYYY0000\n\t\t\t\t\tor  b \t\t\t\t// YYYYXXXX\n\n\t\t\t\t\tld  (hl), a\n\t\t\t\t\tinc hl\n\t\t\t\t\tld  (_animated_ptr), hl\n\n\t\t\t\t._animated_tiles_add_done\n\t\t\t#endif\n\n\t\t\t\tld  bc, (__n)\n\t\t\t\tld  b, 0\n\t\t\t\tld  hl, _comportamiento_tiles\n\t\t\t\tadd hl, bc\n\t\t\t\tld  a, (hl)\n\n\t\t\t\tld  bc, (_rdi)\n\t\t\t\tld  b, 0\n\n\t\t\t\tld  hl, _map_attr\n\t\t\t\tadd hl, bc\n\t\t\t\tld  (hl), a\n\n\t\t\t\tld  hl, _map_buff\n\t\t\t\tadd hl, bc\n\t\t\t\tld  a, (__t)\n\t\t\t\tld  (hl), a\n\n\t\t\t\tld  a, (_rdx)\n\t\t\t\tadd VIEWPORT_X\n\t\t\t\tld  h, 0\n\t\t\t\tld  l, a\n\t\t\t\tpush hl\n\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tadd VIEWPORT_Y\n\t\t\t\tld  h, 0\n\t\t\t\tld  l, a\n\t\t\t\tpush hl\n\n\t\t\t\tld  hl, (__n)\n\t\t\t\tld  h, 0\n\t\t\t\tpush hl\n\n\t\t\t\tcall _draw_coloured_tile\n\n\t\t\t\tpop bc\n\t\t\t\tpop bc\n\t\t\t\tpop bc\n\n\t\t\t\tld  a, (_rdx)\n\t\t\t\tadd 2\n\t\t\t\tcp  30\n\t\t\t\tjr  nz, draw_and_advance_x_set\n\n\t\t\t\tld  a, (_rdy)\n\t\t\t\tadd 2\n\t\t\t\tld  (_rdy), a\n\n\t\t\t\txor a\n\t\t\t\n\t\t\t.draw_and_advance_x_set\n\t\t\t\tld  (_rdx), a\n\n\t\t\t\tld  hl, _rdi\n\t\t\t\tinc (hl)\n\t\t#endasm\n\t}\n#endif\n\nvoid calc_hotspot_ptr (void) {\n\t#asm\n\t\t\tld  hl, (_n_pant)\n\t\t\tld  h, 0\n\t\t\tld  b, h\n\t\t\tld  c, l\n\t\t\tadd hl, hl \t\t\t// x2\n\t\t\tadd hl, bc \t\t\t// x3\n\t\t\tex  de, hl\n\t#endasm\n}\n\nvoid hotspot_paint (void) {\n\t// Is there an object in this screen?\n\t\n\t#asm\n\t\t\tld  a, 240\n\t\t\tld  (_hotspot_y), a \n\t\t\txor a\n\t\t\tld  (_hotspot_t), a\n\n\t\t\tcall _calc_hotspot_ptr\n\t\t\t\n\t\t\tld  ix, _hotspots\n\t\t\tadd ix, de\n\n\t\t\t// Struct is xy, tipo, act\n\n\t\t\tld  a, (ix+2) \t\t// .act\n\t\t\tcp  1\n\t\t\tjr  nz, hotspot_paint_act_skip\n\n\t\t\t#if defined(ACTIVATE_SCRIPTING) && defined(OBJECTS_ON_VAR)\n\t\t\t\tld  a, (_flags + OBJECTS_ON_VAR)\n\t\t\t\tor  a\n\t\t\t\tjr  z, hotspot_paint_act_skip\n\t\t\t#endif\n\n\t\t\tld  a, (ix+1)\t\t// .tipo\n\t\t\tor  a\n\t\t\tjr  z, hotspot_paint_act_skip\n\n\t\t#ifdef MASTER_OF_KEYS\n\t\t\t\tcp  2\n\t\t\t\tjr  nz, hotspot_paint_mok_done\n\n\t\t\t\tld  a, (_master_of_keys)\n\t\t\t\tor  a\n\t\t\t\tjr  z, hotspot_paint_mok_set2\n\n\t\t\t\tld  a, 3\n\t\t\t\tjr  hotspot_paint_mok_done\n\n\t\t\t.hotspot_paint_mok_set2\n\t\t\t\tld  a, 2\n\n\t\t\t.hotspot_paint_mok_done\n\t\t#endif\n\n\t\t\tld  (_hotspot_t), a\n\n\t\t.hotspot_paint_act_skip\n\n\t\t#if !defined DEACTIVATE_REFILLS && defined LEGACY_REFILLS\n\t\t\t\tld  a, (ix+2) \t\t// .act\n\t\t\t\tor  a\n\t\t\t\tjr  nz, hotspot_paint_noact_skip\n\n\t\t\t\tcall _rand\n\t\t\t\tld  a, l\n\t\t\t\tand 3\n\t\t\t\tcp  2\n\t\t\t\tjr  nz, hotspot_paint_noact_skip\n\n\t\t\t\tld  a, 3\n\t\t\t\tld  (_hotspot_t), a\n\n\t\t\t.hotspot_paint_noact_skip\n\t\t#endif\t\t\n\n\t\t\tld  a, (_hotspot_t)\n\t\t\tor  a\n\t\t\tret z\n\n\t\t\t// Calculate tile coordinates\n\t\t\t// Convert to pixels and store\n\n\t\t\tld  a, (ix+0) \t\t// .xy, byte = XY (nibbles)\n\t\t\tld  b, a\n\t\t\tand 0xf0\n\t\t\tld  (_hotspot_x), a\n\t\t\tsrl a\n\t\t\tsrl a\n\t\t\tsrl a\n\t\t\tsrl a\n\t\t\tld  (_rdx), a\n\t\t\tld  e, a \t\t\t// E = rdx\n\t\t\tld  a, b\n\t\t\tand 15\n\t\t\tld  (_rdy), a\n\t\t\tld  b, a \t\t\t// B = rdy\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tsla a\n\t\t\tld  (_hotspot_y), a\n\n\t\t\t// orig_tile = map_buff [15 * rdy + rdx];\n\t\t\t// 15*rdy + rdx = 16*rdy - rdy + rdx = hotspot_y - rdy + rdx\n\t\t\tsub b\n\t\t\tadd e\n\n\t\t\tld  c, a\n\t\t\tld  b, 0\n\t\t\tld  hl, _map_buff\n\t\t\tadd hl, bc\n\t\t\tld  a, (hl)\n\t\t\tld  (_orig_tile), a\n\t\t\n\t\t// Draw the object.\n\t\n\t\t\tld  a, (_rdx)\n\t\t\tsla a \n\t\t\tadd VIEWPORT_X\n\t\t\tld  (__x), a\n\n\t\t\tld  a, (_rdy)\n\t\t\tsla a \n\t\t\tadd VIEWPORT_Y\n\t\t\tld  (__y), a\n\n\t\t\tld  a, (_hotspot_t)\n\t\t\tld  b, a\n\t\t\tcp  3\n\t\t\t\n\t\t\tld  a, 16\n\t\t\tjr  z, hotspot_paint_set_t\n\n\t\t\tadd b\n\t\t.hotspot_paint_set_t\n\t\t\tld  (__t), a\n\t\t\tcall _draw_coloured_tile_do\n\t#endasm\n}\n\nvoid draw_scr_background (void) {\n\t#ifdef ENABLE_ANIMATED_TILES\n\t\t#asm\n\t\t\t\tld  hl, ANIMATED_BASE\n\t\t\t\tld  (_animated_ptr), hl\n\t\t\t\tld  de, ANIMATED_BASE + 1\n\t\t\t\tld  bc, MAX_ANIMATED_TILES - 1\n\t\t\t\tld  a, 0xff\n\t\t\t\tld  (hl), a\n\t\t\t\tldir\n\t\t#endasm\n\t#endif\n\n\t#asm\n\t\t\txor a\n\t\t\tld  (_rdx), a\n\t\t\tld  (_rdy), a\n\t\t\tld  (_rdi), a\n\t#endasm\n\t\n\t#ifdef RLE_MAP\n\t\t#asm\n\t\t\t._draw_scr_get_scr_address\n\t\t\t\t/*\n\t\t\t\tld  a, (_n_pant)\n\t\t\t\tsla a\n\t\t\t\tld  d, 0\n\t\t\t\tld  e, a\n\t\t\t\tld  hl, _mapa\n\t\t\t\t*/\n\n\t\t\t\t// Full 16 bits calculation\n\t\t\t\tld  hl, (_n_pant)\n\t\t\t\tld  h, 0\n\t\t\t\tadd hl, hl\n\t\t\t\tld  de, _mapa\n\n\t\t\t\tadd hl, de \t\t; HL = map + (n_pant << 1)\n\t\t\t\tld  e, (hl)\n\t\t\t\tinc hl\n\t\t\t\tld  d, (hl) \t; DE = index\n\t\t\t\tld  hl, _mapa\n\t\t\t\tadd hl, de      ; HL = map + index\n\t\t\t\tld  (_gp_gen), hl\t\t\n\t\t#endasm\n\t#elif defined (UNPACKED_MAP)\n\t\tgp_gen = mapa + (n_pant * 150);\t\t\n\t#else\n\t\tgp_gen = mapa + (n_pant * 75);\n\t#endif\n\t\t\n\t#if defined TWO_SETS || defined TWO_SETS_REAL\n\t\ttileoffset = TWO_SETS_CONDITION;\n\t#endif\n\n\t#ifdef UNPACKED_MAP\n\t\t// UNPACKED map, every byte represents one tile.\n\t\tfor (gpit = 0; gpit < 150; gpit ++) {\n\t\t\trdd = *gp_gen ++;\n\t\t\t#if defined(USE_COINS) && defined(COINS_DEACTIVABLE)\n\t\t\t\tif (rdd == COIN_TILE && 0 == scenery_info.show_coins) rdd = COIN_TILE_DEACT_SUBS;\n\t\t\t#endif\n\t\t\tmap_attr [rdi] = comportamiento_tiles [rdd];\n\t\t\tmap_buff [rdi] = rdd;\n\t\t\tdraw_coloured_tile (VIEWPORT_X + rdx, VIEWPORT_Y + rdy, rdd);\n\t\t\trdi ++;\n\t\t\trdx += 2;\n\t\t\tif (rdx == 30) {\n\t\t\t\trdx = 0;\n\t\t\t\trdy += 2;\n\t\t\t}\n\t\t}\n\t#elif defined TWO_SETS\n\t\t// TWO_SETS_PACKED map, every byte contains two tiles,\n\t\t// plus uses several tilesets\n\t\t/*\n\t\trdi = 0; \n\t\tfor (gpit = 0; gpit < 75; gpit ++) {\n\t\t\trdd = *gp_gen ++;\n\t\t\trdt1 = rdd >> 4;\n\t\t\t#if defined(USE_COINS) && defined(COINS_DEACTIVABLE)\n\t\t\t\tif (rdt1 == COIN_TILE && 0 == scenery_info.show_coins) rdt1 = COIN_TILE_DEACT_SUBS;\n\t\t\t#endif\n\t\t\trdt2 = rdd & 15;\n\t\t\t#if defined(USE_COINS) && defined(COINS_DEACTIVABLE)\n\t\t\t\tif (rdt2 == COIN_TILE && 0 == scenery_info.show_coins) rdt2 = COIN_TILE_DEACT_SUBS;\n\t\t\t#endif\n\n\t\t\t_t = rdt1; _n = tileoffset + rdt1; draw_and_advance ();\n\t\t\t_t = rdt2; _n = tileoffset + rdt2; draw_and_advance ();\n\t\t}\n\t\t*/\n\n\t\t#asm\n\t\t\t\txor a\n\t\t\t\tld  (_rdi), a\n\t\t\t\tld  (_gpit), a\n\n\t\t\t.draw_scr_bg_loop\n\t\t\t\t\n\t\t\t\tld  hl, (_gp_gen)\n\t\t\t\tld  a, (hl)\n\t\t\t\tinc hl\n\t\t\t\tld  (_gp_gen), hl\n\t\t\t\tld  b, a\n\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\t\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t\tcall coins_check\n\t\t\t\t#endif\n\n\t\t\t\tld  (_rdt1), a\n\n\t\t\t\tld  a, b\n\t\t\t\tand 15\n\t\t\t\t\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t\tcall coins_check\n\t\t\t\t#endif\n\n\t\t\t\tld  (_rdt2), a\n\n\t\t\t\tld  a, (_tileoffset)\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_rdt1)\n\t\t\t\tld  (__t), a\n\t\t\t\tadd c\n\t\t\t\tld  (__n), a\n\t\t\t\tcall _draw_and_advance\n\n\t\t\t\tld  a, (_tileoffset)\n\t\t\t\tld  c, a\n\t\t\t\tld  a, (_rdt2)\n\t\t\t\tld  (__t), a\n\t\t\t\tadd c\n\t\t\t\tld  (__n), a\n\t\t\t\tcall _draw_and_advance\n\n\t\t\t\tld  a, (_gpit)\n\t\t\t\tinc a\n\t\t\t\tld  (_gpit), a\n\t\t\t\tcp  75\n\t\t\t\tjr  nz, draw_scr_bg_loop\n\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t\tjr  draw_scr_bg_loop_end\n\t\t\t\t\t.coins_check\n\t\t\t\t\t\tcp  COIN_TILE\n\t\t\t\t\t\tret nz\n\n\t\t\t\t\t\tld  a, (_scenery_info + 0) \t// scenery_info.showcoins\n\t\t\t\t\t\tor  a\n\n\t\t\t\t\t\tld  a, COIN_TILE\n\t\t\t\t\t\tret nz\n\n\t\t\t\t\t\tld  a, COIN_TILE_DEACT_SUBS\t\t\t\t\n\t\t\t\t\t\tret\n\n\t\t\t\t\t.draw_scr_bg_loop_end\n\t\t\t\t#endif\n\t\t#endasm\t\n\n\t#elif defined TWO_SETS_REAL\n\t\t// TWO_SETS_PACKED map, every byte contains two tiles,\n\t\t// plus uses several tilesets\n\t\t// But *REAL* tile values are written to the buffers\n\t\t/*\n\t\trdi = 0;\n\t\tfor (gpit = 0; gpit < 75; gpit ++) {\t\t\t\n\t\t\trdd = *gp_gen ++;\n\t\t\trdt1 = (rdd >> 4) + tileoffset;\n\t\t\t#if defined(USE_COINS) && defined(COINS_DEACTIVABLE)\n\t\t\t\tif (rdt1 == COIN_TILE && 0 == scenery_info.show_coins) rdt1 = COIN_TILE_DEACT_SUBS;\n\t\t\t#endif\n\t\t\trdt2 = (rdd & 15) + tileoffset;\n\t\t\t#if defined(USE_COINS) && defined(COINS_DEACTIVABLE)\n\t\t\t\tif (rdt2 == COIN_TILE && 0 == scenery_info.show_coins) rdt2 = COIN_TILE_DEACT_SUBS;\n\t\t\t#endif\n\t\t\t_n = rdt1; draw_and_advance ();\n\t\t\t_n = rdt2; draw_and_advance ();\n\t\t}\n\t\t*/\n\n\t\t#asm\n\t\t\t\txor a\n\t\t\t\tld  (_rdi), a\n\t\t\t\tld  (_gpit), a\n\n\t\t\t.draw_scr_bg_loop\n\t\t\t\tld  a, (_tileoffset)\n\t\t\t\tld  c, a\n\t\t\t\t\n\t\t\t\tld  hl, (_gp_gen)\n\t\t\t\tld  a, (hl)\n\t\t\t\tinc hl\n\t\t\t\tld  (_gp_gen), hl\n\t\t\t\tld  b, a\n\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tadd c\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t\tcall coins_check\n\t\t\t\t#endif\n\n\t\t\t\tld  (_rdt1), a\n\n\t\t\t\tld  a, b\n\t\t\t\tand 15\n\t\t\t\tadd c\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t\tcall coins_check\n\t\t\t\t#endif\n\n\t\t\t\tld  (_rdt2), a\n\n\t\t\t\tld  a, (_rdt1)\n\t\t\t\tld  (__n), a\n\t\t\t\tcall _draw_and_advance\n\n\t\t\t\tld  a, (_rdt2)\n\t\t\t\tld  (__n), a\n\t\t\t\tcall _draw_and_advance\n\n\t\t\t\tld  a, (_gpit)\n\t\t\t\tinc a\n\t\t\t\tld  (_gpit), a\n\t\t\t\tcp  75\n\t\t\t\tjr  nz, draw_scr_bg_loop\n\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t\tjr  draw_scr_bg_loop_end\n\t\t\t\t\t.coins_check\n\t\t\t\t\t\tcp  COIN_TILE\n\t\t\t\t\t\tret nz\n\n\t\t\t\t\t\tld  a, (_scenery_info + 0) \t// scenery_info.showcoins\n\t\t\t\t\t\tor  a\n\n\t\t\t\t\t\tld  a, COIN_TILE\n\t\t\t\t\t\tret nz\n\n\t\t\t\t\t\tld  a, COIN_TILE_DEACT_SUBS\t\t\t\t\n\t\t\t\t\t\tret\n\n\t\t\t\t\t.draw_scr_bg_loop_end\n\t\t\t\t#endif\n\t\t#endasm\t\t\t\t\n\t#elif defined RLE_MAP\n\t\t#asm\n\t\t\t._draw_scr_rle\n\t\t\t\t\n\t\t\t._draw_scr_loop\n\t\t\t\tld  a, (_rdi)\n\t\t\t\tcp  150\n\t\t\t\tjr  z, _draw_scr_loop_done\n\n\t\t\t\tld  hl, (_gp_gen)\n\t\t\t\tld  a, (hl)\n\t\t\t\tinc hl\n\t\t\t\tld  (_gp_gen), hl\n\t\t\t\t\n\t\t\t\tld  (_rdn), a\n\n\t\t\t#if RLE_MAP == 44\n\t\t\t\tand 0x0f\n\t\t\t#elif RLE_MAP == 53\n\t\t\t\tand 0x1f\n\t\t\t#else\n\t\t\t\tand 0x3f\n\t\t\t#endif\t\t\t\n\n\t\t\t#ifdef MAPPED_TILESETS\n\t\t\t\tld  hl, (_tileset_mappings)\n\t\t\t\tadd a, l\n\t\t\t\tld  l, a\n\t\t\t\tjr  nc, dsl_noinc\n\t\t\t\tinc h\n\t\t\t.dsl_noinc\n\t\t\t\tld  a, (hl)\n\t\t\t#endif\n\n\t\t\t\tld  (_rdc), a\n\n\t\t\t._draw_scr_advance_loop\n\t\t\t\tld  a, (_rdn)\n\t\t\t#if RLE_MAP == 44\n\t\t\t\tcp  0x10\n\t\t\t#elif RLE_MAP == 53\t\t\t\n\t\t\t\tcp  0x20\n\t\t\t#else\n\t\t\t\tcp  0x40\n\t\t\t#endif\n\n\t\t\t\tjr  c, _draw_scr_advance_loop_done\n\n\t\t\t#if RLE_MAP == 44\n\t\t\t\tsub 0x10\n\t\t\t#elif RLE_MAP == 53\n\t\t\t\tsub 0x20\n\t\t\t#else\n\t\t\t\tsub 0x40\n\t\t\t#endif\n\t\t\t\tld  (_rdn), a\n\n\t\t\t\tcall _advance_worm\n\n\t\t\t\t// That's it!\n\n\t\t\t\tjr _draw_scr_advance_loop\n\n\t\t\t._draw_scr_advance_loop_done\n\t\t\t\tcall _advance_worm\n\n\t\t\t\tjr _draw_scr_loop\n\n\t\t\t._advance_worm\n\t\t\t\tld  a, (_rdc)\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\tcall coins_check\n\t\t\t\t#endif\n\n\t\t\t\tld  (__n), a\n\t\t\t\tcall _draw_and_advance\n\t\t\t\tret\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t.coins_check\n\t\t\t\t\t\tcp  COIN_TILE\n\t\t\t\t\t\tret  nz\n\n\t\t\t\t\t\tld  a, (_scenery_info + 0) \t// scenery_info.showcoins\n\t\t\t\t\t\tor  a\n\t\t\t\t\t\tret  nz\n\n\t\t\t\t\t\tld  a, COIN_TILE_DEACT_SUBS\t\t\t\t\t\n\t\t\t\t\t\tret\n\t\t\t\t#endif\n\n\t\t\t._draw_scr_loop_done\n\t\t#endasm\n\t#elif defined MAPPED_TILESETS\n\t\t// PACKED map, but tile N is in fact tileset_mappings [N].\n\t\t// tileset_mappings is a pointer!\n\n\t\t#asm\n\t\t\t\txor a\n\t\t\t\tld  (_rdi), a\n\t\t\t\tld  (_gpit), a\n\n\t\t\t.draw_scr_bg_loop\n\t\t\t\t\n\t\t\t\tld  hl, (_gp_gen)\n\t\t\t\tld  a, (hl)\n\t\t\t\tinc hl\n\t\t\t\tld  (_gp_gen), hl\n\t\t\t\tld  b, a\n\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t\tcall coins_check\n\t\t\t\t#endif\n\n\t\t\t\tld  (_rdt1), a\n\n\t\t\t\tld  a, b\n\t\t\t\tand 15\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t\tcall coins_check\n\t\t\t\t#endif\n\n\t\t\t\tld  (_rdt2), a\n\n\t\t\t\tld  bc, (_rdt1)\n\t\t\t\tcall tile_lookup\n\t\t\t\tld  (__n), a\n\t\t\t\tcall _draw_and_advance\n\n\t\t\t\tld  bc, (_rdt2)\n\t\t\t\tcall tile_lookup\n\t\t\t\tld  (__n), a\n\t\t\t\tcall _draw_and_advance\n\n\t\t\t\tld  a, (_gpit)\n\t\t\t\tinc a\n\t\t\t\tld  (_gpit), a\n\t\t\t\tcp  75\n\t\t\t\tjr  nz, draw_scr_bg_loop\n\n\t\t\t\tjr  draw_scr_bg_loop_end\n\n\t\t\t.tile_lookup\n\t\t\t\tld  b, 0\n\t\t\t\tld  hl, (_tileset_mappings)\n\t\t\t\tadd hl, bc\n\t\t\t\tld  a, (hl)\n\t\t\t\tret\n\n\t\t\t\tret\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t.coins_check\n\t\t\t\t\t\tcp  COIN_TILE\n\t\t\t\t\t\tret  nz\n\n\t\t\t\t\t\tld  a, (_scenery_info + 0) \t// scenery_info.showcoins\n\t\t\t\t\t\tor  a\n\t\t\t\t\t\tret  nz\n\n\t\t\t\t\t\tld  a, COIN_TILE_DEACT_SUBS\t\t\t\t\t\n\t\t\t\t\t\tret\n\t\t\t\t#endif\n\n\t\t\t.draw_scr_bg_loop_end\t\n\t\t#endasm\t\t\t\t\n\t#else\n\t\t#asm\n\t\t\t\txor a\n\t\t\t\tld  (_rdi), a\n\t\t\t\tld  (_gpit), a\n\n\t\t\t.draw_scr_bg_loop\n\t\t\t\t\n\t\t\t\tld  hl, (_gp_gen)\n\t\t\t\tld  a, (hl)\n\t\t\t\tinc hl\n\t\t\t\tld  (_gp_gen), hl\n\t\t\t\tld  b, a\n\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\t\t\t\tsrl a\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t\tcall coins_check\n\t\t\t\t#endif\n\n\t\t\t\tld  (_rdt1), a\n\n\t\t\t\tld  a, b\n\t\t\t\tand 15\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t\tcall coins_check\n\t\t\t\t#endif\n\n\t\t\t\tld  (_rdt2), a\n\n\n\t\t\t\tld  a, (_rdt1)\n\t\t\t\t#ifndef NO_ALT_BG\n\t\t\t\t\t\tcall no_alt_bg_subst\n\t\t\t\t#endif\n\t\t\t\tld  (__n), a\n\t\t\t\tcall _draw_and_advance\n\n\t\t\t\tld  a, (_rdt2)\n\t\t\t\t#ifndef NO_ALT_BG\n\t\t\t\t\t\tcall no_alt_bg_subst\n\t\t\t\t#endif\n\t\t\t\tld  (__n), a\n\t\t\t\tcall _draw_and_advance\n\n\t\t\t\tld  a, (_gpit)\n\t\t\t\tinc a\n\t\t\t\tld  (_gpit), a\n\t\t\t\tcp  75\n\t\t\t\tjr  nz, draw_scr_bg_loop\n\n\t\t\t\tjr  draw_scr_bg_loop_end\n\n\t\t\t\t#ifndef NO_ALT_BG\n\t\t\t\t\t.no_alt_bg_subst\n\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\tcall _rand\n\t\t\t\t\t\tld  a, l\n\t\t\t\t\t\tand 15\n\t\t\t\t\t\tcp  2\n\t\t\t\t\t\tjr  nc, draw_scr_alt_no\n\n\t\t\t\t\t\tld  a, c\n\t\t\t\t\t\tor  a\n\t\t\t\t\t\tret  nz\n\n\t\t\t\t\t\tld  a, 19\n\t\t\t\t\t\tret\n\n\t\t\t\t\t.draw_scr_alt_no\n\t\t\t\t\t\tld  a, c\n\t\t\t\t\t\tret\n\t\t\t\t#endif\n\n\t\t\t\t#if defined USE_COINS && defined COINS_DEACTIVABLE\n\t\t\t\t\t.coins_check\n\t\t\t\t\t\tcp  COIN_TILE\n\t\t\t\t\t\tret  nz\n\n\t\t\t\t\t\tld  a, (_scenery_info + 0) \t// scenery_info.showcoins\n\t\t\t\t\t\tor  a\n\t\t\t\t\t\tret  nz\n\n\t\t\t\t\t\tld  a, COIN_TILE_DEACT_SUBS\t\t\t\t\t\n\t\t\t\t\t\tret\n\n\t\t\t\t#endif\n\n\t\t\t.draw_scr_bg_loop_end\n\t\t#endasm\n\t#endif\t\n\n\thotspot_paint ();\n\t\n\t#ifndef DEACTIVATE_KEYS\n\t\t// Is there a bolt which has been already opened in this screen?\n\t\t// If so, delete it:\n\n\t\t#asm\n\t\t\t\tld  hl, _cerrojos\n\t\t\t\tld  b, MAX_CERROJOS\n\n\t\t\t.draw_scr_bolts_loop\n\t\t\t\t; Cerrojos structure is np, x, y, st\n\t\t\t\tld  c, (hl)\t\t; np\n\t\t\t\tinc hl\n\t\t\t\tld  d, (hl) \t; x\n\t\t\t\tinc hl\n\t\t\t\tld  e, (hl)\t\t; y \n\t\t\t\tinc hl \n\t\t\t\tld  a, (hl) \t; st\n\t\t\t\tinc hl\n\n\t\t\t\t; Open lock? (st == 0)\n\t\t\t\tor  a \n\t\t\t\tjr  nz, draw_scr_bolts_continue\n\n\t\t\t\t; Current screen? \n\t\t\t\tld  a, (_n_pant)\n\t\t\t\tcp  c\n\t\t\t\tjr  nz, draw_scr_bolts_continue\n\n\t\t\t\t; Clear bolt\n\t\t\t\tpush bc\n\n\t\t\t\tld  a, d\n\t\t\t\tld  c, d \t\t\t\t;; Call directly needs C\n\t\t\t\tld  (__x), a\n\t\t\t\tld  a, e\n\t\t\t\tld  (__y), a\n\t\t\t\txor a\n\t\t\t\tld  (__t), a\n\t\t\t\tld  a, (_comportamiento_tiles)\t;; beh [0]\n\t\t\t\tld  (__n), a\n\n\t\t\t\tcall set_map_tile_do\n\n\t\t\t\tpop bc\n\n\t\t\t.draw_scr_bolts_continue\n\t\t\t\tdjnz draw_scr_bolts_loop\n\t\t#endasm\n\t#endif\t\n}\n\nvoid enems_calc_frame (void) {\n\t// en_an_next_frame [enit] = enem_cells [en_an_base_frame [enit] + en_an_frame [enit]];\n\t#asm\n\t\t\tld  a, (_enit)\n\t\t\tsla a\n\t\t\tld  b, 0\n\t\t\tld  c, a\n\t\t\tld  hl, _en_an_next_frame\n\t\t\tadd hl, bc\n\t\t\n\t\t\tpush hl \t\t// en_an_next_frame [enit]\n\t\t\t\n\t\t\tld  bc, (_enit)\n\t\t\tld  b, 0\n\t\t\t\n\t\t\tld  hl, _en_an_frame\n\t\t\tadd hl, bc\n\t\t\tld  a, (hl)\n\t\t\tld  hl, _en_an_base_frame\n\t\t\tadd hl, bc\n\t\t\tadd a, (hl)\n\n\t\t\tsla a \t\t\t// This will work in 8 bit. Always few frames max.\t\t\t\n\t\t\tld  c, a \t\t// B is already 0\n\t\t\tld  hl, _enem_cells\n\n\t\t\tadd hl, bc \t\t// HL -> enem_cells [...]\n\t\t\tpop de \t\t\t// DE -> en_an_next_frame [enit]\n\n\t\t\tldi\n\t\t\tldi\n\t#endasm\n}\n\nvoid enems_en_an_calc (unsigned char n) {\n\ten_an_base_frame [enit] = \n\t\t#ifdef ENEMS_OFFSET\n\t\t\tENEMS_OFFSET +\n\t\t#endif\n\t\tn << 1;\t\n\tenems_calc_frame ();\n}\n\n#ifdef ENABLE_MARRULLERS\n\tvoid marrullers_select_direction (void) {\n\t\trdd = en_an_ff [enit];\n\t\tswitch (rand () & 3) {\n\t\t\tcase 0:\n\t\t\t\t_en_mx = 0; _en_my = rdd; break;\n\t\t\tcase 1:\n\t\t\t\t_en_mx = 0; _en_my = -rdd; break;\n\t\t\tcase 2:\n\t\t\t\t_en_mx = rdd; _en_my = 0; break;\n\t\t\tcase 3:\n\t\t\t\t_en_mx = -rdd; _en_my = 0; break;\n\t\t}\n\t}\n#endif\n\nvoid draw_scr (void) {\n\t#ifdef SHOW_LEVEL_INFO\n\t\tchar *cad_level = \"LEVEL\";\n\n\t\tsaca_a_todo_el_mundo_de_aqui ();\n\n\t\tsp_ClearRect (spritesClip, 0, 0, sp_CR_TILES);\n\t\tsp_Invalidate (spritesClip, spritesClip);\n\t\t#ifdef SHOW_LEVEL_SUBLEVEL\n\t\t\tdraw_text (VIEWPORT_X + 9, VIEWPORT_Y + 10, 71, cad_level);\n\t\t\tdraw_2_digits (VIEWPORT_X + 16, VIEWPORT_Y + 10, 1+(n_pant / MAP_W));\n\t\t\tsp_PrintAtInv (VIEWPORT_Y + 10, VIEWPORT_X + 18, 71, 15);\n\t\t\tdraw_2_digits (VIEWPORT_X + 19, VIEWPORT_Y + 10, 1+(n_pant % MAP_W));\n\t\t#else\n\t\t\tdraw_text (VIEWPORT_X + 11, VIEWPORT_Y + 10, 71, cad_level);\n\t\t\tdraw_2_digits (VIEWPORT_X + 17, VIEWPORT_Y + 10, (n_pant+1));\n\t\t#endif\n\t\t#asm \n\t\t\tcall SPUpdateNow\n\t\t#endasm\n\t\tplay_sfx (6);\n\t\tespera_activa (1000);\n\t#endif\n\n\t#ifdef FALLING_BOXES\n\t\tinit_falling_box_buffer ();\n\t#endif\n\n\t#ifdef RESET_BODY_COUNT_ON_ENTER\n\t\tplayer.killed = 0;\n\t#endif\n\t\n\t// This function draws and sets up current screen.\n\t\n\tseed = n_pant + 1;\n\t\n\tdraw_scr_background ();\n\n\t#ifdef ENABLE_PERSISTENCE\t\t\n\t\tdraw_persistent ();\n\t#endif\n\t\t\t\n\t#if defined ACTIVATE_SCRIPTING && !defined DEACTIVATE_FIRE_ZONE\n\t\tf_zone_ac = 0;\n\t#endif\n\n\t// Set up enemies.\n\n\t#asm\n\t\t._enems_init\n\t#endasm\n\t\n\tenoffs = n_pant * MAX_ENEMS;\n\n\t#ifdef COUNT_KILLABLE_ON\n\t\tflags [COUNT_KILLABLE_ON] = 0;\n\t#endif\n\n\tfor (enit = 0; enit < MAX_ENEMS; enit ++) {\n\t\t/*\n\t\ten_an_frame [enit] = 0;\n\t\ten_an_state [enit] = 0;\n\t\tenoffsmasi = enit + enoffs;\n\t\t*/\n\t\t\n\t\t#asm\n\t\t\t\tld  bc, (_enit)\n\t\t\t\txor a\n\t\t\t\tld  b, a\n\t\t\t\tld  hl, _en_an_frame\n\t\t\t\tadd hl, bc\n\t\t\t\tld  (hl), a\n\t\t\t\tld  hl, _en_an_state\n\t\t\t\tadd hl, bc\n\t\t\t\tld  (hl), a\n\t\t\t\t\n\t\t\t\tld  hl, (_enoffs)\n\t\t\t\tadd hl, bc\n\t\t\t\tld  (_enoffsmasi), hl\n\t\t#endasm\n\n\t\t#if defined NO_MAX_ENEMS || (defined USE_TYPE_6 && defined MAKE_TYPE_6) \n\t\t\ten_an_next_frame [enit] = sprite_18_a;\n\t\t#endif\n\t\t\n\t\t#ifdef RANDOM_RESPAWN\n\t\t\ten_an_fanty_activo [enit] = 0;\n\t\t#endif\n\n\t\t_en_t = malotes [enoffsmasi].t;\n\n\t\tswitch (_en_t) {\n\n\t\t\t// Empty\n\n\t\t\t#if defined USE_TYPE_6 && defined MAKE_TYPE_6\n\t\t\t\tcase 0:\n\t\t\t\t\tif (scenery_info.make_type_6) {\n\t\t\t\t\t\tenems_en_an_calc (2);\n\t\t\t\t\t\ten_an_x [enit] = (rand () % 224) << 6;\n\t\t\t\t\t\ten_an_y [enit] = (rand () % 144) << 6;\n\t\t\t\t\t\ten_an_vx [enit] = en_an_vy [enit] = 0;\t\t\t\t\t\t\t\n\t\t\t\t\t} \n\t\t\t\t\tbreak;\n\t\t\t#endif\t\n\n\t\t\t// Linear enemies\n\n\t\t\tcase 1:\n\t\t\tcase 2:\n\t\t\tcase 3:\n\t\t\tcase 4:\n\t\t\t\tenems_en_an_calc (_en_t - 1);\n\t\t\t\tbreak;\n\n\t\t\t#ifdef USE_TYPE_6\n\t\t\t\tcase 6:\n\t\t\t\t\tenems_en_an_calc (2);\n\t\t\t\t\ten_an_x [enit] = malotes [enoffsmasi].x << 6;\n\t\t\t\t\ten_an_y [enit] = malotes [enoffsmasi].y << 6;\n\t\t\t\t\ten_an_vx [enit] = en_an_vy [enit] = 0;\t\t\t\t\t\n\t\t\t\t\tbreak;\n\t\t\t#endif\n\n\t\t\t#ifdef ENABLE_CUADRATORS\n\t\t\t\tcase 7:\n\t\t\t\tcase 8:\n\t\t\t\tcase 9:\n\t\t\t\tcase 10:\n\t\t\t\t\ten_an_ff [enit] = 0;\n\t\t\t\t\tenems_en_an_calc (_en_t - 7);\n\n\t\t\t\t\tbreak;\n\t\t\t#endif\n\n\t\t\t#ifdef ENABLE_MARRULLERS\n\t\t\t\tcase 11:\n\t\t\t\tcase 12:\n\t\t\t\tcase 13:\n\t\t\t\tcase 14:\n\t\t\t\t\tenems_en_an_calc (_en_t - 11);\n\t\t\t\t\tmalotes [enoffsmasi].x &= 0xf0;\n\t\t\t\t\tmalotes [enoffsmasi].y &= 0xf0;\n\t\t\t\t\ten_an_ff [enit] = abs (malotes [enoffsmasi].mx + malotes [enoffsmasi].my);\n\t\t\t\t\tbreak;\n\t\t\t#endif\n\n\t\t\t#if defined (ENEMIES_MAY_DIE)\n\t\t\t\tdefault:\n\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n\t\t\t#endif\n\t\t}\n\t\t\n\t\t#ifdef ENABLE_CUSTOM_ENEMS\n\t\t\textra_enems_init ();\n\t\t#endif\n\n\t\t#ifdef COUNT_KILLABLE_ON\t\t\t\n\t\t\t#if defined (ENEMIES_MAY_DIE)\n\t\t\t\tif (1\n\t\t\t\t\t#ifdef BOXES_ONLY_KILL_TYPE\n\t\t\t\t\t\t&& _en_t == BOXES_ONLY_KILL_TYPE\n\t\t\t\t\t#endif\n\t\t\t\t\t#ifdef PLAYER_MIN_KILLABLE\n\t\t\t\t\t\t&& _en_t >= PLAYER_MIN_KILLABLE\n\t\t\t\t\t#endif\n\t\t\t\t\t#ifdef PLAYER_MAX_KILLABLE\n\t\t\t\t\t\t&& _en_t <= PLAYER_MAX_KILLABLE\n\t\t\t\t\t#endif\n\t\t\t\t) {\n\t\t\t\t\tflags [COUNT_KILLABLE_ON] ++;\n\t\t\t\t}\n\t\t\t#endif\n\t\t#endif\n\t}\n\t\t\n\t#ifdef ACTIVATE_SCRIPTING\n\t\t#ifdef LINE_OF_TEXT\n\t\t\t// Delete line of text\n\t\t\t#asm\n\t\t\t\t\txor a\n\t\t\t\t\tld  (_line_of_text_clear+32-LINE_OF_TEXT_SUBSTR), a\t\t\t\n\t\t\t#endasm\n\t\t\tdraw_text (LINE_OF_TEXT_X, LINE_OF_TEXT, LINE_OF_TEXT_ATTR, line_of_text_clear);\n\t\t#endif\n\n\t\t// Run \"ENTERING ANY\" script (if available)\n\t\tscript = e_scripts [MAP_W * MAP_H + 1];\n\t\trun_script ();\n\t\t// Run \"ENTERING\" script for THIS screen (if available)\n\t\tscript = e_scripts [n_pant];\n\t\trun_script ();\n\t#endif\n\n\t#ifdef PLAYER_CAN_FIRE\n\t\tinit_bullets ();\n\t#endif\t\n\n\t#ifdef ENABLE_CODE_HOOKS\n\t\thook_entering ();\n\t#endif\n\n\t#ifdef ENABLE_BREAKABLE\n\t\tinit_breakable ();\n\t#endif\n}\n\n#ifdef PLAYER_CAN_FIRE\n\tvoid mueve_bullets (void) {\t\t\n\t\t#ifdef PLAYER_MOGGY_STYLE\n\t\t\t// TODO\n\t\t#else\t\n\t\t\tfor (gpit = 0; gpit < MAX_BULLETS; gpit ++) {\n\t\t\t\tbullets_x [gpit] += bullets_mx [gpit];\n\t\t\t\t_x = bullets_x [gpit] >> 4;\n\t\t\t\t_y = bullets_y [gpit] >> 4; \n\t\t\t\trdi = attr (_x, _y);\n\t\t\t\tif ((rdi & 8) || bullets_x [gpit] > 240) {\n\t\t\t\t\tbullets_estado [gpit] = 0;\n\t\t\t\t}\n\t\t\t\t#ifdef ENABLE_BREAKABLE\n\t\t\t\t\tif (rdi & 32) add_to_breakables ();\n\t\t\t\t#endif\n\t\t\t}\t\n\t\t#endif\n\t}\n#endif\t\n\n#ifdef USE_SIGHT_DISTANCE\n\tunsigned char distance (unsigned char x1, unsigned char y1, unsigned char x2, unsigned char y2) {\n\t\t// return abs (x2 - x1 + y2 - y1);\n\t\t// Better version:\n\t\tunsigned char dx = abs (x2 - x1);\n\t\tunsigned char dy = abs (y2 - y1);\n\t\tunsigned char mn = dx < dy ? dx : dy;\n\t\treturn (dx + dy - (mn >> 1) - (mn >> 2) + (mn >> 4));\n\t}\n#endif\n\nvoid platform_get_player (void) {\n\t#asm\n\t\t\tld  a, 1\n\t\t\tld  (_player+25), a \t\t// .gotten\n\t\t\tld  a, (_en_ccy)\n\t\t\tsub 16\n\t\t\tld  (_gpy), a \n\t\t\tcall Ashl16_HL\n\t\t\tld  (_player+2), hl \t\t// .y\n\t\t\tld  hl, 0\n\t\t\tld  (_player+8), hl \t\t// .vy\n\t\t\tsrl a\n\t\t\tsrl a\n\t\t\tsrl a\n\t\t\tsrl a\n\t\t\tld  (_gpyy), a \n\t\t\tld  a, (__en_my)\n\t\t\tcall Ashl16_HL\n\t\t\tcall withSign\n\t\t\tld  (_ptgmy), hl\n\t#endasm\n}\n\n#if defined PLAYER_CAN_FIRE || defined PLAYER_KILLS_ENEMIES || defined ENABLE_SWORD\n\tvoid enems_kill (void) {\n\t\t#ifdef ENABLE_CODE_HOOKS\n\t\t\tenemy_died = _en_t;\n\t\t#endif\n\n\t\t// Kill enemy\n\t\t/*\n\t\tsp_MoveSprAbs (sp_moviles [enit], spritesClip, en_an_next_frame [enit] - en_an_current_frame [enit], VIEWPORT_Y + (en_ccy >> 3), VIEWPORT_X + (en_ccx >> 3), en_ccx & 7, en_ccy & 7);\n\t\ten_an_current_frame [enit] = en_an_next_frame [enit];\n\t\t*/\n\t\t#asm\n\t\t\t\tld  a, (_en_ccx)\n\t\t\t\tld  (_rdx), a\n\t\t\t\tld  a, (_en_ccy)\n\t\t\t\tld  (_rdy), a \n\t\t\t\tcall _render_this_enemy\n\t\t#endasm\n\n\t\t#asm \n\t\t\tcall SPUpdateNow\n\t\t#endasm\n\t\tplay_sfx (10);\n\t\ten_an_next_frame [enit] = sprite_18_a;\n\n\t\t_en_t |= 16;\t\t\t// dead\n\n\t\t// Count\n\t\tplayer.killed ++;\n\n\t\t#ifdef ACTIVATE_SCRIPTING\n\t\t\tscript = f_scripts [MAX_SCREENS + 2];\n\t\t\trun_script ();\n\t\t#endif\t\t\t\t\t\t\t\t\n\n\t\t#ifdef RANDOM_RESPAWN\t\t\t\t\t\t\t\t\n\t\t\ten_an_fanty_activo [enit] = 0;\n\t\t\t_en_life = FANTIES_LIFE_GAUGE;\n\t\t#endif\n\n\t\t#ifdef ENABLE_CUSTOM_ENEMS\n\t\t\textra_enems_killed ();\n\t\t#endif\n\t}\n#endif\n\nvoid mueve_bicharracos (void) {\n\t// This function moves the active enemies.\n\ten_tocado = 0;\n\tplayer.gotten = 0;\n\tptgmx =  ptgmy = 0;\n\t\n\tfor (enit = 0; enit < MAX_ENEMS; enit ++) {\n\t\tenoffsmasi = enoffs + enit;\n\n\t\t// Copy array values to temporary variables as fast as possible\n\t\t\n\t\t#asm\n\t\t\t\t// Those values are stored in this order:\n\t\t\t\t// x, y, x1, y1, x2, y2, mx, my, t[, life]\n\t\t\t\t// Point HL to baddies [enoffsmasi]. The struct is 9 or 10 bytes long\n\t\t\t\t// so this is baddies + enoffsmasi*(9|10) depending on PLAYER_CAN_FIRE\n\t\t\t\tld \thl, (_enoffsmasi)\n\n\t\t\t\tcall _calc_baddies_pointer\n\n\t\t\t\tld  (__baddies_pointer), hl \t\t// Save address for later\n\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (__en_x), a\n\t\t\t\tinc hl \n\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (__en_y), a\n\t\t\t\tinc hl \n\n\t\t\t#ifdef PACKED_ENEMS\n\t\t\t\t\tld  a, (hl) \t\t\t\t\t// XY1\n\t\t\t\t\tld  b, a \t\t\t\t\t\t// save\n\n\t\t\t\t\tand 0xf0 \n\t\t\t\t\tld  (__en_x1), a\n\n\t\t\t\t\tld  a, b\n\t\t\t\t\tsla a\n\t\t\t\t\tsla a\n\t\t\t\t\tsla a\n\t\t\t\t\tsla a\n\t\t\t\t\tld  (__en_y1), a\n\n\t\t\t\t\tinc hl\n\n\t\t\t\t\tld  a, (hl) \t\t\t\t\t// XY2\n\t\t\t\t\tld  b, a \t\t\t\t\t\t// save\n\n\t\t\t\t\tand 0xf0 \n\t\t\t\t\tld  (__en_x2), a\n\n\t\t\t\t\tld  a, b\n\t\t\t\t\tsla a\n\t\t\t\t\tsla a\n\t\t\t\t\tsla a\n\t\t\t\t\tsla a\n\t\t\t\t\tld  (__en_y2), a\n\n\t\t\t\t\tinc hl\n\t\t\t#else\n\t\t\t\t\tld  a, (hl)\n\t\t\t\t\tld  (__en_x1), a\n\t\t\t\t\tinc hl \n\t\n\t\t\t\t\tld  a, (hl)\n\t\t\t\t\tld  (__en_y1), a\n\t\t\t\t\tinc hl \n\t\n\t\t\t\t\tld  a, (hl)\n\t\t\t\t\tld  (__en_x2), a\n\t\t\t\t\tinc hl \n\t\n\t\t\t\t\tld  a, (hl)\n\t\t\t\t\tld  (__en_y2), a\n\t\t\t\t\tinc hl \n\t\t\t#endif\n\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (__en_mx), a\n\t\t\t\tinc hl \n\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (__en_my), a\n\t\t\t\tinc hl \n\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (__en_t), a\n\n\t\t\t#if defined PLAYER_CAN_FIRE || defined ENABLE_SWORD\n\t\t\t\tinc hl \n\n\t\t\t\tld  a, (hl)\n\t\t\t\tld  (__en_life), a\n\t\t\t#endif\n\t\t#endasm\n\n\t\t#if (defined ENABLE_SWORD && defined SWORD_PARALYZES) || defined (ENEMIES_MAY_BE_PARALIZED)\n\t\t\tif (en_an_state [enit] == ENEM_PARALYZED) {\n\t\t\t\ten_an_count [enit] --;\n\t\t\t\tif (en_an_count [enit] == 0)\n\t\t\t\t\ten_an_state [enit] = 0;\n\t\t\t}\n\t\t#endif\n\n\t\t#if defined ENEMIES_MAY_DIE\n\t\t\tif ((_en_t & 16)\n\t\t\t\t#ifdef RANDOM_RESPAWN\n\t\t\t\t\t&& (en_an_fanty_activo [enit] == 0)\n\t\t\t\t#endif\n\t\t\t) goto enems_loop_continue;\n\t\t#endif\n\n\t\tif (_en_t != 0\n\t\t\t#if defined USE_TYPE_6 && defined MAKE_TYPE_6\n\t\t\t\t|| scenery_info.make_type_6\n\t\t\t#endif\n\t\t) {\n\t\t\ten_cx = _en_x;\n\t\t\ten_cy = _en_y;\n\t\t\n\t\t\t#if (defined ENABLE_SWORD && defined SWORD_PARALYZES) || defined (ENEMIES_MAY_BE_PARALIZED)\n\t\t\t\tif (en_an_state [enit] != ENEM_PARALYZED)\n\t\t\t#endif\n\t\t\t{\n\n\t\t\t\tif (\n\t\t\t\t\t_en_t <= 4\n\t\t\t\t\t#ifdef RANDOM_RESPAWN\n\t\t\t\t\t\t|| 0 == en_an_fanty_activo [enit]\n\t\t\t\t\t#endif\n\t\t\t\t\t#ifdef ENABLE_MARRULLERS\n\t\t\t\t\t\t|| (_en_t >= 11 && _en_t <= 14)\n\t\t\t\t\t#endif\n\t\t\t\t) {\n\t\t\t\t\t/*\n\t\t\t\t\t_en_x += _en_mx;\n\t\t\t\t\t_en_y += _en_my;\n\n\t\t\t\t\tif (_en_x <= _en_x1) _en_mx = ABS (_en_mx);\n\t\t\t\t\tif (_en_x >= _en_x2) _en_mx = -ABS (_en_mx);\n\n\t\t\t\t\tif (_en_y <= _en_y1) _en_my = ABS (_en_my);\n\t\t\t\t\tif (_en_y >= _en_y2) _en_my = -ABS (_en_my);\n\t\t\t\t\t*/\n\t\t\t\t\t#asm\n\t\t\t\t\t\t\n\t\t\t\t\t\t// _en_x += _en_mx;\n\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_x)\n\t\t\t\t\t\t\tadd c \n\t\t\t\t\t\t\tld  (__en_x), a\n\n\t\t\t\t\t\t// _en_y += _en_my;\n\t\t\t\t\t\t\tld  a, (__en_my)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_y)\n\t\t\t\t\t\t\tadd c \n\t\t\t\t\t\t\tld  (__en_y), a\n\n\t\t\t\t\t\t#ifdef ENABLE_MARRULLERS\n\t\t\t\t\t\t\tld  a, (__en_t)\n\t\t\t\t\t\t\tcp  11\n\t\t\t\t\t\t\tjr  nc, vert_limit_skip_2\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\n\t\t\t\t\t\t.en_linear_horz_bounds\n\t\t\t\t\t\t\t// _en_x <= _en_x1 -> _en_x1 >= _en_x\n\t\t\t\t\t\t\tld  a, (__en_x)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_x1)\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, horz_limit_skip_1\n\n\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\tcall _abs_a\n\t\t\t\t\t\t\tld  (__en_mx), a\n\n\t\t\t\t\t\t\t#ifdef ENEMIES_COLLIDE\t\n\t\t\t\t\t\t\t\tld  a, (__en_x1)\n\t\t\t\t\t\t\t\tld  (__en_x), a\n\t\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t.horz_limit_skip_1\n\n\t\t\t\t\t\t\t// _en_x >= _en_x2\n\t\t\t\t\t\t\tld  a, (__en_x2)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_x)\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, horz_limit_skip_2\n\n\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\tcall _abs_a\n\t\t\t\t\t\t\tneg\n\t\t\t\t\t\t\tld  (__en_mx), a\n\n\t\t\t\t\t\t\t#ifdef ENEMIES_COLLIDE\t\n\t\t\t\t\t\t\t\tld  a, (__en_x2)\n\t\t\t\t\t\t\t\tld  (__en_x), a\n\t\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t.horz_limit_skip_2\n\n\t\t\t\t\t\t.en_linear_vert_bounds\n\t\t\t\t\t\t\t// _en_y <= _en_y1 -> _en_y1 >= _en_y\n\t\t\t\t\t\t\tld  a, (__en_y)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_y1)\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, vert_limit_skip_1\n\n\t\t\t\t\t\t\tld  a, (__en_my)\n\t\t\t\t\t\t\tcall _abs_a\n\t\t\t\t\t\t\tld  (__en_my), a\n\n\t\t\t\t\t\t\t#ifdef ENEMIES_COLLIDE\t\n\t\t\t\t\t\t\t\tld  a, (__en_y1)\n\t\t\t\t\t\t\t\tld  (__en_y), a\n\t\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t.vert_limit_skip_1\n\n\t\t\t\t\t\t\t// _en_y >= _en_y2\n\t\t\t\t\t\t\tld  a, (__en_y2)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_y)\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, vert_limit_skip_2\n\n\t\t\t\t\t\t\tld  a, (__en_my)\n\t\t\t\t\t\t\tcall _abs_a\n\t\t\t\t\t\t\tneg\n\t\t\t\t\t\t\tld  (__en_my), a\n\n\t\t\t\t\t\t\t#ifdef ENEMIES_COLLIDE\t\n\t\t\t\t\t\t\t\tld  a, (__en_y2)\n\t\t\t\t\t\t\t\tld  (__en_y), a\n\t\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t.vert_limit_skip_2\n\n\t\t\t\t\t#endasm\n\t\t\t\t}\n\n\t\t\t\t#ifdef ENABLE_CUADRATORS\n\t\t\t\t\tif (_en_t >= 7 && _en_t <= 10) {\n\n\t\t\t\t\t\t#asm\n\t\t\t\t\t\t// Flipflop tells which axis to update\n\t\t\t\t\t\t\tld  bc, (_enit)\n\t\t\t\t\t\t\tld  b, 0\n\t\t\t\t\t\t\tld  hl, _en_an_ff\n\t\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\t\tor  a\n\t\t\t\t\t\t\tjr  z, _cuadrators_update_y\t\t\t\t\t\t\t\n\n\t\t\t\t\t\t._cuadrators_update_x\n\t\t\t\t\t\t// _en_x += _en_mx;\n\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_x)\n\t\t\t\t\t\t\tadd c \n\t\t\t\t\t\t\tld  (__en_x), a\n\n\t\t\t\t\t\t.cuadrators_horz_bounds\n\t\t\t\t\t\t\t// _en_x <= _en_x1 -> _en_x1 >= _en_x\n\t\t\t\t\t\t\tld  a, (__en_x)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_x1)\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, cuadrators_limit_skip_1\n\n\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\tcall _abs_a\n\t\t\t\t\t\t\tld  (__en_mx), a\n\t\t\t\t\t\t\tjr  _cuadrators_flipflop\n\n\t\t\t\t\t\t.cuadrators_limit_skip_1\n\n\t\t\t\t\t\t\t// _en_x >= _en_x2\n\t\t\t\t\t\t\tld  a, (__en_x2)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_x)\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, _cuadrators_update_done\n\n\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\tcall _abs_a\n\t\t\t\t\t\t\tneg\n\t\t\t\t\t\t\tld  (__en_mx), a\n\t\t\t\t\t\t\tjr  _cuadrators_flipflop\n\n\t\t\t\t\t\t._cuadrators_update_y\n\t\t\t\t\t\t// _en_y += _en_my;\n\t\t\t\t\t\t\tld  a, (__en_my)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_y)\n\t\t\t\t\t\t\tadd c \n\t\t\t\t\t\t\tld  (__en_y), a     \n\n\t\t\t\t\t\t.cuadrators_vert_bounds\n\t\t\t\t\t\t\t// _en_y <= _en_y1 -> _en_y1 >= _en_y\n\t\t\t\t\t\t\tld  a, (__en_y)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_y1)\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, cuadrators_limit_skip_2\n\n\t\t\t\t\t\t\tld  a, (__en_my)\n\t\t\t\t\t\t\tcall _abs_a\n\t\t\t\t\t\t\tld  (__en_my), a\n\t\t\t\t\t\t\tjr  _cuadrators_flipflop\n\n\t\t\t\t\t\t.cuadrators_limit_skip_2\n\n\t\t\t\t\t\t\t// _en_y >= _en_y2\n\t\t\t\t\t\t\tld  a, (__en_y2)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (__en_y)\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, _cuadrators_update_done\n\n\t\t\t\t\t\t\tld  a, (__en_my)\n\t\t\t\t\t\t\tcall _abs_a\n\t\t\t\t\t\t\tneg\n\t\t\t\t\t\t\tld  (__en_my), a      \n\n\t\t\t\t\t\t._cuadrators_flipflop\n\t\t\t\t\t\t\tld  bc, (_enit)\n\t\t\t\t\t\t\tld  b, 0\n\t\t\t\t\t\t\tld  hl, _en_an_ff\n\t\t\t\t\t\t\tadd hl, bc \n\t\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\t\txor 1 \n\t\t\t\t\t\t\tld  (hl), a\n\n\t\t\t\t\t\t._cuadrators_update_done\n\n\t\t\t\t\t\t#ifdef ENEMIES_COLLIDE\n\t\t\t\t\t\t\t\t// Cuadrators don't like collisions with BG!\n\t\t\t\t\t\t\t\tjp _en_bg_collision_end\n\t\t\t\t\t\t#endif\n\t\t\t\t\t#endasm\t\t\t\t\t\t\n\t\t\t\t\t}\n\t\t\t\t#endif\n\n\t\t\t\t#ifdef RANDOM_RESPAWN\n\t\t\t\t\tif (en_an_fanty_activo [enit]) { \n\t\t\t\t\t\t#ifdef PLAYER_CAN_HIDE\n\t\t\t\t\t\t\trds = player_hidden () ? (-(FANTY_A>>1)) : FANTY_A;\n\t\t\t\t\t\t#else\n\t\t\t\t\t\t\trds = FANTY_A;\n\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\tif (player.x > en_an_x [enit]) en_an_vx [enit] += rds;\n\t\t\t\t\t\telse en_an_vx [enit] -= rds;\n\n\t\t\t\t\t\tif (player.y > en_an_y [enit]) en_an_vy [enit] += rds;\n\t\t\t\t\t\telse en_an_vy [enit] -= rds;\n\n\t\t\t\t\t\tif (en_an_vx [enit] < -FANTY_MAX_V) en_an_vx [enit] = -FANTY_MAX_V;\n\t\t\t\t\t\tif (en_an_vy [enit] < -FANTY_MAX_V) en_an_vy [enit] = -FANTY_MAX_V;\n\t\t\t\t\t\tif (en_an_vx [enit] > FANTY_MAX_V) en_an_vx [enit] = FANTY_MAX_V;\n\t\t\t\t\t\tif (en_an_vy [enit] > FANTY_MAX_V) en_an_vy [enit] = FANTY_MAX_V;\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\ten_an_x [enit] += en_an_vx [enit];\n\t\t\t\t\t\ten_an_y [enit] += en_an_vy [enit];\n\t\t\t\t\t\tif (en_an_x [enit] > 15360) en_an_x [enit] = 15360;\n\t\t\t\t\t\tif (en_an_x [enit] < -1024) en_an_x [enit] = -1024;\n\t\t\t\t\t\tif (en_an_y [enit] > 10240) en_an_y [enit] = 10240;\n\t\t\t\t\t\tif (en_an_y [enit] < -1024) en_an_y [enit] = -1024;\n\t\t\t\t\t} \n\t\t\t\t#endif\n\n\t\t\t\t#ifdef USE_TYPE_6\n\t\t\t\t\tif (_en_t == 6 || _en_t == 0) {\n\t\t\t\t\t\t#if defined (USE_SIGHT_DISTANCE) || defined (PLAYER_CAN_HIDE)\n\t\t\t\t\t\t\t// Idle, retreat or pursue depending on player status (distance or hidden)\n\n\t\t\t\t\t\t\tswitch (en_an_state [enit]) {\n\t\t\t\t\t\t\t\tcase TYPE_6_IDLE:\n\t\t\t\t\t\t\t\t\t#ifdef PLAYER_CAN_HIDE\n\t\t\t\t\t\t\t\t\t\tif (distance (en_ccx, en_ccy, gpx, gpy) <= SIGHT_DISTANCE && 0 == player_hidden ()) \n\t\t\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t\t\t\tif (distance (en_ccx, en_ccy, gpx, gpy) <= SIGHT_DISTANCE) \n\t\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\t\ten_an_state [enit] = TYPE_6_PURSUING;\n\t\t\t\t\t\t\t\t\tbreak;\n\t\t\t\t\t\t\t\tcase TYPE_6_PURSUING:\n\t\t\t\t\t\t\t\t\tif ((rand () & 7) > 1) {\n\t\t\t\t\t\t\t\t\t\tif (player.x > en_an_x [enit] && en_an_vx [enit] < FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\t\ten_an_vx [enit] += FANTY_A;\n\t\t\t\t\t\t\t\t\t\telse if (player.x < en_an_x [enit] && en_an_vx [enit] > -FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\t\ten_an_vx [enit] -= FANTY_A;\n\t\t\t\t\t\t\t\t\t\tif (player.y > en_an_y [enit] && en_an_vy [enit] < FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\t\ten_an_vy [enit] += FANTY_A;\n\t\t\t\t\t\t\t\t\t\telse if (player.y < en_an_y [enit] && en_an_vy [enit] > -FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\t\ten_an_vy [enit] -= FANTY_A;\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t#ifdef PLAYER_CAN_HIDE\n\t\t\t\t\t\t\t\t\t\tif (distance (en_ccx, en_ccy, gpx, gpy) >= SIGHT_DISTANCE || player_hidden ()) \n\t\t\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t\t\t\tif (distance (en_ccx, en_ccy, gpx, gpy) >= SIGHT_DISTANCE)\n\t\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\t\ten_an_state [enit] = TYPE_6_RETREATING;\n\t\t\t\t\t\t\t\t\tbreak;\n\t\t\t\t\t\t\t\tcase TYPE_6_RETREATING:\n\t\t\t\t\t\t\t\t\tif ((_en_x << 6) > en_an_x [enit] && en_an_vx [enit] < FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\ten_an_vx [enit] += FANTY_A;\n\t\t\t\t\t\t\t\t\telse if ((_en_x << 6) < en_an_x [enit] && en_an_vx [enit] > -FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\ten_an_vx [enit] -= FANTY_A;\n\t\t\t\t\t\t\t\t\tif ((_en_y << 6) > en_an_y [enit] && en_an_vy [enit] < FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\ten_an_vy [enit] += FANTY_A;\n\t\t\t\t\t\t\t\t\telse if ((_en_y << 6) < en_an_y [enit] && en_an_vy [enit] > -FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\ten_an_vy [enit] -= FANTY_A;\n\t\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t\t#ifdef PLAYER_CAN_HIDE\n\t\t\t\t\t\t\t\t\t\tif (distance (en_ccx, en_ccy, gpx, gpy) <= SIGHT_DISTANCE && 0 == player_hidden ()) \n\t\t\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t\t\t\tif (distance (en_ccx, en_ccy, gpx, gpy) <= SIGHT_DISTANCE) \n\t\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\t\t\ten_an_state [enit] = TYPE_6_PURSUING;\n\t\t\t\t\t\t\t\t\tbreak;\t\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t#ifdef FANTIES_EXIT_STATE_V\n\t\t\t\t\t\t\t\tif (en_an_state [enit] != 1) \n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t{\n\t\t\t\t\t\t\t\t// Always pursue\n\t\n\t\t\t\t\t\t\t\tif ((rand () & 7) > 1) {\n\t\t\t\t\t\t\t\t\tif (player.x > en_an_x [enit] && en_an_vx [enit] < FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\ten_an_vx [enit] += FANTY_A;\n\t\t\t\t\t\t\t\t\telse if (player.x < en_an_x [enit] && en_an_vx [enit] > -FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\ten_an_vx [enit] -= FANTY_A;\n\t\t\t\t\t\t\t\t\tif (player.y > en_an_y [enit] && en_an_vy [enit] < FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\ten_an_vy [enit] += FANTY_A;\n\t\t\t\t\t\t\t\t\telse if (player.y < en_an_y [enit] && en_an_vy [enit] > -FANTY_MAX_V)\n\t\t\t\t\t\t\t\t\t\ten_an_vy [enit] -= FANTY_A;\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\tif (scenery_info.allow_type_6) {\n\t\t\t\t\t\t\ten_an_x [enit] += en_an_vx [enit];\n\t\t\t\t\t\t\ten_an_y [enit] += en_an_vy [enit];\n\t\t\t\t\t\t}\n\t\t\t\t\t\tif (en_an_x [enit] > 15360) en_an_x [enit] = 15360;\n\t\t\t\t\t\tif (en_an_x [enit] < -1024) en_an_x [enit] = -1024;\n\t\t\t\t\t\tif (en_an_y [enit] > 10240) en_an_y [enit] = 10240;\n\t\t\t\t\t\tif (en_an_y [enit] < -1024) en_an_y [enit] = -1024;\n\t\t\t\t\t} \n\t\t\t\t#endif\n\n\t\t\t\t#ifdef ENEMIES_COLLIDE\t\t\t\n\t\t\t\t\t// Check for collisions.\n\t\t\t\t\t/*\n\t\t\t\t\ten_xx = _en_x >> 4;\n\t\t\t\t\ten_yy = _en_y >> 4;\n\t\t\t\t\t\n\t\t\t\t\tif (_en_mx) {\n\t\t\t\t\t\trdi = ctileoff (_en_mx);\n\t\t\t\t\t\tptx1 = ptx2 = en_xx + rdi;\n\t\t\t\t\t\tpty1 = en_yy; \n\t\t\t\t\t\tpty2 = (_en_y + 15) >> 4;\n\t\t\t\t\t\tif ((attr (ptx1, pty1) & 8) || (attr (ptx2, pty2) & 8)) {\n\t\t\t\t\t\t\t_en_mx = -_en_mx;\n\t\t\t\t\t\t\t_en_x = (en_xx + (rdi ^ 1)) << 4;\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\tif (_en_my) {\n\t\t\t\t\t\trdi = ctileoff (_en_my);\n\t\t\t\t\t\tptx1 = en_xx; \n\t\t\t\t\t\tptx2 = (_en_x + 15) >> 4;\n\t\t\t\t\t\tpty1 = pty2 = en_yy + rdi;\n\t\t\t\t\t\tif ((attr (ptx1, pty1) & 8) || (attr (ptx2, pty2) & 8)) {\n\t\t\t\t\t\t\t_en_my = -_en_my;\n\t\t\t\t\t\t\t_en_y = (en_yy + (rdi ^ 1)) << 4;\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\t*/\n\t\t\t\t\t#asm\n\t\t\t\t\t\t._en_bg_collision\n\t\t\t\t\t\t\tcall en_xx_calc\n\t\t\t\t\t\t\tcall en_yy_calc\n\n\n\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\tor  a\n\t\t\t\t\t\t\tjr  z, _en_bg_collision_horz_done\n\n\t\t\t\t\t\t._en_bg_collision_horz\n\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\tcall __ctileoff\n\t\t\t\t\t\t\tld  (_rdi), a\n\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_en_xx)\n\t\t\t\t\t\t\tadd c\n\t\t\t\t\t\t\tld  (_ptx1), a\n\t\t\t\t\t\t\tld  (_ptx2), a\n\n\t\t\t\t\t\t\tld  a, (_en_yy)\n\t\t\t\t\t\t\tld  (_pty1), a\n\n\t\t\t\t\t\t\tld  a, (__en_y)\n\t\t\t\t\t\t\tadd 15\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tld  (_pty2), a\n\n\t\t\t\t\t\t\tcall _en_bg_collision_check\n\t\t\t\t\t\t\tor  a\n\t\t\t\t\t\t\tjr  z, _en_bg_collision_horz_done\n\n\t\t\t\t\t\t\tld  a, (_en_xx)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_rdi)\n\t\t\t\t\t\t\txor 1\n\t\t\t\t\t\t\tadd c\n\t\t\t\t\t\t\tsla a\n\t\t\t\t\t\t\tsla a\n\t\t\t\t\t\t\tsla a\n\t\t\t\t\t\t\tsla a\n\t\t\t\t\t\t\tld  (__en_x), a\n\n\t\t\t\t\t\t\t#ifdef ENABLE_MARRULLERS\n\t\t\t\t\t\t\t\tld  a, (__en_t)\n\t\t\t\t\t\t\t\tcp  11\n\t\t\t\t\t\t\t\tjr  c, _en_bg_col_marrh_done\n\t\t\t\t\t\t\t\tcp  15\n\t\t\t\t\t\t\t\tjr  nc, _en_bg_col_marrh_done\n\n\t\t\t\t\t\t\t\tcall _marrullers_select_direction\n\t\t\t\t\t\t\t\tjp  _en_bg_collision_end\n\n\t\t\t\t\t\t\t._en_bg_col_marrh_done\n\t\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\txor a\n\t\t\t\t\t\t\tsub c\n\t\t\t\t\t\t\tld  (__en_mx), a\n\t\t\t\t\t\t\n\t\t\t\t\t\t._en_bg_collision_horz_done\n\n\t\t\t\t\t\t\tcall en_xx_calc\n\n\t\t\t\t\t\t\tld  a, (__en_my)\n\t\t\t\t\t\t\tor  a\n\t\t\t\t\t\t\tjr  z, _en_bg_collision_vert_done\n\n\t\t\t\t\t\t._en_bg_collision_vert\n\t\t\t\t\t\t\tld  a, (__en_my)\n\t\t\t\t\t\t\tcall __ctileoff\n\t\t\t\t\t\t\tld  (_rdi), a\n\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_en_yy)\n\t\t\t\t\t\t\tadd c\n\t\t\t\t\t\t\tld  (_pty1), a\n\t\t\t\t\t\t\tld  (_pty2), a\n\n\t\t\t\t\t\t\tld  a, (_en_xx)\n\t\t\t\t\t\t\tld  (_ptx1), a\n\n\t\t\t\t\t\t\tld  a, (__en_x)\n\t\t\t\t\t\t\tadd 15\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tld  (_ptx2), a\n\n\t\t\t\t\t\t\tcall _en_bg_collision_check\n\t\t\t\t\t\t\tor  a\n\t\t\t\t\t\t\tjr  z, _en_bg_collision_vert_done\n\n\t\t\t\t\t\t\tld  a, (_en_yy)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_rdi)\n\t\t\t\t\t\t\txor 1\n\t\t\t\t\t\t\tadd c\n\t\t\t\t\t\t\tsla a\n\t\t\t\t\t\t\tsla a\n\t\t\t\t\t\t\tsla a\n\t\t\t\t\t\t\tsla a\n\t\t\t\t\t\t\tld  (__en_y), a\n\n\t\t\t\t\t\t\t#ifdef ENABLE_MARRULLERS\n\t\t\t\t\t\t\t\tld  a, (__en_t)\n\t\t\t\t\t\t\t\tcp  11\n\t\t\t\t\t\t\t\tjr  c, _en_bg_col_marrv_done\n\t\t\t\t\t\t\t\tcp  15\n\t\t\t\t\t\t\t\tjr  nc, _en_bg_col_marrv_done\n\n\t\t\t\t\t\t\t\tcall _marrullers_select_direction\n\t\t\t\t\t\t\t\tjr  _en_bg_collision_end\n\n\t\t\t\t\t\t\t._en_bg_col_marrv_done\n\t\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t\tld  a, (__en_my)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\txor a\n\t\t\t\t\t\t\tsub c\n\t\t\t\t\t\t\tld  (__en_my), a\n\n\t\t\t\t\t\t._en_bg_collision_vert_done\n\n\t\t\t\t\t\t\tcall en_yy_calc\n\n\t\t\t\t\t\t\tjr _en_bg_collision_end\n\n\t\t\t\t\t\t._en_bg_collision_check\n\t\t\t\t\t\t\tld  a, (_ptx1)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_pty1)\n\t\t\t\t\t\t\tcall _attr_enems\n\t\t\t\t\t\t\tld  a, l\n\t\t\t\t\t\t\tand ENEMIES_COLLIDE_MASK\n\t\t\t\t\t\t\tret  nz \t\t\t// Non zero, A = TRUE\n\n\t\t\t\t\t\t\tld  a, (_ptx2)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_pty2)\n\t\t\t\t\t\t\tcall _attr_enems\n\t\t\t\t\t\t\tld  a, l\n\t\t\t\t\t\t\tand ENEMIES_COLLIDE_MASK\n\t\t\t\t\t\t\tret \t\t\t\t// A = result\n\n\t\t\t\t\t\t.__ctileoff\n\t\t\t\t\t\t\t// A signed; A >= 0 -> 1, else 0.\n\t\t\t\t\t\t\tbit 7, a\n\t\t\t\t\t\t\tjr  z, __ctileoff_1\n\n\t\t\t\t\t\t\txor a\n\t\t\t\t\t\t\tret\n\n\t\t\t\t\t\t.__ctileoff_1\n\t\t\t\t\t\t\tld  a, 1\n\t\t\t\t\t\t\tret\n\n\t\t\t\t\t\t.en_xx_calc\n\t\t\t\t\t\t\tld  a, (__en_x)\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tld  (_en_xx), a\n\t\t\t\t\t\t\tret\n\n\t\t\t\t\t\t.en_yy_calc\n\t\t\t\t\t\t\tld  a, (__en_y)\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tsrl a\n\t\t\t\t\t\t\tld  (_en_yy), a\n\t\t\t\t\t\t\tret\n\n\t\t\t\t\t\t._en_bg_collision_end\n\t\t\t\t\t#endasm\n\t\t\t\t#endif\n\n\t\t\t\t// Animate\n\t\t\t\t/*\n\t\t\t\ten_an_count [enit] ++; \n\t\t\t\tif (en_an_count [enit] >= 4) {\n\t\t\t\t\ten_an_count [enit] = 0;\n\t\t\t\t\ten_an_frame [enit] = !en_an_frame [enit];\t\t\t\t\t\n\t\t\t\t}\n\t\t\t\t*/\n\t\t\t\t#asm\n\t\t\t\t\t\tld  bc, (_enit)\n\t\t\t\t\t\tld  b, 0\n\n\t\t\t\t\t\tld  hl, _en_an_count\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\tinc a\n\t\t\t\t\t\tcp  4\n\t\t\t\t\t\tjr  c, _enemy_animate_update_count\n\n\t\t\t\t\t\tpush hl\n\n\t\t\t\t\t\tld  hl, _en_an_frame\n\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\txor 1\n\t\t\t\t\t\tld  (hl), a\n\n\t\t\t\t\t\tpop hl\n\t\t\t\t\t\txor a\n\t\t\t\t\t._enemy_animate_update_count\n\t\t\t\t\t\tld  (hl), a\n\t\t\t\t#endasm\n\t\t\t\t\n\t\t\t\tenems_calc_frame ();\t\t\t\t\n\n\t\t\t\t#ifdef ENABLE_CUSTOM_ENEMS\n\t\t\t\t\textra_enems_move ();\n\t\t\t\t#endif\n\t\t\t}\n\n\t\t\t// Select coordinates for collision\n\n\t\t\t#if defined RANDOM_RESPAWN || defined USE_TYPE_6\t\t\t\t\n\t\t\t\tif (\n\t\t\t\t\t#ifdef RANDOM_RESPAWN\n\t\t\t\t\t\ten_an_fanty_activo [enit]\n\t\t\t\t\t#else\n\t\t\t\t\t\t_en_t == 6 \n\t\t\t\t\t\t#ifdef MAKE_TYPE_6\n\t\t\t\t\t\t|| _en_t == 0\n\t\t\t\t\t\t#endif\n\t\t\t\t\t#endif\n\t\t\t\t) {\n\t\t\t\t\t/*\n\t\t\t\t\ten_ccx = en_an_x [enit] >> 6;\n\t\t\t\t\ten_ccy = en_an_y [enit] >> 6;\n\t\t\t\t\t*/\n\t\t\t\t\t#asm\n\t\t\t\t\t\t\tld  a, (_enit)\n\t\t\t\t\t\t\tsla a\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  b, 0\n\n\t\t\t\t\t\t\tld  hl, _en_an_x\n\t\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\t\tinc hl\n\t\t\t\t\t\t\tld  h, (hl)\n\t\t\t\t\t\t\tld  l, a \n\n\t\t\t\t\t\t\tcall HLshr6_A\n\t\t\t\t\t\t\tld  (_en_ccx), a\n\n\t\t\t\t\t\t\tld  hl, _en_an_y\n\t\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\t\tinc hl\n\t\t\t\t\t\t\tld  h, (hl)\n\t\t\t\t\t\t\tld  l, a \n\n\t\t\t\t\t\t\tcall HLshr6_A\n\t\t\t\t\t\t\tld  (_en_ccy), a\n\t\t\t\t\t#endasm\n\t\t\t\t} else \n\t\t\t#endif\n\t\t\t{\n\t\t\t\ten_ccx = _en_x;\n\t\t\t\ten_ccy = _en_y;\n\t\t\t}\n\t\n\t\t\t// Moving platforms engine:\n\n\t\t\t#ifndef PLAYER_MOGGY_STYLE\t\n\t\t\t\tif ( (_en_t == 4 \n\t\t\t\t\t#ifdef ENABLE_CUADRATORS\n\t\t\t\t\t\t|| _en_t == 10\n\t\t\t\t\t#endif\n\t\t\t\t\t) && gpx >= en_ccx - 15 && gpx <= en_ccx + 15\n\t\t\t\t) {\n\t\t\t\t\t/*\n\t\t\t\t\tif (player.saltando == 0 || player.cont_salto > 4) {\n\t\t\t\t\t\t// Vertical\n\t\t\t\t\t\tif (_en_my) {\n\t\t\t\t\t\t\tif (_en_my < 0) {\n\t\t\t\t\t\t\t\t// Go up.\n\t\t\t\t\t\t\t\tif (gpy + 17 >= en_ccy && gpy + 11 <= en_ccy) {\n\t\t\t\t\t\t\t\t\tplatform_get_player ();\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\t\t// Go down.\n\t\t\t\t\t\t\t\tif (gpy + 20 >= en_ccy && gpy + 13 <= en_ccy) {\n\t\t\t\t\t\t\t\t\tplatform_get_player ();\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\n\t\t\t\t\t\t// Horizontal\n\t\t\t\t\t\tif (_en_mx != 0 && gpy >= en_ccy - 16 && gpy <= en_ccy - 11 && player.vy >= 0) {\n\t\t\t\t\t\t\tplatform_get_player ();\n\t\t\t\t\t\t\t#if (defined ENABLE_SWORD && defined SWORD_PARALYZES) || defined (ENEMIES_MAY_BE_PARALIZED)\n\t\t\t\t\t\t\t\tif (en_an_state [enit] != ENEM_PARALYZED)\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t//ptgmx = (_en_mx << 6);\n\t\t\t\t\t\t\t#asm\n\t\t\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\t\t\tcall Ashl16_HL\n\t\t\t\t\t\t\t\t\tcall withSign\n\t\t\t\t\t\t\t\t\tld  (_ptgmx), hl\n\t\t\t\t\t\t\t#endasm\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t\t*/\n\t\t\t\t\t#asm\n\t\t\t\t\t\t.moving_platforms\n\t\t\t\t\t\t\t// if (player.saltando == 0 || player.cont_salto > 4)\n\t\t\t\t\t\t\tld  a, (_player+19) \t\t// .saltando\n\t\t\t\t\t\t\tor  a\n\t\t\t\t\t\t\tjr  z, moving_platforms_do\n\n\t\t\t\t\t\t\tld  a, (_player+14)\t\t\t// .cont_salto\n\t\t\t\t\t\t\tcp  5 \t\t\t\t\t\t// a > 4 === a >= 5\n\t\t\t\t\t\t\tjp  c, moving_platforms_done\n\n\t\t\t\t\t\t.moving_platforms_do\n\n\t\t\t\t\t\t.moving_platforms_vert\n\t\t\t\t\t\t\t// Vertical\n\t\t\t\t\t\t\t// if (_en_my) \n\t\t\t\t\t\t\tld  a, (__en_my)\n\t\t\t\t\t\t\tor  a\n\t\t\t\t\t\t\tjr  z, moving_platforms_vert_done\n\n\t\t\t\t\t\t\t// Negative/positive\n\t\t\t\t\t\t\tbit 7, a\n\t\t\t\t\t\t\tjr  z, moving_platforms_vert_down\n\n\t\t\t\t\t\t.moving_platforms_vert_up\n\t\t\t\t\t\t\t// if (gpy + 17 >= en_ccy && gpy + 11 <= en_ccy)\n\n\t\t\t\t\t\t\t// gpy + 17 >= en_ccy\n\t\t\t\t\t\t\tld  a, (_en_ccy)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\t\t\tadd 17\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, moving_platforms_vert_done\n\n\t\t\t\t\t\t\t// gpy + 11 <= en_ccy -> en_ccy >= gpy + 11\n\t\t\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\t\t\tadd 11\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_en_ccy)\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, moving_platforms_vert_done\n\n\t\t\t\t\t\t\tcall _platform_get_player\n\n\t\t\t\t\t\t\tjr  moving_platforms_vert_done\n\n\t\t\t\t\t\t.moving_platforms_vert_down\n\t\t\t\t\t\t\t// if (gpy + 20 >= en_ccy && gpy + 13 <= en_ccy)\n\n\t\t\t\t\t\t\t// gpy + 20 >= en_ccy\n\t\t\t\t\t\t\tld  a, (_en_ccy)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\t\t\tadd 20\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, moving_platforms_vert_done\n\n\t\t\t\t\t\t\t// gpy + 13 <= en_ccy -> en_ccy >= gpy + 13\n\t\t\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\t\t\tadd 13\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_en_ccy)\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, moving_platforms_vert_done\n\n\t\t\t\t\t\t\tcall _platform_get_player\n\n\t\t\t\t\t\t.moving_platforms_vert_done\n\n\t\t\t\t\t\t.moving_platforms_horz\n\t\t\t\t\t\t\t// if (_en_mx != 0 && gpy >= en_ccy - 16 && gpy <= en_ccy - 11 && player.vy >= 0)\n\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\tor  a\n\t\t\t\t\t\t\tjr  z, moving_platforms_done\n\n\t\t\t\t\t\t\t// gpy >= en_ccy - 16 -> gpy + 16 >= en_ccy\n\t\t\t\t\t\t\tld  a, (_en_ccy)\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\t\t\tadd 16\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, moving_platforms_done\n\n\t\t\t\t\t\t\t// gpy <= en_ccy - 11 -> gpy + 11 <= en_ccy -> en_ccy >= gpy + 11\n\t\t\t\t\t\t\tld  a, (_gpy)\n\t\t\t\t\t\t\tadd 11\n\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\tld  a, (_en_ccy)\n\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\tjr  c, moving_platforms_done\n\n\t\t\t\t\t\t\t// player.vy >= 0\n\t\t\t\t\t\t\tld  a, (_player+9)\t\t// .vy MSB\n\t\t\t\t\t\t\tbit 7, a\n\t\t\t\t\t\t\tjr  nz, moving_platforms_done\n\n\t\t\t\t\t\t\tcall _platform_get_player\n\n\t\t\t\t\t\t#if (defined ENABLE_SWORD && defined SWORD_PARALYZES) || defined (ENEMIES_MAY_BE_PARALIZED)\n\t\t\t\t\t\t\t\t// if (en_an_state [enit] != ENEM_PARALYZED)\n\t\t\t\t\t\t\t\tld  bc, (_enit)\n\t\t\t\t\t\t\t\tld  b, 0\n\t\t\t\t\t\t\t\tld  hl, _en_an_state\n\t\t\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\t\t\tcp  ENEM_PARALYZED\n\t\t\t\t\t\t\t\tjr  z, moving_platforms_done\n\t\t\t\t\t\t#endif\t\t\n\n\t\t\t\t\t\t\t//ptgmx = (_en_mx << 6);\n\t\t\t\t\t\t\tld  a, (__en_mx)\n\t\t\t\t\t\t\tcall Ashl16_HL\n\t\t\t\t\t\t\tcall withSign\n\t\t\t\t\t\t\tld  (_ptgmx), hl\n\n\t\t\t\t\t\t.moving_platforms_done\n\n\t\t\t\t\t#endasm\n\t\t\t\t} else\n\t\t\t#endif\t\t\t\n\t\t\t{\n\n\t\t\t\t// Swording\n\n\t\t\t\t#ifdef ENABLE_SWORD\n\t\t\t\t\tif (s_on && \n\t\t\t\t\t\ts_frame >= MIN_SWORD_HIT_FRAME && s_frame < MAX_SWORD_HIT_FRAME\n\t\t\t\t\t) {\n\t\t\t\t\t\t//if (s_hit_x >= _en_x - 15 && s_hit_x <= _en_x + 15 && s_hit_y >= _en_y - 15 && s_hit_y <= _en_y + 15) \n\t\t\t\t\t\t#asm\n\t\t\t\t\t\t\t\t// s_hit_x >= en_ccx\n\t\t\t\t\t\t\t\tld  a, (_en_ccx)\n\t\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\t\tld  a, (_s_hit_x) \n\t\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\t\tjp  c, _enems_hit_sword_done\n\n\t\t\t\t\t\t\t\t// s_hit_x <= en_ccx + 15 -> en_ccx + 15 >= s_hit_x\n\t\t\t\t\t\t\t\tld  a, (_s_hit_x)\n\t\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\t\tld  a, (_en_ccx)\n\t\t\t\t\t\t\t\tadd 15\n\t\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\t\tjp  c, _enems_hit_sword_done\n\n\t\t\t\t\t\t\t\t// s_hit_y >= en_ccy \n\t\t\t\t\t\t\t\tld  a, (_en_ccy)\n\t\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\t\tld  a, (_s_hit_y)\n\t\t\t\t\t\t\t\tcp  c \n\t\t\t\t\t\t\t\tjp  c, _enems_hit_sword_done\n\n\t\t\t\t\t\t\t\t// s_hit_y <= en_ccy + 15 -> en_ccy + 15 >= s_hit_y\n\t\t\t\t\t\t\t\tld  a, (_s_hit_y)\n\t\t\t\t\t\t\t\tld  c, a\n\t\t\t\t\t\t\t\tld  a, (_en_ccy)\n\t\t\t\t\t\t\t\tadd 15\n\t\t\t\t\t\t\t\tcp  c\n\t\t\t\t\t\t\t\tjp  c, _enems_hit_sword_done\n\t\t\t\t\t\t#endasm\n\t\t\t\t\t\t{\t\n\t\t\t\t\t\t\tif (1\n\t\t\t\t\t\t\t#ifdef PLAYER_MIN_KILLABLE\n\t\t\t\t\t\t\t\t&& _en_t >= PLAYER_MIN_KILLABLE\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#ifdef PLAYER_MAX_KILLABLE\n\t\t\t\t\t\t\t\t&& _en_t <= PLAYER_MAX_KILLABLE\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#ifndef PLAYER_MOGGY_STYLE\n\t\t\t\t\t\t\t\t&& _en_t != 4\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t) {\n\t\t\t\t\t\t\t\t// Hit!\n\t\t\t\t\t\t\t\tplay_sfx (2);\n\t\t\t\t\t\t\t\ts_on = 0;\n\n\t\t\t\t\t\t\t\t#ifdef SWORD_PARALYZES\n\t\t\t\t\t\t\t\t\ten_an_state [enit] = ENEM_PARALYZED;\n\t\t\t\t\t\t\t\t\ten_an_count [enit] = SWORD_PARALYZES;\n\t\t\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t\t\t// Kill?\n\t\t\t\t\t\t\t\t#if SWORD_LINEAL_DAMAGE > 0\n\t\t\t\t\t\t\t\t\tif (_en_t != 6) if (_en_life >= SWORD_LINEAL_DAMAGE) _en_life -= SWORD_LINEAL_DAMAGE; else _en_life = 0;\n\t\t\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t\t\t#if SWORD_FLYING_DAMAGE > 0\n\t\t\t\t\t\t\t\t\tif (_en_t == 6) if (_en_life >= SWORD_FLYING_DAMAGE) _en_life -= SWORD_FLYING_DAMAGE; else _en_life = 0;\n\t\t\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t\t\t#if SWORD_LINEAL_DAMAGE > 0 || SWORD_FLYING_DAMAGE > 0\n\t\t\t\t\t\t\t\t\tif (_en_life == 0) {\n\t\t\t\t\t\t\t\t\t\ten_an_next_frame [enit] = sprite_17_a;\n\t\t\t\t\t\t\t\t\t\tenems_kill ();\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t\t\tgoto enems_loop_continue;\n\t\t\t\t\t\t\t}\n\t\t\t\t\t\t}\n\t\t\t\t\t\t#asm\n\t\t\t\t\t\t\t._enems_hit_sword_done\n\t\t\t\t\t\t#endasm\n\t\t\t\t\t}\n\t\t\t\t#endif\n\t\t\t\t\n\n\t\t\t\t// Collision with enemy\n\n\t\t\t\tif (\n\t\t\t\t\t0 == en_tocado && collide_enem () && \n\t\t\t\t\t(_en_t < 16 \n\t\t\t\t\t\t#ifdef RANDOM_RESPAWN\n\t\t\t\t\t\t\t|| en_an_fanty_activo [enit] == 1\n\t\t\t\t\t\t#endif\n\t\t\t\t\t) \n\t\t\t\t) {\n\t\t\t\t\t#ifdef PLAYER_KILLS_ENEMIES\n\t\t\t\t\t\tif (\n\t\t\t\t\t\t\t#ifdef TIGHT_BOUNDING_BOX\n\t\t\t\t\t\t\t\tgpy < en_ccy\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t\tgpy <= en_ccy - 8 \n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t&& player.vy >= 0 \n\t\t\t\t\t\t\t#ifdef PLAYER_MIN_KILLABLE\n\t\t\t\t\t\t\t\t&& _en_t >= PLAYER_MIN_KILLABLE\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#ifdef PLAYER_MAX_KILLABLE\n\t\t\t\t\t\t\t\t&& _en_t <= PLAYER_MAX_KILLABLE\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t) {\n\t\t\t\t\t\t\t// Step on enemy and kill it.\n\t\t\t\t\t\t\ten_an_next_frame [enit] = sprite_17_a;\n\t\t\t\t\t\t\tplayer.vy = -PLAYER_MAX_VY_SALTANDO;\n\t\t\t\t\t\t\tenems_kill ();\n\t\t\t\t\t\t} else\t\n\t\t\t\t\t#endif\n\t\t\t\t\tif (\n\t\t\t\t\t\tplayer.estado == EST_NORMAL\n\t\t\t\t\t\t#ifdef PARALYZED_DONT_KILL\n\t\t\t\t\t\t\t&& en_an_state [enit] != ENEM_PARALYZED\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t#ifdef PARALYZED_DONT_KILL_ON_VAR\n\t\t\t\t\t\t\t&& (en_an_state [enit] != ENEM_PARALYZED || paralyzed_dont_kill == 0)\n\t\t\t\t\t\t#endif\n\t\t\t\t\t) {\n\t\t\t\t\t\ten_tocado = 1; player.is_dead = 1; play_sfx (2);\n\t\t\t\t\t\t#ifdef ENABLE_CODE_HOOKS\n\t\t\t\t\t\t\tenemy_killer = enit;\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\n\t\t\t\t\t\t// We decide which kind of life drain we do:\n\t\t\t\t\t\t#if defined(RANDOM_RESPAWN) || defined(USE_TYPE_6)\n\t\t\t\t\t\t\tif (_en_t > 4) {\n\t\t\t\t\t\t\t\tplayer.life -= FLYING_ENEMY_HIT;\n\t\t\t\t\t\t\t} else\n\t\t\t\t\t\t#endif\n\t\t\t\t\t\t{\n\t\t\t\t\t\t\tplayer.life -= LINEAR_ENEMY_HIT;\n\t\t\t\t\t\t}\n\t\t\t\t\t\tplayer_just_died = PLAYER_KILLED_BY_ENEM;\n\t\t\t\t\t\t\n\t\t\t\t\t\t#ifdef PLAYER_BOUNCES\n\t\t\t\t\t\t\t#ifndef PLAYER_MOGGY_STYLE\t\n\t\t\t\t\t\t\t\t#if defined(RANDOM_RESPAWN) || defined(USE_TYPE_6)\n\t\t\t\t\t\t\t\t\tif (0 == en_an_fanty_activo [enit]) {\n\t\t\t\t\t\t\t\t\t\t// Bouncing!\n\t\t\t\t\t\t\t\t\t\tif (_en_mx > 0) player.vx = PLAYER_MAX_VX;\n\t\t\t\t\t\t\t\t\t\tif (_en_mx < 0) player.vx = -PLAYER_MAX_VX;\n\t\t\t\t\t\t\t\t\t\tif (_en_my > 0) player.vy = PLAYER_MAX_VX;\n\t\t\t\t\t\t\t\t\t\tif (_en_my < 0) player.vy = -PLAYER_MAX_VX;\n\t\t\t\t\t\t\t\t\t} else {\n\t\t\t\t\t\t\t\t\t\tplayer.vx = en_an_vx [enit] + en_an_vx [enit];\n\t\t\t\t\t\t\t\t\t\tplayer.vy = en_an_vy [enit] + en_an_vy [enit];\n\t\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t\t\t// Bouncing!\n\t\t\t\t\t\t\t\t\tif (_en_mx > 0) player.vx = (PLAYER_MAX_VX + PLAYER_MAX_VX);\n\t\t\t\t\t\t\t\t\tif (_en_mx < 0) player.vx = -(PLAYER_MAX_VX + PLAYER_MAX_VX);\n\t\t\t\t\t\t\t\t\tif (_en_my > 0) player.vy = (PLAYER_MAX_VX + PLAYER_MAX_VX);\n\t\t\t\t\t\t\t\t\tif (_en_my < 0) player.vy = -(PLAYER_MAX_VX + PLAYER_MAX_VX);\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t\t// Bouncing:\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t// x\n\t\t\t\t\t\t\t\tif (_en_mx) {\n\t\t\t\t\t\t\t\t\tif (gpx < en_ccx) player.vx = - (abs (_en_mx << 1) << 7);\n\t\t\t\t\t\t\t\t\telse player.vx = abs (_en_mx + _en_mx) << 7;\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t\t// y\n\t\t\t\t\t\t\t\tif (_en_my) {\n\t\t\t\t\t\t\t\t\tif (gpy < en_ccy) player.vy = - (abs (_en_my << 1) << 7);\n\t\t\t\t\t\t\t\t\telse player.vy = abs (_en_my + _en_my) << 7;\n\t\t\t\t\t\t\t\t}\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t#endif\n\n\t\t\t\t\t\t#ifdef ENABLE_FRIGOABABOL\n\t\t\t\t\t\t\tplayer.estado = EST_FRIGOABABOL;\n\t\t\t\t\t\t\tplayer.ct_estado = FRIGO_MAX_FRAMES;\n\t\t\t\t\t\t#elif defined PLAYER_FLICKERS\n\t\t\t\t\t\t\t// Flickers. People seem to like this more than the bouncing behaviour.\n\t\t\t\t\t\t\tplayer_flicker ();\n\t\t\t\t\t\t#endif\t\t\t\t\n\t\t\t\t\t}\n\t\t\t\t}\n\t\t\t\t\n\t\t\t\t// Enemy update\n\t\t\t\t\t\n\t\t\t\t#ifdef PLAYER_CAN_FIRE\n\t\t\t\t\t// Collision with bullets\n\t\t\t\t\t#ifdef RANDOM_RESPAWN\n\t\t\t\t\t\tif (_en_t < 16 || en_an_fanty_activo [enit] == 1)\n\t\t\t\t\t#else\n\t\t\t\t\t\tif (_en_t < 16)\n\t\t\t\t\t#endif\n\t\t\t\t\t{\n\t\t\t\t\t\tfor (en_j = 0; en_j < MAX_BULLETS; en_j ++) {\n\t\t\t\t\t\t\t#asm\n\t\t\t\t\t\t\t\t\tld  bc, (_en_j)\n\t\t\t\t\t\t\t\t\tld  b, 0\n\n\t\t\t\t\t\t\t\t\tld  hl, _bullets_estado\n\t\t\t\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\t\t\t\tor  a\n\t\t\t\t\t\t\t\t\tjp  z, enems_coll_bullets_continue\n\n\t\t\t\t\t\t\t\t// Bullet is active. Collide?\n\t\t\t\t\t\t\t\t// if (bullets_y [en_j] >= en_ccy - 4 \n\n\t\t\t\t\t\t\t\t\tld  a, (_en_ccy)\n\t\t\t\t\t\t\t\t\tsub 4\n\t\t\t\t\t\t\t\t\tld  d, a\n\t\t\t\t\t\t\t\t\tld  hl, _bullets_y\n\t\t\t\t\t\t\t\t\tadd hl, bc\n\t\t\t\t\t\t\t\t\tld  a, (hl)\n\t\t\t\t\t\t\t\t\tcp  d \n\t\t\t\t\t\t\t\t\tjp  c, enems_coll_bullets_continue\n\n\t\t\t\t\t\t\t\t// && bullets_y [en_j] <= en_ccy + 12 -> en_ccy + 12 >= bullets_y [en_j]\n\t\t\t\t\t\t\t\t\tld  d, a\n\t\t\t\t\t\t\t\t\tld  a, (_en_ccy)\n\t\t\t\t\t\t\t\t\tadd 12\n\t\t\t\t\t\t\t\t\tcp  d\n\t\t\t\t\t\t\t\t\tjp  c, enems_coll_bullets_continue\n\n\t\t\t\t\t\t\t\t// && bullets_x [en_j] >= en_ccx - 4 \n\t\t\t\t\t\t\t\t\tld  a, (_en_ccx)\n\t\t\t\t\t\t\t\t\tsub 4\n\t\t\t\t\t\t\t\t\tld  d, a \n\t\t\t\t\t\t\t\t\tld  hl, _bullets_x\n\t\t\t\t\t\t\t\t\tadd hl, bc \n\t\t\t\t\t\t\t\t\tld  a, (hl) \n\t\t\t\t\t\t\t\t\tcp  d \n\t\t\t\t\t\t\t\t\tjp  c, enems_coll_bullets_continue\n\n\t\t\t\t\t\t\t\t// && bullets_x [en_j] <= en_ccx + 12) { -> en_ccx + 12 >= bullets_x [en_j]\n\t\t\t\t\t\t\t\t\tld  d, a\n\t\t\t\t\t\t\t\t\tld  a, (_en_ccx)\n\t\t\t\t\t\t\t\t\tadd 12\n\t\t\t\t\t\t\t\t\tcp  d\n\t\t\t\t\t\t\t\t\tjp  c, enems_coll_bullets_continue\n\t\t\t\t\t\t\t#endasm\n\n\t\t\t\t\t\t\t#if defined (RANDOM_RESPAWN) || defined (USE_TYPE_6)\t\n\t\t\t\t\t\t\t\t#ifdef RANDOM_RESPAWN\t\n\t\t\t\t\t\t\t\t\tif (en_an_fanty_activo [enit]) \n\t\t\t\t\t\t\t\t#else\n\t\t\t\t\t\t\t\t\tif (_en_t == 6)\n\t\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\t\ten_an_vx [enit] += (bullets_mx [en_j] > 0 ? 128 : -128);\n\t\t\t\t\t\t\t#endif\n\t\t\t\t\t\t\ten_an_next_frame [enit] = sprite_17_a;\n\t\t\t\t\t\t\ten_an_morido [enit] = 1;\n\t\t\t\t\t\t\tbullets_estado [en_j] = 0;\n\t\t\t\t\t\t\t_en_life --;\n\t\t\t\t\t\t\tif (_en_life == 0) enems_kill ();\n\t\t\t\t\t\t\t\n\t\t\t\t\t\t\t#asm\n\t\t\t\t\t\t\t\t.enems_coll_bullets_continue\n\t\t\t\t\t\t\t#endasm\n\t\t\t\t\t\t}\n\t\t\t\t\t}\n\t\t\t\t#endif\n\t\t\t}\n\n\t\t\t#ifdef ENABLE_CUSTOM_ENEMS\n\t\t\t\textra_enems_checks ();\n\t\t\t#endif\n\t\t}\n\n\t\tenems_loop_continue:\n\n\t\t\t#ifdef RANDOM_RESPAWN\n\t\t\t\t// Activate fanty\n\n\t\t\tif ((_en_t & 16) && en_an_fanty_activo [enit] == 0 && (rand () & 31) == 1) {\n\t\t\t\t\ten_an_fanty_activo [enit] = 1;\n\t\t\t\t\tif (player.y > 5120)\n\t\t\t\t\t\ten_an_y [enit] = -1024;\n\t\t\t\t\telse\n\t\t\t\t\t\ten_an_y [enit] = 10240;\n\t\t\t\t\ten_an_x [enit] = (rand () % 240 - 8) << 6;\n\t\t\t\t\ten_an_vx [enit] = en_an_vy [enit] = 0;\n\t\t\t\tenems_en_an_calc (2);\n\t\t\t\t}\n\t\t\t#endif\n\n\t\t#asm\t\t\n\t\t\t\t// Those values are stored in this order:\n\t\t\t\t// x, y, x1, y1, x2, y2, mx, my, t[, life]\n\n\t\t\t\tld  hl, (__baddies_pointer) \t\t// Restore pointer\n\n\t\t\t\tld  a, (__en_x)\n\t\t\t\tld  (hl), a\n\t\t\t\tinc hl\n\n\t\t\t\tld  a, (__en_y)\n\t\t\t\tld  (hl), a\n\t\t\t\tinc hl\n\n\t\t\t#ifdef PACKED_ENEMS\n\t\t\t\t#ifdef FIXED_ENEMS_LIMITS\n\t\t\t\t\tinc hl\n\t\t\t\t\tinc hl\n\t\t\t\t#else\n\t\t\t\t\tld  a, (__en_x1)\n\t\t\t\t\tld  b, a\n\t\t\t\t\tld  a, (__en_y1)\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tor  b\n\t\t\t\t\tld  (hl), a\n\t\t\t\t\tinc hl\n\n\t\t\t\t\tld  a, (__en_x2)\n\t\t\t\t\tld  b, a\n\t\t\t\t\tld  a, (__en_y2)\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tsrl a\n\t\t\t\t\tor  b\n\t\t\t\t\tld  (hl), a\n\t\t\t\t\tinc hl\t\t\t\t\t\n\t\t\t\t#endif\n\t\t\t#else\n\t\t\t\t#ifdef FIXED_ENEMS_LIMITS\n\t\t\t\t\tld  bc, 4\n\t\t\t\t\tadd hl, bc\n\t\t\t\t#else\n\t\t\t\t\tld  a, (__en_x1)\n\t\t\t\t\tld  (hl), a\n\t\t\t\t\tinc hl\n\t\n\t\t\t\t\tld  a, (__en_y1)\n\t\t\t\t\tld  (hl), a\n\t\t\t\t\tinc hl\n\t\n\t\t\t\t\tld  a, (__en_x2)\n\t\t\t\t\tld  (hl), a\n\t\t\t\t\tinc hl\n\t\n\t\t\t\t\tld  a, (__en_y2)\n\t\t\t\t\tld  (hl), a\n\t\t\t\t\tinc hl\n\t\t\t\t#endif\n\t\t\t#endif\n\t\t\t\tld  a, (__en_mx)\n\t\t\t\tld  (hl), a\n\t\t\t\tinc hl\n\n\t\t\t\tld  a, (__en_my)\n\t\t\t\tld  (hl), a\n\t\t\t\tinc hl\n\n\t\t\t\tld  a, (__en_t)\n\t\t\t\tld  (hl), a\n\t\t\t\tinc hl\n\n\t\t\t#if defined PLAYER_CAN_FIRE || defined ENABLE_SWORD\n\t\t\t\tld  a, (__en_life)\n\t\t\t\tld  (hl), a\n\t\t\t#endif\n\t\t#endasm\t\n\t}\n}\n",
+			"file": "games_zx/perils/dev/engine.h",
+			"file_size": 137197,
+			"file_write_time": 133226550235148283,
+			"settings":
+			{
+				"buffer_size": 131440,
+				"encoding": "Western (Windows 1252)",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "games_zx/perils/dev/comp.bat",
+			"settings":
+			{
+				"buffer_size": 1516,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "games_zx/perils/dev/mainloop.h",
+			"settings":
+			{
+				"buffer_size": 19728,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/utils/sprcnv_exp.bas",
+			"settings":
+			{
+				"buffer_size": 4789,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "games_zx/perils/dev/sprites.h",
+			"settings":
+			{
+				"buffer_size": 27232,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "/D/git/MK1_Pestecera/examples/jetpaco/dev/engine/player.h",
+			"settings":
+			{
+				"buffer_size": 28735,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 392.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"install package",
+				"Package Control: Install Package"
+			],
+			[
+				"ter",
+				"Terminal: Open"
+			],
+			[
+				"package",
+				"Package Control: Install Package"
+			],
+			[
+				"Package Control: ",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 400.0
+	},
+	"console":
+	{
+		"height": 118.0,
+		"history":
+		[
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/D/git/MK1",
+		"/D/git/MK1/games_zx",
+		"/D/git/MK1/games_zx/perils",
+		"/D/git/MK1/games_zx/perils/dev",
+		"/D/git/MK1/games_zx/perils/utils",
+		"/D/git/MK1/src",
+		"/D/git/MK1/src/dev",
+		"/D/git/MK1/src/utils"
+	],
+	"file_history":
+	[
+		"/D/git/MK1/games_zx/perils/dev/sprites.h",
+		"/D/git/MK1/src/utils/sprcnv_exp.bas",
+		"/D/git/MK1/games_zx/perils/dev/mainloop.h",
+		"/D/git/MK1/games_zx/perils/dev/engine.h",
+		"/D/git/MK1/games_zx/perils/dev/config.h",
+		"/D/git/MK1/games_cpc/ababol/dev/engine.h",
+		"/D/git/MK1/lib/splib2/spritepack.h",
+		"/D/git/MK1/games_zx/perils/dev/churromain.c",
+		"/D/git/MK1/lib/splib2/cwrapper/sp_AddColSpr.c",
+		"/D/git/MK1/lib/splib2/sprites/SPAddColSpr.asm",
+		"/D/git/MK1/games_zx/perils/dev/perils.map",
+		"/D/git/MK1/lib/splib2/cwrapper/sp_IterateSprChar.c",
+		"/D/git/MK1/games_zx/perils/dev/perils.asm",
+		"/D/git/MK1/games_zx/perils/dev/comp.bat",
+		"/D/git/MK1/lib/splib2/sprites/SPIterateSprChar.asm",
+		"/D/git/MK1/games_zx/perils/dev/printer.h",
+		"/D/git/MK1/games_zx/ramiro4/dev/pantallas.h",
+		"/D/git/MK1/games_zx/ramiro4/dev/custom.h",
+		"/D/git/MK1/games_zx/perils/dev/pantallas.h",
+		"/D/git/MK1/games_zx/perils/dev/custom.h",
+		"/D/git/MK1/games_zx/perils/dev/loader_128.asm-orig",
+		"/D/git/MK1/games_zx/perils/ogt/atPlayer.speccy.asm",
+		"/D/git/MK1/games_zx/perils/ogt/list.txt",
+		"/D/git/MK1/games_zx/perils/ogt/make_ogt.bat",
+		"/D/git/MK1/games_zx/ramiro4/ogt/RAM1.map.txt",
+		"/D/git/MK1/games_cpc/ramiro4/dev/comp.bat",
+		"/D/git/MK1/games_cpc/ramiro4/dev/custom.h",
+		"/D/git/MK1/games_zx/ramiro3/dev/comp.bat",
+		"/D/git/MK1/games_zx/ramiro4/dev/comp.bat",
+		"/D/git/MK1/games_cpc/ramiro4/dev/churromain.c",
+		"/D/git/MK1/games_cpc/ramiro4/dev/system/behindtilemasks.asm",
+		"/D/git/MK1/games_cpc/ramiro4/dev/system/tilemap_conf.asm",
+		"/D/git/MK1/games_cpc/ramiro3/dev/system/behindtilemasks.asm",
+		"/D/git/MK1/games_cpc/ramiro3/dev/system/tilemap_conf.asm",
+		"/D/git/MK1/games_cpc/ramiro3/dev/comp.bat",
+		"/D/git/MK1/games_cpc/ramiro4/dev/pantallas.h",
+		"/D/git/MK1/games_zx/ramiro3/dev/pantallas.h",
+		"/D/git/MK1/games_cpc/ramiro3/dev/pantallas.h",
+		"/D/git/MK1/games_zx/ramiro3/dev/custom.h",
+		"/D/git/nes_work/leovigildo/howto.md",
+		"/D/git/nes_work/leovigildo/diario.md",
+		"/D/git/nes_work/leovigildo/todo.md",
+		"/D/git/MK1/src/dev/printer.h",
+		"/C/php/php.ini",
+		"/D/git/parseversion/parseversion.php",
+		"/D/git/MK1/games_cpc/ramiro3/dev/printer.h",
+		"/C/php/README.md",
+		"/D/git/MK1/games_cpc/ramiro3/dev/config.h",
+		"/D/git/MK1/games_cpc/ramiro3/dev/msc_extern.h",
+		"/D/git/MK1/games_zx/ramiro3/script/script.spt",
+		"/D/git/MK1/games_cpc/ramiro3/dev/engine.h",
+		"/D/Proyectos/2022/20220609a - Mejoras Webmail (ldap_search, MariaDB 10.5, etc)/instrucciones.txt",
+		"/D/git/MK1/games_cpc/ramiro3/script/script.spt",
+		"/C/Users/jcastano/AppData/Local/Temp/7zO446AC585/Read me.txt",
+		"/C/Users/jcastano/AppData/Local/Temp/7zO44673797/net.minecraft.json",
+		"/D/git/MK1/games_cpc/helmet/dev/pantallas.h",
+		"/D/git/MK1/games_zx/helmet/dev/pantallas.h",
+		"/D/git/MK1/games_cpc/helmet/dev/custom.h",
+		"/D/git/MK1/games_cpc/helmet/dev/engine.h",
+		"/D/git/MK1/games_cpc/helmet/dev/mainloop.h",
+		"/D/git/MK1/games_cpc/helmet/dev/printer.h",
+		"/D/git/MK1/games_cpc/helmet/dev/custom_animation.h",
+		"/D/git/MK1/games_cpc/helmet/dev/config.h",
+		"/D/git/MK1/games_cpc/ramiro3/dev/custom.h",
+		"/D/git/MK1/games_cpc/helmet/dev/custom_player_cells.h",
+		"/D/git/MK1/games_zx/helmet/dev/custom.h",
+		"/D/git/MK1/games_cpc/helmet/dev/comp.bat",
+		"/D/git/MK1/games_cpc/helmet/dev/helmet.asm",
+		"/D/git/MK1/games_cpc/helmet/dev/spriteset_mappings.h",
+		"/D/Proyectos/2022/20220405a - Ficheros v1.8.0.0 - clamav, uidshort, tags, misc/instrucciones.md",
+		"/D/git/MK1/games_zx/helmet/dev/config.h",
+		"/D/Proyectos/2022/20220404a - Admdir 1.43.0.0 - Corrección de problemas de seguridad/instrucciones.txt",
+		"/D/git/MK1/games_cpc/helmet/ogt/compress_songs.bat",
+		"/D/git/MK1/games_zx/helmet/trash/patrollers_assembly.h",
+		"/D/git/MK1/games_zx/helmet/dev/engine.h",
+		"/D/git/MK1/games_zx/helmet/dev/printer.h",
+		"/D/git/MK1/games_zx/helmet/dev/mainloop.h",
+		"/D/git/MK1/games_cpc/ababol/dev/definitions.h",
+		"/D/git/MK1/games_zx/calavera/dev/custom.h",
+		"/D/Proyectos/entregas/Entrega-FicherosJunta_1.6.0.0/modif_core.md",
+		"/D/Proyectos/entregas/Entrega-FicherosJunta_1.6.0.0/modificaciones/apps/files/lib/Command/apps/files/lib/Command/Scan.php",
+		"/D/Proyectos/entregas/Entrega-FicherosJunta_1.6.0.0/printout.html",
+		"/D/Proyectos/2021/20211014b - Actualización declaración accesibilidad Consigna/instrucciones.txt",
+		"/D/Proyectos/2021/20211014c - Actualización declaración accesibilidad Reservas/instrucciones.txt",
+		"/D/Proyectos/entregas/Entrega-FicherosJunta_1.5.0.0/instrucciones.txt",
+		"/D/Proyectos/entregas/Entrega-FicherosJunta_1.5.0.0/files_list-1.5.0.0.txt",
+		"/D/Proyectos/entregas/Entrega-FicherosJunta_1.5.0.0/owncloud/apps/files/lib/Command/Scan.php",
+		"/D/temp/dosbox/dosbox.conf",
+		"/D/git/MK1/games_zx/ramiro3/dev/msc_extern.h",
+		"/D/git/MK1/games_zx/ramiro3/dev/sprites.h",
+		"/D/git/MK1/games_zx/ramiro3/dev/custom_enem_cells.h",
+		"/C/Users/jcastano/Downloads/Telegram Desktop/on_player_killed.h",
+		"/D/Proyectos/2021/20210917b - Admdir - Usuarios genéricos con JAdni/instrucciones.txt",
+		"/D/git/nes_work/multicart/src/diario.txt",
+		"/C/Users/jcastano/Desktop/pikapika.txt",
+		"/D/git/MK1/games_cpc/ramiro3/dev/system/loadercpc.asm",
+		"/D/git/MK1/games_cpc/ramiro3/dev/system/preloadercpc.asm",
+		"/D/git/MK1/games_cpc/ramiro3/dev/system/loadercpc.asm-orig",
+		"/D/git/MK1/games_cpc/ramiro3/dev/system/preloadercpc.asm-orig",
+		"/D/git/MK1/wip/nin_nin/README.md",
+		"/D/git/MK1/wip/nin_nin/dev/config.h",
+		"/D/git/MK1/wip/nin_nin/dev/comp.bat",
+		"/D/git/MK1/wip/nin_nin/dev/sword_custom_frames.h",
+		"/D/git/MK1/wip/nin_nin/dev/engine.h",
+		"/D/git/MK1/wip/nin_nin/dev/definitions.h",
+		"/D/git/MK1/wip/nin_nin/dev/churromain.c",
+		"/D/git/MK1/games_zx/calavera/dev/config.h",
+		"/D/git/MK1/docs/manual.md",
+		"/D/git/MK1/games_zx/calavera/dev/engine.h",
+		"/D/git/MK1/games_cpc/ababol/dev/config.h",
+		"/D/git/MK1/README.md",
+		"/D/temp/vmware_shared/MK1/README.md",
+		"/D/git/MK1/games_cpc/ramiro4/dev/spriteset_mappings.h",
+		"/D/git/MK1/games_cpc/ramiro4/dev/config.h",
+		"/D/git/MK1/games_cpc/ramiro4/dev/msc_extern.h",
+		"/D/git/MK1/games_cpc/ramiro4/dev/engine.h",
+		"/D/git/MK1/games_cpc/ramiro4/dev/mainloop.h",
+		"/D/git/MK1/games_cpc/ramiro4/dev/custom_player_cells.h",
+		"/D/git/MK1/games_cpc/ramiro4/dev/system/loadercpc.asm",
+		"/D/git/MK1/games_cpc/ramiro4/dev/custom_animation.h",
+		"/D/git/MK1/games_cpc/ramiro4/dev/cutsom_animation.h",
+		"/D/git/MK1/games_zx/ramiro4/dev/engine.h",
+		"/D/git/MK1/lib/cpcrslib/cpc_PutTrSp4x8TileMap2bPx.asm",
+		"/D/git/MK1/lib/cpcrslib/multiplication2.asm",
+		"/D/git/MK1/lib/cpcrslib/cpc_PutTrSp8x24TileMap2bPx.asm",
+		"/D/git/MK1/lib/cpcrslib/cpc_PutTrSp8x16TileMap2bPx.asm",
+		"/D/git/MK1/lib/cpcrslib/cpc_PutTrSp8x16TileMap2b.asm",
+		"/D/git/MK1/lib/cpcrslib/cpc_PutTrSp4x8TileMap2b.asm"
+	],
+	"find":
+	{
+		"height": 54.0
+	},
+	"find_in_files":
+	{
+		"height": 134.0,
+		"where_history":
+		[
+			"D:\\git\\MK1\\games_zx\\perils\\dev",
+			"D:\\git\\MK1\\lib\\splib2",
+			"D:\\git\\MK1\\lib",
+			"D:\\git\\MK1\\games_zx\\ramiro4\\dev",
+			"D:\\git\\MK1\\games_zx\\perils\\dev",
+			"D:\\git\\MK1\\games_zx\\ramiro4",
+			"D:\\git\\MK1\\games_cpc\\ramiro4\\dev",
+			"D:\\git\\MK1\\src",
+			"D:\\git\\MK1\\games_cpc\\ramiro3\\dev",
+			"D:\\git\\MK1\\games_zx\\helmet\\dev",
+			"D:\\git\\MK1\\games_zx\\ramiro3",
+			"D:\\git\\MK1\\games_cpc",
+			"D:\\git\\MK1",
+			"D:\\git\\MK1\\wip\\nin_nin\\dev",
+			"D:\\git\\MK1\\games_zx",
+			"D:\\git\\MK1\\games_cpc\\ramiro4\\dev",
+			"D:\\git\\MK1\\games_zx\\ramiro4\\dev",
+			"D:\\git\\MK1",
+			"D:\\git\\MK1\\games_cpc",
+			"D:\\git\\MK1\\src",
+			"D:\\git\\MK1\\lib",
+			"D:\\git\\MK1\\lib\\cpcrslib",
+			"D:\\git\\MK1\\games_cpc\\ramiro3\\dev",
+			"D:\\git\\MK1\\src_cpc\\dev",
+			"D:\\git\\MK1",
+			"D:\\git\\MK1\\src_cpc\\dev",
+			"D:\\git\\MK1\\examples\\perils",
+			"D:\\git\\MK1\\src_cpc\\dev",
+			"D:\\git\\MK1\\lib\\splib2",
+			"D:\\git\\MK1\\examples\\perils\\dev",
+			"D:\\git\\MK1\\examples\\perils",
+			"D:\\git\\MK1\\examples\\perils\\dev",
+			"D:\\git\\MK1\\examples\\ramiro4\\dev",
+			"D:\\git\\MK1\\docs",
+			"D:\\git\\MK1\\examples\\ramiro4\\dev",
+			"D:\\git\\MK1\\examples\\perils\\dev",
+			"D:\\git\\MK1\\examples\\perils",
+			"D:\\git\\MK1\\examples",
+			"D:\\git\\MK1\\lib",
+			"D:\\git\\MK1\\lib\\splib2",
+			"D:\\git\\MK1\\examples\\ramiro4\\dev",
+			"D:\\git\\MK1\\examples\\perils\\dev",
+			"D:\\git\\MK1\\examples\\ramiro4\\dev"
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"p_vx",
+			"player.vx",
+			"sp_left",
+			"hex",
+			"str",
+			"tall_player",
+			"to",
+			"for",
+			"endif",
+			"else",
+			"next",
+			"then",
+			"if",
+			"print",
+			"as",
+			"tight",
+			"SHORT_PLAYER",
+			"TALL_MAIN_SPRITE",
+			"gpxx",
+			"fix_sprites",
+			"spritesclip",
+			"nullspr",
+			"sp_CS",
+			"lda (_rda)",
+			"levels_finis",
+			"level_finished",
+			"arkos_play_music",
+			"apack",
+			"LANG_ES",
+			"power_on",
+			"atsfxplay",
+			"atplay",
+			"song_sfx",
+			" INCBIN\"bin/",
+			"INCBIN \"",
+			"'",
+			"but i ",
+			"rda",
+			"WYZ_SONG_BUFFER",
+			"WYZ_SOUND_BUFFER",
+			"redraw_from_buffer",
+			"pad0",
+			"extension",
+			"&\\n",
+			"AMD",
+			"&",
+			"show_coins",
+			"use_type_6",
+			"fanty",
+			"text34",
+			"BETTER_VERTICAL_CONNECTIONS",
+			"comportamiento_tiles",
+			"inside",
+			"map_behaviours",
+			"enems_calc_frame",
+			"update",
+			"invalidate",
+			"sp_alarm",
+			"sprite_jumo",
+			"_set_facing",
+			"rand (",
+			"todos_rescatados_check",
+			"BETTER_VERTICAL_CONNECTIONS",
+			"alarm_x",
+			"hotspot_paint",
+			"hotspots",
+			"draw_scr",
+			"hook_mainl",
+			"select_power",
+			"saca",
+			"validate",
+			"select_power",
+			"power_names",
+			"cpc_testkey",
+			"define MAX_ENEMS",
+			"render_all_sprites",
+			"is128",
+			"ababol",
+			"draw_scr",
+			".st",
+			"clear_cerrojo",
+			"bolts",
+			"SWORD_CUSTOM_FRAMES",
+			"sword",
+			"sword_custom_frames",
+			"MIN_SWORD",
+			"s_hit_x",
+			"sword",
+			"swoffs_y",
+			"sword",
+			"packed_enems",
+			"PACKED_ENEMS",
+			"sword",
+			"|=",
+			"& 16",
+			"next_frame",
+			"sp_upda",
+			"sp_update",
+			"sprite_remove_aid",
+			"is128",
+			"128K_DUAL",
+			"render_this_enemy",
+			"player.next_frame ",
+			"move",
+			".sp0",
+			"tile_address",
+			"LINE_OF_",
+			"custom_animation",
+			"custom_player_cells",
+			"transferir",
+			"PLAYER_NO_INERTIA",
+			"vert_axis.h",
+			"#define PLATFORMS_",
+			"calc_baddies_pointer",
+			"init_malotes",
+			"phaskey",
+			"WALL_UP",
+			"ld  a, WALL_UP",
+			"v0.3",
+			"x1",
+			"v0.4.20210121-v4",
+			"_en_x1",
+			"enoffs",
+			"* 3",
+			"MIN_FAPS_PER_FRAME",
+			"FLAG 2",
+			"mus/",
+			"apultra"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+			"To",
+			"For",
+			"Endif",
+			"Else",
+			"Next",
+			"Then",
+			"If",
+			"Print",
+			"As",
+			"TIGHT_BOUNDING_BOX",
+			"TALL_PLAYER",
+			" zx0",
+			" INCBIN \"bin/",
+			"INCBIN\"bin/",
+			"\\\"",
+			"&",
+			"&\\n",
+			"_s_f",
+			"ninnin",
+			"v0.4.20210615-v4",
+			"v0.5.20210615-v4",
+			"ogt/",
+			"apack",
+			"0",
+			"Map2bPx",
+			"8x24Px",
+			"4x8Px",
+			"$55",
+			"$f0",
+			"$0",
+			"Map8x16Px",
+			"0.5.20210614",
+			"Map2bPx",
+			"",
+			"_attr_2",
+			"$\\1",
+			"@",
+			"&b\\1",
+			"defw",
+			"defb",
+			"defw",
+			"defb",
+			"$\\1",
+			"skip_ay_player",
+			"",
+			"SWORD_SW_SPRITE_ON",
+			"BASE_ARRAYS",
+			"apack",
+			"0",
+			"c02",
+			"c01p\\1.jpg",
+			"",
+			"with",
+			"Wrote",
+			"2.1 20210527a",
+			"_ls",
+			"0.7.20210416",
+			"64"
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "games_zx/perils/dev/engine.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 131440,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								54939,
+								54943
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 36169.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "games_zx/perils/dev/comp.bat",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1516,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								347,
+								347
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "games_zx/perils/dev/mainloop.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19728,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								6167,
+								6168
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3663.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 2,
+			"sheets":
+			[
+				{
+					"buffer": 3,
+					"file": "src/utils/sprcnv_exp.bas",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4789,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								3815,
+								3815
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Syntax QBasic/QBasic.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1710.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "games_zx/perils/dev/sprites.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 27232,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2929,
+								2929
+							],
+							[
+								2953,
+								2953
+							],
+							[
+								2977,
+								2977
+							],
+							[
+								3001,
+								3001
+							],
+							[
+								3025,
+								3025
+							],
+							[
+								3049,
+								3049
+							],
+							[
+								3073,
+								3073
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 9399.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 5,
+					"file": "/D/git/MK1_Pestecera/examples/jetpaco/dev/engine/player.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 28735,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14408,
+								14408
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9675.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 24.0
+	},
+	"input":
+	{
+		"height": 46.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			0.5,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.SFTP":
+	{
+		"height": 96.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "MK1_v4.sublime-project",
+	"replace":
+	{
+		"height": 44.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 500.0,
+		"last_filter": "",
+		"selected_items":
+		[
+			[
+				"",
+				"D:\\Proyectos\\remote\\desowncl02.sublime-project"
+			]
+		],
+		"width": 380.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 1,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 305.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
