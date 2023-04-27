@@ -4,38 +4,6 @@
 		"selected_items":
 		[
 			[
-				"text",
-				"textbox\t(README.md)"
-			],
-			[
-				"texb",
-				"text_box\t(textbox.h)"
-			],
-			[
-				"espera",
-				"espera_activa\t(extern.h)"
-			],
-			[
-				"texto",
-				"textos_load\t(extern.h)"
-			],
-			[
-				"rel",
-				"relocate_player_done\tabc"
-			],
-			[
-				"tiles",
-				"tile_subst_done\tabc"
-			],
-			[
-				"clearc",
-				"clear_cerrojo_end\tabc"
-			],
-			[
-				"BOUNDI",
-				"BOUNDING_BOX_12X2_CENTERED\tabc"
-			],
-			[
 				"PROCESADOE",
 				"PROCESADO_ERR_EXTENSION\tabc"
 			],
@@ -356,31 +324,65 @@
 	"buffers":
 	[
 		{
-			"file": "src/dev/my/config.h",
+			"file": "/D/Proyectos/2023/20230313 - JAperfilAcceso/actualizacion_metarrama.ldif",
 			"settings":
 			{
-				"buffer_size": 15916,
+				"buffer_size": 253,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/C/Users/jcastano/Desktop/pikapika.txt",
+			"settings":
+			{
+				"buffer_size": 5249,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
 			}
 		},
 		{
-			"contents": "Searching 98 files for \"heng\"\n\nD:\\temp\\MK1\\src\\dev\\engine\\player.h:\n  800  \t// ***************************************************************************\n  801  \n  802: \t#ifndef PLAYER_DISABLE_DEFAULT_HENG\n  803  \t\t/*\n  804  \t\tif ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {\n  ...\n  964  \t#endif\n  965  \n  966: \t#include \"my/ci/custom_heng.h\"\n  967  \n  968  \tp_x = p_x + p_vx;\n\nD:\\temp\\MK1\\src\\dev\\engine\\player_wip.h:\n  551  \t// ***************************************************************************\n  552  \n  553: \t#ifndef PLAYER_DISABLE_DEFAULT_HENG\n  554  \t\tif ( ! ((pad0 & sp_LEFT) == 0 || (pad0 & sp_RIGHT) == 0)) {\n  555  \t\t\t#ifdef PLAYER_GENITAL\t\t\n  ...\n  591  \t#endif\n  592  \n  593: \t#include \"my/ci/custom_heng.h\"\n  594  \n  595  \tp_x = p_x + p_vx;\n\nD:\\temp\\MK1\\src\\dev\\my\\config.h:\n  200  #define PLAYER_STEP_SOUND\t\t\t\t\t// Sound while walking. No effect in the BOOTEE engine.\n  201  \n  202: //#define PLAYER_DISABLE_DEFAULT_HENG \t\t// To disble default horizontal engine (keyrs)\n  203  \n  204  // Configure keyboard\n\n5 matches across 3 files\n",
+			"contents": "GET https://naossuite.juntadeandalucia.es/soporte/dist/js/moment.min.js net::ERR_ABORTED 404 (Not Found)\nDevTools failed to load source map: Could not load content for https://naossuite.juntadeandalucia.es/soporte/dist/js/popper.min.js.map: HTTP error: status code 404, net::ERR_HTTP_RESPONSE_CODE_FAILURE\nDevTools failed to load source map: Could not load content for https://naossuite.juntadeandalucia.es/soporte/dist/js/bootstrap.min.js.map: HTTP error: status code 404, net::ERR_HTTP_RESPONSE_CODE_FAILURE\ntiques-0bead1e6901b4b68.js:1 Uncaught (in promise) TypeError: Cannot read properties of undefined (reading 'replaceAll')\n    at ae (tiques-0bead1e6901b4b68.js:1:73278)\n    at ar (tiques-0bead1e6901b4b68.js:1:75308)\n    at tiques-0bead1e6901b4b68.js:1:73759\n    at uU (framework-2fe4cb6473b20297.js:9:84132)\n    at uX (framework-2fe4cb6473b20297.js:9:90514)\n    at e (framework-2fe4cb6473b20297.js:9:111126)\n    at framework-2fe4cb6473b20297.js:9:111137\n    at oU (framework-2fe4cb6473b20297.js:9:111649)\n    at ox (framework-2fe4cb6473b20297.js:9:95019)\n    at x (framework-2fe4cb6473b20297.js:33:1374)\nae @ tiques-0bead1e6901b4b68.js:1\nar @ tiques-0bead1e6901b4b68.js:1\n(anonymous) @ tiques-0bead1e6901b4b68.js:1\nuU @ framework-2fe4cb6473b20297.js:9\nuX @ framework-2fe4cb6473b20297.js:9\ne @ framework-2fe4cb6473b20297.js:9\n(anonymous) @ framework-2fe4cb6473b20297.js:9\noU @ framework-2fe4cb6473b20297.js:9\nox @ framework-2fe4cb6473b20297.js:9\nx @ framework-2fe4cb6473b20297.js:33\nT @ framework-2fe4cb6473b20297.js:33\nframework-2fe4cb6473b20297.js:9 TypeError: Cannot read properties of undefined (reading 'length')\n    at eq (tiques-0bead1e6901b4b68.js:1:15642)\n    at ak (framework-2fe4cb6473b20297.js:9:60919)\n    at i (framework-2fe4cb6473b20297.js:9:119477)\n    at oD (framework-2fe4cb6473b20297.js:9:99116)\n    at framework-2fe4cb6473b20297.js:9:98983\n    at oO (framework-2fe4cb6473b20297.js:9:98990)\n    at oE (framework-2fe4cb6473b20297.js:9:95742)\n    at ox (framework-2fe4cb6473b20297.js:9:94297)\n    at x (framework-2fe4cb6473b20297.js:33:1374)\n    at MessagePort.T (framework-2fe4cb6473b20297.js:33:1904)\na9 @ framework-2fe4cb6473b20297.js:9\na.componentDidCatch.t.callback @ framework-2fe4cb6473b20297.js:9\nlW @ framework-2fe4cb6473b20297.js:9\nuX @ framework-2fe4cb6473b20297.js:9\ne @ framework-2fe4cb6473b20297.js:9\n(anonymous) @ framework-2fe4cb6473b20297.js:9\noU @ framework-2fe4cb6473b20297.js:9\nox @ framework-2fe4cb6473b20297.js:9\nx @ framework-2fe4cb6473b20297.js:33\nT @ framework-2fe4cb6473b20297.js:33\nmain-fad95b1d036ba510.js:1 TypeError: Cannot read properties of undefined (reading 'length')\n    at eq (tiques-0bead1e6901b4b68.js:1:15642)\n    at ak (framework-2fe4cb6473b20297.js:9:60919)\n    at i (framework-2fe4cb6473b20297.js:9:119477)\n    at oD (framework-2fe4cb6473b20297.js:9:99116)\n    at framework-2fe4cb6473b20297.js:9:98983\n    at oO (framework-2fe4cb6473b20297.js:9:98990)\n    at oE (framework-2fe4cb6473b20297.js:9:95742)\n    at ox (framework-2fe4cb6473b20297.js:9:94297)\n    at x (framework-2fe4cb6473b20297.js:33:1374)\n    at MessagePort.T (framework-2fe4cb6473b20297.js:33:1904)\n$ @ main-fad95b1d036ba510.js:1\nfn @ main-fad95b1d036ba510.js:1\ncomponentDidCatch @ main-fad95b1d036ba510.js:1\na.componentDidCatch.t.callback @ framework-2fe4cb6473b20297.js:9\nlW @ framework-2fe4cb6473b20297.js:9\nuX @ framework-2fe4cb6473b20297.js:9\ne @ framework-2fe4cb6473b20297.js:9\n(anonymous) @ framework-2fe4cb6473b20297.js:9\noU @ framework-2fe4cb6473b20297.js:9\nox @ framework-2fe4cb6473b20297.js:9\nx @ framework-2fe4cb6473b20297.js:33\nT @ framework-2fe4cb6473b20297.js:33\nmain-fad95b1d036ba510.js:1 A client-side exception has occurred, see here for more info: https://nextjs.org/docs/messages/client-side-exception-occurred\n$ @ main-fad95b1d036ba510.js:1\nfn @ main-fad95b1d036ba510.js:1\ncomponentDidCatch @ main-fad95b1d036ba510.js:1\na.componentDidCatch.t.callback @ framework-2fe4cb6473b20297.js:9\nlW @ framework-2fe4cb6473b20297.js:9\nuX @ framework-2fe4cb6473b20297.js:9\ne @ framework-2fe4cb6473b20297.js:9\n(anonymous) @ framework-2fe4cb6473b20297.js:9\noU @ framework-2fe4cb6473b20297.js:9\nox @ framework-2fe4cb6473b20297.js:9\nx @ framework-2fe4cb6473b20297.js:33\nT @ framework-2fe4cb6473b20297.js:33\nframework-2fe4cb6473b20297.js:9 Error: Minified React error #31; visit https://reactjs.org/docs/error-decoder.html?invariant=31&args[]=%5Bobject%20Error%5D for the full message or use the non-minified dev environment for full errors and additional helpful warnings.\n    at l0 (framework-2fe4cb6473b20297.js:9:54223)\n    at d (framework-2fe4cb6473b20297.js:9:56028)\n    at framework-2fe4cb6473b20297.js:9:58168\n    at o (framework-2fe4cb6473b20297.js:9:58459)\n    at uo (framework-2fe4cb6473b20297.js:9:71134)\n    at i (framework-2fe4cb6473b20297.js:9:121296)\n    at oD (framework-2fe4cb6473b20297.js:9:99116)\n    at framework-2fe4cb6473b20297.js:9:98983\n    at oO (framework-2fe4cb6473b20297.js:9:98990)\n    at oE (framework-2fe4cb6473b20297.js:9:95742)\na9 @ framework-2fe4cb6473b20297.js:9\na.componentDidCatch.t.callback @ framework-2fe4cb6473b20297.js:9\nlW @ framework-2fe4cb6473b20297.js:9\nuX @ framework-2fe4cb6473b20297.js:9\ne @ framework-2fe4cb6473b20297.js:9\n(anonymous) @ framework-2fe4cb6473b20297.js:9\noU @ framework-2fe4cb6473b20297.js:9\nox @ framework-2fe4cb6473b20297.js:9\nx @ framework-2fe4cb6473b20297.js:33\nT @ framework-2fe4cb6473b20297.js:33\nmain-fad95b1d036ba510.js:1 Error: Minified React error #31; visit https://reactjs.org/docs/error-decoder.html?invariant=31&args[]=%5Bobject%20Error%5D for the full message or use the non-minified dev environment for full errors and additional helpful warnings.\n    at l0 (framework-2fe4cb6473b20297.js:9:54223)\n    at d (framework-2fe4cb6473b20297.js:9:56028)\n    at framework-2fe4cb6473b20297.js:9:58168\n    at o (framework-2fe4cb6473b20297.js:9:58459)\n    at uo (framework-2fe4cb6473b20297.js:9:71134)\n    at i (framework-2fe4cb6473b20297.js:9:121296)\n    at oD (framework-2fe4cb6473b20297.js:9:99116)\n    at framework-2fe4cb6473b20297.js:9:98983\n    at oO (framework-2fe4cb6473b20297.js:9:98990)\n    at oE (framework-2fe4cb6473b20297.js:9:95742)\n$ @ main-fad95b1d036ba510.js:1\nfn @ main-fad95b1d036ba510.js:1\ncomponentDidCatch @ main-fad95b1d036ba510.js:1\na.componentDidCatch.t.callback @ framework-2fe4cb6473b20297.js:9\nlW @ framework-2fe4cb6473b20297.js:9\nuX @ framework-2fe4cb6473b20297.js:9\ne @ framework-2fe4cb6473b20297.js:9\n(anonymous) @ framework-2fe4cb6473b20297.js:9\noU @ framework-2fe4cb6473b20297.js:9\nox @ framework-2fe4cb6473b20297.js:9\nx @ framework-2fe4cb6473b20297.js:33\nT @ framework-2fe4cb6473b20297.js:33\nmain-fad95b1d036ba510.js:1 A client-side exception has occurred, see here for more info: https://nextjs.org/docs/messages/client-side-exception-occurred\n$ @ main-fad95b1d036ba510.js:1\nfn @ main-fad95b1d036ba510.js:1\ncomponentDidCatch @ main-fad95b1d036ba510.js:1\na.componentDidCatch.t.callback @ framework-2fe4cb6473b20297.js:9\nlW @ framework-2fe4cb6473b20297.js:9\nuX @ framework-2fe4cb6473b20297.js:9\ne @ framework-2fe4cb6473b20297.js:9\n(anonymous) @ framework-2fe4cb6473b20297.js:9\noU @ framework-2fe4cb6473b20297.js:9\nox @ framework-2fe4cb6473b20297.js:9\nx @ framework-2fe4cb6473b20297.js:33\nT @ framework-2fe4cb6473b20297.js:33",
 			"settings":
 			{
-				"buffer_size": 1068,
+				"buffer_size": 7259,
 				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
+				"name": "GET https://naossuite.juntadeandalucia.es/soporte/"
 			}
 		},
 		{
-			"file": "src/dev/engine/player.h",
+			"file": "/C/Users/jcastano/Desktop/naossuite.juntadeandalucia.es-1678862844627.log",
 			"settings":
 			{
-				"buffer_size": 29661,
+				"buffer_size": 7278,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/D/Proyectos/2021/20210209a - Límites configurables en Consigna (cont)/1. LDAP/actualizacion_metarrama.ldif",
+			"settings":
+			{
+				"buffer_size": 256,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/D/Proyectos/2021/20210209a - Límites configurables en Consigna (cont)/1. LDAP/instrucciones.txt",
+			"settings":
+			{
+				"buffer_size": 4010,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "/D/Proyectos/2023/20230313 - JAperfilAcceso/instrucciones.txt",
+			"settings":
+			{
+				"buffer_size": 4824,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
 			}
 		}
 	],
@@ -444,167 +446,154 @@
 	},
 	"expanded_folders":
 	[
-		"/D/temp/MK1",
-		"/D/temp/MK1/src",
-		"/D/temp/MK1/src/dev",
-		"/D/temp/MK1/src/dev/my",
-		"/D/temp/MK1/trash"
+		"/D/git/MK1",
+		"/D/git/MK1/wip",
+		"/D/git/MK1/wip/impossamal",
+		"/D/git/MK1/wip/impossamal/dev",
+		"/D/git/MK1/wip/impossamal/dev/my"
 	],
 	"file_history":
 	[
-		"/D/temp/MK1/src/dev/my/config.h",
-		"/D/temp/MK1/contrib/sami_troid/dev/my/map_custom_decoder.h",
-		"/D/temp/MK1/src/dev/my/ci/on_map_tile_decoded.h",
-		"/D/temp/MK1/trash/textbox/dev/plugins/textbox.h",
-		"/D/temp/leovigildo/Leovigildo III/dev/extern.h",
-		"/D/temp/MK1/trash/textbox/dev/my/ci/extra_vars.h",
-		"/D/temp/MK1/trash/textbox/README.md",
-		"/D/git/MK1_Tostadera/trash/sounds_murcia/README.md",
-		"/D/git/MK1_Tostadera/src/ogt/make_ogt.bat",
-		"/D/temp/MK1/plugins/README.md",
-		"/D/temp/leovigildo/Leovigildo III/texts/texts.txt",
-		"/C/Users/jcastano/Desktop/pikapika.txt",
-		"/D/temp/MK1/trash/textbox/dev/mainloop/game_loop.h",
-		"/D/temp/MK1/trash/textbox/dev/my/ci/entering_game.h",
-		"/D/temp/MK1/trash/textbox/dev/my/ci/extra_routines.h",
-		"/D/temp/MK1/trash/textbox/texts/texts.txt",
-		"/D/temp/MK1/trash/textbox/dev/compile.bat",
-		"/D/temp/leovigildo/Leovigildo III/dev/make.bat",
-		"/D/temp/leovigildo/Leovigildo III/dev/engine/printer.h",
-		"/D/temp/leovigildo/Leovigildo III/dev/engine.h",
-		"/D/temp/MK1/trash/mlst/README.md",
-		"/C/temp/mk1/examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
-		"/D/temp/MK1/examples/helmet/dev/compile.bat",
-		"/D/temp/MK1/examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
-		"/D/Temp/MK1/examples/helmet/dev/loader/loader.asm",
-		"/D/Temp/MK1/examples/helmet/dev/loader/loaderzx48_2scr.asm-orig",
-		"/D/Temp/MK1/examples/helmet/dev/compile.bat",
-		"/D/git/cheman/cpc_zx/src/dev/loader/loaderzx.asm-orig",
-		"/D/git/cheman/cpc_zx/src/dev/compile_zx.bat",
-		"/D/Proyectos/2022/20220222a - Actualizar CCOTOMXX a Java8 y Tomcat9/instrucciones.txt",
-		"/D/temp/MK1/examples/helmet/dev/engine/player.h",
-		"/D/temp/MK1/examples/helmet/dev/printer.h",
-		"/D/temp/MK1/examples/helmet/dev/my/ci/extra_functions.h",
-		"/D/temp/MK1/examples/helmet/dev/my/ci/on_tile_pushed.h",
-		"/D/temp/MK1/examples/helmet/dev/my/ci/entering_screen.h",
-		"/D/temp/MK1/examples/helmet/dev/my/ci/on_wall_broken.h",
-		"/D/temp/MK1/examples/helmet/dev/my/config.h",
-		"/D/temp/MK1/examples/helmet/dev/engine/breakable.h",
-		"/D/temp/MK1/examples/helmet/dev/my/ci/extra_vars.h",
-		"/D/temp/espadewr/dev/extern.h",
-		"/D/temp/MK1/examples/helmet/dev/engine.h",
-		"/D/temp/MK1/README.md",
-		"/D/temp/MK1/examples/helmet/dev/mainloop/game_loop.h",
-		"/D/temp/MK1/examples/helmet/dev/assets/levels.h",
-		"/D/temp/MK1/examples/helmet/dev/definitions.h",
-		"/D/temp/MK1/examples/helmet/dev/helmet.asm",
-		"/D/temp/MK1/examples/helmet/dev/engine/bullets.h",
-		"/C/Users/na_th/AppData/Roaming/.minecraft/versions/version_manifest_v2.json",
-		"/C/Temp/mk1/src/dev/engine/player.h",
-		"/C/Temp/mk1/examples/helmet/dev/engine.h",
-		"/C/Temp/mk1/examples/helmet/dev/engine/player.h",
-		"/C/Temp/mk1/examples/helmet/dev/mtasmlib.h",
-		"/C/Temp/mk1/examples/helmet/dev/definitions.h",
-		"/C/Temp/mk1/examples/helmet/dev/engine/enengine.h",
-		"/C/Temp/mk1/examples/helmet/dev/helmet.asm",
-		"/C/Temp/mk1/examples/helmet/dev/my/levelset.h",
-		"/C/Temp/mk1/examples/helmet/dev/assets/levels.h",
-		"/C/Temp/mk1/examples/helmet/dev/engine/breakable.h",
-		"/C/Temp/mk1/examples/helmet/dev/engine/c_levels.h",
-		"/C/Temp/mk1/examples/helmet/dev/mk1.c",
-		"/C/Temp/mk1/examples/helmet/dev/my/ci/extra_routines.h",
-		"/C/Temp/mk1/examples/helmet/dev/my/ci/entering_screen.h",
-		"/C/Temp/mk1/examples/helmet/dev/my/fixed_screens.h",
-		"/C/Temp/mk1/examples/helmet/dev/my/config.h",
-		"/C/Temp/mk1/examples/helmet/dev/engine/enem_mods/enem_type_pursuers_asm.h",
-		"/C/Temp/mk1/examples/helmet/dev/my/ci/custom_evil_tile_check.h",
-		"/C/Temp/mk1/examples/helmet/dev/my/ci/on_map_tile_decoded.h",
-		"/C/Temp/mk1/examples/helmet/dev/printer.h",
-		"/C/Temp/mk1/examples/helmet/dev/#ifdef PLAYER_PUSH_BOXES",
-		"/C/Temp/mk1/examples/helmet/dev/engine/enem_mods/enem_type_lineal.h",
-		"/C/Temp/mk1/examples/helmet/dev/engine/enem_mods/enem_type_orthoshooters.h",
-		"/C/Temp/mk1/examples/helmet/dev/engine/hotspots.h",
-		"/C/Temp/mk1/examples/helmet/dev/engine/bullets.h",
-		"/D/temp/MK1/lib/splib2/Makefile.bat",
-		"/D/temp/MK1/lib/splib2/updater/SPUpdateNow.asm",
-		"/D/temp/MK1/lib/splib2/SPconfig.def",
-		"/D/temp/MK1/lib/splib2/setenv.bat",
-		"/D/temp/MK1/src/dev/engine/player.h",
-		"/D/temp/MK1/docs/tutorial-cap07.md",
-		"/D/temp/MK1/examples/helmet/dev/my/ci/extra_routines.h",
-		"/D/temp/MK1/examples/helmet/dev/mainloop.h",
-		"/D/temp/MK1/examples/helmet/dev/my/level_screen.h",
-		"/D/temp/MK1/examples/helmet/dev/savegame.h",
-		"/D/temp/MK1/examples/helmet/dev/my/ci/entering_game.h",
-		"/D/temp/MK1/examples/helmet/dev/my/ci/on_wall_hit.h",
-		"/D/temp/MK1/examples/helmet/dev/my/fixed_screens.h",
-		"/D/temp/MK1/examples/helmet/dev/my/title_screen.h",
-		"/D/git/MK1/games_zx/ramiro3/dev/custom.h",
-		"/D/temp/MK1/contrib/godkiller_2/dev/printer.h",
-		"/D/temp/MK1/examples/helmet/diario.md",
-		"/D/temp/MK1/docs/tutorial-cap01.md",
-		"/D/temp/MK1/src/dev/setenv.bat",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/extra_functions.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/fixed_screens.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/config.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/levelset.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/entering_game.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/engine/c_levels.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/compile.bat",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/after_load.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/title_screen.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/level_screen.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/mainloop/game_loop.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/before_entering_screen.h",
-		"/D/Proyectos/2021/20210629a - Cambio de password desde SSOWeb en miCuenta/instrucciones.txt",
-		"/D/temp/vmware_shared/MK1/docs/tutorial-cap13.md",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/engine/c_levels.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/assets/levels.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/compile.bat",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/config.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/fixed_screens.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/ci/entering_screen.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/mainloop.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/mainloop/flick_screen.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/ci/extra_routines.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/ci/after_game_loop.h",
-		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/entering_screen.h",
-		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/hotspots_custom.h",
-		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/before_game.h",
-		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/entering_game.h",
-		"/Y/MK2/examples/Tokimal/dev/minimal.asm",
-		"/W/MK1/src/dev/lala_beta.asm",
-		"/W/MK1/src/dev/engine/player.h",
-		"/W/MK1/src/dev/my/fixed_screens.h",
-		"/Y/MK1_Pestecera/examples/jetpaco/dev/crt.asm",
-		"/W/MK1/src/dev/crt.asm",
-		"/W/MK1/src/dev/definitions.h",
-		"/W/MK1/src/dev/compile.bat"
+		"/D/Proyectos/2021/20210209a - Límites configurables en Consigna (cont)/1. LDAP/actualizacion_metarrama.ldif",
+		"/D/Proyectos/2021/20210209a - Límites configurables en Consigna (cont)/1. LDAP/instrucciones.txt",
+		"/D/git/MK1/wip/impossamal/dev/zx0.h",
+		"/D/git/MK1/wip/impossamal/dev/compile.bat",
+		"/D/git/MK1/wip/impossamal/dev/my/config.h",
+		"/D/git/MK1/wip/impossamal/dev/128k.h",
+		"/D/git/MK1/wip/impossamal/dev/aplib.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/ay_fx_numbers.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/extrasprites.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/levels.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/sprites-empty.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/tileset.h",
+		"/D/git/MK1/wip/impossamal/dev/definitions.h",
+		"/D/git/MK1/wip/impossamal/dev/engine.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/breakable.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/bullets.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/c_levels.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enem_mods/enem_type_fanties.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enem_mods/enem_type_lineal.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enem_mods/enem_type_orthoshooters.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enem_mods/enem_type_pursuers.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enem_mods/enem_type_pursuers_asm.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enengine.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/general.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/hotspots.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/isr.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/player.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/player_wip.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/simple_cocos.h",
+		"/D/git/MK1/wip/impossamal/dev/mainloop.h",
+		"/D/git/MK1/wip/impossamal/dev/mainloop/flick_screen.h",
+		"/D/git/MK1/wip/impossamal/dev/mainloop/game_loop.h",
+		"/D/git/MK1/wip/impossamal/dev/mainloop/hud.h",
+		"/D/git/MK1/wip/impossamal/dev/mainloop/update_sprites.h",
+		"/D/git/MK1/wip/impossamal/dev/mk1.c",
+		"/D/git/MK1/wip/impossamal/dev/mtasmlib.h",
+		"/D/git/MK1/wip/impossamal/dev/pantallas.h",
+		"/D/git/MK1/wip/impossamal/dev/printer.h",
+		"/D/git/MK1/wip/impossamal/dev/prototypes.h",
+		"/D/git/MK1/wip/impossamal/dev/savegame.h",
+		"/D/git/MK1/wip/impossamal/dev/sound/beeper.h",
+		"/D/git/MK1/wip/impossamal/dev/sound/music.h",
+		"/D/git/MK1/wip/impossamal/dev/sound/wyzplayer.h",
+		"/D/git/MK1/wip/impossamal/dev/tilanim.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/enems.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/sprites.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/after_game_loop.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/after_load.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/before_entering_screen.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/before_game.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/bg_collision/obstacle_down.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/bg_collision/obstacle_left.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/bg_collision/obstacle_right.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/bg_collision/obstacle_up.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/custom_enems_player_collision.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/custom_heng.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/custom_lock_clear.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/custom_veng.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_before_move.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_custom_respawn.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_extra_actions.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_extra_mods.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_load.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_move.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/entering_game.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/entering_screen.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/extra_functions.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/extra_routines.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/extra_vars.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/hotspots_custom.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_enems_collision.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_enems_killed.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_jetpac_boost.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_player_fires.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_player_killed.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_player_respawned.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_special_tile.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_tile_pushed.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_unlocked_bolt.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_wall_broken.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_wall_hit.h",
+		"/D/git/MK1/wip/impossamal/dev/my/custom_animation.h",
+		"/D/git/MK1/wip/impossamal/dev/my/extern.h",
+		"/D/git/MK1/wip/impossamal/dev/my/fixed_screens.h",
+		"/D/git/MK1/wip/impossamal/dev/my/level_screen.h",
+		"/D/git/MK1/wip/impossamal/dev/my/levelset.h",
+		"/D/git/MK1/wip/impossamal/dev/my/map_custom_decoder.h",
+		"/D/git/MK1/wip/impossamal/dev/my/title_screen.h",
+		"/D/git/MK1/wip/impossamal/dev/my/msc.h",
+		"/D/git/MK1/wip/impossamal/README.md",
+		"/D/git/MK1/src/dev/mk1.c",
+		"/D/git/MK1/src/dev/mtasmlib.h",
+		"/D/git/MK1/src/dev/my/ci/after_game.h",
+		"/D/git/MK1/src/dev/my/ci/after_game_loop.h",
+		"/D/git/MK1/src/dev/my/ci/after_game_over.h",
+		"/D/git/MK1/src/dev/my/ci/after_load.h",
+		"/D/git/MK1/src/dev/my/ci/before_entering_screen.h",
+		"/D/git/MK1/src/dev/my/ci/before_game.h",
+		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_down.h",
+		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_left.h",
+		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_right.h",
+		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_up.h",
+		"/D/git/MK1/src/dev/my/ci/custom_enems_player_collision.h",
+		"/D/git/MK1/src/dev/my/ci/custom_heng.h",
+		"/D/git/MK1/src/dev/my/ci/custom_lock_clear.h",
+		"/D/git/MK1/src/dev/my/ci/custom_veng.h",
+		"/D/git/MK1/src/dev/my/ci/enems_before_move.h",
+		"/D/git/MK1/src/dev/my/ci/enems_custom_respawn.h",
+		"/D/git/MK1/src/dev/my/ci/enems_extra_actions.h",
+		"/D/git/MK1/src/dev/my/ci/enems_extra_mods.h",
+		"/D/git/MK1/src/dev/my/ci/enems_load.h",
+		"/D/git/MK1/src/dev/my/ci/enems_move.h",
+		"/D/git/MK1/src/dev/my/ci/entering_game.h",
+		"/D/git/MK1/src/dev/my/ci/entering_screen.h",
+		"/D/git/MK1/src/dev/my/ci/extra_functions.h",
+		"/D/git/MK1/src/dev/my/ci/extra_routines.h",
+		"/D/git/MK1/src/dev/my/ci/extra_vars.h",
+		"/D/git/MK1/src/dev/my/ci/hotspot_setup_t_modification.h",
+		"/D/git/MK1/src/dev/my/ci/hotspots_custom.h",
+		"/D/git/MK1/src/dev/my/ci/map_renderer_t_modification.h",
+		"/D/git/MK1/src/dev/my/ci/on_controller_pressed/down.h",
+		"/D/git/MK1/src/dev/my/ci/on_controller_pressed/fire.h",
+		"/D/git/MK1/src/dev/my/ci/on_controller_pressed/left.h",
+		"/D/git/MK1/src/dev/my/ci/on_controller_pressed/right.h",
+		"/D/git/MK1/src/dev/my/ci/on_controller_pressed/up.h",
+		"/D/git/MK1/src/dev/my/ci/on_enems_collision.h",
+		"/D/git/MK1/src/dev/my/ci/on_enems_killed.h",
+		"/D/git/MK1/src/dev/my/ci/on_jetpac_boost.h"
 	],
 	"find":
 	{
-		"height": 54.0
+		"height": 24.0
 	},
 	"find_in_files":
 	{
 		"height": 134.0,
 		"where_history":
 		[
-			"D:\\temp\\MK1\\src\\dev",
-			"D:\\temp\\MK1\\trash\\textbox\\dev",
-			"D:\\temp\\MK1\\examples\\helmet\\dev",
-			"D:\\temp\\MK1\\examples\\helmet",
-			"D:\\temp\\MK1\\examples\\helmet\\dev",
-			"D:\\temp\\MK1\\examples\\helmet",
-			"C:\\Temp\\mk1\\examples\\helmet\\dev",
-			"C:\\Temp\\mk1\\examples\\helmet\\dev\\my\\ci",
-			"C:\\Temp\\mk1\\examples\\helmet\\dev",
-			"C:\\Temp\\mk1\\examples\\helmet",
-			"C:\\Temp\\mk1\\examples\\helmet\\dev",
-			"D:\\temp\\MK1\\examples\\helmet\\dev",
-			"D:\\temp\\MK1\\examples\\helmet\\dev\\engine",
-			"D:\\temp\\MK1\\docs",
-			"D:\\temp\\MK1\\examples\\helmet\\dev\\my",
+			"D:\\git\\MK1\\wip\\impossamal\\dev",
+			"D:\\git\\MK1\\src\\dev",
 			"D:\\temp\\MK1",
 			"D:\\temp\\vmware_shared\\MK1\\docs",
 			"D:\\temp\\MK1\\trash\\6baddies",
@@ -621,56 +610,14 @@
 		"case_sensitive": false,
 		"find_history":
 		[
-			"heng",
-			"@",
-			"validate",
-			"sp_UpdateNow",
+			"JAconsignaLimites",
+			"apultra",
+			"2020-2023-2023",
+			"2010-2014, 2020",
+			" v5.0",
 			"..\\utils\\",
-			"pad0",
-			"pad_read",
-			"button_pressed",
-			"button",
-			"stepbystep",
-			"asm_int",
-			"65536",
-			"enems_kill",
-			"__en_t",
-			"espera_activa",
-			"pad0 =",
-			"level_data",
-			"joyfunc",
-			"pad0 =",
-			"fabric",
-			"break_wall",
-			"breakable",
-			"<< 6",
-			">> 6",
-			"hit_v",
-			"<< 6",
-			"asl",
-			"level_data",
-			"levels",
-			"prepare_level",
-			"breakable",
-			"level_str",
-			"addsign",
-			"TEST_DEBUG",
-			"abs",
-			"deactivat",
-			"15",
-			"deactivate_evil_tile",
-			"jr",
-			"rda",
-			"<",
-			"a",
-			"init",
-			"@",
-			"mons_col_sc_x",
-			"mons_col_sc_y",
-			"pursuers",
-			"8_CENTERED",
-			"flags [",
-			"player_init",
+			"2010-2014, 2020",
+			"v5.0",
 			"ORTHO",
 			"level_data",
 			"level_data->",
@@ -710,10 +657,13 @@
 		"regex": false,
 		"replace_history":
 		[
+			"JAperfilAcceso",
+			"2020-2023",
+			"2010-2014, 2020-2023",
+			" v5.10",
 			"..\\..\\..\\src\\utils\\",
-			"65368",
-			"sla",
-			"jp",
+			"2010-2014, 2020-2023",
+			"v5.10",
 			"level_data.",
 			"timer_\\1",
 			"timer_t",
@@ -730,29 +680,24 @@
 	"groups":
 	[
 		{
-			"sheets":
-			[
-			]
-		},
-		{
-			"selected": 2,
+			"selected": 3,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/dev/my/config.h",
+					"file": "/D/Proyectos/2023/20230313 - JAperfilAcceso/actualizacion_metarrama.ldif",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 15916,
+						"buffer_size": 253,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10486,
-								10486
+								114,
+								114
 							]
 						],
 						"settings":
@@ -760,74 +705,43 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 2304.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 3,
 					"type": "text"
 				},
 				{
 					"buffer": 1,
+					"file": "/C/Users/jcastano/Desktop/pikapika.txt",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 1068,
+						"buffer_size": 5249,
 						"regions":
 						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										202,
-										206
-									],
-									[
-										348,
-										352
-									],
-									[
-										566,
-										570
-									],
-									[
-										734,
-										738
-									],
-									[
-										951,
-										955
-									]
-								],
-								"scope": ""
-							}
 						},
 						"selection":
 						[
 							[
-								203,
-								203
+								5232,
+								5232
 							]
 						],
 						"settings":
 						{
-							"detect_indentation": false,
 							"incomplete_sync": null,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
+						"translation.y": 5113.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -835,31 +749,50 @@
 				},
 				{
 					"buffer": 2,
-					"file": "src/dev/engine/player.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 29661,
+						"buffer_size": 7259,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								17561,
-								17560
-							],
+								7259,
+								7259
+							]
+						],
+						"settings":
+						{
+							"auto_name": "GET https://naossuite.juntadeandalucia.es/soporte/",
+							"incomplete_sync": null,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "/C/Users/jcastano/Desktop/naossuite.juntadeandalucia.es-1678862844627.log",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7278,
+						"regions":
+						{
+						},
+						"selection":
+						[
 							[
-								17586,
-								17585
-							],
-							[
-								17615,
-								17614
-							],
-							[
-								17627,
-								17626
+								0,
+								0
 							]
 						],
 						"settings":
@@ -867,14 +800,118 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
+							"syntax": "Packages/zzz A File Icon zzz/aliases/Plain Text (Log).sublime-syntax",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
-						"translation.y": 12366.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "/D/Proyectos/2021/20210209a - Límites configurables en Consigna (cont)/1. LDAP/actualizacion_metarrama.ldif",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 256,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "/D/Proyectos/2021/20210209a - Límites configurables en Consigna (cont)/1. LDAP/instrucciones.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4010,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 266.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "/D/Proyectos/2023/20230313 - JAperfilAcceso/instrucciones.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 4824,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1514,
+								1128
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 390.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
 					"type": "text"
 				}
 			]
@@ -886,7 +923,7 @@
 	},
 	"input":
 	{
-		"height": 46.0
+		"height": 37.0
 	},
 	"layout":
 	{
@@ -972,7 +1009,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 350.0,
+	"side_bar_width": 273.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

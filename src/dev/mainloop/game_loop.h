@@ -70,7 +70,7 @@
 	#ifdef MAX_AMMO 	
 		ammo_old = 0xff;
 	#endif
-	#if defined(TIMER_ENABLE) && defined(PLAYER_SHOW_TIMER)
+	#if defined TIMER_ENABLE && TIMER_X != 99
 		timer_old = 0;
 	#endif
 
