@@ -31,6 +31,8 @@ void main (void) {
 
 	#endif
 
+	#include "my/ci/after_load.h"
+
 	cortina ();
 	
 	// splib2 initialization
@@ -102,7 +104,7 @@ void main (void) {
 		}
 	#endif
 
-	#include "my/ci/after_load.h"
+	#include "my/ci/after_splib2_init.h"
 
 	while (1) {
 		#if defined ACTIVATE_SCRIPTING && !defined MODE_128K
