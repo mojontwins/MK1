@@ -24,7 +24,7 @@ Pues de tiles. ¿Que qué es un _tile_? Pues para ponerlo sencillo, no es más q
 
 Esto es lo que usa **MTE MK1** para pintar los gráficos de fondo. Como guardar una pantalla gráfica completa ocupa un huevo, lo que se hace es guardar un cierto número de cachitos y luego una lista de qué cachitos ocupa cada pantalla. La colección de cachitos de un güego es lo que se conoce como “tileset”. En este capítulo vamos a explicar cómo son los tilesets de **MTE MK1**, cómo se crean, cómo se convierten, cómo se importan y cómo se usan. Pero antes necesitamos entender varios conceptos. Vete preparando un zumito.
 
-Colisión
+## Colisión
 
 **MTE MK1**, además, usa los tiles para otra cosa: para la colisión. Colisión es un nombre muy chulo para referirse a algo muy tonto: el protagonista del güego podrá andar por la pantalla o no dependiendo del tipo del tile que vaya a pisar. O sea, que cada tile tiene asociado un comportamiento. Por ejemplo, al tile negro del ejemplo de arriba podríamos ponerle un comportamiento “traspasable” para que el jugador pudiera moverse libremente por el espacio ocupado por estos tiles. En cambio, el tile de la hierba debería ser “obstáculo”, entendiendo que debe impedir que el protagonista se mueva por el espacio que ocupan. En un güego de plataformas, por ejemplo, el motor hará caer al protagonista siempre que no haya un tile “obstáculo” bajo sus pies.
 
