@@ -337,8 +337,16 @@
 			"file": "src/dev/mainloop.h",
 			"settings":
 			{
-				"buffer_size": 4907,
+				"buffer_size": 4946,
 				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
+			"settings":
+			{
+				"buffer_size": 3438,
 				"line_ending": "Windows"
 			}
 		},
@@ -347,14 +355,6 @@
 			"settings":
 			{
 				"buffer_size": 7358,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/dev/sound/beeper.h",
-			"settings":
-			{
-				"buffer_size": 3396,
 				"line_ending": "Windows"
 			}
 		},
@@ -426,10 +426,11 @@
 	},
 	"expanded_folders":
 	[
-		"/D/git/MK1",
-		"/D/git/MK1/src",
-		"/D/git/MK1/src/dev",
-		"/D/git/MK1/src/dev/sound"
+		"/C/git/mk1",
+		"/C/git/mk1/examples",
+		"/C/git/mk1/examples/helmet",
+		"/C/git/mk1/examples/helmet/dev",
+		"/C/git/mk1/examples/helmet/dev/loader"
 	],
 	"file_history":
 	[
@@ -669,7 +670,7 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
@@ -998,7 +999,7 @@
 						"translation.y": 4824.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 1,
+					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1007,15 +1008,15 @@
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4907,
+						"buffer_size": 4946,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2481,
-								2512
+								0,
+								0
 							]
 						],
 						"settings":
@@ -1030,11 +1031,40 @@
 						"translation.y": 893.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				},
 				{
 					"buffer": 2,
+					"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3438,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								424,
+								424
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
 					"file": "src/dev/mainloop/game_loop.h",
 					"semi_transient": false,
 					"settings":
@@ -1063,38 +1093,6 @@
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/dev/sound/beeper.h",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 3396,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3266,
-								3065
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3012.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
 					"type": "text"
 				},
 				{
@@ -1129,11 +1127,6 @@
 					"type": "text"
 				}
 			]
-		},
-		{
-			"sheets":
-			[
-			]
 		}
 	],
 	"incremental_find":
@@ -1153,18 +1146,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.5,
 			1.0
 		],
 		"rows":
@@ -1228,7 +1214,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 273.0,
+	"side_bar_width": 210.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

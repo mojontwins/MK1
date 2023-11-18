@@ -1,0 +1,29 @@
+# Script mínimo que no hace nada
+# MTE MK1 v5.0
+
+# flags:
+# 1	- Total de objetos cogidos
+
+#ENTERING GAME
+#    IF TRUE
+#        THEN
+#        WARP_TO 24, 1, 5
+#    END
+#END
+
+ENTERING SCREEN 24
+    # Alicate de Ulises
+    IF TRUE
+    THEN
+    	DECORATIONS
+                # Pedestal
+                12, 3, 32
+                13, 3, 33
+                12, 4, 34
+                13, 4, 35
+                12, 5, 36
+                13, 5, 37
+
+    END
+END
+

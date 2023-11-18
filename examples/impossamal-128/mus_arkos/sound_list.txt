@@ -1,0 +1,17 @@
+01 jump_short X
+02 select X
+03 objetow X
+04 jump_long X
+05 puncho X
+06 latigazow X
+08 ok/start X
+09 mechaw X
+10 text
+11 ¡cosas!
+12 disparow  X
+13 hurt X
+14 hurt 2 X
+15 fanfare
+16 gota X
+17 assplosion X
+18 fanfare 2
