@@ -1,0 +1,29 @@
+; Script sencillo de prueba
+
+PRESS_FIRE AT SCREEN 3
+    IF PLAYER_HASN'T_ITEM 3
+    THEN
+        SET ITEM 3, 1
+    END
+    
+    IF PLAYER_HASN'T_ITEM 2
+    THEN
+        SET ITEM 2, 1
+    END
+END
+
+ENTERING SCREEN 3
+    IF PLAYER_HAS_ITEM 3        ; Si tenemos el ITEM 3
+    IF PLAYER_IN_X 6, 8         ; Posición del jugador:
+    IF PLAYER_IN_Y 3, 5         ; Esto define un rectángulo centrado en el tile 7, 4
+    THEN                        ; Si se cumple todo lo de arriba...
+        SET ITEM 3, 0           ; Perdemos el ITEM 3
+        SET FLAG 1, 1           ; Ponemos FLAG 1 a 1
+    END                         ; Fin de las acciones
+    
+    IF PLAYER_HAS_ITEM 5        ; Si tenemos el ITEM 5
+    IF FLAG 5 < 2               ; Si el FLAG 5 es < 2
+    THEN                        ; Si se cumple todo lo de arriba...
+        INC FLAG 5, 1           ; Incrementa FLAG 5 en 1
+    END                         ; Fin de las acciones
+END

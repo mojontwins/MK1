@@ -114,6 +114,7 @@ Vayamos por partes, como dijo Victor Frankenstein…
                                                 // Comment both for normal 16x16 bounding box
     #define BOUNDING_BOX_8_BOTTOM               // 8x8 aligned to bottom center in 16x16
     //#define BOUNDING_BOX_8_CENTERED           // 8x8 aligned to center in 16x16
+    //#define BOUNDING_BOX_8X2_CENTERED             // 8x2 aligned to center in 16x16
     //#define SMALL_COLLISION                   // 8x8 centered collision instead of 12x12
 ```
 
@@ -127,7 +128,7 @@ Si elegimos una colisión de 8×8 con el escenario, tenemos dos opciones: que el
 
 La primera opción (recuadro centrado) está pensada para güegos con vista genital, como **Balowwwn** o **D'Veel'Ng**. La segunda funciona bien con güegos de vista lateral o güegos con vista genital “con un poco de perspectiva”, como **Mega Meghan**.
 
-Las dos primeras directivas se refieren a colisiones **contra el escenario**. Solo una de las dos directivas puede estar activa (porque son excluyentes): si queremos colisión 8×8 centrada activamos `BOUNDING_BOX_8_CENTERED` y desactivamos la otra. Si queremos colisión 8×8 en la parte baja activamos `BOUNDING_BOX_8_BOTTOM` y desactivamos la otra. **Si queremos colisión de 16×16 desactivamos ambas**.
+Las tres primeras directivas se refieren a colisiones **contra el escenario**. Solo una de las tres directivas puede estar activa (porque son excluyentes): si queremos colisión 8×8 centrada activamos `BOUNDING_BOX_8_CENTERED` y desactivamos las otra. Si queremos colisión 8×8 en la parte baja activamos `BOUNDING_BOX_8_BOTTOM` y desactivamos la otras. Igual con `BOUNDING_BOX_8X2_CENTERED`. **Si queremos colisión de 16×16 desactivamos las tres **.
 
 La tercera directiva se refiere a las colisiones **contra los enemigos**. Si activamos `SMALL_COLLISION`, los sprites tendrán que tocarnos mucho más para darnos. Con `SMALL_COLLISION` los enemigos son más fáciles de esquivar. Funciona bien en güegos con movimientos rápidos, como **Bootee**. Nosotros la vamos a dejar desactivada para **Dogmole**.
 

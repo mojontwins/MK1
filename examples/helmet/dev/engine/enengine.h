@@ -5,8 +5,28 @@
 
 #ifdef ENABLE_PURSUERS
 	void enems_pursuers_init (void) {
+		/*
 		en_an_alive [enit] = 0;
 		en_an_dead_row [enit] = DEATH_COUNT_ADD + (rand () & DEATH_COUNT_AND);
+		*/
+		#asm
+				call _rand 		// Will trash all registers so do it first
+				ld   d, l 		// d = rand ()
+
+				ld  bc, (_enit)
+				ld  b, 0
+				ld  hl, _en_an_alive
+				add hl, bc
+				xor a
+				ld  (hl), a
+
+				ld  a, d 
+				and DEATH_COUNT_AND
+				add DEATH_COUNT_ADD 
+				ld  hl, _en_an_dead_row 
+				add hl, bc 
+				ld  (hl), a
+		#endasm
 	}
 #endif
 
@@ -124,10 +144,37 @@ void enems_load (void) {
 	enoffs = n_pant * MAX_ENEMS;
 	
 	for (enit = 0; enit < MAX_ENEMS; ++ enit) {
+		/*
 		en_an_frame [enit] = 0;
 		en_an_state [enit] = 0;
 		en_an_count [enit] = 3;
+		
 		enoffsmasi = enoffs + enit;
+		*/
+		#asm
+				ld  bc, (_enit)
+				ld  b, 0
+
+				ld  hl, _en_an_frame 
+				add hl, bc
+				xor a
+				ld  (hl), a
+
+				ld  hl, _en_an_state
+				add hl, bc
+				ld  (hl), a
+
+				ld  hl, _en_an_count
+				add hl, bc
+				ld  a, 3
+				ld  (hl), a
+
+				ld  a, (_enit)
+				ld  c, a 
+				ld  a, (_enoffs)
+				add c 
+				ld  (_enoffsmasi), a
+		#endasm
 
 		#ifdef RESPAWN_ON_ENTER
 			// Back to life!
@@ -195,8 +242,23 @@ void enems_load (void) {
 }
 
 void enems_kill (void) {
+	/*
 	if (_en_t != 7) _en_t |= 16;
 	++ p_killed;
+	*/
+
+	#asm 
+			ld  a, (__en_t)
+			cp  7
+			jr  z, enems_kill_noflag
+
+			or  16
+			ld  (__en_t), a
+
+		.enems_kill_noflag
+			ld  hl, (_p_killed)
+			inc (hl)
+	#endasm
 
 	#ifdef BODY_COUNT_ON
 		flags [BODY_COUNT_ON] = p_killed;
@@ -213,8 +275,21 @@ void enems_move (void) {
 	tocado = p_gotten = ptgmx = ptgmy = 0;
 
 	for (enit = 0; enit < MAX_ENEMS; enit ++) {
+		/*
 		active = 0;
 		enoffsmasi = enoffs + enit;
+		*/
+
+		#asm
+				xor a 
+				ld  (_active), a 
+
+				ld  a, (_enit)
+				ld  c, a 
+				ld  a, (_enoffs)
+				add c 
+				ld  (_enoffsmasi), a
+		#endasm
 
 		// Copy array values to temporary variables as fast as possible
 		
@@ -523,6 +598,7 @@ void enems_move (void) {
 					if (rdt >= FIRE_MIN_KILLABLE)
 				#endif				
 				{
+					/*
 					for (gpjt = 0; gpjt < MAX_BULLETS; gpjt ++) {
 						if (bullets_estado [gpjt] == 1) {
 							blx = bullets_x [gpjt] + 3; 
@@ -570,6 +646,150 @@ void enems_move (void) {
 							}
 						}
 					}
+					*/
+					#asm
+							ld  a, MAX_BULLETS
+
+						.enems_collide_bullets
+							dec a
+							ld  (_gpjt), a 
+
+							ld  b, 0
+							ld  c, a
+
+							ld  hl, _bullets_estado
+							add hl, bc 
+							ld  a, (hl)
+							dec a
+							jp  nz, enems_collide_bullets_next
+
+							// blx = bullets_x [gpjt] + 3; 
+							// bly = bullets_y [gpjt] + 3;
+
+							ld  hl, _bullets_x
+							add hl, bc 
+							ld  a, (hl)
+							add 3
+							ld  (_blx), a
+
+							ld  hl, _bullets_y
+							add hl, bc 
+							ld  a, (hl)
+							add 3
+							ld  (_bly), a
+
+							// if (blx >= _en_x && blx <= _en_x + 15 && bly >= _en_y && bly <= _en_y + 15) {
+							// blx >= _en_x
+							ld  a, (__en_x)
+							ld  d, a
+							ld  a, (_blx)
+							cp  d
+							jp  c, enems_collide_bullets_next
+
+							// (_en_x + 15) >= blx
+							ld  a, (_blx)
+							ld  d, a
+							ld  a, (__en_x)
+							add 15
+							cp  d
+							jp  c, enems_collide_bullets_next
+
+							// bly >= _en_y
+							ld  a, (__en_y)
+							ld  d, a
+							ld  a, (_bly)
+							cp  d
+							jp  c, enems_collide_bullets_next
+
+							// (_en_y + 15) >= bly
+							ld  a, (_bly)
+							ld  d, a
+							ld  a, (__en_y)
+							add 15
+							cp  d
+							jp  c, enems_collide_bullets_next
+
+							// _en_x = _en_cx;
+							// _en_y = _en_cy;
+							ld  a, (__en_cx)
+							ld  (__en_x), a
+							ld  a, (__en_cy)
+							ld  (__en_y), a
+
+							// bullets_estado [gpjt] = 0;
+							ld  hl, _bullets_estado
+							add hl, bc
+							xor a
+							ld  (hl), a
+					#endasm
+
+					#ifdef ENABLE_FANTIES
+						if (_en_t == 6) {
+							en_an_vx [enit] += addsign (bullets_mx [gpjt], 128);
+						}
+					#endif
+
+					en_an_next_frame [enit] = sprite_17_a;
+
+					#asm
+	
+						#if !defined PLAYER_GENITAL && !defined DISABLE_PLATFORMS							
+								// if (_en_t != 4) -- _en_life;
+
+								ld  a, (__en_t)
+								cp  4
+								jr  z, bullets_no_substract_life
+
+								ld  hl, __en_life
+								dec (hl)
+							.bullets_no_substract_life
+						#else
+								// -- _en_life;
+								ld  hl, __en_life
+								dec (hl)
+						#endif	
+
+							// if (_en_life == 0) {
+							ld  a, (__en_life)
+							or  a
+							jp  nz, enems_collide_bullets_sound
+					#endasm
+
+					enems_draw_current ();
+					sp_UpdateNow ();
+
+					#ifdef MODE_128K
+						en_an_state [enit] = GENERAL_DYING;
+						en_an_count [enit] = 12;
+						PLAY_SOUND (SFX_KILL_ENEMY_SHOOT);
+					#else															
+						beep_fx (5);
+						en_an_next_frame [enit] = sprite_18_a;
+					#endif	
+
+					#ifdef ENABLE_PURSUERS
+						enems_pursuers_init ();
+					#endif
+
+					#asm
+							call _enems_kill
+							
+						.enems_collide_bullets_sound
+					#endasm
+
+					#ifdef MODE_128K
+						PLAY_SOUND (SFX_HIT_ENEMY);
+					#else
+						beep_fx (1);
+					#endif
+
+					#asm			
+
+						.enems_collide_bullets_next
+							ld  a, (_gpjt)
+							or  a
+							jp  nz, enems_collide_bullets
+					#endasm
 
 				}
 			#endif

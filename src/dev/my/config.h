@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // Config.h
 
@@ -13,6 +13,8 @@
 //#define ARKOS_SFX_CHANNEL	0				// SFX Channel (0-2)
 //#define VENG_SELECTOR 					// Very advanced!
 //#define USE_MAP_CUSTOM_DECODER
+
+#define USE_ZX0	 							// Use ZX0 rather than ARKOS to compress stuff
 
 // In this section we define map dimensions, initial and authomatic ending conditions, etc.
 
@@ -47,6 +49,7 @@
 											// Comment both for normal 16x16 bounding box
 #define BOUNDING_BOX_8_BOTTOM				// 8x8 aligned to bottom center in 16x16
 //#define BOUNDING_BOX_8_CENTERED			// 8x8 aligned to center in 16x16
+//#define BOUNDING_BOX_12X2_CENTERED 			// 8x2 aligned to center in 16x16
 #define SMALL_COLLISION 					// 8x8 centered collision instead of 12x12
 
 // General directives:
@@ -61,6 +64,7 @@
 //#define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
 //#define REVERSE_OBJECTS_COUNT 			// Counts from PLAYER_NUM_OBJETOS to 0
 //#define DEACTIVATE_EVIL_TILE				// If defined, no killing tiles (behaviour 1) are detected.
+//#define CUSTOM_EVIL_TILE_CHECK			// 
 #define PLAYER_BOUNCES						// If defined, collisions make player bounce
 //#define FULL_BOUNCE 						// If defined, evil tile bounces equal MAX_VX, otherwise v/2
 //#define SLOW_DRAIN						// Works with bounces. Drain is 4 times slower
@@ -70,6 +74,10 @@
 //#define EVERYTHING_IS_A_WALL				// If defined, any tile <> type 0 is a wall, otherwise just 8.
 //#define BODY_COUNT_ON 			2		// If defined, count enemies on flag #
 //#define DISABLE_PLATFORMS 				// Disables platforms in side-view
+//#define CUSTOM_LOCK_CLEAR 				// use `custom_lock_clear.h` to remove a lock from screen
+
+//#define DIE_AND_RESPAWN 					// Remember last safe spot & respawn there
+//#define SAFE_SPOT_ON_ENTERING 			// Comment to have safe spot on landing instead
 
 // Extra enemy types
 // -----------------
@@ -79,6 +87,8 @@
 //#define DEATH_COUNT_ADD 			11 		// Frames to wait = ADD + (rand & AND)
 //#define PURSUERS_MAX_V 			2		// 1, 2, 4.
 //#define PURSUERS_BASE_CELL		3		// If defined, type 7 enemies are always #
+//#define PURSUERS_MAX_V 			2		// 1, 2, 4.
+//#define PURSUERS_DONT_SPAWN_IN_OBSTACLE 	// This
 
 //#define ENABLE_FANTIES					// If defined, Fanties are enabled!
 //#define FANTIES_BASE_CELL 		2		// Base sprite cell (0, 1, 2 or 3)
@@ -130,7 +140,9 @@
 //#define INITIAL_AMMO				0		// If defined, ammo = X when entering game.
 
 //#define BREAKABLE_WALLS 					// Breakable walls
-//#define BREAKABLE_WALLS_LIFE	1			// Amount of hits to break wall
+//#define BREAKABLE_WALLS_LIFE	1			// Amount of hits to break wall minus one
+//#define BREAKABLE_WALLS_BREAKING	30 		// If defined, use this tile as "breaking"
+//#define BREAKABLE_WALLS_BROKEN 	0 		// Susbtitute with this
 
 // Scripting
 // ---------
@@ -189,7 +201,8 @@
 //#define PLAYER_MIN_KILLABLE		3		// Only kill enemies with id >= PLAYER_MIN_KILLABLE
 #define PLAYER_STEP_SOUND					// Sound while walking. No effect in the BOOTEE engine.
 
-//#define PLAYER_DISABLE_DEFAULT_HENG 		// To disble default horizontal engine (keyrs)
+//#define PLAYER_DISABLE_DEFAULT_HENG 		// To disble default horizontal engine (genital / side)
+//#define PLAYER_DISABLE_DEFAULT_VENG 		// To disble default vertical engine (genital)
 
 // Configure keyboard
 

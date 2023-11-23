@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // mk1.c
 //#define DEBUG_KEYS
@@ -66,6 +66,7 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 // Cosas del juego:
 
 #include "definitions.h"
+#include "mtasmlib.h"
 
 #ifdef ACTIVATE_SCRIPTING
 	#include "my/msc-config.h"
@@ -77,7 +78,12 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 	#include "assets/librarian.h"
 #endif
 
-#include "aplib.h"
+#ifdef USE_ZX0
+	#include "zx0.h"
+#else
+	#include "aplib.h"
+#endif
+
 #include "pantallas.h"
 
 #ifdef COMPRESSED_LEVELS
@@ -139,6 +145,7 @@ unsigned char AD_FREE [NUMBLOCKS * 15];
 	#include "savegame.h"
 #endif
 
+#include "mainloop/hud.h"
 #include "mainloop.h"
 
 #ifndef MODE_128K

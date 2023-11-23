@@ -324,57 +324,44 @@
 	"buffers":
 	[
 		{
-			"file": "README.md",
+			"contents": "Searching 109 files for \"p_pant\"\n\n0 matches\n\nSearching 109 files for \"o_pant\"\n\nD:\\git\\MK1\\src\\dev\\definitions.h:\n  205  \n  206  // Globalized\n  207: unsigned char o_pant;\n  208  unsigned char n_pant;\n  209  unsigned char is_rendering;\n\nD:\\git\\MK1\\src\\dev\\engine\\player.h:\n 1573  \t\t\tp_y = sg_pool [MAX_FLAGS + 2] << 10;\n 1574  \t\t#endif\t\n 1575: \t\to_pant = 0xff; // Reload\n 1576  \t#endif\n 1577  \n\nD:\\git\\MK1\\src\\dev\\engine\\player_wip.h:\n  874  \t\t\tp_y = sg_pool [MAX_FLAGS + 2] << 10;\n  875  \t\t#endif\t\n  876: \t\to_pant = 0xff; // Reload\n  877  \t#endif\n  878  \n\nD:\\git\\MK1\\src\\dev\\lala_beta.asm:\n 11045  \tld\thl,255 % 256\t;const\n 11046  \tld\ta,l\n 11047: \tld\t(_o_pant),a\n 11048  .i_199\n 11049  \tld\thl,(_playing)\n .....\n 11071  \tld\ta,l\n 11072  \tld\t(_pad0),a\n 11073: \tld\thl,(_o_pant)\n 11074  \tld\th,0\n 11075  \tex\tde,hl\n .....\n 11082  \tld\th,0\n 11083  \tld\ta,l\n 11084: \tld\t(_o_pant),a\n 11085  .i_202\n 11086  \tld\thl,(_p_objs)\n .....\n 11170  .i_208\n 11171  .i_206\n 11172: \tld\thl,(_o_pant)\n 11173  \tld\th,0\n 11174  \tex\tde,hl\n .....\n 12034  ._n_pant\tdefs\t1\n 12035  ._p_cont_salto\tdefs\t1\n 12036: ._o_pant\tdefs\t1\n 12037  ._p_life\tdefs\t1\n 12038  ._enit\tdefs\t1\n .....\n 12319  \tXDEF\t_p_cont_salto\n 12320  \tLIB\tsp_ListCurr\n 12321: \tXDEF\t_o_pant\n 12322  \tXDEF\t_p_life\n 12323  \tXDEF\t_enit\n\nD:\\git\\MK1\\src\\dev\\mainloop\\game_loop.h:\n  100  \t#endif\n  101  \n  102: \to_pant = 0xff;\n  103  \twhile (playing) {\n  104  \t\t#asm\n  ...\n  116  \t\tpad0 = (joyfunc) (&keys);\n  117  \n  118: \t\tif (o_pant != n_pant) {\n  119  \t\t\t#include \"my/ci/before_entering_screen.h\"\n  120  \t\t\tdraw_scr ();\n  121: \t\t\to_pant = n_pant;\n  122  \t\t\t#if defined DIE_AND_RESPAWN && defined PLAYER_GENITAL\n  123  \t\t\t\tsafe_gpx = gpx; safe_gpy = gpy;\n  ...\n  228  \n  229  \t\t// Render\n  230: \t\tif (o_pant == n_pant) {\n  231  \t\t\t#include \"mainloop/update_sprites.h\"\n  232  \n\n13 matches across 5 files\n\n\nSearching 109 files for \"saca_a\"\n\n0 matches\n\nSearching 109 files for \"sprites\"\n\nD:\\git\\MK1\\src\\dev\\assets\\extrasprites.h:\n    2  // Copyleft 2010-2014, 2020-2023 by the Mojon Twins\n    3  \n    4: // Extrasprites.h\n    5: // Contiene sprites extra para el modo de matar enemigos de la churrera\n    6: // Sólo se incluirá (tras los sprites) si se define PLAYER_STEPS_ON_ENEMIES\n    7  // Copyleft 2010 The Mojon Twins\n    8  \n    .\n   23  \t#asm\n   24  \t    ._sprite_17_a\n   25: \t        BINARY \"sprites_extra.bin\"\n   26  \t#endasm\n   27  #endif\n   ..\n   56  \t#asm\t              \t\n   57  \t\t._sprite_19_a\n   58: \t\t\tBINARY \"sprites_bullet.bin\"\n   59  \t#endasm\n   60  #endif\n\nD:\\git\\MK1\\src\\dev\\assets\\levels.h:\n    7  // Prepared for 128K level bundles and standard 48K levels\n    8  \n    9: // Usually, 48K levels use the same sprites for all levels\n   10: // unless PER_LEVEL_SPRITESET is defined in 48K mode.\n   11  \n   12  // Level bundles used in 128K games contain:\n   ..\n   18  // Hotspots, MAP_W * MAP_H * 3 bytes\n   19  // Behs, 48 bytes\n   20: // Spriteset, 2312 bytes\n   21  \n   22  // Definitions\n   ..\n  108  #endasm\n  109  \n  110: extern unsigned char sprites [0];\n  111  #asm\n  112: \t._sprites\n  113  #endasm\n  114  \n  115: #if defined MODE_128K || defined PER_LEVEL_SPRITESET\n  116: \t#include \"assets/sprites-empty.h\"\n  117  #else\n  118: \t#include \"assets/sprites.h\"\n  119  #endif\n  120  \n\nD:\\git\\MK1\\src\\dev\\assets\\sprites-empty.h:\n    2  // Copyleft 2010-2014, 2020-2023 by the Mojon Twins\n    3  \n    4: // Sprites.h\n    5  // Generado por SprCnv de la Churrera\n    6  // Copyleft 2010 The Mojon Twins\n\nD:\\git\\MK1\\src\\dev\\assets\\sprites.h:\n    2  // Copyleft 2010-2014, 2020-2023 by the Mojon Twins\n    3  \n    4: // Sprites.h\n    5  // Generado por SprCnv de la Churrera\n    6  // Copyleft 2010 The Mojon Twins\n\nD:\\git\\MK1\\src\\dev\\compile.bat:\n   29  ..\\utils\\ts2bin.exe ..\\gfx\\font.png ..\\gfx\\work.png tileset.bin 7 >nul\n   30  \n   31: ..\\utils\\sprcnv.exe ..\\gfx\\sprites.png assets\\sprites.h > nul\n   32  \n   33: ..\\utils\\sprcnvbin.exe ..\\gfx\\sprites_extra.png sprites_extra.bin 1 > nul\n   34: ..\\utils\\sprcnvbin8.exe ..\\gfx\\sprites_bullet.png sprites_bullet.bin 1 > nul\n   35  \n   36  ..\\utils\\png2scr.exe ..\\gfx\\title.png ..\\gfx\\title.scr > nul\n\nD:\\git\\MK1\\src\\dev\\engine\\c_levels.h:\n   30  \t\tunpack ((unsigned int) levels [level].c_behs, (unsigned int) (behs));\n   31  \n   32: \t\t#ifdef PER_LEVEL_SPRITESET\n   33: \t\t\tunpack ((unsigned int) levels [level].c_sprites, (unsigned int) (sprites + 16));\n   34  \t\t#endif\n   35  \n\nD:\\git\\MK1\\src\\dev\\lala_beta.asm:\n 8054  \n 8055  \n 8056: ._clear_sprites\n 8057  \tld ix, (_sp_player)\n 8058  \tld iy, vpClipStruct\n ....\n 8062  \tcall SPMoveSprAbs\n 8063  \txor a\n 8064: \t.hide_sprites_enems_loop\n 8065  \tld (_gpit), a\n 8066  \tsla a\n ....\n 8082  \tinc a\n 8083  \tcp 3\n 8084: \tjr nz, hide_sprites_enems_loop\n 8085  \tret\n 8086  \n ....\n 11399  .i_235\n 11400  \tcall\t_cortina\n 11401: \tcall\t_clear_sprites\n 11402  \tjp\ti_197\n 11403  .i_198\n .....\n 12508  \tXDEF\t_select_joyfunc\n 12509  \tXDEF\t_unpack\n 12510: \tXDEF\t_clear_sprites\n 12511  \tXDEF\t_p_disparando\n 12512  \tLIB\tsp_IterateDList\n\nD:\\git\\MK1\\src\\dev\\mainloop.h:\n  238  \t\t}\n  239  \t\t\n  240: \t\tclear_sprites ();\n  241  \t}\n  242  }\n\nD:\\git\\MK1\\src\\dev\\mainloop\\game_loop.h:\n  130  \t\t\t\t\ttimer_zero = 0;\n  131  \t\t\t\t\t#ifdef SHOW_TIMER_OVER\n  132: \t\t\t\t\t\tclear_sprites ();\n  133  \t\t\t\t\t\ttime_over ();\n  134  \t\t\t\t\t#endif\n  ...\n  141  \t\t\t\t\t#ifdef SHOW_TIMER_OVER\n  142  \t\t\t\t\t\t#ifndef TIMER_SCRIPT_0\n  143: \t\t\t\t\t\t\tclear_sprites ();\n  144  \t\t\t\t\t\t\ttime_over ();\n  145  \t\t\t\t\t\t#endif\n  ...\n  229  \t\t// Render\n  230  \t\tif (o_pant == n_pant) {\n  231: \t\t\t#include \"mainloop/update_sprites.h\"\n  232  \n  233  \t\t\t// Limit frame rate\n  ...\n  316  \t\t\t\t\tplayer_on = 0;\n  317  \t\t\t\t#endif\t\t\t\t\n  318: \t\t\t\tclear_sprites ();\n  319  \t\t\t\tpause_screen ();\n  320  \t\t\t\twhile (!sp_KeyPressed (KEY_H));\n\nD:\\git\\MK1\\src\\dev\\mainloop\\update_sprites.h:\n    2  // Copyleft 2010-2014, 2020-2023 by the Mojon Twins\n    3  \n    4: // update_sprites.h - Updates sprites\n    5  \n    6  \tfor (enit = 0; enit < MAX_ENEMS; enit ++) {\n    .\n   10  \n   11  \tif ( (p_estado & EST_PARP) == 0 || half_life == 0 ) {\n   12: \t\t//sp_MoveSprAbs (sp_player, spritesClip, p_next_frame - p_current_frame, VIEWPORT_Y + (gpy >> 3), VIEWPORT_X + (gpx >> 3), gpx & 7, gpy & 7);\n   13  \t\t#asm\n   14  \t\t\t\tld  ix, (_sp_player)\n   ..\n   47  \t\t#endasm\n   48  \t} else {\n   49: \t\t//sp_MoveSprAbs (sp_player, spritesClip, p_next_frame - p_current_frame, -2, -2, 0, 0);\n   50  \t\t#asm\n   51  \t\t\t\tld  ix, (_sp_player)\n   ..\n   71  \t\t\tif (bullets_estado [gpit] == 1) {\n   72  \t\t\t\trdx = bullets_x [gpit]; rdy = bullets_y [gpit];\n   73: \t\t\t\t//sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, VIEWPORT_Y + (bullets_y [gpit] >> 3), VIEWPORT_X + (bullets_x [gpit] >> 3), bullets_x [gpit] & 7, bullets_y [gpit] & 7);\n   74  \t\t\t\t#asm\n   75  \t\t\t\t\t\tld  a, (_gpit)\n   ..\n  113  \t\t\t\t#endasm\n  114  \t\t\t} else {\n  115: \t\t\t\t//sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, -2, -2, 0, 0);\n  116  \t\t\t\t#asm\n  117  \t\t\t\t\t\tld  a, (_gpit)\n  ...\n  143  \t\t\tif (cocos_y [gpit] < 160) { \n  144  \t\t\t\trdx = cocos_x [gpit]; rdy = cocos_y [gpit];\n  145: \t\t\t\t//sp_MoveSprAbs (sp_cocos [gpit], spritesClip, 0, VIEWPORT_Y + (bullets_y [gpit] >> 3), VIEWPORT_X + (bullets_x [gpit] >> 3), bullets_x [gpit] & 7, bullets_y [gpit] & 7);\n  146  \t\t\t\t#asm\n  147  \t\t\t\t\t\tld  a, (_gpit)\n  ...\n  185  \t\t\t\t#endasm\n  186  \t\t\t} else {\n  187: \t\t\t\t//sp_MoveSprAbs (sp_cocos [gpit], spritesClip, 0, -2, -2, 0, 0);\n  188  \t\t\t\t#asm\n  189  \t\t\t\t\t\tld  a, (_gpit)\n\nD:\\git\\MK1\\src\\dev\\mk1.c:\n   44  #endif\n   45  \n   46: // Configure number of blocks and reserve a pool for sprites\n   47  \n   48  #ifdef PLAYER_CAN_FIRE\n   ..\n   89  #ifdef COMPRESSED_LEVELS\n   90  \t#include \"assets/levels.h\"\n   91: \t#include \"assets/extrasprites.h\"\n   92  \t#include \"my/levelset.h\"\n   93  #else\n   ..\n   95  \t#include \"assets/tileset.h\"\n   96  \t#include \"assets/enems.h\"\n   97: \t#include \"assets/sprites.h\"\n   98: \t#include \"assets/extrasprites.h\"\n   99  #endif\n  100  \n\nD:\\git\\MK1\\src\\dev\\my\\config.h:\n   31  #define PLAYER_REFILL\t\t\t\t10\t\t// Life recharge\n   32  //#define COMPRESSED_LEVELS \t\t\t\t// use levels.h instead of mapa.h and enems.h (!)\n   33: //#define PER_LEVEL_SPRITESET \t\t\t\t// use a different spriteset for each level in 48K\n   34  //#define MAX_LEVELS\t\t\t\t4\t\t// # of compressed levels\n   35  //#define REFILL_ME \t\t\t\t\t\t// If defined, refill player on each level\n   ..\n  285  //#define UNPACKED_MAP\t\t\t\t\t\t// Full, uncompressed maps. Shadows settings are ignored.\n  286  #define PACKED_MAP_ALT_TILE \t\t19\t\t// If defined, in 16 tiles mode, alt tile (default 19)\n  287: //#define NO_MASKS\t\t\t\t\t\t\t// Sprites are rendered using OR instead of masks.\n  288  //#define MASKED_BULLETS\t\t\t\t\t// If needed\n  289  //#define PLAYER_CUSTOM_ANIMATION \t\t\t// Code your own animation in my/custom_animation.h\n\nD:\\git\\MK1\\src\\dev\\my\\custom_animation.h:\n    8  \n    9  // You can use the array player_cells [] which contains pointers to the 8\n   10: // frames for the main player in your spriteset.\n   11  \n   12  \n\nD:\\git\\MK1\\src\\dev\\my\\levelset.h:\n   27  \t\tunsigned char *c_enems_hotspots; \t\t// 10\n   28  \t\tunsigned char *c_behs; \t\t\t\t\t// 12\n   29: \t\tunsigned char *c_sprites; \t\t\t\t// 14\n   30  \t\tunsigned int script_offset; \t\t\t// 16\n   31  \t} LEVEL;\n\nD:\\git\\MK1\\src\\dev\\printer.h:\n  904  #endif\n  905  \n  906: void clear_sprites (void) {\n  907  \t#asm\n  908  \t\t\tld  ix, (_sp_player)\n  ...\n  914  \t\n  915  \t\t\txor a\n  916: \t\t.hide_sprites_enems_loop\n  917  \t\t\tld  (_gpit), a\n  918  \n  ...\n  938  \t\t\tinc a\n  939  \t\t\tcp  3\n  940: \t\t\tjr  nz, hide_sprites_enems_loop\n  941  \n  942  \t\t#ifdef PLAYER_CAN_FIRE\n  943  \t\t\t\txor a\n  944: \t\t\t.hide_sprites_bullets_loop\n  945  \t\t\t\tld  (_gpit), a\n  946  \n  ...\n  966  \t\t\t\tinc a\n  967  \t\t\t\tcp  MAX_BULLETS\n  968: \t\t\t\tjr  nz, hide_sprites_bullets_loop\n  969  \t\t#endif\n  970  \t#endasm\n\nD:\\git\\MK1\\src\\dev\\prototypes.h:\n  113  void print_str (void);\n  114  void blackout_area (void);\n  115: void clear_sprites (void);\n  116  \n  117  // savegame.h\n\n57 matches across 16 files\n\n\nSearching 214 files for \"after_load\"\n\nD:\\git\\MK1\\src\\dev\\mainloop.h:\n  103  \t#endif\n  104  \n  105: \t#include \"my/ci/after_load.h\"\n  106  \n  107  \twhile (1) {\n\n1 match in 1 file\n",
 			"settings":
 			{
-				"buffer_size": 3871,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "docs/tutorial-cap01.md",
-			"settings":
-			{
-				"buffer_size": 20511,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "lib/splib2/setenv.bat",
-			"settings":
-			{
-				"buffer_size": 141,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/dev/setenv.bat",
-			"settings":
-			{
-				"buffer_size": 141,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"contents": "Searching 2227 files for \"ORTHO\" (regex)\n\nD:\\temp\\MK1\\contrib\\godkiller_2\\dev\\definitions.h:\n   41  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   42  #endif\n   43: #ifdef ENABLE_ORTHOSHOOTERS\n   44  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   45  #endif\n\nD:\\temp\\MK1\\contrib\\godkiller_2\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\contrib\\godkiller_2\\dev\\engine\\enengine.h:\n  150  \t\t\t\tbreak;\n  151  \n  152: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  153  \t\t\t\tcase 5:\t\t\t\t\t\n  154: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  155: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  156  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  157  \t\t\t\t\t#else\n  158: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  159  \t\t\t\t\t#endif\n  160  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  322  \t\t\tcase 3:\n  323  \t\t\tcase 4:\n  324: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  325  \t\t\t\tcase 5:\n  326  \t\t\t#endif\n  327  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  328: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  329  \t\t\t\t\tif (_en_t == 5) {\n  330: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  331  \t\t\t\t\t}\n  332  \t\t\t\t#endif\n\nD:\\temp\\MK1\\contrib\\godkiller_2\\dev\\my\\config.h:\n   83  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   84  \n   85: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   86: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   87: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   88  \n   89  // Cocos\n\nD:\\temp\\MK1\\contrib\\godkiller_2\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\contrib\\misco_jones\\dev\\definitions.h:\n   41  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   42  #endif\n   43: #ifdef ENABLE_ORTHOSHOOTERS\n   44  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   45  #endif\n\nD:\\temp\\MK1\\contrib\\misco_jones\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\contrib\\misco_jones\\dev\\engine\\enengine.h:\n  150  \t\t\t\tbreak;\n  151  \n  152: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  153  \t\t\t\tcase 5:\t\t\t\t\t\n  154: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  155: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  156  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  157  \t\t\t\t\t#else\n  158: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  159  \t\t\t\t\t#endif\n  160  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  322  \t\t\tcase 3:\n  323  \t\t\tcase 4:\n  324: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  325  \t\t\t\tcase 5:\n  326  \t\t\t#endif\n  327  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  328: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  329  \t\t\t\t\tif (_en_t == 5) {\n  330: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  331  \t\t\t\t\t}\n  332  \t\t\t\t#endif\n\nD:\\temp\\MK1\\contrib\\misco_jones\\dev\\my\\config.h:\n   83  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   84  \n   85: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   86: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   87: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   88  \n   89  // Cocos\n\nD:\\temp\\MK1\\contrib\\misco_jones\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\contrib\\nightmare_on_halloween\\dev\\definitions.h:\n   41  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   42  #endif\n   43: #ifdef ENABLE_ORTHOSHOOTERS\n   44  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   45  #endif\n\nD:\\temp\\MK1\\contrib\\nightmare_on_halloween\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\contrib\\nightmare_on_halloween\\dev\\engine\\enengine.h:\n  150  \t\t\t\tbreak;\n  151  \n  152: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  153  \t\t\t\tcase 5:\t\t\t\t\t\n  154: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  155: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  156  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  157  \t\t\t\t\t#else\n  158: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  159  \t\t\t\t\t#endif\n  160  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  322  \t\t\tcase 3:\n  323  \t\t\tcase 4:\n  324: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  325  \t\t\t\tcase 5:\n  326  \t\t\t#endif\n  327  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  328: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  329  \t\t\t\t\tif (_en_t == 5) {\n  330: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  331  \t\t\t\t\t}\n  332  \t\t\t\t#endif\n\nD:\\temp\\MK1\\contrib\\nightmare_on_halloween\\dev\\my\\config.h:\n   83  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   84  \n   85: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   86: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   87: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   88  \n   89  // Cocos\n\nD:\\temp\\MK1\\contrib\\nightmare_on_halloween\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\contrib\\sami_troid\\dev\\definitions.h:\n   41  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   42  #endif\n   43: #ifdef ENABLE_ORTHOSHOOTERS\n   44  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   45  #endif\n\nD:\\temp\\MK1\\contrib\\sami_troid\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\contrib\\sami_troid\\dev\\engine\\enengine.h:\n  150  \t\t\t\tbreak;\n  151  \n  152: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  153  \t\t\t\tcase 5:\t\t\t\t\t\n  154: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  155: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  156  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  157  \t\t\t\t\t#else\n  158: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  159  \t\t\t\t\t#endif\n  160  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  322  \t\t\tcase 3:\n  323  \t\t\tcase 4:\n  324: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  325  \t\t\t\tcase 5:\n  326  \t\t\t#endif\n  327  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  328: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  329  \t\t\t\t\tif (_en_t == 5) {\n  330: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  331  \t\t\t\t\t}\n  332  \t\t\t\t#endif\n\nD:\\temp\\MK1\\contrib\\sami_troid\\dev\\my\\config.h:\n   83  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   84  \n   85: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   86: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   87: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   88  \n   89  // Cocos\n\nD:\\temp\\MK1\\contrib\\sami_troid\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\contrib\\sami_troid\\map\\sami.tmx:\n    1  <?xml version=\"1.0\" encoding=\"UTF-8\"?>\n    2: <map version=\"1.0\" orientation=\"orthogonal\" width=\"127\" height=\"98\" tilewidth=\"16\" tileheight=\"16\">\n    3   <properties>\n    4    <property name=\"lock\" value=\"15\"/>\n\nD:\\temp\\MK1\\examples\\dogmole\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\examples\\dogmole\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\examples\\dogmole\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\examples\\dogmole\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\examples\\dogmole\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\examples\\dogmole_ci\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\examples\\dogmole_ci\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\examples\\dogmole_ci\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\examples\\dogmole_ci\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\examples\\dogmole_ci\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\examples\\goddess\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\examples\\goddess\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\examples\\goddess\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\examples\\goddess\\dev\\my\\config.h:\n   89  #define FANTIES_TYPE_HOMING\t\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\examples\\goddess\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\examples\\goku_mal\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\examples\\goku_mal\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\examples\\goku_mal\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\examples\\goku_mal\\dev\\my\\config.h:\n   89  #define FANTIES_TYPE_HOMING\t\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\examples\\goku_mal\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\my\\config.h:\n   90  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   91  \n   92: #define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   93: #define ORTHOSHOOTERS_FREQ \t\t\t(rand()&15)\n   94: #define ORTHOSHOOTERS_BASE_CELL \t3 \t\t// 99 means DONT SHOW!\n   95  \n   96  // Cocos\n\nD:\\temp\\MK1\\examples\\helmet\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\examples\\helmet\\diario.md:\n   20  ~~ \n   21  \n   22: Necesito hacer enemigos disparadores. Pero en plan hiper sencillo. Voy a hacer unos *orthogonal cocos*. Si un enemigo tiene levantado el bit 5 (& 0x20) disparará su coco en la direccion que digan los bits 6 y 7 según se cumpla `(rand () & COCO_FREQ) == 1`. Tengo que hacerlo en modo super ahorro así que les meteré candela en ensamble directamente.\n   23  \n   24  ~~ \n\nD:\\temp\\MK1\\src\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\src\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\src\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\src\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\src\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\trash\\6baddies\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\trash\\6baddies\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\trash\\6baddies\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\trash\\6baddies\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\trash\\6baddies\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\trash\\blip_blep\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\trash\\blip_blep\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\trash\\blip_blep\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\trash\\blip_blep\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\trash\\blip_blep\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\nD:\\temp\\MK1\\trash\\mlst\\dev\\definitions.h:\n   49  \tstruct sp_SS *sp_bullets [MAX_BULLETS];\n   50  #endif\n   51: #ifdef ENABLE_ORTHOSHOOTERS\n   52  \tstruct sp_SS *sp_cocos [MAX_ENEMS];\n   53  #endif\n\nD:\\temp\\MK1\\trash\\mlst\\dev\\engine\\enem_mods\\enem_type_orthoshooters.h:\n    4  \t// Include this code after `enem_type_lineal.h` so they move!\n    5  \t\n    6: \tif (ORTHOSHOOTERS_FREQ == 1) {\n    7  \t\trda = en_an_state [enit];\n    8  \t\tsimple_coco_shoot ();\n\nD:\\temp\\MK1\\trash\\mlst\\dev\\engine\\enengine.h:\n  154  \t\t\t\tbreak;\n  155  \n  156: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  157  \t\t\t\tcase 5:\t\t\t\t\t\n  158: \t\t\t\t\t#if ORTHOSHOOTERS_BASE_CELL==99\n  159: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL;\n  160  \t\t\t\t\t\ten_an_next_frame [enit] = sprite_18_a;\n  161  \t\t\t\t\t#else\n  162: \t\t\t\t\t\ten_an_base_frame [enit] = ORTHOSHOOTERS_BASE_CELL << 1;\n  163  \t\t\t\t\t#endif\n  164  \t\t\t\t\ten_an_state [enit] = malotes [enoffsmasi].t >> 6;\n  ...\n  323  \t\t\tcase 3:\n  324  \t\t\tcase 4:\n  325: \t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  326  \t\t\t\tcase 5:\n  327  \t\t\t#endif\n  328  \t\t\t\t#include \"engine/enem_mods/enem_type_lineal.h\"\n  329: \t\t\t\t#ifdef ENABLE_ORTHOSHOOTERS\n  330  \t\t\t\t\tif (rdt == 5) {\n  331: \t\t\t\t\t\t#include \"engine/enem_mods/enem_type_orthoshooters.h\"\n  332  \t\t\t\t\t}\n  333  \t\t\t\t#endif\n\nD:\\temp\\MK1\\trash\\mlst\\dev\\my\\config.h:\n   89  //#define FANTIES_TYPE_HOMING\t\t\t\t// Unset for simple fanties.\n   90  \n   91: //#define ENABLE_ORTHOSHOOTERS\t\t\t\t// If defined, orthoshooters are active\n   92: //#define ORTHOSHOOTERS_FREQ \t\t(rand()&15)\n   93: //#define ORTHOSHOOTERS_BASE_CELL \t0 \t\t// 99 means DONT SHOW!\n   94  \n   95  // Cocos\n\nD:\\temp\\MK1\\trash\\mlst\\dev\\prototypes.h:\n    4  // Autodefs\n    5  \n    6: #if defined ENABLE_ORTHOSHOOTERS\n    7  \t#define ENABLE_SIMPLE_COCOS\n    8  #endif\n\n184 matches across 67 files\n",
-			"settings":
-			{
-				"buffer_size": 24028,
+				"buffer_size": 10050,
 				"line_ending": "Windows",
 				"name": "Find Results",
 				"scratch": true
 			}
 		},
 		{
-			"file": "examples/helmet/diario.md",
+			"file": "src/dev/mainloop.h",
 			"settings":
 			{
-				"buffer_size": 1732,
+				"buffer_size": 4946,
 				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
+			"settings":
+			{
+				"buffer_size": 3438,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/mainloop/game_loop.h",
+			"settings":
+			{
+				"buffer_size": 7358,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"settings":
+			{
+				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		}
@@ -439,148 +426,156 @@
 	},
 	"expanded_folders":
 	[
-		"/D/temp/MK1"
+		"/C/git/mk1",
+		"/C/git/mk1/examples",
+		"/C/git/mk1/examples/helmet",
+		"/C/git/mk1/examples/helmet/dev",
+		"/C/git/mk1/examples/helmet/dev/loader"
 	],
 	"file_history":
 	[
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/extra_functions.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/fixed_screens.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/config.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/levelset.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/entering_game.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/engine/c_levels.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/compile.bat",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/after_load.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/title_screen.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/level_screen.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/mainloop/game_loop.h",
-		"/D/temp/vmware_shared/MK1/examples/goku_mal/dev/my/ci/before_entering_screen.h",
-		"/D/Proyectos/2021/20210629a - Cambio de password desde SSOWeb en miCuenta/instrucciones.txt",
-		"/D/temp/vmware_shared/MK1/docs/tutorial-cap13.md",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/engine/c_levels.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/assets/levels.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/compile.bat",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/config.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/fixed_screens.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/ci/entering_screen.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/mainloop.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/mainloop/flick_screen.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/ci/extra_routines.h",
-		"/D/temp/vmware_shared/MK1/examples/helmet/dev/my/ci/after_game_loop.h",
-		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/entering_screen.h",
-		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/hotspots_custom.h",
-		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/before_game.h",
-		"/D/temp/vmware_shared/MK1/examples/goddess/dev/my/ci/entering_game.h",
-		"/Y/MK2/examples/Tokimal/dev/minimal.asm",
-		"/W/MK1/src/dev/lala_beta.asm",
-		"/W/MK1/src/dev/engine/player.h",
-		"/W/MK1/src/dev/my/fixed_screens.h",
-		"/Y/MK1_Pestecera/examples/jetpaco/dev/crt.asm",
-		"/W/MK1/src/dev/crt.asm",
-		"/W/MK1/src/dev/definitions.h",
-		"/W/MK1/src/dev/compile.bat",
-		"/W/MK1/src/dev/pantallas.h",
-		"/C/z88dk10/lib/spec_crt0.asm",
-		"/W/MK1/lib/splib2/setenv.bat",
-		"/W/MK1/lib/splib2/Makefile.bat",
-		"/W/MK1/lib/splib2/backgroundtiles/SPPrintString.asm",
-		"/W/MK1/lib/splib2/sp.lst",
-		"/W/MK1/lib/splib2/updater/SPUpdateNow.asm",
-		"/W/MK1/lib/splib2/cwrapper/GenCompile.c",
-		"/D/temp/MK1/src/utils/src/msc3_mk1.bas",
-		"/D/Proyectos/2019/20190731a - Bajas automáticas en Ficheros Junta/instrucciones.txt",
-		"/D/temp/MK1/src/dev/mainloop.h",
-		"/D/temp/MK1/src/dev/definitions.h",
-		"/D/temp/MK1/trash/6baddies/utils/src/ene2h.bas",
-		"/D/temp/MK1/trash/6baddies/dev/assets/levels.h",
-		"/D/temp/MK1/src/utils/src/buildlevels_MK1.bas",
-		"/D/temp/MK1/trash/6baddies/utils/src/buildlevels_MK1.bas",
-		"/D/temp/MK1/src/dev/engine/enengine.h",
-		"/D/temp/MK1/trash/6baddies/dev/engine/enengine.h",
-		"/D/temp/MK1/trash/6baddies/dev/definitions.h",
-		"/D/temp/MK1/trash/6baddies/dev/mk1.c",
-		"/D/temp/MK1/trash/6baddies/dev/mainloop/game_loop.h",
-		"/D/temp/MK1/trash/6baddies/dev/mainloop.h",
-		"/D/temp/MK1/trash/6baddies/dev/my/config.h",
-		"/D/temp/MK1/trash/6baddies/dev/engine/isr.h",
-		"/D/temp/MK1/trash/6baddies/dev/sound/arkosplayer.h",
-		"/D/temp/MK1/trash/6baddies/dev/sound/wyzplayer.h",
-		"/D/temp/MK1/docs/tutorial-cap07.md",
-		"/D/temp/MK1/trash/README.md",
-		"/D/temp/MK1/trash/6baddies/dev/compile.bat",
-		"/D/temp/MK1/src/dev/mk1.c",
-		"/D/temp/MK1/src/dev/engine/enem_mods/enem_type_pursuers.h",
-		"/D/temp/MK1/README.md",
-		"/D/temp/MK1/docs/README.md",
-		"/D/temp/MK1/src/mus/WYZproPlay47aZXc.ASM",
-		"/D/temp/MK1/docs/contribs/arkos.md",
-		"/D/git/MK1/examples/helmet/dev/mk1.c",
-		"/D/git/MK1/examples/helmet/dev/mainloop/game_loop.h",
-		"/D/git/MK1/examples/helmet/dev/my/fixed_screens.h",
-		"/C/Users/jcastano/Downloads/log-2021-01-21.php",
-		"/D/Proyectos/CIs.txt",
-		"/D/Proyectos/remote/descon01/consigna/app/controllers/ficheros.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/config.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO883CF3C2/current4-nodo2.txt",
-		"/D/Proyectos/remote/descon01/consigna/app/views/cabecera.php",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/pheanstalk/classes/Pheanstalk.php",
-		"/D/Proyectos/remote/descon01/consigna/extra/antivirus-worker.php",
-		"/D/Proyectos/remote/descon01/consigna/app/models/antivirus.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO88342C43/current4.txt",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO883CDB75/current5.txt",
-		"/D/Proyectos/2021/20210107a - Configuración TTR de Workers AV en Consigna/instrucciones.txt",
-		"/D/Proyectos/2020/20200730a - Actualización Consigna v2.2/instrucciones.md",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/avmodules/kaspersky.php",
-		"/C/Users/jcastano/Downloads/20201130201635562 salidadeejecucioncomandoupgradev-1-5-0",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/authmodules/LDAP.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/ldap.php",
-		"/D/Proyectos/2020/20201130b - Modificación 'appbar' en Consigna (eliminación de 'mensajería')/instrucciones.txt",
-		"/D/Proyectos/2020/20201130a - Modificación 'appbar' en Webmail (eliminación de 'mensajería')/instrucciones.txt",
-		"/D/Proyectos/remote/desccobuz05/correo.juntadeandalucia.es/plugins/enigma/config.inc.php",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/Avengine.php",
-		"/D/Proyectos/2020/20201007a - Corrección cliente javascript de subida a Consigna desde Webmail para IE/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/consigna/app/views/pie.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO8C6CC380/gfxlib015b.txt",
-		"/D/Proyectos/2020/20200917f - Banner 'MiCuenta' en Consigna/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/consigna/public/accesibilidad.html",
-		"/D/Proyectos/2020/20200917d - Consigna - Declaración de Accesibilidad/instrucciones.txt",
-		"/D/Proyectos/2020/20200813b - Corrección CSS Consigna/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/consigna/public/css/estilo.css",
-		"/D/Proyectos/2020/20200903a - Revisión de configuraciones de seguridad de Consigna/instrucciones.txt",
-		"/D/Proyectos/remote/descon01/deshite.md",
-		"/D/Proyectos/copias producción/consigna-2/simplesaml/metadata/saml20-idp-remote.php",
-		"/D/Proyectos/remote/descon01/simplesaml/Configuration.php",
-		"/D/Proyectos/remote/descon01/simplesaml/config/authsources.php",
-		"/D/Proyectos/remote/descon01/simplesaml/config/config.php",
-		"/D/Proyectos/remote/descon01/config18.php",
-		"/D/Proyectos/copias producción/consigna-2/simplesaml/config/config.php",
-		"/D/Proyectos/copias producción/consigna-2/simplesaml/config/authsources.php",
-		"/D/Proyectos/copias producción/consigna-2/etc/httpd/conf.d/consigna.conf",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/Auth.php",
-		"/D/Proyectos/remote/descon01/consigna/app/libraries/authmodules/SamlSSO.php",
-		"/D/Proyectos/remote/descon01/config11.php",
-		"/D/Proyectos/remote/descon01/consigna/app/controllers/usuario.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/auth.php",
-		"/D/Proyectos/remote/descon01/consigna/app/config/subredes.php",
-		"/D/Proyectos/remote/descon01/sftp-config.json",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO81C3925E/saml20-idp-remote.php",
-		"/C/Users/jcastano/AppData/Local/Temp/7zOC8F1EC2A/readme.txt",
-		"/D/Proyectos/documentación/Integración php WebSSO/SimpleSAMLPHP_JDA/config/authsources.php",
-		"/D/Proyectos/remote/descon01/consigna/app/models/trabajoficheros.php",
-		"/D/temp/mw1311ws/makefilewithlua",
-		"/C/Users/jcastano/AppData/Local/Temp/7zO0E105AB9/readsrc.txt",
-		"/D/Proyectos/remote/descon01/consigna/LICENSE",
-		"/D/Proyectos/remote/descon01/consigna/saml-desarrollo.pem"
+		"/D/git/MK1/src/dev/mainloop/game_loop.h",
+		"/D/git/MK1/src/dev/engine/player.h",
+		"/D/Proyectos/2021/20210209a - Límites configurables en Consigna (cont)/1. LDAP/actualizacion_metarrama.ldif",
+		"/D/Proyectos/2023/20230313 - JAperfilAcceso/actualizacion_metarrama.ldif",
+		"/C/Users/jcastano/Desktop/pikapika.txt",
+		"/D/Proyectos/2021/20210209a - Límites configurables en Consigna (cont)/1. LDAP/instrucciones.txt",
+		"/D/Proyectos/2023/20230313 - JAperfilAcceso/instrucciones.txt",
+		"/C/Users/jcastano/Desktop/naossuite.juntadeandalucia.es-1678862844627.log",
+		"/D/git/MK1/wip/impossamal/dev/zx0.h",
+		"/D/git/MK1/wip/impossamal/dev/compile.bat",
+		"/D/git/MK1/wip/impossamal/dev/my/config.h",
+		"/D/git/MK1/wip/impossamal/dev/128k.h",
+		"/D/git/MK1/wip/impossamal/dev/aplib.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/ay_fx_numbers.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/extrasprites.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/levels.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/sprites-empty.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/tileset.h",
+		"/D/git/MK1/wip/impossamal/dev/definitions.h",
+		"/D/git/MK1/wip/impossamal/dev/engine.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/breakable.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/bullets.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/c_levels.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enem_mods/enem_type_fanties.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enem_mods/enem_type_lineal.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enem_mods/enem_type_orthoshooters.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enem_mods/enem_type_pursuers.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enem_mods/enem_type_pursuers_asm.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/enengine.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/general.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/hotspots.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/isr.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/player.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/player_wip.h",
+		"/D/git/MK1/wip/impossamal/dev/engine/simple_cocos.h",
+		"/D/git/MK1/wip/impossamal/dev/mainloop.h",
+		"/D/git/MK1/wip/impossamal/dev/mainloop/flick_screen.h",
+		"/D/git/MK1/wip/impossamal/dev/mainloop/game_loop.h",
+		"/D/git/MK1/wip/impossamal/dev/mainloop/hud.h",
+		"/D/git/MK1/wip/impossamal/dev/mainloop/update_sprites.h",
+		"/D/git/MK1/wip/impossamal/dev/mk1.c",
+		"/D/git/MK1/wip/impossamal/dev/mtasmlib.h",
+		"/D/git/MK1/wip/impossamal/dev/pantallas.h",
+		"/D/git/MK1/wip/impossamal/dev/printer.h",
+		"/D/git/MK1/wip/impossamal/dev/prototypes.h",
+		"/D/git/MK1/wip/impossamal/dev/savegame.h",
+		"/D/git/MK1/wip/impossamal/dev/sound/beeper.h",
+		"/D/git/MK1/wip/impossamal/dev/sound/music.h",
+		"/D/git/MK1/wip/impossamal/dev/sound/wyzplayer.h",
+		"/D/git/MK1/wip/impossamal/dev/tilanim.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/enems.h",
+		"/D/git/MK1/wip/impossamal/dev/assets/sprites.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/after_game_loop.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/after_load.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/before_entering_screen.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/before_game.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/bg_collision/obstacle_down.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/bg_collision/obstacle_left.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/bg_collision/obstacle_right.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/bg_collision/obstacle_up.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/custom_enems_player_collision.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/custom_heng.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/custom_lock_clear.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/custom_veng.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_before_move.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_custom_respawn.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_extra_actions.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_extra_mods.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_load.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/enems_move.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/entering_game.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/entering_screen.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/extra_functions.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/extra_routines.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/extra_vars.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/hotspots_custom.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_enems_collision.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_enems_killed.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_jetpac_boost.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_player_fires.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_player_killed.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_player_respawned.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_special_tile.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_tile_pushed.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_unlocked_bolt.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_wall_broken.h",
+		"/D/git/MK1/wip/impossamal/dev/my/ci/on_wall_hit.h",
+		"/D/git/MK1/wip/impossamal/dev/my/custom_animation.h",
+		"/D/git/MK1/wip/impossamal/dev/my/extern.h",
+		"/D/git/MK1/wip/impossamal/dev/my/fixed_screens.h",
+		"/D/git/MK1/wip/impossamal/dev/my/level_screen.h",
+		"/D/git/MK1/wip/impossamal/dev/my/levelset.h",
+		"/D/git/MK1/wip/impossamal/dev/my/map_custom_decoder.h",
+		"/D/git/MK1/wip/impossamal/dev/my/title_screen.h",
+		"/D/git/MK1/wip/impossamal/dev/my/msc.h",
+		"/D/git/MK1/wip/impossamal/README.md",
+		"/D/git/MK1/src/dev/mk1.c",
+		"/D/git/MK1/src/dev/mtasmlib.h",
+		"/D/git/MK1/src/dev/my/ci/after_game.h",
+		"/D/git/MK1/src/dev/my/ci/after_game_loop.h",
+		"/D/git/MK1/src/dev/my/ci/after_game_over.h",
+		"/D/git/MK1/src/dev/my/ci/after_load.h",
+		"/D/git/MK1/src/dev/my/ci/before_entering_screen.h",
+		"/D/git/MK1/src/dev/my/ci/before_game.h",
+		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_down.h",
+		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_left.h",
+		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_right.h",
+		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_up.h",
+		"/D/git/MK1/src/dev/my/ci/custom_enems_player_collision.h",
+		"/D/git/MK1/src/dev/my/ci/custom_heng.h",
+		"/D/git/MK1/src/dev/my/ci/custom_lock_clear.h",
+		"/D/git/MK1/src/dev/my/ci/custom_veng.h",
+		"/D/git/MK1/src/dev/my/ci/enems_before_move.h",
+		"/D/git/MK1/src/dev/my/ci/enems_custom_respawn.h",
+		"/D/git/MK1/src/dev/my/ci/enems_extra_actions.h",
+		"/D/git/MK1/src/dev/my/ci/enems_extra_mods.h",
+		"/D/git/MK1/src/dev/my/ci/enems_load.h",
+		"/D/git/MK1/src/dev/my/ci/enems_move.h",
+		"/D/git/MK1/src/dev/my/ci/entering_game.h",
+		"/D/git/MK1/src/dev/my/ci/entering_screen.h",
+		"/D/git/MK1/src/dev/my/ci/extra_functions.h",
+		"/D/git/MK1/src/dev/my/ci/extra_routines.h",
+		"/D/git/MK1/src/dev/my/ci/extra_vars.h",
+		"/D/git/MK1/src/dev/my/ci/hotspot_setup_t_modification.h",
+		"/D/git/MK1/src/dev/my/ci/hotspots_custom.h",
+		"/D/git/MK1/src/dev/my/ci/map_renderer_t_modification.h",
+		"/D/git/MK1/src/dev/my/ci/on_controller_pressed/down.h",
+		"/D/git/MK1/src/dev/my/ci/on_controller_pressed/fire.h"
 	],
 	"find":
 	{
-		"height": 48.0
+		"height": 24.0
 	},
 	"find_in_files":
 	{
-		"height": 128.0,
+		"height": 134.0,
 		"where_history":
 		[
+			"D:\\git\\MK1\\src",
+			"D:\\git\\MK1\\src\\dev",
+			"D:\\git\\MK1\\wip\\impossamal\\dev",
+			"D:\\git\\MK1\\src\\dev",
 			"D:\\temp\\MK1",
 			"D:\\temp\\vmware_shared\\MK1\\docs",
 			"D:\\temp\\MK1\\trash\\6baddies",
@@ -597,6 +592,22 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"after_load",
+			"sprites",
+			"saca_a",
+			"o_pant",
+			"p_pant",
+			"espera",
+			"PLAYER_SHOW_TIMER",
+			"TIMER_ENABLE",
+			"JAconsignaLimites",
+			"apultra",
+			"2020-2023-2023",
+			"2010-2014, 2020",
+			" v5.0",
+			"..\\utils\\",
+			"2010-2014, 2020",
+			"v5.0",
 			"ORTHO",
 			"level_data",
 			"level_data->",
@@ -633,9 +644,16 @@
 		"highlight": true,
 		"in_selection": false,
 		"preserve_case": false,
-		"regex": true,
+		"regex": false,
 		"replace_history":
 		[
+			"JAperfilAcceso",
+			"2020-2023",
+			"2010-2014, 2020-2023",
+			" v5.10",
+			"..\\..\\..\\src\\utils\\",
+			"2010-2014, 2020-2023",
+			"v5.10",
 			"level_data.",
 			"timer_\\1",
 			"timer_t",
@@ -652,86 +670,353 @@
 	"groups":
 	[
 		{
-			"selected": 1,
+			"selected": 2,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "README.md",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3871,
+						"buffer_size": 10050,
 						"regions":
 						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										163,
+										169
+									],
+									[
+										345,
+										351
+									],
+									[
+										507,
+										513
+									],
+									[
+										652,
+										658
+									],
+									[
+										765,
+										771
+									],
+									[
+										860,
+										866
+									],
+									[
+										964,
+										970
+									],
+									[
+										1077,
+										1083
+									],
+									[
+										1212,
+										1218
+									],
+									[
+										1334,
+										1340
+									],
+									[
+										1451,
+										1457
+									],
+									[
+										1556,
+										1562
+									],
+									[
+										1726,
+										1732
+									],
+									[
+										2034,
+										2041
+									],
+									[
+										2063,
+										2070
+									],
+									[
+										2160,
+										2167
+									],
+									[
+										2323,
+										2330
+									],
+									[
+										2448,
+										2455
+									],
+									[
+										2652,
+										2659
+									],
+									[
+										2702,
+										2709
+									],
+									[
+										2881,
+										2888
+									],
+									[
+										2990,
+										2997
+									],
+									[
+										3025,
+										3032
+									],
+									[
+										3106,
+										3113
+									],
+									[
+										3141,
+										3148
+									],
+									[
+										3196,
+										3203
+									],
+									[
+										3350,
+										3357
+									],
+									[
+										3560,
+										3567
+									],
+									[
+										3808,
+										3815
+									],
+									[
+										3827,
+										3834
+									],
+									[
+										3888,
+										3895
+									],
+									[
+										3906,
+										3913
+									],
+									[
+										3970,
+										3977
+									],
+									[
+										3989,
+										3996
+									],
+									[
+										4244,
+										4251
+									],
+									[
+										4304,
+										4311
+									],
+									[
+										4329,
+										4336
+									],
+									[
+										4435,
+										4442
+									],
+									[
+										4559,
+										4566
+									],
+									[
+										4667,
+										4674
+									],
+									[
+										4771,
+										4778
+									],
+									[
+										4892,
+										4899
+									],
+									[
+										5025,
+										5032
+									],
+									[
+										5180,
+										5187
+									],
+									[
+										5335,
+										5342
+									],
+									[
+										5489,
+										5496
+									],
+									[
+										5610,
+										5617
+									],
+									[
+										5824,
+										5831
+									],
+									[
+										5844,
+										5851
+									],
+									[
+										6025,
+										6032
+									],
+									[
+										6262,
+										6269
+									],
+									[
+										6524,
+										6531
+									],
+									[
+										6796,
+										6803
+									],
+									[
+										7016,
+										7023
+									],
+									[
+										7286,
+										7293
+									],
+									[
+										7470,
+										7477
+									],
+									[
+										7619,
+										7626
+									],
+									[
+										7777,
+										7784
+									],
+									[
+										7818,
+										7825
+									],
+									[
+										8053,
+										8060
+									],
+									[
+										8086,
+										8093
+									],
+									[
+										8484,
+										8491
+									],
+									[
+										8854,
+										8861
+									],
+									[
+										9035,
+										9042
+									],
+									[
+										9188,
+										9195
+									],
+									[
+										9295,
+										9302
+									],
+									[
+										9408,
+										9415
+									],
+									[
+										9500,
+										9507
+									],
+									[
+										9629,
+										9636
+									],
+									[
+										9798,
+										9805
+									],
+									[
+										9989,
+										9999
+									]
+								],
+								"scope": ""
+							}
 						},
 						"selection":
 						[
 							[
-								1341,
-								1341
+								9996,
+								9996
 							]
 						],
 						"settings":
 						{
+							"detect_indentation": false,
 							"incomplete_sync": null,
+							"line_numbers": false,
+							"output_tag": 5,
 							"remote_loading": false,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
 							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
 						},
 						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 5,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "docs/tutorial-cap01.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 20511,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								17030,
-								17030
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 3276.0,
+						"translation.y": 4824.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
 					"type": "text"
 				},
 				{
-					"buffer": 2,
-					"file": "lib/splib2/setenv.bat",
+					"buffer": 1,
+					"file": "src/dev/mainloop.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 141,
+						"buffer_size": 4946,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								10,
-								10
+								0,
+								0
 							]
 						],
 						"settings":
@@ -739,38 +1024,100 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 893.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3438,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								424,
+								424
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/dev/mainloop/game_loop.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7358,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								2571,
+								2588
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1244.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 3,
 					"type": "text"
 				},
 				{
-					"buffer": 3,
-					"file": "src/dev/setenv.bat",
+					"buffer": 4,
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 141,
+						"buffer_size": 0,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								140,
-								140
+								0,
+								0
 							]
 						],
 						"settings":
 						{
+							"default_dir": "D:\\git\\MK1\\src\\dev",
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Batch File/Batch File.sublime-syntax"
+							"syntax": "Packages/Text/Plain text.tmLanguage"
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
@@ -780,827 +1127,11 @@
 					"type": "text"
 				}
 			]
-		},
-		{
-			"selected": 1,
-			"sheets":
-			[
-				{
-					"buffer": 4,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 24028,
-						"regions":
-						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										176,
-										181
-									],
-									[
-										420,
-										425
-									],
-									[
-										619,
-										624
-									],
-									[
-										673,
-										678
-									],
-									[
-										740,
-										745
-									],
-									[
-										874,
-										879
-									],
-									[
-										1051,
-										1056
-									],
-									[
-										1184,
-										1189
-									],
-									[
-										1278,
-										1283
-									],
-									[
-										1478,
-										1483
-									],
-									[
-										1510,
-										1515
-									],
-									[
-										1552,
-										1557
-									],
-									[
-										1602,
-										1607
-									],
-									[
-										1782,
-										1787
-									],
-									[
-										1981,
-										1986
-									],
-									[
-										2225,
-										2230
-									],
-									[
-										2424,
-										2429
-									],
-									[
-										2478,
-										2483
-									],
-									[
-										2545,
-										2550
-									],
-									[
-										2679,
-										2684
-									],
-									[
-										2856,
-										2861
-									],
-									[
-										2989,
-										2994
-									],
-									[
-										3083,
-										3088
-									],
-									[
-										3283,
-										3288
-									],
-									[
-										3315,
-										3320
-									],
-									[
-										3357,
-										3362
-									],
-									[
-										3407,
-										3412
-									],
-									[
-										3587,
-										3592
-									],
-									[
-										3797,
-										3802
-									],
-									[
-										4052,
-										4057
-									],
-									[
-										4262,
-										4267
-									],
-									[
-										4316,
-										4321
-									],
-									[
-										4383,
-										4388
-									],
-									[
-										4517,
-										4522
-									],
-									[
-										4694,
-										4699
-									],
-									[
-										4827,
-										4832
-									],
-									[
-										4921,
-										4926
-									],
-									[
-										5132,
-										5137
-									],
-									[
-										5164,
-										5169
-									],
-									[
-										5206,
-										5211
-									],
-									[
-										5256,
-										5261
-									],
-									[
-										5447,
-										5452
-									],
-									[
-										5645,
-										5650
-									],
-									[
-										5888,
-										5893
-									],
-									[
-										6086,
-										6091
-									],
-									[
-										6140,
-										6145
-									],
-									[
-										6207,
-										6212
-									],
-									[
-										6341,
-										6346
-									],
-									[
-										6518,
-										6523
-									],
-									[
-										6651,
-										6656
-									],
-									[
-										6745,
-										6750
-									],
-									[
-										6944,
-										6949
-									],
-									[
-										6976,
-										6981
-									],
-									[
-										7018,
-										7023
-									],
-									[
-										7068,
-										7073
-									],
-									[
-										7247,
-										7252
-									],
-									[
-										7442,
-										7447
-									],
-									[
-										7707,
-										7712
-									],
-									[
-										7948,
-										7953
-									],
-									[
-										8144,
-										8149
-									],
-									[
-										8198,
-										8203
-									],
-									[
-										8265,
-										8270
-									],
-									[
-										8399,
-										8404
-									],
-									[
-										8576,
-										8581
-									],
-									[
-										8709,
-										8714
-									],
-									[
-										8801,
-										8806
-									],
-									[
-										8998,
-										9003
-									],
-									[
-										9030,
-										9035
-									],
-									[
-										9072,
-										9077
-									],
-									[
-										9122,
-										9127
-									],
-									[
-										9299,
-										9304
-									],
-									[
-										9498,
-										9503
-									],
-									[
-										9742,
-										9747
-									],
-									[
-										9941,
-										9946
-									],
-									[
-										9995,
-										10000
-									],
-									[
-										10062,
-										10067
-									],
-									[
-										10196,
-										10201
-									],
-									[
-										10373,
-										10378
-									],
-									[
-										10506,
-										10511
-									],
-									[
-										10598,
-										10603
-									],
-									[
-										10798,
-										10803
-									],
-									[
-										10830,
-										10835
-									],
-									[
-										10872,
-										10877
-									],
-									[
-										10922,
-										10927
-									],
-									[
-										11102,
-										11107
-									],
-									[
-										11298,
-										11303
-									],
-									[
-										11539,
-										11544
-									],
-									[
-										11735,
-										11740
-									],
-									[
-										11789,
-										11794
-									],
-									[
-										11856,
-										11861
-									],
-									[
-										11990,
-										11995
-									],
-									[
-										12167,
-										12172
-									],
-									[
-										12300,
-										12305
-									],
-									[
-										12392,
-										12397
-									],
-									[
-										12588,
-										12593
-									],
-									[
-										12620,
-										12625
-									],
-									[
-										12662,
-										12667
-									],
-									[
-										12712,
-										12717
-									],
-									[
-										12889,
-										12894
-									],
-									[
-										13086,
-										13091
-									],
-									[
-										13328,
-										13333
-									],
-									[
-										13525,
-										13530
-									],
-									[
-										13579,
-										13584
-									],
-									[
-										13646,
-										13651
-									],
-									[
-										13780,
-										13785
-									],
-									[
-										13957,
-										13962
-									],
-									[
-										14090,
-										14095
-									],
-									[
-										14182,
-										14187
-									],
-									[
-										14379,
-										14384
-									],
-									[
-										14411,
-										14416
-									],
-									[
-										14453,
-										14458
-									],
-									[
-										14503,
-										14508
-									],
-									[
-										14681,
-										14686
-									],
-									[
-										14876,
-										14881
-									],
-									[
-										15116,
-										15121
-									],
-									[
-										15311,
-										15316
-									],
-									[
-										15365,
-										15370
-									],
-									[
-										15432,
-										15437
-									],
-									[
-										15566,
-										15571
-									],
-									[
-										15743,
-										15748
-									],
-									[
-										15876,
-										15881
-									],
-									[
-										15968,
-										15973
-									],
-									[
-										16162,
-										16167
-									],
-									[
-										16194,
-										16199
-									],
-									[
-										16234,
-										16239
-									],
-									[
-										16283,
-										16288
-									],
-									[
-										16459,
-										16464
-									],
-									[
-										16674,
-										16679
-									],
-									[
-										17076,
-										17081
-									],
-									[
-										17304,
-										17309
-									],
-									[
-										17487,
-										17492
-									],
-									[
-										17541,
-										17546
-									],
-									[
-										17608,
-										17613
-									],
-									[
-										17742,
-										17747
-									],
-									[
-										17919,
-										17924
-									],
-									[
-										18052,
-										18057
-									],
-									[
-										18144,
-										18149
-									],
-									[
-										18328,
-										18333
-									],
-									[
-										18360,
-										18365
-									],
-									[
-										18402,
-										18407
-									],
-									[
-										18452,
-										18457
-									],
-									[
-										18616,
-										18621
-									],
-									[
-										18810,
-										18815
-									],
-									[
-										19049,
-										19054
-									],
-									[
-										19243,
-										19248
-									],
-									[
-										19297,
-										19302
-									],
-									[
-										19364,
-										19369
-									],
-									[
-										19498,
-										19503
-									],
-									[
-										19675,
-										19680
-									],
-									[
-										19808,
-										19813
-									],
-									[
-										19900,
-										19905
-									],
-									[
-										20095,
-										20100
-									],
-									[
-										20127,
-										20132
-									],
-									[
-										20169,
-										20174
-									],
-									[
-										20219,
-										20224
-									],
-									[
-										20394,
-										20399
-									],
-									[
-										20589,
-										20594
-									],
-									[
-										20829,
-										20834
-									],
-									[
-										21024,
-										21029
-									],
-									[
-										21078,
-										21083
-									],
-									[
-										21145,
-										21150
-									],
-									[
-										21279,
-										21284
-									],
-									[
-										21456,
-										21461
-									],
-									[
-										21589,
-										21594
-									],
-									[
-										21681,
-										21686
-									],
-									[
-										21877,
-										21882
-									],
-									[
-										21909,
-										21914
-									],
-									[
-										21951,
-										21956
-									],
-									[
-										22001,
-										22006
-									],
-									[
-										22177,
-										22182
-									],
-									[
-										22367,
-										22372
-									],
-									[
-										22602,
-										22607
-									],
-									[
-										22792,
-										22797
-									],
-									[
-										22846,
-										22851
-									],
-									[
-										22913,
-										22918
-									],
-									[
-										23047,
-										23052
-									],
-									[
-										23224,
-										23229
-									],
-									[
-										23357,
-										23362
-									],
-									[
-										23449,
-										23454
-									],
-									[
-										23640,
-										23645
-									],
-									[
-										23672,
-										23677
-									],
-									[
-										23714,
-										23719
-									],
-									[
-										23764,
-										23769
-									],
-									[
-										23935,
-										23940
-									]
-								],
-								"scope": ""
-							}
-						},
-						"selection":
-						[
-							[
-								16677,
-								16677
-							]
-						],
-						"settings":
-						{
-							"detect_indentation": false,
-							"incomplete_sync": null,
-							"line_numbers": false,
-							"output_tag": 1,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 6747.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 5,
-					"file": "examples/helmet/diario.md",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 1732,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								1006,
-								1006
-							]
-						],
-						"settings":
-						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Markdown Extended/Syntaxes/Markdown Extended.sublime-syntax"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
-			]
 		}
 	],
 	"incremental_find":
 	{
-		"height": 22.0
+		"height": 24.0
 	},
 	"input":
 	{
@@ -1615,18 +1146,11 @@
 				0,
 				1,
 				1
-			],
-			[
-				1,
-				0,
-				2,
-				1
 			]
 		],
 		"cols":
 		[
 			0.0,
-			0.523501762632,
 			1.0
 		],
 		"rows":
@@ -1648,7 +1172,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 88.0
+		"height": 44.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1682,7 +1206,7 @@
 		],
 		"width": 0.0
 	},
-	"selected_group": 1,
+	"selected_group": 0,
 	"settings":
 	{
 	},
@@ -1690,7 +1214,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 273.0,
+	"side_bar_width": 210.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{

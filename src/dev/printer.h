@@ -1,15 +1,92 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // Printing functions
 
 unsigned char attr (unsigned char x, unsigned char y) {
-	if (x >= 15 || y >= 10) return 0;
-	return map_attr [x + (y << 4) - y];
+	// if (x >= 15 || y >= 10) return 0;
+	// return map_attr [x + (y << 4) - y];
+	
+	#asm
+			ld  hl, 4
+			add hl, sp
+			ld  c, (hl) 	// x
+
+			dec hl
+			dec hl
+			ld  a, (hl) 	// y
+			
+			// If you put x in C and y in A you can call here
+			
+		._attr_2
+			// A = y, C = x
+			cp  10
+			jr  c, _attr_1
+			ld  hl, 0
+			ret
+
+		._attr_1
+			ld  b, a 		// save y
+			ld  a, c 		// x
+			cp  15
+			jr  c, _attr_1b
+			ld  hl, 0
+			ret
+
+			// If you put x in C and y in B you can use this entry point for enemies
+
+		._attr_1b
+			ld  a, b 		// restore y
+			sla a
+			sla a
+			sla a
+			sla a
+			sub b
+			add c
+
+			ld  d, 0
+			ld  e, a
+			ld  hl, _map_attr
+			add hl, de
+			ld  l, (hl)
+
+		._attr_end
+			ld  h, 0
+	#endasm
+
 }
 
 unsigned char qtile (unsigned char x, unsigned char y) {
-	return map_buff [x + (y << 4) - y];
+	// return map_buff [x + (y << 4) - y];
+	
+	#asm
+			ld  hl, 4
+			add hl, sp
+			ld  c, (hl) 	// x
+		
+			dec hl
+			dec hl
+			ld  a, (hl) 	// y
+
+			// If you put x in C and y in A you can call here
+			
+		.qtile_do	
+			ld  b, a
+			sla a
+			sla a
+			sla a
+			sla a
+			sub b
+			add c
+
+			ld  d, 0
+			ld  e, a
+			ld  hl, _map_buff
+			add hl, de
+
+			ld  l, (hl)
+			ld  h, 0
+	#endasm
 }
 
 #if defined (USE_AUTO_TILE_SHADOWS) || defined (USE_AUTO_SHADOWS)

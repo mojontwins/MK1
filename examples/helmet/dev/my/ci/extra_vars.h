@@ -7,3 +7,7 @@ unsigned char decos_moto [] = { 0x13, 40, 0x23, 41, 0xff };
 
 unsigned char do_continue = 0;
 unsigned char current_level = 0;
+
+unsigned char *c_screen_address;
+
+#define KEY_1 0x01f7

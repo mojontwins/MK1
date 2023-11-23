@@ -14,8 +14,12 @@ if (n_pant == 0 && flags [1] == 0 && gpy < 96 && p_objs == 5) {
 		beep_fx (0);
 	}
 
-	_x = 1; _y = 0; _t = 71; 
-	_gp_gen = (unsigned char *) ("  DONE! NOW GO BACK TO BASE!  ");
+	_x = 1; _y = 0; _t = 71;
+	#ifdef LANG_ES
+		_gp_gen = (unsigned char *) ("  HECHO! AHORA VUELVE A BASE  ");
+	#else
+		_gp_gen = (unsigned char *) ("  DONE! NOW GO BACK TO BASE!  ");
+	#endif
 	print_str ();
 }
 
@@ -24,13 +28,17 @@ if (flags [0]) {
 		flags [0] = 0;
 		beep_fx (9);
 		_x = 1; _y = 0; _t = 71; 
-		_gp_gen = (unsigned char *) (" HALF NEW MOTORBIKE FOR SALE! ");
+		#ifdef LANG_ES
+			_gp_gen = (unsigned char *) ("     VENDO MOTO SEMINUEVA     ");
+		#else
+			_gp_gen = (unsigned char *) (" HALF NEW MOTORBIKE FOR SALE! ");
+		#endif
 		print_str ();
 	}
 }
 
 #ifdef CHEAT
-	if (sp_KeyPressed (KEY_M) && sp_KeyPressed (KEY_Z)) { 
+	if (sp_KeyPressed (KEY_M) && sp_KeyPressed (KEY_Z) && sp_KeyPressed (KEY_1)) { 
 		o_pant = 99; n_pant = 23; flags [1] = 1;
 	}
 #endif

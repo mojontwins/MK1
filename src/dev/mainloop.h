@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // mainloop.h
 // Churrera copyleft 2011 by The Mojon Twins.
@@ -30,6 +30,8 @@ void main (void) {
 		#endif
 
 	#endif
+
+	#include "my/ci/after_load.h"
 
 	cortina ();
 	
@@ -102,7 +104,7 @@ void main (void) {
 		}
 	#endif
 
-	#include "my/ci/after_load.h"
+	#include "my/ci/after_splib2_init.h"
 
 	while (1) {
 		#if defined ACTIVATE_SCRIPTING && !defined MODE_128K

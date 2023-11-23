@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // simple_cocos.h
 
@@ -23,7 +23,7 @@ void simple_coco_shoot (void) {
 
 			ld  a, (hl)
 			cp  160
-			ret c
+			ret c 						// if cocos_y [enit] < 160: coco is active, ret.
 
 			ld  a, (__en_y)
 			add 4

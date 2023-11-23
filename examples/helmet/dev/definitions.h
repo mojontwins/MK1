@@ -177,7 +177,7 @@ unsigned char *_baddies_pointer;
 
 // atributos de la pantalla: Contiene información
 // sobre qué tipo de tile hay en cada casilla
-unsigned char map_attr [150];
+unsigned char map_attr [150] @ 23296+16+150;
 unsigned char map_buff [150] @ FREEPOOL;
 // Breakable walls/etc
 #ifdef BREAKABLE_WALLS
@@ -258,7 +258,11 @@ unsigned char objs_old, keys_old, life_old, killed_old;
 #endif
 
 #ifdef COMPRESSED_LEVELS
-	unsigned char *level_str = "LEVEL 0X";
+	#ifdef LANG_ES
+		unsigned char *level_str = "NIVEL 0X";
+	#else
+		unsigned char *level_str = "LEVEL 0X";
+	#endif
 	unsigned char silent_level = 0;
 #endif
 

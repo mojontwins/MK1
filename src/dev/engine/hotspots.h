@@ -1,13 +1,28 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // hotspots.h
 
 #ifndef COMPRESSED_LEVELS
 	void hotspots_init (void) {
+		/*
 		gpit = 0; while (gpit < MAP_W * MAP_H) {
 			hotspots [gpit].act = 1; ++ gpit;
 		}
+		*/
+		#asm
+				// iterate MAP_W*MAP_H times
+				// start with _hotspots + 2
+				// set to 1, increment pointer by 3
+				ld  b, MAP_W * MAP_H
+				ld  hl, _hotspots + 2
+				ld  de, 3
+				ld  a, 1
+			.init_hotspots_loop
+				ld  (hl), a
+				add hl, de
+				djnz init_hotspots_loop
+		#endasm		
 	}
 #endif
 
@@ -80,7 +95,9 @@ void hotspots_do (void) {
 			#ifndef DEACTIVATE_REFILLS
 				case 3:
 					p_life += PLAYER_REFILL;
-					if (p_life > PLAYER_LIFE)
+					#ifndef PLAYER_DONT_LIMIT_LIFE
+						if (p_life > PLAYER_LIFE)
+					#endif
 						p_life = PLAYER_LIFE;
 					#ifdef MODE_128K
 						PLAY_SOUND (SFX_REFILL_GET);

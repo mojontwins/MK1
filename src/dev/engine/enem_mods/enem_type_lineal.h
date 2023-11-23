@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // Simple, lineal enemies
 
@@ -37,7 +37,7 @@ _en_y += _en_my;
 	#ifdef WALLS_STOP_ENEMIES
 		jr  z, _enems_lm_change_axis_x
 		
-		call _mons_col_sc_x
+		call _mons_col_sc_x_lineal
 		xor a
 		or l
 
@@ -69,7 +69,7 @@ _en_y += _en_my;
 	#ifdef WALLS_STOP_ENEMIES
 		jr  z, _enems_lm_change_axis_y
 		
-		call _mons_col_sc_y
+		call _mons_col_sc_y_lineal
 		xor a
 		or l
 

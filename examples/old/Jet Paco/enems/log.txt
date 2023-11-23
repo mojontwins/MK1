@@ -1,0 +1,358 @@
+mappy.bmp
+mapa.map
+map_w=7, map_h=5, scr_w=15, scr_h=10, nenems=3
+Reading ENEMYCHUNKS
+Reading HOTSPOTS
+editor - inicializando
+recorta_tiles - creando tile 0
+recorta_tiles - Recortando tiles
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+editor - destruyendo bitmaps
+editor - saliendo
+mappy.bmp
+mapa.map
+map_w=7, map_h=5, scr_w=15, scr_h=10, nenems=3
+Reading ENEMYCHUNKS
+Reading HOTSPOTS
+editor - inicializando
+recorta_tiles - creando tile 0
+recorta_tiles - Recortando tiles
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+editor - destruyendo bitmaps
+editor - saliendo
+mappy.bmp
+mapa.map
+map_w=7, map_h=5, scr_w=15, scr_h=10, nenems=3
+Reading ENEMYCHUNKS
+Reading HOTSPOTS
+editor - inicializando
+recorta_tiles - creando tile 0
+recorta_tiles - Recortando tiles
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+editor - destruyendo bitmaps
+editor - saliendo
+mappy.bmp
+mapa.map
+map_w=7, map_h=5, scr_w=15, scr_h=10, nenems=3
+Reading ENEMYCHUNKS
+Reading HOTSPOTS
+editor - inicializando
+recorta_tiles - creando tile 0
+recorta_tiles - Recortando tiles
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+editor - destruyendo bitmaps
+editor - saliendo
+mappy.bmp
+mapa.map
+map_w=7, map_h=5, scr_w=15, scr_h=10, nenems=3
+Reading ENEMYCHUNKS
+Reading HOTSPOTS
+editor - inicializando
+recorta_tiles - creando tile 0
+recorta_tiles - Recortando tiles
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+draw_screen - Abriendo el archivo
+draw_screen - Leyendo y pintando
+draw_screen - Cerrando el archivo
+draw_screen - saliendo
+editor - destruyendo bitmaps
+editor - saliendo

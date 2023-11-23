@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // Autodefs
 
@@ -32,6 +32,7 @@ void bullets_move (void);
 
 // enengine.h
 void enems_init (void);
+void enems_pursuers_init (void);
 void enems_draw_current (void);
 void enems_load (void);
 void enems_kill (void);

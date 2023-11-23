@@ -1,12 +1,16 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // breakable.h
 
 void break_wall (void) {
 	gpaux = COORDS (_x, _y);
 	if (brk_buff [gpaux] < BREAKABLE_WALLS_LIFE) {
-		++ brk_buff [gpaux];
+		#ifdef BREAKABLE_WALLS_BREAKING
+			_t = BREAKABLE_WALLS_BREAKING;
+			_n = behs [_t]; 
+			update_tile ();
+		#endif
 		#ifdef MODE_128K
 			gpit = SFX_BREAKABLE_HIT;			
 		#else
@@ -14,7 +18,13 @@ void break_wall (void) {
 		#endif
 		#include "my/ci/on_wall_hit.h"
 	} else {
-		_n = _t = 0; update_tile ();
+		_n = 0; 
+		#ifdef BREAKABLE_WALLS_BROKEN
+			_t = BREAKABLE_WALLS_BROKEN;
+		#else
+			_t = 0; 
+		#endif
+		update_tile ();
 		#ifdef MODE_128K
 			gpit = SFX_BREAKABLE_BREAK;
 		#else
@@ -22,6 +32,9 @@ void break_wall (void) {
 		#endif
 		#include "my/ci/on_wall_broken.h"
 	}
+	
+		++ brk_buff [gpaux];
+	
 	#ifdef MODE_128K
 		PLAY_SOUND (gpit);
 	#else			

@@ -15,9 +15,7 @@ LIB SPDisplayList, SPDirtyChars, SPTileArray
 ; 2. Marks the entire display list dirty so that it
 ;    will be redrawn on the next update.
 ; 3. Creates the horizontal rotation tables.
-; 4. Initializes the Tile Array, mapping the graphics to
-;    the ROM character set and the pallette (for Hi-Colour mode
-;    only) to a solid black on white.
+
 ;
 ; enter:  e = default background tile # (graphic)
 ;         d = default background pallette # (colour)
@@ -93,55 +91,9 @@ IF DISP_HICOLOUR
    out ($ff),a          ; hi-colour video mode, int enable
 ENDIF
 
-   ; initialize tile array
 
-   ld hl,SPTileArray
-   ld de,15360
-   ld b,0
-.loop
-   ld a,(hl)
-   ld (hl),e
-   inc h
-   ld c,a
-   or (hl)
-   jr nz, usertile
-   ld (hl),d
-.cont1
-IF DISP_HICOLOUR
-   inc h
-   ld a,(hl)
-   ld (hl),BONW % 256
-   inc h
-   ld c,a
-   or (hl)
-   jr nz, userpallette
-   ld (hl),BONW / 256
-   dec h
-.cont2
-   dec h
-ENDIF
-   dec h
-   inc hl
-   ld a,8
-   add a,e
-   ld e,a
-   jp nc, noadd
-   inc d
-.noadd
-   djnz loop
    ret
 
-.usertile
-   dec h
-   ld (hl),c
-   inc h
-   jr cont1
-IF DISP_HICOLOUR
-.userpallette
-   dec h
-   ld (hl),c
-   jr cont2
-ENDIF
 
 IF DISP_HICOLOUR
 .BONW

@@ -1,5 +1,5 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // Enemigos Increiblemente Jartibles.
 // Assembly version.
@@ -23,6 +23,52 @@
 		ld  a, (hl)
 		or  a
 		jr  nz, _eij_state_still_idle
+
+		#ifdef PURSUERS_DONT_SPAWN_IN_OBSTACLE
+		._pursuers_check_obstacle
+			// Don't spawn if tile is not walkable
+			#ifdef USE_AUTO_TILE_SHADOWS
+				ld  a, (__en_x1)
+				srl a
+				srl a
+				srl a
+				srl a
+				ld  (_cx1), a
+				srl a
+				srl a
+				srl a
+				srl a
+				ld  a, (__en_y1)
+				ld  (_cy1), a
+				call _attr_mk2
+				xor a
+				or  l
+			#else
+				ld  a, (__en_y1)
+				ld  d, a
+				srl a
+				srl a
+				srl a
+				srl a
+				ld  e, a
+				ld  a, d
+				sub e
+				ld  d, a
+				ld  a, (__en_x1)
+				srl a
+				srl a
+				srl a
+				srl a
+				add d 
+				ld  e, a 
+				ld  d, 0
+				ld  hl, _map_attr
+				add hl, de
+				ld  a, (hl) 
+				or  a
+			#endif
+			jr  nz, _eij_state_still_idle
+		#endif
 
 		ld  a, (__en_x1)
 		ld  (__en_x), a
@@ -136,8 +182,11 @@
 
 		ld  a, (__en_x)
 		ld  d, a
+		and 0xfe 		;; Remove jitter!
+		ld  e, a
 		ld  a, (_gpx)
-		cp  d
+		and 0xfe 		;; Remove jitter!
+		cp  e
 		jr  z, _eij_state_moving_y
 
 		jr  c, _eij_state_moving_x_left
@@ -172,8 +221,11 @@
 
 		ld  a, (__en_y)
 		ld  d, a
+		and 0xfe 		;; Remove jitter!
+		ld  e, a
 		ld  a, (_gpy)
-		cp  d
+		and 0xfe 		;; Remove jitter!
+		cp  e
 		jr  z, _eij_state_done
 
 		jr  c, _eij_state_moving_y_up

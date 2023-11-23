@@ -1,3 +1,4 @@
+' ts2bin v0.7.20210416
 ' Tileset to bin
 
 #include "file.bi"
@@ -11,25 +12,46 @@
 #define RGBA_A( c ) ( CUInt( c ) Shr 24         )
 
 Dim Shared As Integer defaultInk
+Dim Shared As Integer inverted
 
 Function speccyColour (colour As Unsigned Long) As uByte
 	Dim res as uByte
-	If RGBA_R (colour) >= 128 Then 
+	Dim As Integer r, g, b 
+	r = RGBA_R (colour)
+	g = RGBA_G (colour)
+	b = RGBA_B (colour)
+
+	If r >= 128 Then 
 		res = res Or 2
-		If RGBA_R (colour) >= 240 Then
+		If r >= 240 Then
+			res = res Or 64
+		ElseIf r < 192 Then
 			res = res Or 128
+			If r >= 160 Then
+				res = res Or 64
+			End If
 		End If
 	End If
-	If RGBA_G (colour) >= 128 Then 
+	If g >= 128 Then 
 		res = res Or 4
-		If RGBA_G (colour) >= 240 Then
+		If g >= 240 Then
+			res = res Or 64
+		ElseIf g < 192 Then
 			res = res Or 128
+			If g >= 160 Then
+				res = res Or 64
+			End If
 		End If
 	End If
-	If RGBA_B (colour) >= 128 Then 
+	If b >= 128 Then 
 		res = res Or 1
-		If RGBA_B (colour) >= 240 Then
+		If b >= 240 Then
+			res = res Or 64
+		ElseIf b < 192 Then
 			res = res Or 128
+			If b >= 160 Then
+				res = res Or 64
+			End If
 		End If
 	End If
 	speccyColour = res
@@ -37,7 +59,7 @@ End Function
 
 Sub getUDGIntoCharset (img As Any Ptr, x0 As integer, y0 As Integer, tileset () As uByte, idx As Integer)
 	Dim As Integer x, y
-	Dim As uByte c1, c2, b, c, attr
+	Dim As uByte c1, c2, b, c, f, attr
 	Dim As String o
 	
 	' First: detect colours
@@ -49,10 +71,16 @@ Sub getUDGIntoCharset (img As Any Ptr, x0 As integer, y0 As Integer, tileset () 
 			If c <> c1 Then c2 = c
 		Next x
 	Next y
+	' Detect encoded flash:
+	f = 0
+	If c1 And 128 Then f = 128: c1 = c1 And 127
+	If c2 And 128 Then f = 128: c2 = c2 And 127
+
 	' Detect bright:
 	b = 0
-	If c1 And 128 Then b = 64: c1 = c1 And 127
-	If c2 And 128 Then b = 64: c2 = c2 And 127
+	If c1 And 64 Then b = 64: c1 = c1 And 63
+	If c2 And 64 Then b = 64: c2 = c2 And 63
+
 	If c1 = c2 Then 
 		If defaultInk <> -1 Then
 			c1 = defaultInk
@@ -64,10 +92,18 @@ Sub getUDGIntoCharset (img As Any Ptr, x0 As integer, y0 As Integer, tileset () 
 			End If
 		End If
 	end if
-	' Darker colour = PAPER (c2)
-	If c2 > c1 Then Swap c1, c2
+
+	If inverted Then
+		' Darker colour = INK (c1)
+		If c1 > c2 Then Swap c1, c2
+	Else
+		' Darker colour = PAPER (c2)
+		If c2 > c1 Then Swap c1, c2
+	End If
+
 	' Build attribute
-	attr = b + 8 * c2 + c1
+	attr = f + b + 8 * c2 + c1
+	'Puts ("ATTR " & attr & " F " & f & ", B " & b & " - " & c1 & ", " & c2)
 	' Write to array
 	tileset (2048 + idx) = attr
 
@@ -77,7 +113,7 @@ Sub getUDGIntoCharset (img As Any Ptr, x0 As integer, y0 As Integer, tileset () 
 	For y = 0 To 7
 		b = 0
 		For x = 0 To 7
-			c = speccyColour (Point (x0 + x, y0 + y, img)) And 127
+			c = speccyColour (Point (x0 + x, y0 + y, img)) And 63u
 			If c = c1 Then b = b + 2 ^ (7- x)
 		Next x
 		tileset (8 * idx + y) = b
@@ -95,10 +131,24 @@ Function getBitPattern (img As Any Ptr, x0 As Integer, y0 As Integer) as uByte
 	getBitPattern = res
 End Function
 
+Function inCommand (spec As String) As Integer
+	Dim As Integer res, i
+
+	i = 0: res = 0
+
+	Do
+		If Command (i) = "" Then Exit Do
+		If Command (i) = spec Then res = -1: Exit Do
+		i = i + 1
+	Loop
+
+	Return res
+End Function
+
 Sub usage
 	Print "Usage: "
 	Print 
-	Print "$ ts2bin font.png/nofont work.png|notiles|blank ts.bin defaultink"
+	Print "$ ts2bin font.png/nofont work.png|notiles|blank ts.bin defaultink [onlyattrs|noattrs]"
 	Print
 	Print "where:"
 	Print "   * font.png is a 256x16 file with 64 chars ascii 32-95"
@@ -108,7 +158,11 @@ Sub usage
 	Print "     (use 'blank' if you want to generate a 100% blank placeholder tileset)"
 	Print "   * ts.bin is the output, 2304 bytes bin file."
 	Print "   * defaultink: a number 0-7. Use this colour as 2nd colour if there's only"
-	Print "     one colour in a 8x8 cell"
+	Print "     one colour in a 8x8 cell, but take this in account:"
+	Print "     - Conversion is performed so PAPER<INK."
+	Print "     - User inverted:N for inverted mode, default N. This makes PAPER>INK"
+	Print "   * onlyattrs: if specified, only output attributes"
+	Print "   * noattrs: if specified, don't output attributes"
 End Sub
 
 ' VARS.
@@ -119,17 +173,30 @@ Dim As uByte d
 Dim As String levelBin
 Dim As Any Ptr img
 Dim As uByte tileset (2303)
+Dim As Integer switchToInverted
+Dim As Integer switchToDefaultInk
 
 ' DO
 
-Print "ts2bin v0.4 20200119 ~ ";
+Print "ts2bin v0.7.20210416 ~ ";
 
 If Len (Command (3)) = 0 Then
 	usage
 	End
 End If
 
-If Len (Command (4)) = 0 Then defaultInk = -1 Else defaultInk = Val (Command (4))
+switchToInverted = 0
+If Len (Command (4)) = 0 Then 
+	switchToDefaultInk = -1 
+Else 
+	If Len (Command (4)) > 9 And Left (Command (4), 9) = "inverted:" Then
+		switchToDefaultInk = Val (Right (Command (4), 1))
+		Print "Inverted " & switchToDefaultInk & " ~ ";
+		switchToInverted = -1
+	Else
+		switchToDefaultInk = Val (Command (4))
+	End If
+End If
 
 levelBin = Command (3)
 
@@ -148,6 +215,8 @@ Open levelBin for Binary as #fout
 
 If command (1) <> "nofont" then
 	printf ("Reading font ~ ")
+	inverted = 0
+	defaultink = -1
 	img = png_load (Command (1))	
 	idx = 0 
 	For y = 0 To 1
@@ -168,6 +237,8 @@ If command (2) <> "notiles" then
 		printf ("reading metatiles ~ ")
 		img = png_load (Command (2))	
 	End If
+	inverted = switchToInverted
+	defaultink = switchToDefaultInk
 	x = 0: y = 0: idx = 64
 	For i = 0 to 47
 		getUDGIntoCharset img, x, y, tileset (), idx: idx = idx + 1
@@ -180,6 +251,9 @@ If command (2) <> "notiles" then
 Else 
 	finByte = 64*8-1
 End If
+
+If inCommand ("noattrs") And finByte = 2303 Then finByte = 2047
+If inCommand ("onlyattrs") Then iniByte = 2048: finByte = 2303
 
 For i = iniByte To finByte
 	d = tileset (i)

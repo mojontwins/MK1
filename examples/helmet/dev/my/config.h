@@ -10,7 +10,7 @@
 //#define MODE_128K 						// Read the docs!
 //#define MIN_FAPS_PER_FRAME		2		// Limits the max # of fps to 50/N
 //#define USE_ARKOS_PLAYER					// Use Arkos instead of Wyz player for 128k Music
-//#define ARKOS_SFX_CHANNEL	0				// SFX Channel (0-2)
+//#define ARKOS_SFX_CHANNEL			0		// SFX Channel (0-2)
 //#define VENG_SELECTOR 					// Very advanced!
 //#define USE_MAP_CUSTOM_DECODER
 
@@ -45,8 +45,9 @@
 // Bounding box size
 // -----------------
 											// Comment both for normal 16x16 bounding box
-#define BOUNDING_BOX_8_BOTTOM				// 8x8 aligned to bottom center in 16x16
+//#define BOUNDING_BOX_8_BOTTOM				// 8x8 aligned to bottom center in 16x16
 //#define BOUNDING_BOX_8_CENTERED			// 8x8 aligned to center in 16x16
+#define BOUNDING_BOX_12X2_CENTERED 			// 8x2 aligned to center in 16x16
 //#define SMALL_COLLISION					// 8x8 centered collision instead of 12x12
 
 // General directives:
@@ -61,6 +62,7 @@
 //#define OBJECT_COUNT				1		// Defines which FLAG will be used to store the object count.
 //#define REVERSE_OBJECTS_COUNT 			// Counts from PLAYER_NUM_OBJETOS to 0
 //#define DEACTIVATE_EVIL_TILE				// If defined, no killing tiles (behaviour 1) are detected.
+//#define CUSTOM_EVIL_TILE_CHECK			// 
 //#define PLAYER_BOUNCES					// If defined, collisions make player bounce
 #define FULL_BOUNCE							// If defined, evil tile bounces equal MAX_VX, otherwise v/2
 //#define SLOW_DRAIN						// Works with bounces. Drain is 4 times slower
@@ -80,6 +82,7 @@
 #define PURSUERS_BASE_CELL			3		// If defined, type 7 enemies are always #
 //#define PURSUERS_BASE_CELL		3		// If defined, type 7 enemies are always #
 #define PURSUERS_MAX_V 				2		// 1, 2, 4.
+#define PURSUERS_DONT_SPAWN_IN_OBSTACLE 	// This
 
 //#define ENABLE_FANTIES					// If defined, Fanties are enabled!
 //#define FANTIES_BASE_CELL 		2		// Base sprite cell (0, 1, 2 or 3)
@@ -116,7 +119,7 @@
 //#define PLAYER_CAN_FIRE_FLAG		1		// If defined, player can only fire when flag # is 1
 #define PLAYER_BULLET_SPEED			8		// Pixels/frame. 
 #define MAX_BULLETS					3		// Max number of bullets on screen. Be careful!.
-#define PLAYER_BULLET_Y_OFFSET 		6		// vertical offset from the player's top.
+#define PLAYER_BULLET_Y_OFFSET 		5		// vertical offset from the player's top.
 #define PLAYER_BULLET_X_OFFSET		0		// vertical offset from the player's left/right.
 #define ENEMIES_LIFE_GAUGE			2		// Amount of shots needed to kill enemies.
 //#define LIMITED_BULLETS					// If defined, bullets die after N frames
@@ -127,11 +130,13 @@
 #define FIRE_MIN_KILLABLE 			3		// If defined, only enemies >= N can be killed.
 //#define CAN_FIRE_UP						// If defined, player can fire upwards and diagonal.
 #define MAX_AMMO					99		// If defined, ammo is not infinite!
-#define AMMO_REFILL					50		// ammo refill, using tile 20 (hotspot #4)
+#define AMMO_REFILL					40		// ammo refill, using tile 20 (hotspot #4)
 //#define INITIAL_AMMO				0		// If defined, ammo = X when entering game.
 
 #define BREAKABLE_WALLS						// Breakable walls
 #define BREAKABLE_WALLS_LIFE		1		// Amount of hits to break wall
+#define BREAKABLE_WALLS_BREAKING	30 		// If defined, use this tile as "breaking"
+#define BREAKABLE_WALLS_BROKEN 		0 		// Susbtitute with this
 
 // Scripting
 // ---------

@@ -1,38 +1,12 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
+
+#ifdef CUSTOM_LOCK_CLEAR
+	#include "my/ci/custom_lock_clear.h"
+#endif
 
 #ifdef TEST_DEBUG
 	void test_debug (void) {
-		sp_UpdateNow ();
-		sp_PrintAtInv (5, 5, 71, 69);
-		sp_PrintAtInv (6, 6, 15, 70);
-		#asm
-				ld  ix, (_sp_player)
-				ld  iy, vpClipStruct
-
-				ld  bc, 0
-
-				ld  hl, 0x0707 
-				ld  de, 0x0000
-
-				call SPMoveSprAbs
-		#endasm
-		sp_UpdateNow ();
-		espera_activa (50);
-		#asm
-				ld  ix, (_sp_player)
-				ld  iy, vpClipStruct
-
-				ld  bc, 0
-
-				ld  hl, 0x0404 
-				ld  de, 0x0000
-
-				call SPMoveSprAbs
-		#endasm
-		sp_UpdateNow ();
-		while (sp_GetKey ());
-		while (!sp_GetKey ());
 	}
 #endif
 
@@ -100,7 +74,20 @@ void espera_activa (int espera) {
 #ifndef COMPRESSED_LEVELS
 	#if !defined DEACTIVATE_KEYS && MAX_CERROJOS > 0
 		void locks_init (void) {
-			for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) cerrojos [gpit].st = 1;	
+			// for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) cerrojos [gpit].st = 1;	
+			#asm
+					// Iterate MAX_CERROJOS time
+					// Start with _cerrojos + 3
+					// Set to 1 and add 4
+					ld  b, MAX_CERROJOS
+					ld  hl, _cerrojos + 3
+					ld  de, 4
+					ld  a, 1
+				.init_cerrojos_loop
+					ld  (hl), a
+					add hl, de
+					djnz init_cerrojos_loop
+			#endasm	
 		}
 	#endif
 #endif
@@ -127,6 +114,7 @@ void espera_activa (int espera) {
 
 #if defined(PLAYER_PUSH_BOXES) || !defined(DEACTIVATE_KEYS)
 	void process_tile (void) {
+		/*
 		#ifdef PLAYER_PUSH_BOXES
 			#ifdef FIRE_TO_PUSH
 				if ((pad0 & sp_FIRE) == 0)				
@@ -139,9 +127,9 @@ void espera_activa (int espera) {
 				#endif
 
 				if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 < 15 && y1 < 10) {
-					rda = map_buff [COORDS(x1,y1)];
 					
 					#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
+						rda = map_buff [COORDS(x1,y1)];
 						flags [MOVED_TILE_FLAG] = rda; 
 						flags [MOVED_X_FLAG] = x1;
 						flags [MOVED_Y_FLAG] = y1;
@@ -169,7 +157,114 @@ void espera_activa (int espera) {
 				} 
 			}			
 		#endif
+		*/
+		#ifdef PLAYER_PUSH_BOXES
+			#asm
+				.push_boxes
+			#endasm
 
+			#ifdef FIRE_TO_PUSH
+				#asm
+						// if ((pad0 & sp_FIRE) == 0)
+						ld  a, (_pad0)
+						and sp_FIRE
+						jp  nz, push_boxes_end
+
+						// p_disparando = 1;
+						ld  a, 1
+						ld  (_p_disparando), a
+				#endasm
+			#endif
+
+			// if (qtile (x0, y0) == 14 && attr (x1, y1) == 0 && x1 < 15 && y1 < 10) {
+			#asm
+					// if (qtile (x0, y0) == 14
+					ld  a, (_x0)
+					ld  c, a
+					ld  a, (_y0)
+					call qtile_do
+					ld  a, l
+				#ifndef UNPACKED_MAP
+					and 15
+				#endif
+					cp  14
+					jp  nz, push_boxes_end
+
+					// && attr (x1, y1) == 0
+					ld  a, (_x1)
+					ld  c, a
+					ld  a, (_y1)
+					ld  b, a
+					call _attr_1b
+					xor a
+					or  l
+					and 0x7f
+					jp  nz, push_boxes_end
+
+					// && x1 < 15
+					ld  a, (_x1)
+					cp  15
+					jp  nc, push_boxes_end
+
+					// && y1 < 10
+					ld  a, (_y1)
+					cp  10
+					jp  nc, push_boxes_end
+			#endasm
+
+			#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING)
+				rda = map_buff [COORDS(x1,y1)];
+				flags [MOVED_TILE_FLAG] = rda; 
+				flags [MOVED_X_FLAG] = x1;
+				flags [MOVED_Y_FLAG] = y1;
+			#endif	
+
+			// Pintar
+			#asm
+					//_x = x0; _y = y0; _t = 0; _n = 0; update_tile ();
+					ld  a, (_x0)
+					ld  (__x), a
+					ld  a, (_y0)
+					ld  (__y), a
+					xor a
+					ld  (__t), a
+					ld  (__n), a
+					call _update_tile
+
+					// _x = x1; _y = y1; _t = 14; _n = 10; update_tile ();
+					ld  a, (_x1)
+					ld  (__x), a
+					ld  a, (_y1)
+					ld  (__y), a
+					ld  a, 14
+					ld  (__t), a
+					ld  a, 10
+					ld  (__n), a
+					call _update_tile
+			#endasm
+
+			// Sonido
+			#ifdef MODE_128K
+				PLAY_SOUND (SFX_PUSH_BOX);
+			#else			
+				beep_fx (2);	
+			#endif			
+
+			#if defined(ACTIVATE_SCRIPTING) && defined(ENABLE_PUSHED_SCRIPTING) && defined(PUSHING_ACTION)
+				// Call scripting
+				just_pushed = 1;
+				run_fire_script ();
+				just_pushed = 0;
+			#endif
+
+			#include "my/ci/on_tile_pushed.h"
+
+			#asm
+				.push_boxes_end
+			#endasm
+		#endif
+
+		/*
 		#if !defined DEACTIVATE_KEYS && MAX_CERROJOS > 0
 			if (qtile (x0, y0) == 15 && p_keys) {
 				for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) {
@@ -190,6 +285,111 @@ void espera_activa (int espera) {
 				#include "my/ci/on_unlocked_bolt.h"
 			}
 		#endif
+		*/
+
+		#if !defined DEACTIVATE_KEYS && MAX_CERROJOS > 0
+			#asm
+				.open_lock
+			#endasm
+
+			// if (qtile (x0, y0) == 15 && p_keys) {
+			#asm
+					ld  a, (_x0)
+					ld  c, a
+					ld  a, (_y0)
+					call qtile_do
+					ld  a, l
+					#ifndef UNPACKED_MAP
+						and 15
+					#endif
+					cp  15
+					jp  nz, open_lock_end
+
+					ld  a, (_p_keys)
+					or  a
+					jr  z, open_lock_end
+			#endasm
+
+			/*
+			for (gpit = 0; gpit < MAX_CERROJOS; ++ gpit) {
+				if (cerrojos [gpit].x == x0 && cerrojos [gpit].y == y0 && cerrojos [gpit].np == n_pant) {
+					cerrojos [gpit].st = 0;
+					break;
+				}
+			}
+			*/
+			#asm
+					// The cerrojos struct is db np, x, y st
+					ld  b, MAX_CERROJOS
+					ld  hl, _cerrojos
+				.clear_cerrojo_loop
+					ld  c, (hl) 		// np
+					inc hl
+					ld  d, (hl) 		// x
+					inc hl 
+					ld  e, (hl) 		// y
+					inc hl
+										// HL->st
+
+					ld  a, (_n_pant)
+					cp  c
+					jr  nz, clear_cerrojo_loop_continue
+
+					ld  a, (_x0)
+					cp  d 
+					jr  nz, clear_cerrojo_loop_continue
+
+					ld  a, (_y0)
+					cp  e 
+					jr  nz, clear_cerrojo_loop_continue
+
+					xor a 
+					ld  (hl), a
+					jr  clear_cerrojo_end
+
+				.clear_cerrojo_loop_continue
+					inc hl
+					djnz clear_cerrojo_loop
+
+				.clear_cerrojo_end
+			#endasm
+
+			// _x = x0; _y = y0; _t = 0; _n = 0; update_tile ();
+
+			#asm
+					ld  a, (_x0)
+					ld  (__x), a
+					ld  a, (_y0)
+					ld  (__y), a
+
+					#ifdef CUSTOM_LOCK_CLEAR
+						call _custom_lock_clear
+					#else
+						xor a
+						ld  (__t), a
+						ld  (__n), a
+						call _update_tile
+					#endif
+			#endasm
+
+			// -- p_keys
+			#asm
+					ld  hl, _p_keys
+					dec (hl)
+			#endasm
+
+			#ifdef MODE_128K
+				PLAY_SOUND (SFX_OPEN_LOCK);
+			#else
+				beep_fx (8);
+			#endif
+
+			#include "my/ci/on_unlocked_bolt.h"
+
+			#asm
+				.open_lock_end
+			#endasm
+		#endif				
 	}
 #endif
 
@@ -220,6 +420,9 @@ void draw_scr_background (void) {
 				#asm
 						ld  hl, (_map_pointer)
 						ld  a, (hl)
+				#endasm
+				#include "my/ci/on_map_tile_decoded.h"
+				#asm
 						ld  (__t), a
 						inc hl
 						ld  (_map_pointer), hl
@@ -276,6 +479,9 @@ void draw_scr_background (void) {
 						and 15
 
 					._draw_scr_packed_done
+				#endasm
+				#include "my/ci/on_map_tile_decoded.h"
+				#asm
 						ld  (__t), a
 						
 						ld  b, 0
@@ -290,8 +496,8 @@ void draw_scr_background (void) {
 						add hl, bc
 						ld  (hl), a
 
-				#ifdef PACKED_MAP_ALT_TILE
 						ld  a, (__t)
+				#ifdef PACKED_MAP_ALT_TILE
 						or  a
 						jr  nz, _draw_scr_packed_noalt
 
@@ -311,7 +517,9 @@ void draw_scr_background (void) {
 
 					._draw_scr_packed_noalt
 				#endif
-
+				#endasm
+				#include "my/ci/map_renderer_t_modification.h"
+				#asm
 						ld  hl, _map_buff
 						add hl, bc
 						
@@ -330,10 +538,12 @@ void draw_scr_background (void) {
 			#endif
 
 			#ifdef ENABLE_TILANIMS
+				#if ENABLE_TILANIMS != 99
 				if (_t >= ENABLE_TILANIMS) {
 					_n = (((_x - VIEWPORT_X) << 3) & 0xf0) | ((_y - VIEWPORT_Y) >> 1);
 					tilanims_add ();	
 				}
+			#endif
 			#endif
 
 			draw_coloured_tile ();
@@ -376,16 +586,28 @@ void draw_scr_hotspots_locks (void) {
 			ld  a, 240
 			ld  (_hotspot_y), a
 
-			// Hotspots are 3-byte wide structs. No game will have more than 85 screens
-			// in the same map so we can do the math in 8 bits:
-
-			ld  a, (_n_pant)
-			ld  b, a
-			sla a
-			add b
-
-			ld  c, a
-			ld  b, 0
+			#if (MAP_W*MAP_H) < 86
+				// Hotspots are 3-byte wide structs. No game will have more than 85 screens
+				// in the same map so we can do the math in 8 bits:
+	
+				ld  a, (_n_pant)
+				ld  b, a
+				sla a
+				add b
+	
+				ld  c, a
+				ld  b, 0
+			#else
+				// More than 85 screens need 16 bits math
+				ld  hl, (_n_pant)
+				ld  h, 0
+				ld  d, h 
+				ld  e, l 
+				add hl, de 
+				add hl, de 
+				ld  b, h 
+				ld  c, l
+			#endif
 
 			// BC = Index to the hotspots struct, which happens to be {xy, type, act}
 
@@ -460,6 +682,9 @@ void draw_scr_hotspots_locks (void) {
 			xor a
 		._hotspots_setup_set
 			add 16
+	#endasm
+	#include "my/ci/hotspot_setup_t_modification.h"
+	#asm
 			ld  (__t), a		
 
 			call _draw_coloured_tile_gamearea
@@ -519,34 +744,21 @@ void draw_scr_hotspots_locks (void) {
 			#endif
 
 			._open_locks_do
+				push hl 			// Save for later.
+			
 				ld  a, d
 				ld  (__x), a
 				ld  a, e
 				ld  (__y), a
 				
-				sla a
-				sla a
-				sla a
-				sla a
-				sub e
-				add d
-
-				ld  b, 0
-				ld  c, a
-				xor a
-				
-				push hl 			// Save for later.
-				
-				ld  hl, _map_attr
-				add hl, bc
-				ld  (hl), a
-				ld  hl, _map_buff
-				add hl, bc
-				ld  (hl), a
-
-				ld  (__t), a
-
-				call _draw_coloured_tile_gamearea
+				#ifdef CUSTOM_LOCK_CLEAR
+					call _custom_lock_clear
+				#else
+					xor a
+					ld  (__t), a
+					ld  (__n), a
+					call _update_tile
+				#endif
 
 				pop hl
 
@@ -632,19 +844,148 @@ void select_joyfunc (void) {
 
 #ifdef WALLS_STOP_ENEMIES
 	unsigned char mons_col_sc_x (void) {
-		cx1 = cx2 = (_en_mx > 0 ? _en_x + 15 : _en_x) >> 4;
-		cy1 = _en_y >> 4; cy2 = (_en_y + 15) >> 4;
+
+		// Si BOUNDING_BOX_12x2_CENTERED ->
+		// D = 2, E = 13; D = 0, E = 15 si _lineal
+		// H = 7, L = 8;  H = 0, L = 15 si _lineal
+		// else D = 0, E = 15; H = 0, L = 15
+
+		#asm
+			#ifdef BOUNDING_BOX_12x2_CENTERED
+					ld  de, 0x020D
+					ld  hl, 0x0708
+					jr  _mons_col_sc_x_compare
+			#endif
+
+			._mons_col_sc_x_lineal
+				ld  de, 0x000f
+				ld  hl, 0x000f
+
+			._mons_col_sc_x_compare
+
+			// cx1 = cx2 = (_en_mx > 0 ? _en_x + 13 : _en_x + 2) >> 4;
+				ld  a, (__en_mx)
+				and 0x80
+				ld  a, (__en_x)
+				jr  z, _mons_col_sc_x_horz_positive
+
+			._mons_col_sc_x_horz_negative_zero
+				add d
+				jr  _mons_col_sc_x_horz_set
+
+			._mons_col_sc_x_horz_positive
+				add e				
+
+			._mons_col_sc_x_horz_set
+				srl a 
+				srl a 
+				srl a  
+				srl a
+
+				ld  (_cx1), a
+				ld  (_cx2), a
+
+			// cy1 = (_en_y + 7) >> 4; cy2 = (_en_y + 8) >> 4;
+
+				ld  a, (__en_y)
+				add h
+
+				srl a
+				srl a
+				srl a
+				srl a
+				ld  (_cy1), a
+
+				ld  a, (__en_y)
+				add l
+
+				srl a
+				srl a
+				srl a
+				srl a
+				ld  (_cy2), a
+		#endasm
+
 		cm_two_points ();
+
+		#asm
+				ld  a, (_at1)
+				and 0x7F
+				ld  (_at1), a
+				ld  a, (_at2)
+				and 0x7F
+				ld  (_at2), a
+		#endasm
+
 		#ifdef EVERYTHING_IS_A_WALL
 			return (at1 || at2);
 		#else
 			return ((at1 & 8) || (at2 & 8));
 		#endif
 	}
-		
+
 	unsigned char mons_col_sc_y (void) {
-		cy1 = cy2 = (_en_my > 0 ? _en_y + 15 : _en_y) >> 4;
-		cx1 = _en_x >> 4; cx2 = (_en_x + 15) >> 4;
+
+		// Si BOUNDING_BOX_12x2_CENTERED ->
+		// D = 2, E = 13; D = 0, E = 15 si _lineal
+		// H = 7, L = 8;  H = 0, L = 15 si _lineal
+		// else D = 0, E = 15; H = 0, L = 15
+
+		#asm
+			#ifdef BOUNDING_BOX_12x2_CENTERED
+					ld  de, 0x020D
+					ld  hl, 0x0708
+					jr  _mons_col_sc_x_compare
+			#endif
+
+			._mons_col_sc_y_lineal
+				ld  de, 0x000f
+				ld  hl, 0x000f
+
+			._mons_col_sc_y_compare
+
+			// cy1 = cy2 = (_en_my > 0 ? _en_y + 8 : _en_y + 7) >> 4;
+					ld  a, (__en_my)
+					and 0x80
+					ld  a, (__en_y)
+					jr  z, _mons_col_sc_y_vert_positive
+
+				._mons_col_sc_y_vert_negative_zero
+				add h
+					jr  _mons_col_sc_y_vert_set
+
+				._mons_col_sc_y_vert_positive
+				add l					
+
+				._mons_col_sc_y_vert_set
+					srl a 
+					srl a 
+					srl a  
+					srl a
+
+					ld  (_cy1), a
+					ld  (_cy2), a
+
+			// cx1 = (_en_x + 2) >> 4; cx2 = (_en_x + 13) >> 4;
+					ld  a, (__en_x)
+				add d
+
+					srl a
+					srl a
+					srl a
+					srl a
+					ld  (_cx1), a
+
+				ld  a, (__en_x)
+				add e
+
+					srl a
+					srl a
+					srl a
+					srl a
+					ld  (_cx2), a
+			#endasm
+
 		cm_two_points ();
 		#ifdef EVERYTHING_IS_A_WALL
 			return (at1 || at2);
@@ -669,7 +1010,7 @@ void select_joyfunc (void) {
 #endif
 
 #if defined(ENABLE_FANTIES)
-	int limit (int val, int min, int max) {
+	signed int limit (signed int val, signed int min, signed int max) {
 		if (val < min) return min;
 		if (val > max) return max;
 		return val;

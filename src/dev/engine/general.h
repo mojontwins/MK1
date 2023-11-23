@@ -1,14 +1,61 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // enengine.h
 
+#ifndef BB_SIZE
+	#ifdef SMALL_COLLISION
+		#define BB_SIZE 8
+	#else
+		#define BB_SIZE 12
+	#endif
+#endif
+
 unsigned char collide (void) {
+	/*
 	#ifdef SMALL_COLLISION
 		return (gpx + 8 >= cx2 && gpx <= cx2 + 8 && gpy + 8 >= cy2 && gpy <= cy2 + 8);
 	#else
-		return (gpx + 13 >= cx2 && gpx <= cx2 + 13 && gpy + 12 >= cy2 && gpy <= cy2 + 12);
+		return (gpx + 12 >= cx2 && gpx <= cx2 + 12 && gpy + 12 >= cy2 && gpy <= cy2 + 12);
 	#endif
+	*/
+	#asm
+			ld  hl, 0
+
+		// gpx + 8 >= cx2
+			ld  a, (_cx2)
+			ld  c, a 
+			ld  a, (_gpx)
+			add BB_SIZE
+			cp  c
+			ret c 
+
+		// gpx <= cx2 + 8 -> cx + 8 >= gpx
+			ld  a, (_gpx)
+			ld  c, a 
+			ld  a, (_cx2)
+			add BB_SIZE
+			cp  c 
+			ret c
+
+		// gpy + 8 >= cy2
+			ld  a, (_cy2)
+			ld  c, a 
+			ld  a, (_gpy)
+			add BB_SIZE
+			cp  c
+			ret c 
+
+		// gpy <= cy2 + 8 -> cy + 8 >= gpy
+			ld  a, (_gpy)
+			ld  c, a 
+			ld  a, (_cy2)
+			add BB_SIZE
+			cp  c 
+			ret c
+
+			ld  l, 1
+	#endasm
 }
 
 unsigned char cm_two_points (void) {

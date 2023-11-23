@@ -1,12 +1,22 @@
-// MTE MK1 (la Churrera) v5.0
-// Copyleft 2010-2014, 2020 by the Mojon Twins
+// MTE MK1 (la Churrera) v5.10
+// Copyleft 2010-2014, 2020-2023 by the Mojon Twins
 
 // bullets.h
 
 void bullets_init (void) {
+	/*
 	b_it = 0; while (b_it < MAX_BULLETS) { 
 		bullets_estado [b_it] = 0; ++ b_it;
 	}	
+	*/
+	#asm
+			ld  hl, _bullets_estado
+			ld  de, _bullets_estado + 1
+			ld  bc, MAX_BULLETS - 1
+			xor a
+			ld  (hl), a
+			ldir
+	#endasm	
 }
 
 void bullets_update (void) {
@@ -237,6 +247,7 @@ void bullets_move (void) {
 					}
 				}
 			#endif
+
 			_x = (_b_x + 3) >> 4;
 			_y = (_b_y + 3) >> 4;
 			rda = attr (_x, _y);

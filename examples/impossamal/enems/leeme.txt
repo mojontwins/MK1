@@ -1,0 +1,6 @@
+Como ver s, ya no est  el colocador, sino el ponedor.
+El Colocador era demasiado inestable y funcionaba mal. Ahora puedes gestionar tus archivos .ene con el ponedor.
+Para obtener enems.h a partir del .ene, tendr s que utilizar la herramienta ene2h.exe incluida:
+
+$ ene2h.exe enems.ene enems.h
+
