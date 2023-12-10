@@ -14,7 +14,7 @@
 //#define VENG_SELECTOR 					// Very advanced!
 //#define USE_MAP_CUSTOM_DECODER
 
-#define USE_ZX0	 							// Use ZX0 rather than ARKOS to compress stuff
+//#define USE_ZX0	 							// Use ZX0 rather than ARKOS to compress stuff
 
 // In this section we define map dimensions, initial and authomatic ending conditions, etc.
 
