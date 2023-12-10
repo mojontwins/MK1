@@ -324,44 +324,27 @@
 	"buffers":
 	[
 		{
-			"contents": "Searching 109 files for \"p_pant\"\n\n0 matches\n\nSearching 109 files for \"o_pant\"\n\nD:\\git\\MK1\\src\\dev\\definitions.h:\n  205  \n  206  // Globalized\n  207: unsigned char o_pant;\n  208  unsigned char n_pant;\n  209  unsigned char is_rendering;\n\nD:\\git\\MK1\\src\\dev\\engine\\player.h:\n 1573  \t\t\tp_y = sg_pool [MAX_FLAGS + 2] << 10;\n 1574  \t\t#endif\t\n 1575: \t\to_pant = 0xff; // Reload\n 1576  \t#endif\n 1577  \n\nD:\\git\\MK1\\src\\dev\\engine\\player_wip.h:\n  874  \t\t\tp_y = sg_pool [MAX_FLAGS + 2] << 10;\n  875  \t\t#endif\t\n  876: \t\to_pant = 0xff; // Reload\n  877  \t#endif\n  878  \n\nD:\\git\\MK1\\src\\dev\\lala_beta.asm:\n 11045  \tld\thl,255 % 256\t;const\n 11046  \tld\ta,l\n 11047: \tld\t(_o_pant),a\n 11048  .i_199\n 11049  \tld\thl,(_playing)\n .....\n 11071  \tld\ta,l\n 11072  \tld\t(_pad0),a\n 11073: \tld\thl,(_o_pant)\n 11074  \tld\th,0\n 11075  \tex\tde,hl\n .....\n 11082  \tld\th,0\n 11083  \tld\ta,l\n 11084: \tld\t(_o_pant),a\n 11085  .i_202\n 11086  \tld\thl,(_p_objs)\n .....\n 11170  .i_208\n 11171  .i_206\n 11172: \tld\thl,(_o_pant)\n 11173  \tld\th,0\n 11174  \tex\tde,hl\n .....\n 12034  ._n_pant\tdefs\t1\n 12035  ._p_cont_salto\tdefs\t1\n 12036: ._o_pant\tdefs\t1\n 12037  ._p_life\tdefs\t1\n 12038  ._enit\tdefs\t1\n .....\n 12319  \tXDEF\t_p_cont_salto\n 12320  \tLIB\tsp_ListCurr\n 12321: \tXDEF\t_o_pant\n 12322  \tXDEF\t_p_life\n 12323  \tXDEF\t_enit\n\nD:\\git\\MK1\\src\\dev\\mainloop\\game_loop.h:\n  100  \t#endif\n  101  \n  102: \to_pant = 0xff;\n  103  \twhile (playing) {\n  104  \t\t#asm\n  ...\n  116  \t\tpad0 = (joyfunc) (&keys);\n  117  \n  118: \t\tif (o_pant != n_pant) {\n  119  \t\t\t#include \"my/ci/before_entering_screen.h\"\n  120  \t\t\tdraw_scr ();\n  121: \t\t\to_pant = n_pant;\n  122  \t\t\t#if defined DIE_AND_RESPAWN && defined PLAYER_GENITAL\n  123  \t\t\t\tsafe_gpx = gpx; safe_gpy = gpy;\n  ...\n  228  \n  229  \t\t// Render\n  230: \t\tif (o_pant == n_pant) {\n  231  \t\t\t#include \"mainloop/update_sprites.h\"\n  232  \n\n13 matches across 5 files\n\n\nSearching 109 files for \"saca_a\"\n\n0 matches\n\nSearching 109 files for \"sprites\"\n\nD:\\git\\MK1\\src\\dev\\assets\\extrasprites.h:\n    2  // Copyleft 2010-2014, 2020-2023 by the Mojon Twins\n    3  \n    4: // Extrasprites.h\n    5: // Contiene sprites extra para el modo de matar enemigos de la churrera\n    6: // Sólo se incluirá (tras los sprites) si se define PLAYER_STEPS_ON_ENEMIES\n    7  // Copyleft 2010 The Mojon Twins\n    8  \n    .\n   23  \t#asm\n   24  \t    ._sprite_17_a\n   25: \t        BINARY \"sprites_extra.bin\"\n   26  \t#endasm\n   27  #endif\n   ..\n   56  \t#asm\t              \t\n   57  \t\t._sprite_19_a\n   58: \t\t\tBINARY \"sprites_bullet.bin\"\n   59  \t#endasm\n   60  #endif\n\nD:\\git\\MK1\\src\\dev\\assets\\levels.h:\n    7  // Prepared for 128K level bundles and standard 48K levels\n    8  \n    9: // Usually, 48K levels use the same sprites for all levels\n   10: // unless PER_LEVEL_SPRITESET is defined in 48K mode.\n   11  \n   12  // Level bundles used in 128K games contain:\n   ..\n   18  // Hotspots, MAP_W * MAP_H * 3 bytes\n   19  // Behs, 48 bytes\n   20: // Spriteset, 2312 bytes\n   21  \n   22  // Definitions\n   ..\n  108  #endasm\n  109  \n  110: extern unsigned char sprites [0];\n  111  #asm\n  112: \t._sprites\n  113  #endasm\n  114  \n  115: #if defined MODE_128K || defined PER_LEVEL_SPRITESET\n  116: \t#include \"assets/sprites-empty.h\"\n  117  #else\n  118: \t#include \"assets/sprites.h\"\n  119  #endif\n  120  \n\nD:\\git\\MK1\\src\\dev\\assets\\sprites-empty.h:\n    2  // Copyleft 2010-2014, 2020-2023 by the Mojon Twins\n    3  \n    4: // Sprites.h\n    5  // Generado por SprCnv de la Churrera\n    6  // Copyleft 2010 The Mojon Twins\n\nD:\\git\\MK1\\src\\dev\\assets\\sprites.h:\n    2  // Copyleft 2010-2014, 2020-2023 by the Mojon Twins\n    3  \n    4: // Sprites.h\n    5  // Generado por SprCnv de la Churrera\n    6  // Copyleft 2010 The Mojon Twins\n\nD:\\git\\MK1\\src\\dev\\compile.bat:\n   29  ..\\utils\\ts2bin.exe ..\\gfx\\font.png ..\\gfx\\work.png tileset.bin 7 >nul\n   30  \n   31: ..\\utils\\sprcnv.exe ..\\gfx\\sprites.png assets\\sprites.h > nul\n   32  \n   33: ..\\utils\\sprcnvbin.exe ..\\gfx\\sprites_extra.png sprites_extra.bin 1 > nul\n   34: ..\\utils\\sprcnvbin8.exe ..\\gfx\\sprites_bullet.png sprites_bullet.bin 1 > nul\n   35  \n   36  ..\\utils\\png2scr.exe ..\\gfx\\title.png ..\\gfx\\title.scr > nul\n\nD:\\git\\MK1\\src\\dev\\engine\\c_levels.h:\n   30  \t\tunpack ((unsigned int) levels [level].c_behs, (unsigned int) (behs));\n   31  \n   32: \t\t#ifdef PER_LEVEL_SPRITESET\n   33: \t\t\tunpack ((unsigned int) levels [level].c_sprites, (unsigned int) (sprites + 16));\n   34  \t\t#endif\n   35  \n\nD:\\git\\MK1\\src\\dev\\lala_beta.asm:\n 8054  \n 8055  \n 8056: ._clear_sprites\n 8057  \tld ix, (_sp_player)\n 8058  \tld iy, vpClipStruct\n ....\n 8062  \tcall SPMoveSprAbs\n 8063  \txor a\n 8064: \t.hide_sprites_enems_loop\n 8065  \tld (_gpit), a\n 8066  \tsla a\n ....\n 8082  \tinc a\n 8083  \tcp 3\n 8084: \tjr nz, hide_sprites_enems_loop\n 8085  \tret\n 8086  \n ....\n 11399  .i_235\n 11400  \tcall\t_cortina\n 11401: \tcall\t_clear_sprites\n 11402  \tjp\ti_197\n 11403  .i_198\n .....\n 12508  \tXDEF\t_select_joyfunc\n 12509  \tXDEF\t_unpack\n 12510: \tXDEF\t_clear_sprites\n 12511  \tXDEF\t_p_disparando\n 12512  \tLIB\tsp_IterateDList\n\nD:\\git\\MK1\\src\\dev\\mainloop.h:\n  238  \t\t}\n  239  \t\t\n  240: \t\tclear_sprites ();\n  241  \t}\n  242  }\n\nD:\\git\\MK1\\src\\dev\\mainloop\\game_loop.h:\n  130  \t\t\t\t\ttimer_zero = 0;\n  131  \t\t\t\t\t#ifdef SHOW_TIMER_OVER\n  132: \t\t\t\t\t\tclear_sprites ();\n  133  \t\t\t\t\t\ttime_over ();\n  134  \t\t\t\t\t#endif\n  ...\n  141  \t\t\t\t\t#ifdef SHOW_TIMER_OVER\n  142  \t\t\t\t\t\t#ifndef TIMER_SCRIPT_0\n  143: \t\t\t\t\t\t\tclear_sprites ();\n  144  \t\t\t\t\t\t\ttime_over ();\n  145  \t\t\t\t\t\t#endif\n  ...\n  229  \t\t// Render\n  230  \t\tif (o_pant == n_pant) {\n  231: \t\t\t#include \"mainloop/update_sprites.h\"\n  232  \n  233  \t\t\t// Limit frame rate\n  ...\n  316  \t\t\t\t\tplayer_on = 0;\n  317  \t\t\t\t#endif\t\t\t\t\n  318: \t\t\t\tclear_sprites ();\n  319  \t\t\t\tpause_screen ();\n  320  \t\t\t\twhile (!sp_KeyPressed (KEY_H));\n\nD:\\git\\MK1\\src\\dev\\mainloop\\update_sprites.h:\n    2  // Copyleft 2010-2014, 2020-2023 by the Mojon Twins\n    3  \n    4: // update_sprites.h - Updates sprites\n    5  \n    6  \tfor (enit = 0; enit < MAX_ENEMS; enit ++) {\n    .\n   10  \n   11  \tif ( (p_estado & EST_PARP) == 0 || half_life == 0 ) {\n   12: \t\t//sp_MoveSprAbs (sp_player, spritesClip, p_next_frame - p_current_frame, VIEWPORT_Y + (gpy >> 3), VIEWPORT_X + (gpx >> 3), gpx & 7, gpy & 7);\n   13  \t\t#asm\n   14  \t\t\t\tld  ix, (_sp_player)\n   ..\n   47  \t\t#endasm\n   48  \t} else {\n   49: \t\t//sp_MoveSprAbs (sp_player, spritesClip, p_next_frame - p_current_frame, -2, -2, 0, 0);\n   50  \t\t#asm\n   51  \t\t\t\tld  ix, (_sp_player)\n   ..\n   71  \t\t\tif (bullets_estado [gpit] == 1) {\n   72  \t\t\t\trdx = bullets_x [gpit]; rdy = bullets_y [gpit];\n   73: \t\t\t\t//sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, VIEWPORT_Y + (bullets_y [gpit] >> 3), VIEWPORT_X + (bullets_x [gpit] >> 3), bullets_x [gpit] & 7, bullets_y [gpit] & 7);\n   74  \t\t\t\t#asm\n   75  \t\t\t\t\t\tld  a, (_gpit)\n   ..\n  113  \t\t\t\t#endasm\n  114  \t\t\t} else {\n  115: \t\t\t\t//sp_MoveSprAbs (sp_bullets [gpit], spritesClip, 0, -2, -2, 0, 0);\n  116  \t\t\t\t#asm\n  117  \t\t\t\t\t\tld  a, (_gpit)\n  ...\n  143  \t\t\tif (cocos_y [gpit] < 160) { \n  144  \t\t\t\trdx = cocos_x [gpit]; rdy = cocos_y [gpit];\n  145: \t\t\t\t//sp_MoveSprAbs (sp_cocos [gpit], spritesClip, 0, VIEWPORT_Y + (bullets_y [gpit] >> 3), VIEWPORT_X + (bullets_x [gpit] >> 3), bullets_x [gpit] & 7, bullets_y [gpit] & 7);\n  146  \t\t\t\t#asm\n  147  \t\t\t\t\t\tld  a, (_gpit)\n  ...\n  185  \t\t\t\t#endasm\n  186  \t\t\t} else {\n  187: \t\t\t\t//sp_MoveSprAbs (sp_cocos [gpit], spritesClip, 0, -2, -2, 0, 0);\n  188  \t\t\t\t#asm\n  189  \t\t\t\t\t\tld  a, (_gpit)\n\nD:\\git\\MK1\\src\\dev\\mk1.c:\n   44  #endif\n   45  \n   46: // Configure number of blocks and reserve a pool for sprites\n   47  \n   48  #ifdef PLAYER_CAN_FIRE\n   ..\n   89  #ifdef COMPRESSED_LEVELS\n   90  \t#include \"assets/levels.h\"\n   91: \t#include \"assets/extrasprites.h\"\n   92  \t#include \"my/levelset.h\"\n   93  #else\n   ..\n   95  \t#include \"assets/tileset.h\"\n   96  \t#include \"assets/enems.h\"\n   97: \t#include \"assets/sprites.h\"\n   98: \t#include \"assets/extrasprites.h\"\n   99  #endif\n  100  \n\nD:\\git\\MK1\\src\\dev\\my\\config.h:\n   31  #define PLAYER_REFILL\t\t\t\t10\t\t// Life recharge\n   32  //#define COMPRESSED_LEVELS \t\t\t\t// use levels.h instead of mapa.h and enems.h (!)\n   33: //#define PER_LEVEL_SPRITESET \t\t\t\t// use a different spriteset for each level in 48K\n   34  //#define MAX_LEVELS\t\t\t\t4\t\t// # of compressed levels\n   35  //#define REFILL_ME \t\t\t\t\t\t// If defined, refill player on each level\n   ..\n  285  //#define UNPACKED_MAP\t\t\t\t\t\t// Full, uncompressed maps. Shadows settings are ignored.\n  286  #define PACKED_MAP_ALT_TILE \t\t19\t\t// If defined, in 16 tiles mode, alt tile (default 19)\n  287: //#define NO_MASKS\t\t\t\t\t\t\t// Sprites are rendered using OR instead of masks.\n  288  //#define MASKED_BULLETS\t\t\t\t\t// If needed\n  289  //#define PLAYER_CUSTOM_ANIMATION \t\t\t// Code your own animation in my/custom_animation.h\n\nD:\\git\\MK1\\src\\dev\\my\\custom_animation.h:\n    8  \n    9  // You can use the array player_cells [] which contains pointers to the 8\n   10: // frames for the main player in your spriteset.\n   11  \n   12  \n\nD:\\git\\MK1\\src\\dev\\my\\levelset.h:\n   27  \t\tunsigned char *c_enems_hotspots; \t\t// 10\n   28  \t\tunsigned char *c_behs; \t\t\t\t\t// 12\n   29: \t\tunsigned char *c_sprites; \t\t\t\t// 14\n   30  \t\tunsigned int script_offset; \t\t\t// 16\n   31  \t} LEVEL;\n\nD:\\git\\MK1\\src\\dev\\printer.h:\n  904  #endif\n  905  \n  906: void clear_sprites (void) {\n  907  \t#asm\n  908  \t\t\tld  ix, (_sp_player)\n  ...\n  914  \t\n  915  \t\t\txor a\n  916: \t\t.hide_sprites_enems_loop\n  917  \t\t\tld  (_gpit), a\n  918  \n  ...\n  938  \t\t\tinc a\n  939  \t\t\tcp  3\n  940: \t\t\tjr  nz, hide_sprites_enems_loop\n  941  \n  942  \t\t#ifdef PLAYER_CAN_FIRE\n  943  \t\t\t\txor a\n  944: \t\t\t.hide_sprites_bullets_loop\n  945  \t\t\t\tld  (_gpit), a\n  946  \n  ...\n  966  \t\t\t\tinc a\n  967  \t\t\t\tcp  MAX_BULLETS\n  968: \t\t\t\tjr  nz, hide_sprites_bullets_loop\n  969  \t\t#endif\n  970  \t#endasm\n\nD:\\git\\MK1\\src\\dev\\prototypes.h:\n  113  void print_str (void);\n  114  void blackout_area (void);\n  115: void clear_sprites (void);\n  116  \n  117  // savegame.h\n\n57 matches across 16 files\n\n\nSearching 214 files for \"after_load\"\n\nD:\\git\\MK1\\src\\dev\\mainloop.h:\n  103  \t#endif\n  104  \n  105: \t#include \"my/ci/after_load.h\"\n  106  \n  107  \twhile (1) {\n\n1 match in 1 file\n",
+			"file": "examples/impossamal/dev/sound/00beeper.h",
 			"settings":
 			{
-				"buffer_size": 10050,
-				"line_ending": "Windows",
-				"name": "Find Results",
-				"scratch": true
+				"buffer_size": 3390,
+				"line_ending": "Windows"
 			}
 		},
 		{
-			"file": "src/dev/mainloop.h",
+			"file": "examples/impossamal/dev/sound/beeper.h",
 			"settings":
 			{
-				"buffer_size": 4946,
+				"buffer_size": 18438,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "examples/impossamal/dev/engine/player.h",
+			"settings":
+			{
+				"buffer_size": 29503,
 				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
-			"settings":
-			{
-				"buffer_size": 3438,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "src/dev/mainloop/game_loop.h",
-			"settings":
-			{
-				"buffer_size": 7358,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"settings":
-			{
-				"buffer_size": 0,
 				"line_ending": "Windows"
 			}
 		}
@@ -428,12 +411,19 @@
 	[
 		"/C/git/mk1",
 		"/C/git/mk1/examples",
-		"/C/git/mk1/examples/helmet",
-		"/C/git/mk1/examples/helmet/dev",
-		"/C/git/mk1/examples/helmet/dev/loader"
+		"/C/git/mk1/examples/impossamal",
+		"/C/git/mk1/examples/impossamal/dev",
+		"/C/git/mk1/examples/impossamal/dev/engine",
+		"/C/git/mk1/examples/impossamal/dev/sound",
+		"/C/git/mk1/examples/impossamal-128",
+		"/C/git/mk1/examples/impossamal-128/dev"
 	],
 	"file_history":
 	[
+		"/C/git/mk1/examples/impossamal/dev/compile.bat",
+		"/C/git/mk1/examples/impossamal-128/dev/compile.bat",
+		"/C/git/mk1/src/dev/mainloop.h",
+		"/C/git/mk1/src/dev/mainloop/game_loop.h",
 		"/D/git/MK1/src/dev/mainloop/game_loop.h",
 		"/D/git/MK1/src/dev/engine/player.h",
 		"/D/Proyectos/2021/20210209a - Límites configurables en Consigna (cont)/1. LDAP/actualizacion_metarrama.ldif",
@@ -557,11 +547,7 @@
 		"/D/git/MK1/src/dev/my/ci/extra_functions.h",
 		"/D/git/MK1/src/dev/my/ci/extra_routines.h",
 		"/D/git/MK1/src/dev/my/ci/extra_vars.h",
-		"/D/git/MK1/src/dev/my/ci/hotspot_setup_t_modification.h",
-		"/D/git/MK1/src/dev/my/ci/hotspots_custom.h",
-		"/D/git/MK1/src/dev/my/ci/map_renderer_t_modification.h",
-		"/D/git/MK1/src/dev/my/ci/on_controller_pressed/down.h",
-		"/D/git/MK1/src/dev/my/ci/on_controller_pressed/fire.h"
+		"/D/git/MK1/src/dev/my/ci/hotspot_setup_t_modification.h"
 	],
 	"find":
 	{
@@ -592,6 +578,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"..\\utils\\",
 			"after_load",
 			"sprites",
 			"saca_a",
@@ -647,6 +634,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"..\\..\\..\\src\\utils\\",
 			"JAperfilAcceso",
 			"2020-2023",
 			"2010-2014, 2020-2023",
@@ -675,328 +663,28 @@
 			[
 				{
 					"buffer": 0,
+					"file": "examples/impossamal/dev/sound/00beeper.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 10050,
+						"buffer_size": 3390,
 						"regions":
 						{
-							"match":
-							{
-								"flags": 112,
-								"regions":
-								[
-									[
-										163,
-										169
-									],
-									[
-										345,
-										351
-									],
-									[
-										507,
-										513
-									],
-									[
-										652,
-										658
-									],
-									[
-										765,
-										771
-									],
-									[
-										860,
-										866
-									],
-									[
-										964,
-										970
-									],
-									[
-										1077,
-										1083
-									],
-									[
-										1212,
-										1218
-									],
-									[
-										1334,
-										1340
-									],
-									[
-										1451,
-										1457
-									],
-									[
-										1556,
-										1562
-									],
-									[
-										1726,
-										1732
-									],
-									[
-										2034,
-										2041
-									],
-									[
-										2063,
-										2070
-									],
-									[
-										2160,
-										2167
-									],
-									[
-										2323,
-										2330
-									],
-									[
-										2448,
-										2455
-									],
-									[
-										2652,
-										2659
-									],
-									[
-										2702,
-										2709
-									],
-									[
-										2881,
-										2888
-									],
-									[
-										2990,
-										2997
-									],
-									[
-										3025,
-										3032
-									],
-									[
-										3106,
-										3113
-									],
-									[
-										3141,
-										3148
-									],
-									[
-										3196,
-										3203
-									],
-									[
-										3350,
-										3357
-									],
-									[
-										3560,
-										3567
-									],
-									[
-										3808,
-										3815
-									],
-									[
-										3827,
-										3834
-									],
-									[
-										3888,
-										3895
-									],
-									[
-										3906,
-										3913
-									],
-									[
-										3970,
-										3977
-									],
-									[
-										3989,
-										3996
-									],
-									[
-										4244,
-										4251
-									],
-									[
-										4304,
-										4311
-									],
-									[
-										4329,
-										4336
-									],
-									[
-										4435,
-										4442
-									],
-									[
-										4559,
-										4566
-									],
-									[
-										4667,
-										4674
-									],
-									[
-										4771,
-										4778
-									],
-									[
-										4892,
-										4899
-									],
-									[
-										5025,
-										5032
-									],
-									[
-										5180,
-										5187
-									],
-									[
-										5335,
-										5342
-									],
-									[
-										5489,
-										5496
-									],
-									[
-										5610,
-										5617
-									],
-									[
-										5824,
-										5831
-									],
-									[
-										5844,
-										5851
-									],
-									[
-										6025,
-										6032
-									],
-									[
-										6262,
-										6269
-									],
-									[
-										6524,
-										6531
-									],
-									[
-										6796,
-										6803
-									],
-									[
-										7016,
-										7023
-									],
-									[
-										7286,
-										7293
-									],
-									[
-										7470,
-										7477
-									],
-									[
-										7619,
-										7626
-									],
-									[
-										7777,
-										7784
-									],
-									[
-										7818,
-										7825
-									],
-									[
-										8053,
-										8060
-									],
-									[
-										8086,
-										8093
-									],
-									[
-										8484,
-										8491
-									],
-									[
-										8854,
-										8861
-									],
-									[
-										9035,
-										9042
-									],
-									[
-										9188,
-										9195
-									],
-									[
-										9295,
-										9302
-									],
-									[
-										9408,
-										9415
-									],
-									[
-										9500,
-										9507
-									],
-									[
-										9629,
-										9636
-									],
-									[
-										9798,
-										9805
-									],
-									[
-										9989,
-										9999
-									]
-								],
-								"scope": ""
-							}
 						},
 						"selection":
 						[
 							[
-								9996,
-								9996
+								3150,
+								3170
 							]
 						],
 						"settings":
 						{
-							"detect_indentation": false,
-							"incomplete_sync": null,
-							"line_numbers": false,
-							"output_tag": 5,
-							"remote_loading": false,
-							"result_base_dir": "",
-							"result_file_regex": "^([^ \t].*):$",
-							"result_line_regex": "^ +([0-9]+):",
-							"scroll_past_end": true,
-							"synced": false,
-							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 4824.0,
+						"translation.y": 3365.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 2,
@@ -1004,11 +692,11 @@
 				},
 				{
 					"buffer": 1,
-					"file": "src/dev/mainloop.h",
+					"file": "examples/impossamal/dev/sound/beeper.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 4946,
+						"buffer_size": 18438,
 						"regions":
 						{
 						},
@@ -1021,14 +709,11 @@
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 893.0,
+						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
 					"stack_index": 1,
@@ -1036,94 +721,31 @@
 				},
 				{
 					"buffer": 2,
-					"file": "examples/helmet/dev/loader/loaderzx48_2scr_zx7.asm-orig",
-					"semi_transient": true,
-					"settings":
-					{
-						"buffer_size": 3438,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								424,
-								424
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/Text/Plain text.tmLanguage",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				},
-				{
-					"buffer": 3,
-					"file": "src/dev/mainloop/game_loop.h",
+					"file": "examples/impossamal/dev/engine/player.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 7358,
+						"buffer_size": 29503,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								2571,
-								2588
+								10593,
+								10593
 							]
 						],
 						"settings":
 						{
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
 							"syntax": "Packages/C++/C++.sublime-syntax",
 							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
-						"translation.y": 1244.0,
+						"translation.y": 7334.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 3,
-					"type": "text"
-				},
-				{
-					"buffer": 4,
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 0,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"default_dir": "D:\\git\\MK1\\src\\dev",
-							"incomplete_sync": null,
-							"remote_loading": false,
-							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 4,
+					"stack_index": 0,
 					"type": "text"
 				}
 			]
@@ -1172,7 +794,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 44.0
+		"height": 94.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -1192,7 +814,7 @@
 		[
 			[
 				"",
-				"D:\\Proyectos\\remote\\p3sdes.sublime-project"
+				"C:\\git\\mk1v4\\MK1_v4.sublime-project"
 			]
 		],
 		"width": 380.0
