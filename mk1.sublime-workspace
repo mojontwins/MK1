@@ -323,31 +323,6 @@
 	},
 	"buffers":
 	[
-		{
-			"file": "examples/impossamal/dev/sound/00beeper.h",
-			"settings":
-			{
-				"buffer_size": 3390,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/impossamal/dev/sound/beeper.h",
-			"settings":
-			{
-				"buffer_size": 18438,
-				"line_ending": "Windows"
-			}
-		},
-		{
-			"file": "examples/impossamal/dev/engine/player.h",
-			"settings":
-			{
-				"buffer_size": 29503,
-				"encoding": "UTF-8",
-				"line_ending": "Windows"
-			}
-		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -410,16 +385,27 @@
 	"expanded_folders":
 	[
 		"/C/git/mk1",
-		"/C/git/mk1/examples",
-		"/C/git/mk1/examples/impossamal",
-		"/C/git/mk1/examples/impossamal/dev",
-		"/C/git/mk1/examples/impossamal/dev/engine",
-		"/C/git/mk1/examples/impossamal/dev/sound",
-		"/C/git/mk1/examples/impossamal-128",
-		"/C/git/mk1/examples/impossamal-128/dev"
+		"/C/git/mk1/src",
+		"/C/git/mk1/src/dev",
+		"/C/git/mk1/src/dev/my",
+		"/C/git/mk1/wip",
+		"/C/git/mk1/wip/balowwwn",
+		"/C/git/mk1/wip/balowwwn/dev",
+		"/C/git/mk1/wip/balowwwn/dev/my"
 	],
 	"file_history":
 	[
+		"/C/git/mk1/wip/balowwwn/dev/compile.bat",
+		"/C/git/mk1/src/dev/my/title_screen.h",
+		"/C/git/mk1/src/dev/my/fixed_screens.h",
+		"/C/git/mk1/src/dev/engine.h",
+		"/C/git/mk1/wip/balowwwn/dev/my/custom_animation.h",
+		"/C/git/mk1/wip/balowwwn/dev/assets/mapa.h",
+		"/C/git/mk1/wip/balowwwn/dev/my/ci/extra_functions.h",
+		"/C/git/mk1/src/dev/my/config.h",
+		"/C/git/mk1/examples/impossamal/dev/sound/00beeper.h",
+		"/C/git/mk1/examples/impossamal/dev/sound/beeper.h",
+		"/C/git/mk1/examples/impossamal/dev/engine/player.h",
 		"/C/git/mk1/examples/impossamal/dev/compile.bat",
 		"/C/git/mk1/examples/impossamal-128/dev/compile.bat",
 		"/C/git/mk1/src/dev/mainloop.h",
@@ -536,28 +522,20 @@
 		"/D/git/MK1/src/dev/my/ci/custom_heng.h",
 		"/D/git/MK1/src/dev/my/ci/custom_lock_clear.h",
 		"/D/git/MK1/src/dev/my/ci/custom_veng.h",
-		"/D/git/MK1/src/dev/my/ci/enems_before_move.h",
-		"/D/git/MK1/src/dev/my/ci/enems_custom_respawn.h",
-		"/D/git/MK1/src/dev/my/ci/enems_extra_actions.h",
-		"/D/git/MK1/src/dev/my/ci/enems_extra_mods.h",
-		"/D/git/MK1/src/dev/my/ci/enems_load.h",
-		"/D/git/MK1/src/dev/my/ci/enems_move.h",
-		"/D/git/MK1/src/dev/my/ci/entering_game.h",
-		"/D/git/MK1/src/dev/my/ci/entering_screen.h",
-		"/D/git/MK1/src/dev/my/ci/extra_functions.h",
-		"/D/git/MK1/src/dev/my/ci/extra_routines.h",
-		"/D/git/MK1/src/dev/my/ci/extra_vars.h",
-		"/D/git/MK1/src/dev/my/ci/hotspot_setup_t_modification.h"
+		"/D/git/MK1/src/dev/my/ci/enems_before_move.h"
 	],
 	"find":
 	{
-		"height": 24.0
+		"height": 54.0
 	},
 	"find_in_files":
 	{
 		"height": 134.0,
 		"where_history":
 		[
+			"C:\\git\\mk1\\src\\dev",
+			"C:\\git\\mk1\\wip\\balowwwn\\dev",
+			"C:\\git\\mk1\\wip\\balowwwn\\dev\\my",
 			"D:\\git\\MK1\\src",
 			"D:\\git\\MK1\\src\\dev",
 			"D:\\git\\MK1\\wip\\impossamal\\dev",
@@ -578,6 +556,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"select_joyfunc",
+			"print",
+			"..\\..\\..\\src\\",
+			"apultra",
+			"ending",
+			"p_next_frame",
+			"SPIKES",
 			"..\\utils\\",
 			"after_load",
 			"sprites",
@@ -634,6 +619,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"..\\",
 			"..\\..\\..\\src\\utils\\",
 			"JAperfilAcceso",
 			"2020-2023",
@@ -658,96 +644,8 @@
 	"groups":
 	[
 		{
-			"selected": 2,
 			"sheets":
 			[
-				{
-					"buffer": 0,
-					"file": "examples/impossamal/dev/sound/00beeper.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 3390,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								3150,
-								3170
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 3365.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 2,
-					"type": "text"
-				},
-				{
-					"buffer": 1,
-					"file": "examples/impossamal/dev/sound/beeper.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 18438,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								0,
-								0
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 0.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 1,
-					"type": "text"
-				},
-				{
-					"buffer": 2,
-					"file": "examples/impossamal/dev/engine/player.h",
-					"semi_transient": false,
-					"settings":
-					{
-						"buffer_size": 29503,
-						"regions":
-						{
-						},
-						"selection":
-						[
-							[
-								10593,
-								10593
-							]
-						],
-						"settings":
-						{
-							"syntax": "Packages/C++/C++.sublime-syntax",
-							"translate_tabs_to_spaces": false
-						},
-						"translation.x": 0.0,
-						"translation.y": 7334.0,
-						"zoom_level": 1.0
-					},
-					"stack_index": 0,
-					"type": "text"
-				}
 			]
 		}
 	],

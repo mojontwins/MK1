@@ -18,5 +18,10 @@
 		#endasm
 	#endif
 
+	_x = 11; _y = 15; _t = 71; _gp_gen = (unsigned char *) "1.POQA"; print_str ();
+	_x = 11; _y = 16; _t = 71; _gp_gen = (unsigned char *) "2.KEMPSTON"; print_str ();
+	_x = 11; _y = 17; _t = 71; _gp_gen = (unsigned char *) "3.SINCLAIR"; print_str ();
+	sp_UpdateNow ();
+
 	select_joyfunc ();
 }

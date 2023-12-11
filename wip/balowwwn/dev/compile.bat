@@ -33,7 +33,7 @@ echo Convirtiendo enemigos/hotspots
 ..\utils\ene2h.exe ..\enems\enems.ene assets\enems.h
 
 echo Importando GFX
-..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png tileset.bin 7 >nul
+..\utils\ts2bin.exe ..\gfx\font.png ..\gfx\work.png tileset.bin 4 >nul
 
 ..\utils\sprcnv.exe ..\gfx\sprites.png assets\sprites.h > nul
 
