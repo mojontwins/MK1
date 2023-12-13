@@ -1,0 +1,28 @@
+# Blaster Flashter
+# Copyleft 2013 MojonTwins
+# Churrera 3.99.2
+
+# flags:
+# 1	- Hemos colocado los cinco objetos
+
+###########################
+# Para cualquier pantalla #
+###########################
+
+# Esta sección se ejecuta justo antes del ENTERING SCREEN n
+# en cada una de las pantallas del güego.
+
+# Usamos esto para poner los mensajes en todas las pantallas.
+# Las pantallas con mensajes "custom" sobrescribirán estos,
+# ya que las secciones propias de las pantallas se ejecutan
+# justo después:
+
+		
+ENTERING ANY
+   IF TRUE
+   THEN
+      TEXT ENCUENTRA_EL_FINAL_Y_HAZ_PIS!
+   END
+END
+
+

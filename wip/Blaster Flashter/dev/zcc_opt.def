@@ -1,0 +1,8 @@
+
+IF !DEFINED_STACKPTR
+	defc	DEFINED_STACKPTR = 1
+	defc STACKPTR = 61952
+ENDIF
+
+	DEFINE DEFINED_myzorg
+	defc myzorg = 24200
