@@ -323,6 +323,15 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "/C/Users/jcastano/AppData/Local/Temp/7zO8C41B88C/AVISO.txt",
+			"settings":
+			{
+				"buffer_size": 521,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -384,17 +393,22 @@
 	},
 	"expanded_folders":
 	[
-		"/C/git/mk1",
-		"/C/git/mk1/src",
-		"/C/git/mk1/src/dev",
-		"/C/git/mk1/src/dev/my",
-		"/C/git/mk1/wip",
-		"/C/git/mk1/wip/balowwwn",
-		"/C/git/mk1/wip/balowwwn/dev",
-		"/C/git/mk1/wip/balowwwn/dev/my"
+		"/D/git/MK1",
+		"/D/git/MK1/wip",
+		"/D/git/MK1/wip/balowwwn",
+		"/D/git/MK1/wip/balowwwn/bin",
+		"/D/git/MK1/wip/balowwwn/dev",
+		"/D/git/MK1/wip/balowwwn/dev/my",
+		"/D/git/MK1/wip/balowwwn/dev/my/ci",
+		"/D/git/MK1/wip/balowwwn/utils",
+		"/D/git/MK1/wip/balowwwn/utils/src"
 	],
 	"file_history":
 	[
+		"/C/Users/jcastano/AppData/Local/Temp/7zO8C4FD6CE/ZxFutbol_Leeme.txt",
+		"/C/Users/jcastano/AppData/Local/Temp/7zO8C44A47C/ZxFutbol_codigo.bas",
+		"/D/git/MK1/wip/Blaster Flashter/dev/blaster.c",
+		"/D/git/MK1/wip/balowwwn/utils/src/ts2bin.bas",
 		"/C/git/mk1/wip/balowwwn/dev/compile.bat",
 		"/C/git/mk1/src/dev/my/title_screen.h",
 		"/C/git/mk1/src/dev/my/fixed_screens.h",
@@ -518,15 +532,11 @@
 		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_left.h",
 		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_right.h",
 		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_up.h",
-		"/D/git/MK1/src/dev/my/ci/custom_enems_player_collision.h",
-		"/D/git/MK1/src/dev/my/ci/custom_heng.h",
-		"/D/git/MK1/src/dev/my/ci/custom_lock_clear.h",
-		"/D/git/MK1/src/dev/my/ci/custom_veng.h",
-		"/D/git/MK1/src/dev/my/ci/enems_before_move.h"
+		"/D/git/MK1/src/dev/my/ci/custom_enems_player_collision.h"
 	],
 	"find":
 	{
-		"height": 54.0
+		"height": 24.0
 	},
 	"find_in_files":
 	{
@@ -644,6 +654,43 @@
 	"groups":
 	[
 		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "/C/Users/jcastano/AppData/Local/Temp/7zO8C41B88C/AVISO.txt",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 521,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		},
+		{
 			"sheets":
 			[
 			]
@@ -666,11 +713,18 @@
 				0,
 				1,
 				1
+			],
+			[
+				1,
+				0,
+				2,
+				1
 			]
 		],
 		"cols":
 		[
 			0.0,
+			0.5,
 			1.0
 		],
 		"rows":
@@ -692,7 +746,7 @@
 	"project": "mk1.sublime-project",
 	"replace":
 	{
-		"height": 94.0
+		"height": 44.0
 	},
 	"save_all_on_build": true,
 	"select_file":
