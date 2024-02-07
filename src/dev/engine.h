@@ -540,7 +540,7 @@ void draw_scr_background (void) {
 			#ifdef ENABLE_TILANIMS
 				#if ENABLE_TILANIMS != 99
 				if (_t >= ENABLE_TILANIMS) {
-					_n = (((_x - VIEWPORT_X) << 3) & 0xf0) | ((_y - VIEWPORT_Y) >> 1);
+					rda = (((_x - VIEWPORT_X) << 3) & 0xf0) | ((_y - VIEWPORT_Y) >> 1);
 					tilanims_add ();	
 				}
 			#endif
