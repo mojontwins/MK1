@@ -84,6 +84,9 @@ Sub getUDGIntoCharset (img As Any Ptr, x0 As integer, y0 As Integer, tileset () 
 	If c1 = c2 Then 
 		If defaultInk <> -1 Then
 			c1 = defaultInk
+			If c2 = c2 Then 
+				c2 = 0
+			End If
 		Else 
 			If c2 < 4 Then
 				c1 = 7
