@@ -240,9 +240,7 @@ void enems_load (void) {
 							add hl, de 						// HL -> malotes [enoffsmasi].t
 
 							ld  a, (hl)
-							rlca
-							rlca
-							and 3							// Short for >> 6, unsigned
+							and 0xc0 						// leave only ->XX000000
 
 							ld  hl, _en_an_state
 							add hl, bc 
@@ -378,10 +376,11 @@ void enems_move (void) {
 		#endif
 		
 		#ifdef MODE_128K
-			if (en_an_state [enit] == GENERAL_DYING) {
+			if (en_an_state [enit] & GENERAL_DYING) {
 				-- en_an_count [enit];
 				if (en_an_count [enit] == 0) {
-					en_an_state [enit] = 0;
+					//en_an_state [enit] = 0;
+					en_an_state [enit] &= ~GENERAL_DYING;
 					en_an_next_frame [enit] = sprite_18_a;
 					continue;
 				}
@@ -573,7 +572,7 @@ void enems_move (void) {
 						{
 							#ifdef MODE_128K
 								PLAY_SOUND (SFX_KILL_ENEMY_STEP);										
-								en_an_state [enit] = GENERAL_DYING;
+								en_an_state [enit] |= GENERAL_DYING;
 								en_an_count [enit] = 12;
 								en_an_next_frame [enit] = sprite_17_a;
 								p_vy = -256;
@@ -670,7 +669,7 @@ void enems_move (void) {
 									enems_draw_current ();
 									sp_UpdateNow ();
 									#ifdef MODE_128K
-										en_an_state [enit] = GENERAL_DYING;
+										en_an_state [enit] |= GENERAL_DYING;
 										en_an_count [enit] = 12;
 										PLAY_SOUND (SFX_KILL_ENEMY_SHOOT);
 									#else															
@@ -806,7 +805,7 @@ void enems_move (void) {
 					sp_UpdateNow ();
 
 					#ifdef MODE_128K
-						en_an_state [enit] = GENERAL_DYING;
+						en_an_state [enit] |= GENERAL_DYING;
 						en_an_count [enit] = 12;
 						PLAY_SOUND (SFX_KILL_ENEMY_SHOOT);
 					#else															
