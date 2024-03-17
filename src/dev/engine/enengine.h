@@ -820,6 +820,7 @@ void enems_move (void) {
 
 					#asm
 							call _enems_kill
+							jp enems_collide_bullets_next
 							
 						.enems_collide_bullets_sound
 					#endasm
