@@ -193,6 +193,7 @@ Así se ve un archivo de texto con comportamientos. Nada muy excitante:
 ```
     0,0,8,8,8,8,8,8,17,8,8,8,8,8,10,10,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,8,8,8,8,8,8,8,8,8,8,0,0,0,0,0,0
 ```
+Nótese que están todos seguidos y separados por comas, sin saltos de linea ni ninguna otra decoración, para asegurarnos de que el conversor, que es bastante tontete, no se hace la picha un lío con los valores. 
 
 Esto equivale a este tileset:
 
