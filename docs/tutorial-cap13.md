@@ -52,7 +52,7 @@ En primer lugar tendremos un buen porrón de pantallas comprimidas. Además de l
 
 Sin salirnos de `gfx/`, tendremos además los gráficos para construir los niveles:
 
-1. `work0.png`, `work1.png`, `work2.png`, `work3.png` y `work4.png` contienen los tilesets de las cinco fases. Es importante notar que todos estos tilesets tienen un tile 0 que no es del todo negro, por lo que habrá que tener en cuenta esto más adelante (ya que los .MAP tendrán los valores desplazados debido al _glitch_ de Mappy que ya conocemos bien). Tenemos aquí sus archivos de comportamientos asociados, `behs0.txt` a `behs4.txt`.
+1. `work0.png`, `work1.png`, `work2.png`, `work3.png` y `work4.png` contienen los tilesets de las cinco fases. Es importante notar que todos estos tilesets tienen un tile 0 que no es del todo negro, por lo que habrá que tener en cuenta esto más adelante (ya que los .MAP tendrán los valores desplazados debido al _glitch_ de Mappy que ya conocemos bien). Tenemos aquí sus archivos de comportamientos asociados, `behs0.txt` a `behs4.txt`. Nótese que el conversor es un poco tontorrón y hay que ponerle las cosas fáciles: los behs deben ir en el archivo separados por comas, sin saltos de linea.
 2. `sprites0.png`, `sprites1.png`, `sprites2.png`, `sprites3.png` y `sprites4.png` contienen los cinco spritesets correspondientes a cada una de las cinco fases.
 3. `font.png` contiene la fuente base que se usará durante el juego.
 4. `level_screen_ts.png` es un _charset_ completo que se empleará para las pantallas del nuevo nivel especial que tiene este juego.
