@@ -311,7 +311,7 @@
 #define PLAYER_MAX_VY_SALTANDO		320 	// Max jump velocity 
 #define PLAYER_INCR_SALTO			64		// acceleration while JUMP is pressed 
 
-#define PLAYER_INCR_JETPAC			32		// Vertical jetpac gauge
+#define PLAYER_INCR_JETPAC			48		// Vertical jetpac gauge
 #define PLAYER_MAX_VY_JETPAC		256 	// Max vertical jetpac speed
 
 // IV.2. Horizontal (side view) or general (top view) movement.
