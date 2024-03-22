@@ -5,5 +5,11 @@
 	
 	if (ORTHOSHOOTERS_FREQ == 1) {
 		rda = en_an_state [enit];
+		#asm
+			ld  a, (_rda)
+			rlca
+			rlca
+			and 3							// Short for >> 6, unsigned
+		#endasm
 		simple_coco_shoot ();
 	} 

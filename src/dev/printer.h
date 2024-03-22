@@ -686,7 +686,7 @@ void update_tile (void) {
 	#ifdef ENABLE_TILANIMS
 		// Detect tilanims
 		if (_t >= ENABLE_TILANIMS) {
-			_n = (_x << 4) | _y;
+			rda = (_x << 4) | _y;
 			tilanims_add ();	
 		}
 	#endif

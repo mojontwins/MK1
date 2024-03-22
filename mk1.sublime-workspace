@@ -324,12 +324,92 @@
 	"buffers":
 	[
 		{
-			"file": "/C/Users/jcastano/AppData/Local/Temp/7zO8C41B88C/AVISO.txt",
+			"file": "src/dev/my/config.h",
 			"settings":
 			{
-				"buffer_size": 521,
+				"buffer_size": 15994,
 				"encoding": "UTF-8",
-				"line_ending": "Unix"
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"contents": "Searching 110 files for \"tilanims_add\"\n\nD:\\git\\MK1\\src\\dev\\engine.h:\n  542  \t\t\t\tif (_t >= ENABLE_TILANIMS) {\n  543  \t\t\t\t\t_n = (((_x - VIEWPORT_X) << 3) & 0xf0) | ((_y - VIEWPORT_Y) >> 1);\n  544: \t\t\t\t\ttilanims_add ();\t\n  545  \t\t\t\t}\n  546  \t\t\t\t#endif\n\nD:\\git\\MK1\\src\\dev\\lala_beta.asm:\n 12174  \tXDEF\t_malotes\n 12175  \tLIB\tsp_MoveSprRel\n 12176: \tXDEF\t_tilanims_add\n 12177  \tXDEF\t_pregotten\n 12178  \tXDEF\t_hit_h\n\nD:\\git\\MK1\\src\\dev\\printer.h:\n  688  \t\tif (_t >= ENABLE_TILANIMS) {\n  689  \t\t\t_n = (_x << 4) | _y;\n  690: \t\t\ttilanims_add ();\t\n  691  \t\t}\n  692  \t#endif\n\nD:\\git\\MK1\\src\\dev\\prototypes.h:\n  123  \n  124  // tilanim.h\n  125: void tilanims_add (void);\n  126  void tilanims_do (void);\n  127  void tilanims_reset (void);\n\nD:\\git\\MK1\\src\\dev\\tilanim.h:\n   18  }\n   19  \n   20: void tilanims_add (void) {\n   21  \t#asm\n   22  \t\t\tld  de, (_max_tilanims)\n\n5 matches across 5 files\n\n\nSearching 110 files for \"MAX_TILANIMS\"\n\nD:\\git\\MK1\\src\\dev\\definitions.h:\n  293  #ifdef ENABLE_TILANIMS\n  294  \tunsigned char tait;\n  295: \tunsigned char max_tilanims;\n  296  \tunsigned char tacount;\n  297: \tunsigned char tilanims_xy [MAX_TILANIMS];\n  298: \tunsigned char tilanims_ft [MAX_TILANIMS];\n  299  #endif\n  300  \n\nD:\\git\\MK1\\src\\dev\\mk1.c:\n   23  \n   24  // Fiddle if you need\n   25: #define MAX_TILANIMS\t16\n   26  #define TILANIMS_PRIME\t7\n   27  \n\nD:\\git\\MK1\\src\\dev\\tilanim.h:\n    8  \t\t\tld  hl, _tilanims_ft\n    9  \t\t\tld  de, _tilanims_ft + 1 \n   10: \t\t\tld  bc, MAX_TILANIMS - 1\n   11  \t\t\txor a\n   12  \t\t\tld  (hl), a\n   ..\n   14  \t\t\tld  (_tacount), a\n   15  \t\t\tld  (_tait), a\n   16: \t\t\tld  (_max_tilanims), a\n   17  \t#endasm\n   18  }\n   ..\n   20  void tilanims_add (void) {\n   21  \t#asm\n   22: \t\t\tld  de, (_max_tilanims)\n   23  \t\t\tld  d, 0\n   24  \n   ..\n   35  \t\t\tld  a, e\n   36  \t\t\tinc a\n   37: \t\t\tld  (_max_tilanims), a\n   38  \t#endasm\n   39  }\n   ..\n   41  void tilanims_do (void) {\n   42  \t#asm\n   43: \t\t\tld  a, (_max_tilanims)\n   44  \t\t\tor  a\n   45  \t\t\tret z\n   ..\n   47  \t\t\tld  a, (_tait)\n   48  \t\t\tadd TILANIMS_PRIME\n   49: \t\t\tcp  MAX_TILANIMS\n   50  \t\t\tjr  c, _tilanims_tait_0_skip\n   51: \t\t\tsub MAX_TILANIMS\n   52  \t\t._tilanims_tait_0_skip\n   53  \t\t\tld  (_tait), a\n\n11 matches across 3 files\n",
+			"settings":
+			{
+				"buffer_size": 2192,
+				"line_ending": "Windows",
+				"name": "Find Results",
+				"scratch": true
+			}
+		},
+		{
+			"file": "src/dev/printer.h",
+			"settings":
+			{
+				"buffer_size": 17285,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/engine/enengine.h",
+			"settings":
+			{
+				"buffer_size": 18695,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/definitions.h",
+			"settings":
+			{
+				"buffer_size": 7594,
+				"encoding": "Western (Windows 1252)",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/engine.h",
+			"settings":
+			{
+				"buffer_size": 19306,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/engine/enem_mods/enem_type_orthoshooters.h",
+			"settings":
+			{
+				"buffer_size": 330,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "contrib/godkiller_2/dev/engine/simple_cocos.h",
+			"settings":
+			{
+				"buffer_size": 2605,
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/tilanim.h",
+			"settings":
+			{
+				"buffer_size": 1499,
+				"encoding": "UTF-8",
+				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "src/dev/my/title_screen.h",
+			"settings":
+			{
+				"buffer_size": 375,
+				"line_ending": "Windows"
 			}
 		}
 	],
@@ -394,17 +474,13 @@
 	"expanded_folders":
 	[
 		"/D/git/MK1",
-		"/D/git/MK1/wip",
-		"/D/git/MK1/wip/balowwwn",
-		"/D/git/MK1/wip/balowwwn/bin",
-		"/D/git/MK1/wip/balowwwn/dev",
-		"/D/git/MK1/wip/balowwwn/dev/my",
-		"/D/git/MK1/wip/balowwwn/dev/my/ci",
-		"/D/git/MK1/wip/balowwwn/utils",
-		"/D/git/MK1/wip/balowwwn/utils/src"
+		"/D/git/MK1/src",
+		"/D/git/MK1/src/dev",
+		"/D/git/MK1/src/dev/my"
 	],
 	"file_history":
 	[
+		"/C/Users/jcastano/AppData/Local/Temp/7zO8C41B88C/AVISO.txt",
 		"/C/Users/jcastano/AppData/Local/Temp/7zO8C4FD6CE/ZxFutbol_Leeme.txt",
 		"/C/Users/jcastano/AppData/Local/Temp/7zO8C44A47C/ZxFutbol_codigo.bas",
 		"/D/git/MK1/wip/Blaster Flashter/dev/blaster.c",
@@ -531,8 +607,7 @@
 		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_down.h",
 		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_left.h",
 		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_right.h",
-		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_up.h",
-		"/D/git/MK1/src/dev/my/ci/custom_enems_player_collision.h"
+		"/D/git/MK1/src/dev/my/ci/bg_collision/obstacle_up.h"
 	],
 	"find":
 	{
@@ -543,6 +618,7 @@
 		"height": 134.0,
 		"where_history":
 		[
+			"D:\\git\\MK1\\src\\dev",
 			"C:\\git\\mk1\\src\\dev",
 			"C:\\git\\mk1\\wip\\balowwwn\\dev",
 			"C:\\git\\mk1\\wip\\balowwwn\\dev\\my",
@@ -566,6 +642,13 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"en_an_state",
+			"orthoshooters",
+			"ortho",
+			"rda",
+			"MAX_TILANIMS",
+			"tilanims_add",
+			"unpacked_map",
 			"select_joyfunc",
 			"print",
 			"..\\..\\..\\src\\",
@@ -659,11 +742,382 @@
 			[
 				{
 					"buffer": 0,
-					"file": "/C/Users/jcastano/AppData/Local/Temp/7zO8C41B88C/AVISO.txt",
+					"file": "src/dev/my/config.h",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 521,
+						"buffer_size": 15994,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								14617,
+								14617
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 3689.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2192,
+						"regions":
+						{
+							"match":
+							{
+								"flags": 112,
+								"regions":
+								[
+									[
+										200,
+										212
+									],
+									[
+										349,
+										361
+									],
+									[
+										518,
+										530
+									],
+									[
+										636,
+										648
+									],
+									[
+										784,
+										796
+									],
+									[
+										1035,
+										1047
+									],
+									[
+										1115,
+										1127
+									],
+									[
+										1165,
+										1177
+									],
+									[
+										1281,
+										1293
+									],
+									[
+										1453,
+										1465
+									],
+									[
+										1583,
+										1595
+									],
+									[
+										1698,
+										1710
+									],
+									[
+										1796,
+										1808
+									],
+									[
+										1909,
+										1921
+									],
+									[
+										2029,
+										2041
+									],
+									[
+										2095,
+										2107
+									]
+								],
+								"scope": ""
+							}
+						},
+						"selection":
+						[
+							[
+								881,
+								881
+							]
+						],
+						"settings":
+						{
+							"detect_indentation": false,
+							"incomplete_sync": null,
+							"line_numbers": false,
+							"output_tag": 2,
+							"remote_loading": false,
+							"result_base_dir": "",
+							"result_file_regex": "^([^ \t].*):$",
+							"result_line_regex": "^ +([0-9]+):",
+							"scroll_past_end": true,
+							"synced": false,
+							"syntax": "Packages/Default/Find Results.hidden-tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 507.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 9,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"file": "src/dev/printer.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 17285,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								12443,
+								12443
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 12599.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 6,
+					"type": "text"
+				},
+				{
+					"buffer": 3,
+					"file": "src/dev/engine/enengine.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 18695,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								5199,
+								5199
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 2746.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 4,
+					"file": "src/dev/definitions.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 7594,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1848,
+								1848
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 1230.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				}
+			]
+		},
+		{
+			"selected": 1,
+			"sheets":
+			[
+				{
+					"buffer": 5,
+					"file": "src/dev/engine.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 19306,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								10467,
+								10467
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 9617.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 5,
+					"type": "text"
+				},
+				{
+					"buffer": 6,
+					"file": "src/dev/engine/enem_mods/enem_type_orthoshooters.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 330,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								232,
+								232
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 3,
+					"type": "text"
+				},
+				{
+					"buffer": 7,
+					"file": "contrib/godkiller_2/dev/engine/simple_cocos.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 2605,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								895,
+								925
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 267.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 4,
+					"type": "text"
+				},
+				{
+					"buffer": 8,
+					"file": "src/dev/tilanim.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1499,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								413,
+								413
+							]
+						],
+						"settings":
+						{
+							"incomplete_sync": null,
+							"remote_loading": false,
+							"synced": false,
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 7,
+					"type": "text"
+				},
+				{
+					"buffer": 9,
+					"file": "src/dev/my/title_screen.h",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 375,
 						"regions":
 						{
 						},
@@ -679,20 +1133,16 @@
 							"incomplete_sync": null,
 							"remote_loading": false,
 							"synced": false,
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"syntax": "Packages/C++/C++.sublime-syntax",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 8,
 					"type": "text"
 				}
-			]
-		},
-		{
-			"sheets":
-			[
 			]
 		}
 	],
