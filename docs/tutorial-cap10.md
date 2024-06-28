@@ -101,7 +101,7 @@ Al igual que pasaba con la música de Beepola, el código que exporta BeepFX no 
     $ ..\utils\asm2z88dk.exe ..\mus\dogmole_fx.asm sound\beeper.h mk1
 ```
 
-Pero todavía no es suficiente, ya que necesitamos una interfaz con **MTE MK1**, una función en C que reciba un parámetro, lo cocine, y llame al _player_ de efectos de BeepFx. Editamos `beeper.h` y añadimos este código al final, que hace precisamente eso:
+Pero todavía no es suficiente, ya que necesitamos una interfaz con **MTE MK1**, una función en C que reciba un parámetro, lo cocine, y llame al _player_ de efectos de BeepFx. Editamos `beeper.h` que está en la carpeta sound y añadimos este código al final, que hace precisamente eso:
 
 ```c
 
