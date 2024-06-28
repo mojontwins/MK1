@@ -98,7 +98,7 @@ Marcamos `Assembly` e `Include player code` y pulsamos `Compile`. Grabamos el ar
 Al igual que pasaba con la música de Beepola, el código que exporta BeepFX no nos sirve directamente, sino que habrá que pasarlo por la turmix. Suponiendo que tengamos el archivo guardado como `mus/dogmole_fx.asm`, nos vamos a `/dev` y ejecutamos así el conversor:
 
 ```
-    $ ..\utils\asm2z88dk.exe ..\mus\dogmole_fx.asm beeper.h mk1
+    $ ..\utils\asm2z88dk.exe ..\mus\dogmole_fx.asm sound\beeper.h mk1
 ```
 
 Pero todavía no es suficiente, ya que necesitamos una interfaz con **MTE MK1**, una función en C que reciba un parámetro, lo cocine, y llame al _player_ de efectos de BeepFx. Editamos `beeper.h` y añadimos este código al final, que hace precisamente eso:
