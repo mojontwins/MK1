@@ -47,13 +47,33 @@ Hecho esto, utilizaremos `my/ci/enems_extra_actions.h` para cambiar el sprite ca
 
 ```c
     // enems_extra_actions.h
-
+if (active) {
     if (_en_mx < 0 || _en_my < 0) {
         en_an_next_frame [enit] = extra_enem_cells [en_an_base_frame [enit] + en_an_frame [enit]];
     }
+}
 ```
 
 `en_an_base_frame [enit]` vale 0, 2, 4 o 6 dependiendo del tipo del enemigo (1 a 4) y `en_an_frame [enit]` va haciendo *flip-flop* cambiando entre 0 y 1 cada 4 cuadros. Lo que hacemos es que, si el muñeco va hacia la izquierda o hacia arriba, elegimos el sprite de nuestro nuevo array `extra_enems_cells`. En caso contrario, `en_an_next_frame` tendrá el valor estándar obtenido de `enem_cells` (que es el comportamiento natural de **MTE MK1**).
+
+Ahora nos toca agregar `active = 0` esta linea de `engine/enengine.h`:
+
+```c
+
+								dec (hl)
+						#endif	
+
+							// if (_en_life == 0) {
+							ld  a, (__en_life)
+							or  a
+							jp  nz, enems_collide_bullets_sound
+					#endasm
+
+					enems_draw_current ();
+					sp_UpdateNow ();
+					active = 0;  // <- esta
+
+```
 
 ## Y listo
 
