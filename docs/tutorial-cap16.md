@@ -60,18 +60,15 @@ Ahora nos toca agregar `active = 0` esta linea de `engine/enengine.h`:
 
 ```c
 
-								dec (hl)
-						#endif	
+    // if (_en_life == 0) {
+    ld  a, (__en_life)
+    or  a
+    jp  nz, enems_collide_bullets_sound
+#endasm
 
-							// if (_en_life == 0) {
-							ld  a, (__en_life)
-							or  a
-							jp  nz, enems_collide_bullets_sound
-					#endasm
-
-					enems_draw_current ();
-					sp_UpdateNow ();
-					active = 0;  // <- esta
+enems_draw_current ();
+sp_UpdateNow ();
+active = 0;  // <- esta, linea 806 ma o meno, dentro del condicional if (_en_life == 0)
 
 ```
 
