@@ -112,8 +112,5 @@ extern unsigned char sprites [0];
 	._sprites
 #endasm
 
-#if defined MODE_128K || defined PER_LEVEL_SPRITESET
-	#include "assets/sprites-empty.h"
-#else
+// Should have space to contain all sprites in the level!
 	#include "assets/sprites.h"
-#endif

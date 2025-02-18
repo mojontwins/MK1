@@ -180,7 +180,7 @@ Vamos por partes:
 
 5. `decorations` (opcional) es una ruta a un archivo de salida en formato _script_ del motor con decoraciones automáticas y que puedes incluir desde tu _script_ para adornar las pantallas de forma automática. Básicamente el mapa se fuerza a *PACKED* y los tiles fuera de rango se escriben como decoraciones de las que se imprimen en los `ENTERING SCREEN`. Es una característica de `msc3` que aún no hemos comentado.
 
-6. `lock` (opcional) sirve para especificar qué tile hace de cerrojo. Para **MTE MK1** tiene que ser el 15. Puedes omitir el parámetro si no usas cerrojos.
+6. `lock` (opcional) sirve para especificar qué tile hace de cerrojo. Para **MTE MK1** tiene que ser el 15. Puedes omitir el parámetro si no usas cerrojos. **PERO OJO CON ESTO :: No puedes olvidarte de desactivar llaves / cerrojos también en `config.h`, o si no el espacio que reserva el motor para descomprimir y el binario generado para cada nivel no coincidirán**.s
 
 7. `fixmappy` (opcional) para deshacer el desbarajuste que lía Mappy si tu tileset no empieza por uno completamente negro.
 
@@ -192,7 +192,7 @@ Vamos por partes:
 
 11. `spritesfile` (obligatorio) es la ruta al archivo con el spriteset en el formato de siempre.
 
-12. `nsprites` (opcional) por si tenemos más de 16 sprites y que, por el momento, omitiremos (no soportado por el motor).
+12. `nsprites` (opcional) por si tenemos más de 16 sprites. Esto debe casar con el espacio para sprites reservado para descomprimir el nivel. Hablaremos más adelante de esto.
 
 13. `enemsfile` (obligatorio) contendrá la ruta al archivo de colocación de enemigos y hotspots `.ene` del Ponedor.
 
@@ -390,7 +390,7 @@ Finalmente me gusta chivar lo que ocupa cada archivo:
 
 El siguiente paso es modificar `compile.bat` para quitar toda la importación de tiestos de un juego normal mononivel y posteriormente construir una cinta de 128K.
 
-Nos fumaremos completamente las secciones donde se convierten mapas, enemigos, sprites y pantallas fijas (menos la pantalla de carga), pero tendremos que dejar la generación de los sprites extra y la importación de la fuente. La importación de tiestos en `compile.bat` se queda, pues, en la mínima expresión:
+Nos fumaremos completamente las secciones donde se convierten mapas, enemigos y pantallas fijas (menos la pantalla de carga), pero tendremos que dejar la generación de los sprites extra y la importación de la fuente. También hay que llamar a `sprcnv2` de forma especial para que genere sprites "vacíos" sobre los que se descomprimirán los que vienen en cada nivel. La importación de tiestos en `compile.bat` se queda, pues, en la mínima expresión:
 
 ```
     echo Importando GFX
@@ -398,9 +398,13 @@ Nos fumaremos completamente las secciones donde se convierten mapas, enemigos, s
 
     ..\..\..\src\utils\sprcnvbin.exe ..\gfx\sprites_extra.png sprites_extra.bin 1 > nul
     ..\..\..\src\utils\sprcnvbin8.exe ..\gfx\sprites_bullet.png sprites_bullet.bin 1 > nul
+    ..\..\src\utils\sprcnv2.exe empty assets\sprites.h 16 extra > nul
+
 
     if [%1]==[justassets] goto :end
 ```
+
+Fíjate como a `sprcnv2` se le pasa la cadena `empty` en lugar de un archivo de spriteset. Es importante que el número indicado en la conversión sea el mismo que hay en `nsprites` de `build_levels`.
 
 ### Generando la cinta de 128K
 

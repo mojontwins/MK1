@@ -27,9 +27,10 @@ End Sub
 
 Sub Usage () 
 	Print "** USO **"
-	Print "   sprcnv2 archivo.png archivo.h n [nomask]"
+	Print "   sprcnv2 archivo.png|empty archivo.h n [nomask]"
 	Print
-	Print "Convierte un Spriteset de n sprites"
+	Print "Convierte un Spriteset en archivo.png de n sprites"
+	Print "Si se pasa empty en vez del nombre de archivo genera ceros (para usar con buildlevels)"
 End Sub
 
 Function labelName (extra As Integer, i As Integer) As String
@@ -45,6 +46,7 @@ dim as any ptr img 			' will contain the image loaded from the PNG
 dim as String filename, o
 dim as integer i, j, f, sprite, x, y, xx, yy, ac, nomask, extra, n
 dim as unsigned long p1, p2
+dim as integer empty 
 
 WarningMessage () 			' Esto lo quito algún día, cuando deje de ser cutrón
 
@@ -60,14 +62,20 @@ If inCommand ("extra") Then extra = -1 else extra = 0
 screenres 640, 480, 32, , -1
 
 filename = Command (1)
-img = png_load ( filename )
 
-if img then
-'	put( 0, 0 ), img
-'	deallocate( img )
-else
-	print "Failed to load"
-end if
+If filename = "empty" Then
+	empty = -1
+Else 
+	empty = 0 
+	img = png_load ( filename )
+
+	if img then
+	'	put( 0, 0 ), img
+	'	deallocate( img )
+	else
+		print "Failed to load"
+	end if
+End If
 
 ' Ahora lo recorro y voy generando el código con sus etiquetas y
 ' sus mascaritas y toda la pesca
@@ -76,10 +84,11 @@ f = FreeFile
 
 Open Command (2) for Output as f
 
-Print #f, "// MTE MK1 (la Churrera) v5.0"
-Print #f, "// Copyleft 2010-2014, 2020 by the Mojon Twins"
+Print #f, "// MTE MK1 (la Churrera) v5.11"
+Print #f, "// Copyleft 2010-2014, 2020-2025 by the Mojon Twins"
 Print #f, ""
 print #f, "// Sprites.h"
+If empty Then Print "// Empty spriteset to be overwritten from levels"
 if nomask then print #f, "// No masks"
 print #f, " "
 
@@ -125,20 +134,24 @@ for sprite = 1 to n
 	for yy = 0 to 15
 		o = "        defb "
 		ac = 0
-		for xx = 0 to 7
-			p1 = point (x + xx, y + yy, img)
-			if RGBA_R (p1) <> 0 Or RGBA_G (p1) <> 0 Or RGBA_B (p1) <> 0 Then
-				ac = ac + 2 ^ (7 - xx)
-			end if
-		next xx
+		If Not empty Then
+			for xx = 0 to 7
+				p1 = point (x + xx, y + yy, img)
+				if RGBA_R (p1) <> 0 Or RGBA_G (p1) <> 0 Or RGBA_B (p1) <> 0 Then
+					ac = ac + 2 ^ (7 - xx)
+				end if
+			next xx
+		End If
 		o = o + Trim (Str(ac)) + ", "
 		ac = 0
-		for xx = 0 to 7
-			p1 = point (x + xx + 16, y + yy, img)
-			if RGBA_R (p1) <> 0 Or RGBA_G (p1) <> 0 Or RGBA_B (p1) <> 0 Then
-				ac = ac + 2 ^ (7 - xx)
-			end if
-		next xx
+		If Not empty Then 
+			for xx = 0 to 7
+				p1 = point (x + xx + 16, y + yy, img)
+				if RGBA_R (p1) <> 0 Or RGBA_G (p1) <> 0 Or RGBA_B (p1) <> 0 Then
+					ac = ac + 2 ^ (7 - xx)
+				end if
+			next xx
+		End If 
 		o = o + Trim (Str(ac))
 		print #f, o
 	next yy
@@ -146,7 +159,11 @@ for sprite = 1 to n
 		if nomask then 
 			print #f, "        defb 0, 0"
 		else
-			print #f, "        defb 0, 255"
+			If empty Then 
+				print #f, "        defb 0, 0"
+			Else
+				print #f, "        defb 0, 255"
+			End If
 		end if
 	next yy
 	print #f, " "
@@ -160,20 +177,24 @@ for sprite = 1 to n
 	for yy = 0 to 15
 		o = "        defb "
 		ac = 0
-		for xx = 0 to 7
-			p1 = point (x + xx + 8, y + yy, img)
-			if RGBA_R (p1) <> 0 Or RGBA_G (p1) <> 0 Or RGBA_B (p1) <> 0 Then
-				ac = ac + 2 ^ (7 - xx)
-			end if
-		next xx
+		If Not empty Then
+			for xx = 0 to 7
+				p1 = point (x + xx + 8, y + yy, img)
+				if RGBA_R (p1) <> 0 Or RGBA_G (p1) <> 0 Or RGBA_B (p1) <> 0 Then
+					ac = ac + 2 ^ (7 - xx)
+				end if
+			next xx
+		End If
 		o = o + Trim (Str(ac)) + ", "
 		ac = 0
-		for xx = 0 to 7
-			p1 = point (x + xx + 24, y + yy, img)
-			if RGBA_R (p1) <> 0 Or RGBA_G (p1) <> 0 Or RGBA_B (p1) <> 0 Then
-				ac = ac + 2 ^ (7 - xx)
-			end if
-		next xx
+		If Not empty Then
+			for xx = 0 to 7
+				p1 = point (x + xx + 24, y + yy, img)
+				if RGBA_R (p1) <> 0 Or RGBA_G (p1) <> 0 Or RGBA_B (p1) <> 0 Then
+					ac = ac + 2 ^ (7 - xx)
+				end if
+			next xx
+		End If
 		o = o + Trim (Str(ac))
 		print #f, o
 	next yy
@@ -181,7 +202,11 @@ for sprite = 1 to n
 		if nomask then 
 			print #f, "        defb 0, 0"
 		else
-			print #f, "        defb 0, 255"
+			If empty Then 
+				Print #f, "        defb 0, 0"
+			Else 
+				print #f, "        defb 0, 255"
+			End If
 		end if
 	next yy
 	print #f, " "
@@ -191,7 +216,7 @@ for sprite = 1 to n
 	print #f, "    ._" & labelName (extra, sprite) & "_" + Trim (Str(Sprite)) + "_c"
 	print #f, "; tercera columna"
 	for yy = 0 to 23
-		if nomask then 
+		if nomask Or empty then 
 			print #f, "        defb 0, 0"
 		else
 			print #f, "        defb 0, 255"
